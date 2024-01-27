@@ -1,6 +1,6 @@
 <!-- Check nearby -->
 <div class="col-12" id="check-nearby-col">
-    <div class="card">
+    <div class="card text-dark">
         <div class="card-header">
             <h5 class="card-title text-center">Object Around</h5>
         </div>
@@ -15,6 +15,12 @@
                 <div class="checkbox">
                     <input type="checkbox" id="check-wp" class="form-check-input">
                     <label for="check-cp">Worship</label>
+                </div>
+            </div>
+            <div class="form-check">
+                <div class="checkbox">
+                    <input type="checkbox" id="check-sv" class="form-check-input">
+                    <label for="check-sv">Service Provider</label>
                 </div>
             </div>
             <div class="form-check">
@@ -40,11 +46,13 @@
         </div>
         <div class="card-body">
             <div class="table-responsive overflow-auto" id="table-result-nearby">
-                <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-cp">
+                <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-cp">
                 </table>
-                <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-wp">
+                <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-wp">
                 </table>
-                <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-sp">
+                <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-sp">
+                </table>
+                <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-sv">
                 </table>
             </div>
         </div>

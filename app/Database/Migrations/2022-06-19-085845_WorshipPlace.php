@@ -12,31 +12,22 @@ class WorshipPlace extends Migration
             'id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 2,
-                'unique' => true,
             ],
             'name' => [
                 'type' => 'VARCHAR',
-                'constraint' => 40,
+                'constraint' => 50,
+            ],
+            'worship_place_category' => [
+                'type' => 'VARCHAR',
+                'constraint' => 2,
             ],
             'address' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
                 'null' => true,
             ],
-            'park_area_size' => [
-                'type' => 'INT',
-                'null' => true,
-            ],
-            'building_size' => [
-                'type' => 'INT',
-                'null' => true,
-            ],
             'capacity' => [
                 'type' => 'INT',
-                'null' => true,
-            ],
-            'last_renovation' => [
-                'type' => 'DATE',
                 'null' => true,
             ],
             'geom' => [
@@ -68,6 +59,7 @@ class WorshipPlace extends Migration
         $this->db->disableForeignKeyChecks();
         $this->forge->addField($fields);
         $this->forge->addPrimaryKey('id');
+        $this->forge->addForeignKey('worship_place_category', 'worship_place_category', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('worship_place');
         $this->db->enableForeignKeyChecks();
     }

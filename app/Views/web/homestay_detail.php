@@ -1,0 +1,160 @@
+<?= $this->extend('web/layouts/main'); ?>
+
+<?= $this->section('content') ?>
+
+<section class="section">
+    <div class="row">
+        <script>
+            currentUrl = '<?= current_url(); ?>';
+        </script>
+
+        <!-- Object Detail Information -->
+        <div class="col-md-6 col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h4 class="card-title">Homestay Information</h4>
+                            <!-- <div class="text-center">
+                                <?php
+                                // for ($i = 0; $i < (int)esc($data['avg_rating']); $i++) { 
+                                ?>
+                                    <span class="material-symbols-outlined rating-color">star</span>
+                                <?php
+                                // } 
+                                ?>
+                                <?php
+                                // for ($i = 0; $i < (5 - (int)esc($data['avg_rating'])); $i++) { 
+                                ?>
+                                    <span class="material-symbols-outlined">star</span>
+                                <?php
+                                // } 
+                                ?>
+                            </div> -->
+                        </div>
+                        <?php if (in_groups('owner')) : ?>
+                            <div class="col-auto">
+                                <a href="<?= base_url('dashboard/homestay/edit'); ?>/<?= esc($data['id']); ?>" class="btn btn-primary float-end"><i class="fa-solid fa-pencil me-3"></i>Edit</a>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (in_groups('admin')) : ?>
+                            <div class="col-auto">
+                                <a href="<?= base_url('dashboard/homestay/manage/edit'); ?>/<?= esc($data['id']); ?>" class="btn btn-primary float-end"><i class="fa-solid fa-pencil me-3"></i>Edit</a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <div class="card-body text-dark">
+                    <div class="row">
+                        <div class="col table-responsive">
+                            <table class="table table-borderless text-dark">
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold">Name</td>
+                                        <td><?= esc($data['name']); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Rating</td>
+                                        <td>
+                                            <?php
+                                            for ($i = 0; $i < (int)esc($data['avg_rating']); $i++) {
+                                            ?>
+                                                <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
+                                            <?php
+                                            }
+                                            ?>
+                                            <?php
+                                            for ($i = 0; $i < (5 - (int)esc($data['avg_rating'])); $i++) {
+                                            ?>
+                                                <i name="rating" class="far fa-star" aria-hidden="true"></i>
+                                            <?php
+                                            }
+                                            ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Address</td>
+                                        <td><?= esc($data['address']); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Open</td>
+                                        <td><?= date('H:i', strtotime(esc($data['open']))) . ' WIB'; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Close</td>
+                                        <td><?= date('H:i', strtotime(esc($data['close']))) . ' WIB'; ?></td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td class="fw-bold">Ticket Price</td>
+                                        <td><?php
+                                            // 'Rp ' . number_format(esc($data['ticket_price']), 0, ',', '.'); 
+                                            ?></td>
+                                    </tr> -->
+                                    <tr>
+                                        <td class="fw-bold">Contact Person</td>
+                                        <td><?= esc($data['phone']);
+                                            ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="fw-bold">Description</p>
+                            <p><?= esc($data['description']); ?></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="fw-bold">Facilities</p>
+                            <?php foreach ($data['facilities'] as $facility) : ?>
+                                <li><?= esc($facility); ?></li>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-12">
+            <!-- Object Location on Map -->
+            <div class="card text-dark">
+                <div class="card-header">
+                    <h5 class="card-title">Google Maps</h5>
+                </div>
+
+                <?= $this->include('web/layouts/map-body'); ?>
+                <script>
+                    initMap(<?= esc($data['lat']); ?>, <?= esc($data['lng']); ?>)
+                    markerClickable = false;
+                    digitObject("<?= esc(json_encode($data['geoJson'])); ?>");
+                </script>
+                <script>
+                    objectMarker("<?= esc($data['id']); ?>", <?= esc($data['lat']); ?>, <?= esc($data['lng']); ?>);
+                    map.setZoom(20);
+                </script>
+            </div>
+
+            <!-- Object Media -->
+            <?= $this->include('web/layouts/gallery_video'); ?>
+        </div>
+    </div>
+</section>
+
+<?= $this->endSection() ?>
+
+<?= $this->section('javascript') ?>
+<script>
+    const myModal = document.getElementById('videoModal');
+    const videoSrc = document.getElementById('video-play').getAttribute('data-src');
+
+    myModal.addEventListener('shown.bs.modal', () => {
+        console.log(videoSrc);
+        document.getElementById('video').setAttribute('src', videoSrc);
+    });
+    myModal.addEventListener('hide.bs.modal', () => {
+        document.getElementById('video').setAttribute('src', '');
+    });
+</script>
+<?= $this->endSection() ?>

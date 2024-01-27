@@ -4,6 +4,7 @@ namespace App\Controllers\Api;
 
 use App\Models\CategoryEventModel;
 use App\Models\EventModel;
+use App\Models\EventDateModel;
 use App\Models\GalleryEventModel;
 use App\Models\ReviewModel;
 use ArrayObject;
@@ -19,6 +20,7 @@ class Event extends ResourceController
     use ResponseTrait;
 
     protected $eventModel;
+    protected $eventDateModel;
     protected $galleryEventModel;
     protected $reviewModel;
     protected $categoryModel;
@@ -26,6 +28,7 @@ class Event extends ResourceController
     public function __construct()
     {
         $this->eventModel = new EventModel();
+        $this->eventDateModel = new EventDateModel();
         $this->galleryEventModel = new GalleryEventModel();
         $this->reviewModel = new ReviewModel();
         $this->categoryModel = new CategoryEventModel();
@@ -38,43 +41,54 @@ class Event extends ResourceController
      */
     public function index()
     {
-        $contents = $this->eventModel->get_list_ev_api()->getResult();
-        foreach ($contents as $content) {
-            $calendar = $this->getCalendar($content);
-            $content->date_next = $calendar[0];
-            $content->calendar = $calendar;
-        }
-        
-        usort($contents, function ($a, $b) {
-            return $a->date_next <=> $b->date_next;
-        });
-    
-        $now = new DateTimeImmutable('now');
-        $events = array();
-        foreach ($contents as $content){
-            $list_gallery = $this->galleryEventModel->get_gallery_api($content->id)->getResultArray();
-            $galleries = array();
-            foreach ($list_gallery as $gallery) {
-                $galleries[] = $gallery['url'];
-            }
-            $content->gallery = $galleries[0];
-            $events[] = $content;
-        }
-        
-        $sortedEvents = array();
-        foreach ($events as $event) {
-            if ($event->date_next >= $now->format('Y-m-d')) {
-                $sortedEvents[] = $event;
+        $contents = $this->eventModel->get_list_ev_api()->getResultArray();
+        date_default_timezone_set("Asia/Jakarta");
+        $date = date("Y-m-d");
+        // dd($date);
+        for ($i = 0; $i < count($contents); $i++) {
+            $event_date = $this->eventDateModel->get_upcoming_ev_date($contents[$i]['id'], $date)->getRowArray();
+            if (empty($event_date)) {
+                $event_date = $this->eventDateModel->get_last_ev_date($contents[$i]['id'], $date)->getRowArray();
+                if (empty($event_date)) {
+                    $contents[$i]['date'] = "the event has never been held";
+                } else {
+                    $contents[$i]['date'] = "last event on " . date('d F Y', strtotime(esc($event_date['date'])));
+                }
+            } else {
+                $contents[$i]['date'] = "upcoming event on " . date('d F Y', strtotime(esc($event_date['date'])));
             }
         }
-        foreach($events as $event){
-            if ($event->date_next < $now->format('Y-m-d')) {
-                $sortedEvents[] = $event;
-            }
-        }
-        
+
+        // usort($contents, function ($a, $b) {
+        //     return $a->date_next <=> $b->date_next;
+        // });
+
+        // $now = new DateTimeImmutable('now');
+        // $events = array();
+        // foreach ($contents as $content){
+        //     $list_gallery = $this->galleryEventModel->get_gallery_api($content->id)->getResultArray();
+        //     $galleries = array();
+        //     foreach ($list_gallery as $gallery) {
+        //         $galleries[] = $gallery['url'];
+        //     }
+        //     $content->gallery = $galleries[0];
+        //     $events[] = $content;
+        // }
+
+        // $sortedEvents = array();
+        // foreach ($events as $event) {
+        //     if ($event->date_next >= $now->format('Y-m-d')) {
+        //         $sortedEvents[] = $event;
+        //     }
+        // }
+        // foreach($events as $event){
+        //     if ($event->date_next < $now->format('Y-m-d')) {
+        //         $sortedEvents[] = $event;
+        //     }
+        // }
+
         $response = [
-            'data' => $sortedEvents,
+            'data' => $contents,
             'status' => 200,
             'message' => [
                 "Success get list of Event"
@@ -91,6 +105,19 @@ class Event extends ResourceController
     public function show($id = null)
     {
         $event = $this->eventModel->get_ev_by_id_api($id)->getRowArray();
+        date_default_timezone_set("Asia/Jakarta");
+        $date = date("Y-m-d");
+        $event_date = $this->eventDateModel->get_upcoming_ev_date($event['id'], $date)->getRowArray();
+        if (empty($event_date)) {
+            $event_date = $this->eventDateModel->get_last_ev_date($event['id'], $date)->getRowArray();
+            if (empty($event_date)) {
+                $event['date'] = "the event has never been held";
+            } else {
+                $event['date'] = "last event on " . date('d F Y', strtotime(esc($event_date['date'])));
+            }
+        } else {
+            $event['date'] = "upcoming event on " . date('d F Y', strtotime(esc($event_date['date'])));
+        }
         if (empty($event)) {
             $response = [
                 'data' => [],
@@ -101,20 +128,20 @@ class Event extends ResourceController
             ];
             return $this->respond($response);
         }
-        $calendar = $this->getCalendar($event);
+        // $calendar = $this->getCalendar($event);
 
-        $list_gallery = $this->galleryEventModel->get_gallery_api($id)->getResultArray();
-        $galleries = array();
-        foreach ($list_gallery as $gallery) {
-            $galleries[] = $gallery['url'];
-        }
+        // $list_gallery = $this->galleryEventModel->get_gallery_api($id)->getResultArray();
+        // $galleries = array();
+        // foreach ($list_gallery as $gallery) {
+        //     $galleries[] = $gallery['url'];
+        // }
 
-        $list_review = $this->reviewModel->get_review_object_api('event_id', $id)->getResultArray();
+        // $list_review = $this->reviewModel->get_review_object_api('event_id', $id)->getResultArray();
 
-        $event['date_next'] = $calendar[0];
-        $event['calendar'] = $calendar;
-        $event['gallery'] = $galleries;
-        $event['reviews'] = $list_review;
+        // $event['date_next'] = $calendar[0];
+        // $event['calendar'] = $calendar;
+        // $event['gallery'] = $galleries;
+        // $event['reviews'] = $list_review;
 
         $response = [
             'data' => $event,
@@ -158,7 +185,7 @@ class Event extends ResourceController
             'video_url' => $request['video_url'],
         ];
         foreach ($requestData as $key => $value) {
-            if(empty($value)) {
+            if (empty($value)) {
                 unset($requestData[$key]);
             }
         }
@@ -166,7 +193,7 @@ class Event extends ResourceController
         $addEV = $this->eventModel->add_ev_api($requestData, $geojson);
         $gallery = $request['gallery'];
         $addGallery = $this->galleryEventModel->add_gallery_api($id, $gallery);
-        if($addEV && $addGallery) {
+        if ($addEV && $addGallery) {
             $response = [
                 'status' => 201,
                 'message' => [
@@ -222,7 +249,7 @@ class Event extends ResourceController
         $updateGallery = $this->galleryEventModel->update_gallery_api($id, $gallery);
         $video = $request['video'];
         $updateVideo = $this->videoEventModel->update_video_api($id, array($video));
-        if($updateEV && $updateGallery && $updateVideo) {
+        if ($updateEV && $updateGallery && $updateVideo) {
             $response = [
                 'status' => 200,
                 'message' => [
@@ -252,7 +279,7 @@ class Event extends ResourceController
     public function delete($id = null)
     {
         $deleteEV = $this->eventModel->delete(['id' => $id]);
-        if($deleteEV) {
+        if ($deleteEV) {
             $response = [
                 'status' => 200,
                 'message' => [
@@ -285,7 +312,7 @@ class Event extends ResourceController
         ];
         return $this->respond($response);
     }
-    
+
     public function findByRadius()
     {
         $request = $this->request->getPost();
@@ -299,7 +326,7 @@ class Event extends ResourceController
         ];
         return $this->respond($response);
     }
-    
+
     public function findByRating()
     {
         $request = $this->request->getPost();
@@ -323,7 +350,7 @@ class Event extends ResourceController
         ];
         return $this->respond($response);
     }
-    
+
     public function findByCategory()
     {
         $request = $this->request->getPost();
@@ -338,43 +365,16 @@ class Event extends ResourceController
         ];
         return $this->respond($response);
     }
-    
+
     public function findByDate()
     {
-        
+
         $request = $this->request->getPost();
         $date = $request['date']; // YYYY-MM-DD
         $contents = $this->eventModel->get_ev_by_date_api($date)->getResult();
-        foreach ($contents as $content) {
-            $calendar = $this->getCalendar($content);
-            $content->date_next = $calendar[0];
-            $content->calendar = $calendar;
-        }
-        $eventsInDate = array();
-        foreach ($contents as $content) {
-            if (in_array($date, $content->calendar)){
-                $eventsInDate[] = $content;
-            }
-        }
-    
-        usort($eventsInDate, function ($a, $b) {
-            return $a->date_next <=> $b->date_next;
-        });
-    
-        $now = new DateTimeImmutable('now');
-        $events = array();
-        foreach ($eventsInDate as $content) {
-            if ($content->date_next >= $now->format('Y-m-d')) {
-                $events[] = $content;
-            }
-        }
-        foreach($eventsInDate as $content){
-            if ($content->date_next < $now->format('Y-m-d')) {
-                $events[] = $content;
-            }
-        }
+
         $response = [
-            'data' => $events,
+            'data' => $contents,
             'status' => 200,
             'message' => [
                 "Success find event by date"
@@ -396,8 +396,9 @@ class Event extends ResourceController
         ];
         return $this->respond($response);
     }
-    
-    public function category() {
+
+    public function category()
+    {
         $contents = $this->categoryModel->get_list_cat_api()->getResult();
         $response = [
             'data' => $contents,
@@ -408,18 +409,16 @@ class Event extends ResourceController
         ];
         return $this->respond($response);
     }
-    
+
     public function getCalendar($event = null): array
     {
         if (!is_array($event)) {
             $event = (array)$event;
         }
         $start_date = new DateTimeImmutable($event['date_start']);
-        if ($event['max_recurs'] == null && $event['date_end'] == null)
-        {
+        if ($event['max_recurs'] == null && $event['date_end'] == null) {
             $end_date = $start_date;
-        }
-        elseif ($event['max_recurs'] == null) {
+        } elseif ($event['max_recurs'] == null) {
             $end_date = new DateTimeImmutable($event['date_end']);
         } elseif ($event['date_end'] == null) {
             $end_date = $start_date->modify("+{$event['max_recurs']} {$event['recurs']}");
@@ -432,23 +431,22 @@ class Event extends ResourceController
                 $end_date = $dateFromEnd;
             }
         }
-        
+
         $calendar = array();
         $now = new DateTimeImmutable('now');
         if ($event['recurs'] == 'none') {
-            $calendar[] =$start_date->format('Y-m-d');
+            $calendar[] = $start_date->format('Y-m-d');
         } elseif ($end_date == $start_date) {
             $calendar[] = $event['date_start'];
-        }
-        else {
+        } else {
             $interval = DateInterval::createFromDateString("1 {$event['recurs']}");
-            $dateArrange = new DatePeriod($start_date, $interval ,$end_date);
-            foreach($dateArrange as $date){
+            $dateArrange = new DatePeriod($start_date, $interval, $end_date);
+            foreach ($dateArrange as $date) {
                 if ($date->format('Y-m-d') >= $now->format('Y-m-d')) {
                     $calendar[] = $date->format('Y-m-d');
                 }
             }
-            foreach($dateArrange as $date){
+            foreach ($dateArrange as $date) {
                 if ($date->format('Y-m-d') < $now->format('Y-m-d')) {
                     $calendar[] = $date->format('Y-m-d');
                 }
@@ -456,5 +454,4 @@ class Event extends ResourceController
         }
         return $calendar;
     }
-    
 }

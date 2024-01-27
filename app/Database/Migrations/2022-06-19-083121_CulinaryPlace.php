@@ -12,24 +12,23 @@ class CulinaryPlace extends Migration
             'id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 2,
-                'unique' => true,
             ],
             'name' => [
                 'type' => 'VARCHAR',
-                'constraint' => 40,
+                'constraint' => 50,
             ],
             'address' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
                 'null' => true,
             ],
-            'contact_person' => [
+            'employee_name' => [
+                'type' => 'VARCHAR',
+                'constraint' => 25,
+            ],
+            'phone' => [
                 'type' => 'VARCHAR',
                 'constraint' => 13,
-                'null' => true,
-            ],
-            'capacity' => [
-                'type' => 'INT',
                 'null' => true,
             ],
             'open' => [
@@ -38,10 +37,6 @@ class CulinaryPlace extends Migration
             ],
             'close' => [
                 'type' => 'TIME',
-                'null' => true,
-            ],
-            'employee' => [
-                'type' => 'INTEGER',
                 'null' => true,
             ],
             'geom' => [

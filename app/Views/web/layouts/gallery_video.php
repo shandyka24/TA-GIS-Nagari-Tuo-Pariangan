@@ -1,13 +1,28 @@
+<?php
+$uri = service('uri')->getSegments();
+$uri1 = $uri[1] ?? 'index';
+$uri2 = $uri[2] ?? '';
+$uri3 = $uri[3] ?? '';
+$showVid = true;
+
+if (($uri1 == 'worshipPlace') || ($uri1 == 'serviceProvider') || ($uri1 == 'souvenirPlace') || ($uri1 == 'culinaryPlace') || ($uri1 == 'homestayUnit') || ($uri1 == 'event')) {
+    $showVid = false;
+}
+
+?>
 <div class="card">
     <div class="card-body">
         <div class="d-grid gap-2">
             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#gallery" <?= (count($data['gallery']) == 0) ? 'disabled' : ''; ?>>
                 <span class="material-icons" style="font-size: 1.5rem; vertical-align: bottom">image</span> Open Gallery
             </button>
-            <button type="button" id="video-play" class="btn-play btn btn-outline-primary" data-bs-toggle="modal" data-src="<?= base_url('media/videos/'. esc($data['video_url'])); ?>" data-bs-target="#videoModal" <?= ($data['video_url'] == '') ? 'disabled' : ''; ?>>
-                <span class="material-icons" style="font-size: 1.5rem; vertical-align: bottom">play_circle</span> Play Video
-            </button>
-            
+
+            <?php if ($showVid) : ?>
+                <button type="button" id="video-play" class="btn-play btn btn-outline-primary" data-bs-toggle="modal" data-src="<?= base_url('media/videos/' . esc($data['video_url'])); ?>" data-bs-target="#videoModal" <?= ($data['video_url'] == '') ? 'disabled' : ''; ?>>
+                    <span class="material-icons" style="font-size: 1.5rem; vertical-align: bottom">play_circle</span> Play Video
+                </button>
+            <?php endif; ?>
+
             <div class="modal fade text-left" id="gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                     <div class="modal-content">
@@ -24,13 +39,13 @@
                                     <?php foreach ($data['gallery'] as $gallery) : ?>
                                         <li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="<?= esc($i); ?>" class="<?= ($i == 0) ? 'active' : ''; ?>"></li>
                                         <?php $i++; ?>
-                                    <?php endforeach ; ?>
+                                    <?php endforeach; ?>
                                 </ol>
                                 <div class="carousel-inner">
                                     <?php $i = 0; ?>
                                     <?php foreach ($data['gallery'] as $gallery) : ?>
                                         <div class="carousel-item<?= ($i == 0) ? ' active' : ''; ?>">
-                                            <img src="<?= base_url('media/photos/'. esc($gallery)); ?>" class="d-block w-100" alt="<?= esc($data['name']); ?>">
+                                            <img src="<?= base_url('media/photos/' . esc($gallery)); ?>" class="d-block w-100" alt="<?= esc($data['name']); ?>">
                                         </div>
                                         <?php $i++; ?>
                                     <?php endforeach; ?>
@@ -54,7 +69,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="modal fade text-left" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
                     <div class="modal-content">
@@ -66,12 +81,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="ratio ratio-16x9">
-                                <video
-                                    src=""
-                                    class="embed-responsive-item"
-                                    id="video"
-                                    controls
-                                >Sorry, your browser doesn't support embedded videos</video>
+                                <video src="" class="embed-responsive-item" id="video" controls>Sorry, your browser doesn't support embedded videos</video>
                             </div>
                         </div>
                         <div class="modal-footer">

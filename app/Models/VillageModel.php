@@ -10,7 +10,7 @@ class VillageModel extends Model
     protected $table            = 'village';
     protected $primaryKey       = 'id';
     protected $returnType       = 'array';
-    protected $allowedFields    = ['id', 'name', 'district', 'geom'];
+    protected $allowedFields    = ['id', 'name', 'district', 'geom', 'geom_file'];
 
     // Dates
     protected $useTimestamps = false;
@@ -22,7 +22,8 @@ class VillageModel extends Model
     protected $cleanValidationRules = true;
 
     // API
-    public function get_sumpur_api() {
+    public function get_sumpur_api()
+    {
         // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
         $query = $this->db->table($this->table)
             ->select("id, name")
@@ -30,8 +31,9 @@ class VillageModel extends Model
             ->get();
         return $query;
     }
-    
-    public function get_desa_wisata_api() {
+
+    public function get_desa_wisata_api()
+    {
         // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
         $query = $this->db->table($this->table)
             ->select("id, name")
@@ -39,12 +41,109 @@ class VillageModel extends Model
             ->get();
         return $query;
     }
-    
-    public function get_geoJson_api($id = null) {
+
+    public function get_geoJson_api($id = null)
+    {
         $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
         $query = $this->db->table($this->table)
             ->select("{$geoJson}")
             ->where('id', $id)
+            ->get();
+        return $query;
+    }
+
+    public function add_village($village = null, $geojson = null)
+    {
+        $insert = $this->db->table($this->table)
+            ->insert($village);
+        $update = $this->db->table($this->table)
+            ->set('geom', "ST_GeomFromGeoJSON('{$geojson}')", false)
+            ->where('id', $village['id'])
+            ->update();
+        return $insert && $update;
+    }
+    public function get_kab_kota()
+    {
+        // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
+        $query = $this->db->table('kab_kota')
+            ->select("id, name")
+            ->where('id', 'K11')
+            ->get();
+        return $query;
+    }
+    public function get_geoJson_api_zzz($id = null)
+    {
+        $geoJson = "ST_AsGeoJSON(kab_kota.geom) AS geoJson";
+        $query = $this->db->table('kab_kota')
+            ->select("{$geoJson}")
+            ->where('id', $id)
+            ->get();
+        return $query;
+    }
+
+    public function get_village_data($id = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select("id, name, geom_file")
+            ->where('id', $id)
+            ->get();
+        return $query;
+    }
+    public function get_tourist_area_data()
+    {
+        $geoJson = "ST_AsGeoJSON(geom) AS geoJson";
+        $query = $this->db->table('tourist_area')
+            ->select("{$geoJson}")
+            ->where('id', 'L1')
+            ->get();
+        return $query;
+    }
+    public function get_unique_att_data()
+    {
+        $geoJson = "ST_AsGeoJSON(geom) AS geoJson";
+        $query = $this->db->table('attraction')
+            ->select("{$geoJson}")
+            ->where('id', 'A7')
+            ->get();
+        return $query;
+    }
+    public function get_village_list()
+    {
+        $query = $this->db->table($this->table)
+            ->select("id, name, geom_file")
+            ->where("id NOT IN ('1')")
+            ->get();
+        return $query;
+    }
+    public function get_subdistrict_list()
+    {
+        $query = $this->db->table('subdistrict')
+            ->select("id, name, geom")
+            ->where("id NOT IN ('S05')")
+            ->get();
+        return $query;
+    }
+    public function get_city_list()
+    {
+        $query = $this->db->table('city')
+            ->select("id, name, geom")
+            ->where("id NOT IN ('C04')")
+            ->get();
+        return $query;
+    }
+    public function get_province_list()
+    {
+        $query = $this->db->table('province')
+            ->select("id, name, geom")
+            ->where("id NOT IN ('P03')")
+            ->get();
+        return $query;
+    }
+    public function get_country_list()
+    {
+        $query = $this->db->table('country')
+            ->select("id, name, geom")
+            ->where("id NOT IN ('N03')")
             ->get();
         return $query;
     }

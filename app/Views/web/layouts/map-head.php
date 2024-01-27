@@ -8,4 +8,7 @@
     <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Toggle Legend" class="btn icon btn-primary mx-1" id="legend-map" onclick="viewLegend();">
         <span class="material-symbols-outlined">visibility</span>
     </a>
+    <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Toggle Legend" class="btn icon btn-primary mx-1" id="legend-map" onclick="goToVillage();">
+        <span>Go To Village</span>
+    </a>
 </div>

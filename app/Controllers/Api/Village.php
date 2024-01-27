@@ -14,49 +14,126 @@ class Village extends BaseController
     {
         $this->villageModel = new VillageModel();
     }
-    
+
     public function getData()
     {
         $request = $this->request->getPost();
         $village = $request['village'];
-        if ($village == '1') {
-            $vilProperty = $this->villageModel->get_sumpur_api()->getRowArray();
-            $geoJson = json_decode($this->villageModel->get_geoJson_api($village)->getRowArray()['geoJson']);
-            $content = [
-                'type' => 'Feature',
-                'geometry' => $geoJson,
-                'properties' => [
-                    'id' => $vilProperty['id'],
-                    'name' => $vilProperty['name'],
-                ]
-            ];
-            $response = [
-                'data' => $content,
-                'status' => 200,
-                'message' => [
-                    "Success display data of Sumpur "
-                ]
-            ];
-            return $this->respond($response);
-        } elseif ($village == '2') {
-            $vilProperty = $this->villageModel->get_desa_wisata_api()->getRowArray();
-            $geoJson = json_decode($this->villageModel->get_geoJson_api($village)->getRowArray()['geoJson']);
-            $content = [
-                'type' => 'Feature',
-                'geometry' => $geoJson,
-                'properties' => [
-                    'id' => $vilProperty['id'],
-                    'name' => $vilProperty['name'],
-                ]
-            ];
-            $response = [
-                'data' => $content,
-                'status' => 200,
-                'message' => [
-                    "Success display data of Desa Wisata "
-                ]
-            ];
-            return $this->respond($response);
-        }
+        $content = $this->villageModel->get_village_data($village)->getRowArray();
+        $response = [
+            'data' => $content,
+            'status' => 200,
+            'message' => [
+                "Success get village data"
+            ]
+        ];
+        return $this->respond($response);
+    }
+    public function getTouristAreaData()
+    {
+        // $content = $this->villageModel->get_tourist_area_data()->getRowArray();
+        $geoJson = json_decode($this->villageModel->get_tourist_area_data()->getRowArray()['geoJson']);
+        $content = [
+            'type' => 'Feature',
+            'geometry' => $geoJson,
+            'properties' => [
+                'id' => 'L01',
+                'name' => 'Lembah Harau Tourist Area',
+            ]
+        ];
+        $response = [
+            'data' => $content,
+            'status' => 200,
+            'message' => [
+                "Success get tourist area data"
+            ]
+        ];
+        return $this->respond($response);
+    }
+    public function getUniqueAttData()
+    {
+        // $content = $this->villageModel->get_tourist_area_data()->getRowArray();
+        $geoJson = json_decode($this->villageModel->get_unique_att_data()->getRowArray()['geoJson']);
+        $content = [
+            'type' => 'Feature',
+            'geometry' => $geoJson,
+            'properties' => [
+                'id' => 'L01',
+                'name' => 'Lembah Harau Tourist Area',
+            ]
+        ];
+        $response = [
+            'data' => $content,
+            'status' => 200,
+            'message' => [
+                "Success get tourist area data"
+            ]
+        ];
+        return $this->respond($response);
+    }
+    public function getVillagesData()
+    {
+        $contents = $this->villageModel->get_village_list()->getResult();
+
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success get list of Villages"
+            ]
+        ];
+        return $this->respond($response);
+    }
+    public function getSubdistrictsData()
+    {
+        $contents = $this->villageModel->get_subdistrict_list()->getResult();
+
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success get list of Subdistricts"
+            ]
+        ];
+        return $this->respond($response);
+    }
+    public function getCitiesData()
+    {
+        $contents = $this->villageModel->get_city_list()->getResult();
+
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success get list of Cities"
+            ]
+        ];
+        return $this->respond($response);
+    }
+    public function getProvincesData()
+    {
+        $contents = $this->villageModel->get_province_list()->getResult();
+
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success get list of Provincies"
+            ]
+        ];
+        return $this->respond($response);
+    }
+    public function getCountriesData()
+    {
+        $contents = $this->villageModel->get_country_list()->getResult();
+
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success get list of Countries"
+            ]
+        ];
+        return $this->respond($response);
     }
 }

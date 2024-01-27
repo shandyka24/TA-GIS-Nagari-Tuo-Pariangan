@@ -12,24 +12,30 @@ class SouvenirPlace extends Migration
             'id' => [
                 'type' => 'VARCHAR',
                 'constraint' => 2,
-                'unique' => true,
             ],
             'name' => [
                 'type' => 'VARCHAR',
-                'constraint' => 40,
+                'constraint' => 50,
             ],
             'address' => [
                 'type' => 'VARCHAR',
                 'constraint' => 100,
                 'null' => true,
             ],
-            'contact_person' => [
+            'employee_name' => [
+                'type' => 'VARCHAR',
+                'constraint' => 25,
+            ],
+            'phone' => [
                 'type' => 'VARCHAR',
                 'constraint' => 13,
+            ],
+            'open' => [
+                'type' => 'TIME',
                 'null' => true,
             ],
-            'employee' => [
-                'type' => 'INT',
+            'close' => [
+                'type' => 'TIME',
                 'null' => true,
             ],
             'geom' => [
@@ -43,14 +49,6 @@ class SouvenirPlace extends Migration
             'lng' => [
                 'type' => 'DECIMAL',
                 'constraint' => '11,8',
-            ],
-            'open' => [
-                'type' => 'TIME',
-                'null' => true,
-            ],
-            'close' => [
-                'type' => 'TIME',
-                'null' => true,
             ],
             'description' => [
                 'type' => 'TEXT',

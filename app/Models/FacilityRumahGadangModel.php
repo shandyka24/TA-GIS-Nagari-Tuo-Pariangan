@@ -26,31 +26,35 @@ class FacilityRumahGadangModel extends Model
     protected $cleanValidationRules = true;
 
     // API
-    public function get_list_fc_api() {
+    public function get_list_fc_api()
+    {
         $query = $this->db->table($this->table)
             ->select('id, facility')
             ->get();
         return $query;
     }
-    
-    public function get_fc_by_id_api($id = null) {
+
+    public function get_fc_by_id_api($id = null)
+    {
         $query = $this->db->table($this->table)
             ->select('id, facility')
             ->where('id', $id)
             ->get();
         return $query;
     }
-    
-    public function get_new_id_api() {
+
+    public function get_new_id_api()
+    {
         $lastId = $this->db->table($this->table)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
         $count = (int)substr($lastId['id'], 0);
         $id = sprintf('%02d', $count + 1);
         return $id;
     }
-    
-    public function add_fc_api($facility = null) {
+
+    public function add_fc_api($facility = null)
+    {
         foreach ($facility as $key => $value) {
-            if(empty($value)) {
+            if (empty($value)) {
                 unset($facility[$key]);
             }
         }
@@ -60,10 +64,11 @@ class FacilityRumahGadangModel extends Model
             ->insert($facility);
         return $insert;
     }
-    
-    public function update_fc_api($id = null, $facility = null) {
+
+    public function update_fc_api($id = null, $facility = null)
+    {
         foreach ($facility as $key => $value) {
-            if(empty($value)) {
+            if (empty($value)) {
                 unset($facility[$key]);
             }
         }

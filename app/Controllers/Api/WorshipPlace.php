@@ -8,6 +8,8 @@ use App\Models\WorshipPlaceModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
+use App\Models\WorshipPlaceCategoryModel;
+
 class WorshipPlace extends ResourceController
 {
     use ResponseTrait;
@@ -16,11 +18,15 @@ class WorshipPlace extends ResourceController
     protected $galleryWorshipPlaceModel;
     protected $reviewModel;
 
+    protected $worshipPlaceCategoryModel;
+
     public function __construct()
     {
         $this->worshipPlaceModel = new WorshipPlaceModel();
         $this->galleryWorshipPlaceModel = new GalleryWorshipPlaceModel();
         $this->reviewModel = new ReviewModel();
+
+        $this->worshipPlaceCategoryModel = new WorshipPlaceCategoryModel();
     }
 
     /**
@@ -55,7 +61,7 @@ class WorshipPlace extends ResourceController
         foreach ($list_gallery as $gallery) {
             $galleries[] = $gallery['url'];
         }
-        
+
         $worship_place['gallery'] = $galleries;
 
         $response = [
@@ -66,7 +72,6 @@ class WorshipPlace extends ResourceController
             ]
         ];
         return $this->respond($response);
-
     }
 
     /**
@@ -110,7 +115,7 @@ class WorshipPlace extends ResourceController
         $addGallery = $this->galleryWorshipPlaceModel->add_gallery_api($id, $gallery);
         $video = $request['video'];
         $addVideo = $this->videoWorshipPlaceModel->add_video_api($id, array($video));
-        if($addWP && $addFacilities && $addGallery && $addVideo) {
+        if ($addWP && $addFacilities && $addGallery && $addVideo) {
             $response = [
                 'status' => 201,
                 'message' => [
@@ -172,7 +177,7 @@ class WorshipPlace extends ResourceController
         $updateGallery = $this->galleryWorshipPlaceModel->update_gallery_api($id, $gallery);
         $video = $request['video'];
         $updateVideo = $this->videoWorshipPlaceModel->update_video_api($id, array($video));
-        if($updateWP && $updateFacilities && $updateGallery && $updateVideo) {
+        if ($updateWP && $updateFacilities && $updateGallery && $updateVideo) {
             $response = [
                 'status' => 201,
                 'message' => [
@@ -203,7 +208,7 @@ class WorshipPlace extends ResourceController
     public function delete($id = null)
     {
         $deleteWP = $this->worshipPlaceModel->delete(['id' => $id]);
-        if($deleteWP) {
+        if ($deleteWP) {
             $response = [
                 'status' => 200,
                 'message' => [
@@ -221,7 +226,7 @@ class WorshipPlace extends ResourceController
             return $this->failNotFound($response);
         }
     }
-    
+
     public function findByRadius()
     {
         $request = $this->request->getPost();
@@ -230,7 +235,7 @@ class WorshipPlace extends ResourceController
             'data' => $contents,
             'status' => 200,
             'message' => [
-                "Success find Rumah Gadang by radius"
+                "Success find Worship Place by radius"
             ]
         ];
         return $this->respond($response);
@@ -245,6 +250,19 @@ class WorshipPlace extends ResourceController
             'status' => 200,
             'message' => [
                 "Success get list of Worship Place"
+            ]
+        ];
+        return $this->respond($response);
+    }
+
+    public function getWPCat()
+    {
+        $contents = $this->worshipPlaceCategoryModel->get_list_wscat_api()->getResult();
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success get list of Owner"
             ]
         ];
         return $this->respond($response);

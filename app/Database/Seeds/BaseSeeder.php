@@ -15,6 +15,9 @@ class BaseSeeder extends Seeder
         $this->call('UserGroupSeeder');
         $this->call('VillageSeeder');
 
+        // Homestay Seed
+        $this->call('HomestayFacilitySeeder');
+
         // Rumah Gadang Seed
         $this->call('RecommendationSeeder');
         $this->call('RumahGadangSeeder');

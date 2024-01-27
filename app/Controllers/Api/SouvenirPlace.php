@@ -5,6 +5,8 @@ namespace App\Controllers\Api;
 use App\Models\GallerySouvenirPlaceModel;
 use App\Models\ReviewModel;
 use App\Models\SouvenirPlaceModel;
+use App\Models\SouvenirProductModel;
+use App\Models\SouvenirProductDetailModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
@@ -13,15 +15,18 @@ class SouvenirPlace extends ResourceController
     use ResponseTrait;
 
     protected $souvenirPlaceModel;
+    protected $souvenirProductModel;
+    protected $souvenirProductDetailModel;
     protected $gallerySouvenirPlaceModel;
     protected $reviewModel;
 
     public function __construct()
     {
         $this->souvenirPlaceModel = new SouvenirPlaceModel();
+        $this->souvenirProductModel = new SouvenirProductModel();
+        $this->souvenirProductDetailModel = new SouvenirProductDetailModel();
         $this->gallerySouvenirPlaceModel = new GallerySouvenirPlaceModel();
         $this->reviewModel = new ReviewModel();
-
     }
 
     /**
@@ -111,7 +116,7 @@ class SouvenirPlace extends ResourceController
         $addVideo = $this->videoSouvenirPlaceModel->add_video_api($id, array($video));
         $products = $request['products'];
         $addProduct = $this->detailProductModel->add_product_api($id, $products);
-        if($addSP && $addFacilities && $addGallery && $addVideo && $addProduct) {
+        if ($addSP && $addFacilities && $addGallery && $addVideo && $addProduct) {
             $response = [
                 'status' => 201,
                 'message' => [
@@ -175,7 +180,7 @@ class SouvenirPlace extends ResourceController
         $updateVideo = $this->videoSouvenirPlaceModel->update_video_api($id, array($video));
         $products = $request['products'];
         $updateProduct = $this->detailProductModel->update_product_api($id, $products);
-        if($updateSP && $updateFacilities && $updateGallery && $updateVideo && $updateProduct) {
+        if ($updateSP && $updateFacilities && $updateGallery && $updateVideo && $updateProduct) {
             $response = [
                 'status' => 201,
                 'message' => [
@@ -207,7 +212,7 @@ class SouvenirPlace extends ResourceController
     public function delete($id = null)
     {
         $deleteSP = $this->souvenirPlaceModel->delete(['id' => $id]);
-        if($deleteSP) {
+        if ($deleteSP) {
             $response = [
                 'status' => 200,
                 'message' => [
@@ -225,7 +230,7 @@ class SouvenirPlace extends ResourceController
             return $this->failNotFound($response);
         }
     }
-    
+
     public function findByRadius()
     {
         $request = $this->request->getPost();
@@ -234,12 +239,12 @@ class SouvenirPlace extends ResourceController
             'data' => $contents,
             'status' => 200,
             'message' => [
-                "Success find Rumah Gadang by radius"
+                "Success find Souvenir Place by radius"
             ]
         ];
         return $this->respond($response);
     }
-    
+
     public function listByOwner()
     {
         $request = $this->request->getPost();
@@ -249,6 +254,29 @@ class SouvenirPlace extends ResourceController
             'status' => 200,
             'message' => [
                 "Success get list of Souvenir Place"
+            ]
+        ];
+        return $this->respond($response);
+    }
+    public function proList($souvenir_place_id = null)
+    {
+        $id_prod_owned = $this->souvenirProductDetailModel->get_product_id_by_sp_api($souvenir_place_id)->getResultArray();
+        $newData = array();
+        foreach ($id_prod_owned as $row) {
+            $newData[] = $row['souvenir_product_id'];
+        }
+        $id_prod_owned = $newData;
+        if (empty($id_prod_owned)) {
+            $contents = $this->souvenirProductModel->get_list_spr_api()->getResult();
+        } else {
+            $contents = $this->souvenirProductModel->get_list_spr_not_owned_api($id_prod_owned)->getResult();
+        }
+
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success get list of Product"
             ]
         ];
         return $this->respond($response);

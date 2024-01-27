@@ -3,6 +3,9 @@
 namespace App\Controllers\Api;
 
 use App\Models\CulinaryPlaceModel;
+use App\Models\CulinaryPlaceGalleryModel;
+use App\Models\CulinaryProductModel;
+use App\Models\CulinaryProductDetailModel;
 use App\Models\GalleryCulinaryPlaceModel;
 use App\Models\ReviewModel;
 use CodeIgniter\API\ResponseTrait;
@@ -13,12 +16,18 @@ class CulinaryPlace extends ResourceController
     use ResponseTrait;
 
     protected $culinaryPlaceModel;
+    protected $culinaryPlaceGalleryModel;
+    protected $culinaryProductModel;
+    protected $culinaryProductDetailModel;
     protected $galleryCulinaryPlaceModel;
     protected $reviewModel;
 
     public function __construct()
     {
         $this->culinaryPlaceModel = new CulinaryPlaceModel();
+        $this->culinaryPlaceGalleryModel = new CulinaryPlaceGalleryModel();
+        $this->culinaryProductModel = new CulinaryProductModel();
+        $this->culinaryProductDetailModel = new CulinaryProductDetailModel();
         $this->galleryCulinaryPlaceModel = new GalleryCulinaryPlaceModel();
         $this->reviewModel = new ReviewModel();
     }
@@ -50,12 +59,12 @@ class CulinaryPlace extends ResourceController
     {
         $culinary_place = $this->culinaryPlaceModel->get_cp_by_id_api($id)->getRowArray();
 
-        $list_gallery = $this->galleryCulinaryPlaceModel->get_gallery_api($id)->getResultArray();
+        $list_gallery = $this->culinaryPlaceGalleryModel->get_gallery_api($id)->getResultArray();
         $galleries = array();
         foreach ($list_gallery as $gallery) {
             $galleries[] = $gallery['url'];
         }
-        
+
         $culinary_place['gallery'] = $galleries;
 
         $response = [
@@ -66,7 +75,6 @@ class CulinaryPlace extends ResourceController
             ]
         ];
         return $this->respond($response);
-
     }
 
     /**
@@ -112,7 +120,7 @@ class CulinaryPlace extends ResourceController
         $addVideo = $this->videoCulinaryPlaceModel->add_video_api($id, array($video));
         $menus = $request['menus'];
         $addMenu = $this->detailMenuModel->add_menu_api($id, $menus);
-        if($addCP && $addFacilities && $addGallery && $addVideo && $addMenu) {
+        if ($addCP && $addFacilities && $addGallery && $addVideo && $addMenu) {
             $response = [
                 'status' => 201,
                 'message' => [
@@ -177,7 +185,7 @@ class CulinaryPlace extends ResourceController
         $updateVideo = $this->videoCulinaryPlaceModel->update_video_api($id, array($video));
         $menus = $request['menus'];
         $updateMenu = $this->detailMenuModel->update_menu_api($id, $menus);
-        if($updateCP && $updateFacilities && $updateGallery && $updateVideo && $updateMenu) {
+        if ($updateCP && $updateFacilities && $updateGallery && $updateVideo && $updateMenu) {
             $response = [
                 'status' => 201,
                 'message' => [
@@ -209,7 +217,7 @@ class CulinaryPlace extends ResourceController
     public function delete($id = null)
     {
         $deleteCP = $this->culinaryPlaceModel->delete(['id' => $id]);
-        if($deleteCP) {
+        if ($deleteCP) {
             $response = [
                 'status' => 200,
                 'message' => [
@@ -227,7 +235,7 @@ class CulinaryPlace extends ResourceController
             return $this->failNotFound($response);
         }
     }
-    
+
     public function findByRadius()
     {
         $request = $this->request->getPost();
@@ -236,7 +244,7 @@ class CulinaryPlace extends ResourceController
             'data' => $contents,
             'status' => 200,
             'message' => [
-                "Success find Rumah Gadang by radius"
+                "Success find Culinary Place by radius"
             ]
         ];
         return $this->respond($response);
@@ -251,6 +259,29 @@ class CulinaryPlace extends ResourceController
             'status' => 200,
             'message' => [
                 "Success get list of Culinary Place"
+            ]
+        ];
+        return $this->respond($response);
+    }
+    public function culList($souvenir_place_id = null)
+    {
+        $id_prod_owned = $this->culinaryProductDetailModel->get_product_id_by_sp_api($souvenir_place_id)->getResultArray();
+        $newData = array();
+        foreach ($id_prod_owned as $row) {
+            $newData[] = $row['culinary_product_id'];
+        }
+        $id_prod_owned = $newData;
+        if (empty($id_prod_owned)) {
+            $contents = $this->culinaryProductModel->get_list_cpr_api()->getResult();
+        } else {
+            $contents = $this->culinaryProductModel->get_list_cpr_not_owned_api($id_prod_owned)->getResult();
+        }
+
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success get list of Product"
             ]
         ];
         return $this->respond($response);

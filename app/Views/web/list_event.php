@@ -3,7 +3,7 @@
 <?= $this->section('content') ?>
 
 <section class="section"">
-<div class="row">
+<div class=" row">
     <!--map-->
     <div class="col-md-8 col-12">
         <div class="card">
@@ -18,7 +18,7 @@
             <?= $this->include('web/layouts/map-body'); ?>
         </div>
     </div>
-    
+
     <div class="col-md-4 col-12">
         <div class="row">
             <!-- List Event -->
@@ -29,34 +29,40 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive overflow-auto" id="table-user">
-                            <script>clearMarker();</script>
+                            <script>
+                                clearMarker();
+                            </script>
                             <table class="table table-hover mb-0 table-lg">
                                 <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Action</th>
-                                </tr>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Action</th>
+                                    </tr>
                                 </thead>
                                 <tbody id="table-data">
-                                <?php if (isset($data)): ?>
-                                    <?php $i = 1; ?>
-                                    <?php foreach ($data as $item) : ?>
-                                    <?php $now = new DateTimeImmutable('now'); ?>
-                                    <tr class="<?= (esc($item['date_next']) < $now->format('Y-m-d')) ? 'table-secondary text-muted' : ''; ?>">
-                                        <script>objectMarker("<?= esc($item['id']); ?>", <?= esc($item['lat']); ?>, <?= esc($item['lng']); ?>);</script>
-                                        <td><?= esc($i); ?></td>
-                                        <td class="fw-bold"><?= esc($item['name']); ?><br><span class="text-muted"><?= date('d F Y', strtotime(esc($item['date_next']))); ?></span></td>
-                                        <td>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="More Info" class="btn icon btn-primary mx-1" onclick="focusObject(`<?= esc($item['id']); ?>`);">
-                                                <span class="material-symbols-outlined">info</span>
-                                            </a>
-                                        </td>
-                                        <?php $i++ ?>
-                                    </tr>
-                                <?php endforeach; ?>
-                                    <script>boundToObject();</script>
-                                <?php endif; ?>
+                                    <?php if (isset($data)) : ?>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($data as $item) : ?>
+                                            <?php $now = new DateTimeImmutable('now'); ?>
+                                            <tr>
+                                                <script>
+                                                    objectMarker("<?= esc($item['id']); ?>", <?= esc($item['lat']); ?>, <?= esc($item['lng']); ?>);
+                                                </script>
+                                                <td><?= esc($i); ?></td>
+                                                <td class="fw-bold"><?= esc($item['name']); ?><br></td>
+                                                <td>
+                                                    <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="More Info" class="btn icon btn-primary mx-1" onclick="focusObject(`<?= esc($item['id']); ?>`);">
+                                                        <span class="material-symbols-outlined">info</span>
+                                                    </a>
+                                                </td>
+                                                <?php $i++ ?>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                        <script>
+                                            boundToObject();
+                                        </script>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -67,10 +73,10 @@
             <?= $this->include('web/layouts/nearby'); ?>
         </div>
     </div>
-</div>
+    </div>
 
-<!-- Direction section -->
-<?= $this->include('web/layouts/direction'); ?>
+    <!-- Direction section -->
+    <?= $this->include('web/layouts/direction'); ?>
 </section>
 
 <?= $this->endSection() ?>
@@ -80,6 +86,5 @@
     $('#direction-row').hide();
     $('#check-nearby-col').hide();
     $('#result-nearby-col').hide();
-
 </script>
 <?= $this->endSection() ?>

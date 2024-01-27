@@ -8,16 +8,16 @@ use CodeIgniter\RESTful\ResourceController;
 
 class User extends ResourceController
 {
-    
+
     use ResponseTrait;
-    
+
     protected $accountModel;
-    
+
     public function __construct()
     {
         $this->accountModel = new AccountModel();
     }
-    
+
     /**
      * Return an array of resource objects, themselves in array format
      *
@@ -73,7 +73,7 @@ class User extends ResourceController
     {
         $request = $this->request->getPost();
         $requestData = [
-            'id'=> $this->accountModel->get_new_id_api(),
+            'id' => $this->accountModel->get_new_id_api(),
             'username' => $request['username'],
             'first_name' => $request['first_name'],
             'last_name' => $request['last_name'],
@@ -123,7 +123,7 @@ class User extends ResourceController
             'avatar' => $request['avatar'],
         ];
         $updateAccount = $this->accountModel->update_account_api($id, $requestData);
-        if($updateAccount){
+        if ($updateAccount) {
             $response = [
                 'status' => 200,
                 'message' => [
@@ -150,7 +150,7 @@ class User extends ResourceController
     public function delete($id = null)
     {
         $delete = $this->accountModel->delete_user_api($id);
-        if($delete) {
+        if ($delete) {
             $response = [
                 'status' => 200,
                 'message' => [
@@ -168,10 +168,22 @@ class User extends ResourceController
             return $this->failNotFound($response);
         }
     }
-    
+
     public function owner()
     {
-        $contents = $this->accountModel->get_list_owner_api()->getResult();
+        $idNotIncluded = $this->accountModel->get_id_owner_not_included_api()->getResultArray();
+        $newData = array();
+        foreach ($idNotIncluded as $row) {
+            $newData[] = $row['owner'];
+        }
+        $idNotIncluded = $newData;
+
+        if (empty($idNotIncluded)) {
+            $contents = $this->accountModel->get_list_owner_api()->getResult();
+        } else {
+            $contents = $this->accountModel->get_list_owner_not_included_api($idNotIncluded)->getResult();
+        }
+
         $response = [
             'data' => $contents,
             'status' => 200,
