@@ -2,7 +2,9 @@
 # Operating Specific Junk Files
 #-------------------------
 
-public/media/
+public/media/photos/*
+public/media/videos/*
+
 # OS X
 .DS_Store
 .AppleDouble
