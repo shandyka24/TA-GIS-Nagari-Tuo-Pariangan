@@ -50,9 +50,9 @@
                     <form id="reservation-form" class="form form-vertical" action="" method="post" enctype="multipart/form-data" onsubmit="checkRequired(event)">
                         <div class="form-body">
                             <div class="row">
-                                <div class="col-md-6 col-12" style="border-right: 1px dashed #333;">
+                                <div class="col-md-5 col-12" style="border-right: 1px dashed #333;">
                                     <div class="row">
-                                        <div class="col-md-6 col-12">
+                                        <div class="col-md-7 col-12">
                                             <div class="form-group mb-4">
                                                 <label for="check_in" class="mb-2">Check In</label>
                                                 <div class="input-group">
@@ -92,7 +92,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-12">
+                                        <div class="col-md-5 col-12">
                                             <div class="form-group mb-4">
                                                 <label for="check_out" class="mb-2">Check Out</label>
                                                 <div class="input-group">
@@ -132,7 +132,7 @@
                                             }
                                         </script>
                                     </div>
-                                    <fieldset class="form-group mb-4 col-md-4 col-12">
+                                    <fieldset class="form-group mb-4 col-md-5 col-12">
                                         <label for="unit_type" class="mb-2">Unit Type</label>
                                         <select class="form-select" id="unit_type" name="unit_type" onchange="getUnitType('<?= esc($homestay_id); ?>')" required>
                                             <option value="" selected disabled>--Choose Unit Type--</option>
@@ -146,7 +146,7 @@
                                         <input type="number" id="total_people" class="form-control" name="total_people" min="1" value="" required>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12" id="unit-available">
+                                <div class="col-md-7 col-12" id="unit-available">
                                     <div class="text-center mb-3">
                                         <span class="fw-bold">Unit Available</span>
                                     </div>

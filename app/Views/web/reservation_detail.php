@@ -18,8 +18,18 @@
     <div class="row">
         <script>
             currentUrl = '<?= current_url(); ?>';
-        </script>
 
+            function checkRequired(event) {
+                const available_stock = document.getElementById("available_stock");
+                const total_order = document.getElementById("totalOrder");
+
+                if (parseInt(total_order.value) > parseInt(available_stock.textContent)) {
+                    event.preventDefault();
+                    Swal.fire('Total order cannot exceed available stock!');
+                }
+
+            }
+        </script>
         <!-- Object Detail Information -->
         <div class="col-md-6 col-12">
             <div class="card">
@@ -121,7 +131,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="panelsStayOpen-headingFour">
                                     <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="true" aria-controls="panelsStayOpen-collapseFour">
-                                        Homestay Activities
+                                        Additional Amenities
                                     </button>
                                 </h2>
                                 <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFour">
@@ -129,32 +139,32 @@
                                         <div class="mb-3">
                                             <span class="fw-bold"><?= esc($homestay['name']) ?></span>
                                             <?php if (($reservation['status'] == null) && ($reservation['canceled_at'] == null)) : ?>
-                                                <a class="text-success float-end" data-bs-toggle="modal" data-bs-target="#insertService"><i class="fa-solid fa-add"></i> Add Activity</a>
+                                                <a title="Detail" class="text-success float-end" data-bs-toggle="modal" data-bs-target="#insertService"><i class="fa-solid fa-add"></i> Additional Amenities</a>
                                             <?php endif; ?>
                                         </div>
                                         <?php $homestay_activity_total_price = 0; ?>
-                                        <?php if (!empty($reservation_homestay_activity)) : ?>
-                                            <?php foreach ($reservation_homestay_activity as $activity) : ?>
+                                        <?php if (!empty($reservation_additional_amenities)) : ?>
+                                            <?php foreach ($reservation_additional_amenities as $activity) : ?>
                                                 <li><?= esc($activity['name']) ?>
-                                                    <?php if ($activity['is_daily'] == '0') : ?>
-                                                        <?= esc(' (once)'); ?>
-                                                    <?php else : ?>
-                                                        <?= esc(' (daily)'); ?>
+                                                    <?php if ($reservation['status'] == null) : ?>
+                                                        <a class="text-danger float-end ms-2" onclick="deleteAdditionalAmenities('<?= esc($activity['homestay_id']); ?>','<?= esc($activity['additional_amenities_id']); ?>','<?= esc($activity['reservation_id']); ?>')"><i class="fa-solid fa-trash"></i></a>
                                                     <?php endif; ?>
                                                     <a class="text-info float-end" target="_blank"><i class="fa-solid fa-circle-info" data-bs-toggle="modal" data-bs-target="#infoActivity<?= esc($activity['id']); ?>"></i></a><br>
-                                                    <p class="ms-4"><?= esc("Rp " . number_format($activity['price'], 0, ',', '.')); ?>/person</p>
+                                                    <p class="ms-4">
+                                                        <?= esc("Rp " . number_format($activity['price'], 0, ',', '.')); ?><?= ($activity['is_order_count_per_day'] == '1') ? '/day' : '' ?><?= ($activity['is_order_count_per_person'] == '1') ? '/person' : '' ?><?= ($activity['is_order_count_per_room'] == '1') ? '/room' : '' ?>
+                                                        <br>
+                                                        <?= ($activity['day_order'] != '0') ? 'Day Order : ' . $activity['day_order'] . ', ' : '' ?><?= ($activity['person_order'] != '0') ? 'Person Order : ' . $activity['person_order'] . ', ' : '' ?><?= ($activity['room_order'] != '0') ? 'Room Order : ' . $activity['room_order'] . ', ' : '' ?><?= (($activity['day_order'] == '0') && ($activity['person_order'] == '0') && ($activity['room_order'] == '0')) ? 'Total Order : ' . $activity['total_order']  : '' ?>
+                                                        <br>
+                                                        <?= esc("Price : Rp " . number_format($activity['total_price'], 0, ',', '.')); ?>
+                                                    </p>
                                                 </li>
-                                                <?php
-                                                if ($activity['is_daily'] == '1') {
-                                                    $homestay_activity_total_price = $homestay_activity_total_price + ($activity['price'] * $reservation['total_people'] * $reservation['day_of_stay']);
-                                                } else {
-                                                    $homestay_activity_total_price = $homestay_activity_total_price + ($activity['price'] * $reservation['total_people']);
-                                                }
-                                                ?>
-                                            <?php endforeach; ?>
-                                            <span>Homestay activity total price = <?= esc("Rp " . number_format($homestay_activity_total_price, 0, ',', '.')) ?></span>
+                                            <?php
+                                                $homestay_activity_total_price = $homestay_activity_total_price + $activity['total_price'];
+                                            endforeach;
+                                            ?>
+                                            <span>Homestay additional amenities total price = <?= esc("Rp " . number_format($homestay_activity_total_price, 0, ',', '.')) ?></span>
                                         <?php else : ?>
-                                            <span>No homestay activities purcashed</span>
+                                            <span>No additional amenities added</span>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -376,14 +386,14 @@
                                         </td>
                                     </tr>
                                 <?php endif; ?>
-                                <?php if (($reservation['deposit_confirmed_at'] != null) && ($reservation['canceled_at'] == null)) : ?>
+                                <?php if (($reservation['deposit_confirmed_at'] != null)) : ?>
                                     <tr>
                                         <td class="fw-bold">Full Pay</td>
                                         <td>
                                             : <?= esc("Rp " . number_format($fullPay, 0, ',', '.')) ?> <i>*(80% of total price)</i>
                                             <?php if (($reservation['full_paid_proof'] == null) && ($reservation['full_paid_confirmed_at'] == null)) : ?>
                                                 <?php
-                                                $fullPayDeadline = date("Y-m-d H:i", strtotime($reservation['check_in'] . ' + 1 days'));
+                                                $fullPayDeadline = date("d F Y 18:00", strtotime($reservation['check_in']));
                                                 ?>
                                                 <span class="text-danger">(Deadline : <?= esc($fullPayDeadline) ?>)</span>
                                             <?php endif; ?>
@@ -778,41 +788,28 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Select Homestay Activity</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Additional Amenities</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="card-body text-dark">
-                        <form class="form form-vertical" action="/web/reservation/addActivity" method="post" enctype="multipart/form-data">
+                        <form class="form form-vertical" action="/web/reservation/addAmenities" method="post" enctype="multipart/form-data" onsubmit="checkRequired(event)">
                             <div class="form-body">
                                 <input type="hidden" name="reservation_id" value="<?= esc($reservation['id']); ?>">
-                                <?php foreach ($homestay_activity as $item) : ?>
-                                    <div class="form-check">
-                                        <?php if (!empty($reservation_homestay_activity)) : ?>
-                                            <?php if (in_array($item['id'], array_column($reservation_homestay_activity, 'id'))) : ?>
-                                                <input class="form-check-input" type="checkbox" name="activity_id[]" value="<?= esc($item['id']) ?>" id="flexCheckDefault<?= esc($item['id']) ?>" checked>
-                                            <?php else : ?>
-                                                <input class="form-check-input" type="checkbox" name="activity_id[]" value="<?= esc($item['id']) ?>" id="flexCheckDefault<?= esc($item['id']) ?>">
-                                            <?php endif; ?>
-                                        <?php else : ?>
-                                            <input class="form-check-input" type="checkbox" name="activity_id[]" value="<?= esc($item['id']) ?>" id="flexCheckDefault<?= esc($item['id']) ?>">
-                                        <?php endif; ?>
-                                        <label class="form-check-label" for="flexCheckDefault<?= esc($item['id']) ?>">
-                                            <?= esc($item['name']); ?>
-                                            <?php if ($item['is_daily'] == '0') : ?>
-                                                <?= esc(' (once)'); ?>
-                                            <?php else : ?>
-                                                <?= esc(' (daily)'); ?>
-                                            <?php endif; ?>
-                                        </label>
-                                        <span class="float-end"><?= esc("Rp " . number_format($item['price'], 0, ',', '.')); ?>/person</span>
-                                    </div>
-                                <?php endforeach; ?>
+                                <fieldset class="form-group mb-4">
+                                    <script>
+                                        getListAdditionalAmenities('<?= esc($reservation['id']); ?>', '<?= esc($homestay['id']) ?>');
+                                    </script>
+                                    <label for="serviceSelect" class="mb-2">Additional Amenities</label>
+                                    <select class="form-select" id="serviceSelect" name="additional_amenities_id" onchange="getOrderField(this.value, '<?= esc($homestay['id']) ?>','<?= esc($reservation['day_of_stay']) ?>','<?= esc($reservation['total_people']) ?>','<?= esc(count($homestay_unit)) ?>')" required>
+                                    </select>
+                                </fieldset>
+                                <div id="additionalAmenitiesOrderFields">
+                                </div>
                                 <input type="hidden" name="homestay_id" value="<?= esc($homestay['id']) ?>">
-                                <button type="submit" class="btn btn-primary me-1 mt-5">Save</button>
-                                <button type="reset" class="btn btn-light-secondary me-1 mt-5">Reset</button>
+                                <button type="submit" class="btn btn-primary me-1 mt-5">Add</button>
                             </div>
                         </form>
                     </div>
@@ -820,14 +817,14 @@
             </div>
         </div>
     </div>
-    <!-- Modal Info Activity -->
-    <?php if (!empty($homestay_activity)) : ?>
-        <?php foreach ($homestay_activity as $activity) : ?>
+    <!-- Modal Info Additional Amenities -->
+    <?php if (!empty($reservation_additional_amenities)) : ?>
+        <?php foreach ($reservation_additional_amenities as $activity) : ?>
             <div class="modal fade bd-example-modal-lg" id="infoActivity<?= esc($activity['id']); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Info Activity</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Info Additional Amenities</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -840,9 +837,15 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="card-body">
-                                            <h5 class="card-title"><?= esc($activity['name']); ?></h5>
+                                            <h5 class="card-title"><?= esc($activity['name']); ?>
+                                                <?php if (!empty($activity['category'] == '1')) : ?>
+                                                    (Facility)
+                                                <?php else : ?>
+                                                    (Service)
+                                                <?php endif; ?>
+                                            </h5>
                                             <p class="card-text"><?= esc($activity['description']); ?></p>
-                                            <p class="card-text"><small class="text-dark"><?= esc("Rp " . number_format($activity['price'], 0, ',', '.')) ?>/person</small></p>
+                                            <p class="card-text"><small class="text-dark"><?= esc("Rp " . number_format($activity['price'], 0, ',', '.')) ?><?= ($activity['is_order_count_per_day'] == '1') ? '/day' : '' ?><?= ($activity['is_order_count_per_person'] == '1') ? '/person' : '' ?><?= ($activity['is_order_count_per_room'] == '1') ? '/room' : '' ?></small></p>
                                         </div>
                                     </div>
                                 </div>
@@ -868,7 +871,7 @@
                     <div class="modal-body">
                         <div class="card-body text-dark">
                             <img src="/media/photos/<?= esc($reservation['refund_proof']) ?>" class="img-fluid" alt="...">
-                            <form class="form form-vertical" action="/web/reservation/refund/confirm/<?= esc($reservation['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                            <form class="form form-vertical" action="/web/reservation/refund/confirm/<?= esc($reservation['id']); ?>" method="post" enctype="multipart/form-data">
                                 <div class="form-body">
                                     <div class="form-group ">
                                         <label for="name" class="mt-2">Is this refund proof correct?</label>

@@ -124,6 +124,29 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
             </tr>
         <?php endforeach; ?>
     <?php endif; ?>
+    <?php if ($reservation_additional_amenities != null) : ?>
+        <tr>
+            <td colspan="6"></td>
+        </tr>
+        <tr style="background-color:#a9a9a9">
+            <th width="28%" style="height: 20px"><strong>Additional Amenities</strong></th>
+            <th width="20%" style="height: 20px"><strong>Order Detail</strong></th>
+            <th width="10%" style="height: 20px"><strong>Total Order</strong></th>
+            <th width="20%" style="height: 20px"><strong>Price</strong></th>
+            <th width="18%" style="height: 20px"><strong>Total Price</strong></th>
+        </tr>
+        <?php foreach ($reservation_additional_amenities as $activity) : ?>
+            <tr>
+                <td><?= esc($activity['name']); ?></td>
+                <td style="height: 20px;">
+                    <?= ($activity['day_order'] != '0') ? 'Day Order : ' . $activity['day_order'] : '' ?><?= ($activity['person_order'] != '0') ? 'Person Order : ' . $activity['person_order'] : '' ?><?= ($activity['room_order'] != '0') ? 'Room Order : ' . $activity['room_order'] : '' ?><?= (($activity['day_order'] == '0') && ($activity['person_order'] == '0') && ($activity['room_order'] == '0')) ? '-'  : '' ?>
+                </td>
+                <td style="height: 20px;text-align:center"><?= esc($activity['total_order']); ?></td>
+                <td style="height: 20px;text-align:right"><?= 'Rp' . number_format(esc($activity['price']), 0, ',', '.'); ?></td>
+                <td style="height: 20px;text-align:right"><?= 'Rp' . number_format(esc($activity['total_price']), 0, ',', '.'); ?></td>
+            </tr>
+        <?php endforeach; ?>
+    <?php endif; ?>
     <?php if (isset($package)) : ?>
         <tr>
             <td colspan="6"></td>
@@ -234,12 +257,6 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
             <th width="50%" style="background-color:#FFC436">: Waiting for the homestay owner to confirm deposit payment</th>
         <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '0')) : ?>
             <th width="20%" style="background-color:#F78CA2">: Reservation Canceled</th>
-        <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] == null)) : ?>
-            <th width="40%" style="background-color:#F78CA2">: Waiting for the homestay owner to pay refund</th>
-        <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] != null) && ($reservation['refund_paid_confirmed_at'] == null)) : ?>
-            <th width="40%" style="background-color:#F78CA2">: Waiting for the customer to confirm refund</th>
-        <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] != null) && ($reservation['refund_paid_confirmed_at'] != null)) : ?>
-            <th width="20%" style="background-color:#F78CA2">: Reservation Canceled</th>
     </tr>
     <tr>
         <?php if ($reservation['cancelation_reason'] == '1') : ?>
@@ -247,10 +264,28 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
             <th> <i>(canceled by customer)</i></th>
         <?php elseif ($reservation['cancelation_reason'] == '2') : ?>
             <th></th>
-            <th> <i>(deposit payment has exceeded the deadline)</i></th>
+            <th width="40%"> <i>(deposit payment has exceeded the deadline)</i></th>
         <?php elseif ($reservation['cancelation_reason'] == '3') : ?>
             <th></th>
-            <th> <i>(full payment has exceeded the deadline)</i></th>
+            <th width="40%"> <i>(full payment has exceeded the deadline)</i></th>
+        <?php endif; ?>
+    <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] == null)) : ?>
+        <th width="40%" style="background-color:#F78CA2">: Waiting for the homestay owner to pay refund</th>
+    <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] != null) && ($reservation['refund_paid_confirmed_at'] == null)) : ?>
+        <th width="40%" style="background-color:#F78CA2">: Waiting for the customer to confirm refund</th>
+    <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] != null) && ($reservation['refund_paid_confirmed_at'] != null)) : ?>
+        <th width="20%" style="background-color:#F78CA2">: Reservation Canceled</th>
+    </tr>
+    <tr>
+        <?php if ($reservation['cancelation_reason'] == '1') : ?>
+            <th></th>
+            <th> <i>(canceled by customer)</i></th>
+        <?php elseif ($reservation['cancelation_reason'] == '2') : ?>
+            <th></th>
+            <th width="40%"> <i>(deposit payment has exceeded the deadline)</i></th>
+        <?php elseif ($reservation['cancelation_reason'] == '3') : ?>
+            <th></th>
+            <th width="40%"> <i>(full payment has exceeded the deadline)</i></th>
         <?php endif; ?>
     <?php elseif (($reservation['deposit_confirmed_at'] != null) && ($reservation['full_paid_proof'] == null)) : ?>
         <th width="15%" style="background-color:#B6E388">: Paying Full Price</th>

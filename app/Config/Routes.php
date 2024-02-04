@@ -66,6 +66,9 @@ $routes->group('web', ['namespace' => 'App\Controllers\Web'], function ($routes)
     $routes->get('homestayPackage/detail/(:segment)/(:segment)', 'tourismPackage::show/$1/$2');
     $routes->get('homestayPackage/(:segment)', 'TourismPackage::getListPackage/$1');
     $routes->get('homestayActivity/(:segment)', 'ExclusiveActivity::getListActivity/$1');
+    $routes->get('homestayAdditionalAmenities/(:segment)', 'AdditionalAmenities::getListAdditionalAmenities/$1');
+    $routes->get('getAdditionalAmenities/(:segment)/(:segment)', 'AdditionalAmenities::getAdditionalAmenities/$1/$2',  ['filter' => 'role:user']);
+    $routes->delete('additionalAmenities/delete/(:segment)/(:segment)/(:segment)', 'AdditionalAmenities::deleteAdditionalAmenities/$1/$2/$3',  ['filter' => 'role:user']);
     $routes->presenter('souvenirPlace');
     $routes->presenter('culinaryPlace');
     $routes->presenter('worshipPlace');
@@ -82,6 +85,7 @@ $routes->group('web', ['namespace' => 'App\Controllers\Web'], function ($routes)
     $routes->get('reservation/(:segment)', 'Reservation::newReservation/$1', ['filter' => 'role:user']);
     $routes->get('reservation/detail/(:segment)', 'Reservation::detailReservation/$1', ['filter' => 'role:user']);
     $routes->delete('reservation/delete/(:segment)', 'Reservation::delete/$1', ['filter' => 'role:user']);
+    $routes->post('reservation/addAmenities', 'Reservation::addAmenities', ['filter' => 'role:user']);
     $routes->post('reservation/addActivity', 'Reservation::addActivity', ['filter' => 'role:user']);
     $routes->post('reservation/review/(:segment)', 'Reservation::addReview/$1', ['filter' => 'role:user']);
     $routes->post('reservation/(:segment)', 'Reservation::createReservation/$1', ['filter' => 'role:user']);
@@ -166,6 +170,9 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Web', 'filter' => '
 
     $routes->presenter('exclusiveActivity',  ['filter' => 'role:owner']);
     $routes->delete('exclusiveActivity/delete/(:segment)/(:segment)', 'ExclusiveActivity::delete/$1/$2',  ['filter' => 'role:owner']);
+
+    $routes->presenter('additionalAmenities',  ['filter' => 'role:owner']);
+    $routes->delete('additionalAmenities/delete/(:segment)/(:segment)', 'AdditionalAmenities::delete/$1/$2',  ['filter' => 'role:owner']);
 
     $routes->presenter('tourismPackage',  ['filter' => 'role:owner']);
     $routes->delete('tourismPackage/delete/(:segment)/(:segment)', 'TourismPackage::delete/$1/$2',  ['filter' => 'role:owner']);

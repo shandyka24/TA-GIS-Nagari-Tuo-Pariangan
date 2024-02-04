@@ -70,7 +70,7 @@
                     </div>
                     <div class="row mt-3">
                         <div class="col table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-borderless text-dark">
                                 <tbody>
                                     <tr>
                                         <td class="fw-bold">Name</td>
@@ -103,7 +103,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-borderless text-dark">
                                 <tbody>
                                     <tr>
                                         <td class="fw-bold">Facilities <a class="float-end" data-bs-toggle="modal" data-bs-target="#insertService"><i class="fa-solid fa-add"></i></a></td>

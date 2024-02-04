@@ -66,9 +66,9 @@ $uri3 = $uri[3] ?? '';
                                 <i class="fa-solid fa-box-open"></i><span> Tourism Package</span>
                             </a>
                         </li>
-                        <li class="sidebar-item <?= ($uri1 == 'exclusiveActivity') ? 'active' : '' ?>">
-                            <a href="<?= base_url('dashboard/exclusiveActivity'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-list-ol"></i><span> Exclusive Activity</span>
+                        <li class="sidebar-item <?= ($uri1 == 'additionalAmenities') ? 'active' : '' ?>">
+                            <a href="<?= base_url('dashboard/additionalAmenities'); ?>" class="sidebar-link">
+                                <i class="fa-solid fa-list-ol"></i><span> Additional Amenitites</span>
                             </a>
                         </li>
                         <li class="sidebar-item <?= ($uri1 == 'reservation') ? 'active' : '' ?>">

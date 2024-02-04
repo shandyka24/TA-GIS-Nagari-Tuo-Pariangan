@@ -85,4 +85,22 @@ class ReservationHomestayUnitDetailModel extends Model
             ->get();
         return $query;
     }
+    public function get_date_by_rid($reservation_id = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select("date")
+            ->where('reservation_id', $reservation_id)
+            ->groupBy('date')
+            ->get();
+        return $query;
+    }
+    public function get_rid_in_date($date)
+    {
+        $query = $this->db->table($this->table)
+            ->select("reservation_id")
+            ->whereIn('date', $date)
+            ->groupBy('reservation_id')
+            ->get();
+        return $query;
+    }
 }

@@ -2857,9 +2857,9 @@ function deleteObject(id = null, name = null, user = false) {
     id = id.substring(1, 3);
     content = "Homestay Unit";
   } else if (id.substring(0, 1) === "G") {
-    homestay_id = id.substring(4, 7);
-    id = id.substring(1, 4);
-    content = "Homestay Exclusive Activity";
+    homestay_id = id.substring(3, 6);
+    id = id.substring(1, 3);
+    content = "Homestay Additional Amenities";
   } else if (id.substring(0, 1) === "F") {
     id = id.substring(1, 3);
     content = "Unit Facility";
@@ -2944,8 +2944,8 @@ function deleteObject(id = null, name = null, user = false) {
   if (content === "Homestay Unit Facility") {
     urlok = "/dashboard/facilityUnit/delete/" + id;
   }
-  if (content === "Homestay Exclusive Activity") {
-    urlok = "/dashboard/exclusiveActivity/delete/" + homestay_id + "/" + id;
+  if (content === "Homestay Additional Amenities") {
+    urlok = "/dashboard/additionalAmenities/delete/" + homestay_id + "/" + id;
   }
   if (content === "Reservation") {
     urlok = "/web/reservation/delete/" + id;
@@ -3399,7 +3399,7 @@ function getListPackageService(homestay_id = null, package_id = null) {
   });
 }
 function getListPackageServiceC(homestay_id = null, package_id = null) {
-  $("#ownerSelect").empty();
+  $("#serviceSelect").empty();
   $.ajax({
     url: baseUrl + "/web/packageService/" + homestay_id + "/" + package_id,
     dataType: "json",
@@ -3423,6 +3423,194 @@ function getListPackageServiceC(homestay_id = null, package_id = null) {
     },
   });
 }
+
+function getListAdditionalAmenities(reservation_id = null, homestay_id = null) {
+  $("#serviceSelect").empty();
+  $.ajax({
+    url:
+      baseUrl +
+      "/web/getAdditionalAmenities/" +
+      homestay_id +
+      "/" +
+      reservation_id,
+    dataType: "json",
+    success: function (response) {
+      $("#serviceSelect").append(
+        '<option value="" selected disabled>Choose Additional Amenities</option>'
+      );
+      let data = response.data;
+      for (i in data) {
+        let item = data[i];
+        if (item.category === "1") {
+          category = "Facility";
+        } else {
+          category = "Service";
+        }
+        objs =
+          '<option value="' +
+          item.additional_amenities_id +
+          item.is_order_count_per_day +
+          item.is_order_count_per_person +
+          item.is_order_count_per_room +
+          item.real_price +
+          '" data-available_stock="' +
+          item.available_stock +
+          '">[' +
+          category +
+          "]" +
+          item.name +
+          " (" +
+          item.price +
+          ")</option>";
+        $("#serviceSelect").append(objs);
+      }
+    },
+  });
+}
+
+function getOrderField(
+  id = null,
+  homestay_id = null,
+  total_day = null,
+  total_people = null,
+  total_room = null
+) {
+  additional_amenities_id = id.substring(0, 2);
+  is_order_count_per_day = id.substring(2, 3);
+  is_order_count_per_person = id.substring(3, 4);
+  is_order_count_per_room = id.substring(4, 5);
+  price = id.substring(5);
+
+  let selectInput = document.getElementById("serviceSelect");
+  let available_stock = selectInput.options[
+    selectInput.selectedIndex
+  ].getAttribute("data-available_stock");
+
+  console.log(available_stock);
+
+  $("#additionalAmenitiesOrderFields").empty();
+  objs = "";
+  if (available_stock !== "undefined") {
+    objs =
+      objs +
+      '<span>(Available stock : </span><span id="available_stock">' +
+      available_stock +
+      "</span><span>)</span>";
+  }
+  if (
+    is_order_count_per_day === "1" ||
+    is_order_count_per_person === "1" ||
+    is_order_count_per_room === "1"
+  ) {
+    if (is_order_count_per_day === "1") {
+      objs =
+        objs +
+        ' <div class="form-group mb-4">' +
+        '<label for="address" class="mb-2">Day Order</label>' +
+        '<input type="number" class="form-control" id="dayOrder" name="day_order" min="1" onchange="getTotalOrder(' +
+        price +
+        ')" required>' +
+        "</div>";
+    }
+    if (is_order_count_per_person === "1") {
+      objs =
+        objs +
+        ' <div class="form-group mb-4">' +
+        '<label for="address" class="mb-2">Person Order</label>' +
+        '<input type="number" class="form-control" id="personOrder" name="person_order" min="1" onchange="getTotalOrder(' +
+        price +
+        ')" required>' +
+        "</div>";
+    }
+    if (is_order_count_per_room === "1") {
+      objs =
+        objs +
+        ' <div class="form-group mb-4">' +
+        '<label for="address" class="mb-2">Room Order</label>' +
+        '<input type="number" class="form-control" id="roomOrder" name="room_order" min="1" onchange="getTotalOrder(' +
+        price +
+        ')" required>' +
+        "</div>";
+    }
+    objs =
+      objs +
+      ' <div class="form-group mb-4">' +
+      '<label for="address" class="mb-2">Total Order</label>' +
+      '<input type="number" class="form-control" id="totalOrder" name="total_order" readonly required>' +
+      "</div>";
+  } else {
+    objs =
+      objs +
+      ' <div class="form-group mb-4">' +
+      '<label for="address" class="mb-2">Total Order</label>' +
+      '<input type="number" class="form-control" id="totalOrder" name="total_order" min="1" onchange="getTotalPrice(' +
+      price +
+      ')" required>' +
+      "</div>";
+  }
+  objs =
+    objs +
+    '<div class="form-group mb-4">' +
+    '<label for="address" class="mb-2">Total Price</label>' +
+    '<div class="input-group">' +
+    '<span class="input-group-text">Rp</span>' +
+    '<input type="number" class="form-control" id="totalPrice" name="total_price" readonly required>' +
+    "</div>" +
+    "</div>";
+  $("#additionalAmenitiesOrderFields").append(objs);
+  if (
+    is_order_count_per_day === "1" ||
+    is_order_count_per_person === "1" ||
+    is_order_count_per_room === "1"
+  ) {
+    total_order = 1;
+    if (is_order_count_per_day === "1") {
+      document.getElementById("dayOrder").setAttribute("value", total_day);
+      document.getElementById("dayOrder").setAttribute("max", total_day);
+      total_order = total_order * total_day;
+    }
+    if (is_order_count_per_person === "1") {
+      document
+        .getElementById("personOrder")
+        .setAttribute("value", total_people);
+      document.getElementById("personOrder").setAttribute("max", total_people);
+      total_order = total_order * total_people;
+    }
+    if (is_order_count_per_room === "1") {
+      document.getElementById("roomOrder").setAttribute("value", total_room);
+      document.getElementById("roomOrder").setAttribute("max", total_room);
+      total_order = total_order * total_room;
+    }
+    document.getElementById("totalOrder").setAttribute("value", total_order);
+    total_price = total_order * price;
+    document.getElementById("totalPrice").setAttribute("value", total_price);
+  }
+}
+
+function getTotalOrder(price = null) {
+  const day_order = document.getElementById("dayOrder");
+  const person_order = document.getElementById("personOrder");
+  const room_order = document.getElementById("roomOrder");
+
+  total_order =
+    (day_order ? day_order.value : 1) *
+    (person_order ? person_order.value : 1) *
+    (room_order ? room_order.value : 1);
+
+  document.getElementById("totalOrder").setAttribute("value", total_order);
+  document
+    .getElementById("totalPrice")
+    .setAttribute("value", total_order * price);
+}
+
+function getTotalPrice(price = null) {
+  const total_order = document.getElementById("totalOrder");
+
+  document
+    .getElementById("totalPrice")
+    .setAttribute("value", total_order.value * price);
+}
+
 function getUnitType(homestay_id = null) {
   const unitType = document.getElementById("unit_type");
   const dayOfStay = document.getElementById("day_of_stay");
@@ -3624,4 +3812,48 @@ function routeBetweenObjects(startLat, startLng, endLat, endLng) {
   });
 
   boundToRoute(start, end);
+}
+
+function deleteAdditionalAmenities(
+  homestay_id = null,
+  additional_amenities_id = null,
+  reservation_id = null
+) {
+  console.log(homestay_id + additional_amenities_id + reservation_id);
+  Swal.fire({
+    title: "Delete Additional Amenities?",
+    icon: "warning",
+    showCancelButton: true,
+    denyButtonText: "Delete",
+    confirmButtonColor: "#dc3545",
+    cancelButtonColor: "#343a40",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        url:
+          baseUrl +
+          "/web/additionalAmenities/delete/" +
+          homestay_id +
+          "/" +
+          additional_amenities_id +
+          "/" +
+          reservation_id,
+        type: "DELETE",
+        dataType: "json",
+        success: function (response) {
+          if (response.status === 200) {
+            Swal.fire("Deleted!", "Successfully removed", "success").then(
+              (result) => {
+                if (result.isConfirmed) {
+                  document.location.reload();
+                }
+              }
+            );
+          } else {
+            Swal.fire("Failed", "Delete failed!", "warning");
+          }
+        },
+      });
+    }
+  });
 }

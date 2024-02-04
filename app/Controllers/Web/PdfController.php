@@ -12,8 +12,10 @@ use DateTime;
 use App\Models\ReservationHomestayUnitDetailBackUpModel;
 use App\Models\ReservationHomestayUnitDetailModel;
 use App\Models\ReservationModel;
+use App\Models\ReservationHomestayAdditionalAmenitiesDetailModel;
 use App\Models\ReservationHomestayActivityDetailModel;
 use App\Models\HomestayUnitModel;
+use App\Models\HomestayAdditionalAmenitiesModel;
 use App\Models\HomestayExclusiveActivityModel;
 use App\Models\PackageModel;
 use App\Models\PackageDayModel;
@@ -40,8 +42,10 @@ class PdfController extends ResourcePresenter
     protected $reservationHomestayUnitDetailBackUpModel;
     protected $reservationHomestayUnitDetailModel;
     protected $reservationModel;
+    protected $reservationHomestayAdditionalAmenitiesDetailModel;
     protected $reservationHomestayActivityDetailModel;
     protected $homestayUnitModel;
+    protected $homestayAdditionalAmenitiesModel;
     protected $homestayExclusiveActivityModel;
     protected $packageModel;
     protected $packageDayModel;
@@ -76,8 +80,10 @@ class PdfController extends ResourcePresenter
         $this->reservationHomestayUnitDetailBackUpModel = new ReservationHomestayUnitDetailBackUpModel();
         $this->reservationHomestayUnitDetailModel = new ReservationHomestayUnitDetailModel();
         $this->reservationModel = new ReservationModel();
+        $this->reservationHomestayAdditionalAmenitiesDetailModel = new ReservationHomestayAdditionalAmenitiesDetailModel();
         $this->reservationHomestayActivityDetailModel = new ReservationHomestayActivityDetailModel();
         $this->homestayUnitModel = new HomestayUnitModel();
+        $this->homestayAdditionalAmenitiesModel = new HomestayAdditionalAmenitiesModel();
         $this->homestayExclusiveActivityModel = new HomestayExclusiveActivityModel();
         $this->packageModel = new PackageModel();
         $this->packageDayModel = new PackageDayModel();
@@ -104,9 +110,9 @@ class PdfController extends ResourcePresenter
 
         // set document information
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('Desa Wisata Green Talao Park');
-        $pdf->SetTitle('PDF Invoice Desa Wisata Green Talao Park');
-        $pdf->SetSubject('Desa Wisata Green Talao Park');
+        $pdf->SetAuthor('Kawasan Wisata Lembah Harau');
+        $pdf->SetTitle('PDF Invoice Kawasan Wisata Lembah Harau');
+        $pdf->SetSubject('Kawasan Wisata Lembah Harau');
         $pdf->SetKeywords('TCPDF, PDF, invoice, desawisatagtp.online');
 
 
@@ -214,6 +220,20 @@ class PdfController extends ResourcePresenter
             $reservation_homestay_activity[$i]['description'] = $act['description'];
             $reservation_homestay_activity[$i]['id'] = $reservation_homestay_activity[$i]['homestay_activity_id'];
         }
+        $reservation_additional_amenities = $this->reservationHomestayAdditionalAmenitiesDetailModel->get_haa_by_rid_api($homestay_id[0], $reservation['id'])->getResultArray();
+        for ($i = 0; $i < count($reservation_additional_amenities); $i++) {
+            $amenities = $this->homestayAdditionalAmenitiesModel->get_haa_by_id_api($reservation_additional_amenities[$i]['homestay_id'], $reservation_additional_amenities[$i]['additional_amenities_id'])->getRowArray();
+            $reservation_additional_amenities[$i]['name'] = $amenities['name'];
+            $reservation_additional_amenities[$i]['category'] = $amenities['category'];
+            $reservation_additional_amenities[$i]['price'] = $amenities['price'];
+            $reservation_additional_amenities[$i]['is_order_count_per_day'] = $amenities['is_order_count_per_day'];
+            $reservation_additional_amenities[$i]['is_order_count_per_person'] = $amenities['is_order_count_per_person'];
+            $reservation_additional_amenities[$i]['is_order_count_per_room'] = $amenities['is_order_count_per_room'];
+            $reservation_additional_amenities[$i]['description'] = $amenities['description'];
+            $reservation_additional_amenities[$i]['image_url'] = $amenities['image_url'];
+            $reservation_additional_amenities[$i]['id'] = $reservation_additional_amenities[$i]['additional_amenities_id'];
+        }
+
         $homestay_owner_bank_account = $this->userBankAccountModel->get_user_bank_account($homestay_data['owner'])->getRowArray();
 
         $customer_bank_account = $this->userBankAccountModel->get_user_bank_account($reservation['customer_id'])->getRowArray();
@@ -228,6 +248,7 @@ class PdfController extends ResourcePresenter
             'homestay_unit' => $homestay_units,
             'homestay_activity' => $homestay_activity,
             'reservation_homestay_activity' => $reservation_homestay_activity,
+            'reservation_additional_amenities' => $reservation_additional_amenities,
         ];
 
         if (!empty($reservation['package_id'])) {

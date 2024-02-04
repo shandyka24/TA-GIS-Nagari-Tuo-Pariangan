@@ -5,13 +5,13 @@ namespace App\Models;
 use CodeIgniter\Model;
 use CodeIgniter\I18n\Time;
 
-class HomestayUnitModel extends Model
+class HomestayAdditionalAmenitiesModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'homestay_unit';
+    protected $table            = 'homestay_additional_amenities';
     protected $primaryKey       = 'id';
     protected $returnType       = 'array';
-    protected $allowedFields    = ['homestay_id', 'unit_type', 'unit_number', 'name', 'price', 'description'];
+    protected $allowedFields    = ['id', 'homestay_id', 'name', 'description', 'image_url'];
 
     // Dates
     protected $useTimestamps = true;
@@ -25,13 +25,11 @@ class HomestayUnitModel extends Model
     protected $skipValidation       = false;
     protected $cleanValidationRules = true;
 
-    public function get_list_hu_api($homestay_id)
+    public function get_list_haa_api($homestay_id)
     {
-        $columns = "{$this->table}.homestay_id,{$this->table}.unit_type,{$this->table}.unit_number,{$this->table}.name,{$this->table}.price,{$this->table}.capacity,{$this->table}.description";
         $query = $this->db->table($this->table)
-            ->select("{$columns}")
+            ->select("*")
             ->where('homestay_id', $homestay_id)
-            ->orderBy('created_at', 'ASC')
             ->get();
         return $query;
     }
@@ -66,78 +64,66 @@ class HomestayUnitModel extends Model
         return $query;
     }
 
-    public function get_new_id_api($homestay_id = null, $unit_type = null)
+    public function get_new_id_api($homestay_id = null)
     {
-        $lastId = $this->db->table($this->table)
-            ->select('unit_number')
-            ->where('homestay_id', $homestay_id)
-            ->where('unit_type', $unit_type)
-            ->orderBy('created_at', 'ASC')
-            ->get()
-            ->getLastRow('array');
+        $lastId = $this->db->table($this->table)->select('additional_amenities_id')->where('homestay_id', $homestay_id)->orderBy('additional_amenities_id', 'ASC')->get()->getLastRow('array');
         if ($lastId == null) {
             $count = 0;
         } else {
-            $count = (int)$lastId['unit_number'];
+            $count = (int)substr($lastId['additional_amenities_id'], 0);
         }
-
-        $id = sprintf($count + 1);
+        $id = sprintf('%02d', $count + 1);
         return $id;
     }
 
-    public function add_hs_api($homestayUnit = null)
+    public function add_haa_api($additionalAmenities = null)
     {
-        $homestayUnit['created_at'] = Time::now();
-        $homestayUnit['updated_at'] = Time::now();
+        $new_id = $this->get_new_id_api($additionalAmenities['homestay_id']);
+        $additionalAmenities['additional_amenities_id'] = $new_id;
+        $additionalAmenities['created_at'] = Time::now();
+        $additionalAmenities['updated_at'] = Time::now();
+        unset($additionalAmenities['gallery']);
         $insert = $this->db->table($this->table)
-            ->insert($homestayUnit);
+            ->insert($additionalAmenities);
         return $insert;
     }
 
-    public function get_hu_by_id_api($homestay_id = null, $unit_type = null, $unit_number = null)
+    public function get_haa_by_id_api($homestay_id = null, $additional_amenities_id = null)
     {
-
-        $columns = "{$this->table}.homestay_id,{$this->table}.unit_type,{$this->table}.unit_number,{$this->table}.name,{$this->table}.price,{$this->table}.capacity,{$this->table}.description";
         $query = $this->db->table($this->table)
-            ->select("{$columns}, homestay_unit_type.name AS unit")
+            ->select("*")
             ->where('homestay_id', $homestay_id)
-            ->where('unit_type', $unit_type)
-            ->where('unit_number', $unit_number)
-            ->join('homestay_unit_type', 'homestay_unit_type.id = homestay_unit.unit_type')
+            ->where('additional_amenities_id', $additional_amenities_id)
             ->get();
         return $query;
     }
 
-    public function update_hs_api($homestay_id = null, $unit_type = null, $unit_number = null, $homestayUnit = null)
+    public function update_haa_api($additionalAmenities = null, $homestay_id = null, $activity_id = null)
     {
-        $homestayUnit['updated_at'] = Time::now();
+        $additionalAmenities['updated_at'] = Time::now();
+        unset($additionalAmenities['gallery']);
         $query = $this->db->table($this->table)
             ->where('homestay_id', $homestay_id)
-            ->where('unit_type', $unit_type)
-            ->where('unit_number', $unit_number)
-            ->update($homestayUnit);
+            ->where('additional_amenities_id', $activity_id)
+            ->update($additionalAmenities);
         return $query;
     }
-
-    public function delete_hu_api($homestay_id = null, $unit_type = null, $unit_number = null)
+    public function get_haa_for_res($id = null, $homestay_id = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select('*')
+            ->where('homestay_id', $homestay_id)
+            ->whereNotIN('additional_amenities_id', $id)
+            ->orderBy('name', 'ASC')
+            ->get();
+        return $query;
+    }
+    public function del_activity($homestay_id = null, $activity_id = null)
     {
         $query = $this->db->table($this->table)
             ->where('homestay_id', $homestay_id)
-            ->where('unit_type', $unit_type)
-            ->where('unit_number', $unit_number)
+            ->where('additional_amenities_id', $activity_id)
             ->delete();
-        return $query;
-    }
-    public function get_hu_in_number($homestay_id = null, $unit_type = null, $id = null)
-    {
-        $columns = "{$this->table}.homestay_id,{$this->table}.unit_type,{$this->table}.unit_number,{$this->table}.name,{$this->table}.price,{$this->table}.capacity,{$this->table}.description";
-        $query = $this->db->table($this->table)
-            ->select("{$columns}")
-            ->where('homestay_id', $homestay_id)
-            ->where('unit_type', $unit_type)
-            ->whereNotIN('unit_number', $id)
-            ->orderBy('created_at', 'ASC')
-            ->get();
         return $query;
     }
 }

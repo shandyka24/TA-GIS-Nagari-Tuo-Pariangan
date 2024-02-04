@@ -14,10 +14,12 @@ use App\Models\HomestayModel;
 use App\Models\HomestayUnitModel;
 use App\Models\HomestayUnitGalleryModel;
 use App\Models\HomestayExclusiveActivityModel;
+use App\Models\HomestayAdditionalAmenitiesModel;
 use App\Models\ReservationModel;
 use App\Models\ReservationHomestayUnitDetailModel;
 use App\Models\ReservationHomestayUnitDetailBackUpModel;
 use App\Models\ReservationHomestayActivityDetailModel;
+use App\Models\ReservationHomestayAdditionalAmenitiesDetailModel;
 use App\Models\AttractionModel;
 use App\Models\CulinaryPlaceModel;
 use App\Models\SouvenirPlaceModel;
@@ -38,10 +40,12 @@ class Reservation extends ResourcePresenter
     protected $homestayUnitModel;
     protected $homestayUnitGalleryModel;
     protected $homestayExclusiveActivityModel;
+    protected $homestayAdditionalAmenitiesModel;
     protected $reservationModel;
     protected $reservationHomestayUnitDetailModel;
     protected $reservationHomestayUnitDetailBackUpModel;
     protected $reservationHomestayActivityDetailModel;
+    protected $reservationHomestayAdditionalAmenitiesDetailModel;
 
     protected $attractionModel;
     protected $culinaryPlaceModel;
@@ -63,10 +67,12 @@ class Reservation extends ResourcePresenter
         $this->homestayUnitModel = new HomestayUnitModel();
         $this->homestayUnitGalleryModel = new HomestayUnitGalleryModel();
         $this->homestayExclusiveActivityModel = new HomestayExclusiveActivityModel();
+        $this->homestayAdditionalAmenitiesModel = new HomestayAdditionalAmenitiesModel();
         $this->reservationModel = new ReservationModel();
         $this->reservationHomestayUnitDetailModel = new ReservationHomestayUnitDetailModel();
         $this->reservationHomestayUnitDetailBackUpModel = new ReservationHomestayUnitDetailBackUpModel();
         $this->reservationHomestayActivityDetailModel = new ReservationHomestayActivityDetailModel();
+        $this->reservationHomestayAdditionalAmenitiesDetailModel = new ReservationHomestayAdditionalAmenitiesDetailModel();
 
         $this->attractionModel = new AttractionModel();
         $this->culinaryPlaceModel = new CulinaryPlaceModel();
@@ -82,7 +88,7 @@ class Reservation extends ResourcePresenter
         $reservations = $this->reservationModel->get_list_reservation_by_cus_id(user()->id)->getResultArray();
 
         foreach ($reservations as $reservation) {
-            if ($reservation['canceled_at'] != null) {
+            if ($reservation['canceled_at'] == null) {
                 $checkIsReservationCancel = $this->checkIsReservationCancel($reservation);
             }
         }
@@ -226,7 +232,7 @@ class Reservation extends ResourcePresenter
             return redirect()->to(base_url('web/reservation'));
         }
 
-        if ($reservation['canceled_at'] != null) {
+        if ($reservation['canceled_at'] == null) {
             $checkIsReservationCancel = $this->checkIsReservationCancel($reservation);
         }
         $reservation = $this->reservationModel->get_reservation_by_id($id)->getRowArray();
@@ -298,6 +304,20 @@ class Reservation extends ResourcePresenter
             $reservation_homestay_activity[$i]['description'] = $act['description'];
             $reservation_homestay_activity[$i]['id'] = $reservation_homestay_activity[$i]['homestay_activity_id'];
         }
+
+        $reservation_additional_amenities = $this->reservationHomestayAdditionalAmenitiesDetailModel->get_haa_by_rid_api($homestay_id[0], $reservation['id'])->getResultArray();
+        for ($i = 0; $i < count($reservation_additional_amenities); $i++) {
+            $amenities = $this->homestayAdditionalAmenitiesModel->get_haa_by_id_api($reservation_additional_amenities[$i]['homestay_id'], $reservation_additional_amenities[$i]['additional_amenities_id'])->getRowArray();
+            $reservation_additional_amenities[$i]['name'] = $amenities['name'];
+            $reservation_additional_amenities[$i]['category'] = $amenities['category'];
+            $reservation_additional_amenities[$i]['price'] = $amenities['price'];
+            $reservation_additional_amenities[$i]['is_order_count_per_day'] = $amenities['is_order_count_per_day'];
+            $reservation_additional_amenities[$i]['is_order_count_per_person'] = $amenities['is_order_count_per_person'];
+            $reservation_additional_amenities[$i]['is_order_count_per_room'] = $amenities['is_order_count_per_room'];
+            $reservation_additional_amenities[$i]['description'] = $amenities['description'];
+            $reservation_additional_amenities[$i]['image_url'] = $amenities['image_url'];
+            $reservation_additional_amenities[$i]['id'] = $reservation_additional_amenities[$i]['additional_amenities_id'];
+        }
         $homestay_owner_bank_account = $this->userBankAccountModel->get_user_bank_account($homestay_data['owner'])->getRowArray();
 
         $customer_bank_account = $this->userBankAccountModel->get_user_bank_account($reservation['customer_id'])->getRowArray();
@@ -311,6 +331,7 @@ class Reservation extends ResourcePresenter
             'homestay_unit' => $homestay_units,
             'homestay_activity' => $homestay_activity,
             'reservation_homestay_activity' => $reservation_homestay_activity,
+            'reservation_additional_amenities' => $reservation_additional_amenities,
         ];
 
         if (!empty($reservation['package_id'])) {
@@ -320,6 +341,7 @@ class Reservation extends ResourcePresenter
 
             $data = array_merge($data, $data2);
         }
+
         return view('web/reservation_detail', $data);
     }
 
@@ -791,6 +813,15 @@ class Reservation extends ResourcePresenter
         }
     }
 
+    public function addAmenities()
+    {
+        $request = $this->request->getPost();
+        $request['additional_amenities_id'] = substr($request['additional_amenities_id'], 0, 2);
+
+        $add = $this->reservationHomestayAdditionalAmenitiesDetailModel->add_detail_haa($request);
+
+        return redirect()->to(base_url('web/reservation/detail/' . $request['reservation_id']));
+    }
     public function addActivity()
     {
         $request = $this->request->getPost();
@@ -845,7 +876,7 @@ class Reservation extends ResourcePresenter
         $reservations = array();
         for ($i = 0; $i < count($nid); $i++) {
             $reservation = $this->reservationModel->get_reservation_by_id($nid[$i])->getRowArray();
-            if ($reservation['canceled_at'] != null) {
+            if ($reservation['canceled_at'] == null) {
                 $checkIsReservationCancel = $this->checkIsReservationCancel($reservation);
             }
             $reservation = $this->reservationModel->get_reservation_by_id($nid[$i])->getRowArray();
@@ -879,8 +910,7 @@ class Reservation extends ResourcePresenter
             return redirect()->to(base_url('dashboard/reservation'));
         }
 
-        if ($reservation['canceled_at'] != null) {
-            dd(['oke']);
+        if ($reservation['canceled_at'] == null) {
             $checkIsReservationCancel = $this->checkIsReservationCancel($reservation);
         }
         $reservation = $this->reservationModel->get_reservation_by_id($id)->getRowArray();
@@ -951,7 +981,19 @@ class Reservation extends ResourcePresenter
             $reservation_homestay_activity[$i]['description'] = $act['description'];
             $reservation_homestay_activity[$i]['id'] = $reservation_homestay_activity[$i]['homestay_activity_id'];
         }
-        // dd($reservation_homestay_activity);
+        $reservation_additional_amenities = $this->reservationHomestayAdditionalAmenitiesDetailModel->get_haa_by_rid_api($homestay_id[0], $reservation['id'])->getResultArray();
+        for ($i = 0; $i < count($reservation_additional_amenities); $i++) {
+            $amenities = $this->homestayAdditionalAmenitiesModel->get_haa_by_id_api($reservation_additional_amenities[$i]['homestay_id'], $reservation_additional_amenities[$i]['additional_amenities_id'])->getRowArray();
+            $reservation_additional_amenities[$i]['name'] = $amenities['name'];
+            $reservation_additional_amenities[$i]['category'] = $amenities['category'];
+            $reservation_additional_amenities[$i]['price'] = $amenities['price'];
+            $reservation_additional_amenities[$i]['is_order_count_per_day'] = $amenities['is_order_count_per_day'];
+            $reservation_additional_amenities[$i]['is_order_count_per_person'] = $amenities['is_order_count_per_person'];
+            $reservation_additional_amenities[$i]['is_order_count_per_room'] = $amenities['is_order_count_per_room'];
+            $reservation_additional_amenities[$i]['description'] = $amenities['description'];
+            $reservation_additional_amenities[$i]['image_url'] = $amenities['image_url'];
+            $reservation_additional_amenities[$i]['id'] = $reservation_additional_amenities[$i]['additional_amenities_id'];
+        }
 
         $homestay_owner_bank_account = $this->userBankAccountModel->get_user_bank_account($homestay_data['owner'])->getRowArray();
 
@@ -966,6 +1008,7 @@ class Reservation extends ResourcePresenter
             'homestay_unit' => $homestay_units,
             'homestay_activity' => $homestay_activity,
             'reservation_homestay_activity' => $reservation_homestay_activity,
+            'reservation_additional_amenities' => $reservation_additional_amenities,
         ];
 
         if (!empty($reservation['package_id'])) {
@@ -1185,7 +1228,7 @@ class Reservation extends ResourcePresenter
         $dateNow = date("Y-m-d H:i");
 
         $depositDeadline = date("d F Y, H:i", strtotime($reservation['check_in'] . ' - 2 days'));
-        $fullPayDeadline = date("d F Y, H:i", strtotime($reservation['check_in'] . ' + 1 days'));
+        $fullPayDeadline = date("d F Y, 18:00", strtotime($reservation['check_in']));
 
         if ((strtotime($dateNow) > strtotime($depositDeadline)) && ($reservation['deposit_at'] == null) && ($reservation['canceled_at'] == null)) {
             $cancelReservation['canceled_at'] = $dateNow;

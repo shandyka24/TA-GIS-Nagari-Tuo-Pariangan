@@ -192,6 +192,8 @@ class ExclusiveActivity extends ResourcePresenter
 
         $data['homestay_id'] = $homestay_id;
 
+        dd($data);
+
         return view('web/homestay_activity_list', $data);
     }
 }
