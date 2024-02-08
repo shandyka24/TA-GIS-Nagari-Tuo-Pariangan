@@ -388,12 +388,6 @@
                                         <td>: <?= esc(date_format(date_create($reservation['reservation_finish_at']), "d F Y, H:i")) ?></td>
                                     </tr>
                                 <?php endif; ?>
-                                <?php if ($reservation['cust_package_price_confirmed_at'] != null) : ?>
-                                    <tr>
-                                        <td class="fw-bold">Package Price Confirmed at</td>
-                                        <td>: <?= esc(date_format(date_create($reservation['cust_package_price_confirmed_at']), "d F Y, H:i")) ?></td>
-                                    </tr>
-                                <?php endif; ?>
                                 <?php if ($reservation['confirmed_at'] != null) : ?>
                                     <tr>
                                         <td class="fw-bold">Reservation Confirmed at</td>

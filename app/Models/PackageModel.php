@@ -56,6 +56,7 @@ class PackageModel extends Model
         $query = $this->db->table($this->table)
             ->select("{$columns}")
             ->where('homestay_id', $homestay_id)
+            ->orderBy('is_custom')
             ->get();
         return $query;
     }

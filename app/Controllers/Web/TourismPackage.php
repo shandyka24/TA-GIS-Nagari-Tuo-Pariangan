@@ -76,6 +76,7 @@ class TourismPackage extends ResourcePresenter
             'category' => 'Package',
             'data' => $contents,
         ];
+
         return view('dashboard/manage', $data);
     }
     public function new()
