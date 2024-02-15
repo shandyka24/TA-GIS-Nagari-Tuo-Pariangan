@@ -32,6 +32,11 @@
                                 ?>
                             </div> -->
                         </div>
+                        <?php if (in_groups('user')) : ?>
+                            <div class="col">
+                                <a href="<?= base_url('web/reservation'); ?><?= esc('/' . $homestay_id); ?>" class="btn btn-success float-end" target=”_blank”><i class="fa-solid fa-bookmark me-3"></i>Booking</a>
+                            </div>
+                        <?php endif; ?>
                         <?php if (in_groups('owner')) : ?>
                             <div class="col-auto">
                                 <a href="<?= base_url('dashboard/homestay/edit'); ?>/<?= esc($data['id']); ?>" class="btn btn-primary float-end"><i class="fa-solid fa-pencil me-3"></i>Edit</a>

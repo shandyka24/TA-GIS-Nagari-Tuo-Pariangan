@@ -14,29 +14,29 @@ class Users extends ResourcePresenter
     protected $accountModel;
     protected $helpers = ['auth', 'url', 'filesystem'];
     protected $auth;
-    
+
     /**
      * @var AuthConfig
      */
     protected $config;
-    
+
     /**
      * @var Session
      */
     protected $session;
-    
+
     public function __construct()
     {
         $this->accountModel = new AccountModel();
-    
+
         // Most services in this controller require
         // the session to be started - so fire it up!
         $this->session = service('session');
-    
+
         $this->config = config('Auth');
         $this->auth = service('authentication');
     }
-    
+
     /**
      * Present a view of resource objects
      *
@@ -71,7 +71,7 @@ class Users extends ResourcePresenter
      */
     public function new()
     {
-        return redirect()->to(previous_url());
+        dd();
     }
 
     /**
@@ -82,7 +82,6 @@ class Users extends ResourcePresenter
      */
     public function create()
     {
-    
     }
 
     /**
@@ -118,7 +117,7 @@ class Users extends ResourcePresenter
             'title' => 'Update User',
             'errors' => []
         ];
-        
+
         $request = $this->request->getPost();
         $requestData = [
             'username' => $request['username'],
@@ -129,21 +128,20 @@ class Users extends ResourcePresenter
             'phone' => $request['phone'],
         ];
         foreach ($requestData as $key => $value) {
-            if(empty($value)) {
+            if (empty($value)) {
                 unset($requestData[$key]);
             }
         }
-        
-        if (!empty($request['password'])){
+
+        if (!empty($request['password'])) {
             $rules = [
                 'pass_confirm' => 'matches[password]',
             ];
-    
-            if (! $this->validate($rules))
-            {
+
+            if (!$this->validate($rules)) {
                 return redirect()->back()->withInput();
             }
-    
+
             $passwordData = [
                 'password_hash' => Password::hash($request['password']),
                 'reset_hash' => null,
@@ -152,7 +150,7 @@ class Users extends ResourcePresenter
             ];
             $updatePassword = $this->accountModel->change_password_user($id, $passwordData);
         }
-    
+
         if (($request['avatar']) != 'default.jpg') {
             $folder = $request['avatar'];
             $filepath = WRITEPATH . 'uploads/' . $folder;
@@ -168,7 +166,7 @@ class Users extends ResourcePresenter
         $role = [
             'group_id' => $request['role']
         ];
-    
+
         $updateUser = $this->accountModel->update_account_users($id, $requestData);
         $updateRole = $this->accountModel->update_role_api($id, $role);
         if ($updateUser && $updateRole) {

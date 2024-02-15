@@ -217,6 +217,9 @@ $edit = in_array('edit', $uri);
                     </div>
                 </div>
             </div>
+            <div class="col">
+                <a class="btn icon btn-success btn-sm mb-3 float-end" href="/dashboard/tourismPackage/<?= esc($data['id']); ?>"><i class="fa-solid fa-check"></i> Done</a>
+            </div>
         </div>
     <?php endif; ?>
     <?php if ($edit) : ?>

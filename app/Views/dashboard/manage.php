@@ -36,6 +36,8 @@ $users = in_array('users', $uri);
                         <?php else : ?>
                             <a href="<?= current_url(); ?>/new" class="btn btn-primary float-end"><i class="fa-solid fa-plus me-3"></i> New <?= $category; ?></a>
                         <?php endif; ?>
+                    <?php else : ?>
+                        <a href="<?= current_url(); ?>/new" class="btn btn-primary float-end"><i class="fa-solid fa-plus me-3"></i> Homestay Owner</a>
                     <?php endif; ?>
                 </div>
             </div>
