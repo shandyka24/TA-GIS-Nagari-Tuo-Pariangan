@@ -19,7 +19,7 @@ $uri3 = $uri[3] ?? '';
                 <?php if (logged_in()) : ?>
                     <div class="p-2 text-center">
                         <?php if (!empty(user()->first_name)) : ?>
-                            Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-muted mb-0">@<?= user()->username; ?></span>
+                            Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-dark mb-0">@<?= user()->username; ?></span>
                         <?php else : ?>
                             Hello, <span class="fw-bold">@<?= user()->username; ?></span>
                         <?php endif; ?>
@@ -36,7 +36,7 @@ $uri3 = $uri[3] ?? '';
                 <ul class="menu">
                     <li class="sidebar-item">
                         <a href="<?= base_url('web'); ?>" class="sidebar-link">
-                            <i class="fa-solid fa-house"></i><span> Home</span>
+                            <i class="fa-solid fa-house"></i><span class="text-dark fw-bold"> Home</span>
                         </a>
                     </li>
 
@@ -44,7 +44,7 @@ $uri3 = $uri[3] ?? '';
                     <?php if (in_groups(['admin'])) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'users') ? 'active' : '' ?>">
                             <a href="<?= base_url('dashboard/users'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-users"></i><span> Users</span>
+                                <i class="fa-solid fa-users"></i><span class="text-dark fw-bold"> Users</span>
                             </a>
                         </li>
                     <?php endif; ?>
@@ -53,7 +53,7 @@ $uri3 = $uri[3] ?? '';
                     <?php if (in_groups(['admin'])) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'attraction') ? 'active' : '' ?> has-sub">
                             <a href="" class="sidebar-link">
-                                <i class="fa-solid fa-landmark"></i><span> Attraction</span>
+                                <i class="fa-solid fa-landmark"></i><span class="text-dark fw-bold"> Attraction</span>
                             </a>
                             <ul class="submenu <?= ($uri1 == 'attraction') ? 'active' : '' ?>">
                                 <!-- Manage Attraction -->
@@ -72,7 +72,7 @@ $uri3 = $uri[3] ?? '';
                     <?php if (in_groups(['admin'])) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'event') ? 'active' : '' ?>">
                             <a href="<?= base_url('dashboard/event'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-bullhorn"></i><span> Event</span>
+                                <i class="fa-solid fa-bullhorn"></i><span class="text-dark fw-bold"> Event</span>
                             </a>
                         </li>
                     <?php endif; ?>
@@ -81,27 +81,27 @@ $uri3 = $uri[3] ?? '';
                     <?php if (in_groups(['owner'])) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'homestay') ? 'active' : '' ?>">
                             <a href="<?= base_url('dashboard/homestay'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-bed"></i><span> Homestay</span>
+                                <i class="fa-solid fa-bed"></i><span class="text-dark fw-bold"> Homestay</span>
                             </a>
                         </li>
                         <li class="sidebar-item <?= ($uri1 == 'homestayUnit') ? 'active' : '' ?>">
                             <a href="<?= base_url('dashboard/homestayUnit'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-door-open"></i><span> Unit</span>
+                                <i class="fa-solid fa-door-open"></i><span class="text-dark fw-bold"> Unit</span>
                             </a>
                         </li>
                         <li class="sidebar-item <?= ($uri1 == 'tourismPackage') ? 'active' : '' ?>">
                             <a href="<?= base_url('dashboard/tourismPackage'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-box-open"></i><span> Tourism Package</span>
+                                <i class="fa-solid fa-box-open"></i><span class="text-dark fw-bold"> Tourism Package</span>
                             </a>
                         </li>
                         <li class="sidebar-item <?= ($uri1 == 'additionalAmenities') ? 'active' : '' ?>">
                             <a href="<?= base_url('dashboard/additionalAmenities'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-list-ol"></i><span> Additional Amenitites</span>
+                                <i class="fa-solid fa-list-ol"></i><span class="text-dark fw-bold"> Additional Amenitites</span>
                             </a>
                         </li>
                         <li class="sidebar-item <?= ($uri1 == 'reservation') ? 'active' : '' ?>">
                             <a href="<?= base_url('dashboard/reservation'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-book"></i><span> Reservation</span>
+                                <i class="fa-solid fa-book"></i><span class="text-dark fw-bold"> Reservation</span>
                             </a>
                         </li>
                     <?php endif; ?>
@@ -110,7 +110,7 @@ $uri3 = $uri[3] ?? '';
                     <?php if (in_groups(['admin'])) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'homestay') ? 'active' : '' ?> has-sub">
                             <a href="<?= base_url('dashboard/homestay/manage'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-bed"></i><span> Homestay</span>
+                                <i class="fa-solid fa-bed"></i><span class="text-dark fw-bold"> Homestay</span>
                             </a>
                             <ul class="submenu <?= ($uri1 == 'homestay') ? 'active' : '' ?><?= ($uri1 == 'facilityHomestay') ? 'active' : '' ?><?= ($uri1 == 'facilityUnit') ? 'active' : '' ?>">
                                 <!-- Manage Homestay -->
@@ -133,7 +133,7 @@ $uri3 = $uri[3] ?? '';
                     <?php if (in_groups(['admin'])) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'culinarysouvenirPlace') ? 'active' : '' ?> has-sub">
                             <a href="" class="sidebar-link">
-                                <i class="fa-solid fa-bag-shopping"></i><span> Souvenir Place</span>
+                                <i class="fa-solid fa-bag-shopping"></i><span class="text-dark fw-bold"> Souvenir Place</span>
                             </a>
                             <ul class="submenu <?= ($uri1 == 'souvenirPlace') ? 'active' : '' ?>">
                                 <!-- Manage Souvenir Place -->
@@ -152,7 +152,7 @@ $uri3 = $uri[3] ?? '';
                     <?php if (in_groups(['admin'])) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'culinaryPlace') ? 'active' : '' ?> has-sub">
                             <a href="" class="sidebar-link">
-                                <i class="fa-solid fa-mortar-pestle"></i><span> Culinary Place</span>
+                                <i class="fa-solid fa-mortar-pestle"></i><span class="text-dark fw-bold"> Culinary Place</span>
                             </a>
                             <ul class="submenu <?= ($uri1 == 'culinaryPlace') ? 'active' : '' ?>">
                                 <!-- Manage Souvenir Place -->
@@ -171,7 +171,7 @@ $uri3 = $uri[3] ?? '';
                     <?php if (in_groups(['admin'])) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'worshipPlace') ? 'active' : '' ?>">
                             <a href="<?= base_url('dashboard/worshipPlace'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-place-of-worship"></i><span> Worship Place</span>
+                                <i class="fa-solid fa-place-of-worship"></i><span class="text-dark fw-bold"> Worship Place</span>
                             </a>
                         </li>
                     <?php endif; ?>
@@ -180,7 +180,7 @@ $uri3 = $uri[3] ?? '';
                     <?php if (in_groups(['admin'])) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'serviceProvider') ? 'active' : '' ?>">
                             <a href="<?= base_url('dashboard/serviceProvider'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-briefcase"></i><span> Service Provider</span>
+                                <i class="fa-solid fa-briefcase"></i><span class="text-dark fw-bold"> Service Provider</span>
                             </a>
                         </li>
                     <?php endif; ?>

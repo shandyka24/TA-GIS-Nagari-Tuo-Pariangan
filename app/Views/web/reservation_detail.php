@@ -105,6 +105,8 @@
                                         <span class="fw-bold"><?= esc($homestay['name']) ?></span><br>
                                         <span>Type : <?= esc($homestay['unit_type']) ?></span>
                                         <?php $homestay_unit_total_price = 0; ?>
+                                        <?php $package_total_price = 0; ?>
+                                        <?php $homestay_activity_total_price = 0; ?>
                                         <?php foreach ($homestay_unit as $item) : ?>
                                             <div class="card border mb-3">
                                                 <div class="row g-0">
@@ -128,230 +130,242 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="true" aria-controls="panelsStayOpen-collapseFour">
-                                        Additional Amenities
-                                    </button>
-                                </h2>
-                                <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFour">
-                                    <div class="accordion-body">
-                                        <div class="mb-3">
-                                            <span class="fw-bold"><?= esc($homestay['name']) ?></span>
-                                            <?php if (($reservation['status'] == null) && ($reservation['canceled_at'] == null)) : ?>
-                                                <a title="Detail" class="text-success float-end" data-bs-toggle="modal" data-bs-target="#insertService"><i class="fa-solid fa-add"></i> Additional Amenities</a>
+                            <?php if ($homestay_unit[0]['unit_type'] != "3") : ?>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="true" aria-controls="panelsStayOpen-collapseFour">
+                                            Additional Amenities
+                                        </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingFour">
+                                        <div class="accordion-body">
+                                            <div class="mb-3">
+                                                <span class="fw-bold"><?= esc($homestay['name']) ?></span>
+                                                <?php if (($reservation['status'] == null) && ($reservation['canceled_at'] == null)) : ?>
+                                                    <a title="Detail" class="text-success float-end" data-bs-toggle="modal" data-bs-target="#insertService"><i class="fa-solid fa-add"></i> Additional Amenities</a>
+                                                <?php endif; ?>
+                                            </div>
+                                            <?php if (!empty($reservation_additional_amenities)) : ?>
+                                                <?php foreach ($reservation_additional_amenities as $activity) : ?>
+                                                    <li><?= esc($activity['name']) ?>
+                                                        <?php if ($reservation['status'] == null) : ?>
+                                                            <a class="text-danger float-end ms-2" onclick="deleteAdditionalAmenities('<?= esc($activity['homestay_id']); ?>','<?= esc($activity['additional_amenities_id']); ?>','<?= esc($activity['reservation_id']); ?>')"><i class="fa-solid fa-trash"></i></a>
+                                                        <?php endif; ?>
+                                                        <a class="text-info float-end" target="_blank"><i class="fa-solid fa-circle-info" data-bs-toggle="modal" data-bs-target="#infoActivity<?= esc($activity['id']); ?>"></i></a><br>
+                                                        <p class="ms-4">
+                                                            <?= esc("Rp " . number_format($activity['price'], 0, ',', '.')); ?><?= ($activity['is_order_count_per_day'] == '1') ? '/day' : '' ?><?= ($activity['is_order_count_per_person'] == '1') ? '/person' : '' ?><?= ($activity['is_order_count_per_room'] == '1') ? '/room' : '' ?>
+                                                            <br>
+                                                            <?= ($activity['day_order'] != '0') ? 'Day Order : ' . $activity['day_order'] . ', ' : '' ?><?= ($activity['person_order'] != '0') ? 'Person Order : ' . $activity['person_order'] . ', ' : '' ?><?= ($activity['room_order'] != '0') ? 'Room Order : ' . $activity['room_order'] . ', ' : '' ?><?= (($activity['day_order'] == '0') && ($activity['person_order'] == '0') && ($activity['room_order'] == '0')) ? 'Total Order : ' . $activity['total_order']  : '' ?>
+                                                            <br>
+                                                            <?= esc("Price : Rp " . number_format($activity['total_price'], 0, ',', '.')); ?>
+                                                        </p>
+                                                    </li>
+                                                <?php
+                                                    $homestay_activity_total_price = $homestay_activity_total_price + $activity['total_price'];
+                                                endforeach;
+                                                ?>
+                                                <span>Homestay additional amenities total price = <?= esc("Rp " . number_format($homestay_activity_total_price, 0, ',', '.')) ?></span>
+                                            <?php else : ?>
+                                                <span>No additional amenities added</span>
                                             <?php endif; ?>
                                         </div>
-                                        <?php $homestay_activity_total_price = 0; ?>
-                                        <?php if (!empty($reservation_additional_amenities)) : ?>
-                                            <?php foreach ($reservation_additional_amenities as $activity) : ?>
-                                                <li><?= esc($activity['name']) ?>
-                                                    <?php if ($reservation['status'] == null) : ?>
-                                                        <a class="text-danger float-end ms-2" onclick="deleteAdditionalAmenities('<?= esc($activity['homestay_id']); ?>','<?= esc($activity['additional_amenities_id']); ?>','<?= esc($activity['reservation_id']); ?>')"><i class="fa-solid fa-trash"></i></a>
-                                                    <?php endif; ?>
-                                                    <a class="text-info float-end" target="_blank"><i class="fa-solid fa-circle-info" data-bs-toggle="modal" data-bs-target="#infoActivity<?= esc($activity['id']); ?>"></i></a><br>
-                                                    <p class="ms-4">
-                                                        <?= esc("Rp " . number_format($activity['price'], 0, ',', '.')); ?><?= ($activity['is_order_count_per_day'] == '1') ? '/day' : '' ?><?= ($activity['is_order_count_per_person'] == '1') ? '/person' : '' ?><?= ($activity['is_order_count_per_room'] == '1') ? '/room' : '' ?>
-                                                        <br>
-                                                        <?= ($activity['day_order'] != '0') ? 'Day Order : ' . $activity['day_order'] . ', ' : '' ?><?= ($activity['person_order'] != '0') ? 'Person Order : ' . $activity['person_order'] . ', ' : '' ?><?= ($activity['room_order'] != '0') ? 'Room Order : ' . $activity['room_order'] . ', ' : '' ?><?= (($activity['day_order'] == '0') && ($activity['person_order'] == '0') && ($activity['room_order'] == '0')) ? 'Total Order : ' . $activity['total_order']  : '' ?>
-                                                        <br>
-                                                        <?= esc("Price : Rp " . number_format($activity['total_price'], 0, ',', '.')); ?>
-                                                    </p>
-                                                </li>
-                                            <?php
-                                                $homestay_activity_total_price = $homestay_activity_total_price + $activity['total_price'];
-                                            endforeach;
-                                            ?>
-                                            <span>Homestay additional amenities total price = <?= esc("Rp " . number_format($homestay_activity_total_price, 0, ',', '.')) ?></span>
-                                        <?php else : ?>
-                                            <span>No additional amenities added</span>
-                                        <?php endif; ?>
                                     </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-md-6 col-12">
-            <div class="card">
-                <div class="card-header text-center">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h4 class="card-title">Package Reservation</h4>
+        <?php if ($homestay_unit[0]['unit_type'] != "3") : ?>
+            <div class="col-md-6 col-12">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h4 class="card-title">Package Reservation</h4>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <?php $package_total_price = 0; ?>
-                    <?php if (empty($package)) : ?>
-                        <?php if (($reservation['status'] == null) && ($reservation['canceled_at'] == null)) : ?>
-                            <a title="Buy Package" class="btn icon btn-success btn-sm mb-1" href="/web/reservation/package/<?= esc($homestay['id']); ?>/<?= esc($reservation['id']); ?>">
-                                <i class="fa-solid fa-dollar-sign"></i> Buy Package
-                            </a>
-                            <p><i>*You can choose a tourism package offered by the homestay which has the same number of days or fewer than the <b>Day of Stay</b> on your homestay reservation. You can also customize your own package or extend the available packages</i></p>
+                    <div class="card-body">
+                        <?php if (empty($package)) : ?>
+                            <?php if (($reservation['status'] == null) && ($reservation['canceled_at'] == null)) : ?>
+                                <a title="Buy Package" class="btn icon btn-success btn-sm mb-1" href="/web/reservation/package/<?= esc($homestay['id']); ?>/<?= esc($reservation['id']); ?>">
+                                    <i class="fa-solid fa-dollar-sign"></i> Buy Package
+                                </a>
+                                <p><i>*You can choose a tourism package offered by the homestay which has the same number of days or fewer than the <b>Day of Stay</b> on your homestay reservation. You can also customize your own package or extend the available packages</i></p>
+                            <?php else : ?>
+                                <center>
+                                    <span>No tourism packages purchased</span>
+                                </center>
+                            <?php endif; ?>
                         <?php else : ?>
-                            <center>
-                                <span>No tourism packages purchased</span>
-                            </center>
-                        <?php endif; ?>
-                    <?php else : ?>
-                        <div class="card border mb-3">
-                            <div class="row">
-                                <?php if ($package['brochure_url'] != null) : ?>
-                                    <div class="col-md-3 d-flex align-items-center justify-content-center">
-                                        <img width="500px" src="/media/photos/<?= esc($package['brochure_url']) ?>" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 155px;">
-                                    </div>
-                                <?php endif; ?>
-                                <?php if ($package['brochure_url'] != null) : ?>
-                                    <div class="col-md-9">
-                                    <?php else : ?>
-                                        <div class="col-md-12">
-                                        <?php endif; ?>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <h5 class="card-title"><?= esc($package['name']) ?></h5>
-                                                </div>
-                                                <div class="col">
-                                                    <?php if ($reservation['status'] == null) : ?>
-                                                        <a title="Delete Package" class="btn icon btn-danger btn-sm mb-1 float-end" href="/web/reservation/package/delete/<?= esc($reservation['id']); ?>">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </a>
-                                                        <?php if ($package['is_custom'] == '1') : ?>
-                                                            <?php if (str_contains($package['name'], 'extend')) : ?>
-                                                                <a title="Edit Package" class="btn icon btn-warning btn-sm mb-1 me-1 float-end" href="/web/reservation/package/extendPackage/<?= esc($reservation['id']); ?>/<?= esc($reservation['homestay_id']); ?>/<?= esc($reservation['package_id']); ?>">
-                                                                    <i class="fa-solid fa-edit"></i>
-                                                                </a>
-                                                            <?php else : ?>
-                                                                <a title="Edit Package" class="btn icon btn-warning btn-sm mb-1 me-1 float-end" href="/web/reservation/package/customPackage/<?= esc($reservation['id']); ?>/<?= esc($reservation['homestay_id']); ?>/<?= esc($reservation['package_id']); ?>">
-                                                                    <i class="fa-solid fa-edit"></i>
-                                                                </a>
+                            <div class="card border mb-3">
+                                <div class="row">
+                                    <?php if ($package['brochure_url'] != null) : ?>
+                                        <div class="col-md-3 d-flex align-items-center justify-content-center">
+                                            <img width="500px" src="/media/photos/<?= esc($package['brochure_url']) ?>" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 155px;">
+                                        </div>
+                                    <?php endif; ?>
+                                    <?php if ($package['brochure_url'] != null) : ?>
+                                        <div class="col-md-9">
+                                        <?php else : ?>
+                                            <div class="col-md-12">
+                                            <?php endif; ?>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <h5 class="card-title"><?= esc($package['name']) ?></h5>
+                                                    </div>
+                                                    <div class="col">
+                                                        <?php if ($reservation['status'] == null) : ?>
+                                                            <a title="Delete Package" class="btn icon btn-danger btn-sm mb-1 float-end" href="/web/reservation/package/delete/<?= esc($reservation['id']); ?>">
+                                                                <i class="fa-solid fa-trash"></i>
+                                                            </a>
+                                                            <?php if ($package['is_custom'] == '1') : ?>
+                                                                <?php if (str_contains($package['name'], 'extend')) : ?>
+                                                                    <a title="Edit Package" class="btn icon btn-warning btn-sm mb-1 me-1 float-end" href="/web/reservation/package/extendPackage/<?= esc($reservation['id']); ?>/<?= esc($reservation['homestay_id']); ?>/<?= esc($reservation['package_id']); ?>">
+                                                                        <i class="fa-solid fa-edit"></i>
+                                                                    </a>
+                                                                <?php else : ?>
+                                                                    <a title="Edit Package" class="btn icon btn-warning btn-sm mb-1 me-1 float-end" href="/web/reservation/package/customPackage/<?= esc($reservation['id']); ?>/<?= esc($reservation['homestay_id']); ?>/<?= esc($reservation['package_id']); ?>">
+                                                                        <i class="fa-solid fa-edit"></i>
+                                                                    </a>
+                                                                <?php endif; ?>
                                                             <?php endif; ?>
                                                         <?php endif; ?>
-                                                    <?php endif; ?>
-                                                    <a title="Detail Package" class="btn icon btn-info btn-sm mb-1 me-1 float-end" href="/web/homestayPackage/detail/<?= esc($package['homestay_id']); ?>/<?= esc($package['id']); ?>" target="_blank">
-                                                        <i class="fa-solid fa-circle-info"></i>
-                                                    </a>
+                                                        <a title="Detail Package" class="btn icon btn-info btn-sm mb-1 me-1 float-end" href="/web/homestayPackage/detail/<?= esc($package['homestay_id']); ?>/<?= esc($package['id']); ?>" target="_blank">
+                                                            <i class="fa-solid fa-circle-info"></i>
+                                                        </a>
+                                                    </div>
                                                 </div>
+                                                <p class="card-text">Minimun Capacity : <?= esc($package['min_capacity']) ?> people</p>
+                                                <p class="card-text"><small class="text-dark"><?= esc("Rp " . number_format($package['price'], 0, ',', '.')); ?></small></p>
                                             </div>
-                                            <p class="card-text">Minimun Capacity : <?= esc($package['min_capacity']) ?> people</p>
-                                            <p class="card-text"><small class="text-dark"><?= esc("Rp " . number_format($package['price'], 0, ',', '.')); ?></small></p>
+                                            </div>
                                         </div>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="accordion mt-3" id="accordionPanelsStayOpenExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
-                                            Package Activity
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
-                                        <div class="accordion-body">
-                                            <?php foreach ($list_day as $day) : ?>
-                                                <div class="mt-3">
-                                                    <span class="fw-bold">Day <?= esc($day['day']); ?></span>
-                                                    <?php foreach ($list_activity as $activity) : ?>
-                                                        <?php if ($activity['day'] == $day['day']) : ?>
-                                                            <li><?= esc($activity['object_name']); ?>
-                                                                <?php if ($activity['description'] != null) : ?>
-                                                                    <?= esc(' : ' . $activity['description']); ?>
-                                                                <?php endif; ?>
-                                                            </li>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                </div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </div>
                                 </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
-                                            Package Service
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
-                                        <div class="accordion-body">
-                                            <div class="mt-3">
-                                                <span class="fw-bold">Include</span>
-                                                <?php foreach ($list_service as $service) : ?>
-                                                    <?php if ($service['status'] == '1') : ?>
-                                                        <li><?= esc($service['name']); ?> </li>
-                                                    <?php endif; ?>
+                                <div class="accordion mt-3" id="accordionPanelsStayOpenExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
+                                                Package Activity
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+                                            <div class="accordion-body">
+                                                <?php foreach ($list_day as $day) : ?>
+                                                    <div class="mt-3">
+                                                        <span class="fw-bold">Day <?= esc($day['day']); ?></span>
+                                                        <?php foreach ($list_activity as $activity) : ?>
+                                                            <?php if ($activity['day'] == $day['day']) : ?>
+                                                                <li><?= esc($activity['object_name']); ?>
+                                                                    <?php if ($activity['description'] != null) : ?>
+                                                                        <?= esc(' : ' . $activity['description']); ?>
+                                                                    <?php endif; ?>
+                                                                </li>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
+                                                    </div>
                                                 <?php endforeach; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
+                                                Package Service
+                                            </button>
+                                        </h2>
+                                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
+                                            <div class="accordion-body">
                                                 <div class="mt-3">
-                                                    <span class="fw-bold">Exclude</span>
+                                                    <span class="fw-bold">Include</span>
                                                     <?php foreach ($list_service as $service) : ?>
-                                                        <?php if ($service['status'] == '0') : ?>
+                                                        <?php if ($service['status'] == '1') : ?>
                                                             <li><?= esc($service['name']); ?> </li>
                                                         <?php endif; ?>
                                                     <?php endforeach; ?>
+                                                    <div class="mt-3">
+                                                        <span class="fw-bold">Exclude</span>
+                                                        <?php foreach ($list_service as $service) : ?>
+                                                            <?php if ($service['status'] == '0') : ?>
+                                                                <li><?= esc($service['name']); ?> </li>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col table-responsive mt-3">
-                                <table class="table table-borderless text-dark">
-                                    <tbody>
-                                        <tr>
-                                            <td class="fw-bold">Total People</td>
-                                            <td><?= esc($reservation['total_people']); ?> People</td>
-                                        </tr>
-                                        <?php
+                                <div class="col table-responsive mt-3">
+                                    <table class="table table-borderless text-dark">
+                                        <tbody>
+                                            <tr>
+                                                <td class="fw-bold">Total People</td>
+                                                <td><?= esc($reservation['total_people']); ?> People</td>
+                                            </tr>
+                                            <?php
 
-                                        if ($package['min_capacity'] == 0) {
-                                            $packageOrder = 1;
-                                        } else {
-                                            $packageOrder = $reservation['total_people'] / $package['min_capacity'];
-                                            if ($packageOrder < 1) {
+                                            if ($package['min_capacity'] == 0) {
                                                 $packageOrder = 1;
-                                            } elseif (($reservation['total_people'] % $package['min_capacity'] <= $package['min_capacity'] / 2) && ($reservation['total_people'] % $package['min_capacity'] > 0)) {
-                                                $packageOrder = floor($packageOrder) + 0.5;
-                                            } elseif ($reservation['total_people'] % $package['min_capacity'] > $package['min_capacity'] / 2) {
-                                                $packageOrder = floor($packageOrder) + 1;
+                                            } else {
+                                                $packageOrder = $reservation['total_people'] / $package['min_capacity'];
+                                                if ($packageOrder < 1) {
+                                                    $packageOrder = 1;
+                                                } elseif (($reservation['total_people'] % $package['min_capacity'] <= $package['min_capacity'] / 2) && ($reservation['total_people'] % $package['min_capacity'] > 0)) {
+                                                    $packageOrder = floor($packageOrder) + 0.5;
+                                                } elseif ($reservation['total_people'] % $package['min_capacity'] > $package['min_capacity'] / 2) {
+                                                    $packageOrder = floor($packageOrder) + 1;
+                                                }
                                             }
-                                        }
-                                        $package_total_price = $packageOrder * $package['price'];
-                                        ?>
-                                        <tr>
-                                            <td class="fw-bold">Package Order</td>
-                                            <td><?= esc($packageOrder); ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-bold">Package Reservation<br>Total Price</td>
-                                            <td><?= esc("Rp " . number_format($package_total_price, 0, ',', '.')); ?></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                            $package_total_price = $packageOrder * $package['price'];
+                                            ?>
+                                            <tr>
+                                                <td class="fw-bold">Package Order</td>
+                                                <td><?= esc($packageOrder); ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fw-bold">Package Reservation<br>Total Price</td>
+                                                <td><?= esc("Rp " . number_format($package_total_price, 0, ',', '.')); ?></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            <?php endif; ?>
                             </div>
-                        <?php endif; ?>
-                        </div>
-                </div>
-                <?php
-                $total_price = $homestay_unit_total_price + $homestay_activity_total_price + $package_total_price;
-                $deposit = $total_price * 20 / 100;
-                $fullPay = $total_price * 80 / 100;
+                    </div>
+                    <?php
+                    $total_price = $homestay_unit_total_price + $homestay_activity_total_price + $package_total_price;
+                    $deposit = $total_price * 20 / 100;
+                    $fullPay = $total_price * 80 / 100;
 
-                if ($reservation['is_refund'] == '1') {
-                    $refund = $deposit * 50 / 100;
-                } elseif ($reservation['is_refund'] == '0') {
-                    $refund = 0;
-                }
-                ?>
-                <?php if (($reservation['status'] == null) && ($reservation['canceled_at'] == null)) : ?>
-                    <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($deposit); ?>','<?= esc($total_price); ?>')">
-                        <i class="fa-solid fa-check"></i> Done
-                    </a>
-                <?php endif; ?>
+                    if ($reservation['is_refund'] == '1') {
+                        $refund = $deposit * 50 / 100;
+                    } elseif ($reservation['is_refund'] == '0') {
+                        $refund = 0;
+                    }
+                    ?>
+                    <?php if (($reservation['status'] == null) && ($reservation['canceled_at'] == null)) : ?>
+                        <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($deposit); ?>','<?= esc($total_price); ?>')">
+                            <i class="fa-solid fa-check"></i> Done
+                        </a>
+                    <?php endif; ?>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
+        <?php
+        $total_price = $homestay_unit_total_price + $homestay_activity_total_price + $package_total_price;
+        $deposit = $total_price * 20 / 100;
+        $fullPay = $total_price * 80 / 100;
+
+        if ($reservation['is_refund'] == '1') {
+            $refund = $deposit * 50 / 100;
+        } elseif ($reservation['is_refund'] == '0') {
+            $refund = 0;
+        }
+        ?>
         <div class="row">
             <div class="card">
                 <div class="card-header text-center">
@@ -369,24 +383,22 @@
                                     <td class="fw-bold">Total Price</td>
                                     <td>: <?= esc("Rp " . number_format($total_price, 0, ',', '.')) ?></td>
                                 </tr>
-                                <?php if ($reservation['status'] != null) : ?>
-                                    <tr>
-                                        <td class="fw-bold">Deposit</td>
-                                        <td>
-                                            : <?= esc("Rp " . number_format($deposit, 0, ',', '.')) ?> <i>*(20% of total price)</i>
-                                            <?php if (($reservation['status'] == '1') && ($reservation['deposit_proof'] == null) && ($reservation['deposit_confirmed_at'] == null) && ($reservation['is_rejected'] != '1')) : ?>
-                                                <?php
-                                                $depositDeadline = date("d F Y, H:i", strtotime($reservation['check_in'] . ' - 2 days'));
-                                                ?>
-                                                <span class="text-danger">(Deadline : <?= esc($depositDeadline) ?>)</span>
-                                            <?php endif; ?>
-                                            <?php if ($reservation['deposit_confirmed_at'] != null) : ?>
-                                                <span class="text-success">(Paid by costumer)</span>
-                                            <?php endif; ?>
-                                        </td>
-                                    </tr>
-                                <?php endif; ?>
-                                <?php if (($reservation['deposit_confirmed_at'] != null) && ($reservation['canceled_at'] == null)) : ?>
+                                <tr>
+                                    <td class="fw-bold">Deposit</td>
+                                    <td>
+                                        : <?= esc("Rp " . number_format($deposit, 0, ',', '.')) ?> <i>*(20% of total price)</i>
+                                        <?php if (($reservation['deposit_proof'] == null) && ($reservation['deposit_confirmed_at'] == null) && ($reservation['is_rejected'] != '1')) : ?>
+                                            <?php
+                                            $depositDeadline = date("d F Y, H:i", strtotime($reservation['check_in'] . ' - 2 days'));
+                                            ?>
+                                            <span class="text-danger">(Deadline : <?= esc($depositDeadline) ?>)</span>
+                                        <?php endif; ?>
+                                        <?php if ($reservation['deposit_confirmed_at'] != null) : ?>
+                                            <span class="text-success">(Paid by costumer)</span>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                                <?php if (($reservation['deposit_confirmed_at'] != null) && ($reservation['cancelation_reason'] != '1')) : ?>
                                     <tr>
                                         <td class="fw-bold">Full Pay</td>
                                         <td>

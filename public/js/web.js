@@ -3620,6 +3620,44 @@ function getUnitType(homestay_id = null) {
     checkInInput.value !== "" &&
     unitType.value !== ""
   ) {
+    const checkOutInput = document.getElementById("check_out");
+    const checkInTimeInput = document.getElementById("check_in_time");
+    if (unitType.value === "3") {
+      var checkInDate = new Date(checkInInput.value);
+      checkInDate.setDate(
+        checkInDate.getDate() + parseInt(dayOfStay.value) - 1
+      );
+      let coyear = checkInDate.getFullYear();
+      let comonth = checkInDate.getMonth() + 1;
+      if (comonth < 10) {
+        comonth = "0" + comonth;
+      }
+      let codaydate = checkInDate.getDate();
+      if (codaydate < 10) {
+        codaydate = "0" + codaydate;
+      }
+
+      let checkOutVal = coyear + "-" + comonth + "-" + codaydate + "T23:59";
+      checkOutInput.value = checkOutVal;
+      checkInTimeInput.value = "06:00";
+      console.log("oke");
+    } else {
+      var checkInDate = new Date(checkInInput.value);
+      checkInDate.setDate(checkInDate.getDate() + parseInt(dayOfStay.value));
+      let coyear = checkInDate.getFullYear();
+      let comonth = checkInDate.getMonth() + 1;
+      if (comonth < 10) {
+        comonth = "0" + comonth;
+      }
+      let codaydate = checkInDate.getDate();
+      if (codaydate < 10) {
+        codaydate = "0" + codaydate;
+      }
+
+      let checkOutVal = coyear + "-" + comonth + "-" + codaydate + "T12:00";
+      checkOutInput.value = checkOutVal;
+      checkInTimeInput.value = "14:00";
+    }
     $("#units-available").empty();
     $.ajax({
       url:

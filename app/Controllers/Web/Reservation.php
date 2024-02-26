@@ -192,12 +192,22 @@ class Reservation extends ResourcePresenter
             $total_price = $total_price + $homestay_unit['price'];
         }
 
-        $requestData = [
-            'id' => $new_id,
-            'customer_id' => user()->id,
-            'check_in' => $request['check_in'] . ' 12:00',
-            'total_people' => $request['total_people']
-        ];
+        if ($request['unit_type'] == '3') {
+            $requestData = [
+                'id' => $new_id,
+                'customer_id' => user()->id,
+                'check_in' => $request['check_in'] . ' 06:00',
+                'total_people' => $request['total_people']
+            ];
+        } else {
+            $requestData = [
+                'id' => $new_id,
+                'customer_id' => user()->id,
+                'check_in' => $request['check_in'] . ' 14:00',
+                'total_people' => $request['total_people']
+            ];
+        }
+
 
         foreach ($requestData as $key => $value) {
             if (empty($value)) {
@@ -341,7 +351,6 @@ class Reservation extends ResourcePresenter
 
             $data = array_merge($data, $data2);
         }
-
         return view('web/reservation_detail', $data);
     }
 

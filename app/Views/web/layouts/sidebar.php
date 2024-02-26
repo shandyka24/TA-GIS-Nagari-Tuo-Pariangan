@@ -31,20 +31,20 @@ $uri3 = $uri[3] ?? '';
                     <!-- Home -->
                     <li class="sidebar-item <?= ($uri1 == 'index') ? 'active' : '' ?>">
                         <a href="/web" class="sidebar-link">
-                            <i class="fa-solid fa-house"></i><span>Home</span>
+                            <i class="fa-solid fa-house"></i><span class="text-dark fw-bold">Home</span>
                         </a>
                     </li>
                     <!-- Unique Attraction -->
                     <li class="sidebar-item <?= ($uri1 == 'uniqueAttraction') ? 'active' : '' ?>">
                         <a href="/web/uniqueAttraction" class="sidebar-link">
-                            <i class="fa-solid fa-star"></i><span>Unique Attraction</span>
+                            <i class="fa-solid fa-star"></i><span class="text-dark fw-bold">Unique Attraction</span>
                         </a>
                     </li>
 
                     <!-- Ordinary Attraction -->
                     <li class="sidebar-item <?= ($uri1 == 'attraction') ? 'active' : '' ?> has-sub">
                         <a href="" class="sidebar-link">
-                            <i class="fa-solid fa-tree"></i><span>Ordinary Attraction</span>
+                            <i class="fa-solid fa-tree"></i><span class="text-dark fw-bold">Ordinary Attraction</span>
                         </a>
 
                         <ul class="submenu <?= ($uri1 == 'attraction') ? 'active' : '' ?>">
@@ -102,7 +102,7 @@ $uri3 = $uri[3] ?? '';
                     <!-- Event -->
                     <li class="sidebar-item <?= ($uri1 == 'event') ? 'active' : '' ?> has-sub">
                         <a href="" class="sidebar-link">
-                            <i class="fa-solid fa-bullhorn"></i><span>Event</span>
+                            <i class="fa-solid fa-bullhorn"></i><span class="text-dark fw-bold">Event</span>
                         </a>
 
                         <ul class="submenu <?= ($uri1 == 'event') ? 'active' : '' ?>">
@@ -158,7 +158,7 @@ $uri3 = $uri[3] ?? '';
                     <!-- Homestay -->
                     <li class="sidebar-item <?= ($uri1 == 'homestay') ? 'active' : '' ?> has-sub">
                         <a href="" class="sidebar-link">
-                            <i class="fa-solid fa-bed"></i></i><span>Homestay</span>
+                            <i class="fa-solid fa-bed"></i></i><span class="text-dark fw-bold">Homestay</span>
                         </a>
                         <ul class="submenu <?= ($uri1 == 'homestay') ? 'active' : '' ?>">
                             <!-- List Homestay -->
@@ -251,7 +251,7 @@ $uri3 = $uri[3] ?? '';
                     <?php if (in_groups('user')) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'reservation') ? 'active' : '' ?>">
                             <a href="<?= base_url('web/reservation'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-book"></i><span>Reservation</span>
+                                <i class="fa-solid fa-book"></i><span class="text-dark fw-bold">Reservation</span>
                             </a>
                         </li>
                     <?php endif; ?>
@@ -262,7 +262,7 @@ $uri3 = $uri[3] ?? '';
                                 <?php elseif (in_groups(['admin'])) : ?>
                                     <a href="<?= base_url('dashboard/users'); ?>" class="sidebar-link">
                                     <?php endif; ?>
-                                    <i class="bi bi-grid-fill"></i><span>Dashboard</span>
+                                    <i class="bi bi-grid-fill"></i><span class="text-dark fw-bold">Dashboard</span>
                                     </a>
                         </li>
                     <?php endif; ?>

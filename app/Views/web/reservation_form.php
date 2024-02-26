@@ -57,7 +57,7 @@
                                                 <label for="check_in" class="mb-2">Check In</label>
                                                 <div class="input-group">
                                                     <input type="date" id="check_in" class="form-control" name="check_in" onchange="getCheckOut2()" value="" required>
-                                                    <input type="time" class="form-control" value="12:00" required disabled>
+                                                    <input type="time" class="form-control" id="check_in_time" value="14:00" required disabled>
                                                     <script>
                                                         function getCheckOut2() {
                                                             const dayOfStay = document.getElementById("day_of_stay");

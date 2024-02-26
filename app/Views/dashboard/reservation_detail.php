@@ -343,7 +343,7 @@
                                         <?php endif; ?>
                                     </td>
                                 </tr>
-                                <?php if (($reservation['deposit_confirmed_at'] != null) && ($reservation['canceled_at'] == null)) : ?>
+                                <?php if (($reservation['deposit_confirmed_at'] != null) && ($reservation['cancelation_reason'] != '1')) : ?>
                                     <tr>
                                         <td class="fw-bold">Full Pay</td>
                                         <td>
