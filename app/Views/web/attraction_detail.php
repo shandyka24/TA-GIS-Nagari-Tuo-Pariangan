@@ -77,7 +77,7 @@
                     </div>
                     <div class="row">
                         <div class="col table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-borderless text-dark">
                                 <tbody>
                                     <tr>
                                         <td class="fw-bold" colspan="3">List of Ticket Prices</td>
