@@ -7,10 +7,7 @@ $edit = in_array('edit', $uri);
 
 <?= $this->section('styles') ?>
 <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
-<link
-    href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-    rel="stylesheet"
-/>
+<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/filepond-plugin-media-preview@1.0.11/dist/filepond-plugin-media-preview.min.css">
 <link rel="stylesheet" href="<?= base_url('assets/css/pages/form-element-select.css'); ?>">
 <?= $this->endSection() ?>
@@ -20,18 +17,13 @@ $edit = in_array('edit', $uri);
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">Update Profile</h3>
-            <?php if (isset($errors)): ?>
-            <?php foreach ($errors as $error): ?>
-                <div class="alert alert-warning alert-dismissible show fade">
-                    <?= esc($error) ?>
-                    <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="alert"
-                            aria-label="Close"
-                    ></button>
-                </div>
-            <?php endforeach ?>
+            <?php if (isset($errors)) : ?>
+                <?php foreach ($errors as $error) : ?>
+                    <div class="alert alert-warning alert-dismissible show fade">
+                        <?= esc($error) ?>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                <?php endforeach ?>
             <?php endif; ?>
         </div>
         <div class="card-body">
@@ -43,75 +35,66 @@ $edit = in_array('edit', $uri);
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="first-name" class="mb-2">First Name</label>
-                                        <input type="text" id="first-name" class="form-control"
-                                               name="first_name" placeholder="First Name" value="<?= ($edit) ? $data['first_name'] : old('first_name'); ?>">
+                                        <input type="text" id="first-name" class="form-control" name="first_name" placeholder="First Name" value="<?= ($edit) ? $data['first_name'] : old('first_name'); ?>">
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="last-name" class="mb-2">Last Name</label>
-                                        <input type="text" id="last-name" class="form-control"
-                                               name="last_name" placeholder="Last Name" value="<?= ($edit) ? $data['last_name'] : old('last_name'); ?>">
+                                        <input type="text" id="last-name" class="form-control" name="last_name" placeholder="Last Name" value="<?= ($edit) ? $data['last_name'] : old('last_name'); ?>">
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="email" class="mb-2">Email</label>
-                                        <input type="email" id="email" class="form-control"
-                                               name="email" placeholder="Email" value="<?= ($edit) ? $data['email'] : old('email'); ?>" required>
+                                        <input type="email" id="email" class="form-control" name="email" placeholder="Email" value="<?= ($edit) ? $data['email'] : old('email'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="username" class="mb-2">Username</label>
-                                        <input type="text" id="username" class="form-control"
-                                               name="username" placeholder="Username" value="<?= ($edit) ? $data['username'] : old('username'); ?>" required>
+                                        <input type="text" id="username" class="form-control" name="username" placeholder="Username" value="<?= ($edit) ? $data['username'] : old('username'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="password" class="mb-2">New Password</label>
-                                        <input type="password" id="password" class="form-control"
-                                               name="password" placeholder="New Password">
+                                        <input type="password" id="password" class="form-control" name="password" placeholder="New Password">
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="confirm-password" class="mb-2">Confirm New Password</label>
-                                        <input type="password" id="confirm-password" class="form-control"
-                                               name="pass_confirm" placeholder="Confirm New Password">
+                                        <input type="password" id="confirm-password" class="form-control" name="pass_confirm" placeholder="Confirm New Password">
                                     </div>
                                 </div>
                                 <fieldset class="form-group mb-4">
                                     <label for="role" class="mb-2">Roles</label>
                                     <select class="form-select" id="role" name="role">
                                         <?php foreach ($roles as $role) : ?>
-                                        <?php if ($edit && esc($role['name']) == esc($data['role'])): ?>
-                                            <option value="<?= esc($role['id']); ?>" selected><?= ucfirst(esc($role['name'])); ?></option>
-                                        <?php else: ?>
-                                            <option value="<?= esc($role['id']); ?>"><?= ucfirst(esc($role['name'])); ?></option>
-                                        <?php endif; ?>
+                                            <?php if ($edit && esc($role['name']) == esc($data['role'])) : ?>
+                                                <option value="<?= esc($role['id']); ?>" selected><?= ucfirst(esc($role['name'])); ?></option>
+                                            <?php else : ?>
+                                                <option value="<?= esc($role['id']); ?>"><?= ucfirst(esc($role['name'])); ?></option>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
                                 </fieldset>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="address" class="mb-2">Address</label>
-                                        <input type="text" id="address" class="form-control"
-                                               name="address" placeholder="Address" value="<?= ($edit) ? $data['address'] : old('address'); ?>">
+                                        <input type="text" id="address" class="form-control" name="address" placeholder="Address" value="<?= ($edit) ? $data['address'] : old('address'); ?>">
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="phone" class="mb-2">Phone</label>
-                                        <input type="number" id="phone" class="form-control"
-                                               name="phone" placeholder="Phone" value="<?= ($edit) ? $data['phone'] : old('phone'); ?>">
+                                        <input type="text" id="phone" class="form-control" name="phone" placeholder="Phone" value="<?= ($edit) ? $data['phone'] : old('phone'); ?>">
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end mb-3">
                                     <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
-                                    <button type="reset"
-                                            class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                 </div>
                             </div>
                         </div>
@@ -166,8 +149,8 @@ $edit = in_array('edit', $uri);
         styleButtonRemoveItemPosition: 'center bottom',
         credits: false,
     });
-    <?php if ($edit): ?>
-    pond.addFile(`<?= base_url('media/photos/' . $data['avatar']); ?>`);
+    <?php if ($edit) : ?>
+        pond.addFile(`<?= base_url('media/photos/' . $data['avatar']); ?>`);
     <?php endif; ?>
     FilePond.setOptions({
         server: '/upload/avatar'

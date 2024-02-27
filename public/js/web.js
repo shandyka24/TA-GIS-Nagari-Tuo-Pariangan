@@ -2305,6 +2305,7 @@ function saveSelection(shape) {
 
 // Get list of users
 function getListUsers(owner) {
+  console.log(owner);
   let users;
   $("#ownerSelect").empty();
   $.ajax({

@@ -109,7 +109,6 @@ class Event extends ResourcePresenter
 
         $list_date = $this->eventDateModel->get_list_date_api($id)->getResultArray();
 
-
         $data = [
             'title' => 'Event',
             'data' => $event,
@@ -121,7 +120,6 @@ class Event extends ResourcePresenter
             'geometry' => json_decode($data['data']['geoJson']),
             'properties' => []
         ];
-
         if (url_is('*dashboard*')) {
             return view('dashboard/detail_event', $data);
         }

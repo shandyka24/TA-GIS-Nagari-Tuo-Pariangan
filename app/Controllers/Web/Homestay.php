@@ -247,6 +247,12 @@ class Homestay extends ResourcePresenter
             return redirect()->to('dashboard/homestay');
         }
 
+        $owner = $this->homestayModel->get_hs_owner_by_id($homestay['owner'])->getRowArray();
+
+        $homestay['owner_first_name'] = $owner['first_name'];
+        $homestay['owner_last_name'] = $owner['last_name'];
+        $homestay['owner_username'] = $owner['username'];
+
         $list_facility = $this->homestayFacilityDetailModel->get_facility_by_hs_api($id)->getResultArray();
         $selectedFac = array();
         foreach ($list_facility as $facility) {

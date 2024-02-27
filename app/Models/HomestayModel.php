@@ -180,4 +180,12 @@ class HomestayModel extends Model
             ->get();
         return $query;
     }
+    public function get_hs_owner_by_id($owner = null)
+    {
+        $query = $this->db->table('users')
+            ->select("*")
+            ->where('id', $owner)
+            ->get();
+        return $query;
+    }
 }

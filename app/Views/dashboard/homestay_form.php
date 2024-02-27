@@ -67,14 +67,24 @@ $edit = in_array('edit', $uri);
                                 <?php if (in_groups('owner')) : ?>
                                     <input type="hidden" name="owner" value="<?= user()->id; ?>" required>
                                 <?php else : ?>
-                                    <fieldset class="form-group mb-4">
-                                        <script>
-                                            getListUsers('<?= ($edit) ? esc($data['owner']) : ''; ?>');
-                                        </script>
-                                        <label for="ownerSelect" class="mb-2">Owner</label>
-                                        <select class="form-select" id="ownerSelect" name="owner" required>
-                                        </select>
-                                    </fieldset>
+                                    <?php if ($edit) : ?>
+                                        <input type="hidden" name="owner" value="<?= esc($data['owner']); ?>" required>
+                                        <fieldset class="form-group mb-4">
+                                            <label for="ownerSelect" class="mb-2">Owner</label>
+                                            <select class="form-select" id="ownerSelect" name="owner" required disabled>
+                                                <option value="<?= esc($data['owner']) ?>" selected><?= ($data['owner_first_name']) ? esc($data['owner_first_name']) : ''; ?> <?= ($data['owner_last_name']) ? esc($data['owner_last_name']) : ''; ?>(@<?= esc($data['owner_username']); ?>)</option>
+                                            </select>
+                                        </fieldset>
+                                    <?php else : ?>
+                                        <fieldset class="form-group mb-4">
+                                            <script>
+                                                getListUsers('<?= ($edit) ? esc($data['owner']) : ''; ?>');
+                                            </script>
+                                            <label for="ownerSelect" class="mb-2">Owner</label>
+                                            <select class="form-select" id="ownerSelect" name="owner" required>
+                                            </select>
+                                        </fieldset>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                                 <div class="form-group mb-4">
                                     <label for="description" class="form-label">Description</label>
