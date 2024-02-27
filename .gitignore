@@ -2,8 +2,8 @@
 # Operating Specific Junk Files
 #-------------------------
 
-public/media/photos/*
-public/media/videos/*
+# public/media/photos/*
+# public/media/videos/*
 
 # OS X
 .DS_Store
