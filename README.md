@@ -1,4 +1,5 @@
-# Desa Wisata Kampuang Minang Nagari Sumpu
+# GIS Kawasan Wisata Lembah Harau
+
 This is a Geographic Information System (GIS) Web Application. Created using Codeigniter 4 with Myth/Auth for user authentications.
 
 ## What is CodeIgniter?
@@ -29,7 +30,7 @@ the following primary features:
 
 ## Installation & updates
 
-Using terminal, **run `git clone https://github.com/j03hanafi/desa-wisata-sumpu.git`, go inside the directory with `cd desa-wisata-sumpu`, then `composer install`** to set up Codeigniter 4 framework.
+Using terminal, **run `git clone https://github.com/UntungJamari/lembah-harau-web.git`, go inside the directory with `cd lembah-harau-web`, then `composer install`** to set up Codeigniter 4 framework.
 
 When updating, check the release notes to see if there are any changes you might need to apply
 to your `app` folder. The affected files can be copied or merged from
@@ -53,7 +54,7 @@ Execute `php spark serve` to start application locally.
 This application came with few users to use authentication functionality.
 
 | Email                 | Username    | Password   |
-|-----------------------|-------------|------------|
+| --------------------- | ----------- | ---------- |
 | `accuser1@email.com`  | `accuser1`  | `akunaku1` |
 | `accuser2@email.com`  | `accuser2`  | `akunaku2` |
 | `accuser3@email.com`  | `accuser3`  | `akunaku3` |
