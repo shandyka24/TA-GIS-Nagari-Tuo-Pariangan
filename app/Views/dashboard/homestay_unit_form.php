@@ -67,7 +67,7 @@ $edit = in_array('edit', $uri);
                             <div class="form-group">
                                 <label for="price" class="mb-2">Capacity</label>
                                 <div class="input-group">
-                                    <input type="number" id="price" class="form-control" name="capacity" placeholder="Capacity" aria-label="Price" aria-describedby="price" value="<?= ($edit) ? $data['price'] : old('price'); ?>" required>
+                                    <input type="number" id="price" class="form-control" name="capacity" placeholder="Capacity" aria-label="Price" aria-describedby="price" value="<?= ($edit) ? $data['capacity'] : old('capacity'); ?>" required>
                                     <span class="input-group-text">people</span>
                                 </div>
                             </div>

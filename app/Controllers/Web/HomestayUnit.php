@@ -257,6 +257,7 @@ class HomestayUnit extends ResourcePresenter
         $requestData = [
             'name' => $request['name'],
             'price' => $request['price'],
+            'capacity' => $request['capacity'],
             'description' => $request['description'],
         ];
         foreach ($requestData as $key => $value) {
@@ -521,6 +522,8 @@ class HomestayUnit extends ResourcePresenter
         $unit_type = substr($id, 0, 1);
         $unit_number = substr($id, 1);
 
+        $homestay = $this->homestayModel->get_hs_by_id_api($homestay_id)->getRowArray();
+
         $homestayUnit = $this->homestayUnitModel->get_hu_by_id_api($homestay_id, $unit_type, $unit_number)->getRowArray();
 
         $getRID = $this->reservationHomestayUnitDetailModel->get_reservation_by_huid($homestay_id, $unit_type, $unit_number)->getResultArray();
@@ -559,7 +562,7 @@ class HomestayUnit extends ResourcePresenter
         $homestayUnit['gallery'] = $galleries;
 
         $data = [
-            'title' => $homestayUnit['name'],
+            'title' => $homestay['name'],
             'data' => $homestayUnit,
             'facilities' => $list_facility,
         ];
