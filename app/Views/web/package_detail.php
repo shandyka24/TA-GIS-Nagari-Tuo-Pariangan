@@ -157,7 +157,19 @@ $edit = in_array('edit', $uri);
                                         $activitiesForDay = array_filter($list_activity, function ($list_activity) use ($d) {
                                             return $list_activity['day'] === $d['day'];
                                         });
-                                        foreach ($activitiesForDay as $object) {
+
+                                        $activitiesForDayy = $activitiesForDay;
+
+                                        $hs = [
+                                            'id_object' => $homestay['id'],
+                                            'lat' => $homestay['lat'],
+                                            'lng' => $homestay['lng'],
+                                        ];
+
+                                        array_unshift($activitiesForDayy, $hs);
+                                        array_push($activitiesForDayy, $hs);
+
+                                        foreach ($activitiesForDayy as $object) {
                                             $loop++;
 
                                             $lat_now = isset($object['lat']) ? esc($object['lat']) : '';
@@ -211,6 +223,10 @@ $edit = in_array('edit', $uri);
                                     </button>
                                     <ul class="dropdown-menu">
                                         <?php if (!empty($activitiesForDay)) :  ?>
+                                            <?php
+                                            $first = array_values($activitiesForDay)[0];
+                                            ?>
+                                            <li><button type="button" onclick="routeBetweenObjects( <?= $homestay['lat'] ?>, <?= $homestay['lng'] ?>, <?= $first['lat'] ?>, <?= $first['lng'] ?>)" class="btn btn-outline-primary"><i class="fa fa-road"></i> Homestay ke Activity 1</button></a></li>
                                             <?php foreach ($activitiesForDay as $index => $currentActivity) : ?>
                                                 <?php $loop++; ?>
                                                 <?php if ($currentActivity['day'] === $d['day']) : ?>
@@ -224,6 +240,10 @@ $edit = in_array('edit', $uri);
 
                                                 <?php endif; ?>
                                             <?php endforeach; ?>
+                                            <?php
+                                            $last = end($activitiesForDay);
+                                            ?>
+                                            <li><button type="button" onclick="routeBetweenObjects( <?= $last['lat'] ?>, <?= $last['lng'] ?>, <?= $homestay['lat'] ?>, <?= $homestay['lng'] ?>)" class="btn btn-outline-primary"><i class="fa fa-road"></i> Activity <?= esc($nextActivity['activity']) ?> ke Homestay</button></a></li>
                                         <?php endif; ?>
                                     </ul>
                                 </div>

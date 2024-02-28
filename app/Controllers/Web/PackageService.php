@@ -132,7 +132,6 @@ class PackageService extends ResourcePresenter
     }
     public function delete($homestay_id = null, $package_id = null, $package_service_id = null)
     {
-
         $reservation = $this->reservationModel->get_reservation_by_cpid($homestay_id, $package_id)->getRowArray();
 
         $package = $this->packageModel->get_package_by_id_api($homestay_id, $package_id)->getRowArray();
@@ -141,9 +140,16 @@ class PackageService extends ResourcePresenter
 
         $package_service_detail = $this->packageServiceDetailModel->get_ps_by_id_api($homestay_id, $package_id, $package_service_id)->getRowArray();
 
-        if ($package_service_detail['status'] == "1") {
+        if (($package_service_detail['status'] == "1") && ($package['is_custom'] == '1')) {
             if ($service['category'] == "1") {
                 $package['price'] = (int)$package['price'] - ((int)$service['price'] * (int)$reservation['total_people']);
+            } else {
+                $package['price'] = (int)$package['price'] - (int)$service['price'];
+            }
+            $setPrice = $this->packageModel->set_price($package['price'], $homestay_id, $package_id);
+        } elseif (($package_service_detail['status'] == "1") && ($package['is_custom'] != '1')) {
+            if ($service['category'] == "1") {
+                $package['price'] = (int)$package['price'] - ((int)$service['price'] * (int)$package['min_capacity']);
             } else {
                 $package['price'] = (int)$package['price'] - (int)$service['price'];
             }

@@ -116,7 +116,6 @@ class TourismPackage extends ResourcePresenter
             'homestay_id' => $homestay['id'],
             'name' => $request['name'],
             'min_capacity' => $request['min_capacity'],
-            'price' => $request['price'],
             'description' => $request['description'],
             'brochure_url' => $gallery[0],
             'is_custom' => $request['is_custom'],
@@ -204,6 +203,7 @@ class TourismPackage extends ResourcePresenter
             $homestay = $this->homestayModel->list_by_owner_api(user()->id)->getRowArray();
             $homestay_id = $homestay['id'];
         }
+        $homestay = $this->homestayModel->get_hs_by_id_api($homestay_id)->getRowArray();
         $data = $this->getPackageDetail($homestay_id, $package_id);
         $reservations = $this->reservationModel->get_reservation_by_cpid($homestay_id, $package_id)->getResultArray();
         $rating = 0;
@@ -223,12 +223,12 @@ class TourismPackage extends ResourcePresenter
 
         $data['title'] = 'Package Detail';
 
+        $data['homestay'] = $homestay;
         if (url_is('*web*')) {
             $data['homestay_id'] = $data['data']['homestay_id'];
-            // dd($data);
+            $data['title'] = $homestay['name'];
             return view('web/package_detail', $data);
         }
-
         return view('dashboard/package_detail', $data);
     }
     public function getPackageDetail($homestay_id = null, $package_id = null)

@@ -48,15 +48,17 @@ $edit = in_array('edit', $uri);
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group mb-4">
-                                        <label for="employee_name" class="mb-2">Price</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text">Rp</span>
-                                            <input type="number" maxlength="25" id="employee_name" class="form-control" name="price" placeholder="Price" value="<?= ($edit) ? $data['price'] : old('price'); ?>" max="<?= ($edit) ? $data['price'] : old('price'); ?>">
+                                <?php if ($edit) : ?>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group mb-4">
+                                            <label for="employee_name" class="mb-2">Price</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text">Rp</span>
+                                                <input type="number" maxlength="25" id="employee_name" class="form-control" name="price" placeholder="Price" value="<?= ($edit) ? $data['price'] : old('price'); ?>" max="<?= ($edit) ? $data['price'] : old('price'); ?>">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                <?php endif; ?>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-12">
