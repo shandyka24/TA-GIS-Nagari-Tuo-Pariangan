@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2024 at 08:02 AM
+-- Generation Time: Feb 28, 2024 at 11:16 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.0.6
 
@@ -73,9 +73,9 @@ CREATE TABLE `attraction` (
 --
 
 INSERT INTO `attraction` (`id`, `name`, `status`, `address`, `price_for_package`, `open`, `close`, `employee_name`, `phone`, `description`, `geom`, `lat`, `lng`, `video_url`, `created_at`, `updated_at`) VALUES
-('A4', 'Air Terjun Sarasah Bunta', 'Ordinary', 'Tarantang village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province, Indonesia,', 0, '00:00:00', '23:59:00', NULL, NULL, 'Air terjun Sarasah Bunta merupakan air terjun alami yang terbentuk akibat patahan ', 0xe6100000010300000001000000060000002a5c34bb592b5940693d0ced2adebbbf2a5c34c0632b594013a5e1ec92dfbbbf2a5c340c632b59402d902ff102bbbbbf2b5c3434592b5940a2a644f14ebabbbf295c3461592b59409e351fef96ccbbbf2a5c34bb592b5940693d0ced2adebbbf, '-0.10859590', '100.67764144', '', '2023-11-26 16:19:36', '2023-12-22 11:38:25'),
+('A4', 'Air Terjun Sarasah Bunta', 'Ordinary', 'Tarantang village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province, Indonesia,', 0, '00:00:00', '23:59:00', NULL, NULL, 'Air terjun Sarasah Bunta merupakan air terjun alami yang terbentuk akibat patahan ', 0xe6100000010300000001000000060000002a5c34bb592b5940693d0ced2adebbbf2a5c34c0632b594013a5e1ec92dfbbbf2a5c340c632b59402d902ff102bbbbbf2b5c3434592b5940a2a644f14ebabbbf295c3461592b59409e351fef96ccbbbf2a5c34bb592b5940693d0ced2adebbbf, '-0.10859590', '100.67764144', 'A4-V.mp4', '2023-11-26 16:19:36', '2023-12-22 11:38:25'),
 ('A5', 'Panorama Aka Barayun', 'Ordinary', 'Tarantang village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province, Indonesia,', 0, '00:00:00', '23:59:00', NULL, NULL, 'Panorama Aka Barayun merupakan objek wisata dengan daya tarik air terjun dan tebing lembah harau yang ditumbuhi oleh tumbuhan merambat.', 0xe6100000010300000001000000060000005d23248aa62a5940c59ef650f5ebb9bf5c23a4a3a32a59401f0674525eddb9bf5b23e4b3ad2a594026cf37551fc2b9bf5d236478b42a5940b2f4ee5177e2b9bf5b232476ab2a594047dd284f89fdb9bf5d23248aa62a5940c59ef650f5ebb9bf, '-0.10107162', '100.66675139', '', '2023-11-26 16:26:07', '2023-12-22 11:31:35'),
-('A6', 'Kampuang Sarosah', 'Ordinary', 'Tarantang village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province, Indonesia,', 30000, '09:00:00', '17:00:00', 'Kampuang Sarosah', '081360813344', 'Kampuang Sarosah Harau merupakan tempat wisata hits di Sumatera Barat yang dilengkapi dengan replika ikon sejumlah negara di dunia. Objek-objek wisata yang terdapat pada Kampuang Sarosah yaitu Kampung Eropa,  Kampuang Korea, Kampung Jepang dan Kampung Sarosah', 0xe61000000103000000010000000e000000295cb418c82a59407a6a2bcbcaf1bcbf2a5c741dd62a5940b1f57bd30cb0bcbf2a5c3477da2a5940e46ba5d2bab6bcbf295cb495e12a594032157ad70e90bcbf295cb404fa2a59400bed02c9aa02bdbf2b5c34b6f52a594087bc9ec4c424bdbf2b5cf40af02a5940f7a9fdc0b740bdbf2b5cb4c7eb2a594076938ebac271bdbf2b5cb41ce22a5940f57261bd505cbdbf2a5c345bd82a594024fcd1c2a732bdbf295c7456ca2a5940bb18f43c915fbdbf2a5cb405bd2a59405d971ec4a228bdbf2a5cb459c32a5940d1baedc71a0bbdbf295cb418c82a59407a6a2bcbcaf1bcbf, '-0.11329513', '100.66964846', '', '2023-11-26 16:27:54', '2023-12-22 11:23:38'),
+('A6', 'Harau Dream Park', 'Ordinary', 'Tarantang village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province, Indonesia,', 30000, '09:00:00', '17:00:00', 'Kampuang Sarosah', '081360813344', 'Harau Dream Park merupakan tempat wisata hits di Sumatera Barat yang dilengkapi dengan replika ikon sejumlah negara di dunia. Objek-objek wisata yang terdapat pada Kampuang Sarosah yaitu Kampung Eropa,  Kampuang Korea, Kampung Jepang dan Kampung Sarosah', 0xe61000000103000000010000000e000000295cb418c82a59407a6a2bcbcaf1bcbf2a5c741dd62a5940b1f57bd30cb0bcbf2a5c3477da2a5940e46ba5d2bab6bcbf295cb495e12a594032157ad70e90bcbf295cb404fa2a59400bed02c9aa02bdbf2b5c34b6f52a594087bc9ec4c424bdbf2b5cf40af02a5940f7a9fdc0b740bdbf2b5cb4c7eb2a594076938ebac271bdbf2b5cb41ce22a5940f57261bd505cbdbf2a5c345bd82a594024fcd1c2a732bdbf295c7456ca2a5940bb18f43c915fbdbf2a5cb405bd2a59405d971ec4a228bdbf2a5cb459c32a5940d1baedc71a0bbdbf295cb418c82a59407a6a2bcbcaf1bcbf, '-0.11329513', '100.66964846', '', '2023-11-26 16:27:54', '2023-12-22 11:23:38'),
 ('A7', 'Geopark Lembah Harau', 'Unique', 'Tarantang village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province, Indonesia,', 0, '00:00:00', '23:59:00', 'Edo', '081261499095', 'Geopark Lembah Harau dikenal karena beragam formasi batuan yang unik. Situs geologi di kawasan ini memberikan pandangan yang menarik tentang sejarah geologi dan proses alam yang terjadi selama jutaan tahun.<br><br> Kawasan geopark ini ditandai oleh tebing-tebing curam yang mengelilingi lembah, menciptakan pemandangan spektakuler. Keberadaan tebing yang tinggi dan terjal memberikan sentuhan dramatis pada lanskap alam.<br><br> Ketinggian tebing batu pada Geopark Lembah Harau berkisar antara 30m - 100m. Batuan pada tebing merupakan perselingan konglomerat dan batupasir dengan ketinggian ± 100 meter termasuk ke dalam formasi <i>Brani</i> berumur <i>Oligosen (34-23 juta tahun lalu)</i> serta mencirikan endapan fluvial dari sungai purba.<br><br> Terbentuknya lembah harau dikarenakan adanya patahan turun atau block yang turun membentuk lembah yang cukup luas dan datar. Salah satu tanda-tanda atau untuk melihat dimana lokasi patahannya adalah dengan adanya air terjun. Dengan begitu, dapat disimpulkan bahwa dahulu ada sungai yang kemudian terpotong akibat adanya patahan turun, sehingga membentuk air terjun. ', 0xe610000001030000000100000048000000cd9fb8d2782b5940882772613a20bcbfcc9fb852622b594075d13d659600bcbfcc9fb826522b59405da32b68fae7bbbfcd9fb843442b59405e07956a96d3bbbfcd9fb87c382b59405c1cff6a12d0bbbfc8bbd1d12c2b5940d2eea27d4ac8bbbfc7bbd17d262b59402043cd7de2c6bbbfc9bbd18c172b5940263b267b62ddbbbfc7bbd1f20b2b5940710b50784af5bbbfc8bbd128032b59406c7b657896f4bbbfc8bbd1fcf22a5940cb5ef675fa08bcbfc9bbd1e3ed2a594076f03074be17bcbfc7bbd119e52a5940a29da96e7245bcbfc8bbd1dcd62a59402082c66cea54bcbfc8bbd120cf2a5940a15c2c6cd659bcbfc8bbd153c92a5940bfe8886a3267bcbfc8bbd1d2c22a5940004ca166d686bcbfc8bbd1c7be2a5940aebdcf6182adbcbfc9bbd151bc2a5940a6f00b6092bbbcbfc7bbd1d3b22a5940c655e55eb6c4bcbfc8bbd1c0a72a5940b0bdd45d26cdbcbfc8bbd1f69e2a5940ce693f5b8ae1bcbfc8bbd197942a5940405e1c5826fabcbfc8bbd1708e2a5940844397549215bdbfc8bbd11c882a5940c22b52536a1fbdbfc7bbd1f5812a59406494c652a223bdbfc8bbd19e7e2a59402698dd53321bbdbfc7bbd11a7b2a5940e062335872f9bcbfc9bbd1fb7b2a594038ae1e5dc6d2bcbfc8bbd18d802a594063f55e6106b1bcbfc8bbd1a6852a594074120264ee9bbcbfbc63056e862a5940467b6dff8073bcbfba6305e7852a5940fb453f078533bcbfbb6305c28c2a59408627991109ddbbbfbb630508922a59405a1c301c5582bbbfbb6305ab942a5940d84438202d5fbbbfba6305b09e2a59405a539626ed26bbbfbc6305e2a82a59403c27132cb5f5babfbb630555ae2a5940bbf2ca2ff5d3babfbc630517b02a5940cfce3e3351b4babfbc630517b02a5940e39e49363198babfbb630574ad2a5940c3878d381983babfbc630509af2a5940d574d13c055bbabfbc63057fb12a5940914e1b413d32babfd83694d9b12a5940a28fe0104f13babfd83694dcae2a5940b8f210145ff4b9bfd936949ca32a5940ef4c27184bccb9bfd73694789a2a59408eb3a01bd7a9b9bfd8369454912a59404fde6f1eb78db9bfd836940a9f2a5940b19dce24074db9bfd736944aaa2a59407de3512b8709b9bfd93694d6b42a59408942522f57dfb8bfd83694e6c22a59401ab70d34b7acb8bfd8369406df2a59400aa1ae375785b8bfd836944a042b5940c13cbc39d76eb8bfd8369456252b59404a10853b275bb8bfd93694125a2b594091fe4a3d7747b8bfd8369432762b5940f57c8d3e6739b8bfd836946e942b5940f57c8d3e6739b8bfd836942eb62b5940100f3f3a3769b8bfd83694cace2b59403426613017d4b8bf59bc2e11cf2b5940002f1cfbd3eab8bf5abc2e39c52b59405f6d48f0535bb9bf5abc2e4ac32b594063e535ee6b70b9bf5abc2e6ab22b59403663a4e2bbe3b9bf5abc2e95a52b5940f1ce8cd99f3bbabf5bbc2e069e2b594048da0dd4a76fbabf59bc2e078e2b5940743ebdc28f0ebbbf5bbc2e59872b59403c8f89b91f60bbbf5abc2e32812b59402f3db5af33b5bbbf5abc2eec7b2b594088a311a753febbbfcd9fb8d2782b5940882772613a20bcbf, '-0.10422544', '100.67413855', 'geopark_lembah_harau.mp4', '2023-12-22 03:40:13', '2023-12-22 03:40:13'),
 ('A8', 'Air Terjun Sarasah Aie Luluih', 'Ordinary', 'Tarantang village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province, Indonesia,', 0, '00:00:00', '23:59:00', NULL, NULL, 'Air terjun Sarasah Bunta merupakan air terjun alami yang terbentuk akibat patahan ', 0xe6100000010300000001000000050000008b5023e1302b5940bec37b2030c0bbbf8b5023133b2b5940bec37b2030c0bbbf8b5023133b2b5940dcc5e924389abbbf8b5023d32f2b5940dcc5e924389abbbf8b5023e1302b5940bec37b2030c0bbbf, '-0.10811163', '100.67513731', '', '2023-12-22 11:41:50', '2023-12-22 11:41:50'),
 ('A9', 'Harau Sky Dream World', 'Ordinary', 'Tarantang village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province, Indonesia,', 30000, '09:00:00', '17:00:00', 'Harau Sky', '081212229832', 'Wisata Harau Sky Dream World menyuguhkan wahana waterpark, kemudian spot foto dream land, spot mini world di negeri air Venezia dan Swiss. Selain itu,  juga ada Lounge Sunset Wonderland Harau atau ruang santai untuk melihat keindahan sunset dengan view Lembah Harau.', 0xe610000001030000000100000010000000f99e2407a72a5940a40ac596dcb4babff99e24bba72a5940ffde1098e8a8babff99e240aa42a5940c4c1059b7c8dbabff99e241e9f2a5940f237c79e546ababffa9e249d982a5940983a739f0064babff89e24ef912a5940f850869f4c63babff99e24a98c2a594040b5139f8467babff99e24f58b2a59401104bb9d2c74babff99e248a8d2a59403c3e279cf082babffa9e245a902a5940d2e2309a3895babff99e24a0952a59401f8a5b99f49cbabffa9e24f7982a5940f568fa9878a0babffa9e24b99a2a5940c660fd979ca9babff99e243d9e2a5940b5608897d4adbabffa9e2448a22a59409b93d89628b4babff99e2407a72a5940a40ac596dcb4babf, '-0.10369996', '100.66563991', '', '2023-12-22 11:49:58', '2023-12-22 11:49:58');
@@ -148,26 +148,26 @@ CREATE TABLE `attraction_gallery` (
 --
 
 INSERT INTO `attraction_gallery` (`id`, `attraction_id`, `url`, `created_at`, `updated_at`) VALUES
-('001', 'A6', '1703290919_487ac6750f7ac69060e6.jpg', '2023-12-22 11:23:38', '2023-12-22 11:23:38'),
-('002', 'A6', '1703290919_252bbe30d1f432ef6911.jpg', '2023-12-22 11:23:38', '2023-12-22 11:23:38'),
-('003', 'A6', '1703290921_60ead7eea65f1220dc9a.jpg', '2023-12-22 11:23:38', '2023-12-22 11:23:38'),
-('004', 'A6', '1703290921_f0b51fd81c616dae7b16.jpg', '2023-12-22 11:23:38', '2023-12-22 11:23:38'),
-('005', 'A6', '1703290923_0616d46794597fe79674.png', '2023-12-22 11:23:38', '2023-12-22 11:23:38'),
-('006', 'A5', '1703291422_28165a1c0ccee8eee94b.png', '2023-12-22 11:31:35', '2023-12-22 11:31:35'),
-('007', 'A5', '1703291422_96c302f7ee30318e99c0.png', '2023-12-22 11:31:35', '2023-12-22 11:31:35'),
-('008', 'A5', '1703291424_2868a9943adc8e8e1e63.jpg', '2023-12-22 11:31:35', '2023-12-22 11:31:35'),
-('009', 'A4', '1703291851_03e10622d0cd52d9dbbd.jpg', '2023-12-22 11:38:25', '2023-12-22 11:38:25'),
-('010', 'A4', '1703291851_3ef33912109b8a36e37f.jpg', '2023-12-22 11:38:25', '2023-12-22 11:38:25'),
-('011', 'A8', '1703292106_86791bf8ef343c1a7d0d.jpg', '2023-12-22 11:41:50', '2023-12-22 11:41:50'),
-('012', 'A8', '1703292105_974ec6621ecc9a90f693.jpg', '2023-12-22 11:41:50', '2023-12-22 11:41:50'),
-('013', 'A8', '1703292108_8a477a82ec01556e2a5a.jpg', '2023-12-22 11:41:50', '2023-12-22 11:41:50'),
-('014', 'A9', '1703292478_788373fb9f981fc9cc94.jpg', '2023-12-22 11:49:58', '2023-12-22 11:49:58'),
-('015', 'A9', '1703292478_40175d1df4a49b5c3d50.jpg', '2023-12-22 11:49:58', '2023-12-22 11:49:58'),
+('001', 'A6', 'A6-1.jpg', '2023-12-22 11:23:38', '2023-12-22 11:23:38'),
+('002', 'A6', 'A6-2.jpg', '2023-12-22 11:23:38', '2023-12-22 11:23:38'),
+('003', 'A6', 'A6-3.jpg', '2023-12-22 11:23:38', '2023-12-22 11:23:38'),
+('006', 'A5', 'A5-1.jpg', '2023-12-22 11:31:35', '2023-12-22 11:31:35'),
+('007', 'A5', 'A5-2.jpg', '2023-12-22 11:31:35', '2023-12-22 11:31:35'),
+('008', 'A5', 'A5-3.jpg', '2023-12-22 11:31:35', '2023-12-22 11:31:35'),
+('009', 'A4', 'A4-1.jpg', '2023-12-22 11:38:25', '2023-12-22 11:38:25'),
+('010', 'A4', 'A4-2.jpg', '2023-12-22 11:38:25', '2023-12-22 11:38:25'),
+('011', 'A8', 'A8-1.jpg', '2023-12-22 11:41:50', '2023-12-22 11:41:50'),
+('012', 'A8', 'A8-2.jpg', '2023-12-22 11:41:50', '2023-12-22 11:41:50'),
+('013', 'A8', 'A8-3.jpg', '2023-12-22 11:41:50', '2023-12-22 11:41:50'),
+('014', 'A9', 'A9-1.jpg', '2023-12-22 11:49:58', '2023-12-22 11:49:58'),
+('015', 'A9', 'A9-2.jpg', '2023-12-22 11:49:58', '2023-12-22 11:49:58'),
 ('016', 'A7', 'A7-1.jpg', NULL, NULL),
 ('017', 'A7', 'A7-2.jpg', NULL, NULL),
 ('018', 'A7', 'A7-3.jpg', NULL, NULL),
 ('019', 'A7', 'A7-4.jpg', NULL, NULL),
-('020', 'A7', 'A7-5.jpg', NULL, NULL);
+('020', 'A7', 'A7-5.jpg', NULL, NULL),
+('021', 'A4', 'A4-3.jpg', NULL, NULL),
+('022', 'A9', 'A9-3.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -265,11 +265,17 @@ INSERT INTO `auth_groups_users` (`group_id`, `user_id`) VALUES
 (1, 4),
 (1, 10),
 (1, 11),
-(2, 5),
-(2, 6),
-(2, 8),
 (2, 9),
-(2, 12),
+(2, 13),
+(2, 14),
+(2, 15),
+(2, 16),
+(2, 17),
+(2, 18),
+(2, 19),
+(2, 20),
+(2, 21),
+(2, 22),
 (3, 7);
 
 -- --------------------------------------------------------
@@ -604,7 +610,21 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (310, '::1', 'andi@gmail.com', 9, '2024-01-26 18:33:36', 1),
 (311, '::1', 'ade@gmail.com', 12, '2024-01-26 19:42:10', 1),
 (312, '::1', 'andi@gmail.com', 9, '2024-01-26 20:16:11', 1),
-(313, '::1', 'andi@gmail.com', 9, '2024-01-27 01:01:35', 1);
+(313, '::1', 'andi@gmail.com', 9, '2024-01-27 01:01:35', 1),
+(314, '::1', 'accadmin1@email.com', 7, '2024-02-25 20:25:15', 1),
+(315, '::1', 'accadmin1@email.com', 7, '2024-02-26 19:03:06', 1),
+(316, '::1', 'aurahomesta@gmail.com', 13, '2024-02-26 19:27:40', 1),
+(317, '::1', 'accadmin1@email.com', 7, '2024-02-27 02:08:36', 1),
+(318, '::1', 'accadmin1@email.com', 7, '2024-02-27 02:56:55', 1),
+(319, '::1', 'accadmin1@email.com', 7, '2024-02-27 06:23:56', 1),
+(320, '::1', 'andi@gmail.com', 9, '2024-02-27 08:38:46', 1),
+(321, '::1', 'accadmin1@email.com', 7, '2024-02-27 08:58:10', 1),
+(322, '::1', 'andi@gmail.com', 9, '2024-02-27 20:28:47', 1),
+(323, '::1', 'homestayharausyafiq@gmail.com', 9, '2024-02-28 01:45:13', 1),
+(324, '::1', 'homestayharausyafiq@gmail.com', 9, '2024-02-28 01:46:22', 1),
+(325, '::1', 'homestayauraaccount', NULL, '2024-02-28 03:47:09', 0),
+(326, '::1', 'aurahomesta@gmail.com', 13, '2024-02-28 03:47:26', 1),
+(327, '::1', 'accadmin1@email.com', 7, '2024-02-28 03:58:49', 1);
 
 -- --------------------------------------------------------
 
@@ -777,22 +797,21 @@ CREATE TABLE `culinary_place_gallery` (
 --
 
 INSERT INTO `culinary_place_gallery` (`id`, `culinary_place_id`, `url`, `created_at`, `updated_at`) VALUES
-('004', 'C2', '1701527273_2ac29674267b033faefe.jpg', '2023-12-02 01:29:02', '2023-12-02 01:29:02'),
-('005', 'C3', '1701569680_fcb631c61990d68b0674.jpg', '2023-12-02 13:14:54', '2023-12-02 13:14:54'),
-('006', 'C4', '1701569918_b4222a4e266550b19db0.jpg', '2023-12-02 13:18:41', '2023-12-02 13:18:41'),
-('007', 'C5', '1701570135_2977e5b4f3e9274016be.jpg', '2023-12-02 13:22:18', '2023-12-02 13:22:18'),
-('008', 'C6', '1701570301_09491528d6872b3f951b.jpg', '2023-12-02 13:25:11', '2023-12-02 13:25:11'),
-('009', 'C7', '1701570423_6dc9093df97d927507d4.jpg', '2023-12-02 13:27:05', '2023-12-02 13:27:05'),
-('010', 'C8', '1701570650_414d5848bfb0a0dcfd44.jpg', '2023-12-02 13:30:53', '2023-12-02 13:30:53'),
-('011', 'C9', '1701574385_ee8cda403ec5b6833f99.jpg', '2023-12-02 14:33:08', '2023-12-02 14:33:08'),
-('012', 'C1', '1701666799_9f9ee593db81b9f53ac3.jpg', '2023-12-03 16:13:40', '2023-12-03 16:13:40'),
-('013', 'C1', '1701666799_6bd38cdc6bf0148224ee.jpg', '2023-12-03 16:13:40', '2023-12-03 16:13:40'),
-('014', 'C1', '1701666801_46a9c9664f0b483456ee.jpg', '2023-12-03 16:13:40', '2023-12-03 16:13:40'),
-('015', 'C10', '1701666907_7ee42b2acd47b24b7cec.jpg', '2023-12-03 16:15:09', '2023-12-03 16:15:09'),
-('016', 'C11', '1701666945_6a6f3a8bca29c6295d3b.jpg', '2023-12-03 16:15:48', '2023-12-03 16:15:48'),
-('017', 'C12', '1701666998_e70d520908a38677d376.jpg', '2023-12-03 16:16:40', '2023-12-03 16:16:40'),
-('018', 'C13', '1701667053_37a127370c02c3c872dd.jpg', '2023-12-03 16:17:36', '2023-12-03 16:17:36'),
-('019', 'C13', '1701667053_089449a54563bfae8fd6.jpg', '2023-12-03 16:17:36', '2023-12-03 16:17:36');
+('004', 'C2', 'C2-1.jpg', '2023-12-02 01:29:02', '2023-12-02 01:29:02'),
+('005', 'C3', 'C3-1.jpg', '2023-12-02 13:14:54', '2023-12-02 13:14:54'),
+('006', 'C4', 'C4-1.jpg', '2023-12-02 13:18:41', '2023-12-02 13:18:41'),
+('007', 'C5', 'C5-1.jpg', '2023-12-02 13:22:18', '2023-12-02 13:22:18'),
+('008', 'C6', 'C6-1.jpg', '2023-12-02 13:25:11', '2023-12-02 13:25:11'),
+('009', 'C7', 'C7-1.jpg', '2023-12-02 13:27:05', '2023-12-02 13:27:05'),
+('010', 'C8', 'C8-1.jpg', '2023-12-02 13:30:53', '2023-12-02 13:30:53'),
+('011', 'C9', 'C9-1.jpg', '2023-12-02 14:33:08', '2023-12-02 14:33:08'),
+('012', 'C1', 'C1-1.jpg', '2023-12-03 16:13:40', '2023-12-03 16:13:40'),
+('013', 'C1', 'C1-2.jpg', '2023-12-03 16:13:40', '2023-12-03 16:13:40'),
+('015', 'C10', 'C10-1.jpg', '2023-12-03 16:15:09', '2023-12-03 16:15:09'),
+('016', 'C11', 'C11-1.jpg', '2023-12-03 16:15:48', '2023-12-03 16:15:48'),
+('017', 'C12', 'C12-1.jpg', '2023-12-03 16:16:40', '2023-12-03 16:16:40'),
+('018', 'C13', 'C13-1.jpg', '2023-12-03 16:17:36', '2023-12-03 16:17:36'),
+('019', 'C13', 'C13-2.jpg', '2023-12-03 16:17:36', '2023-12-03 16:17:36');
 
 -- --------------------------------------------------------
 
@@ -838,8 +857,8 @@ CREATE TABLE `culinary_product_detail` (
 --
 
 INSERT INTO `culinary_product_detail` (`culinary_place_id`, `culinary_product_id`, `price`, `image_url`, `description`, `created_at`, `updated_at`) VALUES
-('C1', '02', 5000, '1701526983_f759718ae5bc232ec46e.jpg', NULL, '2023-12-02 01:23:06', '2023-12-02 01:23:06'),
-('C13', '04', 20000, '1701577023_1e109e4304970c25e17b.jpg', NULL, '2023-12-02 15:17:05', '2023-12-02 15:17:05');
+('C1', '02', 5000, 'C1P-1.jpg', NULL, '2023-12-02 01:23:06', '2023-12-02 01:23:06'),
+('C13', '04', 20000, 'C13P-1.jpg', NULL, '2023-12-02 15:17:05', '2023-12-02 15:17:05');
 
 -- --------------------------------------------------------
 
@@ -910,11 +929,10 @@ CREATE TABLE `event_gallery` (
 --
 
 INSERT INTO `event_gallery` (`id`, `event_id`, `url`, `created_at`, `updated_at`) VALUES
-('003', 'E02', '1705738875_0f75bd549a1c8d8acb77.png', '2024-01-19 19:22:26', '2024-01-19 19:22:26'),
-('004', 'E02', '1705738875_9d266515385ce5c34b57.jpg', '2024-01-19 19:22:26', '2024-01-19 19:22:26'),
-('005', 'E02', '1705738877_1cab938a51f68b3393c1.jpg', '2024-01-19 19:22:26', '2024-01-19 19:22:26'),
-('006', 'E01', '1705800986_e1d94afb23d6494570a4.jpg', '2024-01-20 12:36:29', '2024-01-20 12:36:29'),
-('007', 'E01', '1705800980_7fd298bdc727c12f0770.jpg', '2024-01-20 12:36:29', '2024-01-20 12:36:29');
+('003', 'E02', 'E2-1.jpg', '2024-01-19 19:22:26', '2024-01-19 19:22:26'),
+('004', 'E02', 'E2-2.jpg', '2024-01-19 19:22:26', '2024-01-19 19:22:26'),
+('005', 'E02', 'E2-3.jpg', '2024-01-19 19:22:26', '2024-01-19 19:22:26'),
+('006', 'E01', 'E1-1.jpg', '2024-01-20 12:36:29', '2024-01-20 12:36:29');
 
 -- --------------------------------------------------------
 
@@ -943,36 +961,51 @@ CREATE TABLE `homestay` (
 --
 
 INSERT INTO `homestay` (`id`, `name`, `address`, `geom`, `lat`, `lng`, `owner`, `open`, `close`, `description`, `video_url`, `created_at`, `updated_at`) VALUES
-('H03', 'Homestay Harau Syafiq', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000900000050038a31b62a594076cf14a327dbbcbf51034a5bbd2a5940dc6fd69fa4f4bcbf50030a8ebb2a5940277ea59ef5fdbcbf50030a9cbc2a5940c4b0269ed301bdbf4f038aa4bb2a5940d64ab39d5705bdbf50030a97b22a5940ed4908a26ae3bcbf50034a67b12a5940b06cf5221fdcbcbf50038a31b62a594076cf14a327dbbcbf50038a31b62a594076cf14a327dbbcbf, '-0.11304090', '100.66744263', 9, '10:00:00', '17:00:00', 'Homestay Harau Syafiq adalah sebuah penginapan yang terletak di kawasan wisata LembahHarau, Sumatera Barat, Indonesia. Kami menawarkan pengalaman menginap yang hangat dan ramah, memadukan kenyamanan rumah dengan nuansa alam yang menakjubkan.', '1703394475_6edeecc9def51c4414aa.mp4', '2023-12-08 03:38:47', '2023-12-23 16:08:03'),
-('H04', 'Homestay Aura', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000005000000fbdb06ae9d2a59401e608006f6e7babffcdb06ca9f2a5940eea9be05d1eebabffcdb0668982a5940209f3102cf0ebbbffcdb8662962a5940ae332c030506bbbffbdb06ae9d2a59401e608006f6e7babf, '-0.10539833', '100.66571576', 12, '10:00:00', '17:00:00', NULL, NULL, '2024-01-20 01:47:12', '2024-01-20 01:47:12');
+('H01', 'Homestay Harau Syafiq', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe6100000010300000001000000090000005a4b0163b62a5940655a3f7f85dbbcbf594b4149bd2a59403e620c7ca8f4bcbf594bc11ec22a5940d697c6796906bdbf594b4173c02a59405a28cbf80e0ebdbf584b81cabf2a594040dd65782211bdbf594ba146ba2a594085b2737a2301bdbf4a390f21b32a594040c41cc5abe5bcbf4b398f48b12a5940b949544617dcbcbf5a4b0163b62a5940655a3f7f85dbbcbf, '-0.11313367', '100.66758434', 9, '10:00:00', '18:00:00', 'Homestay Harau Syafiq adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
+('H02', 'Homestay Aura', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000005000000564e8a909f2a594017a1314be2eebabf564e0a8b9d2a59401970e44b8ee8babf574eca47992a594058e5f749f5f9babf574eca639b2a5940e82ff948ec02bbbf564e8a909f2a594017a1314be2eebabf, '-0.10531219', '100.66579727', 13, '10:00:00', '18:00:00', 'Homestay Aura adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 12:59:05', '2024-02-26 14:05:06'),
+('H03', 'Meliya Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000600000018eccacd8c2a5940e7fa5eed7961bbbf18eccaec8b2a5940648434ecab6bbbbf18ecca388b2a5940cb5a4ceb9473bbbf18ec0a28892a594091e0dceba86ebbbf18eccade8a2a5940c391c0ed225ebbbf18eccacd8c2a5940e7fa5eed7961bbbf, '-0.10706877', '100.66473267', 14, '10:00:00', '18:00:00', 'Meliya Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
+('H04', 'Abyan Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000007000000f2a9ae22802a594044bcf1de0b67bcbff3a94e09812a59400fe9e35e7c67bcbff4a9ae03812a5940c80f3d615354bcbff2a9ce5d7f2a5940ff0e53619f53bcbff3a9ee4c7f2a5940c151b05ffb60bcbff3a98e527f2a5940e58bff5e9b66bcbff2a9ae22802a594044bcf1de0b67bcbf, '-0.11080252', '100.66407278', 15, '10:00:00', '18:00:00', 'Abyan Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:04:25', '2024-02-26 16:06:12'),
+('H05', 'Homestay Bilza', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000b0000007bfb35a98d2a59400487a321773bbdbf7bfb150e942a5940672d9ca2fe33bdbf7bfb151c952a59400e49d5a1f839bdbf7cfbb55f932a594081c05b619e3dbdbf7bfbc59a932a5940ab371341cb3fbdbf7afb1598912a5940ad3384201444bdbf7afbd513922a5940e035c81fb449bdbf7bfb5568902a594029c17b1ffd4bbdbf7afb35c58f2a59403d5d20201147bdbf7afb55a68e2a5940613df71f4c48bdbf7bfb35a98d2a59400487a321773bbdbf, '-0.11425769', '100.66512362', 16, '10:00:00', '18:00:00', 'Homestay Bilza adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:12:45', '2024-02-26 16:12:45'),
+('H06', 'Homestay IBU', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000005000000fadfac346a2a5940ef6629841954bebffadf6cf96c2a594059de71041452bebffbdfac5e6d2a5940b77372833259bebffadfacbb6a2a594052321d03925bbebffadfac346a2a5940ef6629841954bebf, '-0.11851233', '100.66282884', 17, '10:00:00', '18:00:00', 'Homestay IBU adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:24:11', '2024-02-26 16:24:11'),
+('H07', 'Dangau Pitossa', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000007000000cd71909ce82a59402f6520800d9bbcbfcd711050f12a5940bfb6887dcbafbcbfcd7110c0f92a59409c158d796fcfbcbfcc711033ff2a59408ddc177d4fb3bcbfcc711061ef2a5940094a9e83ed7ebcbfcc71101ee72a5940ef167a803d98bcbfcd71909ce82a59402f6520800d9bbcbf, '-0.11192599', '100.67109121', 18, '10:00:00', '18:00:00', 'Dangau pitossa adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
+('H08', 'Oston Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000500000076db4060f92a5940f8d7ecf1a131bcbf75db0060fd2a594083633b73d226bcbf75db4038032b59402b7fefee3d4abcbf75dbc0caff2a59404c96376e2150bcbf76db4060f92a5940f8d7ecf1a131bcbf, '-0.11028254', '100.67177111', 19, '10:00:00', '18:00:00', 'Oston Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
+('H09', 'Megahomestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe6100000010300000001000000050000003c1b76f5082b594075ac5c818d15bcbf3c1bf6fa0a2b5940d7cd907ec12cbcbf3b1b36b70e2b59400bbf187f5c28bcbf3c1b36f50c2b59400e667980ef1cbcbf3c1b76f5082b594075ac5c818d15bcbf, '-0.10988089', '100.67259749', 20, '10:00:00', '18:00:00', 'Oston Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
+('H10', 'Dangau Abah Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000b0000006d9223fd2a2b59407b6a1e0c4e06bcbf6e92e3dd2f2b5940b31efe0b5c07bcbf6e9263c72f2b594053cd2409171fbcbf6d9223e6322b594094b20909f81fbcbf6e92a3cf322b59404e4ba307922bbcbf6e92e321282b594068dd9d07bf2bbcbf6e92632a272b5940ad4404092520bcbf6d9223492a2b59400a275009af1dbcbf6e92233b292b59407905720bee0bbcbf6e92e3c42a2b5940a168770bc10bbcbf6d9223fd2a2b59407b6a1e0c4e06bcbf, '-0.10975686', '100.67462355', 21, '10:00:00', '18:00:00', 'Oston Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
+('H11', 'Limpato Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000500000080afea2f6b2a59406e3aed395306bebf80afcaf46b2a5940f281c4b6431dbebf81af4a276e2a59405be7ec361f1cbebf80afaa6d6d2a59400e1c0c3a7205bebf80afea2f6b2a59406e3aed395306bebf, '-0.11745232', '100.66288271', 22, '10:00:00', '18:00:00', 'Limpato Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 19:17:47', '2024-02-26 19:20:24');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `homestay_exclusive_activity`
+-- Table structure for table `homestay_additional_amenities`
 --
 
-CREATE TABLE `homestay_exclusive_activity` (
+CREATE TABLE `homestay_additional_amenities` (
   `homestay_id` varchar(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `activity_id` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `additional_amenities_id` varchar(3) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `price` int DEFAULT NULL,
-  `is_daily` varchar(1) DEFAULT NULL,
+  `category` varchar(1) NOT NULL,
+  `price` int NOT NULL,
+  `is_order_count_per_day` varchar(1) NOT NULL,
+  `is_order_count_per_person` varchar(1) NOT NULL,
+  `is_order_count_per_room` varchar(1) NOT NULL,
+  `stock` int NOT NULL,
   `description` text NOT NULL,
-  `image_url` text,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `image_url` text NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `homestay_exclusive_activity`
+-- Dumping data for table `homestay_additional_amenities`
 --
 
-INSERT INTO `homestay_exclusive_activity` (`homestay_id`, `activity_id`, `name`, `price`, `is_daily`, `description`, `image_url`, `created_at`, `updated_at`) VALUES
-('H03', '001', 'Budidaya Pakis Monyett', 10000, '0', 'Belajar cara menanam, merawat, dan mengembangkan tanaman yang memiliki distribusi alami terbatas di lembah harau yaitu Pakis Monyett', '1704618690_0113bd9fd1e452f962dc.jpg', '2023-12-09 20:14:25', '2024-01-06 20:11:32'),
-('H03', '002', 'Sarapan', 25000, '1', 'Bisa pilih menu', '1703832246_dd935b23a1c668046c56.png', '2023-12-28 17:44:19', '2023-12-28 17:44:19'),
-('H04', '001', 'Memetik Strawberry', 20000, '0', 'Memetik strawberry dan langsung menikmatinya', '1705766808_566a01a1c515fe087a30.jpg', '2024-01-20 03:06:51', '2024-01-20 03:06:51'),
-('H04', '002', 'sqq', 11, '0', 'w2w2', '1705768612_c8708e6f3594876d640b.png', '2024-01-20 03:36:54', '2024-01-20 03:36:54');
+INSERT INTO `homestay_additional_amenities` (`homestay_id`, `additional_amenities_id`, `name`, `category`, `price`, `is_order_count_per_day`, `is_order_count_per_person`, `is_order_count_per_room`, `stock`, `description`, `image_url`, `created_at`, `updated_at`) VALUES
+('H01', '01', 'Breakfast', '2', 15000, '1', '1', '', 0, 'Sarapan dengan menu yang dapat dipilih ketika menginap', '1709108441_15e566c51441ddbb6f12.jpg', '2024-02-27 19:20:43', '2024-02-27 19:20:43'),
+('H01', '02', 'Lunch', '2', 25000, '1', '1', '', 0, 'Makan siang dengan menu yang dapat dipilih ketika menginap', '1709108493_8acb29efb0b2f28978f1.jpg', '2024-02-27 19:21:42', '2024-02-27 19:21:42'),
+('H01', '03', 'Dinner', '2', 25000, '1', '1', '', 0, 'Makan malam dengan menu yang dapat dipilih ketika menginap', '1709108535_ef01c134ee1e28296108.jpg', '2024-02-27 19:22:17', '2024-02-27 19:22:17'),
+('H01', '04', 'Mattress', '1', 50000, '', '', '1', 5, 'Kasur tambahan', '1709108595_9cb67fef27d471f093ce.jpg', '2024-02-27 19:23:18', '2024-02-27 19:23:18'),
+('H01', '05', 'Bathroom amenities', '1', 20000, '', '1', '', 0, 'Perlengkapan mandi', '1709108729_0c2892841396fba08924.jpeg', '2024-02-27 19:25:32', '2024-02-27 19:25:32'),
+('H01', '06', 'Equipment for grilling', '1', 30000, '', '', '', 5, 'Perlengkapan untuk bakar-bakar', '1709108832_5a375e35ec18bb648e8f.jpg', '2024-02-27 19:27:20', '2024-02-27 19:27:20');
 
 -- --------------------------------------------------------
 
@@ -1017,15 +1050,53 @@ CREATE TABLE `homestay_facility_detail` (
 --
 
 INSERT INTO `homestay_facility_detail` (`homestay_id`, `facility_id`, `created_at`, `updated_at`) VALUES
-('H03', '01', '2023-12-23 16:08:03', '2023-12-23 16:08:03'),
-('H03', '02', '2023-12-23 16:08:03', '2023-12-23 16:08:03'),
-('H03', '03', '2023-12-23 16:08:03', '2023-12-23 16:08:03'),
-('H03', '04', '2023-12-23 16:08:03', '2023-12-23 16:08:03'),
-('H03', '05', '2023-12-23 16:08:03', '2023-12-23 16:08:03'),
-('H03', '06', '2023-12-23 16:08:03', '2023-12-23 16:08:03'),
-('H04', '01', '2024-01-20 01:47:12', '2024-01-20 01:47:12'),
-('H04', '02', '2024-01-20 01:47:12', '2024-01-20 01:47:12'),
-('H04', '03', '2024-01-20 01:47:12', '2024-01-20 01:47:12');
+('H01', '01', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
+('H01', '02', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
+('H01', '03', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
+('H01', '04', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
+('H01', '05', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
+('H01', '06', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
+('H02', '01', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
+('H02', '02', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
+('H02', '03', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
+('H02', '06', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
+('H03', '01', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
+('H03', '03', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
+('H03', '05', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
+('H03', '06', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
+('H04', '01', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
+('H04', '02', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
+('H04', '03', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
+('H05', '01', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
+('H05', '02', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
+('H05', '03', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
+('H05', '05', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
+('H05', '06', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
+('H06', '01', '2024-02-26 16:24:11', '2024-02-26 16:24:11'),
+('H07', '01', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
+('H07', '02', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
+('H07', '03', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
+('H07', '04', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
+('H07', '05', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
+('H07', '06', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
+('H08', '01', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
+('H08', '02', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
+('H08', '03', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
+('H08', '04', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
+('H08', '05', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
+('H08', '06', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
+('H09', '01', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
+('H09', '02', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
+('H09', '03', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
+('H09', '05', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
+('H09', '06', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
+('H10', '01', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
+('H10', '02', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
+('H10', '03', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
+('H10', '04', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
+('H10', '06', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
+('H11', '01', '2024-02-26 19:20:24', '2024-02-26 19:20:24'),
+('H11', '06', '2024-02-26 19:20:24', '2024-02-26 19:20:24');
 
 -- --------------------------------------------------------
 
@@ -1046,16 +1117,53 @@ CREATE TABLE `homestay_gallery` (
 --
 
 INSERT INTO `homestay_gallery` (`id`, `homestay_id`, `url`, `created_at`, `updated_at`) VALUES
-('001', 'H03', '1703394444_57af1e8966199903bbd9.jpg', '2023-12-23 16:08:03', '2023-12-23 16:08:03'),
-('002', 'H03', '1703394439_ebf63f34972b748dfe9c.jpg', '2023-12-23 16:08:03', '2023-12-23 16:08:03'),
-('003', 'H03', '1703394448_39626003dd7872013d03.jpg', '2023-12-23 16:08:03', '2023-12-23 16:08:03'),
-('004', 'H03', '1703394446_2240fc835d086ae6cda8.jpg', '2023-12-23 16:08:03', '2023-12-23 16:08:03'),
-('005', 'H03', '1703394446_fda824d91f729127a310.jpg', '2023-12-23 16:08:03', '2023-12-23 16:08:03'),
-('006', 'H03', '1703394448_5301556eb2acd110c5f4.jpg', '2023-12-23 16:08:03', '2023-12-23 16:08:03'),
-('007', 'H04', '1705762026_c3db86bcaffe37232ace.jpg', '2024-01-20 01:47:12', '2024-01-20 01:47:12'),
-('008', 'H04', '1705762028_032b1454efbf901b2879.jpg', '2024-01-20 01:47:12', '2024-01-20 01:47:12'),
-('009', 'H04', '1705762027_295d60e523b68a8296ff.jpg', '2024-01-20 01:47:12', '2024-01-20 01:47:12'),
-('010', 'H04', '1705762025_b2fe38eebc81d00d03fe.jpg', '2024-01-20 01:47:12', '2024-01-20 01:47:12');
+('001', 'H01', '1708996942_a0187ce30534a5d19779.jpg', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
+('002', 'H01', '1708996756_23818827877eb8777f4f.jpg', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
+('003', 'H01', '1708996733_0459e7788d8cd3204108.jpg', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
+('004', 'H01', '1708996735_ad723e3380fffc979c22.jpg', '2024-02-26 12:22:26', '2024-02-26 12:22:26'),
+('005', 'H01', '1708996733_669be0e9573b4cc7bd81.jpg', '2024-02-26 12:22:26', '2024-02-26 12:22:26'),
+('006', 'H01', '1708996704_30f2c3d0080c208f327f.jpg', '2024-02-26 12:22:26', '2024-02-26 12:22:26'),
+('007', 'H02', '1709003046_136681fff32821764426.jpg', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
+('008', 'H02', '1709003048_526e1184880a0be1b510.jpg', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
+('009', 'H02', '1709003048_cea56da3bcd3e294d4ca.jpg', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
+('010', 'H02', '1709003046_fa1fd3796cf0e0a6524f.jpg', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
+('011', 'H03', '1709009913_38ec234c6c8410d8f024.jpg', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
+('012', 'H03', '1709009901_64202b8e394cc2aad90f.jpg', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
+('013', 'H03', '1709009902_7aa91ee4c6b4b7664b38.jpg', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
+('014', 'H04', '1709010307_2ab7305c50f7691a1a3c.jpg', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
+('015', 'H04', '1709010307_e958d35b54973534718a.jpg', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
+('016', 'H04', '1709010311_59592c3b76ed99cdbc40.jpg', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
+('017', 'H04', '1709010311_9a0dca992e1bdcc61496.jpg', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
+('018', 'H05', '1709010753_123aa13d80dceeebc438.jpg', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
+('019', 'H05', '1709010753_fb8b97fef7c9b5726fd6.jpg', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
+('020', 'H05', '1709010756_20509d45f03a50ec2795.jpg', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
+('021', 'H05', '1709010756_37ea35ccf9b09dd17bc2.jpg', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
+('022', 'H05', '1709010751_05d184d986687335ea72.jpg', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
+('023', 'H05', '1709010750_b848d619d4223be3749a.jpg', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
+('024', 'H06', '1709011448_819d97a6d86d3dc6294f.jpg', '2024-02-26 16:24:11', '2024-02-26 16:24:11'),
+('025', 'H07', '1709012184_96150c0d81232727ad9d.jpg', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
+('026', 'H07', '1709012157_192c3c457d626e89d983.jpg', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
+('027', 'H07', '1709012136_a35f9801b8f5f331eff8.jpg', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
+('028', 'H07', '1709012113_5c38dcf83657d231773c.jpg', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
+('029', 'H07', '1709012112_83b76692148ec9b1b9d3.jpg', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
+('030', 'H07', '1709012115_6b82af8c4149003fdf52.jpg', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
+('031', 'H08', '1709012606_c7b17b2ec7e4c265d284.jpg', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
+('032', 'H08', '1709012604_c399f4fadbeb4e943625.jpg', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
+('033', 'H08', '1709012603_8256e6540187320d4a74.jpg', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
+('034', 'H08', '1709012606_4a8028d98071cdc4dafc.jpg', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
+('035', 'H09', '1709012814_d99a10ab32c005a0c3d7.jpg', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
+('036', 'H09', '1709012811_80bd16e0bfb315386cb2.jpg', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
+('037', 'H09', '1709012811_8a5597f02c03e659b2ae.jpg', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
+('038', 'H09', '1709012813_6633d657e10d01382dcb.jpg', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
+('039', 'H10', '1709013336_9cf3df566c684739671d.jpg', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
+('040', 'H10', '1709013328_235f274ef77dad5b9707.jpg', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
+('041', 'H10', '1709013308_880ffbabd9297a05a02a.jpg', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
+('042', 'H10', '1709013312_eab8d2fd7f414955cbb7.jpg', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
+('043', 'H10', '1709013308_bba2e566121a4fd432b7.jpg', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
+('044', 'H10', '1709013311_f6a981f624467a133917.jpg', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
+('045', 'H11', '1709022020_203ac63eadbc7865792b.jpg', '2024-02-26 19:20:24', '2024-02-26 19:20:24'),
+('046', 'H11', '1709022021_0c0449818d7637b39352.jpg', '2024-02-26 19:20:24', '2024-02-26 19:20:24'),
+('047', 'H11', '1709022022_ea237737fe250c819431.jpg', '2024-02-26 19:20:24', '2024-02-26 19:20:24');
 
 -- --------------------------------------------------------
 
@@ -1080,26 +1188,29 @@ CREATE TABLE `homestay_unit` (
 --
 
 INSERT INTO `homestay_unit` (`homestay_id`, `unit_type`, `unit_number`, `name`, `price`, `capacity`, `description`, `created_at`, `updated_at`) VALUES
-('H03', '1', '1', 'Kamar 1', 300000, 2, NULL, '2023-12-19 17:52:15', '2023-12-19 17:52:15'),
-('H03', '1', '10', 'Kamar 10', 300000, 2, NULL, '2023-12-22 12:57:15', '2023-12-22 12:57:15'),
-('H03', '1', '2', 'Kamar 2', 350000, 2, NULL, '2023-12-19 18:51:22', '2023-12-22 12:28:55'),
-('H03', '1', '3', 'Kamar 3', 300000, 2, NULL, '2023-12-19 18:52:08', '2023-12-19 18:52:08'),
-('H03', '1', '4', 'Kamar 4', 300000, 2, NULL, '2023-12-22 12:53:16', '2023-12-22 12:53:16'),
-('H03', '1', '5', 'Kamar 5', 300000, 2, NULL, '2023-12-22 12:54:01', '2023-12-22 12:54:01'),
-('H03', '1', '6', 'Kamar 6', 300000, 2, NULL, '2023-12-22 12:54:45', '2023-12-22 12:54:45'),
-('H03', '1', '7', 'Kamar 7', 300000, 2, NULL, '2023-12-22 12:55:25', '2023-12-22 12:55:25'),
-('H03', '1', '8', 'Kamar 8', 300000, 2, NULL, '2023-12-22 12:56:05', '2023-12-22 12:56:05'),
-('H03', '1', '9', 'Kamar 9', 300000, 2, NULL, '2023-12-22 12:56:39', '2023-12-22 12:56:39'),
-('H03', '2', '1', 'Rumah Barbie', 600000, 8, NULL, '2023-12-19 18:54:12', '2023-12-22 12:34:13'),
-('H04', '1', '1', 'Kamar A', 350000, 2, NULL, '2024-01-20 01:51:12', '2024-01-20 01:52:26'),
-('H04', '1', '10', 'Kamar I', 350000, 2, NULL, '2024-01-20 02:04:07', '2024-01-20 02:04:07'),
-('H04', '1', '2', 'Kamar B', 350000, 2, NULL, '2024-01-20 01:53:05', '2024-01-20 01:53:05'),
-('H04', '1', '3', 'Kamar C', 350000, 2, NULL, '2024-01-20 01:53:46', '2024-01-20 01:53:46'),
-('H04', '1', '4', 'Kamar D', 350000, 2, NULL, '2024-01-20 01:54:23', '2024-01-20 01:54:23'),
-('H04', '1', '5', 'Kamar E', 350000, 2, NULL, '2024-01-20 01:56:35', '2024-01-20 01:57:43'),
-('H04', '1', '6', 'Kamar F', 350000, 2, NULL, '2024-01-20 02:01:37', '2024-01-20 02:01:37'),
-('H04', '1', '7', 'Kamar G', 350000, 2, NULL, '2024-01-20 02:02:27', '2024-01-20 02:02:27'),
-('H04', '1', '9', 'Kamar H', 350000, 2, NULL, '2024-01-20 02:03:22', '2024-01-20 02:03:22');
+('H01', '1', '1', 'Kamar 1', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 01:56:15', '2024-02-27 02:36:04'),
+('H01', '1', '10', 'Kamar 10', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 13:39:10', '2024-02-27 13:39:10'),
+('H01', '1', '11', 'Kamar 11', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 13:42:10', '2024-02-27 13:42:10'),
+('H01', '1', '12', 'Kamar 12', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 13:43:37', '2024-02-27 13:43:37'),
+('H01', '1', '13', 'Kamar 13', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 13:44:48', '2024-02-27 13:44:48'),
+('H01', '1', '14', 'Rumah Barbie', 600000, 8, 'This villa is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 14:28:13', '2024-02-27 14:28:13'),
+('H01', '1', '2', 'Kamar 2', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 02:49:40', '2024-02-27 02:49:40'),
+('H01', '1', '3', 'Kamar 3', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 02:51:43', '2024-02-27 02:51:43'),
+('H01', '1', '4', 'Kamar 4', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 02:54:11', '2024-02-27 02:54:11'),
+('H01', '1', '5', 'Kamar 5', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 02:56:21', '2024-02-27 02:56:21'),
+('H01', '1', '6', 'Kamar 6', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 02:58:49', '2024-02-27 02:58:49'),
+('H01', '1', '7', 'Kamar 7', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 03:01:02', '2024-02-27 03:01:02'),
+('H01', '1', '8', 'Kamar 8', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 13:36:04', '2024-02-27 13:36:04'),
+('H01', '1', '9', 'Kamar 9', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 13:37:49', '2024-02-27 13:37:49'),
+('H02', '1', '1', 'Kamar 1', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 20:58:10', '2024-02-27 20:58:10'),
+('H02', '1', '2', 'Kamar 2', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:00:43', '2024-02-27 21:00:43'),
+('H02', '1', '3', 'Kamar 3', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:01:09', '2024-02-27 21:01:09'),
+('H02', '1', '4', 'Kamar 4', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:02:08', '2024-02-27 21:02:08'),
+('H02', '1', '5', 'Kamar 5', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:02:52', '2024-02-27 21:02:52'),
+('H02', '1', '6', 'Kamar 6', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:11:35', '2024-02-27 21:11:35'),
+('H02', '1', '7', 'Kamar 7', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:12:31', '2024-02-27 21:12:31'),
+('H02', '1', '8', 'Kamar 8', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:13:30', '2024-02-27 21:13:30'),
+('H02', '1', '9', 'Kamar 9 ', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:14:30', '2024-02-27 21:14:30');
 
 -- --------------------------------------------------------
 
@@ -1120,9 +1231,12 @@ CREATE TABLE `homestay_unit_facility` (
 
 INSERT INTO `homestay_unit_facility` (`id`, `name`, `created_at`, `updated_at`) VALUES
 ('02', 'AC', '2023-12-06 14:34:36', '2023-12-06 14:34:36'),
-('03', 'Kompor', '2023-12-06 14:34:47', '2023-12-08 03:45:08'),
+('03', 'Stove', '2023-12-06 14:34:47', '2024-02-27 02:40:22'),
 ('04', 'TV', '2023-12-06 14:47:37', '2023-12-06 14:47:37'),
-('05', 'Lemari Es', '2023-12-07 15:00:07', '2023-12-08 03:44:06');
+('05', 'Refridgerator', '2023-12-07 15:00:07', '2024-02-27 02:40:01'),
+('06', 'Toilet', '2024-02-27 01:58:47', '2024-02-27 01:58:47'),
+('07', 'Bed', '2024-02-27 02:00:17', '2024-02-27 02:00:17'),
+('08', 'Fan', '2024-02-27 20:59:04', '2024-02-27 20:59:04');
 
 -- --------------------------------------------------------
 
@@ -1145,7 +1259,44 @@ CREATE TABLE `homestay_unit_facility_detail` (
 --
 
 INSERT INTO `homestay_unit_facility_detail` (`homestay_id`, `unit_type`, `unit_number`, `facility_id`, `description`, `created_at`, `updated_at`) VALUES
-('H03', '1', '1', '02', NULL, '2023-12-19 17:52:28', '2023-12-19 17:52:28');
+('H01', '1', '1', '06', 'toilet in room', '2024-02-27 02:39:15', '2024-02-27 02:39:15'),
+('H01', '1', '1', '07', '1 single bed, 1 double bed', '2024-02-27 02:37:17', '2024-02-27 02:37:17'),
+('H01', '1', '10', '06', 'toilet in room', '2024-02-27 13:39:49', '2024-02-27 13:39:49'),
+('H01', '1', '10', '07', '1 single bed, 1 double bed', '2024-02-27 13:39:31', '2024-02-27 13:39:31'),
+('H01', '1', '11', '06', 'toilet in room', '2024-02-27 13:42:57', '2024-02-27 13:42:57'),
+('H01', '1', '11', '07', '1 single bed, 1 double bed', '2024-02-27 13:42:41', '2024-02-27 13:42:41'),
+('H01', '1', '12', '06', 'toilet in room', '2024-02-27 13:43:55', '2024-02-27 13:43:55'),
+('H01', '1', '12', '07', '1 single bed, 1 double bed', '2024-02-27 13:44:08', '2024-02-27 13:44:08'),
+('H01', '1', '2', '06', 'toilet in room', '2024-02-27 02:50:11', '2024-02-27 02:50:11'),
+('H01', '1', '2', '07', '1 single bed, 1 double bed', '2024-02-27 02:50:37', '2024-02-27 02:50:37'),
+('H01', '1', '3', '06', 'toilet in room', '2024-02-27 02:52:57', '2024-02-27 02:52:57'),
+('H01', '1', '3', '07', '1 single bed, 1 double bed', '2024-02-27 02:52:39', '2024-02-27 02:52:39'),
+('H01', '1', '4', '06', 'toilet in room', '2024-02-27 02:55:18', '2024-02-27 02:55:18'),
+('H01', '1', '4', '07', '1 single bed, 1 double bed', '2024-02-27 02:55:34', '2024-02-27 02:55:34'),
+('H01', '1', '5', '06', 'toilet in room', '2024-02-27 02:56:41', '2024-02-27 02:56:41'),
+('H01', '1', '5', '07', '1 single bed, 1 double bed', '2024-02-27 02:56:58', '2024-02-27 02:56:58'),
+('H01', '1', '6', '06', 'toilet in room', '2024-02-27 02:59:46', '2024-02-27 02:59:46'),
+('H01', '1', '6', '07', '1 single bed, 1 double bed', '2024-02-27 02:59:19', '2024-02-27 02:59:19'),
+('H01', '1', '7', '06', 'toilet in room', '2024-02-27 03:01:35', '2024-02-27 03:01:35'),
+('H01', '1', '7', '07', '1 single bed, 1 double bed', '2024-02-27 03:01:22', '2024-02-27 03:01:22'),
+('H01', '1', '8', '06', 'toilet in room', '2024-02-27 13:36:24', '2024-02-27 13:36:24'),
+('H01', '1', '8', '07', '1 single bed, 1 double bed', '2024-02-27 13:36:46', '2024-02-27 13:36:46'),
+('H01', '1', '9', '06', 'toilet in room', '2024-02-27 13:40:04', '2024-02-27 13:40:04'),
+('H01', '1', '9', '07', '1 single bed, 1 double bed', '2024-02-27 13:40:19', '2024-02-27 13:40:19'),
+('H02', '1', '1', '07', 'Double bed', '2024-02-27 20:59:32', '2024-02-27 20:59:32'),
+('H02', '1', '1', '08', NULL, '2024-02-27 20:59:52', '2024-02-27 20:59:52'),
+('H02', '1', '3', '07', 'Double bed', '2024-02-27 21:01:23', '2024-02-27 21:01:23'),
+('H02', '1', '3', '08', NULL, '2024-02-27 21:01:32', '2024-02-27 21:01:32'),
+('H02', '1', '4', '07', 'Double bed', '2024-02-27 21:03:49', '2024-02-27 21:03:49'),
+('H02', '1', '4', '08', NULL, '2024-02-27 21:03:57', '2024-02-27 21:03:57'),
+('H02', '1', '5', '07', 'Double bed', '2024-02-27 21:03:09', '2024-02-27 21:03:09'),
+('H02', '1', '5', '08', NULL, '2024-02-27 21:03:16', '2024-02-27 21:03:16'),
+('H02', '1', '6', '07', 'Double bed', '2024-02-27 21:11:52', '2024-02-27 21:11:52'),
+('H02', '1', '6', '08', NULL, '2024-02-27 21:12:00', '2024-02-27 21:12:00'),
+('H02', '1', '7', '07', 'Double bed', '2024-02-27 21:12:44', '2024-02-27 21:12:44'),
+('H02', '1', '7', '08', NULL, '2024-02-27 21:12:52', '2024-02-27 21:12:52'),
+('H02', '1', '8', '07', 'Double bed', '2024-02-27 21:13:46', '2024-02-27 21:13:46'),
+('H02', '1', '8', '08', NULL, '2024-02-27 21:13:56', '2024-02-27 21:13:56');
 
 -- --------------------------------------------------------
 
@@ -1168,43 +1319,44 @@ CREATE TABLE `homestay_unit_gallery` (
 --
 
 INSERT INTO `homestay_unit_gallery` (`id`, `homestay_id`, `unit_type`, `unit_number`, `url`, `created_at`, `updated_at`) VALUES
-('004', 'H03', '1', '1', '1703055130_fe4fcb7396377a4e6f1f.jpg', '2023-12-19 17:52:15', '2023-12-19 17:52:15'),
-('005', 'H03', '1', '1', '1703055131_09eb27afa364697e3fd4.jpg', '2023-12-19 17:52:15', '2023-12-19 17:52:15'),
-('008', 'H03', '1', '3', '1703058725_ddee595fed99cd90f43f.jpg', '2023-12-19 18:52:08', '2023-12-19 18:52:08'),
-('009', 'H03', '1', '3', '1703058726_f28ea83e980db7204209.jpg', '2023-12-19 18:52:08', '2023-12-19 18:52:08'),
-('012', 'H03', '1', '2', '1703294933_4d611776b0c396c8cd83.jpg', '2023-12-22 12:28:55', '2023-12-22 12:28:55'),
-('013', 'H03', '1', '2', '1703294933_c59fda3bcf5308cd49ae.jpg', '2023-12-22 12:28:55', '2023-12-22 12:28:55'),
-('014', 'H03', '2', '1', '1703295242_406f7c8f5d82079497e9.jpg', '2023-12-22 12:34:13', '2023-12-22 12:34:13'),
-('015', 'H03', '2', '1', '1703295242_62920ba5433e8645e75d.jpg', '2023-12-22 12:34:13', '2023-12-22 12:34:13'),
-('016', 'H03', '2', '1', '1703295162_f7d9c4361c03b24cc410.jpg', '2023-12-22 12:34:13', '2023-12-22 12:34:13'),
-('017', 'H03', '1', '4', '1703296393_3b11d73e3f397b898699.jpg', '2023-12-22 12:53:16', '2023-12-22 12:53:16'),
-('018', 'H03', '1', '4', '1703296393_ed83c0c84d9946558aab.jpg', '2023-12-22 12:53:16', '2023-12-22 12:53:16'),
-('019', 'H03', '1', '5', '1703296439_97235c60c1dce32cec5e.jpg', '2023-12-22 12:54:01', '2023-12-22 12:54:01'),
-('020', 'H03', '1', '5', '1703296439_890a6dd66583df4ecb0a.jpg', '2023-12-22 12:54:01', '2023-12-22 12:54:01'),
-('021', 'H03', '1', '6', '1703296483_3badf29633c02f719c91.jpg', '2023-12-22 12:54:45', '2023-12-22 12:54:45'),
-('022', 'H03', '1', '6', '1703296483_c5262708e7a1c876b7d9.jpg', '2023-12-22 12:54:45', '2023-12-22 12:54:45'),
-('023', 'H03', '1', '7', '1703296522_e9fe18f100811e49096a.jpg', '2023-12-22 12:55:25', '2023-12-22 12:55:25'),
-('024', 'H03', '1', '7', '1703296523_f3cbb06f1e44a64cf4d1.jpg', '2023-12-22 12:55:25', '2023-12-22 12:55:25'),
-('025', 'H03', '1', '8', '1703296562_dea52667438c3f54c34c.jpg', '2023-12-22 12:56:05', '2023-12-22 12:56:05'),
-('026', 'H03', '1', '8', '1703296563_a19cb297f1a2c6fa91d7.jpg', '2023-12-22 12:56:05', '2023-12-22 12:56:05'),
-('027', 'H03', '1', '9', '1703296597_a3411b481cc72dbf5c6d.jpg', '2023-12-22 12:56:39', '2023-12-22 12:56:39'),
-('028', 'H03', '1', '9', '1703296597_63b9662ea64c0513f81c.jpg', '2023-12-22 12:56:39', '2023-12-22 12:56:39'),
-('029', 'H03', '1', '10', '1703296632_d094092b53e08307b116.jpg', '2023-12-22 12:57:15', '2023-12-22 12:57:15'),
-('030', 'H03', '1', '10', '1703296633_d009f04618064147843e.jpg', '2023-12-22 12:57:15', '2023-12-22 12:57:15'),
-('031', 'H04', '1', '1', '1705762327_92fa1cea893161e92e8a.jpg', '2024-01-20 01:52:26', '2024-01-20 01:52:26'),
-('032', 'H04', '1', '1', '1705762327_b699d047ecb06ae97f3d.jpg', '2024-01-20 01:52:26', '2024-01-20 01:52:26'),
-('033', 'H04', '1', '2', '1705762380_b8fe8a8ce0d97950cf7b.jpg', '2024-01-20 01:53:05', '2024-01-20 01:53:05'),
-('034', 'H04', '1', '2', '1705762382_60e9222ed3b895501676.jpg', '2024-01-20 01:53:05', '2024-01-20 01:53:05'),
-('035', 'H04', '1', '3', '1705762423_5f1cc0fd556b871a01bc.jpg', '2024-01-20 01:53:46', '2024-01-20 01:53:46'),
-('036', 'H04', '1', '4', '1705762459_c677a067555b559be71e.jpg', '2024-01-20 01:54:23', '2024-01-20 01:54:23'),
-('037', 'H04', '1', '4', '1705762460_16debac7f2d5c05b81f7.jpg', '2024-01-20 01:54:23', '2024-01-20 01:54:23'),
-('038', 'H04', '1', '5', '1705762660_28487c8871067acb59d8.jpg', '2024-01-20 01:57:43', '2024-01-20 01:57:43'),
-('039', 'H04', '1', '5', '1705762649_4c87fc92072dcc5395cb.jpg', '2024-01-20 01:57:43', '2024-01-20 01:57:43'),
-('040', 'H04', '1', '6', '1705762896_f19bc40a6511040d3fa2.jpg', '2024-01-20 02:01:37', '2024-01-20 02:01:37'),
-('041', 'H04', '1', '7', '1705762945_12ec3f27d7b7da8a1fae.jpg', '2024-01-20 02:02:27', '2024-01-20 02:02:27'),
-('042', 'H04', '1', '7', '1705762945_be0ffd8f712de4b0b146.jpg', '2024-01-20 02:02:27', '2024-01-20 02:02:27'),
-('043', 'H04', '1', '9', '1705762999_4516df82bf29f2e295de.jpg', '2024-01-20 02:03:22', '2024-01-20 02:03:22'),
-('044', 'H04', '1', '10', '1705763045_10c48d6e82e8d6062678.jpg', '2024-01-20 02:04:07', '2024-01-20 02:04:07');
+('001', 'H01', '1', '1', '1709048137_33da4cd2457d45d6753f.jpg', '2024-02-27 02:36:04', '2024-02-27 02:36:04'),
+('002', 'H01', '1', '1', '1709048136_f4828cd6163e17399e0a.jpg', '2024-02-27 02:36:04', '2024-02-27 02:36:04'),
+('003', 'H01', '1', '2', '1709048959_a639287ae4825fa670c1.jpg', '2024-02-27 02:49:41', '2024-02-27 02:49:41'),
+('004', 'H01', '1', '2', '1709048941_7ab7c9172b40439ad887.jpg', '2024-02-27 02:49:41', '2024-02-27 02:49:41'),
+('005', 'H01', '1', '3', '1709049101_4e58552968da3d2aacb4.jpg', '2024-02-27 02:51:43', '2024-02-27 02:51:43'),
+('006', 'H01', '1', '3', '1709049092_c731f125bfd623c1bb31.jpg', '2024-02-27 02:51:43', '2024-02-27 02:51:43'),
+('007', 'H01', '1', '4', '1709049246_2eb0c8f50bbe8ed7fe07.jpg', '2024-02-27 02:54:11', '2024-02-27 02:54:11'),
+('008', 'H01', '1', '4', '1709049236_3d72adadc95e451e0aa5.jpg', '2024-02-27 02:54:11', '2024-02-27 02:54:11'),
+('009', 'H01', '1', '5', '1709049379_a0ab403704768fe12008.jpg', '2024-02-27 02:56:21', '2024-02-27 02:56:21'),
+('010', 'H01', '1', '6', '1709049526_05e84963f460200fb9ed.jpg', '2024-02-27 02:58:49', '2024-02-27 02:58:49'),
+('011', 'H01', '1', '6', '1709049517_7cf01fd8a1b057ec0d67.jpg', '2024-02-27 02:58:49', '2024-02-27 02:58:49'),
+('012', 'H01', '1', '7', '1709049658_2dd9b63de577f65f2be7.jpg', '2024-02-27 03:01:02', '2024-02-27 03:01:02'),
+('013', 'H01', '1', '7', '1709049650_9763ebc12c88a6d0a6be.jpg', '2024-02-27 03:01:02', '2024-02-27 03:01:02'),
+('014', 'H01', '1', '8', '1709087762_8c322c07fbb8715a6c16.jpg', '2024-02-27 13:36:05', '2024-02-27 13:36:05'),
+('015', 'H01', '1', '9', '1709087866_d45d26763fc16c4b5221.jpg', '2024-02-27 13:37:49', '2024-02-27 13:37:49'),
+('016', 'H01', '1', '9', '1709087857_eb25ebd9258f1a26e023.jpg', '2024-02-27 13:37:49', '2024-02-27 13:37:49'),
+('017', 'H01', '1', '10', '1709087947_b581c478dd5447dcc977.jpg', '2024-02-27 13:39:10', '2024-02-27 13:39:10'),
+('018', 'H01', '1', '10', '1709087935_58eaa6d4557ca3b2efd7.jpg', '2024-02-27 13:39:10', '2024-02-27 13:39:10'),
+('019', 'H01', '1', '11', '1709088128_3cce2f9c10e18c639b46.jpg', '2024-02-27 13:42:10', '2024-02-27 13:42:10'),
+('020', 'H01', '1', '11', '1709088121_060e6b763bb9c2103c78.jpg', '2024-02-27 13:42:10', '2024-02-27 13:42:10'),
+('021', 'H01', '1', '12', '1709088215_2e2f53467cca2fa7913f.jpg', '2024-02-27 13:43:37', '2024-02-27 13:43:37'),
+('022', 'H01', '1', '12', '1709088210_e929bf3e5f0a9de6002f.jpg', '2024-02-27 13:43:37', '2024-02-27 13:43:37'),
+('023', 'H01', '1', '13', '1709088285_18320006cf92743d41a5.jpg', '2024-02-27 13:44:48', '2024-02-27 13:44:48'),
+('024', 'H01', '1', '14', '1709090887_7bcaf37569300e0ea0d3.jpg', '2024-02-27 14:28:13', '2024-02-27 14:28:13'),
+('025', 'H01', '1', '14', '1709090818_eb933525341cffa99209.jpg', '2024-02-27 14:28:13', '2024-02-27 14:28:13'),
+('026', 'H01', '1', '14', '1709090807_7f4892280beb29e29565.jpg', '2024-02-27 14:28:13', '2024-02-27 14:28:13'),
+('027', 'H01', '1', '14', '1709090806_e32135f2176fd80b698a.jpg', '2024-02-27 14:28:13', '2024-02-27 14:28:13'),
+('028', 'H01', '1', '14', '1709090808_ac04f57d00c9b6512a8e.jpg', '2024-02-27 14:28:13', '2024-02-27 14:28:13'),
+('029', 'H02', '1', '1', '1709114288_fbcd38b91d0eaa988aaf.jpg', '2024-02-27 20:58:10', '2024-02-27 20:58:10'),
+('030', 'H02', '1', '3', '1709114466_53ec48de09dcce5be4c9.jpg', '2024-02-27 21:01:09', '2024-02-27 21:01:09'),
+('031', 'H02', '1', '4', '1709114525_68d14ad42431ebf669dd.jpg', '2024-02-27 21:02:08', '2024-02-27 21:02:08'),
+('032', 'H02', '1', '5', '1709114569_c7c42f2f1b61d3cf5506.jpg', '2024-02-27 21:02:52', '2024-02-27 21:02:52'),
+('033', 'H02', '1', '5', '1709114569_d516b2cba42f8ccd5b81.jpg', '2024-02-27 21:02:52', '2024-02-27 21:02:52'),
+('034', 'H02', '1', '2', '1709114525_68d14ad42431ebf669dd.jpg', NULL, NULL),
+('035', 'H02', '1', '6', '1709115093_c8f85854a59c47400402.jpg', '2024-02-27 21:11:35', '2024-02-27 21:11:35'),
+('036', 'H02', '1', '7', '1709115149_d0b5039619b5aedce3b2.jpg', '2024-02-27 21:12:31', '2024-02-27 21:12:31'),
+('037', 'H02', '1', '8', '1709115208_635d071e0621807372b0.jpg', '2024-02-27 21:13:30', '2024-02-27 21:13:30'),
+('038', 'H02', '1', '9', '1709115268_fa9e6da631963f15a510.jpg', '2024-02-27 21:14:30', '2024-02-27 21:14:30');
 
 -- --------------------------------------------------------
 
@@ -1312,37 +1464,8 @@ CREATE TABLE `package` (
 --
 
 INSERT INTO `package` (`homestay_id`, `package_id`, `name`, `min_capacity`, `brochure_url`, `description`, `price`, `is_custom`, `created_at`, `updated_at`) VALUES
-('H03', 'P001', 'paket P001', 6, '1704531619_d3bff0dde4320f74d083.jpg', 'tes paket P001', 120000, '0', '2023-12-11 16:34:49', '2023-12-11 16:34:49'),
-('H03', 'P002', 'Paket 23', 5, '1702784296_049975bb12e011283229.jpg', 'qqqqqqqww', 110000, '0', '2023-12-16 14:25:59', '2023-12-16 14:25:59'),
-('H03', 'P003', 'Paket Hemat', 4, '1702784352_2d5217d6befd2999b8fb.jpg', 'qaqaq', 100000, '0', '2023-12-16 14:39:15', '2023-12-16 14:39:15'),
-('H03', 'P007', 'Custom by daffa at 2023-12-19 18:29', 0, NULL, NULL, 0, '1', '2023-12-19 11:29:28', '2023-12-19 11:29:28'),
-('H03', 'P008', 'Custom by daffa at 2023-12-20 09:37', 0, NULL, NULL, 150000, '1', '2023-12-20 02:37:26', '2023-12-20 02:37:26'),
-('H03', 'P009', 'Custom by daffa at 2023-12-20 12:36', 0, NULL, NULL, 200000, '1', '2023-12-20 05:36:47', '2023-12-20 05:36:47'),
-('H03', 'P010', 'sqsq extend by daffa at 2023-12-21 14:19', 111, NULL, NULL, 200000, '1', '2023-12-21 07:19:13', '2023-12-21 07:19:13'),
-('H03', 'P011', 'Paket Hemat extend by daffa at 2023-12-22 10:31', 4, NULL, NULL, 20000, '1', '2023-12-22 03:31:19', '2023-12-22 03:31:19'),
-('H03', 'P012', 'Custom by daffa at 2023-12-30 09:54', 0, NULL, NULL, 0, '1', '2023-12-30 02:54:20', '2023-12-30 02:54:20'),
-('H03', 'P013', 'Paket 23 extend by daffa at 2023-12-30 10:13', 5, NULL, NULL, 20000, '1', '2023-12-30 03:13:18', '2023-12-30 03:13:18'),
-('H03', 'P014', 'Custom by daffa at 2024-01-09 15:30', 0, NULL, NULL, 0, '1', '2024-01-09 08:30:24', '2024-01-09 08:30:24'),
-('H03', 'P015', 'Custom by daffa at 2024-01-09 15:36', 0, NULL, NULL, 0, '1', '2024-01-09 08:36:24', '2024-01-09 08:36:24'),
-('H03', 'P016', 'Custom by daffa at 2024-01-09 15:53', 0, NULL, NULL, 0, '1', '2024-01-09 08:53:38', '2024-01-09 08:53:38'),
-('H03', 'P017', 'Custom by daffa at 2024-01-10 12:09', 0, NULL, NULL, 0, '1', '2024-01-10 05:09:41', '2024-01-10 05:09:41'),
-('H03', 'P018', 'Custom by daffa at 2024-01-11 11:56', 0, NULL, NULL, 0, '1', '2024-01-11 04:56:35', '2024-01-11 04:56:35'),
-('H03', 'P019', 'Custom by daffa at 2024-01-11 14:16', 0, NULL, NULL, 0, '1', '2024-01-11 07:16:36', '2024-01-11 07:16:36'),
-('H03', 'P020', 'Custom by daffa at 2024-01-13 12:03', 0, NULL, NULL, 0, '1', '2024-01-13 05:03:02', '2024-01-13 05:03:02'),
-('H03', 'P021', 'Custom by daffa at 2024-01-15 10:43', 0, NULL, NULL, 440000, '1', '2024-01-15 03:43:23', '2024-01-15 03:43:23'),
-('H03', 'P022', 'Jelajah Lembah Harau', 10, '1705470660_614374c3a2a9e25389bf.png', NULL, 900000, '0', '2024-01-16 14:17:19', '2024-01-16 14:17:19'),
-('H03', 'P023', 'Custom by daffa at 2024-01-17 14:45', 0, NULL, NULL, 0, '1', '2024-01-17 07:45:09', '2024-01-17 07:45:09'),
-('H03', 'P024', 'Jelajah Lembah Harau extend by daffa at 2024-01-17 14:53', 10, NULL, NULL, 0, '1', '2024-01-17 07:53:30', '2024-01-17 07:53:30'),
-('H03', 'P025', 'Jelajah Lembah Harau extend by daffa at 2024-01-17 14:57', 10, NULL, NULL, 0, '1', '2024-01-17 07:57:06', '2024-01-17 07:57:06'),
-('H03', 'P026', 'Jelajah Lembah Harau extend by daffa at 2024-01-17 15:24', 10, NULL, NULL, 1740000, '1', '2024-01-17 08:24:43', '2024-01-17 08:24:43'),
-('H03', 'P027', 'Jelajah Lembah Harau extend by daffa at 2024-01-17 20:33', 10, NULL, NULL, 1000000, '1', '2024-01-17 13:33:20', '2024-01-17 13:33:20'),
-('H03', 'P028', 'Custom by daffa at 2024-01-17 23:40', 0, NULL, NULL, 360000, '1', '2024-01-17 16:40:05', '2024-01-17 16:40:05'),
-('H03', 'P029', 'Custom by daffa at 2024-01-24 19:49', 0, NULL, NULL, 280000, '1', '2024-01-24 12:49:38', '2024-01-24 12:49:38'),
-('H03', 'P030', 'Custom by daffa at 2024-01-27 09:22', 0, NULL, NULL, 380000, '1', '2024-01-27 02:22:58', '2024-01-27 02:22:58'),
-('H04', 'P001', 'Explore Lembah Harau', 5, '1705764071_80912c2a2ea68df98b19.jpg', 'Nikmati keindahan alam yang memukau dan petualangan tak terlupakan dengan Paket Wisata Explore Lembah Harau. ', 150000, '0', '2024-01-20 02:14:47', '2024-01-20 02:14:47'),
-('H04', 'P002', 'Custom by daffa at 2024-01-23 11:02', 0, NULL, NULL, 260000, '1', '2024-01-23 04:02:31', '2024-01-23 04:02:31'),
-('H04', 'P003', 'Explore Lembah Harau extend by daffa at 2024-01-23 15:45', 5, NULL, NULL, 450000, '1', '2024-01-23 08:45:21', '2024-01-23 08:45:21'),
-('H04', 'P004', 'Explore Lembah Harau extend by daffa at 2024-01-24 13:05', 5, NULL, NULL, 300000, '1', '2024-01-24 06:05:29', '2024-01-24 06:05:29');
+('H01', 'P001', 'Explore Lembah Harau', 5, '1709092962_e08836f6f13adffb5d1d.jpg', 'Paket ini menawarkan perjalanan ke objek-objek wisata populer di lembah harau', 250000, '0', '2024-02-27 14:45:03', '2024-02-27 14:45:03'),
+('H01', 'P002', 'Explore Geopark Lembah Harau', 5, '1709107084_e539c652fa40cac62347.jpg', 'Menjelajahi semua objek yang berkaitan dengan geopark lembah harau', 100000, '0', '2024-02-27 18:23:54', '2024-02-27 18:23:54');
 
 -- --------------------------------------------------------
 
@@ -1363,45 +1486,9 @@ CREATE TABLE `package_day` (
 --
 
 INSERT INTO `package_day` (`homestay_id`, `package_id`, `day`, `description`, `is_base_for_extend`) VALUES
-('H03', 'P001', '1', 'ssqsq', '0'),
-('H03', 'P001', '2', NULL, '0'),
-('H03', 'P002', '1', NULL, '0'),
-('H03', 'P002', '2', NULL, '0'),
-('H03', 'P002', '3', NULL, '0'),
-('H03', 'P003', '1', 'a', '0'),
-('H03', 'P007', '1', NULL, '0'),
-('H03', 'P008', '1', NULL, '0'),
-('H03', 'P008', '2', NULL, '0'),
-('H03', 'P009', '1', NULL, '0'),
-('H03', 'P010', '1', 'ssqsq', '0'),
-('H03', 'P010', '2', NULL, '0'),
-('H03', 'P011', '1', 'a', '0'),
-('H03', 'P013', '1', NULL, '0'),
-('H03', 'P013', '2', NULL, '0'),
-('H03', 'P018', '1', 'tes day1', '0'),
-('H03', 'P019', '1', NULL, '0'),
-('H03', 'P020', '1', NULL, '0'),
-('H03', 'P020', '2', NULL, '0'),
-('H03', 'P021', '1', NULL, '0'),
-('H03', 'P022', '1', NULL, '0'),
-('H03', 'P024', '1', NULL, '0'),
-('H03', 'P025', '1', NULL, '1'),
-('H03', 'P025', '2', NULL, '0'),
-('H03', 'P026', '1', NULL, '1'),
-('H03', 'P026', '2', NULL, '0'),
-('H03', 'P027', '1', NULL, '1'),
-('H03', 'P027', '2', NULL, '0'),
-('H03', 'P028', '1', NULL, '0'),
-('H03', 'P028', '2', NULL, '0'),
-('H03', 'P029', '1', NULL, '0'),
-('H03', 'P029', '2', NULL, '0'),
-('H03', 'P030', '1', NULL, '0'),
-('H03', 'P030', '2', NULL, '0'),
-('H04', 'P001', '1', 'Menikmati keindahan alam Lembah Harau', '0'),
-('H04', 'P002', '1', NULL, '0'),
-('H04', 'P003', '1', 'Menikmati keindahan alam Lembah Harau', '1'),
-('H04', 'P004', '1', 'Menikmati keindahan alam Lembah Harau', '1'),
-('H04', 'P004', '2', NULL, '0');
+('H01', 'P001', '1', 'Menikmati keindahan alam lembah harau', '0'),
+('H01', 'P001', '2', 'Menikmati keindahan alam dan budaya', '0'),
+('H01', 'P002', '1', 'Melihat tabing batu lembah harau', '0');
 
 -- --------------------------------------------------------
 
@@ -1425,73 +1512,15 @@ CREATE TABLE `package_detail` (
 --
 
 INSERT INTO `package_detail` (`homestay_id`, `package_id`, `day`, `activity`, `activity_type`, `id_object`, `description`, `is_base_for_extend`) VALUES
-('H03', 'P001', '1', '1', 'A', 'A7', '', '0'),
-('H03', 'P001', '1', '2', 'C', 'C14', '11', '0'),
-('H03', 'P001', '1', '3', 'C', 'C3', 'qq', '0'),
-('H03', 'P001', '1', '4', 'V', 'V2', '', '0'),
-('H03', 'P001', '2', '1', 'C', 'C1', '', '0'),
-('H03', 'P001', '2', '2', 'C', 'C14', '', '0'),
-('H03', 'P002', '1', '1', 'A', 'A6', '', '0'),
-('H03', 'P002', '2', '1', 'C', 'C7', '', '0'),
-('H03', 'P002', '3', '1', 'C', 'C8', '', '0'),
-('H03', 'P003', '1', '1', 'A', 'A4', '', '0'),
-('H03', 'P003', '1', '2', 'C', 'C7', '', '0'),
-('H03', 'P008', '1', '1', 'C', 'C3', '', '0'),
-('H03', 'P009', '1', '1', 'A', 'A5', '', '0'),
-('H03', 'P010', '1', '2', 'C', 'C14', '11', '0'),
-('H03', 'P010', '1', '3', 'C', 'C3', 'qq', '0'),
-('H03', 'P010', '1', '4', 'V', 'V2', '', '0'),
-('H03', 'P010', '2', '1', 'C', 'C1', '', '0'),
-('H03', 'P010', '2', '2', 'C', 'C14', '', '0'),
-('H03', 'P011', '1', '1', 'A', 'A4', '', '0'),
-('H03', 'P013', '1', '1', 'A', 'A6', '', '0'),
-('H03', 'P013', '2', '1', 'C', 'C7', '', '0'),
-('H03', 'P013', '2', '2', 'A', 'A4', '', '0'),
-('H03', 'P018', '1', '1', 'A', 'A8', 'tes', '0'),
-('H03', 'P018', '1', '2', 'A', 'A4', '', '0'),
-('H03', 'P020', '1', '1', 'A', 'A8', '', '0'),
-('H03', 'P021', '1', '1', 'A', 'A9', '', '0'),
-('H03', 'P021', '1', '2', 'E', 'E01', '', '0'),
-('H03', 'P021', '1', '3', 'C', 'C6', '', '0'),
-('H03', 'P021', '1', '4', 'W', 'W1', '', '0'),
-('H03', 'P021', '1', '5', 'S', 'S1', '', '0'),
-('H03', 'P021', '1', '6', 'A', 'A6', '', '0'),
-('H03', 'P021', '1', '7', 'A', 'A5', '', '0'),
-('H03', 'P021', '1', '8', 'A', 'A7', '', '0'),
-('H03', 'P021', '1', '9', 'C', 'C11', '', '0'),
-('H03', 'P022', '1', '1', 'A', 'A9', '', '0'),
-('H03', 'P022', '1', '2', 'A', 'A6', '', '0'),
-('H03', 'P024', '1', '1', 'A', 'A9', '', '0'),
-('H03', 'P024', '1', '2', 'A', 'A6', '', '0'),
-('H03', 'P025', '1', '1', 'A', 'A9', '', '1'),
-('H03', 'P025', '1', '2', 'A', 'A6', '', '1'),
-('H03', 'P025', '1', '3', 'A', 'A8', '', '0'),
-('H03', 'P026', '1', '1', 'A', 'A9', '', '1'),
-('H03', 'P026', '1', '2', 'A', 'A6', '', '1'),
-('H03', 'P026', '2', '1', 'A', 'A6', '', '0'),
-('H03', 'P026', '2', '2', 'E', 'E01', '', '0'),
-('H03', 'P027', '1', '1', 'A', 'A9', '', '1'),
-('H03', 'P027', '1', '2', 'A', 'A6', '', '1'),
-('H03', 'P028', '1', '1', 'A', 'A9', '', '0'),
-('H03', 'P028', '2', '1', 'A', 'A6', '', '0'),
-('H03', 'P029', '1', '1', 'A', 'A9', '', '0'),
-('H03', 'P029', '1', '2', 'C', 'C1', '', '0'),
-('H03', 'P029', '2', '1', 'A', 'A6', '', '0'),
-('H03', 'P030', '1', '1', 'A', 'A9', '', '0'),
-('H03', 'P030', '2', '1', 'A', 'A6', '', '0'),
-('H04', 'P001', '1', '1', 'A', 'A7', 'Melihat keindahan tebing batu yang menjadi icon Lembah Harau', '0'),
-('H04', 'P001', '1', '2', 'A', 'A6', 'Berfoto ria dengan latar belakang berupa miniatur dari berbagai bangunan ikonin dari berbagai dunia', '0'),
-('H04', 'P001', '1', '3', 'A', 'A4', 'Menikmati keindahan air terjun serta bermain air', '0'),
-('H04', 'P002', '1', '1', 'A', 'A9', '', '0'),
-('H04', 'P002', '1', '2', 'C', 'C4', '', '0'),
-('H04', 'P003', '1', '1', 'A', 'A7', 'Melihat keindahan tebing batu yang menjadi icon Lembah Harau', '1'),
-('H04', 'P003', '1', '2', 'A', 'A6', 'Berfoto ria dengan latar belakang berupa miniatur dari berbagai bangunan ikonin dari berbagai dunia', '1'),
-('H04', 'P003', '1', '3', 'A', 'A4', 'Menikmati keindahan air terjun serta bermain air', '1'),
-('H04', 'P004', '1', '1', 'A', 'A7', 'Melihat keindahan tebing batu yang menjadi icon Lembah Harau', '1'),
-('H04', 'P004', '1', '2', 'A', 'A6', 'Berfoto ria dengan latar belakang berupa miniatur dari berbagai bangunan ikonin dari berbagai dunia', '1'),
-('H04', 'P004', '1', '3', 'A', 'A4', 'Menikmati keindahan air terjun serta bermain air', '1'),
-('H04', 'P004', '2', '1', 'C', 'C1', '', '0'),
-('H04', 'P004', '2', '2', 'A', 'A9', '', '0');
+('H01', 'P001', '1', '1', 'A', 'A5', 'Melihat keindahan air tejun aka barayun', '0'),
+('H01', 'P001', '1', '2', 'A', 'A7', 'Melihat keidahaan tebing batu khas lembah harau', '0'),
+('H01', 'P001', '1', '3', 'A', 'A9', 'Bermain air dan berenang di waterpark', '0'),
+('H01', 'P001', '2', '1', 'A', 'A4', 'Melihat keindahan air terjun', '0'),
+('H01', 'P001', '2', '2', 'A', 'A6', 'Belajar  budaya dan melihat bangunan khas budaya minang, eropa, jepang, dan korea', '0'),
+('H01', 'P001', '2', '3', 'S', 'S2', 'Membeli oleh-oleh', '0'),
+('H01', 'P002', '1', '1', 'A', 'A5', 'Melihat air terjun aka barayun dan bermain air ', '0'),
+('H01', 'P002', '1', '2', 'A', 'A7', 'melihat keindahan tebing batu lembah harau ', '0'),
+('H01', 'P002', '1', '3', 'A', 'A4', 'Melihat air terjun dan tanaman-tanaman endemik lembah harau', '0');
 
 -- --------------------------------------------------------
 
@@ -1537,48 +1566,11 @@ CREATE TABLE `package_service_detail` (
 --
 
 INSERT INTO `package_service_detail` (`homestay_id`, `package_id`, `package_service_id`, `status`, `is_base_for_extend`) VALUES
-('H03', 'P001', '3', '1', '0'),
-('H03', 'P001', '6', '1', '0'),
-('H03', 'P003', '3', '1', '0'),
-('H03', 'P021', '1', '1', '0'),
-('H03', 'P021', '2', '1', '0'),
-('H03', 'P022', '1', '1', '0'),
-('H03', 'P022', '3', '1', '0'),
-('H03', 'P022', '4', '1', '0'),
-('H03', 'P022', '5', '0', '0'),
-('H03', 'P022', '6', '0', '0'),
-('H03', 'P024', '1', '1', '0'),
-('H03', 'P024', '3', '1', '0'),
-('H03', 'P024', '4', '1', '0'),
-('H03', 'P024', '5', '0', '0'),
-('H03', 'P024', '6', '0', '0'),
-('H03', 'P025', '1', '1', '1'),
-('H03', 'P025', '3', '1', '1'),
-('H03', 'P025', '4', '1', '1'),
-('H03', 'P026', '1', '1', '1'),
-('H03', 'P026', '2', '1', '0'),
-('H03', 'P026', '3', '1', '1'),
-('H03', 'P026', '4', '1', '1'),
-('H03', 'P027', '1', '1', '1'),
-('H03', 'P027', '2', '1', '0'),
-('H03', 'P027', '3', '1', '1'),
-('H03', 'P027', '4', '1', '1'),
-('H03', 'P028', '2', '1', '0'),
-('H03', 'P028', '3', '1', '0'),
-('H03', 'P028', '4', '1', '0'),
-('H03', 'P029', '3', '1', '0'),
-('H03', 'P030', '1', '1', '0'),
-('H03', 'P030', '2', '1', '0'),
-('H04', 'P001', '1', '1', '0'),
-('H04', 'P001', '3', '1', '0'),
-('H04', 'P001', '5', '0', '0'),
-('H04', 'P002', '1', '1', '0'),
-('H04', 'P002', '3', '1', '0'),
-('H04', 'P003', '1', '1', '1'),
-('H04', 'P003', '3', '1', '1'),
-('H04', 'P003', '5', '1', '0'),
-('H04', 'P004', '1', '1', '1'),
-('H04', 'P004', '3', '1', '1');
+('H01', 'P001', '1', '1', '0'),
+('H01', 'P001', '3', '0', '0'),
+('H01', 'P001', '4', '1', '0'),
+('H01', 'P002', '1', '1', '0'),
+('H01', 'P002', '3', '0', '0');
 
 -- --------------------------------------------------------
 
@@ -1587,9 +1579,9 @@ INSERT INTO `package_service_detail` (`homestay_id`, `package_id`, `package_serv
 --
 
 CREATE TABLE `province` (
-  `id` varchar(3) COLLATE utf8mb4_general_ci NOT NULL,
-  `name` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
-  `geom` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
+  `id` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `geom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -1605,8 +1597,8 @@ INSERT INTO `province` (`id`, `name`, `geom`) VALUES
 ('P06', 'Sumatera Selatan', 'P06.geojson'),
 ('P07', 'Bengkulu', 'P07.geojson'),
 ('P08', 'Lampung', 'P08.geojson'),
-('P09', 'Kepulauan Riau', 'P09.geojson'),
-('P10', 'Bangka Belitung', 'P10.geojson');
+('P09', 'Kepulauan Riau', 'P10.geojson'),
+('P10', 'Bangka Belitung', 'P09.geojson');
 
 -- --------------------------------------------------------
 
@@ -1673,84 +1665,22 @@ CREATE TABLE `reservation` (
   `full_paid_confirmed_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `reservation`
---
-
-INSERT INTO `reservation` (`id`, `customer_id`, `request_date`, `check_in`, `total_people`, `homestay_id`, `package_id`, `review`, `rating`, `total_price`, `cust_package_price_confirmed_at`, `deposit`, `status`, `reservation_finish_at`, `is_rejected`, `confirmed_at`, `feedback`, `deposit_at`, `deposit_proof`, `is_deposit_proof_correct`, `deposit_confirmed_at`, `canceled_at`, `cancelation_reason`, `is_refund`, `refund_paid_at`, `refund_proof`, `is_refund_proof_correct`, `refund_paid_confirmed_at`, `full_paid_at`, `full_paid_proof`, `is_full_paid_proof_correct`, `full_paid_confirmed_at`) VALUES
-('R001', 11, '2024-01-05 15:11:56', '2024-01-08 12:00:00', 2, '', NULL, 'Homestay bagus', 5, 1300000, NULL, 260000, 1, '2024-01-05 08:12:13', NULL, '2024-01-05 08:12:39', NULL, '2024-01-05 08:13:10', '1704442388_65be0b4a7f352ef9c4bd.jpg', NULL, '2024-01-05 08:13:32', NULL, NULL, NULL, NULL, NULL, '', NULL, '2024-01-05 08:13:59', '1704442436_1470cb9f3077a92cd9d9.jpg', NULL, '2024-01-05 08:14:11'),
-('R002', 11, '2024-01-05 15:15:42', '2024-01-08 12:00:00', 2, '', NULL, NULL, NULL, 600000, NULL, 120000, 1, '2024-01-05 08:15:52', NULL, '2024-01-05 08:16:17', NULL, '2024-01-05 08:16:44', '1704442602_74395cfcc053a29f2ef2.jpg', NULL, '2024-01-05 08:17:13', '2024-01-05 08:17:00', '1', '1', '2024-01-05 08:18:05', '1704442682_0839d71e141bc037eae9.jpg', '', '2024-01-05 08:18:26', NULL, NULL, NULL, NULL),
-('R003', 11, '2024-01-05 15:25:58', '2024-01-06 12:00:00', 4, '', NULL, NULL, NULL, 1200000, NULL, 240000, 1, '2024-01-05 08:26:09', NULL, '2024-01-05 08:26:30', NULL, '2024-01-05 08:26:49', '1704443207_55a0a739328af8b13e19.jpg', NULL, '2024-01-05 08:26:57', '2024-01-05 08:30:00', '1', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R004', 11, '2024-01-05 15:31:35', '2024-01-07 12:00:00', 2, '', NULL, NULL, NULL, 1200000, NULL, 240000, 1, '2024-01-05 08:31:55', NULL, '2024-01-05 08:32:15', NULL, NULL, NULL, NULL, NULL, '2024-01-05 08:32:00', '2', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R005', 11, '2024-01-05 15:35:24', '2024-01-04 12:00:00', 4, '', NULL, NULL, NULL, 1200000, NULL, 240000, 1, '2024-01-05 08:35:41', NULL, '2024-01-05 08:36:00', NULL, '2024-01-05 08:36:40', '1704443798_205a7dd17d913a5b4462.jpg', NULL, '2024-01-05 08:36:48', '2024-01-05 08:37:00', '3', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R006', 11, '2024-01-08 15:54:38', '2024-01-11 12:00:00', 5, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-09 05:12:00', '2', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R007', 11, '2024-01-09 13:08:56', '2024-01-12 12:00:00', 2, 'H03', 'P001', NULL, NULL, 820000, NULL, 164000, 1, '2024-01-09 06:19:52', NULL, '2024-01-09 08:20:10', NULL, NULL, NULL, NULL, NULL, '2024-01-10 05:07:00', '2', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R008', 11, '2024-01-09 15:26:02', '2024-01-12 12:00:00', 2, 'H03', 'P016', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-10 05:05:00', '2', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R009', 11, '2024-01-10 13:01:37', '2024-01-13 12:00:00', 3, 'H03', 'P018', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-11 05:21:00', '2', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R010', 11, '2024-01-11 12:22:41', '2024-01-14 12:00:00', 4, 'H03', 'P019', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-12 13:38:00', '2', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R011', 11, '2024-01-13 12:02:25', '2024-01-16 12:00:00', 4, 'H03', 'P020', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-15 03:33:00', '2', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R012', 11, '2024-01-15 10:43:08', '2024-01-18 12:00:00', 2, 'H03', 'P021', NULL, NULL, 1860000, NULL, 372000, 0, '2024-01-15 12:56:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-17 03:14:00', '2', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R013', 11, '2024-01-17 14:44:31', '2024-01-20 12:00:00', 6, 'H03', 'P026', NULL, NULL, 5040000, NULL, 1008000, 1, '2024-01-17 08:39:23', NULL, '2024-01-17 08:46:52', NULL, NULL, NULL, NULL, NULL, '2024-01-18 08:45:00', '2', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R014', 11, '2024-01-17 20:33:09', '2024-01-20 12:00:00', 16, 'H03', 'P027', 'Homestay nyaman dan paket wisata yang ditawarkan juga menarik', 5, 6200000, NULL, 1240000, 1, '2024-01-18 02:42:52', NULL, '2024-01-18 03:24:02', NULL, '2024-01-18 03:24:54', '1705548293_3a381c7360235a21dc74.jpg', NULL, '2024-01-18 03:25:36', NULL, NULL, NULL, NULL, NULL, '', NULL, '2024-01-18 08:32:14', '1705566732_8b794cc21ed127714739.jpg', NULL, '2024-01-18 08:32:35'),
-('R015', 11, '2024-01-17 23:39:52', '2024-01-23 12:00:00', 4, 'H03', 'P028', 'Homestay Nyaman', 5, 1660000, NULL, 332000, 1, '2024-01-18 02:42:58', NULL, '2024-01-18 03:23:54', NULL, '2024-01-18 03:25:05', '1705548303_fb79562adc07b489ffb9.jpg', NULL, '2024-01-18 03:25:27', NULL, NULL, NULL, NULL, NULL, '', NULL, '2024-01-18 03:26:42', '1705548395_2dcba41aa4b66349bc7e.jpg', NULL, '2024-01-18 08:32:38'),
-('R016', 11, '2024-01-20 23:28:51', '2024-01-23 12:00:00', 5, NULL, NULL, NULL, NULL, 3150000, NULL, 630000, 1, '2024-01-21 01:41:00', NULL, '2024-01-21 01:42:19', NULL, '2024-01-21 01:43:01', '1705801378_d1d6ab8ec6d1bec4535c.jpg', NULL, '2024-01-21 01:43:20', NULL, NULL, NULL, NULL, NULL, '', NULL, '2024-01-21 01:43:52', '1705801430_46c627bf4a8662514206.jpg', NULL, '2024-01-21 01:44:10'),
-('R017', 11, '2024-01-21 10:09:21', '2024-01-24 12:00:00', 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-22 08:57:00', '2', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R018', 11, '2024-01-22 15:59:22', '2024-01-25 12:00:00', 6, 'H04', 'P001', NULL, NULL, 3555000, NULL, 711000, 0, '2024-01-22 09:00:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-23 05:03:00', '2', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R019', 11, '2024-01-22 16:27:47', '2024-01-25 12:00:00', 4, 'H04', 'P002', NULL, NULL, 1740000, NULL, 348000, 0, '2024-01-23 04:03:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-23 05:02:00', '2', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R020', 11, '2024-01-23 12:03:53', '2024-01-26 12:00:00', 3, 'H04', 'P001', NULL, NULL, 3360000, NULL, 672000, 1, '2024-01-23 05:04:29', '1', '2024-01-23 05:28:10', 'Saat ini sedang dalam renovasi', NULL, NULL, NULL, NULL, '2024-01-24 06:12:00', '2', '0', NULL, NULL, '', NULL, NULL, NULL, NULL, NULL),
-('R021', 11, '2024-01-23 15:45:11', '2024-01-26 12:00:00', 4, 'H04', 'P003', NULL, NULL, 1930000, NULL, 386000, 1, '2024-01-23 08:46:01', '0', '2024-01-23 08:47:08', '', '2024-01-24 02:23:28', '1706063005_598af54142c878681a86.jpg', '1', '2024-01-24 02:24:25', NULL, NULL, NULL, NULL, NULL, '', NULL, '2024-01-24 06:02:46', '1706076163_f14a5c5edc6353ef9068.jpg', '1', '2024-01-24 06:03:55'),
-('R022', 11, '2024-01-24 13:05:18', '2024-01-27 12:00:00', 4, 'H04', 'P004', NULL, NULL, 1700000, NULL, 340000, 1, '2024-01-24 06:07:09', '0', '2024-01-24 06:07:35', '', '2024-01-24 06:08:02', '1706076480_743a030f5b68466c44c5.jpg', '1', '2024-01-24 06:08:49', NULL, NULL, NULL, NULL, NULL, '', NULL, '2024-01-24 06:09:22', '1706076559_fa5cfd437ad48eac7733.jpg', '1', '2024-01-24 06:09:45'),
-('R023', 11, '2024-01-24 13:14:45', '2024-01-27 12:00:00', 3, NULL, NULL, NULL, NULL, 1400000, NULL, 280000, 1, '2024-01-24 06:14:55', '0', '2024-01-24 06:19:42', '', '2024-01-24 06:20:07', '1706077204_c09a0e4ff2af871b5be1.jpg', '1', '2024-01-24 06:21:47', '2024-01-24 06:22:00', '1', '1', '2024-01-24 07:57:48', '1706083064_4b303d77b6c374f03221.png', '1', '2024-01-24 07:58:14', NULL, NULL, NULL, NULL),
-('R024', 11, '2024-01-24 19:45:38', '2024-01-27 12:00:00', 4, 'H03', 'P029', '', 5, 1580000, NULL, 316000, 1, '2024-01-24 12:53:56', '0', '2024-01-24 12:59:37', '', '2024-01-24 13:00:09', '1706101206_af5e1c31c9e5e6ee1f4e.jpg', '1', '2024-01-24 13:00:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-24 13:01:06', '1706101264_5f6d0a2359f4364273a2.jpg', '1', '2024-01-24 13:01:40'),
-('R025', 11, '2024-01-25 11:42:17', '2024-01-28 12:00:00', 4, NULL, NULL, 'Cukup bagus', 4, 1200000, NULL, 240000, 1, '2024-01-25 04:42:27', '0', '2024-01-25 04:43:00', '', '2024-01-26 03:29:43', '1706239780_3bbe605640541917fb90.jpg', '1', '2024-01-26 03:30:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-26 03:30:23', '1706239821_5622be354baec82148a0.jpg', '1', '2024-01-26 03:30:37'),
-('R026', 11, '2024-01-25 21:19:42', '2024-01-28 12:00:00', 4, 'H04', 'P001', NULL, NULL, 1630000, NULL, 326000, 1, '2024-01-25 14:20:48', '0', '2024-01-25 14:22:40', '', '2024-01-25 14:26:08', '1706192765_26d944da7c8f24670435.jpg', '1', '2024-01-25 14:40:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-25 14:42:12', '1706193730_08f249cd78376bffb926.jpg', '1', '2024-01-25 14:43:11'),
-('R027', 11, '2024-01-25 21:46:36', '2024-01-28 12:00:00', 4, 'H04', 'P001', NULL, NULL, 1630000, NULL, 326000, 1, '2024-01-25 14:47:14', '0', '2024-01-25 14:48:01', '', '2024-01-25 14:48:48', '1706194127_90aa6c6ae9547ac0e7a5.jpg', '1', '2024-01-25 14:49:06', '2024-01-25 14:49:00', '1', '1', '2024-01-25 14:51:43', '1706194289_cc03017e46ee684f2ecd.jpg', '1', '2024-01-25 14:52:51', NULL, NULL, NULL, NULL),
-('R028', 11, '2024-01-26 15:46:36', '2024-01-29 12:00:00', 4, 'H03', 'P022', '', 4, 2200000, NULL, 440000, 1, '2024-01-26 08:47:04', '0', '2024-01-26 08:47:23', '', '2024-01-26 08:47:45', '1706258863_f35c6d8ac4602488a5ba.jpg', '1', '2024-01-26 08:47:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-26 08:48:20', '1706258897_9a24dcdaab0ac9e20e72.jpg', '1', '2024-01-26 08:48:31'),
-('R029', 11, '2024-01-26 16:00:58', '2024-01-29 12:00:00', 1, NULL, NULL, '', 4, 310000, NULL, 62000, 1, '2024-01-26 09:01:17', '0', '2024-01-26 09:01:35', '', '2024-01-26 09:01:50', '1706259707_7fc0d3a145c10beff05d.jpg', '1', '2024-01-26 09:02:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-26 09:02:19', '1706259737_5b02f3b53cfdc5dda0cb.jpg', '1', '2024-01-26 09:02:31'),
-('R030', 11, '2024-01-27 07:26:29', '2024-01-30 12:00:00', 4, 'H03', 'P022', '', 5, 2100000, NULL, 420000, 1, '2024-01-27 00:33:08', '0', '2024-01-27 00:34:14', '', '2024-01-27 00:34:53', '1706315691_b0c5ab2c2cae8924b834.jpg', '1', '2024-01-27 00:35:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-27 00:35:42', '1706315740_84001f619f2a3afcfd07.jpg', '1', '2024-01-27 00:35:53'),
-('R031', 11, '2024-01-27 08:41:16', '2024-01-30 12:00:00', 3, 'H04', 'P001', NULL, NULL, 1550000, NULL, 310000, 1, '2024-01-27 01:41:40', '0', '2024-01-27 01:42:42', '', '2024-01-27 01:43:12', '1706319789_dd1664b5b5126ebf8a54.jpg', '1', '2024-01-27 01:44:07', '2024-01-27 01:44:00', '1', '1', '2024-01-27 01:46:00', '1706319958_e2c3827484f0fdbfaa05.jpg', '1', '2024-01-27 01:46:14', NULL, NULL, NULL, NULL),
-('R032', 11, '2024-01-27 08:47:23', '2024-01-30 12:00:00', 4, 'H04', 'P001', 'homestay bagus, aktivitas dan paketnya menarik', 5, 1630000, NULL, 326000, 1, '2024-01-27 01:47:58', '0', '2024-01-27 01:48:40', '', '2024-01-27 01:49:00', '1706320137_4d719e3a62377df86d8d.jpg', '1', '2024-01-27 01:49:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-27 01:49:57', '1706320182_f9787eff22ee992159c0.jpg', '1', '2024-01-27 01:50:12'),
-('R033', 11, '2024-01-27 09:12:55', '2024-01-30 12:00:00', 4, 'H03', 'P022', 'Homestaynya bagus', 5, 2340000, NULL, 468000, 1, '2024-01-27 02:15:43', '0', '2024-01-27 02:17:30', '', '2024-01-27 02:20:04', '1706322001_352ccc848538d2fbb30b.jpg', '1', '2024-01-27 02:20:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-01-27 02:21:04', '1706322060_4464f30191e11d0b448c.jpg', '1', '2024-01-27 02:21:26'),
-('R034', 11, '2024-01-27 09:22:41', '2024-01-30 12:00:00', 4, 'H03', 'P030', NULL, NULL, 1820000, NULL, 364000, 1, '2024-01-27 02:26:27', '0', '2024-01-27 02:26:56', '', '2024-01-27 02:27:26', '1706322443_dcecf635924d8753ef45.jpg', '1', '2024-01-27 02:27:40', '2024-01-27 02:28:00', '1', '1', '2024-01-27 02:30:04', '1706322574_37ccbe0015e2ed3f9665.jpg', '1', '2024-01-27 02:30:34', NULL, NULL, NULL, NULL),
-('R035', 11, '2024-01-27 09:31:34', '2024-01-28 09:00:00', 4, NULL, NULL, NULL, NULL, 1200000, NULL, 240000, 1, '2024-01-27 02:31:50', '0', '2024-01-27 02:32:10', '', '2024-01-27 02:32:38', '1706322756_3b6a2944bfd6699b0c5b.jpg', '1', '2024-01-27 02:32:55', '2024-01-27 02:35:00', '1', '0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R036', 11, '2024-01-27 09:36:14', '2024-01-28 12:00:00', 4, NULL, NULL, NULL, NULL, 1200000, NULL, 240000, 1, '2024-01-27 02:36:25', '0', '2024-01-27 02:37:00', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R037', 11, '2024-01-27 09:47:02', '2024-01-30 12:00:00', 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reservation_homestay_activity_detail`
+-- Table structure for table `reservation_homestay_additional_amenities_detail`
 --
 
-CREATE TABLE `reservation_homestay_activity_detail` (
+CREATE TABLE `reservation_homestay_additional_amenities_detail` (
   `homestay_id` varchar(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `homestay_activity_id` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `reservation_id` varchar(4) NOT NULL
+  `additional_amenities_id` varchar(3) NOT NULL,
+  `reservation_id` varchar(4) NOT NULL,
+  `day_order` int NOT NULL,
+  `person_order` int NOT NULL,
+  `room_order` int NOT NULL,
+  `total_order` int NOT NULL,
+  `total_price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `reservation_homestay_activity_detail`
---
-
-INSERT INTO `reservation_homestay_activity_detail` (`homestay_id`, `homestay_activity_id`, `reservation_id`) VALUES
-('H03', '002', 'R007'),
-('H03', '001', 'R009'),
-('H03', '002', 'R009'),
-('H03', '001', 'R012'),
-('H03', '002', 'R012'),
-('H03', '002', 'R013'),
-('H04', '001', 'R018'),
-('H04', '001', 'R019'),
-('H04', '001', 'R020'),
-('H04', '001', 'R021'),
-('H04', '001', 'R026'),
-('H04', '001', 'R027'),
-('H03', '001', 'R029'),
-('H04', '001', 'R032'),
-('H03', '001', 'R033'),
-('H03', '002', 'R033'),
-('H03', '001', 'R034'),
-('H03', '002', 'R034');
 
 -- --------------------------------------------------------
 
@@ -1766,88 +1696,6 @@ CREATE TABLE `reservation_homestay_unit_detail` (
   `reservation_id` varchar(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `reservation_homestay_unit_detail`
---
-
-INSERT INTO `reservation_homestay_unit_detail` (`homestay_id`, `unit_type`, `unit_number`, `date`, `reservation_id`) VALUES
-('H03', '1', '1', '2024-01-08', 'R001'),
-('H03', '1', '1', '2024-01-09', 'R001'),
-('H03', '1', '2', '2024-01-08', 'R001'),
-('H03', '1', '2', '2024-01-09', 'R001'),
-('H03', '1', '10', '2024-01-20', 'R014'),
-('H03', '1', '10', '2024-01-21', 'R014'),
-('H03', '1', '4', '2024-01-20', 'R014'),
-('H03', '1', '4', '2024-01-21', 'R014'),
-('H03', '1', '5', '2024-01-20', 'R014'),
-('H03', '1', '5', '2024-01-21', 'R014'),
-('H03', '1', '6', '2024-01-20', 'R014'),
-('H03', '1', '6', '2024-01-21', 'R014'),
-('H03', '1', '7', '2024-01-20', 'R014'),
-('H03', '1', '7', '2024-01-21', 'R014'),
-('H03', '1', '8', '2024-01-20', 'R014'),
-('H03', '1', '8', '2024-01-21', 'R014'),
-('H03', '1', '9', '2024-01-20', 'R014'),
-('H03', '1', '9', '2024-01-21', 'R014'),
-('H03', '1', '1', '2024-01-23', 'R015'),
-('H03', '1', '1', '2024-01-24', 'R015'),
-('H03', '1', '2', '2024-01-23', 'R015'),
-('H03', '1', '2', '2024-01-24', 'R015'),
-('H04', '1', '1', '2024-01-23', 'R016'),
-('H04', '1', '1', '2024-01-24', 'R016'),
-('H04', '1', '1', '2024-01-25', 'R016'),
-('H04', '1', '2', '2024-01-23', 'R016'),
-('H04', '1', '2', '2024-01-24', 'R016'),
-('H04', '1', '2', '2024-01-25', 'R016'),
-('H04', '1', '3', '2024-01-23', 'R016'),
-('H04', '1', '3', '2024-01-24', 'R016'),
-('H04', '1', '3', '2024-01-25', 'R016'),
-('H04', '1', '4', '2024-01-26', 'R021'),
-('H04', '1', '4', '2024-01-27', 'R021'),
-('H04', '1', '5', '2024-01-26', 'R021'),
-('H04', '1', '5', '2024-01-27', 'R021'),
-('H04', '1', '6', '2024-01-27', 'R022'),
-('H04', '1', '6', '2024-01-28', 'R022'),
-('H04', '1', '7', '2024-01-27', 'R022'),
-('H04', '1', '7', '2024-01-28', 'R022'),
-('H03', '1', '1', '2024-01-27', 'R024'),
-('H03', '1', '1', '2024-01-28', 'R024'),
-('H03', '1', '2', '2024-01-27', 'R024'),
-('H03', '1', '2', '2024-01-28', 'R024'),
-('H03', '1', '3', '2024-01-28', 'R025'),
-('H03', '1', '3', '2024-01-29', 'R025'),
-('H03', '1', '4', '2024-01-28', 'R025'),
-('H03', '1', '4', '2024-01-29', 'R025'),
-('H04', '1', '1', '2024-01-28', 'R026'),
-('H04', '1', '1', '2024-01-29', 'R026'),
-('H04', '1', '2', '2024-01-28', 'R026'),
-('H04', '1', '2', '2024-01-29', 'R026'),
-('H03', '1', '1', '2024-01-29', 'R028'),
-('H03', '1', '1', '2024-01-30', 'R028'),
-('H03', '1', '2', '2024-01-29', 'R028'),
-('H03', '1', '2', '2024-01-30', 'R028'),
-('H03', '1', '5', '2024-01-29', 'R029'),
-('H03', '1', '6', '2024-01-30', 'R030'),
-('H03', '1', '6', '2024-01-31', 'R030'),
-('H03', '1', '7', '2024-01-30', 'R030'),
-('H03', '1', '7', '2024-01-31', 'R030'),
-('H04', '1', '1', '2024-01-30', 'R032'),
-('H04', '1', '1', '2024-01-31', 'R032'),
-('H04', '1', '2', '2024-01-30', 'R032'),
-('H04', '1', '2', '2024-01-31', 'R032'),
-('H03', '1', '3', '2024-01-30', 'R033'),
-('H03', '1', '3', '2024-01-31', 'R033'),
-('H03', '1', '4', '2024-01-30', 'R033'),
-('H03', '1', '4', '2024-01-31', 'R033'),
-('H03', '1', '5', '2024-01-30', 'R036'),
-('H03', '1', '5', '2024-01-31', 'R036'),
-('H03', '1', '8', '2024-01-30', 'R036'),
-('H03', '1', '8', '2024-01-31', 'R036'),
-('H03', '1', '10', '2024-01-30', 'R037'),
-('H03', '1', '10', '2024-01-31', 'R037'),
-('H03', '1', '9', '2024-01-30', 'R037'),
-('H03', '1', '9', '2024-01-31', 'R037');
-
 -- --------------------------------------------------------
 
 --
@@ -1861,111 +1709,6 @@ CREATE TABLE `reservation_homestay_unit_detail_backup` (
   `reservation_id` varchar(4) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `reservation_homestay_unit_detail_backup`
---
-
-INSERT INTO `reservation_homestay_unit_detail_backup` (`homestay_id`, `unit_type`, `unit_number`, `reservation_id`, `date`) VALUES
-('H03', '1', '3', 'R002', '2024-01-08'),
-('H03', '1', '3', 'R002', '2024-01-09'),
-('H03', '1', '3', 'R003', '2024-01-08'),
-('H03', '1', '3', 'R003', '2024-01-09'),
-('H03', '1', '4', 'R003', '2024-01-08'),
-('H03', '1', '4', 'R003', '2024-01-09'),
-('H03', '1', '3', 'R004', '2024-01-08'),
-('H03', '1', '3', 'R004', '2024-01-09'),
-('H03', '1', '4', 'R004', '2024-01-08'),
-('H03', '1', '4', 'R004', '2024-01-09'),
-('H03', '1', '3', 'R005', '2024-01-08'),
-('H03', '1', '3', 'R005', '2024-01-09'),
-('H03', '1', '4', 'R005', '2024-01-08'),
-('H03', '1', '4', 'R005', '2024-01-09'),
-('H03', '1', '1', 'R006', '2024-01-11'),
-('H03', '1', '1', 'R006', '2024-01-12'),
-('H03', '1', '2', 'R006', '2024-01-11'),
-('H03', '1', '2', 'R006', '2024-01-12'),
-('H03', '1', '1', 'R007', '2024-01-12'),
-('H03', '1', '1', 'R007', '2024-01-13'),
-('H03', '1', '2', 'R008', '2024-01-12'),
-('H03', '1', '2', 'R008', '2024-01-13'),
-('H03', '1', '2', 'R008', '2024-01-14'),
-('H03', '1', '10', 'R009', '2024-01-13'),
-('H03', '1', '10', 'R009', '2024-01-14'),
-('H03', '1', '9', 'R009', '2024-01-13'),
-('H03', '1', '9', 'R009', '2024-01-14'),
-('H03', '1', '10', 'R010', '2024-01-14'),
-('H03', '1', '10', 'R010', '2024-01-15'),
-('H03', '1', '9', 'R010', '2024-01-14'),
-('H03', '1', '9', 'R010', '2024-01-15'),
-('H03', '1', '1', 'R011', '2024-01-16'),
-('H03', '1', '1', 'R011', '2024-01-17'),
-('H03', '1', '2', 'R011', '2024-01-16'),
-('H03', '1', '2', 'R011', '2024-01-17'),
-('H03', '1', '1', 'R012', '2024-01-18'),
-('H03', '1', '1', 'R012', '2024-01-19'),
-('H03', '1', '2', 'R012', '2024-01-18'),
-('H03', '1', '2', 'R012', '2024-01-19'),
-('H03', '1', '1', 'R013', '2024-01-20'),
-('H03', '1', '1', 'R013', '2024-01-21'),
-('H03', '1', '1', 'R013', '2024-01-22'),
-('H03', '1', '2', 'R013', '2024-01-20'),
-('H03', '1', '2', 'R013', '2024-01-21'),
-('H03', '1', '2', 'R013', '2024-01-22'),
-('H03', '1', '3', 'R013', '2024-01-20'),
-('H03', '1', '3', 'R013', '2024-01-21'),
-('H03', '1', '3', 'R013', '2024-01-22'),
-('H04', '1', '4', 'R017', '2024-01-24'),
-('H04', '1', '4', 'R017', '2024-01-25'),
-('H04', '1', '4', 'R017', '2024-01-26'),
-('H04', '1', '5', 'R017', '2024-01-24'),
-('H04', '1', '5', 'R017', '2024-01-25'),
-('H04', '1', '5', 'R017', '2024-01-26'),
-('H04', '1', '6', 'R017', '2024-01-24'),
-('H04', '1', '6', 'R017', '2024-01-25'),
-('H04', '1', '6', 'R017', '2024-01-26'),
-('H04', '1', '4', 'R018', '2024-01-25'),
-('H04', '1', '4', 'R018', '2024-01-26'),
-('H04', '1', '4', 'R018', '2024-01-27'),
-('H04', '1', '5', 'R018', '2024-01-25'),
-('H04', '1', '5', 'R018', '2024-01-26'),
-('H04', '1', '5', 'R018', '2024-01-27'),
-('H04', '1', '6', 'R018', '2024-01-25'),
-('H04', '1', '6', 'R018', '2024-01-26'),
-('H04', '1', '6', 'R018', '2024-01-27'),
-('H04', '1', '7', 'R019', '2024-01-25'),
-('H04', '1', '7', 'R019', '2024-01-26'),
-('H04', '1', '9', 'R019', '2024-01-25'),
-('H04', '1', '9', 'R019', '2024-01-26'),
-('H04', '1', '1', 'R020', '2024-01-26'),
-('H04', '1', '1', 'R020', '2024-01-27'),
-('H04', '1', '1', 'R020', '2024-01-28'),
-('H04', '1', '2', 'R020', '2024-01-26'),
-('H04', '1', '2', 'R020', '2024-01-27'),
-('H04', '1', '2', 'R020', '2024-01-28'),
-('H04', '1', '3', 'R020', '2024-01-26'),
-('H04', '1', '3', 'R020', '2024-01-27'),
-('H04', '1', '3', 'R020', '2024-01-28'),
-('H04', '1', '1', 'R023', '2024-01-27'),
-('H04', '1', '1', 'R023', '2024-01-28'),
-('H04', '1', '2', 'R023', '2024-01-27'),
-('H04', '1', '2', 'R023', '2024-01-28'),
-('H04', '1', '3', 'R027', '2024-01-28'),
-('H04', '1', '3', 'R027', '2024-01-29'),
-('H04', '1', '4', 'R027', '2024-01-28'),
-('H04', '1', '4', 'R027', '2024-01-29'),
-('H04', '1', '1', 'R031', '2024-01-30'),
-('H04', '1', '1', 'R031', '2024-01-31'),
-('H04', '1', '2', 'R031', '2024-01-30'),
-('H04', '1', '2', 'R031', '2024-01-31'),
-('H03', '1', '5', 'R034', '2024-01-30'),
-('H03', '1', '5', 'R034', '2024-01-31'),
-('H03', '1', '8', 'R034', '2024-01-30'),
-('H03', '1', '8', 'R034', '2024-01-31'),
-('H03', '1', '5', 'R035', '2024-01-30'),
-('H03', '1', '5', 'R035', '2024-01-31'),
-('H03', '1', '8', 'R035', '2024-01-30'),
-('H03', '1', '8', 'R035', '2024-01-31');
 
 -- --------------------------------------------------------
 
@@ -2066,13 +1809,13 @@ CREATE TABLE `service_provider_gallery` (
 --
 
 INSERT INTO `service_provider_gallery` (`id`, `service_provider_id`, `url`, `created_at`, `updated_at`) VALUES
-('001', 'V1', '1701589464_267580ca681eb71884cd.jpg', '2023-12-02 18:45:51', '2023-12-02 18:45:51'),
-('002', 'V2', '1701589894_c903375fc48414ed15a2.jpg', '2023-12-02 18:51:39', '2023-12-02 18:51:39'),
-('003', 'V2', '1701589892_e1f5a9232cc1d3bf1e9f.jpg', '2023-12-02 18:51:39', '2023-12-02 18:51:39'),
-('004', 'V2', '1701589892_b4ce413b557157751272.jpg', '2023-12-02 18:51:39', '2023-12-02 18:51:39'),
-('005', 'V2', '1701589895_0245544432070344d7d0.jpg', '2023-12-02 18:51:39', '2023-12-02 18:51:39'),
-('006', 'V3', '1701590090_09ab969c2dfe9507a551.jpg', '2023-12-02 18:55:32', '2023-12-02 18:55:32'),
-('007', 'V3', '1701590091_b70ccb4a5b3f64fc7d04.jpg', '2023-12-02 18:55:32', '2023-12-02 18:55:32');
+('001', 'V1', 'V1-1.jpg', '2023-12-02 18:45:51', '2023-12-02 18:45:51'),
+('002', 'V2', 'V2-1.jpg', '2023-12-02 18:51:39', '2023-12-02 18:51:39'),
+('003', 'V2', 'V2-2.jpg', '2023-12-02 18:51:39', '2023-12-02 18:51:39'),
+('004', 'V2', 'V2-3.jpg', '2023-12-02 18:51:39', '2023-12-02 18:51:39'),
+('005', 'V2', 'V2-4.jpg', '2023-12-02 18:51:39', '2023-12-02 18:51:39'),
+('006', 'V3', 'V3-1.jpg', '2023-12-02 18:55:32', '2023-12-02 18:55:32'),
+('007', 'V3', 'V3-2.jpg', '2023-12-02 18:55:32', '2023-12-02 18:55:32');
 
 -- --------------------------------------------------------
 
@@ -2125,16 +1868,16 @@ CREATE TABLE `souvenir_place_gallery` (
 --
 
 INSERT INTO `souvenir_place_gallery` (`id`, `souvenir_place_id`, `url`, `created_at`, `updated_at`) VALUES
-('001', 'S1', '1701519268_9fff60bc6ae6ba25f098.jpg', '2023-12-01 23:15:16', '2023-12-01 23:15:16'),
-('002', 'S1', '1701519269_360883c311b3780bdbea.jpg', '2023-12-01 23:15:16', '2023-12-01 23:15:16'),
-('003', 'S2', '1701521121_078662c6c4362c585600.jpg', '2023-12-01 23:45:32', '2023-12-01 23:45:32'),
-('004', 'S2', '1701521122_9255c08f8161b4c5fbbd.jpg', '2023-12-01 23:45:32', '2023-12-01 23:45:32'),
-('005', 'S2', '1701521123_484adc9d37e668b14722.jpg', '2023-12-01 23:45:32', '2023-12-01 23:45:32'),
-('006', 'S3', '1701523039_8b9a5cc00b3df8e7b33b.jpg', '2023-12-02 00:17:47', '2023-12-02 00:17:47'),
-('007', 'S3', '1701523039_d8f3f90737be1907f1a8.jpg', '2023-12-02 00:17:47', '2023-12-02 00:17:47'),
-('008', 'S4', '1701524624_25016f64ba86d4c2fa7a.jpg', '2023-12-02 00:44:34', '2023-12-02 00:44:34'),
-('009', 'S4', '1701524624_765bb9bd1b055d746d2a.jpg', '2023-12-02 00:44:34', '2023-12-02 00:44:34'),
-('010', 'S4', '1701524626_f5d8b8ca12e3a1ce31cd.jpg', '2023-12-02 00:44:34', '2023-12-02 00:44:34');
+('001', 'S1', 'S1-1.jpg', '2023-12-01 23:15:16', '2023-12-01 23:15:16'),
+('002', 'S1', 'S1-2.jpg', '2023-12-01 23:15:16', '2023-12-01 23:15:16'),
+('003', 'S2', 'S2-1.jpg', '2023-12-01 23:45:32', '2023-12-01 23:45:32'),
+('004', 'S2', 'S2-2.jpg', '2023-12-01 23:45:32', '2023-12-01 23:45:32'),
+('005', 'S2', 'S2-3.jpg', '2023-12-01 23:45:32', '2023-12-01 23:45:32'),
+('006', 'S3', 'S3-1.jpg', '2023-12-02 00:17:47', '2023-12-02 00:17:47'),
+('007', 'S3', 'S3-2.jpg', '2023-12-02 00:17:47', '2023-12-02 00:17:47'),
+('008', 'S4', 'S4-1.jpg', '2023-12-02 00:44:34', '2023-12-02 00:44:34'),
+('009', 'S4', 'S4-2.jpg', '2023-12-02 00:44:34', '2023-12-02 00:44:34'),
+('010', 'S4', 'S4-3.jpg', '2023-12-02 00:44:34', '2023-12-02 00:44:34');
 
 -- --------------------------------------------------------
 
@@ -2185,18 +1928,18 @@ CREATE TABLE `souvenir_product_detail` (
 --
 
 INSERT INTO `souvenir_product_detail` (`souvenir_place_id`, `souvenir_product_id`, `price`, `image_url`, `description`, `created_at`, `updated_at`) VALUES
-('S1', '03', 2000, '1701520701_29b8d0454cce9dbd32f7.jpg', NULL, '2023-12-01 23:38:30', '2023-12-01 23:38:30'),
-('S1', '05', 30000, '1701520554_c0aa350f25cddc062249.jpg', 'Setiap baju kaos ini adalah potongan fesyen yang menceritakan cerita destinasi yang memikat. Dibuat dengan perhatian terhadap detail, kaos ini menjadi pilihan sempurna untuk mereka yang ingin merayakan dan mengenang setiap perjalanan mereka. Desainnya yang cerdas dan nyaman memastikan bahwa Anda tidak hanya terlihat modis, tetapi juga merasa nyaman sepanjang hari.', '2023-12-01 23:37:01', '2023-12-01 23:37:01'),
-('S1', '06', 35000, '1701520085_4f482d7e8d2fa2f46da5.jpg', 'Tas rajutan ini bukan sekadar aksesori, melainkan cerminan seni dan dedikasi pengrajinnya. Terbuat dari serat alami yang lembut dan tahan lama, setiap tas menjadi sebuah karya seni yang menggabungkan keanggunan fungsionalitas dengan daya tarik estetika.', '2023-12-01 23:29:17', '2023-12-01 23:29:17'),
-('S1', '07', 4000, '1701520747_4552f210f12dfcf9a9fc.jpg', 'Gelang ini adalah perwujudan sempurna dari seni kerajinan tangan yang menggabungkan kehalusan dan keindahan. Dibuat dengan hati-hati oleh tangan ahli pengrajin, gelang ini bukan hanya sebuah aksesori, melainkan simbol dari keterampilan tinggi dan dedikasi terhadap seni.', '2023-12-01 23:34:31', '2023-12-01 23:39:09'),
-('S2', '02', 35000, '1701521208_1379e1557db6df979bfc.jpg', 'Setiap baju piyama ini adalah penggabungan harmonis antara kenyamanan dan inspirasi perjalanan. Terbuat dari bahan lembut yang memeluk tubuh dengan lembut, setiap sentuhan kain seperti memeluk kehangatan kasih sayang. Desainnya yang cerdas dan ergonomis memastikan tidur Anda menjadi pengalaman yang mewah, seolah-olah Anda berada dalam perjalanan indah di malam hari.', '2023-12-01 23:47:41', '2023-12-01 23:47:41'),
-('S2', '03', 2000, '1701521325_dc604d4708d79706e403.jpg', NULL, '2023-12-01 23:49:25', '2023-12-01 23:49:25'),
-('S2', '04', 120000, '1701521404_3117a6457c1040ca41ba.jpg', 'Setiap miniatur rumah gadang adalah pameran keahlian tinggi pengrajin yang mengabadikan kecantikan dan keunikannya. Dengan cermat dan teliti, setiap goresan menggambarkan keindahan arsitektur khas, dari atap bergonjong hingga hiasan-hiasan artistik yang menghiasi dindingnya. Setiap detail mengandung pesan sejarah dan nilai-nilai kultural yang diwariskan dari generasi ke generasi.', '2023-12-01 23:50:55', '2023-12-01 23:50:55'),
-('S3', '02', 35000, '1701523576_af138b74fceab150e66f.jpg', NULL, '2023-12-02 00:26:19', '2023-12-02 00:26:19'),
-('S3', '05', 30000, '1701523615_dd114197051bbdfebc55.jpg', NULL, '2023-12-02 00:26:57', '2023-12-02 00:26:57'),
-('S3', '09', 40000, '1701523856_2b0db57e90f66fe83a31.jpg', NULL, '2023-12-02 00:30:59', '2023-12-02 00:30:59'),
-('S3', '10', 35000, '1701524305_9bc577ed3044b59698ee.jpg', NULL, '2023-12-02 00:38:27', '2023-12-02 00:38:27'),
-('S4', '08', 25000, '1701524804_48f7265b4c1c57774efb.jpg', NULL, '2023-12-02 00:46:48', '2023-12-02 00:46:48');
+('S1', '03', 2000, 'S1P-1.jpg', NULL, '2023-12-01 23:38:30', '2023-12-01 23:38:30'),
+('S1', '05', 30000, 'S1P-2.jpg', 'Setiap baju kaos ini adalah potongan fesyen yang menceritakan cerita destinasi yang memikat. Dibuat dengan perhatian terhadap detail, kaos ini menjadi pilihan sempurna untuk mereka yang ingin merayakan dan mengenang setiap perjalanan mereka. Desainnya yang cerdas dan nyaman memastikan bahwa Anda tidak hanya terlihat modis, tetapi juga merasa nyaman sepanjang hari.', '2023-12-01 23:37:01', '2023-12-01 23:37:01'),
+('S1', '06', 35000, 'S1P-3.jpg', 'Tas rajutan ini bukan sekadar aksesori, melainkan cerminan seni dan dedikasi pengrajinnya. Terbuat dari serat alami yang lembut dan tahan lama, setiap tas menjadi sebuah karya seni yang menggabungkan keanggunan fungsionalitas dengan daya tarik estetika.', '2023-12-01 23:29:17', '2023-12-01 23:29:17'),
+('S1', '07', 4000, 'S1P-4.jpg', 'Gelang ini adalah perwujudan sempurna dari seni kerajinan tangan yang menggabungkan kehalusan dan keindahan. Dibuat dengan hati-hati oleh tangan ahli pengrajin, gelang ini bukan hanya sebuah aksesori, melainkan simbol dari keterampilan tinggi dan dedikasi terhadap seni.', '2023-12-01 23:34:31', '2023-12-01 23:39:09'),
+('S2', '02', 35000, 'S2P-1.jpg', 'Setiap baju piyama ini adalah penggabungan harmonis antara kenyamanan dan inspirasi perjalanan. Terbuat dari bahan lembut yang memeluk tubuh dengan lembut, setiap sentuhan kain seperti memeluk kehangatan kasih sayang. Desainnya yang cerdas dan ergonomis memastikan tidur Anda menjadi pengalaman yang mewah, seolah-olah Anda berada dalam perjalanan indah di malam hari.', '2023-12-01 23:47:41', '2023-12-01 23:47:41'),
+('S2', '03', 2000, 'S2P-2.jpg', NULL, '2023-12-01 23:49:25', '2023-12-01 23:49:25'),
+('S2', '04', 120000, 'S2P-3.jpg', 'Setiap miniatur rumah gadang adalah pameran keahlian tinggi pengrajin yang mengabadikan kecantikan dan keunikannya. Dengan cermat dan teliti, setiap goresan menggambarkan keindahan arsitektur khas, dari atap bergonjong hingga hiasan-hiasan artistik yang menghiasi dindingnya. Setiap detail mengandung pesan sejarah dan nilai-nilai kultural yang diwariskan dari generasi ke generasi.', '2023-12-01 23:50:55', '2023-12-01 23:50:55'),
+('S3', '02', 35000, 'S3P-1.jpg', NULL, '2023-12-02 00:26:19', '2023-12-02 00:26:19'),
+('S3', '05', 30000, 'S3P-2.jpg', NULL, '2023-12-02 00:26:57', '2023-12-02 00:26:57'),
+('S3', '09', 40000, 'S3P-3.jpg', NULL, '2023-12-02 00:30:59', '2023-12-02 00:30:59'),
+('S3', '10', 35000, 'S3P-4.jpg', NULL, '2023-12-02 00:38:27', '2023-12-02 00:38:27'),
+('S4', '08', 25000, 'S4P-1.jpg', NULL, '2023-12-02 00:46:48', '2023-12-02 00:46:48');
 
 -- --------------------------------------------------------
 
@@ -2205,9 +1948,9 @@ INSERT INTO `souvenir_product_detail` (`souvenir_place_id`, `souvenir_product_id
 --
 
 CREATE TABLE `subdistrict` (
-  `id` varchar(3) COLLATE utf8mb4_general_ci NOT NULL,
-  `name` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
-  `geom` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
+  `id` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `geom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -2323,14 +2066,20 @@ INSERT INTO `users` (`id`, `email`, `username`, `first_name`, `last_name`, `addr
 (2, 'accuser2@email.com', 'accuser2', 'User 2', 'Account', 'Desa Wisata Kampuang Minang Nagari Sumpu', '081211536051', 'default.jpg', '$2y$10$PyeB88Z/oU0ZpS7EqejH5unNVhWqwXGmRk0f5f1TeRgXdZ37s.g6e', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:28', '2023-10-28 22:51:28', NULL),
 (3, 'accuser3@email.com', 'accuser3', 'User 3', 'Account', 'Desa Wisata Kampuang Minang Nagari Sumpu', '081673777122', 'default.jpg', '$2y$10$7YbcXjv8uL2bsYbdX1EJPucZr7v.F1lDXOmNiHalcUVo2.BeA0oY6', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:29', '2023-10-28 22:51:29', NULL),
 (4, 'accuser4@email.com', 'accuser4', 'User 4', 'Account', 'Desa Wisata Kampuang Minang Nagari Sumpu', '081375337211', 'default.jpg', '$2y$10$2AmltcPtgE0h0FyHBvzjB.96QAvoZ1JPgTc5qmpzt5NOYRo//TNZW', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:29', '2023-10-28 22:51:29', NULL),
-(5, 'accowner1@email.com', 'accowner1', 'Pokdarwis', 'Account', 'Desa Wisata Kampuang Minang Nagari Sumpu', '081711822434', 'default.jpg', '$2y$10$G/8lvXiJBAwh/mMilt9iTuPxdDUwFxpxIrQ43fg9QTk.IJnm02A3.', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:29', '2023-10-28 22:51:29', NULL),
-(6, 'accowner2@email.com', 'accowner2', 'Warga', 'Account', 'Desa Wisata Kampuang Minang Nagari Sumpu', '081851858447', 'default.jpg', '$2y$10$iP6JHl.Ep3.sbJh4ujCyu.b6de/rRmSAVwqyaTSlHmI.kWHjWRnCa', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:29', '2023-10-28 22:51:29', NULL),
 (7, 'accadmin1@email.com', 'accadmin1', 'Zuherman', 'Account', 'Desa Wisata Kampuang Minang Nagari Sumpu', '08111678345', 'default.jpg', '$2y$10$Qj.hWZHW4uLNI2G8TMxSH.iY3A.B6auTcHB3lVPwPWkNsDyC5esRi', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:29', '2023-10-28 22:51:29', NULL),
-(8, 'untunggjamari@gmail.com', 'ujamari', NULL, NULL, NULL, NULL, 'default.jpg', '$2y$10$sxOSxOHQ8UHtYZ12KFe5VeqS131nfLJNWPppjBG2JL/.wYiA7PlVa', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-11-16 08:47:45', '2023-11-16 08:47:45', NULL),
-(9, 'andi@gmail.com', 'andi', 'Andi', NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '085213100756', 'default.jpg', '$2y$10$VumDbbWe08c0kNuMKeSpJuvhpgPcdYM9NEQ2t/qjYZzIfK5Fg4U5e', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-08 10:27:24', '2023-12-08 10:27:24', NULL),
+(9, 'homestayharausyafiq@gmail.com', 'homestayharausyafiqaccount', 'Andi', NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '085213100756', 'default.jpg', '$2y$10$VumDbbWe08c0kNuMKeSpJuvhpgPcdYM9NEQ2t/qjYZzIfK5Fg4U5e', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-08 10:27:24', '2023-12-08 10:27:24', NULL),
 (10, 'ari@gmail.com', 'arie', NULL, NULL, NULL, NULL, 'default.jpg', '$2y$10$I76ASpG4aFnFakR212BTm.MkremdoUllq7dJkJRa1aDK2OC.4IPpa', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-14 01:20:26', '2023-12-14 01:20:26', NULL),
 (11, 'daffa@gmail.com', 'daffa', 'Daffa', 'Muyassar', 'Bukittinggi', '082223556788', 'default.jpg', '$2y$10$6dlvr8vNqXtFACvXFTAhx.g4DQXUt9ED9zuIkljB3jTHuRgzyqiMO', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-14 20:28:36', '2023-12-14 20:28:36', NULL),
-(12, 'ade@gmail.com', 'mhdade', 'ade', NULL, NULL, '081270263970', 'default.jpg', '$2y$10$KM6AVz0trtyW6kZKKbYYpu5Ad4hwj2IoWwSsJJx.it3q1v1hXpENu', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-22 19:40:42', '2023-12-22 19:40:42', NULL);
+(13, 'aurahomesta@gmail.com', 'aurahomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '081270263970', 'default.jpg', '$2y$10$tXgnmtgKzebhj7t6.EBqR.IkxWMLp1biVfgle2HKx1EJgapvRQIFO', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 19:27:21', '2024-02-26 19:27:21', NULL),
+(14, 'meliyahomestay@gmail.com', 'meliyahomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '085274265850', 'default.jpg', '$2y$10$LeHmdAe2g.22UfdwkHquLeZl1nK7.AtIu2HuYgtpBLWoW02lfQ6zi', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 22:54:14', '2024-02-26 22:54:14', NULL),
+(15, 'abyanhomestay@gmail.com', 'abyanhomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '081270377333', 'default.jpg', '$2y$10$DHia3.HzTpmHJANPOJM4ReyM7EJ8pyWbhOcZqOh8RDcR.AvPV/rb6', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 22:59:42', '2024-02-26 22:59:42', NULL),
+(16, 'homestaybilza@gmail.com', 'homestaybilzaaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '081363876893', 'default.jpg', '$2y$10$5sod.IT34FbcaKDwIRgD9.NB.6sjciZcb5clPjW0uXlYAP99No5wK', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:08:20', '2024-02-26 23:08:20', NULL),
+(17, 'homestayibu@gmail.com', 'homestayibuaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '082381976256', 'default.jpg', '$2y$10$Sm3bMZsbox0B7PCXekXiw.WMMf7KusogYbD1T7oh0NkgHvQuNilwm', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:14:20', '2024-02-26 23:14:20', NULL),
+(18, 'dangaupitossa@gmail.com', 'dangaupitossaaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '085285333018', 'default.jpg', '$2y$10$oaMkGwJ6P2dtvfNacFm2tOWkAKBVYED1nj/C3cLyfCq85M0y5HMRC', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:28:12', '2024-02-26 23:28:12', NULL),
+(19, 'ostonhomestay@gmail.com', 'ostonhomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '082174854400', 'default.jpg', '$2y$10$Av7FOrEUF5/M33bIJiQwIueHlpae.2WgIKquWCqf9OQZMijp4bjhW', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:37:28', '2024-02-26 23:37:28', NULL),
+(20, 'megahomestay@gmail.com', 'megahomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '081266724140', 'default.jpg', '$2y$10$hLY4EbUhD29vSBcTu7Q3P.FL9mWl..QzYgaXy/6hsh6nY/nFMCkJS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:44:25', '2024-02-26 23:44:25', NULL),
+(21, 'dangauabahhomestay@gmail.com', 'dangauabahhomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '082391158500', 'default.jpg', '$2y$10$AJA4Um/doSqcEvhi1FJGaeRIYt9noTCycT6OMdg9rmYpILkUhmqWW', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:47:49', '2024-02-26 23:47:49', NULL),
+(22, 'limpatohomesaty@gmail.com', 'limpatohomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '081364348921', 'default.jpg', '$2y$10$388h3htWTvMWy19Yk4uhY.2wto/Y.Fx5ASRHkuwWJ3k4JG1o.FuNC', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:56:58', '2024-02-26 23:56:58', NULL);
 
 -- --------------------------------------------------------
 
@@ -2353,8 +2102,7 @@ CREATE TABLE `user_bank_account` (
 
 INSERT INTO `user_bank_account` (`id`, `user_id`, `bank_name`, `bank_code`, `account_number`, `account_name`) VALUES
 ('001', 9, 'Bank Central Asia (BCA)', '014', '3214467122', 'Andi'),
-('002', 11, 'Bank BRI', '323', '231334122', 'Daffa'),
-('003', 12, 'Bank Central Asia (BCA)', '014', '2317787642', 'Muhammad Ade');
+('002', 11, 'Bank BRI', '323', '231334122', 'Daffa');
 
 -- --------------------------------------------------------
 
@@ -2457,8 +2205,8 @@ CREATE TABLE `worship_place_gallery` (
 --
 
 INSERT INTO `worship_place_gallery` (`id`, `worship_place_id`, `url`, `created_at`, `updated_at`) VALUES
-('001', 'W1', '1701583850_fb7d28cbb0d58be5c263.jpg', '2023-12-02 17:11:28', '2023-12-02 17:11:28'),
-('002', 'W2', '1701584264_16f1e6ff6ad27213f2f8.jpg', '2023-12-02 17:17:48', '2023-12-02 17:17:48');
+('001', 'W1', 'W1-1.jpg', '2023-12-02 17:11:28', '2023-12-02 17:11:28'),
+('002', 'W2', 'W2-1.jpg', '2023-12-02 17:17:48', '2023-12-02 17:17:48');
 
 --
 -- Indexes for dumped tables
@@ -2634,11 +2382,11 @@ ALTER TABLE `homestay`
   ADD KEY `homestay_owner_foreign` (`owner`);
 
 --
--- Indexes for table `homestay_exclusive_activity`
+-- Indexes for table `homestay_additional_amenities`
 --
-ALTER TABLE `homestay_exclusive_activity`
-  ADD PRIMARY KEY (`homestay_id`,`activity_id`),
-  ADD KEY `homestay_exclusive_activity_ibfk_1` (`homestay_id`);
+ALTER TABLE `homestay_additional_amenities`
+  ADD PRIMARY KEY (`homestay_id`,`additional_amenities_id`),
+  ADD KEY `homestay_additional_amenities_ibfk_1` (`homestay_id`);
 
 --
 -- Indexes for table `homestay_facility`
@@ -2759,12 +2507,12 @@ ALTER TABLE `reservation`
   ADD KEY `reservation_ibfk_2` (`homestay_id`,`package_id`);
 
 --
--- Indexes for table `reservation_homestay_activity_detail`
+-- Indexes for table `reservation_homestay_additional_amenities_detail`
 --
-ALTER TABLE `reservation_homestay_activity_detail`
-  ADD PRIMARY KEY (`homestay_id`,`homestay_activity_id`,`reservation_id`),
-  ADD KEY `reservation_homestay_activity_detail_ibfk_2` (`reservation_id`),
-  ADD KEY `reservation_homestay_activity_detail_ibfk_1` (`homestay_id`,`homestay_activity_id`);
+ALTER TABLE `reservation_homestay_additional_amenities_detail`
+  ADD PRIMARY KEY (`homestay_id`,`additional_amenities_id`,`reservation_id`),
+  ADD KEY `reservation_homestay_additional_amenities_detail_ibfk_2` (`reservation_id`),
+  ADD KEY `reservation_homestay_additional_amenities_detail_ibfk_1` (`homestay_id`,`additional_amenities_id`);
 
 --
 -- Indexes for table `reservation_homestay_unit_detail`
@@ -2915,7 +2663,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=314;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=328;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -2945,7 +2693,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Constraints for dumped tables
@@ -3035,10 +2783,10 @@ ALTER TABLE `homestay`
   ADD CONSTRAINT `homestay_owner_foreign` FOREIGN KEY (`owner`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `homestay_exclusive_activity`
+-- Constraints for table `homestay_additional_amenities`
 --
-ALTER TABLE `homestay_exclusive_activity`
-  ADD CONSTRAINT `homestay_exclusive_activity_ibfk_1` FOREIGN KEY (`homestay_id`) REFERENCES `homestay` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `homestay_additional_amenities`
+  ADD CONSTRAINT `homestay_additional_amenities_ibfk_1` FOREIGN KEY (`homestay_id`) REFERENCES `homestay` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `homestay_facility_detail`
@@ -3106,11 +2854,11 @@ ALTER TABLE `reservation`
   ADD CONSTRAINT `reservation_ibfk_2` FOREIGN KEY (`homestay_id`,`package_id`) REFERENCES `package` (`homestay_id`, `package_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `reservation_homestay_activity_detail`
+-- Constraints for table `reservation_homestay_additional_amenities_detail`
 --
-ALTER TABLE `reservation_homestay_activity_detail`
-  ADD CONSTRAINT `reservation_homestay_activity_detail_ibfk_1` FOREIGN KEY (`homestay_id`,`homestay_activity_id`) REFERENCES `homestay_exclusive_activity` (`homestay_id`, `activity_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `reservation_homestay_activity_detail_ibfk_2` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `reservation_homestay_additional_amenities_detail`
+  ADD CONSTRAINT `reservation_homestay_additional_amenities_detail_ibfk_1` FOREIGN KEY (`homestay_id`,`additional_amenities_id`) REFERENCES `homestay_additional_amenities` (`homestay_id`, `additional_amenities_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `reservation_homestay_additional_amenities_detail_ibfk_2` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `reservation_homestay_unit_detail`
