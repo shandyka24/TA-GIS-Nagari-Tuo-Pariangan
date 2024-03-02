@@ -206,20 +206,6 @@ class PdfController extends ResourcePresenter
 
         $reservation['day_of_stay'] = count($day_of_stay);
 
-        $homestay_activity = $this->homestayExclusiveActivityModel->get_list_hea_api($homestay_id[0])->getResultArray();
-        for ($i = 0; $i < count($homestay_activity); $i++) {
-            $homestay_activity[$i]['id'] = $homestay_activity[$i]['activity_id'];
-        }
-        $reservation_homestay_activity = $this->reservationHomestayActivityDetailModel->get_activity_by_rid_api($id)->getResultArray();
-        for ($i = 0; $i < count($reservation_homestay_activity); $i++) {
-            $act = $this->homestayExclusiveActivityModel->get_hea_by_id_api($homestay_id[0], $reservation_homestay_activity[$i]['homestay_activity_id'])->getRowArray();
-            $reservation_homestay_activity[$i]['name'] = $act['name'];
-            $reservation_homestay_activity[$i]['price'] = $act['price'];
-            $reservation_homestay_activity[$i]['is_daily'] = $act['is_daily'];
-            $reservation_homestay_activity[$i]['image_url'] = $act['image_url'];
-            $reservation_homestay_activity[$i]['description'] = $act['description'];
-            $reservation_homestay_activity[$i]['id'] = $reservation_homestay_activity[$i]['homestay_activity_id'];
-        }
         $reservation_additional_amenities = $this->reservationHomestayAdditionalAmenitiesDetailModel->get_haa_by_rid_api($homestay_id[0], $reservation['id'])->getResultArray();
         for ($i = 0; $i < count($reservation_additional_amenities); $i++) {
             $amenities = $this->homestayAdditionalAmenitiesModel->get_haa_by_id_api($reservation_additional_amenities[$i]['homestay_id'], $reservation_additional_amenities[$i]['additional_amenities_id'])->getRowArray();
@@ -246,8 +232,6 @@ class PdfController extends ResourcePresenter
             'homestay_owner_bank_account' => $homestay_owner_bank_account,
             'customer_bank_account' => $customer_bank_account,
             'homestay_unit' => $homestay_units,
-            'homestay_activity' => $homestay_activity,
-            'reservation_homestay_activity' => $reservation_homestay_activity,
             'reservation_additional_amenities' => $reservation_additional_amenities,
         ];
 

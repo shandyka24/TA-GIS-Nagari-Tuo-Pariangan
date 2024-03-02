@@ -98,32 +98,6 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
             <td style="height: 20px;text-align:right"><?= 'Rp' . number_format(esc($unit['price'] * $reservation['day_of_stay']), 0, ',', '.'); ?></td>
         </tr>
     <?php endforeach; ?>
-    <?php if ($reservation_homestay_activity != null) : ?>
-        <tr>
-            <td colspan="6"></td>
-        </tr>
-        <tr style="background-color:#a9a9a9">
-            <th width="38%" style="height: 20px"><strong>Homestay Activity Name</strong></th>
-            <th width="10%" style="height: 20px"><strong>Count</strong></th>
-            <th width="30%" style="height: 20px"><strong>Price</strong></th>
-            <th width="18%" style="height: 20px"><strong>Total Price</strong></th>
-        </tr>
-        <?php foreach ($reservation_homestay_activity as $activity) : ?>
-            <tr>
-                <td><?= esc($activity['name']); ?></td>
-                <?php
-                if ($activity['is_daily'] == '0') {
-                    $count = 1;
-                } else {
-                    $count = $reservation['day_of_stay'];
-                }
-                ?>
-                <td style="height: 20px;text-align:center"><?= esc($count); ?></td>
-                <td style="height: 20px;text-align:right"><?= 'Rp' . number_format(esc($activity['price']), 0, ',', '.'); ?>/person</td>
-                <td style="height: 20px;text-align:right"><?= 'Rp' . number_format(esc($activity['price'] * $reservation['total_people'] * $count), 0, ',', '.'); ?></td>
-            </tr>
-        <?php endforeach; ?>
-    <?php endif; ?>
     <?php if ($reservation_additional_amenities != null) : ?>
         <tr>
             <td colspan="6"></td>

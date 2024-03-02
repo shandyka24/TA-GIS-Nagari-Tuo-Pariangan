@@ -40,7 +40,7 @@ $edit = in_array('edit', $uri);
                 </div>
                 <div class="card-body">
                     <div class="col table-responsive">
-                        <table class="table table-borderless">
+                        <table class="table table-borderless text-dark">
                             <tbody>
                                 <tr>
                                     <td class="fw-bold">ID</td>
