@@ -133,7 +133,7 @@ class AttractionModel extends Model
 
     public function get_new_id_api()
     {
-        $lastId = $this->db->table($this->table)->select('id')->orderBy('id', 'ASC')->get()->getLastRow('array');
+        $lastId = $this->db->table($this->table)->select('id')->orderBy('created_at', 'ASC')->get()->getLastRow('array');
         if ($lastId == null) {
             $count = 0;
         } else {
