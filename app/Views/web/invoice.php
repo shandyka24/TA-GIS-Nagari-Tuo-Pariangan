@@ -112,9 +112,7 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
         <?php foreach ($reservation_additional_amenities as $activity) : ?>
             <tr>
                 <td><?= esc($activity['name']); ?></td>
-                <td style="height: 20px;">
-                    <?= ($activity['day_order'] != '0') ? 'Day Order : ' . $activity['day_order'] : '' ?><?= ($activity['person_order'] != '0') ? 'Person Order : ' . $activity['person_order'] : '' ?><?= ($activity['room_order'] != '0') ? 'Room Order : ' . $activity['room_order'] : '' ?><?= (($activity['day_order'] == '0') && ($activity['person_order'] == '0') && ($activity['room_order'] == '0')) ? '-'  : '' ?>
-                </td>
+                <td style="height: 20px;"><?= ($activity['day_order'] != '0') ? 'Day Order : ' . $activity['day_order'] : '' ?><?= ($activity['person_order'] != '0') ? '<br>Person Order : ' . $activity['person_order'] : '' ?><?= ($activity['room_order'] != '0') ? '<br>Room Order : ' . $activity['room_order'] : '' ?><?= (($activity['day_order'] == '0') && ($activity['person_order'] == '0') && ($activity['room_order'] == '0')) ? '-'  : '' ?></td>
                 <td style="height: 20px;text-align:center"><?= esc($activity['total_order']); ?></td>
                 <td style="height: 20px;text-align:right"><?= 'Rp' . number_format(esc($activity['price']), 0, ',', '.'); ?></td>
                 <td style="height: 20px;text-align:right"><?= 'Rp' . number_format(esc($activity['total_price']), 0, ',', '.'); ?></td>
