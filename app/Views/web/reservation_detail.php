@@ -111,7 +111,7 @@
                                             <div class="card border mb-3">
                                                 <div class="row g-0">
                                                     <div class="col-md-3 d-flex align-items-center justify-content-center">
-                                                        <img width="500px" src="/media/photos/<?= esc($item['galleries'][0]) ?>" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 120px;">
+                                                        <img width="500px" src="/media/photos/<?= esc($item['galleries'][0]) ?>" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 150px;">
                                                     </div>
                                                     <div class="col-md-9">
                                                         <div class="card-body">
@@ -204,7 +204,7 @@
                                 <div class="row">
                                     <?php if ($package['brochure_url'] != null) : ?>
                                         <div class="col-md-3 d-flex align-items-center justify-content-center">
-                                            <img width="500px" src="/media/photos/<?= esc($package['brochure_url']) ?>" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 155px;">
+                                            <img width="500px" src="/media/photos/<?= esc($package['brochure_url']) ?>" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 170px;">
                                         </div>
                                     <?php endif; ?>
                                     <?php if ($package['brochure_url'] != null) : ?>

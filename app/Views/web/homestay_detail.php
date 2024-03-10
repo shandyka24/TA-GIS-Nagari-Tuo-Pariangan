@@ -120,6 +120,41 @@
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title text-center">Reviews</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <strong>@mutia</strong>
+                            <br>
+                            <div>Rating :
+                                <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
+                                <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
+                                <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
+                                <i name="rating" class="far fa-star" aria-hidden="true"></i>
+                                <i name="rating" class="far fa-star" aria-hidden="true"></i>
+                            </div>
+                            <div>Review : Enjoyable</div>
+                            <hr>
+                            <strong>@mutia</strong>
+                            <br>
+                            <div>Rating :
+                                <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
+                                <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
+                                <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
+                                <i name="rating" class="far fa-star" aria-hidden="true"></i>
+                                <i name="rating" class="far fa-star" aria-hidden="true"></i>
+                            </div>
+                            <div>Review : I feel very exciting</div>
+                            <hr>
+                            <p></p>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="col-md-6 col-12">
