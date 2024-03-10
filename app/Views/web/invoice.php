@@ -33,7 +33,7 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
         <th width="40%">: <strong><?= esc($reservation['id']); ?></strong></th>
     </tr>
     <tr>
-        <th width="10%">Addres</th>
+        <th width="10%">Address</th>
         <?php if (!empty($customer['address'])) : ?>
             <th width="40%">: <strong><?= esc($customer['address']); ?></strong></th>
         <?php else : ?>
@@ -44,7 +44,7 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
         <th width="60%">: <strong><?= esc(date('l, j F Y H:i:s', $request_date)); ?></strong></th>
     </tr>
     <tr>
-        <th width="10%">Telp</th>
+        <th width="10%">Phone</th>
         <?php if (!empty($customer['phone'])) : ?>
             <th width="40%">: <strong><?= esc($customer['phone']); ?></strong></th>
         <?php else : ?>
