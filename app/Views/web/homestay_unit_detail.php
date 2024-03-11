@@ -112,7 +112,7 @@
             </div>
         </div>
 
-        <div class="col-md-4 col-12">
+        <div class="col-md-5 col-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -138,6 +138,45 @@
                                     <?php endif; ?>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title text-center">Reviews</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <?php if (empty($data['rating_review'])) : ?>
+                                <center>
+                                    <span>No reviews yet</span>
+                                </center>
+                            <?php else : ?>
+                                <?php foreach ($data['rating_review'] as $rating_review) : ?>
+                                    <strong>@<?= esc($rating_review['username']); ?></strong>
+                                    <br>
+                                    <div>Rating :
+                                        <?php
+                                        for ($i = 0; $i < (int)esc($rating_review['rating']); $i++) {
+                                        ?>
+                                            <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
+                                        <?php
+                                        }
+                                        ?>
+                                        <?php
+                                        for ($i = 0; $i < (5 - (int)esc($rating_review['rating'])); $i++) {
+                                        ?>
+                                            <i name="rating" class="far fa-star" aria-hidden="true"></i>
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
+                                    <div>Review : <?= esc($rating_review['review']); ?></div>
+                                    <hr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

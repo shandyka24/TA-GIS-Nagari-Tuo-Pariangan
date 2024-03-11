@@ -37,16 +37,6 @@
                                 <a href="<?= base_url('web/reservation'); ?><?= esc('/' . $homestay_id); ?>" class="btn btn-success float-end" target=”_blank”><i class="fa-solid fa-bookmark me-3"></i>Booking</a>
                             </div>
                         <?php endif; ?>
-                        <?php if (in_groups('owner')) : ?>
-                            <div class="col-auto">
-                                <a href="<?= base_url('dashboard/homestay/edit'); ?>/<?= esc($data['id']); ?>" class="btn btn-primary float-end"><i class="fa-solid fa-pencil me-3"></i>Edit</a>
-                            </div>
-                        <?php endif; ?>
-                        <?php if (in_groups('admin')) : ?>
-                            <div class="col-auto">
-                                <a href="<?= base_url('dashboard/homestay/manage/edit'); ?>/<?= esc($data['id']); ?>" class="btn btn-primary float-end"><i class="fa-solid fa-pencil me-3"></i>Edit</a>
-                            </div>
-                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="card-body text-dark">
@@ -127,30 +117,34 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <strong>@mutia</strong>
-                            <br>
-                            <div>Rating :
-                                <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
-                                <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
-                                <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
-                                <i name="rating" class="far fa-star" aria-hidden="true"></i>
-                                <i name="rating" class="far fa-star" aria-hidden="true"></i>
-                            </div>
-                            <div>Review : Enjoyable</div>
-                            <hr>
-                            <strong>@mutia</strong>
-                            <br>
-                            <div>Rating :
-                                <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
-                                <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
-                                <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
-                                <i name="rating" class="far fa-star" aria-hidden="true"></i>
-                                <i name="rating" class="far fa-star" aria-hidden="true"></i>
-                            </div>
-                            <div>Review : I feel very exciting</div>
-                            <hr>
-                            <p></p>
-                            <br>
+                            <?php if (empty($data['rating_review'])) : ?>
+                                <center>
+                                    <span>No reviews yet</span>
+                                </center>
+                            <?php else : ?>
+                                <?php foreach ($data['rating_review'] as $rating_review) : ?>
+                                    <strong>@<?= esc($rating_review['username']); ?></strong>
+                                    <br>
+                                    <div>Rating :
+                                        <?php
+                                        for ($i = 0; $i < (int)esc($rating_review['rating']); $i++) {
+                                        ?>
+                                            <i name="rating" class="fas fa-star text-warning" aria-hidden="true"></i>
+                                        <?php
+                                        }
+                                        ?>
+                                        <?php
+                                        for ($i = 0; $i < (5 - (int)esc($rating_review['rating'])); $i++) {
+                                        ?>
+                                            <i name="rating" class="far fa-star" aria-hidden="true"></i>
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
+                                    <div>Review : <?= esc($rating_review['review']); ?></div>
+                                    <hr>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

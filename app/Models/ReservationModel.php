@@ -217,4 +217,12 @@ class ReservationModel extends Model
             ->update($reservation);
         return $query;
     }
+    public function get_cust($user_id = null)
+    {
+        $query = $this->db->table('users')
+            ->select('*')
+            ->where('id', $user_id)
+            ->get();
+        return $query;
+    }
 }

@@ -96,11 +96,18 @@ class Homestay extends ResourcePresenter
         }
 
         $getRID = $this->reservationHomestayUnitDetailModel->get_reservation_by_hs_api($id)->getResultArray();
+
+        $rating_review = array();
         $rating = 0;
         $rating_divider = 0;
         foreach ($getRID as $rid) {
             $reservation = $this->reservationModel->get_reservation_by_id($rid['reservation_id'])->getRowArray();
             if ($reservation['rating'] != null) {
+                $user = $this->reservationModel->get_cust($reservation['customer_id'])->getRowArray();
+                $rr['username'] = $user['username'];
+                $rr['rating'] = $reservation['rating'];
+                $rr['review'] = $reservation['review'];
+                $rating_review[] = $rr;
                 $rating = $rating + $reservation['rating'];
                 $rating_divider++;
             }
@@ -112,6 +119,7 @@ class Homestay extends ResourcePresenter
         }
 
         $homestay['avg_rating'] = $avg_rating;
+        $homestay['rating_review'] = $rating_review;
 
         // $list_review = $this->reviewModel->get_review_object_api('rumah_gadang_id', $id)->getResultArray();
 
