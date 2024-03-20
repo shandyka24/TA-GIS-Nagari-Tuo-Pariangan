@@ -95,7 +95,6 @@ class Attraction extends ResourcePresenter
             return redirect()->to(substr(current_url(), 0, -strlen($id)));
         }
 
-        // $avg_rating = $this->reviewModel->get_rating('rumah_gadang_id', $id)->getRowArray()['avg_rating'];
         $list_ticketPrice = $this->attractionTicketPriceModel->get_ticket_by_at_api($id)->getResultArray();
         $list_facility = $this->attractionFacilityDetailModel->get_facility_by_at_api($id)->getResultArray();
         $facilities = array();
@@ -103,18 +102,13 @@ class Attraction extends ResourcePresenter
             $facilities[] = $facility['name'];
         }
 
-        // $list_review = $this->reviewModel->get_review_object_api('rumah_gadang_id', $id)->getResultArray();
-
         $list_gallery = $this->attractionGalleryModel->get_gallery_api($id)->getResultArray();
         $galleries = array();
         foreach ($list_gallery as $gallery) {
             $galleries[] = $gallery['url'];
         }
 
-
-        // $rumahGadang['avg_rating'] = $avg_rating;
         $attraction['facilities'] = $facilities;
-        // $rumahGadang['reviews'] = $list_review;
         $attraction['gallery'] = $galleries;
 
         $data = [
@@ -377,53 +371,50 @@ class Attraction extends ResourcePresenter
 
     public function maps()
     {
-        $contents = $this->rumahGadangModel->get_list_rg_api()->getResultArray();
+        $contents = $this->attractionModel->get_list_at_api()->getResultArray();
         $data = [
-            'title' => 'Rumah Gadang',
+            'title' => 'Attraction',
             'data' => $contents,
         ];
 
-        return view('maps/rumah_gadang', $data);
+        return view('maps/attraction', $data);
     }
 
     public function detail($id = null)
     {
-        $rumahGadang = $this->rumahGadangModel->get_rg_by_id_api($id)->getRowArray();
-        if (empty($rumahGadang)) {
+        $attraction = $this->attractionModel->get_at_by_id_api($id)->getRowArray();
+        if (empty($attraction)) {
             return redirect()->to(substr(current_url(), 0, -strlen($id)));
         }
 
-        $avg_rating = $this->reviewModel->get_rating('rumah_gadang_id', $id)->getRowArray()['avg_rating'];
-
-        $list_facility = $this->detailFacilityRumahGadangModel->get_facility_by_rg_api($id)->getResultArray();
+        $list_ticketPrice = $this->attractionTicketPriceModel->get_ticket_by_at_api($id)->getResultArray();
+        $list_facility = $this->attractionFacilityDetailModel->get_facility_by_at_api($id)->getResultArray();
         $facilities = array();
         foreach ($list_facility as $facility) {
-            $facilities[] = $facility['facility'];
+            $facilities[] = $facility['name'];
         }
 
-        $list_review = $this->reviewModel->get_review_object_api('rumah_gadang_id', $id)->getResultArray();
-
-        $list_gallery = $this->galleryRumahGadangModel->get_gallery_api($id)->getResultArray();
+        $list_gallery = $this->attractionGalleryModel->get_gallery_api($id)->getResultArray();
         $galleries = array();
         foreach ($list_gallery as $gallery) {
             $galleries[] = $gallery['url'];
         }
 
-
-        $rumahGadang['avg_rating'] = $avg_rating;
-        $rumahGadang['facilities'] = $facilities;
-        $rumahGadang['reviews'] = $list_review;
-        $rumahGadang['gallery'] = $galleries;
+        $attraction['facilities'] = $facilities;
+        $attraction['gallery'] = $galleries;
 
         $data = [
-            'title' => $rumahGadang['name'],
-            'data' => $rumahGadang,
+            'title' => $attraction['name'],
+            'data' => $attraction,
+            'ticket_prices' => $list_ticketPrice,
         ];
 
-        if (url_is('*dashboard*')) {
-            return view('dashboard/detail_rumah_gadang', $data);
-        }
-        return view('maps/detail_rumah_gadang', $data);
+        $data['data']['geoJson'] = [
+            'type' => 'Feature',
+            'geometry' => json_decode($data['data']['geoJson']),
+            'properties' => []
+        ];
+        return view('maps/attraction_detail', $data);
     }
     public function listFacility()
     {

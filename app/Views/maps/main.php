@@ -1,10 +1,11 @@
 <!doctype html>
 <?php $uri = service('uri')->getSegments(); ?>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= esc($title); ?> - Desa Wisata Kampuang Minang Nagari Sumpu</title>
+    <title><?= esc($title); ?> - Kawasan Wisata lembah Harau</title>
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/main/app.css'); ?>">
@@ -24,7 +25,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="<?= base_url('assets/js/extensions/sweetalert2.js'); ?>"></script>
     <script src="https://kit.fontawesome.com/de7d18ea4d.js" crossorigin="anonymous"></script>
-    
+
     <!-- Google Maps API and Custom JS -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8B04MTIk7abJDVESr6SUF6f3Hgt1DPAY&libraries=drawing"></script>
     <script src="<?= base_url('js/web.js'); ?>"></script>
@@ -32,6 +33,7 @@
         #googlemaps {
             height: 100%;
         }
+
         html,
         body {
             height: 100%;
@@ -40,6 +42,7 @@
         }
     </style>
 </head>
+
 <body>
     <?= $this->renderSection('content') ?>
 
@@ -49,9 +52,9 @@
     <!-- Custom JS -->
     <?= $this->renderSection('javascript') ?>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl)
             })
         }, false);
@@ -66,4 +69,5 @@
         });
     </script>
 </body>
+
 </html>

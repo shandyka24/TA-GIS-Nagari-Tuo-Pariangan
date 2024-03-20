@@ -1,38 +1,18 @@
-<?= $this->extend('web/layouts/main'); ?>
+<?= $this->extend('maps/main'); ?>
 
 <?= $this->section('content') ?>
 
-<section class="section text-dark">
+<section class="section">
     <div class="row">
         <script>
             currentUrl = '<?= current_url(); ?>';
         </script>
 
         <!-- Object Detail Information -->
-        <div class="col-md-6 col-12">
+        <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h4 class="card-title text-center">Attraction Information</h4>
-                            <!-- <div class="text-center">
-                                <?php
-                                // for ($i = 0; $i < (int)esc($data['avg_rating']); $i++) { 
-                                ?>
-                                    <span class="material-symbols-outlined rating-color">star</span>
-                                <?php
-                                // } 
-                                ?>
-                                <?php
-                                // for ($i = 0; $i < (5 - (int)esc($data['avg_rating'])); $i++) { 
-                                ?>
-                                    <span class="material-symbols-outlined">star</span>
-                                <?php
-                                // } 
-                                ?>
-                            </div> -->
-                        </div>
-                    </div>
+                    <h4 class="card-title text-center">Attraction Information</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -100,7 +80,12 @@
                             </table>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col">
+                            <p class="fw-bold">Description</p>
+                            <p><?= esc($data['description']); ?></p>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col">
                             <p class="fw-bold">Facilities</p>
@@ -113,25 +98,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-md-6 col-12">
-            <!-- Object Location on Map -->
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Google Maps</h5>
-                </div>
-
-                <?= $this->include('web/layouts/map-body'); ?>
-                <script>
-                    initMap(<?= esc($data['lat']); ?>, <?= esc($data['lng']); ?>);
-                    map.setZoom(16);
-                    digitObject("<?= esc(json_encode($data['geoJson'])); ?>");
-                </script>
-                <script>
-                    objectMarker("<?= esc($data['id']); ?>", <?= esc($data['lat']); ?>, <?= esc($data['lng']); ?>);
-                </script>
-            </div>
 
             <!-- Object Media -->
             <?= $this->include('web/layouts/gallery_video'); ?>
@@ -139,9 +105,6 @@
     </div>
 </section>
 
-<?= $this->endSection() ?>
-
-<?= $this->section('javascript') ?>
 <script>
     const myModal = document.getElementById('videoModal');
     const videoSrc = document.getElementById('video-play').getAttribute('data-src');
