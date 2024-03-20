@@ -141,7 +141,7 @@
                         Kawasan Wisata <span class="text-primary">Lembah Harau Nagari Tarantang</span>
                     </h1>
                     <p class="mb-4">
-                        Kawasam WIsata Lembah Harau terletak di Nagari Tarantang, Kecamatan Harau Kabupaten Lima Puluh Kota Sumatra Barat. Lembah Harau dikenal karena keindahan alamnya yang memukau. Anda akan menemukan tebing-tebing curam, air terjun yang indah, serta hamparan sawah dan hijaunya hutan yang menyegarkan. Keindahan alam yang unik ini membuatnya menjadi tempat yang sempurna untuk menikmati alam dan mengabadikan momen indah. Keunikan dari Kawasam Wisata Lembah Harau yaitu terdapatnya geopark. Geopark Lembah Harau memiliki berbagai formasi batuan yang unik dan menarik. Beberapa situs geologi memberikan pandangan tentang sejarah geologi daerah tersebut dan proses-proses alam yang membentuknya.
+                        Kawasan Wisata Lembah Harau terletak di Nagari Tarantang, Kecamatan Harau Kabupaten Lima Puluh Kota Sumatra Barat. Lembah Harau dikenal karena keindahan alamnya yang memukau. Anda akan menemukan tebing-tebing curam, air terjun yang indah, serta hamparan sawah dan hijaunya hutan yang menyegarkan. Keindahan alam yang unik ini membuatnya menjadi tempat yang sempurna untuk menikmati alam dan mengabadikan momen indah. Keunikan dari Kawasam Wisata Lembah Harau yaitu terdapatnya geopark. Geopark Lembah Harau memiliki berbagai formasi batuan yang unik dan menarik. Beberapa situs geologi memberikan pandangan tentang sejarah geologi daerah tersebut dan proses-proses alam yang membentuknya.
                     </p>
                     <h5 class="mb-3">
                         <a href="#map" class="text-reset" onclick="showMap('at');">
