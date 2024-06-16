@@ -47,11 +47,6 @@ $uri3 = $uri[3] ?? '';
                                 <i class="fa-solid fa-door-open"></i><span> Unit</span>
                             </a>
                         </li>
-                        <li class="sidebar-item <?= ($uri1 == 'homestayPackage') ? 'active' : '' ?>">
-                            <a href="<?= base_url('web/homestayPackage'); ?><?= esc('/' . $homestay_id); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-box-open"></i><span> Package</span>
-                            </a>
-                        </li>
                         <li class="sidebar-item <?= ($uri1 == 'homestayAdditionalAmenities') ? 'active' : '' ?>">
                             <a href="<?= base_url('web/homestayAdditionalAmenities'); ?><?= esc('/' . $homestay_id); ?>" class="sidebar-link">
                                 <i class="fa-solid fa-list-ol"></i><span> Additional Amenities</span>

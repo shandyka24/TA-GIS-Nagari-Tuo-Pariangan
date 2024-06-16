@@ -38,21 +38,11 @@ class TouristArea extends ResourcePresenter
 
     public function index()
     {
-        $tourist_area = $this->touristAreaModel->get_tourist_area()->getRowArray();
-        $list_gallery = $this->touristAreaModel->get_tourist_area_gallery()->getResultArray();
-        $galleries = array();
-        foreach ($list_gallery as $gallery) {
-            $galleries[] = $gallery['url'];
-        }
-        $tourist_area['gallery'] = $galleries;
-        $tourist_area['id_ta'] = $tourist_area['id'];
-        unset($tourist_area['id']);
         $data = [
             'title' => 'Home',
-            'data' => $tourist_area,
         ];
 
-        return view('web/home', $data);
+        return view('home/home', $data);
     }
     public function addTouristArea()
     {

@@ -125,7 +125,7 @@ class Attraction extends ResourcePresenter
 
         if (url_is('*dashboard*')) {
             // return view('dashboard/detail_rumah_gadang', $data);
-            return view('dashboard/attraction_detail', $data);
+            return view('admin/attraction_detail', $data);
         }
         // return view('web/detail_rumah_gadang', $data);
         // dd($data['data']['geoJson']);
@@ -144,7 +144,7 @@ class Attraction extends ResourcePresenter
             'title' => 'New Attraction',
             'facilities' => $facilities,
         ];
-        return view('dashboard/attraction_form', $data);
+        return view('admin/attraction_form', $data);
     }
 
     /**
@@ -251,7 +251,7 @@ class Attraction extends ResourcePresenter
             'data' => $attraction,
             'facilities' => $facilities,
         ];
-        return view('dashboard/attraction_form', $data);
+        return view('admin/attraction_form', $data);
     }
 
     /**

@@ -2,27 +2,27 @@
 
 namespace App\Controllers\Api;
 
-use App\Models\DetailFacilityRumahGadangModel;
-use App\Models\GalleryRumahGadangModel;
-use App\Models\ReviewModel;
-use App\Models\RumahGadangModel;
+// use App\Models\DetailFacilityRumahGadangModel;
+// use App\Models\GalleryRumahGadangModel;
+// use App\Models\ReviewModel;
+// use App\Models\RumahGadangModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
-use App\Models\HomestayModel;
-use App\Models\HomestayGalleryModel;
-use App\Models\HomestayFacilityDetailModel;
-use App\Models\HomestayUnitFacilityModel;
-use App\Models\HomestayUnitFacilityDetailModel;
+use App\Models\Homestay\HomestayModel;
+use App\Models\Homestay\HomestayGalleryModel;
+use App\Models\Homestay\HomestayFacilityDetailModel;
+use App\Models\Homestay\HomestayUnitFacilityModel;
+use App\Models\Homestay\HomestayUnitFacilityDetailModel;
 
 class Homestay extends ResourceController
 {
     use ResponseTrait;
 
-    protected $rumahGadangModel;
-    protected $galleryRumahGadangModel;
-    protected $detailFacilityRumahGadangModel;
-    protected $reviewModel;
+    // protected $rumahGadangModel;
+    // protected $galleryRumahGadangModel;
+    // protected $detailFacilityRumahGadangModel;
+    // protected $reviewModel;
 
     protected $homestayModel;
     protected $homestayGalleryModel;
@@ -32,10 +32,10 @@ class Homestay extends ResourceController
 
     public function __construct()
     {
-        $this->rumahGadangModel = new RumahGadangModel();
-        $this->galleryRumahGadangModel = new GalleryRumahGadangModel();
-        $this->detailFacilityRumahGadangModel = new DetailFacilityRumahGadangModel();
-        $this->reviewModel = new ReviewModel();
+        // $this->rumahGadangModel = new RumahGadangModel();
+        // $this->galleryRumahGadangModel = new GalleryRumahGadangModel();
+        // $this->detailFacilityRumahGadangModel = new DetailFacilityRumahGadangModel();
+        // $this->reviewModel = new ReviewModel();
 
         $this->homestayModel = new HomestayModel();
         $this->homestayGalleryModel = new HomestayGalleryModel();

@@ -121,7 +121,7 @@ class Event extends ResourcePresenter
             'properties' => []
         ];
         if (url_is('*dashboard*')) {
-            return view('dashboard/detail_event', $data);
+            return view('admin/detail_event', $data);
         }
         return view('web/detail_event', $data);
     }
@@ -136,7 +136,7 @@ class Event extends ResourcePresenter
         $data = [
             'title' => 'New Event',
         ];
-        return view('dashboard/event_form', $data);
+        return view('admin/event_form', $data);
     }
 
     /**
@@ -216,7 +216,7 @@ class Event extends ResourcePresenter
             'title' => 'Edit Event',
             'data' => $event,
         ];
-        return view('dashboard/event_form', $data);
+        return view('admin/event_form', $data);
     }
 
     /**

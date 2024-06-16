@@ -40,39 +40,20 @@ $uri3 = $uri[3] ?? '';
                         </a>
                     </li>
 
+                    <!-- Manage Village -->
+                    <?php if (in_groups(['admin'])) : ?>
+                        <li class="sidebar-item <?= ($uri1 == 'villages') ? 'active' : '' ?>">
+                            <a href="<?= base_url('dashboard/villages'); ?>" class="sidebar-link">
+                                <i class="fa-solid fa-map-location-dot"></i><span class="text-dark fw-bold"> Villages</span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+
                     <!-- Manage Users -->
                     <?php if (in_groups(['admin'])) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'users') ? 'active' : '' ?>">
                             <a href="<?= base_url('dashboard/users'); ?>" class="sidebar-link">
                                 <i class="fa-solid fa-users"></i><span class="text-dark fw-bold"> Users</span>
-                            </a>
-                        </li>
-                    <?php endif; ?>
-
-                    <!-- Manage Attraction -->
-                    <?php if (in_groups(['admin'])) : ?>
-                        <li class="sidebar-item <?= ($uri1 == 'attraction') ? 'active' : '' ?> has-sub">
-                            <a href="" class="sidebar-link">
-                                <i class="fa-solid fa-landmark"></i><span class="text-dark fw-bold"> Attraction</span>
-                            </a>
-                            <ul class="submenu <?= ($uri1 == 'attraction') ? 'active' : '' ?>">
-                                <!-- Manage Attraction -->
-                                <li class="submenu-item" id="mg-sp">
-                                    <a href="<?= base_url('dashboard/attraction'); ?>"><i class="fa-solid fa-list me-3"></i>List</a>
-                                </li>
-                                <!-- Manage Facility -->
-                                <li class="submenu-item" id="mg-p">
-                                    <a href="<?= base_url('dashboard/attraction/facility'); ?>"><i class="fa-solid fa-hand-holding me-3"></i>Facility</a>
-                                </li>
-                            </ul>
-                        </li>
-                    <?php endif; ?>
-
-                    <!-- Manage EV -->
-                    <?php if (in_groups(['admin'])) : ?>
-                        <li class="sidebar-item <?= ($uri1 == 'event') ? 'active' : '' ?>">
-                            <a href="<?= base_url('dashboard/event'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-bullhorn"></i><span class="text-dark fw-bold"> Event</span>
                             </a>
                         </li>
                     <?php endif; ?>
@@ -87,11 +68,6 @@ $uri3 = $uri[3] ?? '';
                         <li class="sidebar-item <?= ($uri1 == 'homestayUnit') ? 'active' : '' ?>">
                             <a href="<?= base_url('dashboard/homestayUnit'); ?>" class="sidebar-link">
                                 <i class="fa-solid fa-door-open"></i><span class="text-dark fw-bold"> Unit</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item <?= ($uri1 == 'tourismPackage') ? 'active' : '' ?>">
-                            <a href="<?= base_url('dashboard/tourismPackage'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-box-open"></i><span class="text-dark fw-bold"> Tourism Package</span>
                             </a>
                         </li>
                         <li class="sidebar-item <?= ($uri1 == 'additionalAmenities') ? 'active' : '' ?>">
@@ -176,14 +152,6 @@ $uri3 = $uri[3] ?? '';
                         </li>
                     <?php endif; ?>
 
-                    <!-- Manage Service Provider -->
-                    <?php if (in_groups(['admin'])) : ?>
-                        <li class="sidebar-item <?= ($uri1 == 'serviceProvider') ? 'active' : '' ?>">
-                            <a href="<?= base_url('dashboard/serviceProvider'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-briefcase"></i><span class="text-dark fw-bold"> Service Provider</span>
-                            </a>
-                        </li>
-                    <?php endif; ?>
                 </ul>
             </div>
 

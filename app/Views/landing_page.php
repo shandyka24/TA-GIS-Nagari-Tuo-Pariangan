@@ -62,6 +62,8 @@
         </button>
         <div class="collapse navbar-collapse py-4 py-lg-0" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
+                
+                <a href="/tes" class="nav-item nav-link active">Tes</a>
                 <a href="#home" class="nav-item nav-link active">Home</a>
                 <a href="/web" class="nav-item nav-link">Explore</a>
                 <a href="#about" class="nav-item nav-link">About</a>

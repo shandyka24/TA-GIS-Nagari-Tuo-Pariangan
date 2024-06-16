@@ -42,7 +42,7 @@ class TouristAreaModel extends Model
         $query = $this->db->table($this->table)
             ->select("*")
             ->where('id', 'L1')
-            ->get();
+            ->get();    
         return $query;
     }
     public function get_tourist_area_gallery()
