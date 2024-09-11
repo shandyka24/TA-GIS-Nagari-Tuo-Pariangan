@@ -62,7 +62,7 @@
         </button>
         <div class="collapse navbar-collapse py-4 py-lg-0" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
-                
+
                 <a href="/tes" class="nav-item nav-link active">Tes</a>
                 <a href="#home" class="nav-item nav-link active">Home</a>
                 <a href="/web" class="nav-item nav-link">Explore</a>
@@ -82,7 +82,7 @@
             <div class="col-lg-6 p-0 wow fadeIn" data-wow-delay="0.1s">
                 <div class="header-bg h-100 d-flex flex-column justify-content-center p-5">
                     <h2 class="display-6 text-light mb-2">
-                        Welcome to
+                        Welcome too
                     </h2>
                     <h1 class="display-4 text-light mb-5">
                         Kawasan Wisata Lembah Harau Nagari Tarantang
