@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\Query;
 use CodeIgniter\Model;
 
 class VillageModel extends Model
@@ -145,6 +146,16 @@ class VillageModel extends Model
             ->select("id, name, geom")
             ->where("id NOT IN ('N03')")
             ->get();
+        return $query;
+    }
+
+    public function check_village()
+    {
+        $query = $this->db->table($this->table)
+            ->select("*")
+            ->where('selected', '1')
+            ->get();
+
         return $query;
     }
 }

@@ -16,7 +16,12 @@ class LandingPage extends BaseController
     }
     public function index()
     {
-        return view('landing_page');
+        $checkVillage = $this->villageModel->check_village()->getRowArray();
+
+        $data = [
+            'village' => $checkVillage
+        ];
+        return view('landing_page', $data);
     }
     public function addVillage()
     {
