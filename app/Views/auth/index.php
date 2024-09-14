@@ -45,7 +45,9 @@
         </button>
         <div class="collapse navbar-collapse py-4 py-lg-0" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
-                <a href="<?= base_url('web'); ?>" class="nav-item nav-link">Explore</a>
+                <?php if ($village != null) : ?>
+                    <a href="<?= base_url('web'); ?>" class="nav-item nav-link">Explore</a>
+                <?php endif; ?>
                 <a href="<?= base_url(); ?>" class="nav-item nav-link">About</a>
             </div>
         </div>
@@ -53,14 +55,14 @@
     <!-- Navbar End -->
 
     <!-- Auth Content -->
-    <div id="auth">
+    <div id="auth" class="h-flex">
         <?= $this->renderSection('content'); ?>
     </div>
     <!-- End Auth Content -->
 
     <div class="row justify-content-center align-items-center m-0" style="background-color: #2d499d">
         <div class="col">
-            <p class="text-center text-white"><?= date('Y'); ?> &copy; Rahmat Hanafi</p>
+            <p class="text-center text-white"><?= date('Y'); ?> &copy; Shandyka Tribuana Putra</p>
         </div>
     </div>
 </body>
