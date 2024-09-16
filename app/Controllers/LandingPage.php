@@ -83,5 +83,12 @@ class LandingPage extends BaseController
         ];
         return $this->respond($response);
     }
-    public function setup() {}
+    public function setup()
+    {
+        $data = [
+            'title' => 'App Set Up',
+        ];
+
+        return view('admin/setup/setup', $data);
+    }
 }

@@ -4,11 +4,11 @@ namespace App\Controllers\Api;
 
 use App\Models\GalleryWorshipPlaceModel;
 use App\Models\ReviewModel;
-use App\Models\WorshipPlaceModel;
+use App\Models\Worship\WorshipPlaceModel;
+use App\Models\Worship\WorshipPlaceCategoryModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
-use App\Models\WorshipPlaceCategoryModel;
 
 class WorshipPlace extends ResourceController
 {

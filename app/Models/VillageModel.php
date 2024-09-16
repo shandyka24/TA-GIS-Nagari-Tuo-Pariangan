@@ -157,4 +157,13 @@ class VillageModel extends Model
 
         return $query;
     }
+
+    public function village_list()
+    {
+        $query = $this->db->table($this->table)
+            ->select("id, name, geom_file")
+            ->orderBy('name', 'ASC')
+            ->get();
+        return $query;
+    }
 }

@@ -2346,6 +2346,95 @@ function getListUsers(owner) {
     },
   });
 }
+// Get list of Village
+function getListVillage() {
+  $("#catSelect").empty();
+  let cats;
+  $.ajax({
+    url: baseUrl + "/api/selectVillage",
+    dataType: "json",
+    success: function (response) {
+      cats =
+        '<option value="" selected disabled>--- Choose Village ---</option>';
+      $("#catSelect").append(cats);
+      let data = response.data;
+      for (i in data) {
+        let item = data[i];
+        cats = '<option value="' + item.id + '">' + item.name + "</option>";
+        $("#catSelect").append(cats);
+      }
+    },
+  });
+}
+// Variabel untuk menyimpan referensi village
+let currentVillage = null;
+
+function getVillageGeom(id_village) {
+  // Jika ada polygon village yang sudah ada, hapus dari peta
+  if (currentVillage) {
+    currentVillage.setMap(null); // Menghapus polygon sebelumnya
+  }
+
+  $.ajax({
+    url: baseUrl + "/api/village/" + id_village,
+    type: "GET",
+    dataType: "json",
+    success: function (response) {
+      const data = response.data;
+      console.log(data.geom_file);
+
+      // Buat instance baru dari google.maps.Data untuk village baru
+      currentVillage = new google.maps.Data();
+      currentVillage.loadGeoJson(
+        "/map/tourism_village/" + data.geom_file,
+        null,
+        function (features) {
+          let bounds = new google.maps.LatLngBounds();
+
+          // Mendapatkan bounds dari semua fitur GeoJSON
+          features.forEach(function (feature) {
+            feature.getGeometry().forEachLatLng(function (latlng) {
+              bounds.extend(latlng);
+            });
+          });
+
+          // Fokuskan peta ke area village
+          map.fitBounds(bounds);
+
+          // Mendapatkan pusat dari bounds
+          let center = bounds.getCenter();
+
+          // Set style untuk village polygon
+          currentVillage.setStyle({
+            fillColor: "#f3fa32",
+            strokeWeight: 0.5,
+            strokeColor: "#005000",
+            fillOpacity: 0.5,
+            clickable: true,
+            title: data.name,
+          });
+
+          // Tampilkan info window di tengah village
+          villageInfoWindow.setContent(data.name + " Village");
+          villageInfoWindow.setPosition(center);
+          villageInfoWindow.open(map);
+
+          // Tambahkan listener untuk klik pada village
+          currentVillage.addListener("click", function (event) {
+            villageInfoWindow.close();
+            villageInfoWindow.setContent(data.name + " Village");
+            villageInfoWindow.setPosition(event.latLng);
+            villageInfoWindow.open(map);
+          });
+        }
+      );
+
+      // Set village polygon pada peta
+      currentVillage.setMap(map);
+    },
+  });
+}
+
 // Get list of Worship Place Category
 function getListWPCat(cat_id) {
   let cats;

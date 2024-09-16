@@ -136,4 +136,28 @@ class Village extends BaseController
         ];
         return $this->respond($response);
     }
+    public function selectVillage()
+    {
+        $contents = $this->villageModel->village_list()->getResult();
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success get list of Village"
+            ]
+        ];
+        return $this->respond($response);
+    }
+    public function getVillageGeom($id = null)
+    {
+        $contents = $this->villageModel->get_village_data($id)->getRowArray();
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success get list of Villages"
+            ]
+        ];
+        return $this->respond($response);
+    }
 }

@@ -306,6 +306,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
     $routes->get('touristArea', 'Village::getTouristAreaData');
     $routes->get('uniqueAttraction', 'Village::getUniqueAttData');
     $routes->get('villages', 'Village::getVillagesData');
+    $routes->get('village/(:segment)', 'Village::getVillageGeom/$1');
     $routes->get('subdistricts', 'Village::getSubdistrictsData');
     $routes->get('cities', 'Village::getCitiesData');
     $routes->get('provinces', 'Village::getProvincesData');
@@ -315,6 +316,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
     $routes->get('logout', 'Profile::logout');
 
     $routes->get('wPCat', 'WorshipPlace::getWPCat');
+    $routes->get('selectVillage', 'Village::selectVillage');
     $routes->get('proList/(:segment)', 'souvenirPlace::proList/$1');
     $routes->get('culList/(:segment)', 'culinaryPlace::culList/$1');
     $routes->get('homestayUnitFac/(:segment)/(:segment)/(:segment)', 'Homestay::homestayUnitFac/$1/$2/$3');
