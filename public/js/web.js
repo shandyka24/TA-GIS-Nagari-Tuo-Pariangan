@@ -87,9 +87,6 @@ function initMap(
   digitCountries();
   digitProvinces();
   digitCities();
-  digitSubdistricts();
-  digitVillages();
-  digitVillage();
 }
 function goToVillage() {
   // map.setCenter({ lat: -0.11371891332439286, lng: 100.66784601319584 });

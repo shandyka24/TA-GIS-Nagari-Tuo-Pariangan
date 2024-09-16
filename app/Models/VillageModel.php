@@ -128,7 +128,6 @@ class VillageModel extends Model
     {
         $query = $this->db->table('city')
             ->select("id, name, geom")
-            ->where("id NOT IN ('C04')")
             ->get();
         return $query;
     }

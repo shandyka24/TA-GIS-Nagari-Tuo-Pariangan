@@ -83,4 +83,5 @@ class LandingPage extends BaseController
         ];
         return $this->respond($response);
     }
+    public function setup() {}
 }
