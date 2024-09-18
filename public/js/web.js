@@ -2381,7 +2381,6 @@ function getVillageGeom(id_village) {
     dataType: "json",
     success: function (response) {
       const data = response.data;
-      console.log(data.geom_file);
 
       // Buat instance baru dari google.maps.Data untuk village baru
       currentVillage = new google.maps.Data();
@@ -2409,20 +2408,20 @@ function getVillageGeom(id_village) {
             fillColor: "#f3fa32",
             strokeWeight: 0.5,
             strokeColor: "#005000",
-            fillOpacity: 0.5,
+            fillOpacity: 0.2,
             clickable: true,
             title: data.name,
           });
 
           // Tampilkan info window di tengah village
-          villageInfoWindow.setContent(data.name + " Village");
+          villageInfoWindow.setContent(data.name);
           villageInfoWindow.setPosition(center);
           villageInfoWindow.open(map);
 
           // Tambahkan listener untuk klik pada village
           currentVillage.addListener("click", function (event) {
             villageInfoWindow.close();
-            villageInfoWindow.setContent(data.name + " Village");
+            villageInfoWindow.setContent(data.name);
             villageInfoWindow.setPosition(event.latLng);
             villageInfoWindow.open(map);
           });
@@ -2433,6 +2432,196 @@ function getVillageGeom(id_village) {
       currentVillage.setMap(map);
     },
   });
+  let vform;
+  vform =
+    '<div class="card-body">' +
+    '<form class="form form-vertical mx-4 mt-3" action="" method="post" id="uploadForm" enctype="multipart/form-data">' +
+    '<div class="form-body">' +
+    '<input type="hidden" name="id_village" value="' +
+    id_village +
+    '">' +
+    '<div class="form-group mb-4">' +
+    '<label for="description" class="form-label">Description</label>' +
+    '<textarea class="form-control" id="description" name="description" rows="4"></textarea>' +
+    "</div>" +
+    '<div class="row">' +
+    '<div class="form-group col-md-4 col-12 mb-4">' +
+    '<label for="capacity" class="mb-2">Open</label>' +
+    '<div class="input-group">' +
+    '<input type="time" id="capacity" class="form-control" name="open" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="">' +
+    '<span class="input-group-text">WIB</span>' +
+    "</div>" +
+    "</div>" +
+    '<div class="form-group col-md-2 col-12 mb-4">' +
+    "</div>" +
+    '<div class="form-group col-md-4 col-12 mb-4">' +
+    '<label for="capacity" class="mb-2">Ticket Price</label>' +
+    '<div class="input-group">' +
+    '<span class="input-group-text">Rp.</span>' +
+    '<input type="number" id="capacity" class="form-control" name="ticket_price" placeholder="Ticket Price" aria-label="Ticket Price" aria-describedby="ticket-price" value="">' +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    '<div class="row">' +
+    '<div class="form-group col-md-4 col-12 mb-4">' +
+    '<label for="capacity" class="mb-2">Close</label>' +
+    '<div class="input-group">' +
+    '<input type="time" id="capacity" class="form-control" name="close" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="">' +
+    '<span class="input-group-text">WIB</span>' +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    '<div class="row mt-3">' +
+    '<div class="form-group col-md-3 col-12 mb-4">' +
+    '<label for="capacity" class="mb-2">Facebook</label>' +
+    '<div class="input-group">' +
+    '<span class="input-group-text">@</span>' +
+    '<input type="text" id="capacity" class="form-control" name="facebook" placeholder="Facebook" aria-label="Ticket Price" aria-describedby="ticket-price" value="">' +
+    "</div>" +
+    "</div>" +
+    '<div class="form-group col-md-3 col-12 mb-4">' +
+    '<label for="capacity" class="mb-2">Instagram</label>' +
+    '<div class="input-group">' +
+    '<span class="input-group-text">@</span>' +
+    '<input type="text" id="capacity" class="form-control" name="instagram" placeholder="Instagram" aria-label="Ticket Price" aria-describedby="ticket-price" value="">' +
+    "</div>" +
+    "</div>" +
+    '<div class="form-group col-md-3 col-12 mb-4">' +
+    '<label for="capacity" class="mb-2">Youtube</label>' +
+    '<div class="input-group">' +
+    '<span class="input-group-text">@</span>' +
+    '<input type="text" id="capacity" class="form-control" name="youtube" placeholder="Youtube" aria-label="Ticket Price" aria-describedby="ticket-price" value="">' +
+    "</div>" +
+    "</div>" +
+    '<div class="form-group col-md-3 col-12 mb-4">' +
+    '<label for="capacity" class="mb-2">TikTok</label>' +
+    '<div class="input-group">' +
+    '<span class="input-group-text">@</span>' +
+    '<input type="text" id="capacity" class="form-control" name="tiktok" placeholder="TikTok" aria-label="Ticket Price" aria-describedby="ticket-price" value="">' +
+    "</div>" +
+    "</div>" +
+    "</div>" +
+    '<div class="row mt-3 mb-4">' +
+    '<div class="form-group col-md-6 col-12 mb-4">' +
+    '<label for="gallery" class="form-label">Photos</label>' +
+    '<input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>' +
+    "</div>" +
+    '<div class="form-group col-md-6 col-12 mb-4">' +
+    '<label for="video" class="form-label">Video</label>' +
+    '<input class="form-control" accept="video/*, .mkv" type="file" name="video" id="video">' +
+    "</div>" +
+    "</div>" +
+    '<button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>' +
+    '<button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>' +
+    "</div>" +
+    "</form>" +
+    "</div>";
+  $("#village-form").empty();
+  $("#village-form").append(vform);
+
+  FilePond.registerPlugin(
+    FilePondPluginFileValidateSize,
+    FilePondPluginFileValidateType,
+    FilePondPluginImageExifOrientation,
+    FilePondPluginImagePreview,
+    FilePondPluginImageResize,
+    FilePondPluginMediaPreview
+  );
+
+  // Get a reference to the file input element
+  const photo = document.querySelector('input[id="gallery"]');
+  const video = document.querySelector('input[id="video"]');
+
+  // Create a FilePond instance
+  const pond = FilePond.create(photo, {
+    maxFileSize: "1920MB",
+    maxTotalFileSize: "1920MB",
+    imageResizeTargetHeight: 720,
+    imageResizeUpscale: false,
+    credits: false,
+  });
+  const vidPond = FilePond.create(video, {
+    maxFileSize: "1920MB",
+    maxTotalFileSize: "1920MB",
+    credits: false,
+  });
+
+  let uploadedPhotos = 0;
+
+  pond.setOptions({
+    server: {
+      timeout: 3600000,
+      process: {
+        url: "/upload/photo",
+        onload: (response) => {
+          console.log("processed:", response);
+          uploadedPhotos++;
+          console.log(uploadedPhotos);
+          return response;
+        },
+        onerror: (response) => {
+          console.log("error:", response);
+          return response;
+        },
+      },
+      revert: {
+        url: "/upload/photo",
+        onload: (response) => {
+          console.log("reverted:", response);
+          uploadedPhotos--;
+          console.log(uploadedPhotos);
+          return response;
+        },
+        onerror: (response) => {
+          console.log("error:", response);
+          return response;
+        },
+      },
+    },
+  });
+
+  vidPond.setOptions({
+    server: {
+      timeout: 86400000,
+      process: {
+        url: "/upload/video",
+        onload: (response) => {
+          console.log("processed:", response);
+          return response;
+        },
+        onerror: (response) => {
+          console.log("error:", response);
+          return response;
+        },
+      },
+      revert: {
+        url: "/upload/video",
+        onload: (response) => {
+          console.log("reverted:", response);
+          return response;
+        },
+        onerror: (response) => {
+          console.log("error:", response);
+          return response;
+        },
+      },
+    },
+  });
+  document
+    .getElementById("uploadForm")
+    .addEventListener("submit", function (e) {
+      e.preventDefault(); // Mencegah form dikirim langsung
+
+      // Validasi jumlah file yang diupload
+      if (uploadedPhotos < 4) {
+        alert("Anda harus mengupload minimal 4 gambar.");
+      } else {
+        // alert("Form valid dan bisa dikirim!");
+        // Lakukan pengiriman form secara manual jika validasi berhasil
+        // Misalnya dengan AJAX, atau submit form di sini jika diperlukan
+        this.submit(); // Uncomment jika ingin melanjutkan pengiriman
+      }
+    });
 }
 
 // Get list of Worship Place Category

@@ -47,7 +47,7 @@ $routes->get('/register', 'Web\Profile\Profile::register');
 $routes->get('/setup', 'LandingPage::setup',  ['filter' => 'role:admin']);
 
 // Upload files
-$routes->group('upload', ['namespace' => 'App\Controllers\Web'], function ($routes) {
+$routes->group('upload', ['namespace' => 'App\Controllers\Web\Upload'], function ($routes) {
     $routes->post('photo', 'Upload::photo');
     $routes->post('video', 'Upload::video');
     $routes->post('avatar', 'Upload::avatar');
