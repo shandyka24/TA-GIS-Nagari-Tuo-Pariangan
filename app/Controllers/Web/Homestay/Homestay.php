@@ -11,11 +11,14 @@ use CodeIgniter\Files\File;
 use CodeIgniter\RESTful\ResourcePresenter;
 use CodeIgniter\API\ResponseTrait;
 
+use App\Models\VillageModel;
+
 use App\Models\Homestay\HomestayModel;
 use App\Models\Homestay\HomestayFacilityModel;
 use App\Models\Homestay\HomestayUnitFacilityModel;
 use App\Models\Homestay\HomestayFacilityDetailModel;
 use App\Models\Homestay\HomestayGalleryModel;
+use App\Models\HomestayCertificationModel;
 
 use App\Models\Reservation\ReservationModel;
 use App\Models\Reservation\ReservationHomestayUnitDetailModel;
@@ -23,6 +26,8 @@ use App\Models\Reservation\ReservationHomestayUnitDetailModel;
 class Homestay extends ResourcePresenter
 {
     use ResponseTrait;
+
+    protected $villageModel;
 
     protected $rumahGadangModel;
     protected $galleryRumahGadangModel;
@@ -35,6 +40,7 @@ class Homestay extends ResourcePresenter
     protected $homestayUnitFacilityModel;
     protected $homestayFacilityDetailModel;
     protected $homestayGalleryModel;
+    protected $homestayCertificationModel;
 
     protected $reservationModel;
     protected $reservationHomestayUnitDetailModel;
@@ -49,11 +55,14 @@ class Homestay extends ResourcePresenter
         // $this->reviewModel = new ReviewModel();
         // $this->facilityRumahGadangModel = new FacilityRumahGadangModel();
 
+        $this->villageModel = new VillageModel();
+
         $this->homestayModel = new HomestayModel();
         $this->homestayFacilityModel = new HomestayFacilityModel();
         $this->homestayUnitFacilityModel = new HomestayUnitFacilityModel();
         $this->homestayFacilityDetailModel = new HomestayFacilityDetailModel();
         $this->homestayGalleryModel = new HomestayGalleryModel();
+        $this->homestayCertificationModel = new HomestayCertificationModel();
 
         $this->reservationModel = new ReservationModel();
         $this->reservationHomestayUnitDetailModel = new ReservationHomestayUnitDetailModel();
@@ -67,12 +76,65 @@ class Homestay extends ResourcePresenter
     public function index()
     {
         $contents = $this->homestayModel->get_list_hs_api()->getResultArray();
+        $village = $this->villageModel->check_village()->getRowArray();
+
+        $filePath = realpath(WRITEPATH . '..' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'map' . DIRECTORY_SEPARATOR . 'tourism_village' . DIRECTORY_SEPARATOR . $village['geom_file']);
+
+        // Read the content of the GeoJSON file
+        $geoJsonContent = file_get_contents($filePath);
+
+        // Decode the GeoJSON content into a PHP object or array
+        $geoJsonData = json_decode($geoJsonContent, true);
+
+        $polygon  = $geoJsonData['features'][0]['geometry']['coordinates'][0][0];
+
+        $i = 0;
+        foreach ($contents as $content) {
+            $point = [(float)$content['lng'], (float)$content['lat']];
+
+            $isInside = $this->isPointInPolygon($point, $polygon);
+
+            // Display the result
+            if (!$isInside) {
+                unset($contents[$i]);
+            }
+            $i++;
+        }
+
+        $contents = array_values($contents);
         $data = [
             'title' => 'Homestay',
             'data' => $contents,
         ];
 
         return view('homestay/list_homestay', $data);
+    }
+
+    private function isPointInPolygon($point, $polygon)
+    {
+        $x = $point[0]; // Latitude of the point
+        $y = $point[1]; // Longitude of the point
+        $inside = false; // Initialize the inside status as false
+        $n = count($polygon); // Number of vertices in the polygon
+
+        // Loop through each edge of the polygon
+        for ($i = 0, $j = $n - 1; $i < $n; $j = $i++) {
+            $xi = $polygon[$i][0]; // Current vertex X (latitude)
+            $yi = $polygon[$i][1]; // Current vertex Y (longitude)
+            $xj = $polygon[$j][0]; // Previous vertex X (latitude)
+            $yj = $polygon[$j][1]; // Previous vertex Y (longitude)
+
+            // Check if the point is inside the edge's vertical range and compute intersection
+            $intersect = (($yi > $y) != ($yj > $y)) &&
+                ($x < ($xj - $xi) * ($y - $yi) / ($yj - $yi) + $xi);
+
+            // If an intersection occurs, toggle the inside status
+            if ($intersect) {
+                $inside = !$inside;
+            }
+        }
+
+        return $inside; // Return true if the point is inside, otherwise false
     }
 
     /**
@@ -129,10 +191,15 @@ class Homestay extends ResourcePresenter
             $galleries[] = $gallery['url'];
         }
 
+        $list_certification = $this->homestayCertificationModel->get_list_homestay_certification($homestay['id'])->getResultArray();
+        $certifications = array();
+        foreach ($list_certification as $certification) {
+            $certifications[] = $certification;
+        }
 
         $homestay['facilities'] = $facilities;
-        // $rumahGadang['reviews'] = $list_review;
         $homestay['gallery'] = $galleries;
+        $homestay['certification'] = $certifications;
 
         $data = [
             'title' => $homestay['name'],
@@ -179,8 +246,10 @@ class Homestay extends ResourcePresenter
     {
         $request = $this->request->getPost();
         $id = $this->homestayModel->get_new_id_api();
+        $village = $this->villageModel->check_village()->getRowArray();
         $requestData = [
             'id' => $id,
+            'village_id' => $village['id'],
             'name' => $request['name'],
             'address' => $request['address'],
             'open' => $request['open'],

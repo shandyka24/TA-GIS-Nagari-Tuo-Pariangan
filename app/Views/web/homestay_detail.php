@@ -111,6 +111,26 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card-header bg-primary text-white">
+                    Homestay Certifications
+                </div>
+                <div class="card-body mt-4">
+                    <ul class="list-group">
+                        <?php foreach ($data['certification'] as $certification) : ?>
+                            <li class="list-group-item">
+                                <h5><?= esc($certification['certificate_name']); ?></h5>
+                                <p class="text-mute mb-1"><?= esc($certification['certificate_num']); ?></p>
+                                <p class="mb-1"><?= esc($certification['description']); ?></p>
+                                <p class="mb-1"><strong>Certifying Agency:</strong> <?= esc($certification['certifying_agency']); ?> | <strong>Certification Date:</strong> <?= esc(date('d-m-Y', strtotime($certification['date']))); ?> </p>
+                                <a title="Info" class="btn icon btn-outline-primary btn-sm float-end ms-1" data-bs-toggle="modal" data-bs-target="#infoCertificate<?= esc($certification['certification_id']); ?>">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="card">
                 <div class="card-header">
                     <h4 class="card-title text-center">Reviews</h4>
                 </div>
@@ -174,6 +194,20 @@
             <?= $this->include('web/layouts/gallery_video'); ?>
         </div>
     </div>
+    <?php foreach ($data['certification'] as $certification) : ?>
+        <div class="modal fade" id="infoCertificate<?= esc($certification['certification_id']); ?>" tabindex="-1" aria-labelledby="certificateModalLabel1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="certificateModalLabel1">Homestay Certificate</h5>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="<?= base_url('media/photos/' . esc($certification['image_url'])); ?>" alt="Homestay Certificate" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
 </section>
 
 <?= $this->endSection() ?>

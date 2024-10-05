@@ -15,9 +15,24 @@ class UserModel extends Model
     protected $useSoftDeletes = true;
 
     protected $allowedFields = [
-        'email', 'username', 'password_hash', 'reset_hash', 'reset_at', 'reset_expires', 'activate_hash',
-        'first_name', 'last_name', 'address', 'phone', 'avatar',
-        'status', 'status_message', 'active', 'force_pass_reset', 'permissions', 'deleted_at',
+        'email',
+        'username',
+        'password_hash',
+        'reset_hash',
+        'reset_at',
+        'reset_expires',
+        'activate_hash',
+        'first_name',
+        'last_name',
+        'address',
+        'phone',
+        'avatar',
+        'status',
+        'status_message',
+        'active',
+        'force_pass_reset',
+        'permissions',
+        'deleted_at',
     ];
 
     protected $useTimestamps = true;
@@ -128,6 +143,16 @@ class UserModel extends Model
         $query = $this->db->table('users')
             ->select('*')
             ->where('id', $id)
+            ->get();
+        return $query;
+    }
+
+    public function get_admin_phone()
+    {
+        $query = $this->db->table('users')
+            ->select('users.*')
+            ->join('auth_groups_users', 'auth_groups_users.user_id = users.id')
+            ->where('auth_groups_users.group_id', 3)
             ->get();
         return $query;
     }

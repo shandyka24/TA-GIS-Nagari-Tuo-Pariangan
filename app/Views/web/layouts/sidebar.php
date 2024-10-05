@@ -34,7 +34,7 @@ $uri3 = $uri[3] ?? '';
                             <i class="fa-solid fa-house"></i><span class="text-dark fw-bold">Home</span>
                         </a>
                     </li>
-                    
+
                     <!-- Homestay -->
                     <li class="sidebar-item <?= ($uri1 == 'homestay') ? 'active' : '' ?> has-sub">
                         <a href="" class="sidebar-link">
@@ -140,7 +140,7 @@ $uri3 = $uri[3] ?? '';
                             <?php if (in_groups(['owner'])) : ?>
                                 <a href="<?= base_url('dashboard/homestay'); ?>" class="sidebar-link">
                                 <?php elseif (in_groups(['admin'])) : ?>
-                                    <a href="<?= base_url('dashboard/users'); ?>" class="sidebar-link">
+                                    <a href="<?= base_url('dashboard/villages'); ?>" class="sidebar-link">
                                     <?php endif; ?>
                                     <i class="bi bi-grid-fill"></i><span class="text-dark fw-bold">Dashboard</span>
                                     </a>
@@ -148,15 +148,40 @@ $uri3 = $uri[3] ?? '';
                     <?php endif; ?>
 
                     <li class="sidebar-item">
-                        <div class="d-flex justify-content-around">
-                            <a href="https://www.instagram.com/pesonasumpu" class="sidebar-link" target="_blank">
-                                <i class="fa-brands fa-instagram"></i><span>Instagram</span>
-                            </a>
-                            <a href="https://www.tiktok.com/@pesonasumpu2" class="sidebar-link" target="_blank">
-                                <i class="fa-brands fa-tiktok"></i><span>TikTok</span>
-                            </a>
+                        <div class="d-flex justify-content-around" id="socials">
                         </div>
                     </li>
+                    <script>
+                        window.onload = function() {
+                            let socs = '';
+                            $("#socials").empty();
+
+                            console.log('Fungsi ini dijalankan saat halaman dimuat.');
+                            $.ajax({
+                                url: baseUrl + "/api/socials/",
+                                type: "GET",
+                                dataType: "json",
+                                success: function(response) {
+                                    const data = response.data;
+                                    if (data.instagram) {
+                                        socs = socs + '<a href="https://www.instagram.com/' + data.instagram + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-instagram"></i></a>'
+                                    }
+                                    if (data.facebook) {
+                                        socs = socs + '<a href="https://www.facebook.com/' + data.facebook + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-facebook"></i></a>'
+                                    }
+                                    if (data.youtube) {
+                                        socs = socs + '<a href="https://www.youtube.com/' + data.youtube + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-youtube"></i></a>'
+                                    }
+                                    if (data.tiktok) {
+                                        socs = socs + '<a href="https://www.tiktok.com/' + data.tiktok + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-tiktok"></i></a>'
+                                    }
+                                    console.log(data);
+                                    $("#socials").append(socs);
+                                },
+                            });
+
+                        };
+                    </script>
                 </ul>
 
             </div>

@@ -45,6 +45,7 @@ $routes->get('/403', 'Home::error403');
 $routes->get('/login', 'Web\Profile\Profile::login');
 $routes->get('/register', 'Web\Profile\Profile::register');
 $routes->get('/setup', 'LandingPage::setup',  ['filter' => 'role:admin']);
+$routes->post('/setup', 'LandingPage::selectVillage',  ['filter' => 'role:admin']);
 
 // Upload files
 $routes->group('upload', ['namespace' => 'App\Controllers\Web\Upload'], function ($routes) {
@@ -131,6 +132,10 @@ $routes->group('web', ['namespace' => 'App\Controllers\Web'], function ($routes)
     $routes->get('packageService/(:segment)/(:segment)', 'PackageService::getService/$1/$2',  ['filter' => 'role:user']);
     $routes->presenter('packageService',  ['filter' => 'role:user']);
     $routes->delete('packageService/delete/(:segment)/(:segment)/(:segment)', 'PackageService::delete/$1/$2/$3',  ['filter' => 'role:user']);
+    $routes->get('payment', 'PaymentController::createTransaction');
+    $routes->get('payment/(:segment)', 'PaymentController::checkPaymentStatus/$1');
+    $routes->post('saveToken', 'ReservationController::saveToken');
+    $routes->post('reservationRefund', 'Reservation::addAccountRefund', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
 });
 
 // Dashboard
@@ -246,6 +251,7 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Web', 'filter' => '
     $routes->post('reservation/(:segment)', 'Reservation::manualReservation/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:owner']);
 
     $routes->presenter('villages',  ['namespace' => 'App\Controllers\Web\Villages', 'filter' => 'role:admin']);
+    $routes->presenter('homestayCertification',  ['namespace' => 'App\Controllers\Web', 'filter' => 'role:owner']);
 });
 
 // API
@@ -303,7 +309,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
     $routes->get('owner', 'User::owner');
     $routes->resource('facility');
     $routes->post('village', 'Village::getData');
-    $routes->get('touristArea', 'Village::getTouristAreaData');
+    $routes->get('touristVillage', 'Village::gettouristVillageData');
     $routes->get('uniqueAttraction', 'Village::getUniqueAttData');
     $routes->get('villages', 'Village::getVillagesData');
     $routes->get('village/(:segment)', 'Village::getVillageGeom/$1');
@@ -321,6 +327,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
     $routes->get('culList/(:segment)', 'culinaryPlace::culList/$1');
     $routes->get('homestayUnitFac/(:segment)/(:segment)/(:segment)', 'Homestay::homestayUnitFac/$1/$2/$3');
     $routes->get('getHomestayNameByUser/(:segment)', 'Homestay::getNameByUser/$1');
+    $routes->get('socials', 'Village::getSocials');
 });
 
 /*

@@ -29,23 +29,14 @@ class Village extends BaseController
         ];
         return $this->respond($response);
     }
-    public function getTouristAreaData()
+    public function getTouristVillageData()
     {
-        // $content = $this->villageModel->get_tourist_area_data()->getRowArray();
-        $geoJson = json_decode($this->villageModel->get_tourist_area_data()->getRowArray()['geoJson']);
-        $content = [
-            'type' => 'Feature',
-            'geometry' => $geoJson,
-            'properties' => [
-                'id' => 'L01',
-                'name' => 'Lembah Harau Tourist Area',
-            ]
-        ];
+        $content = $this->villageModel->get_tourist_area_data()->getRowArray();
         $response = [
             'data' => $content,
             'status' => 200,
             'message' => [
-                "Success get tourist area data"
+                "Success get village data"
             ]
         ];
         return $this->respond($response);
@@ -156,6 +147,18 @@ class Village extends BaseController
             'status' => 200,
             'message' => [
                 "Success get list of Villages"
+            ]
+        ];
+        return $this->respond($response);
+    }
+    public function getSocials()
+    {
+        $contents = $this->villageModel->check_village()->getRowArray();
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success get Village data"
             ]
         ];
         return $this->respond($response);

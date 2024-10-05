@@ -21,7 +21,7 @@
         </script>
 
         <!-- Object Detail Information -->
-        <div class="col-md-6 col-12">
+        <div class="col-md-12 col-12">
             <div class="card">
                 <div class="card-header text-center">
                     <div class="row align-items-center">
@@ -161,156 +161,17 @@
                 </div>
             </div>
         </div>
+        <?php
+        $total_price = $homestay_unit_total_price + $homestay_activity_total_price;
+        $deposit = $total_price * 20 / 100;
+        $fullPay = $total_price * 80 / 100;
 
-        <div class="col-md-6 col-12">
-            <div class="card">
-                <div class="card-header text-center">
-                    <div class="row align-items-center">
-                        <div class="col">
-                            <h4 class="card-title">Package Reservation</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <?php $package_total_price = 0; ?>
-                    <?php if (empty($package)) : ?>
-                        <center>
-                            <span>No tourism packages purchased</span>
-                        </center>
-                    <?php else : ?>
-                        <div class="card border mb-3">
-                            <div class="row">
-                                <?php if ($package['brochure_url'] != null) : ?>
-                                    <div class="col-md-3 d-flex align-items-center justify-content-center">
-                                        <img width="500px" src="/media/photos/<?= esc($package['brochure_url']) ?>" class="img-fluid rounded-start" alt="..." style="object-fit: cover; height: 170px;">
-                                    </div>
-                                <?php endif; ?>
-                                <?php if ($package['brochure_url'] != null) : ?>
-                                    <div class="col-md-9">
-                                    <?php else : ?>
-                                        <div class="col-md-12">
-                                        <?php endif; ?>
-                                        <div class="card-body">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <h5 class="card-title"><?= esc($package['name']) ?></h5>
-                                                </div>
-                                                <div class="col">
-                                                    <a title="Detail Package" class="btn icon btn-outline-info btn-sm mb-1 me-1 float-end" href="/web/homestayPackage/detail/<?= esc($package['id']); ?>" target="_blank">
-                                                        <i class="fa-solid fa-circle-info"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <p class="card-text">Minimun Capacity : <?= esc($package['min_capacity']) ?> people</p>
-                                            <p class="card-text"><small class="text-dark"><?= esc("Rp " . number_format($package['price'], 0, ',', '.')); ?></small></p>
-                                        </div>
-                                        </div>
-                                    </div>
-                            </div>
-                            <div class="accordion mt-3" id="accordionPanelsStayOpenExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
-                                            Package Activity
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
-                                        <div class="accordion-body">
-                                            <?php foreach ($list_day as $day) : ?>
-                                                <div class="mt-3">
-                                                    <span class="fw-bold">Day <?= esc($day['day']); ?></span>
-                                                    <?php foreach ($list_activity as $activity) : ?>
-                                                        <?php if ($activity['day'] == $day['day']) : ?>
-                                                            <li><?= esc($activity['object_name']); ?>
-                                                                <?php if ($activity['description'] != null) : ?>
-                                                                    <?= esc(' : ' . $activity['description']); ?>
-                                                                <?php endif; ?>
-                                                            </li>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                </div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
-                                            Package Service
-                                        </button>
-                                    </h2>
-                                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
-                                        <div class="accordion-body">
-                                            <div class="mt-3">
-                                                <span class="fw-bold">Include</span>
-                                                <?php foreach ($list_service as $service) : ?>
-                                                    <?php if ($service['status'] == '1') : ?>
-                                                        <li><?= esc($service['name']); ?> </li>
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-                                                <div class="mt-3">
-                                                    <span class="fw-bold">Exclude</span>
-                                                    <?php foreach ($list_service as $service) : ?>
-                                                        <?php if ($service['status'] == '0') : ?>
-                                                            <li><?= esc($service['name']); ?> </li>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col table-responsive mt-3">
-                                <table class="table table-borderless text-dark">
-                                    <tbody>
-                                        <tr>
-                                            <td class="fw-bold">Total People</td>
-                                            <td><?= esc($reservation['total_people']); ?> People</td>
-                                        </tr>
-                                        <?php
-
-                                        if ($package['min_capacity'] == 0) {
-                                            $packageOrder = 1;
-                                        } else {
-                                            $packageOrder = $reservation['total_people'] / $package['min_capacity'];
-                                            if ($packageOrder < 1) {
-                                                $packageOrder = 1;
-                                            } elseif (($reservation['total_people'] % $package['min_capacity'] <= $package['min_capacity'] / 2) && ($reservation['total_people'] % $package['min_capacity'] > 0)) {
-                                                $packageOrder = floor($packageOrder) + 0.5;
-                                            } elseif ($reservation['total_people'] % $package['min_capacity'] > $package['min_capacity'] / 2) {
-                                                $packageOrder = floor($packageOrder) + 1;
-                                            }
-                                        }
-                                        $package_total_price = $packageOrder * $package['price'];
-                                        ?>
-                                        <tr>
-                                            <td class="fw-bold">Package Order</td>
-                                            <td><?= esc($packageOrder); ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="fw-bold">Package Reservation<br>Total Price</td>
-                                            <td><?= esc("Rp " . number_format($package_total_price, 0, ',', '.')); ?></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <?php endif; ?>
-                        </div>
-                </div>
-                <?php
-                $total_price = $homestay_unit_total_price + $homestay_activity_total_price + $package_total_price;
-                $deposit = $total_price * 20 / 100;
-                $fullPay = $total_price * 80 / 100;
-
-                if ($reservation['is_refund'] == '1') {
-                    $refund = $deposit * 50 / 100;
-                } elseif ($reservation['is_refund'] == '0') {
-                    $refund = 0;
-                }
-                ?>
-            </div>
-        </div>
+        if ($reservation['is_refund'] == '1') {
+            $refund = $deposit * 50 / 100;
+        } elseif ($reservation['is_refund'] == '0') {
+            $refund = 0;
+        }
+        ?>
         <div class="row">
             <div class="card">
                 <div class="card-header text-center">
@@ -332,34 +193,8 @@
                                     <td class="fw-bold">Deposit</td>
                                     <td>
                                         : <?= esc("Rp " . number_format($deposit, 0, ',', '.')) ?> <i>*(20% of total price)</i>
-                                        <?php if (($reservation['status'] == '1') && ($reservation['deposit_proof'] == null) && ($reservation['is_rejected'] != '1')) : ?>
-                                            <?php
-                                            $depositDeadline = date("d F Y, H:i", strtotime($reservation['check_in'] . ' - 2 days'));;
-                                            ?>
-                                            <span class="text-danger">(Deadline : <?= esc($depositDeadline) ?>)</span>
-                                        <?php endif; ?>
-                                        <?php if ($reservation['deposit_confirmed_at'] != null) : ?>
-                                            <span class="text-success">(Paid by customer)</span>
-                                        <?php endif; ?>
                                     </td>
                                 </tr>
-                                <?php if (($reservation['deposit_confirmed_at'] != null) && ($reservation['cancelation_reason'] != '1')) : ?>
-                                    <tr>
-                                        <td class="fw-bold">Full Pay</td>
-                                        <td>
-                                            : <?= esc("Rp " . number_format($fullPay, 0, ',', '.')) ?> <i>*(80% of total price)</i>
-                                            <?php if (($reservation['full_paid_proof'] == null) && ($reservation['full_paid_confirmed_at'] == null)) : ?>
-                                                <?php
-                                                $fullPayDeadline = date("d F Y 18:00", strtotime($reservation['check_in']));
-                                                ?>
-                                                <span class="text-danger">(Deadline : <?= esc($fullPayDeadline) ?>)</span>
-                                            <?php endif; ?>
-                                            <?php if ($reservation['full_paid_confirmed_at'] != null) : ?>
-                                                <span class="text-success">(Paid by customer)</span>
-                                            <?php endif; ?>
-                                        </td>
-                                    </tr>
-                                <?php endif; ?>
                                 <?php if ($reservation['is_refund'] == '1') : ?>
                                     <tr>
                                         <td class="fw-bold">Refund</td>
@@ -390,24 +225,8 @@
                                 <?php endif; ?>
                                 <?php if ($reservation['confirmed_at'] != null) : ?>
                                     <tr>
-                                        <td class="fw-bold">Reservation Confirmed at</td>
+                                        <td class="fw-bold">Reservation <?= ($reservation['is_rejected'] == '1') ? 'Rejected' : 'Confirmed' ?> at</td>
                                         <td>: <?= esc(date_format(date_create($reservation['confirmed_at']), "d F Y, H:i")) ?></td>
-                                    </tr>
-                                <?php endif; ?>
-                                <?php if ($reservation['deposit_at'] != null) : ?>
-                                    <tr>
-                                        <td class="fw-bold">Deposit Proof</td>
-                                        <td>: <a href="/media/photos/<?= esc($reservation['deposit_proof']) ?>" target="_blank">See Document</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Deposit Proof uploaded at</td>
-                                        <td>: <?= esc(date_format(date_create($reservation['deposit_at']), "d F Y, H:i")) ?></td>
-                                    </tr>
-                                <?php endif; ?>
-                                <?php if ($reservation['deposit_confirmed_at'] != null) : ?>
-                                    <tr>
-                                        <td class="fw-bold">Deposit Confirmed at</td>
-                                        <td>: <?= esc(date_format(date_create($reservation['deposit_confirmed_at']), "d F Y, H:i")) ?></td>
                                     </tr>
                                 <?php endif; ?>
                                 <?php if ($reservation['canceled_at'] != null) : ?>
@@ -426,36 +245,10 @@
                                         <?php endif; ?>
                                     </tr>
                                 <?php endif; ?>
-                                <?php if ($reservation['refund_paid_at'] != null) : ?>
-                                    <tr>
-                                        <td class="fw-bold">Refund Proof</td>
-                                        <td>: <a href="/media/photos/<?= esc($reservation['refund_proof']) ?>" target="_blank">See Document</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Refund Proof uploaded at</td>
-                                        <td>: <?= esc(date_format(date_create($reservation['refund_paid_at']), "d F Y, H:i")) ?></td>
-                                    </tr>
-                                <?php endif; ?>
                                 <?php if ($reservation['refund_paid_confirmed_at'] != null) : ?>
                                     <tr>
                                         <td class="fw-bold">Refund Paid Confirmed at</td>
                                         <td>: <?= esc(date_format(date_create($reservation['refund_paid_confirmed_at']), "d F Y, H:i")) ?></td>
-                                    </tr>
-                                <?php endif; ?>
-                                <?php if ($reservation['full_paid_at'] != null) : ?>
-                                    <tr>
-                                        <td class="fw-bold">Full Paid Proof</td>
-                                        <td>: <a href="/media/photos/<?= esc($reservation['full_paid_proof']) ?>" target="_blank">See Document</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Full Paid Proof uploaded at</td>
-                                        <td>: <?= esc(date_format(date_create($reservation['full_paid_at']), "d F Y, H:i")) ?></td>
-                                    </tr>
-                                <?php endif; ?>
-                                <?php if ($reservation['full_paid_confirmed_at'] != null) : ?>
-                                    <tr>
-                                        <td class="fw-bold">Full Paid Confirmed at</td>
-                                        <td>: <?= esc(date_format(date_create($reservation['full_paid_confirmed_at']), "d F Y, H:i")) ?></td>
                                     </tr>
                                 <?php endif; ?>
                                 <tr>
@@ -465,25 +258,25 @@
                                             <button title="Reservation Incomplete" class="btn-sm btn-dark float-center" disabled>Incomplete</button>
                                         <?php elseif (($reservation['status'] == '0') && ($reservation['canceled_at'] == null)) : ?>
                                             <button title="Waiting for the homestay owner to accept the reservation" class="btn-sm btn-warning float-center" disabled>Waiting</button>
-                                        <?php elseif (($reservation['status'] == '1') && ($reservation['deposit_proof'] == null) && ($reservation['canceled_at'] == null) && ($reservation['is_rejected'] == '1')) : ?>
+                                        <?php elseif (($reservation['status'] == '1') && ($reservation['canceled_at'] == null) && ($reservation['is_rejected'] == '1')) : ?>
                                             <button title="Reservation Rejected" class="btn-sm btn-danger float-center" disabled>Rejected</button>
-                                        <?php elseif (($reservation['status'] == '1') && ($reservation['deposit_proof'] == null) && ($reservation['canceled_at'] == null)) : ?>
-                                            <button title="Paying Deposit" class="btn-sm btn-success float-center" disabled>Paying Deposit</button>
-                                        <?php elseif (($reservation['deposit_proof'] != null) && ($reservation['deposit_confirmed_at'] == null)) : ?>
-                                            <button title="Waiting for the homestay owner to confirm deposit payment" class="btn-sm btn-warning float-center" disabled>Waiting</button>
-                                        <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '0')) : ?>
-                                            <button title="Reservation Canceled" class="btn-sm btn-danger float-center" disabled>Cancel</button>
+                                        <?php elseif (($reservation['status'] == '1') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Paying Deposit" class="btn-sm btn-info float-center" disabled>Paying Deposit</button>
+                                        <?php elseif (($reservation['status'] == 'Payment Pending') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Payment Pending" class="btn-sm btn-warning float-center" disabled>Payment Pending</button>
+                                        <?php elseif (($reservation['status'] == 'Payment Successful') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Payment Successful" class="btn-sm btn-success float-center" disabled>Payment Successful</button>
+                                        <?php elseif (($reservation['status'] == 'Payment Expired') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Payment Expired" class="btn-sm btn-danger float-center" disabled>Payment Expired</button>
                                         <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] == null)) : ?>
                                             <button title="Waiting for the homestay owner to pay refund" class="btn-sm btn-danger float-center" disabled>Refund</button>
                                         <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] != null) && ($reservation['refund_paid_confirmed_at'] == null)) : ?>
                                             <button title="Waiting for the customer to confirm refund" class="btn-sm btn-danger float-center" disabled>Confirm Refund</button>
                                         <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] != null) && ($reservation['refund_paid_confirmed_at'] != null)) : ?>
+                                            <button title="Reservation Canceled" class="btn-sm btn-danger float-center" disabled>Canceled</button>
+                                        <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '0')) : ?>
                                             <button title="Reservation Canceled" class="btn-sm btn-danger float-center" disabled>Cancel</button>
-                                        <?php elseif (($reservation['deposit_confirmed_at'] != null) && ($reservation['full_paid_proof'] == null)) : ?>
-                                            <button title="Paying Full Price" class="btn-sm btn-success float-center" disabled>Paying Full Price</button>
-                                        <?php elseif (($reservation['full_paid_proof'] != null) && ($reservation['full_paid_confirmed_at'] == null)) : ?>
-                                            <button title="Waiting for the homestay owner to confirm full payment" class="btn-sm btn-warning float-center" disabled>Waiting</button>
-                                        <?php elseif ($reservation['full_paid_confirmed_at'] != null) : ?>
+                                        <?php elseif ($reservation['status'] == 'Done') : ?>
                                             <button title="Reservation Done" class="btn-sm btn-primary float-center" disabled>Done</button>
                                         <?php endif; ?>
                                     </td>
@@ -513,20 +306,6 @@
                                             </a>
                                         </td>
                                     </tr>
-                                <?php elseif (($reservation['deposit_at'] != null) && ($reservation['deposit_confirmed_at'] == null)) : ?>
-                                    <tr>
-                                        <td colspan="2">
-                                            <span class="fw-bold">To Do : </span>
-                                            Confirm deposit payment. Please check the deposit proof first before confirm.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <a title="Confirm Deposit" class="btn icon btn-primary btn-sm mb-1 mt-3" data-bs-toggle="modal" data-bs-target="#confirmDeposit">
-                                                Confirm Deposit
-                                            </a>
-                                        </td>
-                                    </tr>
                                 <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_paid_confirmed_at'] == null)) : ?>
                                     <tr>
                                         <td colspan="2">
@@ -541,19 +320,15 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <?php if ($customer_bank_account == null) : ?>
-                                                <span><i>Customer has not entered his account data</i></span>
+                                            <?php if ($reservation['account_refund'] == null) : ?>
+                                                <span><i>Customer has not entered his refund account</i></span>
                                             <?php else : ?>
                                                 <div class="col-md-4">
                                                     <div class="card border" style="display: flex;">
                                                         <div class="card-body">
                                                             <span class="fw-bold">
-                                                                <?= esc($customer_bank_account['bank_name']) ?><?= ($customer_bank_account['bank_code']) ? ' (' . $customer_bank_account['bank_code'] . ')' : '' ?>
+                                                                <?= esc($reservation['account_refund']) ?>
                                                             </span>
-                                                            <br>
-                                                            Account Number : <?= esc($customer_bank_account['account_number']) ?>
-                                                            <br>
-                                                            Account Name : <?= esc($customer_bank_account['account_name']) ?>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -579,20 +354,6 @@
                                                     </form>
                                                 </div>
                                             <?php endif; ?>
-                                        </td>
-                                    </tr>
-                                <?php elseif (($reservation['full_paid_at'] != null) && ($reservation['full_paid_confirmed_at'] == null)) : ?>
-                                    <tr>
-                                        <td colspan="2">
-                                            <span class="fw-bold">To Do : </span>
-                                            Confirm full payment. Please check the full payment proof first before confirm.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <a title="Confirm Full Payment" class="btn icon btn-primary btn-sm mb-1 mt-3" data-bs-toggle="modal" data-bs-target="#confirmFullPay">
-                                                Confirm Full Payment
-                                            </a>
                                         </td>
                                     </tr>
                                 <?php endif; ?>
@@ -719,97 +480,6 @@
             </div>
         </div>
     <?php endif; ?>
-
-    <!-- Modal Deposit Confirmation -->
-    <?php if (($reservation['deposit_at'] != null) && ($reservation['deposit_confirmed_at'] == null)) : ?>
-        <div class="modal fade" id="confirmDeposit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Deposit Confirmation</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card-body text-dark">
-                            <img src="/media/photos/<?= esc($reservation['deposit_proof']) ?>" class="img-fluid" alt="...">
-                            <form class="form form-vertical" action="/dashboard/reservation/deposit/confirm/<?= esc($reservation['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
-                                <div class="form-body">
-                                    <div class="form-group ">
-                                        <label for="name" class="mt-2">Is this deposit proof correct?</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" name="is_deposit_proof_correct" value="1" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                <i class="fa-solid fa-check"></i> Correct
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" name="is_deposit_proof_correct" value="0" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                <i class="fa-solid fa-xmark"></i> Incorrect
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group ">
-                                        <label for="description" class="form-label">Feedback</label>
-                                        <textarea class="form-control" id="description" name="feedback" rows="4"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary me-1">Save</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
-
-    <!-- Modal Full Pay Confirmation -->
-    <?php if (($reservation['full_paid_at'] != null) && ($reservation['full_paid_confirmed_at'] == null)) : ?>
-        <div class="modal fade" id="confirmFullPay" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Full Pay Confirmation</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="card-body text-dark">
-                            <img src="/media/photos/<?= esc($reservation['full_paid_proof']) ?>" class="img-fluid" alt="...">
-                            <form class="form form-vertical" action="/dashboard/reservation/fullPay/confirm/<?= esc($reservation['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
-                                <div class="form-body">
-                                    <div class="form-group ">
-                                        <label for="name" class="mt-2">Is this full paid proof correct?</label>
-                                        <div class="form-check">
-                                            <input class="form-check-input" name="is_full_paid_proof_correct" value="1" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                <i class="fa-solid fa-check"></i> Correct
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" name="is_full_paid_proof_correct" value="0" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                <i class="fa-solid fa-xmark"></i> Incorrect
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group ">
-                                        <label for="description" class="form-label">Feedback</label>
-                                        <textarea class="form-control" id="description" name="feedback" rows="4"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary me-1">Save</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
-
 
 </section>
 

@@ -5,6 +5,7 @@
 <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/filepond-plugin-media-preview@1.0.11/dist/filepond-plugin-media-preview.min.css">
 <link rel="stylesheet" href="<?= base_url('assets/css/pages/form-element-select.css'); ?>">
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="<?= config('Midtrans')->clientKey; ?>"></script>
 <style>
     .filepond--root {
         width: 100%;
@@ -188,6 +189,15 @@
             $refund = 0;
         }
         ?>
+        <?php if (($reservation['status'] == null) && ($reservation['canceled_at'] == null)) : ?>
+            <div class="row">
+                <div class="col">
+                    <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($deposit); ?>','<?= esc($total_price); ?>')">
+                        <i class="fa-solid fa-check"></i> Done
+                    </a>
+                </div>
+            </div>
+        <?php endif; ?>
         <div class="row">
             <div class="card">
                 <div class="card-header text-center">
@@ -209,29 +219,8 @@
                                     <td class="fw-bold">Deposit</td>
                                     <td>
                                         : <?= esc("Rp " . number_format($deposit, 0, ',', '.')) ?> <i>*(20% of total price)</i>
-                                        
-                                         
-                                        
-                                        
                                     </td>
                                 </tr>
-                                
-                                    <tr>
-                                        <td class="fw-bold">Full Pay</td>
-                                        <td>
-                                            : <?= esc("Rp " . number_format($fullPay, 0, ',', '.')) ?> <i>*(80% of total price)</i>
-
-                                                <?php
-                                                $fullPayDeadline = date("d F Y 18:00", strtotime($reservation['check_in']));
-                                                ?>
-                                                <span class="text-danger">(Deadline : <?= esc($fullPayDeadline) ?>)</span>
-                                            
-                                            
-                                                <span class="text-success">(Paid by customer)</span>
-                                           
-                                        </td>
-                                    </tr>
-                                
                                 <?php if ($reservation['is_refund'] == '1') : ?>
                                     <tr>
                                         <td class="fw-bold">Refund</td>
@@ -254,16 +243,19 @@
                         <hr class="hr">
 
                         <div class="col-md-11">
-                            <?php if ($reservation['status'] == '1') : ?>
+                            <?php if ($reservation['status'] == 'asasa') : ?>
                                 <a title="Download Invoice" class="btn icon btn-success btn-sm mt-3 float-end" href="/web/reservation/invoice/<?= esc($reservation['id']) ?>" target="_blank">
                                     <i class="fa-solid fa-print"></i> Invoice
                                 </a>
                             <?php endif; ?>
-                            
+
+                            <?php if (($reservation['status'] == 'Payment Successful') && ($reservation['canceled_at'] == null)) : ?>
                                 <a title="Cancel Reservation" class="btn icon btn-danger btn-sm mt-3 float-end" onclick="confirmCancelReservation('<?= esc($reservation['id']); ?>')">
                                     <i class="fa-solid fa-xmark"></i> Cancel Reservation
                                 </a>
-                            
+                            <?php endif; ?>
+
+
                         </div>
 
                         <?php
@@ -288,12 +280,12 @@
                                 <?php endif; ?>
                                 <?php if ($reservation['confirmed_at'] != null) : ?>
                                     <tr>
-                                        <td class="fw-bold">Reservation Confirmed at</td>
+                                        <td class="fw-bold">Reservation <?= ($reservation['is_rejected'] == '1') ? 'Rejected' : 'Confirmed' ?> at</td>
                                         <td>: <?= esc(date_format(date_create($reservation['confirmed_at']), "d F Y, H:i")) ?></td>
                                     </tr>
                                 <?php endif; ?>
-                                
-                              
+
+
                                 <?php if ($reservation['canceled_at'] != null) : ?>
                                     <tr>
                                         <td class="fw-bold">Canceled at</td>
@@ -310,38 +302,18 @@
                                         <?php endif; ?>
                                     </tr>
                                 <?php endif; ?>
-                                
+                                <?php if ($reservation['refund_proof']) : ?>
                                     <tr>
                                         <td class="fw-bold">Refund Proof</td>
                                         <td>: <a href="/media/photos/<?= esc($reservation['refund_proof']) ?>" target="_blank">See Document</a></td>
                                     </tr>
-                                    <tr>
-                                        <td class="fw-bold">Refund Proof uploaded at</td>
-                                        
-                                    </tr>
-                                
+                                <?php endif; ?>
                                 <?php if ($reservation['refund_paid_confirmed_at'] != null) : ?>
                                     <tr>
                                         <td class="fw-bold">Refund Paid Confirmed at</td>
                                         <td>: <?= esc(date_format(date_create($reservation['refund_paid_confirmed_at']), "d F Y, H:i")) ?></td>
                                     </tr>
                                 <?php endif; ?>
-                                
-                                    <tr>
-                                        <td class="fw-bold">Full Paid Proof</td>
-                                        
-                                    </tr>
-                                    <tr>
-                                        <td class="fw-bold">Full Paid Proof uploaded at</td>
-                                        
-                                    </tr>
-                                
-                                
-                                    <tr>
-                                        <td class="fw-bold">Full Paid Confirmed at</td>
-                                        
-                                    </tr>
-                                
                                 <tr>
                                     <td class="fw-bold">Status</td>
                                     <td>:
@@ -349,79 +321,57 @@
                                             <button title="Reservation Incomplete" class="btn-sm btn-dark float-center" disabled>Incomplete</button>
                                         <?php elseif (($reservation['status'] == '0') && ($reservation['canceled_at'] == null)) : ?>
                                             <button title="Waiting for the homestay owner to accept the reservation" class="btn-sm btn-warning float-center" disabled>Waiting</button>
-                                        <?php elseif (($reservation['status'] == '1') && ($reservation['deposit_proof'] == null) && ($reservation['canceled_at'] == null) && ($reservation['is_rejected'] == '1')) : ?>
+                                        <?php elseif (($reservation['status'] == '1') && ($reservation['canceled_at'] == null) && ($reservation['is_rejected'] == '1')) : ?>
                                             <button title="Reservation Rejected" class="btn-sm btn-danger float-center" disabled>Rejected</button>
-                                        <?php elseif (($reservation['status'] == '1') && ($reservation['deposit_proof'] == null) && ($reservation['canceled_at'] == null)) : ?>
-                                            <button title="Paying Deposit" class="btn-sm btn-success float-center" disabled>Paying Deposit</button>
-                                        <?php elseif (($reservation['deposit_proof'] != null) && ($reservation['deposit_confirmed_at'] == null)) : ?>
-                                            <button title="Waiting for the homestay owner to confirm deposit payment" class="btn-sm btn-warning float-center" disabled>Waiting</button>
-                                        <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '0')) : ?>
-                                            <button title="Reservation Canceled" class="btn-sm btn-danger float-center" disabled>Cancel</button>
+                                        <?php elseif (($reservation['status'] == '1') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Paying Deposit" class="btn-sm btn-info float-center" disabled>Paying Deposit</button>
+                                        <?php elseif (($reservation['status'] == 'Payment Pending') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Payment Pending" class="btn-sm btn-warning float-center" disabled>Payment Pending</button>
+                                        <?php elseif (($reservation['status'] == 'Payment Successful') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Payment Successful" class="btn-sm btn-success float-center" disabled>Payment Successful</button>
+                                        <?php elseif (($reservation['status'] == 'Payment Expired') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Payment Expired" class="btn-sm btn-danger float-center" disabled>Payment Expired</button>
                                         <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] == null)) : ?>
                                             <button title="Waiting for the homestay owner to pay refund" class="btn-sm btn-danger float-center" disabled>Refund</button>
                                         <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] != null) && ($reservation['refund_paid_confirmed_at'] == null)) : ?>
                                             <button title="Waiting for the customer to confirm refund" class="btn-sm btn-danger float-center" disabled>Confirm Refund</button>
                                         <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] != null) && ($reservation['refund_paid_confirmed_at'] != null)) : ?>
-                                            <button title="Reservation Canceled" class="btn-sm btn-danger float-center" disabled>Cancel</button>
-                                        <?php elseif (($reservation['deposit_confirmed_at'] != null) && ($reservation['full_paid_proof'] == null)) : ?>
-                                            <button title="Paying Full Price" class="btn-sm btn-success float-center" disabled>Paying Full Price</button>
-                                        <?php elseif (($reservation['full_paid_proof'] != null) && ($reservation['full_paid_confirmed_at'] == null)) : ?>
-                                            <button title="Waiting for the homestay owner to confirm full payment" class="btn-sm btn-warning float-center" disabled>Waiting</button>
-                                        <?php elseif ($reservation['full_paid_confirmed_at'] != null) : ?>
+                                            <button title="Reservation Canceled" class="btn-sm btn-danger float-center" disabled>Canceled</button>
+                                        <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '0')) : ?>
+                                            <button title="Reservation Canceled" class="btn-sm btn-danger float-center" disabled>Canceled</button>
+                                        <?php elseif ($reservation['status'] == 'Done') : ?>
                                             <button title="Reservation Done" class="btn-sm btn-primary float-center" disabled>Done</button>
                                         <?php endif; ?>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <hr class="hr">
+                                    </td>
+                                </tr>
+                                <?php if ((($reservation['status'] == '1') || ($reservation['status'] == 'Payment Pending')) && ($reservation['canceled_at'] == null) && ($reservation['is_rejected'] != '1')) : ?>
+                                    <tr>
+                                        <td colspan="2">
+                                            <span class="fw-bold">To Do : </span>
+                                            Pay deposit by click button bellow
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <a class="btn icon btn-primary btn-sm mb-1 mt-3" id="pay-button">
+                                                Pay Deposit
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
                                 <?php if ($reservation['feedback'] != null) : ?>
                                     <tr>
                                         <td class="fw-bold">Feedback</td>
                                         <td>: <?= esc($reservation['feedback']) ?></td>
                                     </tr>
                                 <?php endif; ?>
-                                <tr>
-                                    <td colspan="2">
-                                        <hr class="hr">
-                                    </td>
-                                </tr>
 
-                                <?php if (($reservation['status'] == '1') && ($reservation['deposit_confirmed_at'] == null) && ($reservation['canceled_at'] == null) && ($reservation['is_rejected'] != '1')) : ?>
-                                    <tr>
-                                        <td colspan="2">
-                                            <span class="fw-bold">To Do : </span>
-                                            Pay deposit and then upload payment proof.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            Pay to :
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <div class="col-md-4 mt-5">
-                                                <form class="form form-vertical" action="/web/reservation/payDeposit/<?= esc($reservation['id']); ?>" method="post" enctype="multipart/form-data">
-                                                    <div class="form-body">
-                                                        <div class="form-group mb-4">
-                                                            <label for="gallery" class="form-label">
-                                                                <?php if ($reservation['deposit_proof'] == null) : ?>
-                                                                    Deposit Payment Proof
-                                                                <?php else : ?>
-                                                                    Change Deposit Payment Proof
-                                                                    <?php if ($reservation['is_deposit_proof_correct'] == '0') : ?>
-                                                                        <br>
-                                                                        <span class="text-danger"><i>*deposit proof that you uploaded previously is incorrect</i></span>
-                                                                    <?php endif; ?>
-                                                                <?php endif; ?>
-                                                            </label>
-                                                            <input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery" required>
-                                                        </div>
-                                                        <button type="submit" class="btn btn-primary">Save</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] == null)) : ?>
+                                <?php if (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] == null)) : ?>
                                     <tr>
                                         <td colspan="2">
                                             <span class="fw-bold">To Do : </span>
@@ -430,32 +380,15 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <div class="col-md-4">
-                                                <form class="form form-vertical" action="<?= ($customer_bank_account) ? '/web/reservation/bankAccount/update/' . $customer_bank_account['id'] : '/web/reservation/bankAccount/create' ?>" method="post" enctype="multipart/form-data">
+                                            <div class="col-md-6">
+                                                <form class="form form-vertical" action="<?= base_url('web/reservationRefund'); ?>" method="post" enctype="multipart/form-data">
                                                     <div class="form-body">
-                                                        <input type="hidden" name="user_id" value="<?= esc($reservation['customer_id']); ?>">
                                                         <input type="hidden" name="reservation_id" value="<?= esc($reservation['id']); ?>">
                                                         <div class="form-group">
-                                                            <label for="name" class="mb-2">Bank Name</label>
-                                                            <input type="text" id="bank_name" class="form-control" name="bank_name" value="<?= ($customer_bank_account) ? $customer_bank_account['bank_name'] : '' ?>" required>
+                                                            <label for="name" class="mb-2">Account Refund (Ex: Name XX - Bank XX - AccNumber)</label>
+                                                            <textarea class="form-control" name="account_refund" placeholder="Budi Setiawan - Bank ABC - 12345678" required><?= $reservation['account_refund'] ? $reservation['account_refund'] : '' ?></textarea>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <label for="name" class="mb-2">Bank Code</label>
-                                                            <input type="text" id="bank_code" class="form-control" name="bank_code" value="<?= ($customer_bank_account && $customer_bank_account['bank_code']) ? $customer_bank_account['bank_code'] : '' ?>">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="name" class="mb-2">Account Number</label>
-                                                            <input type="text" id="account_number" class="form-control" name="account_number" value="<?= ($customer_bank_account) ? $customer_bank_account['account_number'] : '' ?>" required>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="name" class="mb-2">Account Name</label>
-                                                            <input type="text" id="account_name" class="form-control" name="account_name" value="<?= ($customer_bank_account) ? $customer_bank_account['account_name'] : '' ?>" required>
-                                                        </div>
-                                                        <?php if ($customer_bank_account == null) : ?>
-                                                            <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
-                                                        <?php else : ?>
-                                                            <button type="submit" class="btn btn-primary me-1 my-3">Save Changes</button>
-                                                        <?php endif; ?>
+                                                        <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -475,57 +408,7 @@
                                             </a>
                                         </td>
                                     </tr>
-                                
-                                    <tr>
-                                        <td colspan="2">
-                                            <span class="fw-bold">To Do : </span>
-                                            Pay full price excluding deposit and then upload payment proof.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            Pay to :
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <div class="col-md-4">
-                                                <div class="card border" style="display: flex;">
-                                                    <div class="card-body">
-                                                        <span class="fw-bold">
-                                                            <?= esc($homestay_owner_bank_account['bank_name']) ?>
-                                                        </span>
-                                                        <br>
-                                                        Account Number : <?= esc($homestay_owner_bank_account['account_number']) ?>
-                                                        <br>
-                                                        Account Name : <?= esc($homestay_owner_bank_account['account_name']) ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mt-5">
-                                                <form class="form form-vertical" action="/web/reservation/payFull/<?= esc($reservation['id']); ?>" method="post" enctype="multipart/form-data">
-                                                    <div class="form-body">
-                                                        <div class="form-group mb-4">
-                                                            <label for="gallery" class="form-label">
-                                                                <?php if ($reservation['full_paid_proof'] == null) : ?>
-                                                                    Full Payment Proof
-                                                                <?php else : ?>
-                                                                    Change Full Payment Proof
-                                                                    <?php if ($reservation['is_full_paid_proof_correct'] == '0') : ?>
-                                                                        <br>
-                                                                        <span class="text-danger"><i>*full paid proof that you uploaded previously is incorrect</i></span>
-                                                                    <?php endif; ?>
-                                                                <?php endif; ?>
-                                                            </label>
-                                                            <input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery" required>
-                                                        </div>
-                                                        <button type="submit" class="btn btn-primary">Save</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                
+                                <?php elseif (($reservation['status'] == 'Done') && ($reservation['rating'] == null) && ($reservation['review'] == null)) : ?>
                                     <tr>
                                         <td colspan="2">
                                             <span class="fw-bold">To Do : </span>
@@ -731,6 +614,39 @@ if (strtotime(date("d F Y, H:i")) < strtotime($cancelDeadline)) {
 
 ?>
 <span><?= esc(strtotime(date("d F Y, H:i"))) ?><br><?= esc(strtotime($cancelDeadline)) ?></span>
+<?php if (isset($snapToken)) : ?>
+    <script type="text/javascript">
+        var payButton = document.getElementById('pay-button');
+
+        payButton.addEventListener('click', function() {
+
+            console.log('<?= $snapToken; ?>');
+            snap.pay('<?= $snapToken; ?>', {
+                // Optional callback after payment success
+                onSuccess: function(result) {
+                    console.log('Payment Success:', result);
+                    // Refresh the page after success
+                    location.reload();
+                },
+                // Optional callback when payment is pending
+                onPending: function(result) {
+                    console.log('Payment Pending:', result);
+                    // Refresh the page for pending status as well
+                    location.reload();
+                },
+                // Optional callback when payment fails
+                onError: function(result) {
+                    console.log('Payment Error:', result);
+                    alert('Payment failed. Please try again.');
+                },
+                // Optional callback when user closes the payment window
+                onClose: function() {
+                    alert('You closed the payment window without finishing the payment.');
+                }
+            }); // Use the Snap token from the controller
+        });
+    </script>
+<?php endif; ?>
 <script>
     function confirmCancelReservation(reservation_id) {
         Swal.fire({

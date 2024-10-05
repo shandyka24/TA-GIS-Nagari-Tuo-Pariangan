@@ -175,7 +175,7 @@ function digitCities() {
           strokeWeight: 0.5,
           strokeColor: "#005000",
           fillOpacity: 0.2,
-          clickable: true,
+          clickable: false,
           title: item.name,
         });
         village.addListener("click", function (event) {
@@ -279,25 +279,62 @@ function digitVillage() {
     },
   });
 }
-function digitTouristArea() {
-  const village = new google.maps.Data();
+function digitTourismVillage() {
+  if (currentVillage) {
+    currentVillage.setMap(null); // Menghapus polygon sebelumnya
+  }
   $.ajax({
-    url: baseUrl + "/api/touristArea",
+    url: baseUrl + "/api/touristVillage",
     type: "GET",
     dataType: "json",
     success: function (response) {
       const data = response.data;
-      console.log(data);
-      // village.loadGeoJson("/map/" + data.geom_file);
-      village.addGeoJson(data);
-      village.setStyle({
-        fillColor: "#ff0000",
-        strokeWeight: 0.8,
-        strokeColor: "#005000",
-        fillOpacity: 0.1,
-        clickable: false,
+
+      // Buat instance baru dari google.maps.Data untuk village baru
+      currentVillage = new google.maps.Data();
+      currentVillage.loadGeoJson(
+        "/map/tourism_village/" + data.geom_file,
+        null,
+        function (features) {
+          let bounds = new google.maps.LatLngBounds();
+
+          // Mendapatkan bounds dari semua fitur GeoJSON
+          features.forEach(function (feature) {
+            feature.getGeometry().forEachLatLng(function (latlng) {
+              bounds.extend(latlng);
+            });
+          });
+
+          // Fokuskan peta ke area village
+          map.fitBounds(bounds);
+
+          // Mendapatkan pusat dari bounds
+          let center = bounds.getCenter();
+
+          // Set style untuk village polygon
+          currentVillage.setStyle({
+            fillColor: "#f3fa32",
+            strokeWeight: 0.5,
+            strokeColor: "#005000",
+            fillOpacity: 0.2,
+            clickable: false,
+            title: data.name,
+          });
+
+          // Tampilkan info window di tengah village
+          villageInfoWindow.setContent(data.name);
+          villageInfoWindow.setPosition(center);
+        }
+      );
+      //Tambahkan listener untuk klik pada village
+      currentVillage.addListener("click", function (event) {
+        villageInfoWindow.close();
+        villageInfoWindow.setContent(data.name);
+        villageInfoWindow.setPosition(event.latLng);
+        villageInfoWindow.open(map);
       });
-      village.setMap(map);
+      // Set village polygon pada peta
+      currentVillage.setMap(map);
     },
   });
 }
@@ -1973,6 +2010,19 @@ function viewLegend() {
   }
 }
 
+let trafficVisible = false;
+
+const trafficLayer = new google.maps.TrafficLayer();
+
+function showTraffic() {
+  if (trafficVisible) {
+    trafficLayer.setMap(null); // Remove traffic layer from the map
+  } else {
+    trafficLayer.setMap(map); // Add traffic layer to the map
+  }
+  trafficVisible = !trafficVisible;
+}
+
 // list object for new visit history
 function getObjectByCategory() {
   const category = document.getElementById("category").value;
@@ -2439,16 +2489,20 @@ function getVillageGeom(id_village) {
     '<div class="form-body">' +
     '<input type="hidden" name="id_village" value="' +
     id_village +
-    '">' +
+    '" required>' +
+    '<div class="form-group mb-4">' +
+    '<label for="address" class="form-label">Address</label>' +
+    '<textarea class="form-control" id="address" name="address" rows="2" required></textarea>' +
+    "</div>" +
     '<div class="form-group mb-4">' +
     '<label for="description" class="form-label">Description</label>' +
-    '<textarea class="form-control" id="description" name="description" rows="4"></textarea>' +
+    '<textarea class="form-control" id="description" name="description" rows="4" required></textarea>' +
     "</div>" +
     '<div class="row">' +
     '<div class="form-group col-md-4 col-12 mb-4">' +
     '<label for="capacity" class="mb-2">Open</label>' +
     '<div class="input-group">' +
-    '<input type="time" id="capacity" class="form-control" name="open" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="">' +
+    '<input type="time" id="capacity" class="form-control" name="open" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="" required>' +
     '<span class="input-group-text">WIB</span>' +
     "</div>" +
     "</div>" +
@@ -2466,9 +2520,15 @@ function getVillageGeom(id_village) {
     '<div class="form-group col-md-4 col-12 mb-4">' +
     '<label for="capacity" class="mb-2">Close</label>' +
     '<div class="input-group">' +
-    '<input type="time" id="capacity" class="form-control" name="close" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="">' +
+    '<input type="time" id="capacity" class="form-control" name="close" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="" required>' +
     '<span class="input-group-text">WIB</span>' +
     "</div>" +
+    "</div>" +
+    "</div>" +
+    '<div class="row mt-3">' +
+    '<div class="form-group col-md-6 col-12 mb-4">' +
+    '<label for="email" class="mb-2">Email</label>' +
+    '<input type="email" id="email" class="form-control" name="email" placeholder="Email" aria-label="Ticket Price" aria-describedby="ticket-price" value="">' +
     "</div>" +
     "</div>" +
     '<div class="row mt-3">' +
@@ -2614,7 +2674,7 @@ function getVillageGeom(id_village) {
 
       // Validasi jumlah file yang diupload
       if (uploadedPhotos < 4) {
-        alert("Anda harus mengupload minimal 4 gambar.");
+        Swal.fire("You must upload a minimum of 4 photos!");
       } else {
         // alert("Form valid dan bisa dikirim!");
         // Lakukan pengiriman form secara manual jika validasi berhasil
@@ -3751,6 +3811,7 @@ function getOrderField(
   total_people = null,
   total_room = null
 ) {
+  console.log(id);
   additional_amenities_id = id.substring(0, 2);
   is_order_count_per_day = id.substring(2, 3);
   is_order_count_per_person = id.substring(3, 4);
@@ -3859,6 +3920,7 @@ function getOrderField(
     }
     document.getElementById("totalOrder").setAttribute("value", total_order);
     total_price = total_order * price;
+    console.log(price);
     document.getElementById("totalPrice").setAttribute("value", total_price);
   }
 }

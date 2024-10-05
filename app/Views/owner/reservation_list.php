@@ -59,25 +59,25 @@ $users = in_array('users', $uri);
                                             <button title="Reservation Incomplete" class="btn-sm btn-dark float-center" disabled>Incomplete</button>
                                         <?php elseif (($item['status'] == '0') && ($item['canceled_at'] == null)) : ?>
                                             <button title="Waiting for the homestay owner to accept the reservation" class="btn-sm btn-warning float-center" disabled>Waiting</button>
-                                        <?php elseif (($item['status'] == '1') && ($item['deposit_proof'] == null) && ($item['canceled_at'] == null) && ($item['is_rejected'] == '1')) : ?>
+                                        <?php elseif (($item['status'] == '1') && ($item['canceled_at'] == null) && ($item['is_rejected'] == '1')) : ?>
                                             <button title="Reservation Rejected" class="btn-sm btn-danger float-center" disabled>Rejected</button>
-                                        <?php elseif (($item['status'] == '1') && ($item['deposit_proof'] == null) && ($item['canceled_at'] == null)) : ?>
-                                            <button title="Paying Deposit" class="btn-sm btn-success float-center" disabled>Paying Deposit</button>
-                                        <?php elseif (($item['deposit_proof'] != null) && ($item['deposit_confirmed_at'] == null)) : ?>
-                                            <button title="Waiting for the homestay owner to confirm deposit payment" class="btn-sm btn-warning float-center" disabled>Waiting</button>
-                                        <?php elseif (($item['canceled_at'] != null) && ($item['is_refund'] == '0')) : ?>
-                                            <button title="Reservation Canceled" class="btn-sm btn-danger float-center" disabled>Cancel</button>
+                                        <?php elseif (($item['status'] == '1') && ($item['canceled_at'] == null)) : ?>
+                                            <button title="Paying Deposit" class="btn-sm btn-info float-center" disabled>Paying Deposit</button>
+                                        <?php elseif (($item['status'] == 'Payment Pending') && ($item['canceled_at'] == null)) : ?>
+                                            <button title="Payment Pending" class="btn-sm btn-warning float-center" disabled>Payment Pending</button>
+                                        <?php elseif (($item['status'] == 'Payment Successful') && ($item['canceled_at'] == null)) : ?>
+                                            <button title="Payment Successful" class="btn-sm btn-success float-center" disabled>Payment Successful</button>
+                                        <?php elseif (($item['status'] == 'Payment Expired') && ($item['canceled_at'] == null)) : ?>
+                                            <button title="Payment Expired" class="btn-sm btn-danger float-center" disabled>Payment Expired</button>
                                         <?php elseif (($item['canceled_at'] != null) && ($item['is_refund'] == '1') && ($item['refund_proof'] == null)) : ?>
                                             <button title="Waiting for the homestay owner to pay refund" class="btn-sm btn-danger float-center" disabled>Refund</button>
                                         <?php elseif (($item['canceled_at'] != null) && ($item['is_refund'] == '1') && ($item['refund_proof'] != null) && ($item['refund_paid_confirmed_at'] == null)) : ?>
                                             <button title="Waiting for the customer to confirm refund" class="btn-sm btn-danger float-center" disabled>Confirm Refund</button>
                                         <?php elseif (($item['canceled_at'] != null) && ($item['is_refund'] == '1') && ($item['refund_proof'] != null) && ($item['refund_paid_confirmed_at'] != null)) : ?>
-                                            <button title="Reservation Canceled" class="btn-sm btn-danger float-center" disabled>Cancel</button>
-                                        <?php elseif (($item['deposit_confirmed_at'] != null) && ($item['full_paid_proof'] == null)) : ?>
-                                            <button title="Paying Full Price" class="btn-sm btn-success float-center" disabled>Paying Full Price</button>
-                                        <?php elseif (($item['full_paid_proof'] != null) && ($item['full_paid_confirmed_at'] == null)) : ?>
-                                            <button title="Waiting for the homestay owner to confirm full payment" class="btn-sm btn-warning float-center" disabled>Waiting</button>
-                                        <?php elseif ($item['full_paid_confirmed_at'] != null) : ?>
+                                            <button title="Reservation Canceled" class="btn-sm btn-danger float-center" disabled>Canceled</button>
+                                        <?php elseif (($item['canceled_at'] != null) && ($item['is_refund'] == '0')) : ?>
+                                            <button title="Reservation Canceled" class="btn-sm btn-danger float-center" disabled>Canceled</button>
+                                        <?php elseif ($item['status'] == 'Done') : ?>
                                             <button title="Reservation Done" class="btn-sm btn-primary float-center" disabled>Done</button>
                                         <?php endif; ?>
                                     </td>
@@ -85,11 +85,6 @@ $users = in_array('users', $uri);
                                         <a title="Detail Reservation" class="btn icon btn-outline-info btn-sm" href="reservation/<?= esc($item['id']); ?>">
                                             <i class="fa-solid fa-circle-info"></i>
                                         </a>
-                                        <?php if ($item['status'] != '1') : ?>
-                                            <a title="Delete Resrvation" class="btn icon btn-outline-danger btn-sm" onclick="deleteObject('<?= esc($item['id']); ?>','<?= esc($item['id']); ?>','false')">
-                                                <i class="fa-solid fa-trash"></i>
-                                            </a>
-                                        <?php endif; ?>
                                     </td>
                                 </tr>
                                 <?php $i++ ?>

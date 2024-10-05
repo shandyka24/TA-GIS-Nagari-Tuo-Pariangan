@@ -44,7 +44,7 @@ $uri3 = $uri[3] ?? '';
                     <?php if (in_groups(['admin'])) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'villages') ? 'active' : '' ?>">
                             <a href="<?= base_url('dashboard/villages'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-map-location-dot"></i><span class="text-dark fw-bold"> Villages</span>
+                                <i class="fa-solid fa-map-location-dot"></i><span class="text-dark fw-bold"> Village</span>
                             </a>
                         </li>
                     <?php endif; ?>

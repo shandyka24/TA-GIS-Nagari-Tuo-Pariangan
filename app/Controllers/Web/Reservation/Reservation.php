@@ -27,6 +27,9 @@ use App\Models\Souvenir\SouvenirPlaceModel;
 use App\Models\Worship\WorshipPlaceModel;
 // use App\Models\EventModel;
 // use App\Models\UserBankAccountModel;
+use Myth\Auth\Models\UserModel;
+
+use App\Controllers\Web\PaymentController;
 
 class Reservation extends ResourcePresenter
 {
@@ -54,6 +57,9 @@ class Reservation extends ResourcePresenter
     protected $worshipPlaceModel;
     // protected $eventModel;
     // protected $userBankAccountModel;
+    protected $userModel;
+
+    protected $paymentController;
 
     protected $helpers = ['auth', 'url', 'filesystem'];
 
@@ -81,6 +87,9 @@ class Reservation extends ResourcePresenter
         $this->worshipPlaceModel = new WorshipPlaceModel();
         // $this->eventModel = new EventModel();
         // $this->userBankAccountModel = new UserBankAccountModel();
+        $this->userModel = new UserModel();
+
+        $this->paymentController = new PaymentController();
     }
 
     public function listReservation()
@@ -88,14 +97,22 @@ class Reservation extends ResourcePresenter
         $reservations = $this->reservationModel->get_list_reservation_by_cus_id(user()->id)->getResultArray();
 
         foreach ($reservations as $reservation) {
-            if ($reservation['canceled_at'] == null) {
+            if (($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
                 $checkIsReservationCancel = $this->checkIsReservationCancel($reservation);
+            }
+
+            if (($reservation['confirmed_at'] != null) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
+                $checkPaymentStatus = $this->checkPaymentStatus($reservation);
+            }
+
+            if ($reservation['status'] == 'Payment Successful') {
+                $checkIsReservationDone = $this->checkIsReservationDone($reservation);
             }
         }
 
         $reservations = $this->reservationModel->get_list_reservation_by_cus_id(user()->id)->getResultArray();
 
-        
+
         $data = [
             'title' => 'Reservation',
             'data' => $reservations,
@@ -245,13 +262,17 @@ class Reservation extends ResourcePresenter
             $requestData = [
                 'id' => $new_id,
                 'check_in' => $request['check_in'] . ' 06:00',
-                'total_people' => $request['total_people']
+                'total_people' => $request['total_people'],
+                'total_price' => $total_price,
+                'status' => 'Done'
             ];
         } else {
             $requestData = [
                 'id' => $new_id,
                 'check_in' => $request['check_in'] . ' 14:00',
-                'total_people' => $request['total_people']
+                'total_people' => $request['total_people'],
+                'total_price' => $total_price,
+                'status' => 'Done'
             ];
         }
 
@@ -276,7 +297,7 @@ class Reservation extends ResourcePresenter
         }
 
         if ($addReservation) {
-            return redirect()->to(base_url('web/reservation/detail/' . $new_id));
+            return redirect()->to(base_url('dashboard/reservation/detail/' . $new_id));
         } else {
             return redirect()->back()->withInput();
         }
@@ -290,12 +311,53 @@ class Reservation extends ResourcePresenter
             return redirect()->to(base_url('web/reservation'));
         }
 
-        if ($reservation['canceled_at'] == null) {
+        if (($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
             $checkIsReservationCancel = $this->checkIsReservationCancel($reservation);
+        }
+        if (($reservation['confirmed_at'] != null) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
+
+            $checkPayment = $this->paymentController->checkPaymentStatus($reservation['id']);
+            // dd($checkPayment);
+            if (strpos($checkPayment, "Transaction doesn't exist") !== false) {
+                $transactionDetails = array(
+                    'order_id' => $reservation['id'],
+                    'gross_amount' => $reservation['deposit'], // Amount in IDR (100,000)
+                );
+
+                $customer = $this->userModel->get_user_by_id($reservation['customer_id'])->getRowArray();
+
+                $customerDetails = array(
+                    'first_name' => $customer['first_name'],
+                    'last_name' => $customer['last_name'],
+                    'email' => $customer['email'],
+                    'phone' => $customer['phone'],
+                );
+
+                $snapToken = $this->paymentController->createTransaction($transactionDetails, $customerDetails);
+                $this->reservationModel->saveSnapToken($reservation['id'], $snapToken);
+            } elseif ($checkPayment == 'Pending') {
+                $snapToken = $reservation['snap_token'];
+                $this->reservationModel->update_status($reservation['id'], 'Payment Pending');
+            } elseif ($checkPayment == 'Settlement') {
+                $this->reservationModel->update_status($reservation['id'], 'Payment Successful');
+            } elseif ($checkPayment == 'Expire') {
+                $this->reservationModel->update_status($reservation['id'], 'Payment Expired');
+                $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reservation_by_id($reservation['id'])->getResultArray();
+
+                foreach ($reservation_detail as $reservationDetail) {
+                    $this->reservationHomestayUnitDetailBackUpModel->add_reservation_detail_api($reservationDetail);
+                }
+                $this->reservationHomestayUnitDetailModel->delete_reserv_det_by_reserv_id($reservation['id']);
+            }
+        }
+
+        if ($reservation['status'] == 'Payment Successful') {
+            $checkIsReservationDone = $this->checkIsReservationDone($reservation);
         }
         $reservation = $this->reservationModel->get_reservation_by_id($id)->getRowArray();
 
-        if ($reservation['canceled_at'] != null) {
+
+        if (($reservation['canceled_at'] != null) || ($reservation['is_rejected'] == '1') || ($reservation['status'] == 'Payment Expired')) {
             $reservation_detail = $this->reservationHomestayUnitDetailBackUpModel->get_reservation_by_id($id)->getResultArray();
         } else {
             $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reservation_by_id($id)->getResultArray();
@@ -361,7 +423,7 @@ class Reservation extends ResourcePresenter
             $reservation_additional_amenities[$i]['image_url'] = $amenities['image_url'];
             $reservation_additional_amenities[$i]['id'] = $reservation_additional_amenities[$i]['additional_amenities_id'];
         }
-        
+
 
         $data = [
             'title' => 'Reservation',
@@ -371,12 +433,8 @@ class Reservation extends ResourcePresenter
             'reservation_additional_amenities' => $reservation_additional_amenities,
         ];
 
-        if (!empty($reservation['package_id'])) {
-            $package = $this->packageModel->get_package_by_id_api($reservation['homestay_id'], $reservation['package_id'])->getRowArray();
-            $data['package'] = $package;
-            $data2 = $this->getPackageDetail($reservation['id'], $reservation['homestay_id'], $reservation['package_id']);
-
-            $data = array_merge($data, $data2);
+        if (isset($snapToken)) {
+            $data['snapToken'] = $snapToken;
         }
         return view('web/reservation_detail', $data);
     }
@@ -889,6 +947,7 @@ class Reservation extends ResourcePresenter
     //xxx
     public function index()
     {
+
         $homestay = $this->homestayModel->list_by_owner_api(user()->id)->getRowArray();
         $id_reservation1 = $this->reservationHomestayUnitDetailModel->get_reservation_by_hs_api($homestay['id'])->getResultArray();
         $id_reservation2 = $this->reservationHomestayUnitDetailBackUpModel->get_reservation_by_hs_api($homestay['id'])->getResultArray();
@@ -912,23 +971,17 @@ class Reservation extends ResourcePresenter
         $reservations = array();
         for ($i = 0; $i < count($nid); $i++) {
             $reservation = $this->reservationModel->get_reservation_by_id($nid[$i])->getRowArray();
-            if ($reservation['canceled_at'] == null) {
+            if (($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
                 $checkIsReservationCancel = $this->checkIsReservationCancel($reservation);
+            }
+            if (($reservation['confirmed_at'] != null) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
+                $checkPaymentStatus = $this->checkPaymentStatus($reservation);
+            }
+            if ($reservation['status'] == 'Payment Successful') {
+                $checkIsReservationDone = $this->checkIsReservationDone($reservation);
             }
             $reservation = $this->reservationModel->get_reservation_by_id($nid[$i])->getRowArray();
             $reservations[] = $reservation;
-        }
-
-        for ($i = 0; $i < count($reservations); $i++) {
-            if ($reservations[$i]['package_id'] != null) {
-                $package = $this->packageModel->get_package_by_id_api($reservations[$i]['homestay_id'], $reservations[$i]['package_id'])->getRowArray();
-
-                $reservations[$i]['price'] = $package['price'];
-                $reservations[$i]['is_custom'] = $package['is_custom'];
-            } else {
-                $reservations[$i]['price'] = null;
-                $reservations[$i]['is_custom'] = null;
-            }
         }
 
         $data = [
@@ -940,18 +993,25 @@ class Reservation extends ResourcePresenter
     }
     public function show($id = null)
     {
+
         $reservation = $this->reservationModel->get_reservation_by_id($id)->getRowArray();
 
         if (empty($reservation)) {
             return redirect()->to(base_url('dashboard/reservation'));
         }
 
-        if ($reservation['canceled_at'] == null) {
+        if (($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
             $checkIsReservationCancel = $this->checkIsReservationCancel($reservation);
+        }
+        if (($reservation['confirmed_at'] != null) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
+            $checkPaymentStatus = $this->checkPaymentStatus($reservation);
+        }
+        if ($reservation['status'] == 'Payment Successful') {
+            $checkIsReservationDone = $this->checkIsReservationDone($reservation);
         }
         $reservation = $this->reservationModel->get_reservation_by_id($id)->getRowArray();
 
-        if ($reservation['canceled_at'] != null) {
+        if (($reservation['canceled_at'] != null) || ($reservation['is_rejected'] == '1')) {
             $reservation_detail = $this->reservationHomestayUnitDetailBackUpModel->get_reservation_by_id($id)->getResultArray();
         } else {
             $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reservation_by_id($id)->getResultArray();
@@ -1047,6 +1107,16 @@ class Reservation extends ResourcePresenter
             return redirect()->to(base_url('dashboard/reservation'));
         }
 
+        if ($request['is_rejected'] == '1') {
+            $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reservation_by_id($reservation_id)->getResultArray();
+
+            foreach ($reservation_detail as $reservationDetail) {
+                $reservation_detail_backup = $this->reservationHomestayUnitDetailBackUpModel->add_reservation_detail_api($reservationDetail);
+            }
+
+            $delete_reservation_detail = $this->reservationHomestayUnitDetailModel->delete_reserv_det_by_reserv_id($reservation_id);
+        }
+
         $confirm = $this->reservationModel->confirm_reservation($request, $reservation_id);
 
         if ($confirm) {
@@ -1125,10 +1195,7 @@ class Reservation extends ResourcePresenter
             return redirect()->back()->withInput();
         }
     }
-    public function create()
-    {
-        
-    }
+    public function create() {}
     public function update($id = null)
     {
         $request = $this->request->getPost();
@@ -1209,22 +1276,10 @@ class Reservation extends ResourcePresenter
         $dateNow = date("Y-m-d H:i");
 
         $depositDeadline = date("d F Y, H:i", strtotime($reservation['check_in'] . ' - 2 days'));
-        $fullPayDeadline = date("d F Y, 18:00", strtotime($reservation['check_in']));
 
-        if ((strtotime($dateNow) > strtotime($depositDeadline)) && ($reservation['deposit_at'] == null) && ($reservation['canceled_at'] == null)) {
+        if ((strtotime($dateNow) > strtotime($depositDeadline)) && (($reservation['status'] == null) || ($reservation['status'] == '0') || ($reservation['status'] == '1')) && ($reservation['canceled_at'] == null)) {
             $cancelReservation['canceled_at'] = $dateNow;
             $cancelReservation['cancelation_reason'] = '2';
-            $cancelReservation['is_refund'] = '0';
-            $cancel_reservation = $this->reservationModel->cancel_reservation($cancelReservation, $reservation['id']);
-            $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reservation_by_id($reservation['id'])->getResultArray();
-
-            foreach ($reservation_detail as $reservationDetail) {
-                $reservation_detail_backup = $this->reservationHomestayUnitDetailBackUpModel->add_reservation_detail_api($reservationDetail);
-            }
-            $delete_reservation_detail = $this->reservationHomestayUnitDetailModel->delete_reserv_det_by_reserv_id($reservation['id']);
-        } else if ((strtotime($dateNow) > strtotime($fullPayDeadline)) && ($reservation['full_paid_at'] == null) && ($reservation['canceled_at'] == null)) {
-            $cancelReservation['canceled_at'] = $dateNow;
-            $cancelReservation['cancelation_reason'] = '3';
             $cancelReservation['is_refund'] = '0';
             $cancel_reservation = $this->reservationModel->cancel_reservation($cancelReservation, $reservation['id']);
             $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reservation_by_id($reservation['id'])->getResultArray();
@@ -1238,11 +1293,62 @@ class Reservation extends ResourcePresenter
 
     public function new()
     {
+
         $homestay = $this->homestayModel->list_by_owner_api(user()->id)->getRowArray();
         $data = [
             'title' => 'Add Reservation',
             'homestayid' => $homestay['id'],
         ];
         return view('owner/reservation_form', $data);
+    }
+
+    public function saveToken()
+    {
+        $request = $this->request->getPost();
+
+        $this->reservationModel->saveSnapToken($request['reservation_id'], $request['snapToken']);
+    }
+    public function addAccountRefund()
+    {
+        $request = $this->request->getPost();
+
+        $this->reservationModel->update_account_refund($request['reservation_id'], $request['account_refund']);
+
+        return redirect()->to(base_url('web/reservation/detail/' . $request['reservation_id']));
+    }
+
+    public function checkPaymentStatus($reservation = null)
+    {
+        $checkPayment = $this->paymentController->checkPaymentStatus($reservation['id']);
+
+        if ($checkPayment == 'Pending') {
+            $this->reservationModel->update_status($reservation['id'], 'Payment Pending');
+        } elseif ($checkPayment == 'Settlement') {
+            $this->reservationModel->update_status($reservation['id'], 'Payment Successful');
+        } elseif ($checkPayment == 'Expire') {
+            $this->reservationModel->update_status($reservation['id'], 'Payment Expired');
+            $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reservation_by_id($reservation['id'])->getResultArray();
+
+            foreach ($reservation_detail as $reservationDetail) {
+                $this->reservationHomestayUnitDetailBackUpModel->add_reservation_detail_api($reservationDetail);
+            }
+            $this->reservationHomestayUnitDetailModel->delete_reserv_det_by_reserv_id($reservation['id']);
+        }
+    }
+
+    public function checkIsReservationDone($reservation = null)
+    {
+
+        $stayInDates = $this->reservationHomestayUnitDetailModel->get_stay_in_dates($reservation['id'])->getResultArray();
+
+        $day_of_stay = count($stayInDates);
+
+        $checkOutDate = strtotime($reservation['check_in'] . ' + ' . $day_of_stay . ' days');
+
+        $currentDate = time();
+
+        if ($currentDate > $checkOutDate) {
+            $this->reservationModel->update_status($reservation['id'], 'Done');
+        }
     }
 }

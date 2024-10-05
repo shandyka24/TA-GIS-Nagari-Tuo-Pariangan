@@ -103,4 +103,14 @@ class ReservationHomestayUnitDetailModel extends Model
             ->get();
         return $query;
     }
+
+    public function get_stay_in_dates($reservation_id = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select("reservation_id, date")
+            ->where('reservation_id', $reservation_id)
+            ->groupBy('date')
+            ->get();
+        return $query;
+    }
 }

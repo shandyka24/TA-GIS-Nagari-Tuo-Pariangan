@@ -56,20 +56,34 @@
                                                         });
                                                     </script>
                                                     <script>
-                                                        var date = new Date();
-                                                        date.setDate(date.getDate() + 3);
+                                                        // var date = new Date();
+                                                        // date.setDate(date.getDate() + 3);
 
-                                                        let year = date.getFullYear();
-                                                        let month = date.getMonth() + 1;
-                                                        if (month < 10) {
-                                                            month = '0' + month;
-                                                        }
-                                                        let daydate = date.getDate();
-                                                        if (daydate < 10) {
-                                                            daydate = '0' + daydate;
-                                                        }
-                                                        let minDate = year + '-' + month + '-' + daydate;
+                                                        // let year = date.getFullYear();
+                                                        // let month = date.getMonth() + 1;
+                                                        // if (month < 10) {
+                                                        //     month = '0' + month;
+                                                        // }
+                                                        // let daydate = date.getDate();
+                                                        // if (daydate < 10) {
+                                                        //     daydate = '0' + daydate;
+                                                        // }
+                                                        // let minDate = year + '-' + month + '-' + daydate;
 
+                                                        // const checkInInput = document.getElementById("check_in");
+                                                        // checkInInput.setAttribute("min", minDate);
+
+                                                        // Get today's date
+                                                        const today = new Date();
+
+                                                        // Format the date as YYYY-MM-DD
+                                                        const year = today.getFullYear();
+                                                        const month = String(today.getMonth() + 1).padStart(2, '0'); // Add leading zero
+                                                        const day = String(today.getDate()).padStart(2, '0'); // Add leading zero
+
+                                                        // Set the value as min for the input
+                                                        const minDate = `${year}-${month}-${day}`;
+                                                        // document.getElementById('check_in').setAttribute('min', minDate);
                                                         const checkInInput = document.getElementById("check_in");
                                                         checkInInput.setAttribute("min", minDate);
                                                     </script>

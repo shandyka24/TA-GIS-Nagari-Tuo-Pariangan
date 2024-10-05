@@ -92,10 +92,9 @@ class VillageModel extends Model
     }
     public function get_tourist_area_data()
     {
-        $geoJson = "ST_AsGeoJSON(geom) AS geoJson";
-        $query = $this->db->table('tourist_area')
-            ->select("{$geoJson}")
-            ->where('id', 'L1')
+        $query = $this->db->table('village')
+            ->select("*")
+            ->where('selected', '1')
             ->get();
         return $query;
     }
@@ -164,6 +163,15 @@ class VillageModel extends Model
             ->select("id, name, geom_file")
             ->orderBy('name', 'ASC')
             ->get();
+        return $query;
+    }
+
+    public function update_village($id = null, $data = null)
+    {
+        $query = $this->db->table($this->table)
+            ->where('id', $id)
+            ->update($data);
+
         return $query;
     }
 }

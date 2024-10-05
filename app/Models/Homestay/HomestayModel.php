@@ -30,11 +30,8 @@ class HomestayModel extends Model
         //$coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
         $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.owner,{$this->table}.open,{$this->table}.close,{$this->table}.description";
         $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
-        $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
             ->select("{$columns}, homestay.lat, homestay.lng, {$geoJson}")
-            ->from('village')
-            ->where($vilGeom)
             ->get();
         return $query;
     }
@@ -44,11 +41,11 @@ class HomestayModel extends Model
         //$coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
         $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.owner,{$this->table}.open,{$this->table}.close,{$this->table}.description";
         $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
-        $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
+        // $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
             ->select("{$columns}, homestay.lat, homestay.lng, {$geoJson}")
-            ->from('village')
-            ->where($vilGeom)
+            // ->from('village')
+            // ->where($vilGeom)
             ->where('owner', $id)
             ->get();
         return $query;
@@ -59,11 +56,11 @@ class HomestayModel extends Model
         //$coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
         $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.owner,{$this->table}.open,{$this->table}.close,{$this->table}.description,{$this->table}.category,{$this->table}.profil_link";
         $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
-        $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
+        // $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
             ->select("{$columns}, homestay.lat, homestay.lng, {$geoJson}")
-            ->from('village')
-            ->where($vilGeom)
+            // ->from('village')
+            // ->where($vilGeom)
             ->where('owner', $id)
             ->get();
         return $query;
@@ -102,10 +99,10 @@ class HomestayModel extends Model
         $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
             ->select("{$columns}, users.phone, homestay.lat, homestay.lng, {$geoJson}")
-            ->from('village')
+            // ->from('village')
             ->where('homestay.id', $id)
             ->join('users', 'users.id = homestay.owner', 'LEFT')
-            ->where($vilGeom)
+            // ->where($vilGeom)
             ->get();
         return $query;
     }
@@ -151,12 +148,9 @@ class HomestayModel extends Model
     {
         //$coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
         $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.owner,{$this->table}.open,{$this->table}.close,{$this->table}.description";
-        $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
             ->select("{$columns}, homestay.lat, homestay.lng")
-            ->from('village')
             ->like("{$this->table}.name", $name)
-            ->where($vilGeom)
             ->get();
         return $query;
     }
@@ -174,9 +168,7 @@ class HomestayModel extends Model
         $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
             ->select("{$columns}, homestay.lat, homestay.lng")
-            ->from('village')
             ->whereIn('homestay.id', $id)
-            ->where($vilGeom)
             ->get();
         return $query;
     }

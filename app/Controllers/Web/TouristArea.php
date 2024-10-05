@@ -2,44 +2,54 @@
 
 namespace App\Controllers\Web;
 
-use App\Models\DetailFacilityRumahGadangModel;
-use App\Models\FacilityRumahGadangModel;
-use App\Models\GalleryRumahGadangModel;
-use App\Models\ReviewModel;
-use App\Models\RumahGadangModel;
 use CodeIgniter\Files\File;
 use CodeIgniter\RESTful\ResourcePresenter;
 use CodeIgniter\API\ResponseTrait;
 
 use App\Models\TouristAreaModel;
+use App\Models\VillageModel;
+use App\Models\VillageGalleryModel;
+use Myth\Auth\Models\UserModel;
 
 class TouristArea extends ResourcePresenter
 {
 
     use ResponseTrait;
-    protected $rumahGadangModel;
-    protected $galleryRumahGadangModel;
-    protected $detailFacilityRumahGadangModel;
-    protected $reviewModel;
-    protected $facilityRumahGadangModel;
+
     protected $touristAreaModel;
+    protected $villageModel;
+    protected $villageGalleryModel;
+    protected $userModel;
 
     protected $helpers = ['auth', 'url', 'filesystem'];
 
     public function __construct()
     {
-        $this->rumahGadangModel = new RumahGadangModel();
-        $this->galleryRumahGadangModel = new GalleryRumahGadangModel();
-        $this->detailFacilityRumahGadangModel = new DetailFacilityRumahGadangModel();
-        $this->reviewModel = new ReviewModel();
-        $this->facilityRumahGadangModel = new FacilityRumahGadangModel();
         $this->touristAreaModel = new TouristAreaModel();
+        $this->villageModel = new VillageModel();
+        $this->villageGalleryModel = new VillageGalleryModel();
+        $this->userModel = new UserModel();
     }
 
     public function index()
     {
+
+        $village = $this->villageModel->check_village()->getRowArray();
+        $user_phone = $this->userModel->get_admin_phone()->getRowArray();
+        $village['phone'] = $user_phone['phone'];
+
+        $list_gallery = $this->villageGalleryModel->get_gallery_api($village['id'])->getResultArray();
+        $galleries = array();
+        foreach ($list_gallery as $gallery) {
+            $galleries[] = $gallery['url'];
+        }
+        $village['gallery'] = $galleries;
+        $village['id_ta'] = $village['id'];
+        unset($village['id']);
+
         $data = [
             'title' => 'Home',
+            'data' => $village,
         ];
 
         return view('home/home', $data);

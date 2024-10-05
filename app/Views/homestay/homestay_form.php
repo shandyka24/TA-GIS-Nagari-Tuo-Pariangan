@@ -156,7 +156,7 @@ $edit = in_array('edit', $uri);
                 </div>
                 <?= $this->include('web/layouts/map-body'); ?>
                 <script>
-                    goToVillage();
+                    digitTourismVillage();
                     initDrawingManager(<?= $edit ?>);
                 </script>
             </div>
@@ -194,7 +194,7 @@ $edit = in_array('edit', $uri);
     function checkRequired(event) {
         if (!$('#geo-json').val()) {
             event.preventDefault();
-            Swal.fire('Please select location for the New Rumah Gadang');
+            Swal.fire('Please select location for the New Homestay');
         }
     }
 </script>
@@ -259,7 +259,7 @@ $edit = in_array('edit', $uri);
             },
         }
     });
- 
+
     vidPond.setOptions({
         server: {
             timeout: 86400000,

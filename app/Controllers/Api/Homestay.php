@@ -15,6 +15,8 @@ use App\Models\Homestay\HomestayFacilityDetailModel;
 use App\Models\Homestay\HomestayUnitFacilityModel;
 use App\Models\Homestay\HomestayUnitFacilityDetailModel;
 
+use App\Models\VillageModel;
+
 class Homestay extends ResourceController
 {
     use ResponseTrait;
@@ -30,6 +32,8 @@ class Homestay extends ResourceController
     protected $homestayUnitFacilityModel;
     protected $homestayUnitFacilityDetailModel;
 
+    protected $villageModel;
+
     public function __construct()
     {
         // $this->rumahGadangModel = new RumahGadangModel();
@@ -42,6 +46,8 @@ class Homestay extends ResourceController
         $this->homestayFacilityDetailModel = new HomestayFacilityDetailModel();
         $this->homestayUnitFacilityModel = new HomestayUnitFacilityModel();
         $this->homestayUnitFacilityDetailModel = new HomestayUnitFacilityDetailModel();
+
+        $this->villageModel = new VillageModel();
     }
 
     /**
@@ -52,20 +58,23 @@ class Homestay extends ResourceController
     public function index()
     {
         $homestay = array();
-        $contents = $this->homestayModel->get_list_hs_api()->getResult();
+        $contents = $this->homestayModel->get_list_hs_api()->getResultArray();
         foreach ($contents as $content) {
-            $list_gallery = $this->homestayGalleryModel->get_gallery_api($content->id)->getResultArray();
+            $list_gallery = $this->homestayGalleryModel->get_gallery_api($content['id'])->getResultArray();
             $galleries = array();
             foreach ($list_gallery as $gallery) {
                 $galleries[] = $gallery['url'];
             }
             if (empty($galleries)) {
-                $content->gallery = null;
+                $content['gallery'] = null;
             } else {
-                $content->gallery = $galleries[0];
+                $content['gallery'] = $galleries[0];
             }
             $homestay[] = $content;
         }
+        $homestay = $this->checkIsInsideVillage($homestay);
+
+        $homestay = array_values($homestay);
         $response = [
             'data' => $homestay,
             'status' => 200,
@@ -359,7 +368,12 @@ class Homestay extends ResourceController
     {
         $request = $this->request->getPost();
         $name = $request['name'];
-        $contents = $this->homestayModel->get_hs_by_name_api($name)->getResult();
+        $contents = $this->homestayModel->get_hs_by_name_api($name)->getResultArray();
+
+        $contents = $this->checkIsInsideVillage($contents);
+
+        $contents = array_values($contents);
+
         $response = [
             'data' => $contents,
             'status' => 200,
@@ -373,7 +387,17 @@ class Homestay extends ResourceController
     public function findByRadius()
     {
         $request = $this->request->getPost();
-        $contents = $this->homestayModel->get_hs_by_radius_api($request)->getResult();
+        $contents = $this->homestayModel->get_list_hs_api()->getResultArray();
+        $i = 0;
+        foreach ($contents as $content) {
+
+            $isWithinRadius = $this->isWithinRadius($request['lat'], $request['long'], $content['lat'], $content['lng'], (int)$request['radius'] / 1000);
+            if (!$isWithinRadius) {
+                unset($contents[$i]);
+            }
+            $i++;
+        }
+
         $response = [
             'data' => $contents,
             'status' => 200,
@@ -393,7 +417,12 @@ class Homestay extends ResourceController
         foreach ($list_facility as $facil) {
             $homestay_id[] = $facil['homestay_id'];
         }
-        $contents = $this->homestayModel->get_hs_in_id_api($homestay_id)->getResult();
+        $contents = $this->homestayModel->get_hs_in_id_api($homestay_id)->getResultArray();
+
+        $contents = $this->checkIsInsideVillage($contents);
+
+        $contents = array_values($contents);
+
         $response = [
             'data' => $contents,
             'status' => 200,
@@ -510,5 +539,86 @@ class Homestay extends ResourceController
             ]
         ];
         return $this->respond($response);
+    }
+    public function checkIsInsideVillage($contents = null)
+    {
+        $village = $this->villageModel->check_village()->getRowArray();
+
+        $filePath = realpath(WRITEPATH . '..' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'map' . DIRECTORY_SEPARATOR . 'tourism_village' . DIRECTORY_SEPARATOR . $village['geom_file']);
+
+        // Read the content of the GeoJSON file
+        $geoJsonContent = file_get_contents($filePath);
+
+        // Decode the GeoJSON content into a PHP object or array
+        $geoJsonData = json_decode($geoJsonContent, true);
+
+        $polygon  = $geoJsonData['features'][0]['geometry']['coordinates'][0][0];
+
+        $i = 0;
+        foreach ($contents as $content) {
+            $point = [(float)$content['lng'], (float)$content['lat']];
+
+            $isInside = $this->isPointInPolygon($point, $polygon);
+
+            // Display the result
+            if (!$isInside) {
+                unset($contents[$i]);
+            }
+            $i++;
+        }
+
+        return $contents;
+    }
+    private function isPointInPolygon($point, $polygon)
+    {
+        $x = $point[0]; // Latitude of the point
+        $y = $point[1]; // Longitude of the point
+        $inside = false; // Initialize the inside status as false
+        $n = count($polygon); // Number of vertices in the polygon
+
+        // Loop through each edge of the polygon
+        for ($i = 0, $j = $n - 1; $i < $n; $j = $i++) {
+            $xi = $polygon[$i][0]; // Current vertex X (latitude)
+            $yi = $polygon[$i][1]; // Current vertex Y (longitude)
+            $xj = $polygon[$j][0]; // Previous vertex X (latitude)
+            $yj = $polygon[$j][1]; // Previous vertex Y (longitude)
+
+            // Check if the point is inside the edge's vertical range and compute intersection
+            $intersect = (($yi > $y) != ($yj > $y)) &&
+                ($x < ($xj - $xi) * ($y - $yi) / ($yj - $yi) + $xi);
+
+            // If an intersection occurs, toggle the inside status
+            if ($intersect) {
+                $inside = !$inside;
+            }
+        }
+
+        return $inside; // Return true if the point is inside, otherwise false
+    }
+
+    public function isWithinRadius($lat1, $lon1, $lat2, $lon2, $radius)
+    {
+        // Konstanta jari-jari bumi dalam kilometer
+        $earthRadius = 6371;
+
+        // Konversi derajat ke radian
+        $lat1 = deg2rad($lat1);
+        $lon1 = deg2rad($lon1);
+        $lat2 = deg2rad($lat2);
+        $lon2 = deg2rad($lon2);
+
+        // Menghitung perbedaan lintang dan bujur
+        $dLat = $lat2 - $lat1;
+        $dLon = $lon2 - $lon1;
+
+        // Menggunakan rumus Haversine
+        $a = sin($dLat / 2) * sin($dLat / 2) + cos($lat1) * cos($lat2) * sin($dLon / 2) * sin($dLon / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+        // Menghitung jarak
+        $distance = $earthRadius * $c;
+
+        // Memeriksa apakah jarak berada dalam radius
+        return $distance <= $radius;
     }
 }

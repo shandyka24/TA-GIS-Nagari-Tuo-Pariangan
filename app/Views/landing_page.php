@@ -58,6 +58,23 @@
             border: none;
             /* Opsional: Hilangkan border jika tidak diperlukan */
         }
+
+        .owl-carousel-item {
+            position: relative;
+            width: 100%;
+            /* Make sure it takes the full width */
+            height: 450px;
+            /* Set a fixed height or adjust as needed */
+            overflow: hidden;
+            /* Hide overflow when the image zooms */
+        }
+
+        .owl-carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* This ensures the image covers the entire div without distortion */
+        }
     </style>
 </head>
 
@@ -83,7 +100,6 @@
         <div class="collapse navbar-collapse py-4 py-lg-0" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
 
-                <a href="/tes" class="nav-item nav-link active">Tes</a>
                 <a href="#home" class="nav-item nav-link active">Home</a>
                 <?php if ($village != null) : ?>
                     <a href="/web" class="nav-item nav-link">Explore</a>
@@ -103,16 +119,16 @@
         <div class="container-fluid bg-dark p-0 mb-5" id="home">
             <div class="row g-0 flex-column-reverse flex-lg-row">
                 <div class="col-lg-6 p-0 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="header-bg h-100 d-flex flex-column justify-content-center p-5">
+                    <div class="header-bg h-100 d-flex flex-column justify-content-center p-5" style="background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url(media/photos/<?= $gallery[array_rand($gallery)]; ?>) center center no-repeat; background-size: cover;">
                         <h2 class="display-6 text-light mb-2">
-                            Welcome too
+                            Welcome to
                         </h2>
                         <h1 class="display-4 text-light mb-5">
-                            Kawasan Wisata Lembah Harau Nagari Tarantang
+                            <?= $village['name']; ?>
                         </h1>
                         <div class="d-flex align-items-center pt-4 animated slideInDown">
                             <a href="/web" class="btn btn-primary py-sm-3 px-3 px-sm-5 me-5">Explore</a>
-                            <button type="button" class="btn-play" data-bs-toggle="modal" data-src="<?= base_url('media/videos/landing_page.mp4'); ?>" data-bs-target="#videoModal">
+                            <button type="button" class="btn-play" data-bs-toggle="modal" data-src="<?= base_url('media/videos/' . $village['video_url']); ?>" data-bs-target="#videoModal">
                                 <span></span>
                             </button>
                             <h6 class="text-white m-0 ms-4 d-none d-sm-block">Watch Video</h6>
@@ -121,15 +137,11 @@
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <div class="owl-carousel header-carousel">
-                        <div class="owl-carousel-item">
-                            <img class="img-fluid" src="media/photos/landing-page/carousel-1.jpg" alt="" />
-                        </div>
-                        <div class="owl-carousel-item">
-                            <img class="img-fluid" src="media/photos/landing-page/carousel-2.jpg" alt="" />
-                        </div>
-                        <div class="owl-carousel-item">
-                            <img class="img-fluid" src="media/photos/landing-page/carousel-3.jpg" alt="" />
-                        </div>
+                        <?php foreach ($gallery as $item) : ?>
+                            <div class="owl-carousel-item">
+                                <img class="img-fluid" src="media/photos/<?= $item; ?>" alt="" />
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -156,31 +168,23 @@
         <!-- Video Modal End -->
 
         <!-- About Start -->
-        <div class="container-xxl py-5" id="about">
+        <div class="container-xxl py-5 my-5" id="about">
             <div class="container">
                 <div class="row p-5">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
                         <p><span class="text-primary me-2">#</span>Welcome To Desa Wisata </p>
                         <h1 class="display-5 mb-4">
                             Why You Should Visit
-                            Kawasan Wisata <span class="text-primary">Lembah Harau Nagari Tarantang</span>
+                            <span class="text-primary">
+                                <?= $village['name']; ?>
+                            </span>
                         </h1>
                         <p class="mb-4">
-                            Kawasan Wisata Lembah Harau terletak di Nagari Tarantang, Kecamatan Harau Kabupaten Lima Puluh Kota Sumatra Barat. Lembah Harau dikenal karena keindahan alamnya yang memukau. Anda akan menemukan tebing-tebing curam, air terjun yang indah, serta hamparan sawah dan hijaunya hutan yang menyegarkan. Keindahan alam yang unik ini membuatnya menjadi tempat yang sempurna untuk menikmati alam dan mengabadikan momen indah. Keunikan dari Kawasam Wisata Lembah Harau yaitu terdapatnya geopark. Geopark Lembah Harau memiliki berbagai formasi batuan yang unik dan menarik. Beberapa situs geologi memberikan pandangan tentang sejarah geologi daerah tersebut dan proses-proses alam yang membentuknya.
+                            <?= $village['description']; ?>
                         </p>
-                        <h5 class="mb-3">
-                            <a href="#map" class="text-reset" onclick="showMap('at');">
-                                <i class="far fa-check-circle text-primary me-3"></i>Attraction
-                            </a>
-                        </h5>
                         <h5 class="mb-3">
                             <a href="#map" class="text-reset" onclick="showMap('hs');">
                                 <i class="far fa-check-circle text-primary me-3"></i>Homestay
-                            </a>
-                        </h5>
-                        <h5 class="mb-3">
-                            <a href="#map" class="text-reset" onclick="showMap('ev');">
-                                <i class="far fa-check-circle text-primary me-3"></i>Event
                             </a>
                         </h5>
                         <h5 class="mb-3">
@@ -198,16 +202,11 @@
                                 <i class="far fa-check-circle text-primary me-3"></i>Souvenir Place
                             </a>
                         </h5>
-                        <h5 class="mb-3">
-                            <a href="#map" class="text-reset" onclick="showMap('sv');">
-                                <i class="far fa-check-circle text-primary me-3"></i>Service Provider
-                            </a>
-                        </h5>
                         <a class="btn btn-primary py-3 px-5 mt-3" href="/web">Explore</a>
                     </div>
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="img-border  ">
-                            <img class="img-fluid" src="media/photos/landing-page/bg-about.jpg" alt="" />
+                            <img class="img-fluid" src="media/photos/<?= $gallery[array_rand($gallery)]; ?>" alt="" />
                         </div>
                     </div>
                 </div>
@@ -303,17 +302,29 @@
                     <div class="col-lg-9 col-md-6">
                         <h5 class="text-light mb-4">Address</h5>
                         <p class="mb-2">
-                            <i class="fa fa-map-marker-alt me-3"></i>Nagari Tarantang, Harau, Kabupaten Lima Puluh Kota, Sumatera Barat
+                            <i class="fa fa-map-marker-alt me-3"></i> <?= $village['address']; ?>
                         </p>
+                        <?php if ($village['phone']) : ?>
+                            <p class="mb-2">
+                                <i class="fa fa-phone-alt me-3"></i><?= $village['phone']; ?>
+                            </p>
+                        <?php endif; ?>
                         <p class="mb-2">
-                            <i class="fa fa-phone-alt me-3"></i>+62 812 6149 9095
-                        </p>
-                        <p class="mb-2">
-                            <i class="fa fa-envelope me-3"></i>harauvalley@gmail.com
+                            <i class="fa fa-envelope me-3"></i> <?= $village['email']; ?>
                         </p>
                         <div class="d-flex pt-2">
-                            <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/explore_harau"><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/Kampuang%20Minang%20Nagari%20Sumpu"><i class="fab fa-facebook-f"></i></a>
+                            <?php if ($village['instagram']) : ?>
+                                <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/<?= $village['instagram']; ?>"><i class="fab fa-instagram"></i></a>
+                            <?php endif; ?>
+                            <?php if ($village['facebook']) : ?>
+                                <a class="btn btn-outline-light btn-social" href="https://www.facebook.com/<?= $village['facebook']; ?>"><i class="fab fa-facebook-f"></i></a>
+                            <?php endif; ?>
+                            <?php if ($village['youtube']) : ?>
+                                <a class="btn btn-outline-light btn-social" href="https://www.youtube.com/<?= $village['youtube']; ?>"><i class="fa-brands fa-youtube"></i></a>
+                            <?php endif; ?>
+                            <?php if ($village['tiktok']) : ?>
+                                <a class="btn btn-outline-light btn-social" href="https://www.tiktok.com/<?= $village['tiktok']; ?>"><i class="fa-brands fa-tiktok"></i></a>
+                            <?php endif; ?>
                         </div>
                     </div>
 

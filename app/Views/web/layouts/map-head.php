@@ -8,7 +8,12 @@
     <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Toggle Legend" class="btn icon btn-primary mx-1" id="legend-map" onclick="viewLegend();">
         <span class="material-symbols-outlined">visibility</span>
     </a>
-    <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Toggle Legend" class="btn icon btn-primary mx-1" id="legend-map" onclick="goToVillage();">
-        <span>Go To Village</span>
+    <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Traffic" class="btn icon btn-primary mx-1" id="legend-map" onclick="showTraffic();">
+        <span class="material-symbols-outlined"> traffic </span>
+    </a>
+    <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Go To Village" class="btn icon btn-primary mx-1" id="legend-map" onclick="digitTourismVillage();">
+        <span class="material-symbols-outlined">
+            landscape_2
+        </span>
     </a>
 </div>
