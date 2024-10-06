@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jun 16, 2024 at 08:21 AM
+-- Host: 127.0.0.1
+-- Generation Time: Oct 06, 2024 at 11:09 AM
 -- Server version: 8.0.30
--- PHP Version: 8.2.4
+-- PHP Version: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -100,6 +100,8 @@ INSERT INTO `auth_groups_users` (`group_id`, `user_id`) VALUES
 (2, 20),
 (2, 21),
 (2, 22),
+(2, 23),
+(2, 24),
 (3, 7);
 
 -- --------------------------------------------------------
@@ -461,7 +463,90 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (337, '::1', 'daffa@gmail.com', 11, '2024-06-03 05:27:06', 1),
 (338, '::1', 'accadmin1', NULL, '2024-06-03 05:35:31', 0),
 (339, '::1', 'accadmin1', NULL, '2024-06-03 05:35:34', 0),
-(340, '::1', 'accadmin1@email.com', 7, '2024-06-03 05:35:38', 1);
+(340, '::1', 'accadmin1@email.com', 7, '2024-06-03 05:35:38', 1),
+(341, '::1', 'accadmin1', NULL, '2024-08-27 09:41:46', 0),
+(342, '::1', 'accadmin1', NULL, '2024-08-27 09:41:54', 0),
+(343, '::1', 'accadmin1@email.com', 7, '2024-08-27 09:42:04', 1),
+(344, '::1', 'accadmin1@email.com', 7, '2024-08-27 10:29:44', 1),
+(345, '::1', 'accadmin1@email.com', 7, '2024-09-11 02:09:30', 1),
+(346, '::1', 'aa', NULL, '2024-09-14 03:50:57', 0),
+(347, '::1', 'accadmin1@email.com', 7, '2024-09-14 03:51:29', 1),
+(348, '::1', 'accadmin1@email.com', 7, '2024-09-14 03:52:07', 1),
+(349, '::1', 'accadmin1@email.com', 7, '2024-09-14 03:53:55', 1),
+(350, '::1', 'accadmin1@email.com', 7, '2024-09-14 03:54:07', 1),
+(351, '::1', 'accadmin1@email.com', 7, '2024-09-14 03:56:58', 1),
+(352, '::1', 'accadmin1@email.com', 7, '2024-09-14 04:01:15', 1),
+(353, '::1', 'accadmin1@email.com', 7, '2024-09-14 04:01:27', 1),
+(354, '::1', 'accadmin1@email.com', 7, '2024-09-15 01:35:20', 1),
+(355, '::1', 'homestayharausyafiq@gmail.com', 9, '2024-09-15 01:35:39', 1),
+(356, '::1', 'homestayharausyafiq@gmail.com', 9, '2024-09-15 01:39:48', 1),
+(357, '::1', 'homestayharausyafiq@gmail.com', 9, '2024-09-15 01:40:17', 1),
+(358, '::1', 'daffa@gmail.com', 11, '2024-09-15 01:43:07', 1),
+(359, '::1', 'homestayharausyafiq@gmail.com', 9, '2024-09-15 01:44:11', 1),
+(360, '::1', 'accadmin1', NULL, '2024-09-15 01:45:13', 0),
+(361, '::1', 'accadmin1@email.com', 7, '2024-09-15 01:45:22', 1),
+(362, '::1', 'daffa@gmail.com', 11, '2024-09-15 01:47:33', 1),
+(363, '::1', 'daffa@gmail.com', 11, '2024-09-15 01:48:56', 1),
+(364, '::1', 'accadmin1', NULL, '2024-09-15 08:52:13', 0),
+(365, '::1', 'accadmin1@email.com', 7, '2024-09-15 08:52:22', 1),
+(366, '::1', 'accadmin1@email.com', 7, '2024-09-15 08:53:18', 1),
+(367, '::1', 'daffamuyassar', NULL, '2024-09-15 09:58:31', 0),
+(368, '::1', 'daffamuyassar', NULL, '2024-09-15 09:58:44', 0),
+(369, '::1', 'daffamuyassar', NULL, '2024-09-15 09:59:02', 0),
+(370, '::1', 'homestayharausyafiq@gmail.com', 9, '2024-09-15 09:59:25', 1),
+(371, '::1', 'accadmin1@email.com', 7, '2024-09-15 10:00:08', 1),
+(372, '::1', 'accadmin1@email.com', 7, '2024-09-15 10:01:29', 1),
+(373, '::1', 'accadmin1@email.com', 7, '2024-09-15 10:05:56', 1),
+(374, '::1', 'homestayharausyafiq@gmail.com', 9, '2024-09-15 22:32:15', 1),
+(375, '::1', 'accadmin1@email.com', 7, '2024-09-15 22:32:28', 1),
+(376, '::1', 'accadmin1@email.com', 7, '2024-09-16 02:35:08', 1),
+(377, '::1', 'accadmin1@email.com', 7, '2024-09-16 07:49:56', 1),
+(378, '::1', 'accadmin1@email.com', 7, '2024-09-17 06:41:15', 1),
+(379, '::1', 'accadmin1@email.com', 7, '2024-09-18 08:22:45', 1),
+(380, '::1', 'accadmin1@email.com', 7, '2024-09-19 03:14:49', 1),
+(381, '::1', 'accadmin1@email.com', 7, '2024-09-21 07:51:10', 1),
+(382, '::1', 'accadmin1@email.com', 7, '2024-09-23 08:42:08', 1),
+(383, '::1', 'accadmin1', NULL, '2024-09-23 08:42:44', 0),
+(384, '::1', 'accadmin1@email.com', 7, '2024-09-23 08:57:57', 1),
+(385, '::1', 'accadmin1@email.com', 7, '2024-09-26 05:32:57', 1),
+(386, '::1', 'accadmin1@email.com', 7, '2024-09-26 11:36:49', 1),
+(387, '::1', 'accadmin1@email.com', 7, '2024-09-28 05:02:46', 1),
+(388, '::1', 'accadmin1@email.com', 7, '2024-09-28 10:09:28', 1),
+(389, '::1', 'accadmin1', NULL, '2024-09-28 22:16:46', 0),
+(390, '::1', 'accadmin1@email.com', 7, '2024-09-28 22:16:56', 1),
+(391, '::1', 'accadmin1@email.com', 7, '2024-09-29 07:38:31', 1),
+(392, '::1', 'homestayaaa@gmail.com', 23, '2024-09-29 07:56:52', 1),
+(393, '::1', 'daffamuyassar', NULL, '2024-09-29 08:01:59', 0),
+(394, '::1', 'daffamuyassar', NULL, '2024-09-29 08:02:06', 0),
+(395, '::1', 'daffa', NULL, '2024-09-29 08:02:41', 0),
+(396, '::1', 'daffa@gmail.com', 11, '2024-09-29 08:02:48', 1),
+(397, '::1', 'homestayaaa@gmail.com', 23, '2024-09-29 08:04:37', 1),
+(398, '::1', 'daffa@gmail.com', 11, '2024-09-29 08:08:38', 1),
+(399, '::1', 'accadmin1@email.com', 7, '2024-09-30 07:14:55', 1),
+(400, '::1', 'daffa@gmail.com', 11, '2024-09-30 07:15:39', 1),
+(401, '::1', 'homestayaaa', NULL, '2024-09-30 07:44:33', 0),
+(402, '::1', 'homestayaaa@gmail.com', 23, '2024-09-30 07:44:42', 1),
+(403, '::1', 'daffa@gmail.com', 11, '2024-09-30 10:29:55', 1),
+(404, '::1', 'daffa@gmail.com', 11, '2024-10-02 02:10:37', 1),
+(405, '::1', 'homestayaaa@gmail.com', 23, '2024-10-02 02:21:16', 1),
+(406, '::1', 'daffa@gmail.com', 11, '2024-10-02 09:05:43', 1),
+(407, '::1', 'daffa', NULL, '2024-10-03 08:08:34', 0),
+(408, '::1', 'daffa@gmail.com', 11, '2024-10-03 08:08:46', 1),
+(409, '::1', 'homestayaaa@gmail.com', 23, '2024-10-03 08:16:34', 1),
+(410, '::1', 'daffa', NULL, '2024-10-03 10:42:14', 0),
+(411, '::1', 'daffa@gmail.com', 11, '2024-10-03 10:42:23', 1),
+(412, '::1', 'homestayaaa@gmail.com', 23, '2024-10-03 10:43:34', 1),
+(413, '::1', 'daffa', NULL, '2024-10-04 06:40:23', 0),
+(414, '::1', 'daffa@gmail.com', 11, '2024-10-04 06:40:31', 1),
+(415, '::1', 'homestayaaa@gmail.com', 23, '2024-10-04 06:51:33', 1),
+(416, '::1', 'homestayaaa@gmail.com', 23, '2024-10-04 10:07:56', 1),
+(417, '::1', 'daffa@gmail.com', 11, '2024-10-04 21:54:32', 1),
+(418, '::1', 'homestayaaa@gmail.com', 23, '2024-10-04 22:03:12', 1),
+(419, '::1', 'daffa', NULL, '2024-10-05 01:46:37', 0),
+(420, '::1', 'daffa@gmail.com', 11, '2024-10-05 01:46:47', 1),
+(421, '::1', 'homestayaaa@gmail.com', 23, '2024-10-05 01:48:01', 1),
+(422, '::1', 'daffa@gmail.com', 11, '2024-10-05 03:27:01', 1),
+(423, '::1', 'homestayaaa@gmail.com', 23, '2024-10-05 05:51:00', 1);
 
 -- --------------------------------------------------------
 
@@ -600,20 +685,20 @@ CREATE TABLE `culinary_place` (
 --
 
 INSERT INTO `culinary_place` (`id`, `name`, `address`, `employee_name`, `phone`, `open`, `close`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('C1', 'Bintang Fajar', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Dewi', '081261884909', '12:00:00', '18:00:00', 0xe6100000010300000001000000050000007db664a6a52a5940be47b3767bc2babf7cb6446ba62a5940440584962cc4babf7cb604e7a62a59400446e196d5c0babf7cb64411a62a5940bc680d9740bfbabf7db664a6a52a5940be47b3767bc2babf, -0.10451833, 100.66639869, 'Bintang Fajar adalah tempat kuliner yang menghadirkan keajaiban rasa melalui kreasinya, yaitu Rakik Kacang. Ini bukan sekadar camilan, melainkan sebuah seni kuliner yang meramu kacang pilihan menjadi gurih dan renyah dengan sentuhan rahasia yang memikat lidah.', '2023-12-02 01:13:25', '2023-12-03 16:13:39'),
-('C10', 'Nasi Ampera & Sate Zal', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000006000000848dd8cb402b5940ae0049b0abdfbbbf848dd8cb402b59409a1be9afd5e2bbbf858d58c3412b59406e70eeafa8e2bbbf848d18b8412b5940985a3eb005e0bbbf848dd8cb402b594063ae3b301ce0bbbf848dd8cb402b5940ae0049b0abdfbbbf, -0.10890583, 100.67585935, NULL, '2023-12-02 14:36:44', '2023-12-03 16:15:09'),
-('C11', 'Sarapan Pagi M.Upik', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '07:00:00', '18:00:00', 0xe61000000103000000010000000500000098ad45d8412b594047997c5ff4debbbf98ad45d8412b59405ebefc5e2ce3bbbf97adc5a2422b59403413025fffe2bbbf97ad8597422b594047997c5ff4debbbf98ad45d8412b594047997c5ff4debbbf, -0.10890295, 100.67591799, NULL, '2023-12-02 15:04:36', '2023-12-03 16:15:48'),
-('C12', 'Warung Uni Nita', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000005000000d934ff0b442b5940a5d7d09a4fe8bbbfda347f30452b5940b8d9e09ac8e7bbbfda34bf68452b59402cc4f59984efbbbfd9343f44442b5940c26bf099b1efbbbfd934ff0b442b5940a5d7d09a4fe8bbbf, -0.10906584, 100.67606983, NULL, '2023-12-02 15:06:30', '2023-12-03 16:16:40'),
-('C13', 'Kini Cheese Tea Sarbun', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '14:00:00', '20:00:00', 0xe61000000103000000010000000500000069e2adbb472b5940084496d790dfbbbf68e22dd2472b5940f25e36d7bae2bbbf68e22de0482b59409d0841d760e2bbbf67e26dbe482b59404936b6d782debbbf69e2adbb472b5940084496d790dfbbbf, -0.10889619, 100.67628811, NULL, '2023-12-02 15:08:34', '2023-12-03 16:17:36'),
-('C14', 'Yorafa Food & Drink', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe61000000103000000010000000500000067c15490442b5940274639d3a8f5bbbf66c1d4e1452b59408e5649d321f5bbbf67c114ed452b594069c89dd2c1fabbbf67c114df442b5940d60c93d21bfbbbbf67c15490442b5940274639d3a8f5bbbf, -0.10925477, 100.67610138, NULL, '2023-12-02 15:10:00', '2023-12-02 15:10:00'),
-('C2', 'Warung Yuniar', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Yuniar', '082267248766', '10:00:00', '18:00:00', 0xe610000001030000000100000005000000b161818ea12a59404a3a82f9e2e9b9bfb161410aa22a5940320dbef999e7b9bfb16141fca02a5940d568fef923e5b9bfb261c18ba02a5940f6d7b4f9f3e7b9bfb161818ea12a59404a3a82f9e2e9b9bf, -0.10118887, 100.66609454, NULL, '2023-12-02 01:29:02', '2023-12-02 01:29:02'),
-('C3', 'Bhumi Harau Cafe & Resto', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '19:00:00', '23:00:00', 0xe610000001030000000100000005000000b5d63fc46b2a5940c989df167062bebfb6d67f916d2a5940de7f05176261bebfb6d69fda6d2a594016eb3a160267bebfb6d67ffc6b2a5940ce131896f967bebfb5d63fc46b2a5940c989df167062bebf, -0.11872374, 100.66289125, NULL, '2023-12-02 12:33:23', '2023-12-02 13:14:54'),
-('C4', 'Nasi Kapau Josi', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '21:00:00', 0xe61000000103000000010000000500000015f95d376b2a594030b78ee9ac46bebf15f91d676c2a59408bd8a7e9f845bebf15f93db06c2a5940e922e868554bbebf15f91d866b2a5940351abc68904cbebf15f95d376b2a594030b78ee9ac46bebf, -0.11830548, 100.66283889, NULL, '2023-12-02 13:18:41', '2023-12-02 13:18:41'),
-('C5', 'Leven Coffe & Eatery', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '14:00:00', '22:00:00', 0xe6100000010300000001000000050000003759b3a5a12a594009b92ecdc5d2babf3759f364a22a5940f2d8aecd33cebabf37593335a12a5940f29dfdcd63cbbabf3659738ca02a594020aa78cd22d0babf3759b3a5a12a594009b92ecdc5d2babf, -0.10472231, 100.66610544, NULL, '2023-12-02 13:22:18', '2023-12-02 13:22:18'),
-('C6', 'Kedai 4s', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000005000000c4ace737382b5940da31c6ae33e5bbbfc4aca767392b5940458acbae06e5bbbfc4aca767392b5940d62826af09e2bbbfc3ac6721382b5940d62826af09e2bbbfc4ace737382b5940da31c6ae33e5bbbf, -0.10894195, 100.67533983, NULL, '2023-12-02 13:25:11', '2023-12-02 13:25:11'),
-('C7', 'Kedai Nasi Keyla', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe6100000010300000001000000050000007b3079a33d2b5940315af9817cedbbbf7c30f9213f2b59406f630982f5ecbbbf7b30b9e93e2b594072f4ae8282e7bbbf7b30b9813d2b59405df29e8209e8bbbf7b3079a33d2b5940315af9817cedbbbf, -0.10904691, 100.67567869, NULL, '2023-12-02 13:27:05', '2023-12-02 13:27:05'),
-('C8', 'Warung Kawa Daun Sarasah Aie Luluih', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000005000000af50f425382b594056f4ed7a2dc0bbbfaf50b428392b59401ab9c37a95c1bbbfaf5034e5382b59403cea697a92c4bbbfaf50f4cb372b59401de68e7a57c3bbbfaf50f425382b594056f4ed7a2dc0bbbf, -0.10843468, 100.67532213, NULL, '2023-12-02 13:30:53', '2023-12-02 13:30:53'),
-('C9', 'Warung Iyef', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000006000000e14399013a2b59402e0da94318c6bbbfe14399013a2b5940984d644361c8bbbfe043d9ed3a2b5940af97694334c8bbbfe043d9ed3a2b594050fcb0c3d4c5bbbfe14399013a2b59402e0da94318c6bbbfe14399013a2b59402e0da94318c6bbbf, -0.10850686, 100.67544358, NULL, '2023-12-02 14:32:48', '2023-12-02 14:33:08');
+('C1', 'Bintang Fajar', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Dewi', '081261884909', '12:00:00', '18:00:00', 0xe6100000010300000001000000050000007db664a6a52a5940be47b3767bc2babf7cb6446ba62a5940440584962cc4babf7cb604e7a62a59400446e196d5c0babf7cb64411a62a5940bc680d9740bfbabf7db664a6a52a5940be47b3767bc2babf, '-0.10451833', '100.66639869', 'Bintang Fajar adalah tempat kuliner yang menghadirkan keajaiban rasa melalui kreasinya, yaitu Rakik Kacang. Ini bukan sekadar camilan, melainkan sebuah seni kuliner yang meramu kacang pilihan menjadi gurih dan renyah dengan sentuhan rahasia yang memikat lidah.', '2023-12-02 01:13:25', '2023-12-03 16:13:39'),
+('C10', 'Nasi Ampera & Sate Zal', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000006000000848dd8cb402b5940ae0049b0abdfbbbf848dd8cb402b59409a1be9afd5e2bbbf858d58c3412b59406e70eeafa8e2bbbf848d18b8412b5940985a3eb005e0bbbf848dd8cb402b594063ae3b301ce0bbbf848dd8cb402b5940ae0049b0abdfbbbf, '-0.10890583', '100.67585935', NULL, '2023-12-02 14:36:44', '2023-12-03 16:15:09'),
+('C11', 'Sarapan Pagi M.Upik', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '07:00:00', '18:00:00', 0xe61000000103000000010000000500000098ad45d8412b594047997c5ff4debbbf98ad45d8412b59405ebefc5e2ce3bbbf97adc5a2422b59403413025fffe2bbbf97ad8597422b594047997c5ff4debbbf98ad45d8412b594047997c5ff4debbbf, '-0.10890295', '100.67591799', NULL, '2023-12-02 15:04:36', '2023-12-03 16:15:48'),
+('C12', 'Warung Uni Nita', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000005000000d934ff0b442b5940a5d7d09a4fe8bbbfda347f30452b5940b8d9e09ac8e7bbbfda34bf68452b59402cc4f59984efbbbfd9343f44442b5940c26bf099b1efbbbfd934ff0b442b5940a5d7d09a4fe8bbbf, '-0.10906584', '100.67606983', NULL, '2023-12-02 15:06:30', '2023-12-03 16:16:40'),
+('C13', 'Kini Cheese Tea Sarbun', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '14:00:00', '20:00:00', 0xe61000000103000000010000000500000069e2adbb472b5940084496d790dfbbbf68e22dd2472b5940f25e36d7bae2bbbf68e22de0482b59409d0841d760e2bbbf67e26dbe482b59404936b6d782debbbf69e2adbb472b5940084496d790dfbbbf, '-0.10889619', '100.67628811', NULL, '2023-12-02 15:08:34', '2023-12-03 16:17:36'),
+('C14', 'Yorafa Food & Drink', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe61000000103000000010000000500000067c15490442b5940274639d3a8f5bbbf66c1d4e1452b59408e5649d321f5bbbf67c114ed452b594069c89dd2c1fabbbf67c114df442b5940d60c93d21bfbbbbf67c15490442b5940274639d3a8f5bbbf, '-0.10925477', '100.67610138', NULL, '2023-12-02 15:10:00', '2023-12-02 15:10:00'),
+('C2', 'Warung Yuniar', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Yuniar', '082267248766', '10:00:00', '18:00:00', 0xe610000001030000000100000005000000b161818ea12a59404a3a82f9e2e9b9bfb161410aa22a5940320dbef999e7b9bfb16141fca02a5940d568fef923e5b9bfb261c18ba02a5940f6d7b4f9f3e7b9bfb161818ea12a59404a3a82f9e2e9b9bf, '-0.10118887', '100.66609454', NULL, '2023-12-02 01:29:02', '2023-12-02 01:29:02'),
+('C3', 'Bhumi Harau Cafe & Resto', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '19:00:00', '23:00:00', 0xe610000001030000000100000005000000b5d63fc46b2a5940c989df167062bebfb6d67f916d2a5940de7f05176261bebfb6d69fda6d2a594016eb3a160267bebfb6d67ffc6b2a5940ce131896f967bebfb5d63fc46b2a5940c989df167062bebf, '-0.11872374', '100.66289125', NULL, '2023-12-02 12:33:23', '2023-12-02 13:14:54'),
+('C4', 'Nasi Kapau Josi', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '21:00:00', 0xe61000000103000000010000000500000015f95d376b2a594030b78ee9ac46bebf15f91d676c2a59408bd8a7e9f845bebf15f93db06c2a5940e922e868554bbebf15f91d866b2a5940351abc68904cbebf15f95d376b2a594030b78ee9ac46bebf, '-0.11830548', '100.66283889', NULL, '2023-12-02 13:18:41', '2023-12-02 13:18:41'),
+('C5', 'Leven Coffe & Eatery', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '14:00:00', '22:00:00', 0xe6100000010300000001000000050000003759b3a5a12a594009b92ecdc5d2babf3759f364a22a5940f2d8aecd33cebabf37593335a12a5940f29dfdcd63cbbabf3659738ca02a594020aa78cd22d0babf3759b3a5a12a594009b92ecdc5d2babf, '-0.10472231', '100.66610544', NULL, '2023-12-02 13:22:18', '2023-12-02 13:22:18'),
+('C6', 'Kedai 4s', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000005000000c4ace737382b5940da31c6ae33e5bbbfc4aca767392b5940458acbae06e5bbbfc4aca767392b5940d62826af09e2bbbfc3ac6721382b5940d62826af09e2bbbfc4ace737382b5940da31c6ae33e5bbbf, '-0.10894195', '100.67533983', NULL, '2023-12-02 13:25:11', '2023-12-02 13:25:11'),
+('C7', 'Kedai Nasi Keyla', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe6100000010300000001000000050000007b3079a33d2b5940315af9817cedbbbf7c30f9213f2b59406f630982f5ecbbbf7b30b9e93e2b594072f4ae8282e7bbbf7b30b9813d2b59405df29e8209e8bbbf7b3079a33d2b5940315af9817cedbbbf, '-0.10904691', '100.67567869', NULL, '2023-12-02 13:27:05', '2023-12-02 13:27:05'),
+('C8', 'Warung Kawa Daun Sarasah Aie Luluih', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000005000000af50f425382b594056f4ed7a2dc0bbbfaf50b428392b59401ab9c37a95c1bbbfaf5034e5382b59403cea697a92c4bbbfaf50f4cb372b59401de68e7a57c3bbbfaf50f425382b594056f4ed7a2dc0bbbf, '-0.10843468', '100.67532213', NULL, '2023-12-02 13:30:53', '2023-12-02 13:30:53'),
+('C9', 'Warung Iyef', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000006000000e14399013a2b59402e0da94318c6bbbfe14399013a2b5940984d644361c8bbbfe043d9ed3a2b5940af97694334c8bbbfe043d9ed3a2b594050fcb0c3d4c5bbbfe14399013a2b59402e0da94318c6bbbfe14399013a2b59402e0da94318c6bbbf, '-0.10850686', '100.67544358', NULL, '2023-12-02 14:32:48', '2023-12-02 14:33:08');
 
 -- --------------------------------------------------------
 
@@ -705,6 +790,7 @@ INSERT INTO `culinary_product_detail` (`culinary_place_id`, `culinary_product_id
 
 CREATE TABLE `homestay` (
   `id` varchar(3) NOT NULL,
+  `village_id` varchar(3) DEFAULT NULL,
   `name` varchar(100) NOT NULL,
   `address` varchar(100) NOT NULL,
   `geom` geometry DEFAULT NULL,
@@ -724,18 +810,20 @@ CREATE TABLE `homestay` (
 -- Dumping data for table `homestay`
 --
 
-INSERT INTO `homestay` (`id`, `name`, `address`, `geom`, `lat`, `lng`, `owner`, `open`, `close`, `description`, `created_at`, `updated_at`, `category`, `profil_link`) VALUES
-('H01', 'Homestay Harau Syafiq', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe6100000010300000001000000090000005a4b0163b62a5940655a3f7f85dbbcbf594b4149bd2a59403e620c7ca8f4bcbf594bc11ec22a5940d697c6796906bdbf594b4173c02a59405a28cbf80e0ebdbf584b81cabf2a594040dd65782211bdbf594ba146ba2a594085b2737a2301bdbf4a390f21b32a594040c41cc5abe5bcbf4b398f48b12a5940b949544617dcbcbf5a4b0163b62a5940655a3f7f85dbbcbf, -0.11313367, 100.66758434, 9, '10:00:00', '18:00:00', 'Homestay Harau Syafiq adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 12:22:25', '2024-02-26 12:22:25', '', ''),
-('H02', 'Homestay Aura', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000005000000564e8a909f2a594017a1314be2eebabf564e0a8b9d2a59401970e44b8ee8babf574eca47992a594058e5f749f5f9babf574eca639b2a5940e82ff948ec02bbbf564e8a909f2a594017a1314be2eebabf, -0.10531219, 100.66579727, 13, '10:00:00', '18:00:00', 'Homestay Aura adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 12:59:05', '2024-02-26 14:05:06', '', ''),
-('H03', 'Meliya Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000600000018eccacd8c2a5940e7fa5eed7961bbbf18eccaec8b2a5940648434ecab6bbbbf18ecca388b2a5940cb5a4ceb9473bbbf18ec0a28892a594091e0dceba86ebbbf18eccade8a2a5940c391c0ed225ebbbf18eccacd8c2a5940e7fa5eed7961bbbf, -0.10706877, 100.66473267, 14, '10:00:00', '18:00:00', 'Meliya Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 15:58:36', '2024-02-26 15:58:36', '', ''),
-('H04', 'Abyan Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000007000000f2a9ae22802a594044bcf1de0b67bcbff3a94e09812a59400fe9e35e7c67bcbff4a9ae03812a5940c80f3d615354bcbff2a9ce5d7f2a5940ff0e53619f53bcbff3a9ee4c7f2a5940c151b05ffb60bcbff3a98e527f2a5940e58bff5e9b66bcbff2a9ae22802a594044bcf1de0b67bcbf, -0.11080252, 100.66407278, 15, '10:00:00', '18:00:00', 'Abyan Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:04:25', '2024-02-26 16:06:12', '', ''),
-('H05', 'Homestay Bilza', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000b0000007bfb35a98d2a59400487a321773bbdbf7bfb150e942a5940672d9ca2fe33bdbf7bfb151c952a59400e49d5a1f839bdbf7cfbb55f932a594081c05b619e3dbdbf7bfbc59a932a5940ab371341cb3fbdbf7afb1598912a5940ad3384201444bdbf7afbd513922a5940e035c81fb449bdbf7bfb5568902a594029c17b1ffd4bbdbf7afb35c58f2a59403d5d20201147bdbf7afb55a68e2a5940613df71f4c48bdbf7bfb35a98d2a59400487a321773bbdbf, -0.11425769, 100.66512362, 16, '10:00:00', '18:00:00', 'Homestay Bilza adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:12:45', '2024-02-26 16:12:45', '', ''),
-('H06', 'Homestay IBU', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000005000000fadfac346a2a5940ef6629841954bebffadf6cf96c2a594059de71041452bebffbdfac5e6d2a5940b77372833259bebffadfacbb6a2a594052321d03925bbebffadfac346a2a5940ef6629841954bebf, -0.11851233, 100.66282884, 17, '10:00:00', '18:00:00', 'Homestay IBU adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:24:11', '2024-02-26 16:24:11', '', ''),
-('H07', 'Dangau Pitossa', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000007000000cd71909ce82a59402f6520800d9bbcbfcd711050f12a5940bfb6887dcbafbcbfcd7110c0f92a59409c158d796fcfbcbfcc711033ff2a59408ddc177d4fb3bcbfcc711061ef2a5940094a9e83ed7ebcbfcc71101ee72a5940ef167a803d98bcbfcd71909ce82a59402f6520800d9bbcbf, -0.11192599, 100.67109121, 18, '10:00:00', '18:00:00', 'Dangau pitossa adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:36:27', '2024-02-26 16:36:27', '', ''),
-('H08', 'Oston Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000500000076db4060f92a5940f8d7ecf1a131bcbf75db0060fd2a594083633b73d226bcbf75db4038032b59402b7fefee3d4abcbf75dbc0caff2a59404c96376e2150bcbf76db4060f92a5940f8d7ecf1a131bcbf, -0.11028254, 100.67177111, 19, '10:00:00', '18:00:00', 'Oston Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:43:34', '2024-02-26 16:43:34', '', ''),
-('H09', 'Megahomestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe6100000010300000001000000050000003c1b76f5082b594075ac5c818d15bcbf3c1bf6fa0a2b5940d7cd907ec12cbcbf3b1b36b70e2b59400bbf187f5c28bcbf3c1b36f50c2b59400e667980ef1cbcbf3c1b76f5082b594075ac5c818d15bcbf, -0.10988089, 100.67259749, 20, '10:00:00', '18:00:00', 'Oston Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:47:02', '2024-02-26 16:47:02', '', ''),
-('H10', 'Dangau Abah Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000b0000006d9223fd2a2b59407b6a1e0c4e06bcbf6e92e3dd2f2b5940b31efe0b5c07bcbf6e9263c72f2b594053cd2409171fbcbf6d9223e6322b594094b20909f81fbcbf6e92a3cf322b59404e4ba307922bbcbf6e92e321282b594068dd9d07bf2bbcbf6e92632a272b5940ad4404092520bcbf6d9223492a2b59400a275009af1dbcbf6e92233b292b59407905720bee0bbcbf6e92e3c42a2b5940a168770bc10bbcbf6d9223fd2a2b59407b6a1e0c4e06bcbf, -0.10975686, 100.67462355, 21, '10:00:00', '18:00:00', 'Oston Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:55:41', '2024-02-26 16:55:41', '', ''),
-('H11', 'Limpato Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000500000080afea2f6b2a59406e3aed395306bebf80afcaf46b2a5940f281c4b6431dbebf81af4a276e2a59405be7ec361f1cbebf80afaa6d6d2a59400e1c0c3a7205bebf80afea2f6b2a59406e3aed395306bebf, -0.11745232, 100.66288271, 22, '10:00:00', '18:00:00', 'Limpato Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 19:17:47', '2024-02-26 19:20:24', '', '');
+INSERT INTO `homestay` (`id`, `village_id`, `name`, `address`, `geom`, `lat`, `lng`, `owner`, `open`, `close`, `description`, `created_at`, `updated_at`, `category`, `profil_link`) VALUES
+('H01', NULL, 'Homestay Harau Syafiq', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe6100000010300000001000000090000005a4b0163b62a5940655a3f7f85dbbcbf594b4149bd2a59403e620c7ca8f4bcbf594bc11ec22a5940d697c6796906bdbf594b4173c02a59405a28cbf80e0ebdbf584b81cabf2a594040dd65782211bdbf594ba146ba2a594085b2737a2301bdbf4a390f21b32a594040c41cc5abe5bcbf4b398f48b12a5940b949544617dcbcbf5a4b0163b62a5940655a3f7f85dbbcbf, '-0.11313367', '100.66758434', 9, '10:00:00', '18:00:00', 'Homestay Harau Syafiq adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 12:22:25', '2024-02-26 12:22:25', '', ''),
+('H02', NULL, 'Homestay Aura', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000005000000564e8a909f2a594017a1314be2eebabf564e0a8b9d2a59401970e44b8ee8babf574eca47992a594058e5f749f5f9babf574eca639b2a5940e82ff948ec02bbbf564e8a909f2a594017a1314be2eebabf, '-0.10531219', '100.66579727', 13, '10:00:00', '18:00:00', 'Homestay Aura adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 12:59:05', '2024-02-26 14:05:06', '', ''),
+('H03', NULL, 'Meliya Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000600000018eccacd8c2a5940e7fa5eed7961bbbf18eccaec8b2a5940648434ecab6bbbbf18ecca388b2a5940cb5a4ceb9473bbbf18ec0a28892a594091e0dceba86ebbbf18eccade8a2a5940c391c0ed225ebbbf18eccacd8c2a5940e7fa5eed7961bbbf, '-0.10706877', '100.66473267', 14, '10:00:00', '18:00:00', 'Meliya Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 15:58:36', '2024-02-26 15:58:36', '', ''),
+('H04', NULL, 'Abyan Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000007000000f2a9ae22802a594044bcf1de0b67bcbff3a94e09812a59400fe9e35e7c67bcbff4a9ae03812a5940c80f3d615354bcbff2a9ce5d7f2a5940ff0e53619f53bcbff3a9ee4c7f2a5940c151b05ffb60bcbff3a98e527f2a5940e58bff5e9b66bcbff2a9ae22802a594044bcf1de0b67bcbf, '-0.11080252', '100.66407278', 15, '10:00:00', '18:00:00', 'Abyan Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:04:25', '2024-02-26 16:06:12', '', ''),
+('H05', NULL, 'Homestay Bilza', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000b0000007bfb35a98d2a59400487a321773bbdbf7bfb150e942a5940672d9ca2fe33bdbf7bfb151c952a59400e49d5a1f839bdbf7cfbb55f932a594081c05b619e3dbdbf7bfbc59a932a5940ab371341cb3fbdbf7afb1598912a5940ad3384201444bdbf7afbd513922a5940e035c81fb449bdbf7bfb5568902a594029c17b1ffd4bbdbf7afb35c58f2a59403d5d20201147bdbf7afb55a68e2a5940613df71f4c48bdbf7bfb35a98d2a59400487a321773bbdbf, '-0.11425769', '100.66512362', 16, '10:00:00', '18:00:00', 'Homestay Bilza adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:12:45', '2024-02-26 16:12:45', '', ''),
+('H06', NULL, 'Homestay IBU', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000005000000fadfac346a2a5940ef6629841954bebffadf6cf96c2a594059de71041452bebffbdfac5e6d2a5940b77372833259bebffadfacbb6a2a594052321d03925bbebffadfac346a2a5940ef6629841954bebf, '-0.11851233', '100.66282884', 17, '10:00:00', '18:00:00', 'Homestay IBU adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:24:11', '2024-02-26 16:24:11', '', ''),
+('H07', NULL, 'Dangau Pitossa', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000007000000cd71909ce82a59402f6520800d9bbcbfcd711050f12a5940bfb6887dcbafbcbfcd7110c0f92a59409c158d796fcfbcbfcc711033ff2a59408ddc177d4fb3bcbfcc711061ef2a5940094a9e83ed7ebcbfcc71101ee72a5940ef167a803d98bcbfcd71909ce82a59402f6520800d9bbcbf, '-0.11192599', '100.67109121', 18, '10:00:00', '18:00:00', 'Dangau pitossa adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:36:27', '2024-02-26 16:36:27', '', ''),
+('H08', NULL, 'Oston Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000500000076db4060f92a5940f8d7ecf1a131bcbf75db0060fd2a594083633b73d226bcbf75db4038032b59402b7fefee3d4abcbf75dbc0caff2a59404c96376e2150bcbf76db4060f92a5940f8d7ecf1a131bcbf, '-0.11028254', '100.67177111', 19, '10:00:00', '18:00:00', 'Oston Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:43:34', '2024-02-26 16:43:34', '', ''),
+('H09', NULL, 'Megahomestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe6100000010300000001000000050000003c1b76f5082b594075ac5c818d15bcbf3c1bf6fa0a2b5940d7cd907ec12cbcbf3b1b36b70e2b59400bbf187f5c28bcbf3c1b36f50c2b59400e667980ef1cbcbf3c1b76f5082b594075ac5c818d15bcbf, '-0.10988089', '100.67259749', 20, '10:00:00', '18:00:00', 'Oston Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:47:02', '2024-02-26 16:47:02', '', ''),
+('H10', NULL, 'Dangau Abah Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000b0000006d9223fd2a2b59407b6a1e0c4e06bcbf6e92e3dd2f2b5940b31efe0b5c07bcbf6e9263c72f2b594053cd2409171fbcbf6d9223e6322b594094b20909f81fbcbf6e92a3cf322b59404e4ba307922bbcbf6e92e321282b594068dd9d07bf2bbcbf6e92632a272b5940ad4404092520bcbf6d9223492a2b59400a275009af1dbcbf6e92233b292b59407905720bee0bbcbf6e92e3c42a2b5940a168770bc10bbcbf6d9223fd2a2b59407b6a1e0c4e06bcbf, '-0.10975686', '100.67462355', 21, '10:00:00', '18:00:00', 'Oston Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 16:55:41', '2024-02-26 16:55:41', '', ''),
+('H11', NULL, 'Limpato Homestay', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000500000080afea2f6b2a59406e3aed395306bebf80afcaf46b2a5940f281c4b6431dbebf81af4a276e2a59405be7ec361f1cbebf80afaa6d6d2a59400e1c0c3a7205bebf80afea2f6b2a59406e3aed395306bebf, '-0.11745232', '100.66288271', 22, '10:00:00', '18:00:00', 'Limpato Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', '2024-02-26 19:17:47', '2024-02-26 19:20:24', '', ''),
+('H12', '1', 'Homestay aaa', 'Address 1 ', 0xe6100000010300000001000000050000000613e5e17f1f5940cf06575bfd1eddbf051345bd801f5940807d9cdc5f1eddbf05134509801f5940c203101f301dddbf0413c5117f1f5940d384edbdbc1dddbf0613e5e17f1f5940cf06575bfd1eddbf, '-0.45496148', '100.49218166', 23, '00:00:00', '23:59:00', 'des', '2024-09-26 05:27:13', '2024-09-26 05:27:13', '', ''),
+('H13', '1', 'Homestay bbb', 'Address 1 ', 0xe610000001030000000100000005000000181ce04c891f5940b5c731b3ac9edcbf181ca07c8a1f5940ca6ae5b3529edcbf181c002b8b1f5940b911f590cb9fdcbf181cc0e4891f5940b2baf2ef4ca0dcbf181ce04c891f5940b5c731b3ac9edcbf, '-0.44722362', '100.49281214', 24, '00:00:00', '23:59:00', 'des', '2024-09-27 22:09:00', '2024-09-27 22:09:00', '', '');
 
 -- --------------------------------------------------------
 
@@ -749,9 +837,9 @@ CREATE TABLE `homestay_additional_amenities` (
   `name` varchar(50) NOT NULL,
   `category` varchar(1) NOT NULL,
   `price` int NOT NULL,
-  `is_order_count_per_day` varchar(1) NOT NULL,
-  `is_order_count_per_person` varchar(1) NOT NULL,
-  `is_order_count_per_room` varchar(1) NOT NULL,
+  `is_order_count_per_day` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  `is_order_count_per_person` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  `is_order_count_per_room` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
   `stock` int NOT NULL,
   `description` text NOT NULL,
   `image_url` text NOT NULL,
@@ -769,7 +857,10 @@ INSERT INTO `homestay_additional_amenities` (`homestay_id`, `additional_amenitie
 ('H01', '03', 'Dinner', '2', 25000, '1', '1', '', 0, 'Makan malam dengan menu yang dapat dipilih ketika menginap', '1709108535_ef01c134ee1e28296108.jpg', '2024-02-27 19:22:17', '2024-02-27 19:22:17'),
 ('H01', '04', 'Mattress', '1', 50000, '', '', '1', 5, 'Kasur tambahan', '1709108595_9cb67fef27d471f093ce.jpg', '2024-02-27 19:23:18', '2024-02-27 19:23:18'),
 ('H01', '05', 'Bathroom amenities', '1', 20000, '', '1', '', 0, 'Perlengkapan mandi', '1709108729_0c2892841396fba08924.jpeg', '2024-02-27 19:25:32', '2024-02-27 19:25:32'),
-('H01', '06', 'Equipment for grilling', '1', 30000, '', '', '', 5, 'Perlengkapan untuk bakar-bakar', '1709108832_5a375e35ec18bb648e8f.jpg', '2024-02-27 19:27:20', '2024-02-27 19:27:20');
+('H01', '06', 'Equipment for grilling', '1', 30000, '', '', '', 5, 'Perlengkapan untuk bakar-bakar', '1709108832_5a375e35ec18bb648e8f.jpg', '2024-02-27 19:27:20', '2024-02-27 19:27:20'),
+('H12', '01', 'Kasur', '1', 100000, '0', '0', '0', 5, 'des', '1727615240_1cb4af5b1784dcfbaf7d.png', '2024-09-29 01:07:22', '2024-09-29 01:07:22'),
+('H12', '02', 'Pijat Relaksasi', '2', 100000, '0', '1', '0', 0, 'tes', '1727615278_b042c7317103edd06d63.png', '2024-09-29 01:08:13', '2024-09-29 01:08:13'),
+('H12', '03', 'Sarapan', '2', 15000, '1', '1', '0', 0, 'sarapan enak', '1727700339_8f7c6229898833d4d8a2.png', '2024-09-30 00:45:42', '2024-09-30 00:45:42');
 
 -- --------------------------------------------------------
 
@@ -778,12 +869,23 @@ INSERT INTO `homestay_additional_amenities` (`homestay_id`, `additional_amenitie
 --
 
 CREATE TABLE `homestay_certification` (
-  `certificat_num` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `homestay_id` varchar(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `certification_id` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `certificate_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `certificate_num` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `certifying_agency` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `date` date NOT NULL,
-  `url` text NOT NULL
+  `description` text,
+  `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `homestay_certification`
+--
+
+INSERT INTO `homestay_certification` (`homestay_id`, `certification_id`, `certificate_name`, `certificate_num`, `certifying_agency`, `date`, `description`, `image_url`) VALUES
+('H12', '001', 'aaaa', '111', 'aaa', '2024-10-05', 'aaa', '1728133396_9210f340d84dbc9449db.png'),
+('H12', '002', 'bbb', '222', 'bbb', '2024-10-05', 'bbb', '1728132235_031fe81fdba4d90c9c3f.png');
 
 -- --------------------------------------------------------
 
@@ -874,7 +976,12 @@ INSERT INTO `homestay_facility_detail` (`homestay_id`, `facility_id`, `created_a
 ('H10', '04', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
 ('H10', '06', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
 ('H11', '01', '2024-02-26 19:20:24', '2024-02-26 19:20:24'),
-('H11', '06', '2024-02-26 19:20:24', '2024-02-26 19:20:24');
+('H11', '06', '2024-02-26 19:20:24', '2024-02-26 19:20:24'),
+('H12', '01', '2024-09-26 05:27:13', '2024-09-26 05:27:13'),
+('H12', '06', '2024-09-26 05:27:13', '2024-09-26 05:27:13'),
+('H13', '01', '2024-09-27 22:09:00', '2024-09-27 22:09:00'),
+('H13', '04', '2024-09-27 22:09:00', '2024-09-27 22:09:00'),
+('H13', '06', '2024-09-27 22:09:00', '2024-09-27 22:09:00');
 
 -- --------------------------------------------------------
 
@@ -941,7 +1048,13 @@ INSERT INTO `homestay_gallery` (`id`, `homestay_id`, `url`, `created_at`, `updat
 ('044', 'H10', '1709013311_f6a981f624467a133917.jpg', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
 ('045', 'H11', '1709022020_203ac63eadbc7865792b.jpg', '2024-02-26 19:20:24', '2024-02-26 19:20:24'),
 ('046', 'H11', '1709022021_0c0449818d7637b39352.jpg', '2024-02-26 19:20:24', '2024-02-26 19:20:24'),
-('047', 'H11', '1709022022_ea237737fe250c819431.jpg', '2024-02-26 19:20:24', '2024-02-26 19:20:24');
+('047', 'H11', '1709022022_ea237737fe250c819431.jpg', '2024-02-26 19:20:24', '2024-02-26 19:20:24'),
+('048', 'H12', '1727371628_3542b44db898a7086570.png', '2024-09-26 05:27:13', '2024-09-26 05:27:13'),
+('049', 'H12', '1727371629_43f46daaeffa22ad3b94.png', '2024-09-26 05:27:13', '2024-09-26 05:27:13'),
+('050', 'H12', '1727371630_078d47c2f5afac16855d.png', '2024-09-26 05:27:13', '2024-09-26 05:27:13'),
+('051', 'H13', '1727518067_7b1f7491c7731379d7d4.png', '2024-09-27 22:09:00', '2024-09-27 22:09:00'),
+('052', 'H13', '1727518066_3a842ba3f1336f493577.png', '2024-09-27 22:09:00', '2024-09-27 22:09:00'),
+('053', 'H13', '1727518068_81cb9bae51fb9f8dddc9.png', '2024-09-27 22:09:00', '2024-09-27 22:09:00');
 
 -- --------------------------------------------------------
 
@@ -988,7 +1101,10 @@ INSERT INTO `homestay_unit` (`homestay_id`, `unit_type`, `unit_number`, `name`, 
 ('H02', '1', '6', 'Kamar 6', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:11:35', '2024-02-27 21:11:35'),
 ('H02', '1', '7', 'Kamar 7', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:12:31', '2024-02-27 21:12:31'),
 ('H02', '1', '8', 'Kamar 8', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:13:30', '2024-02-27 21:13:30'),
-('H02', '1', '9', 'Kamar 9 ', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:14:30', '2024-02-27 21:14:30');
+('H02', '1', '9', 'Kamar 9 ', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:14:30', '2024-02-27 21:14:30'),
+('H12', '1', '1', 'Kamar 1', 100000, 2, NULL, '2024-09-29 01:05:21', '2024-09-29 01:05:21'),
+('H12', '1', '2', 'Kamar 2', 200000, -1, NULL, '2024-09-29 01:05:52', '2024-09-29 01:05:52'),
+('H12', '1', '3', 'Kamar 3', 150000, 2, NULL, '2024-09-29 01:06:32', '2024-09-29 01:06:32');
 
 -- --------------------------------------------------------
 
@@ -1134,7 +1250,13 @@ INSERT INTO `homestay_unit_gallery` (`id`, `homestay_id`, `unit_type`, `unit_num
 ('035', 'H02', '1', '6', '1709115093_c8f85854a59c47400402.jpg', '2024-02-27 21:11:35', '2024-02-27 21:11:35'),
 ('036', 'H02', '1', '7', '1709115149_d0b5039619b5aedce3b2.jpg', '2024-02-27 21:12:31', '2024-02-27 21:12:31'),
 ('037', 'H02', '1', '8', '1709115208_635d071e0621807372b0.jpg', '2024-02-27 21:13:30', '2024-02-27 21:13:30'),
-('038', 'H02', '1', '9', '1709115268_fa9e6da631963f15a510.jpg', '2024-02-27 21:14:30', '2024-02-27 21:14:30');
+('038', 'H02', '1', '9', '1709115268_fa9e6da631963f15a510.jpg', '2024-02-27 21:14:30', '2024-02-27 21:14:30'),
+('039', 'H12', '1', '1', '1727615118_f2516067a8b74a009b0f.png', '2024-09-29 01:05:21', '2024-09-29 01:05:21'),
+('040', 'H12', '1', '1', '1727615118_6c476410ff00a155fcd1.png', '2024-09-29 01:05:21', '2024-09-29 01:05:21'),
+('041', 'H12', '1', '2', '1727615149_b031537f8d8f3ad0b4a3.png', '2024-09-29 01:05:52', '2024-09-29 01:05:52'),
+('042', 'H12', '1', '2', '1727615150_5d82169020b981420316.png', '2024-09-29 01:05:52', '2024-09-29 01:05:52'),
+('043', 'H12', '1', '3', '1727615187_d2b8c00e51de9750d277.png', '2024-09-29 01:06:32', '2024-09-29 01:06:32'),
+('044', 'H12', '1', '3', '1727615187_b09a9153ab96b6a162d9.png', '2024-09-29 01:06:32', '2024-09-29 01:06:32');
 
 -- --------------------------------------------------------
 
@@ -1262,7 +1384,8 @@ CREATE TABLE `reservation` (
   `rating` int DEFAULT NULL,
   `total_price` int DEFAULT NULL,
   `deposit` int DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL,
+  `status` varchar(20) DEFAULT NULL,
+  `snap_token` text,
   `reservation_finish_at` timestamp NULL DEFAULT NULL,
   `is_rejected` varchar(1) DEFAULT NULL,
   `confirmed_at` timestamp NULL DEFAULT NULL,
@@ -1270,6 +1393,7 @@ CREATE TABLE `reservation` (
   `canceled_at` timestamp NULL DEFAULT NULL,
   `cancelation_reason` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `is_refund` char(1) DEFAULT NULL,
+  `refund_paid_at` timestamp NULL DEFAULT NULL,
   `account_refund` text,
   `refund_proof` text,
   `is_refund_proof_correct` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -1280,10 +1404,18 @@ CREATE TABLE `reservation` (
 -- Dumping data for table `reservation`
 --
 
-INSERT INTO `reservation` (`id`, `customer_id`, `request_date`, `check_in`, `total_people`, `review`, `rating`, `total_price`, `deposit`, `status`, `reservation_finish_at`, `is_rejected`, `confirmed_at`, `feedback`, `canceled_at`, `cancelation_reason`, `is_refund`, `account_refund`, `refund_proof`, `is_refund_proof_correct`, `refund_paid_confirmed_at`) VALUES
-('R001', NULL, '2024-05-30 15:01:16', '2024-06-06 14:00:00', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R002', 11, '2024-05-30 15:04:54', '2024-06-20 14:00:00', 1, NULL, NULL, 350000, 70000, 0, '2024-05-30 08:21:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R003', 11, '2024-06-03 17:34:33', '2024-06-08 14:00:00', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `reservation` (`id`, `customer_id`, `request_date`, `check_in`, `total_people`, `review`, `rating`, `total_price`, `deposit`, `status`, `snap_token`, `reservation_finish_at`, `is_rejected`, `confirmed_at`, `feedback`, `canceled_at`, `cancelation_reason`, `is_refund`, `refund_paid_at`, `account_refund`, `refund_proof`, `is_refund_proof_correct`, `refund_paid_confirmed_at`) VALUES
+('R002', 11, '2024-10-02 14:54:09', '2024-10-05 14:00:00', 3, NULL, NULL, 390000, 78000, '1', NULL, '2024-10-02 07:54:28', '1', '2024-10-02 08:44:46', '', '2024-10-04 16:05:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R003', 11, '2024-10-03 20:18:54', '2024-10-06 14:00:00', 5, NULL, NULL, 700000, 140000, '1', NULL, '2024-10-03 13:19:00', '1', '2024-10-03 13:19:14', '', '2024-10-04 16:05:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R004', 11, '2024-10-03 20:19:40', '2024-10-06 14:00:00', 5, NULL, NULL, 800000, 160000, 'Payment Successful', NULL, '2024-10-03 13:20:49', '0', '2024-10-03 13:21:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R005', 11, '2024-10-03 23:29:35', '2024-10-06 14:00:00', 3, NULL, NULL, 300000, 60000, '1', NULL, '2024-10-03 16:29:42', '1', '2024-10-03 16:29:55', '', '2024-10-04 16:05:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R006', 11, '2024-10-03 23:30:18', '2024-10-06 14:00:00', 3, NULL, NULL, 300000, 60000, 'Payment Expired', '65a45428-5af5-4ce8-b553-801ddeb01d91', '2024-10-03 16:30:23', '0', '2024-10-03 16:30:57', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R007', 11, '2024-10-04 18:47:53', '2024-10-10 14:00:00', 5, NULL, NULL, 600000, 120000, 'Payment Successful', 'c4c96bdd-c9d2-43c3-839f-01a7ca136aef', '2024-10-04 11:50:55', '0', '2024-10-04 11:51:47', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R008', 11, '2024-10-04 19:16:47', '2024-10-07 14:00:00', 3, NULL, NULL, 150000, 30000, 'Payment Successful', '40a5c12d-748b-4923-b77e-aeb47f1ec9f2', '2024-10-04 12:16:54', '0', '2024-10-04 12:17:15', '', '2024-10-04 14:19:00', '1', '1', '2024-10-04 15:16:14', 'aaa - bank aaa - 1112', '1728054972_c6cf3b6f27c6b1966981.jpg', '1', '2024-10-04 15:20:15'),
+('R009', 11, '2024-10-04 22:23:03', '2024-10-05 14:00:00', 3, NULL, NULL, 300000, 60000, 'Done', 'bcf0ed75-736b-4895-b6e1-ed3900598c3f', '2024-10-04 15:24:39', '0', '2024-10-04 15:25:09', '', '2024-10-04 15:29:00', '1', '0', NULL, NULL, NULL, NULL, NULL),
+('R010', 11, '2024-10-04 22:50:54', '2024-10-02 14:00:00', 3, 'Bagus', 5, 300000, 60000, 'Done', 'de6b0a0f-6a6f-47e6-9104-967ffe9dfa3b', '2024-10-04 15:51:02', '0', '2024-10-04 15:51:32', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R011', 11, '2024-10-04 23:00:10', '2024-10-05 14:00:00', 2, NULL, NULL, 100000, 20000, '1', 'aa6d42bc-acf4-47fc-88f5-c16b553cb3c0', '2024-10-04 16:00:48', '0', '2024-10-04 16:01:45', '', '2024-10-04 16:04:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R012', NULL, '2024-10-05 15:25:55', '2024-10-05 14:00:00', 3, NULL, NULL, 100000, NULL, 'Done', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1301,6 +1433,14 @@ CREATE TABLE `reservation_homestay_additional_amenities_detail` (
   `total_order` int NOT NULL,
   `total_price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `reservation_homestay_additional_amenities_detail`
+--
+
+INSERT INTO `reservation_homestay_additional_amenities_detail` (`homestay_id`, `additional_amenities_id`, `reservation_id`, `day_order`, `person_order`, `room_order`, `total_order`, `total_price`) VALUES
+('H12', '01', 'R004', 0, 0, 0, 2, 200000),
+('H12', '03', 'R002', 2, 3, 0, 6, 90000);
 
 -- --------------------------------------------------------
 
@@ -1321,9 +1461,17 @@ CREATE TABLE `reservation_homestay_unit_detail` (
 --
 
 INSERT INTO `reservation_homestay_unit_detail` (`homestay_id`, `unit_type`, `unit_number`, `date`, `reservation_id`) VALUES
-('H01', '1', '2', '2024-06-06', 'R001'),
-('H01', '1', '1', '2024-06-20', 'R002'),
-('H01', '1', '3', '2024-06-08', 'R003');
+('H12', '1', '1', '2024-10-06', 'R004'),
+('H12', '1', '1', '2024-10-07', 'R004'),
+('H12', '1', '2', '2024-10-06', 'R004'),
+('H12', '1', '2', '2024-10-07', 'R004'),
+('H12', '1', '1', '2024-10-10', 'R007'),
+('H12', '1', '1', '2024-10-11', 'R007'),
+('H12', '1', '2', '2024-10-10', 'R007'),
+('H12', '1', '2', '2024-10-11', 'R007'),
+('H12', '1', '3', '2024-10-07', 'R010'),
+('H12', '1', '3', '2024-10-08', 'R010'),
+('H12', '1', '1', '2024-10-05', 'R012');
 
 -- --------------------------------------------------------
 
@@ -1338,6 +1486,26 @@ CREATE TABLE `reservation_homestay_unit_detail_backup` (
   `reservation_id` varchar(4) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `reservation_homestay_unit_detail_backup`
+--
+
+INSERT INTO `reservation_homestay_unit_detail_backup` (`homestay_id`, `unit_type`, `unit_number`, `reservation_id`, `date`) VALUES
+('H12', '1', '3', 'R002', '2024-10-05'),
+('H12', '1', '3', 'R002', '2024-10-06'),
+('H12', '1', '2', 'R003', '2024-10-06'),
+('H12', '1', '2', 'R003', '2024-10-07'),
+('H12', '1', '3', 'R003', '2024-10-06'),
+('H12', '1', '3', 'R003', '2024-10-07'),
+('H12', '1', '3', 'R005', '2024-10-06'),
+('H12', '1', '3', 'R005', '2024-10-07'),
+('H12', '1', '3', 'R006', '2024-10-06'),
+('H12', '1', '3', 'R006', '2024-10-07'),
+('H12', '1', '3', 'R008', '2024-10-07'),
+('H12', '1', '3', 'R009', '2024-10-07'),
+('H12', '1', '3', 'R009', '2024-10-08'),
+('H12', '1', '1', 'R011', '2024-10-12');
 
 -- --------------------------------------------------------
 
@@ -1366,10 +1534,10 @@ CREATE TABLE `souvenir_place` (
 --
 
 INSERT INTO `souvenir_place` (`id`, `name`, `address`, `employee_name`, `phone`, `open`, `close`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('S1', 'Wida Gallery 99 Sarasah Bunta', 'Tarantang village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Wida', '082344125645', '10:00:00', '18:00:00', 0xe61000000103000000010000000500000086127dfd3a2b59400c2bed4b08e9bbbf8512fdf43b2b5940e17ff24bdbe8bbbf86127d0b3c2b5940517b374b02efbbbf8612bd083b2b5940232c424ba8eebbbf86127dfd3a2b59400c2bed4b08e9bbbf, -0.10906880, 100.67550766, 'Selamat datang di Wida Gallery 99, destinasi yang memukau untuk menemukan cinderamata istimewa, yang terletak di dekat Sarasah Bunta! Wida Gallery 99 merupakan surga bagi para pencinta souvenir, menawarkan pengalaman berbelanja yang tak terlupakan di tengah-tengah keindahan lokal yang khas.', '2023-12-01 21:13:53', '2023-12-01 23:15:15'),
-('S2', 'Harau Collection & Souvenir', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Iwan', '082267348821', '10:00:00', '18:00:00', 0xe610000001030000000100000006000000fa7e921d732a5940edfd04e0c8febcbffa7e0215752a59402e0a0a80a1febcbffa7e1223752a594030bc775f1703bdbffb7ed228732a59407f346c5f7103bdbffa7e921d732a5940edfd04e0c8febcbffa7e921d732a5940edfd04e0c8febcbf, -0.11329707, 100.66333778, 'Selamat datang di Harau Collection & Souvenir, destinasi yang memukau untuk menemukan cinderamata istimewa, yang terletak di Lembah Harau. Harau Collection & Souvenir merupakan surga bagi para pencinta souvenir, menawarkan pengalaman berbelanja yang tak terlupakan di tengah-tengah keindahan lokal yang khas.', '2023-12-01 23:44:52', '2023-12-01 23:45:32'),
-('S3', 'Harau Cell & Fashion', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Andi', '082211213349', '10:00:00', '18:00:00', 0xe610000001030000000100000006000000df514b7e4b2b5940b3e53046e1e0bbbfdd51b3524b2b594083f9ae252ae5bbbfdd5173554c2b5940c44d94250be6bbbfdd51f36b4c2b594095961926a6e1bbbfdf51b3ac4b2b5940dd902b460ee1bbbfdf514b7e4b2b5940b3e53046e1e0bbbf, -0.10893954, 100.67650588, 'Harau Cell & Fashion bukan hanya sekadar toko, melainkan pusat inspirasi yang memadukan kecantikan budaya dan fesyen terkini. Dengan atmosfer yang ramah dan penuh semangat, setiap pengunjung diundang untuk menjelajahi koleksi souvenir yang dipilih dengan cermat dan penuh cinta.', '2023-12-02 00:16:18', '2023-12-02 00:17:47'),
-('S4', 'Sarasah Bunta Garden', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Wan', '081287723412', '09:00:00', '18:00:00', 0xe61000000103000000010000000500000038c2b2224d2b5940e301fbf550e7bbbf37c2f2684e2b59407c50d0f5b8e8bbbf37c2f20e4e2b5940757455f5c3ecbbbf38c272ea4c2b5940d83990f5d4eabbbf38c2b2224d2b5940e301fbf550e7bbbf, -0.10903993, 100.67661517, 'Sarasah Bunta Garden bagaikan oase yang memelihara tanaman-tanaman endemik yang tumbuh subur di kawasan ini. Setiap sudut taman dipenuhi dengan keindahan alami dan aroma harum dari berbagai jenis tanaman yang khas. Dari flora yang langka hingga tanaman hias yang menawan, setiap pot dan wadah dipilih dengan hati untuk memamerkan keunikan dan keindahan masing-masing.', '2023-12-02 00:44:34', '2023-12-02 00:44:34');
+('S1', 'Wida Gallery 99 Sarasah Bunta', 'Tarantang village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Wida', '082344125645', '10:00:00', '18:00:00', 0xe61000000103000000010000000500000086127dfd3a2b59400c2bed4b08e9bbbf8512fdf43b2b5940e17ff24bdbe8bbbf86127d0b3c2b5940517b374b02efbbbf8612bd083b2b5940232c424ba8eebbbf86127dfd3a2b59400c2bed4b08e9bbbf, '-0.10906880', '100.67550766', 'Selamat datang di Wida Gallery 99, destinasi yang memukau untuk menemukan cinderamata istimewa, yang terletak di dekat Sarasah Bunta! Wida Gallery 99 merupakan surga bagi para pencinta souvenir, menawarkan pengalaman berbelanja yang tak terlupakan di tengah-tengah keindahan lokal yang khas.', '2023-12-01 21:13:53', '2023-12-01 23:15:15'),
+('S2', 'Harau Collection & Souvenir', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Iwan', '082267348821', '10:00:00', '18:00:00', 0xe610000001030000000100000006000000fa7e921d732a5940edfd04e0c8febcbffa7e0215752a59402e0a0a80a1febcbffa7e1223752a594030bc775f1703bdbffb7ed228732a59407f346c5f7103bdbffa7e921d732a5940edfd04e0c8febcbffa7e921d732a5940edfd04e0c8febcbf, '-0.11329707', '100.66333778', 'Selamat datang di Harau Collection & Souvenir, destinasi yang memukau untuk menemukan cinderamata istimewa, yang terletak di Lembah Harau. Harau Collection & Souvenir merupakan surga bagi para pencinta souvenir, menawarkan pengalaman berbelanja yang tak terlupakan di tengah-tengah keindahan lokal yang khas.', '2023-12-01 23:44:52', '2023-12-01 23:45:32'),
+('S3', 'Harau Cell & Fashion', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Andi', '082211213349', '10:00:00', '18:00:00', 0xe610000001030000000100000006000000df514b7e4b2b5940b3e53046e1e0bbbfdd51b3524b2b594083f9ae252ae5bbbfdd5173554c2b5940c44d94250be6bbbfdd51f36b4c2b594095961926a6e1bbbfdf51b3ac4b2b5940dd902b460ee1bbbfdf514b7e4b2b5940b3e53046e1e0bbbf, '-0.10893954', '100.67650588', 'Harau Cell & Fashion bukan hanya sekadar toko, melainkan pusat inspirasi yang memadukan kecantikan budaya dan fesyen terkini. Dengan atmosfer yang ramah dan penuh semangat, setiap pengunjung diundang untuk menjelajahi koleksi souvenir yang dipilih dengan cermat dan penuh cinta.', '2023-12-02 00:16:18', '2023-12-02 00:17:47'),
+('S4', 'Sarasah Bunta Garden', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Wan', '081287723412', '09:00:00', '18:00:00', 0xe61000000103000000010000000500000038c2b2224d2b5940e301fbf550e7bbbf37c2f2684e2b59407c50d0f5b8e8bbbf37c2f20e4e2b5940757455f5c3ecbbbf38c272ea4c2b5940d83990f5d4eabbbf38c2b2224d2b5940e301fbf550e7bbbf, '-0.10903993', '100.67661517', 'Sarasah Bunta Garden bagaikan oase yang memelihara tanaman-tanaman endemik yang tumbuh subur di kawasan ini. Setiap sudut taman dipenuhi dengan keindahan alami dan aroma harum dari berbagai jenis tanaman yang khas. Dari flora yang langka hingga tanaman hias yang menawan, setiap pot dan wadah dipilih dengan hati untuk memamerkan keunikan dan keindahan masing-masing.', '2023-12-02 00:44:34', '2023-12-02 00:44:34');
 
 -- --------------------------------------------------------
 
@@ -1545,7 +1713,9 @@ INSERT INTO `users` (`id`, `email`, `username`, `first_name`, `last_name`, `addr
 (19, 'ostonhomestay@gmail.com', 'ostonhomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '082174854400', 'default.jpg', '$2y$10$Av7FOrEUF5/M33bIJiQwIueHlpae.2WgIKquWCqf9OQZMijp4bjhW', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:37:28', '2024-02-26 23:37:28', NULL),
 (20, 'megahomestay@gmail.com', 'megahomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '081266724140', 'default.jpg', '$2y$10$hLY4EbUhD29vSBcTu7Q3P.FL9mWl..QzYgaXy/6hsh6nY/nFMCkJS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:44:25', '2024-02-26 23:44:25', NULL),
 (21, 'dangauabahhomestay@gmail.com', 'dangauabahhomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '082391158500', 'default.jpg', '$2y$10$AJA4Um/doSqcEvhi1FJGaeRIYt9noTCycT6OMdg9rmYpILkUhmqWW', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:47:49', '2024-02-26 23:47:49', NULL),
-(22, 'limpatohomesaty@gmail.com', 'limpatohomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '081364348921', 'default.jpg', '$2y$10$388h3htWTvMWy19Yk4uhY.2wto/Y.Fx5ASRHkuwWJ3k4JG1o.FuNC', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:56:58', '2024-02-26 23:56:58', NULL);
+(22, 'limpatohomesaty@gmail.com', 'limpatohomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '081364348921', 'default.jpg', '$2y$10$388h3htWTvMWy19Yk4uhY.2wto/Y.Fx5ASRHkuwWJ3k4JG1o.FuNC', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:56:58', '2024-02-26 23:56:58', NULL),
+(23, 'homestayaaa@gmail.com', 'homestayaaa', NULL, NULL, NULL, NULL, 'default.jpg', '$2y$10$jsPLyiULsgQuOb00IhcWAONVhuqQ.Mz/Nuxj08sLVi9wTRSYAbv3e', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-26 11:40:48', '2024-09-26 11:40:48', NULL),
+(24, 'homestaybbb@gmail.com', 'homestaybbb', NULL, NULL, NULL, NULL, 'default.jpg', '$2y$10$ctEctlQP2cUs4/dUcYLFG.QKFpsfHsnnMnQ1GCdaeTHSDzvi1PS1O', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-28 05:04:12', '2024-09-28 05:04:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -1554,53 +1724,85 @@ INSERT INTO `users` (`id`, `email`, `username`, `first_name`, `last_name`, `addr
 --
 
 CREATE TABLE `village` (
-  `id` varchar(3) NOT NULL,
+  `id` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `geom` geometry DEFAULT NULL,
-  `district` varchar(30) DEFAULT NULL,
   `geom_file` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `selected` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  `description` text,
+  `ticket_price` int DEFAULT NULL,
+  `open` time DEFAULT NULL,
+  `close` time DEFAULT NULL,
+  `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `email` varchar(50) DEFAULT NULL,
+  `facebook` varchar(50) DEFAULT NULL,
+  `instagram` varchar(50) DEFAULT NULL,
+  `youtube` varchar(50) DEFAULT NULL,
+  `tiktok` varchar(50) DEFAULT NULL,
+  `video_url` text,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `selected` char(1) NOT NULL DEFAULT '0'
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `village`
 --
 
-INSERT INTO `village` (`id`, `name`, `geom`, `district`, `geom_file`, `created_at`, `updated_at`, `selected`) VALUES
-('1', 'Nagari Tuo Pariangan', NULL, NULL, 'Pariangan.geojson', NULL, NULL, '1'),
-('10', 'Danau Ateh Alahan Panjang', NULL, NULL, 'Alahan_Panjang.goejson', NULL, NULL, '0'),
-('11', 'Kumanis', NULL, NULL, 'Kumnanis.goejson', NULL, NULL, '0'),
-('12', 'Sisawah', NULL, NULL, 'Sisawah.goejson', NULL, NULL, '0'),
-('13', 'Marapalam Batu Bulek', NULL, NULL, 'Marapalam_Batu_Bulek.goejson', NULL, NULL, '0'),
-('14', 'Guranjhil', NULL, NULL, 'Kuranji_Hilir.goejson', NULL, NULL, '0'),
-('15', 'Sintuak', NULL, NULL, 'Sintuak.goejson', NULL, NULL, '0'),
-('16', 'Panampuang', NULL, NULL, 'Panampuang.goejson', NULL, NULL, '0'),
-('17', 'Dalko', NULL, NULL, 'Dalko_Tanjung_Sani.goejson', NULL, NULL, '0'),
-('18', 'Kamang Mudiak', NULL, NULL, 'Kamang_Mudiak.goejson', NULL, NULL, '0'),
-('19', 'Koto Gadang', NULL, NULL, 'Koto_Gadang.goejson', NULL, NULL, '0'),
-('2', 'Silabu', NULL, NULL, 'Silabu.geojson', NULL, NULL, '0'),
-('20', 'Simarasok', NULL, NULL, 'Simarasok.goejson', NULL, NULL, '0'),
-('21', 'Koto Kaciak', NULL, NULL, 'Koto_Kaciak.goejson', NULL, NULL, '0'),
-('22', 'Pesona Pagadih', NULL, NULL, 'Pagadih.goejson', NULL, NULL, '0'),
-('23', 'Nagata', NULL, NULL, 'Nagata_Talang_Anau.goejson', NULL, NULL, '0'),
-('24', 'Kampung Bung Hatta Batuhampar', NULL, NULL, 'Kampung_Bung_Hatta_Batuhampar.goejson', NULL, NULL, '0'),
-('25', 'Kapalo Banda Taram', NULL, NULL, 'Kapalo_Banda_Taram.goejson', NULL, NULL, '0'),
-('26', 'Ganggo Mudiak', NULL, NULL, 'Ganggo_Mudiak.goejson', NULL, NULL, '0'),
-('27', 'Ganggo Hilia', NULL, NULL, 'Ganggo_Hilia.goejson', NULL, NULL, '0'),
-('28', 'Teluk Buo', NULL, NULL, 'Teluk_Buo_Teluk_Kabung_Tengah.goejson', NULL, NULL, '0'),
-('29', 'Parit Antang \"The Heart of Kurai\"', NULL, NULL, 'Parit_Rantang.goejson', NULL, NULL, '0'),
-('3', 'Salido', NULL, NULL, 'Salido.goejson', NULL, NULL, '0'),
-('30', 'Parik Natuang', NULL, NULL, 'Pulai_Anak_Aia.goejson', NULL, NULL, '0'),
-('31', 'Desa Wisata Sanjai', NULL, NULL, 'Manggis_Ganting.goejson', NULL, NULL, '0'),
-('32', 'Pendakian Gunung Marapi Koto Baru', NULL, NULL, 'Koto_Baru_X_Koto.goejson', NULL, NULL, '0'),
-('4', 'Pesona Palmurah', NULL, NULL, 'Palmurah_Pasar_Lama.goejson', NULL, NULL, '0'),
-('5', 'Carocok Pantai Painan', NULL, NULL, 'Carocok_Painan.goejson\r\n', NULL, NULL, '0'),
-('6', 'Nyalo', NULL, NULL, 'Nyalo_Mudiak_Aia.goejson', NULL, NULL, '0'),
-('7', 'Ekowisata Nagari Amping Parak', NULL, NULL, 'Amping_Parak.goejson', NULL, NULL, '0'),
-('8', 'Kampung Batu Dalam', NULL, NULL, 'Kampung_Batu_Dalam.goejson', NULL, NULL, '0'),
-('9', 'Tabek Talang Babungo', NULL, NULL, 'Talang_Babungo.goejson', NULL, NULL, '0');
+INSERT INTO `village` (`id`, `name`, `geom_file`, `selected`, `description`, `ticket_price`, `open`, `close`, `address`, `email`, `facebook`, `instagram`, `youtube`, `tiktok`, `video_url`, `created_at`, `updated_at`) VALUES
+('1', 'Nagari Tuo Pariangan', 'Pariangan.geojson', '1', 'desc', 1, '00:00:00', '23:59:00', 'Pariangan, Kecamatan Pariangan, Kabupaten Tanah Datar, Sumatera Barat', 'pariangan@gmail.com', 'f', 'i', NULL, 't', '1727614484_c2e89f13f679fb18a052.mp4', NULL, NULL),
+('10', 'Danau Ateh Alahan Panjang', 'Alahan_Panjang.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('11', 'Kumanis', 'Kumanis.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('12', 'Sisawah', 'Sisawah.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('13', 'Marapalam Batu Bulek', 'Marapalam_Batu_Bulek.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('14', 'Guranjhil', 'Kuranji_Hilir.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('15', 'Sintuak', 'Sintuak.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('16', 'Panampuang', 'Panampuang.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('17', 'Dalko', 'Dalko_Tanjung_Sani.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('18', 'Kamang Mudiak', 'Kamang_Mudiak.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('19', 'Koto Gadang', 'Koto_Gadang.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('2', 'Silabu', 'Silabu.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('20', 'Simarasok', 'Simarasok.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('21', 'Koto Kaciak', 'Koto_Kaciak.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('22', 'Pesona Pagadih', 'Pagadih.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('23', 'Nagata', 'Nagata_Talang_Anau.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('24', 'Kampung Bung Hatta Batuhampar', 'Kampung_Bung_Hatta_Batuhampar.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('25', 'Kapalo Banda Taram', 'Kapalo_Banda_Taram.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('26', 'Ganggo Mudiak', 'Ganggo_Mudiak.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('27', 'Ganggo Hilia', 'Ganggo_Hilia.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('28', 'Teluk Buo', 'Teluk_Buo_Teluk_Kabung_Tengah.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('29', 'Parit Antang \"The Heart of Kurai\"', 'Parit_Rantang.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('3', 'Salido', 'Salido.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('30', 'Parik Natuang', 'Pulai_Anak_Aia.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('31', 'Desa Wisata Sanjai', 'Manggis_Ganting.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('32', 'Pendakian Gunung Marapi Koto Baru', 'Koto_Baru_X_Koto.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('4', 'Pesona Palmurah', 'Palmurah_Pasar_Lama.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('5', 'Carocok Pantai Painan', 'Carocok_Painan.geojson\r\n', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('6', 'Nyalo', 'Nyalo_Mudiak_Aia.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('7', 'Ekowisata Nagari Amping Parak', 'Amping_Parak.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('8', 'Kampung Batu Dalam', 'Kampung_Batu_Dalam.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('9', 'Tabek Talang Babungo', 'Talang_Babungo.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `village_gallery`
+--
+
+CREATE TABLE `village_gallery` (
+  `id` varchar(3) NOT NULL,
+  `village_id` varchar(3) NOT NULL,
+  `url` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `village_gallery`
+--
+
+INSERT INTO `village_gallery` (`id`, `village_id`, `url`) VALUES
+('001', '1', '1727614495_f0ba376c28ae87e8df80.png'),
+('002', '1', '1727614479_2f0ee2c1ce316d37d3ca.jpg'),
+('003', '1', '1727614479_5f9a92807eae6f09ccbd.jpg'),
+('004', '1', '1727614482_37a4d005face04127013.jpg'),
+('005', '1', '1727614481_20ae5c4e6ed020accd68.jpg');
 
 -- --------------------------------------------------------
 
@@ -1627,8 +1829,8 @@ CREATE TABLE `worship_place` (
 --
 
 INSERT INTO `worship_place` (`id`, `name`, `worship_place_category`, `address`, `capacity`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('W1', 'Masjid Raya Al-Muttaqin', '01', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 100, 0xe610000001030000000100000005000000f5a554ee772a5940ba53f3e79f3abcbff5a59437762a594043365666e547bcbff5a514ff792a59408f7588e57c4ebcbff4a554727b2a5940ad453167dd40bcbff5a554ee772a5940ba53f3e79f3abcbf, -0.11042109, 100.66362499, 'Masjid Raya Al-Muttaqin adalah sebuah tempat ibadah Islam yang menakjubkan dan penuh makna, terletak di tengah Nagari Tarantang. Dibangun dengan arsitektur yang megah dan indah, masjid ini menjadi ikon keagamaan di Nagari Tarantang.', '2023-12-02 17:11:28', '2023-12-02 17:11:28'),
-('W2', 'Mushalla Nurul Ikhlas', '02', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 50, 0xe61000000103000000010000000900000061c9dd3b7d2a594028bbc2bcab9ebcbf60c91d557e2a5940d015e93d7195bcbf62c95df87c2a5940b7dc313e2893bcbf61c9fda37c2a59407049cabd6896bcbf62c93d557c2a5940334bd83df895bcbf61c9dd2d7c2a5940b9779dbdd097bcbf60c95d717c2a5940a440843d9b98bcbf61c99df57b2a59409db00bbd629cbcbf61c9dd3b7d2a594028bbc2bcab9ebcbf, -0.11170828, 100.66388830, NULL, '2023-12-02 17:16:46', '2023-12-02 17:17:48');
+('W1', 'Masjid Raya Al-Muttaqin', '01', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 100, 0xe610000001030000000100000005000000f5a554ee772a5940ba53f3e79f3abcbff5a59437762a594043365666e547bcbff5a514ff792a59408f7588e57c4ebcbff4a554727b2a5940ad453167dd40bcbff5a554ee772a5940ba53f3e79f3abcbf, '-0.11042109', '100.66362499', 'Masjid Raya Al-Muttaqin adalah sebuah tempat ibadah Islam yang menakjubkan dan penuh makna, terletak di tengah Nagari Tarantang. Dibangun dengan arsitektur yang megah dan indah, masjid ini menjadi ikon keagamaan di Nagari Tarantang.', '2023-12-02 17:11:28', '2023-12-02 17:11:28'),
+('W2', 'Mushalla Nurul Ikhlas', '02', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 50, 0xe61000000103000000010000000900000061c9dd3b7d2a594028bbc2bcab9ebcbf60c91d557e2a5940d015e93d7195bcbf62c95df87c2a5940b7dc313e2893bcbf61c9fda37c2a59407049cabd6896bcbf62c93d557c2a5940334bd83df895bcbf61c9dd2d7c2a5940b9779dbdd097bcbf60c95d717c2a5940a440843d9b98bcbf61c99df57b2a59409db00bbd629cbcbf61c9dd3b7d2a594028bbc2bcab9ebcbf, '-0.11170828', '100.66388830', NULL, '2023-12-02 17:16:46', '2023-12-02 17:17:48');
 
 -- --------------------------------------------------------
 
@@ -1795,7 +1997,7 @@ ALTER TABLE `homestay_additional_amenities`
 -- Indexes for table `homestay_certification`
 --
 ALTER TABLE `homestay_certification`
-  ADD PRIMARY KEY (`certificat_num`),
+  ADD PRIMARY KEY (`homestay_id`,`certification_id`),
   ADD KEY `homestay_id` (`homestay_id`);
 
 --
@@ -1945,6 +2147,13 @@ ALTER TABLE `village`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `village_gallery`
+--
+ALTER TABLE `village_gallery`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `village_id` (`village_id`);
+
+--
 -- Indexes for table `worship_place`
 --
 ALTER TABLE `worship_place`
@@ -1984,7 +2193,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=341;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=424;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -2014,7 +2223,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
@@ -2144,6 +2353,12 @@ ALTER TABLE `souvenir_place_gallery`
 ALTER TABLE `souvenir_product_detail`
   ADD CONSTRAINT `souvenir_product_detail_souvenir_place_id_foreign` FOREIGN KEY (`souvenir_place_id`) REFERENCES `souvenir_place` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `souvenir_product_detail_souvenir_product_id_foreign` FOREIGN KEY (`souvenir_product_id`) REFERENCES `souvenir_product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `village_gallery`
+--
+ALTER TABLE `village_gallery`
+  ADD CONSTRAINT `village_gallery_ibfk_1` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `worship_place`
