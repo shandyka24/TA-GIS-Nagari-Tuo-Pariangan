@@ -195,6 +195,14 @@
                                         : <?= esc("Rp " . number_format($deposit, 0, ',', '.')) ?> <i>*(20% of total price)</i>
                                     </td>
                                 </tr>
+                                <?php if ((($reservation['status'] == 'Deposit Successful') || ($reservation['status'] == 'Full Pay Pending') || ($reservation['status'] == 'Full Pay Successful')) && ($reservation['canceled_at'] == null)) : ?>
+                                    <tr>
+                                        <td class="fw-bold">Full Price</td>
+                                        <td>
+                                            : <?= esc("Rp " . number_format($total_price - $deposit, 0, ',', '.')) ?> <i>*(80% of total price)</i>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
                                 <?php if ($reservation['is_refund'] == '1') : ?>
                                     <tr>
                                         <td class="fw-bold">Refund</td>
@@ -261,13 +269,17 @@
                                         <?php elseif (($reservation['status'] == '1') && ($reservation['canceled_at'] == null) && ($reservation['is_rejected'] == '1')) : ?>
                                             <button title="Reservation Rejected" class="btn-sm btn-danger float-center" disabled>Rejected</button>
                                         <?php elseif (($reservation['status'] == '1') && ($reservation['canceled_at'] == null)) : ?>
-                                            <button title="Paying Deposit" class="btn-sm btn-info float-center" disabled>Paying Deposit</button>
-                                        <?php elseif (($reservation['status'] == 'Payment Pending') && ($reservation['canceled_at'] == null)) : ?>
-                                            <button title="Payment Pending" class="btn-sm btn-warning float-center" disabled>Payment Pending</button>
-                                        <?php elseif (($reservation['status'] == 'Payment Successful') && ($reservation['canceled_at'] == null)) : ?>
-                                            <button title="Payment Successful" class="btn-sm btn-success float-center" disabled>Payment Successful</button>
-                                        <?php elseif (($reservation['status'] == 'Payment Expired') && ($reservation['canceled_at'] == null)) : ?>
-                                            <button title="Payment Expired" class="btn-sm btn-danger float-center" disabled>Payment Expired</button>
+                                            <button title="Paying Deposit" class="btn-sm btn-info float-center" disabled>Pay Deposit</button>
+                                        <?php elseif (($reservation['status'] == 'Deposit Pending') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Deposit Pending" class="btn-sm btn-warning float-center" disabled>Deposit Pending</button>
+                                        <?php elseif (($reservation['status'] == 'Deposit Successful') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Deposit Successful" class="btn-sm btn-success float-center" disabled>Deposit Successful</button>
+                                        <?php elseif (($reservation['status'] == 'Deposit Expired') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Deposit Expired" class="btn-sm btn-danger float-center" disabled>Deposit Expired</button>
+                                        <?php elseif (($reservation['status'] == 'Full Pay Pending') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Full Pay Pending" class="btn-sm btn-warning float-center" disabled>Full Pay Pending</button>
+                                        <?php elseif (($reservation['status'] == 'Full Pay Successful') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Full Pay Successful" class="btn-sm btn-success float-center" disabled>Full Pay Successful</button>
                                         <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] == null)) : ?>
                                             <button title="Waiting for the homestay owner to pay refund" class="btn-sm btn-danger float-center" disabled>Refund</button>
                                         <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] != null) && ($reservation['refund_paid_confirmed_at'] == null)) : ?>

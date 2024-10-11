@@ -72,10 +72,12 @@ $edit = in_array('edit', $uri);
                                     <label for="role" class="mb-2">Roles</label>
                                     <select class="form-select" id="role" name="role">
                                         <?php foreach ($roles as $role) : ?>
-                                            <?php if ($edit && esc($role['name']) == esc($data['role'])) : ?>
-                                                <option value="<?= esc($role['id']); ?>" selected><?= ucfirst(esc($role['name'])); ?></option>
-                                            <?php else : ?>
-                                                <option value="<?= esc($role['id']); ?>"><?= ucfirst(esc($role['name'])); ?></option>
+                                            <?php if (esc($role['name']) != 'admin') : ?>
+                                                <?php if ($edit && esc($role['name']) == esc($data['role'])) : ?>
+                                                    <option value="<?= esc($role['id']); ?>" selected><?= ucfirst(esc($role['name'])); ?></option>
+                                                <?php else : ?>
+                                                    <option value="<?= esc($role['id']); ?>"><?= ucfirst(esc($role['name'])); ?></option>
+                                                <?php endif; ?>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>

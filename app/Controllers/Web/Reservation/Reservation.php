@@ -100,9 +100,11 @@ class Reservation extends ResourcePresenter
             if (($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
                 $checkIsReservationCancel = $this->checkIsReservationCancel($reservation);
             }
-
-            if (($reservation['confirmed_at'] != null) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
-                $checkPaymentStatus = $this->checkPaymentStatus($reservation);
+            if (($reservation['confirmed_at'] != null) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Deposit Successful')  && ($reservation['status'] != 'Full Pay Pending') && ($reservation['status'] != 'Full Pay Successful') && ($reservation['status'] != 'Done')) {
+                $checkPaymentStatus = $this->checkDepositPaymentStatus($reservation);
+            }
+            if ((($reservation['status'] == 'Deposit Successful') || ($reservation['status'] == 'Full Pay Pending')) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
+                $checkPaymentStatus = $this->checkFullPaymentStatus($reservation);
             }
 
             if ($reservation['status'] == 'Payment Successful') {
@@ -314,13 +316,14 @@ class Reservation extends ResourcePresenter
         if (($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
             $checkIsReservationCancel = $this->checkIsReservationCancel($reservation);
         }
-        if (($reservation['confirmed_at'] != null) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
+        if (($reservation['confirmed_at'] != null) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Deposit Successful')  && ($reservation['status'] != 'Full Pay Pending') && ($reservation['status'] != 'Full Pay Successful') && ($reservation['status'] != 'Done')) {
 
-            $checkPayment = $this->paymentController->checkPaymentStatus($reservation['id']);
+            $order_id = $reservation['id'] . '01';
+            $checkPayment = $this->paymentController->checkPaymentStatus($order_id);
             // dd($checkPayment);
             if (strpos($checkPayment, "Transaction doesn't exist") !== false) {
                 $transactionDetails = array(
-                    'order_id' => $reservation['id'],
+                    'order_id' => $order_id,
                     'gross_amount' => $reservation['deposit'], // Amount in IDR (100,000)
                 );
 
@@ -334,14 +337,53 @@ class Reservation extends ResourcePresenter
                 );
 
                 $snapToken = $this->paymentController->createTransaction($transactionDetails, $customerDetails);
-                $this->reservationModel->saveSnapToken($reservation['id'], $snapToken);
+                $this->reservationModel->saveDepositSnapToken($reservation['id'], $snapToken);
             } elseif ($checkPayment == 'Pending') {
-                $snapToken = $reservation['snap_token'];
-                $this->reservationModel->update_status($reservation['id'], 'Payment Pending');
+                $snapToken = $reservation['deposit_snap_token'];
+                $this->reservationModel->update_status($reservation['id'], 'Deposit Pending');
             } elseif ($checkPayment == 'Settlement') {
-                $this->reservationModel->update_status($reservation['id'], 'Payment Successful');
+                $this->reservationModel->update_status($reservation['id'], 'Deposit Successful');
             } elseif ($checkPayment == 'Expire') {
-                $this->reservationModel->update_status($reservation['id'], 'Payment Expired');
+                $this->reservationModel->update_status($reservation['id'], 'Deposit Expired');
+                $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reservation_by_id($reservation['id'])->getResultArray();
+
+                foreach ($reservation_detail as $reservationDetail) {
+                    $this->reservationHomestayUnitDetailBackUpModel->add_reservation_detail_api($reservationDetail);
+                }
+                $this->reservationHomestayUnitDetailModel->delete_reserv_det_by_reserv_id($reservation['id']);
+            }
+        }
+        if ((($reservation['status'] == 'Deposit Successful') || ($reservation['status'] == 'Full Pay Pending')) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
+
+            $order_id = $reservation['id'] . '02';
+            // dd($order_id);
+            $checkPayment = $this->paymentController->checkPaymentStatus($order_id);
+            // dd($checkPayment);
+            if (strpos($checkPayment, "Transaction doesn't exist") !== false) {
+                $full_price = $reservation['total_price'] - $reservation['deposit'];
+                $transactionDetails = array(
+                    'order_id' => $order_id,
+                    'gross_amount' => $full_price, // Amount in IDR (100,000)
+                );
+
+                $customer = $this->userModel->get_user_by_id($reservation['customer_id'])->getRowArray();
+
+                $customerDetails = array(
+                    'first_name' => $customer['first_name'],
+                    'last_name' => $customer['last_name'],
+                    'email' => $customer['email'],
+                    'phone' => $customer['phone'],
+                );
+
+                $snapToken = $this->paymentController->createTransaction($transactionDetails, $customerDetails);
+                $this->reservationModel->savePayFullSnapToken($reservation['id'], $snapToken);
+            } elseif ($checkPayment == 'Pending') {
+                $snapToken = $reservation['pay_full_snap_token'];
+                $this->reservationModel->update_status($reservation['id'], 'Full Pay Pending');
+            } elseif ($checkPayment == 'Settlement') {
+                $this->reservationModel->update_status($reservation['id'], 'Full Pay Successful');
+            } elseif ($checkPayment == 'Expire') {
+                $this->reservationModel->update_status($reservation['id'], 'Full Pay Expired');
                 $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reservation_by_id($reservation['id'])->getResultArray();
 
                 foreach ($reservation_detail as $reservationDetail) {
@@ -351,7 +393,7 @@ class Reservation extends ResourcePresenter
             }
         }
 
-        if ($reservation['status'] == 'Payment Successful') {
+        if ($reservation['status'] == 'Full Pay Successful') {
             $checkIsReservationDone = $this->checkIsReservationDone($reservation);
         }
         $reservation = $this->reservationModel->get_reservation_by_id($id)->getRowArray();
@@ -974,8 +1016,11 @@ class Reservation extends ResourcePresenter
             if (($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
                 $checkIsReservationCancel = $this->checkIsReservationCancel($reservation);
             }
-            if (($reservation['confirmed_at'] != null) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
-                $checkPaymentStatus = $this->checkPaymentStatus($reservation);
+            if (($reservation['confirmed_at'] != null) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Deposit Successful')  && ($reservation['status'] != 'Full Pay Pending') && ($reservation['status'] != 'Full Pay Successful') && ($reservation['status'] != 'Done')) {
+                $checkPaymentStatus = $this->checkDepositPaymentStatus($reservation);
+            }
+            if ((($reservation['status'] == 'Deposit Successful') || ($reservation['status'] == 'Full Pay Pending')) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
+                $checkPaymentStatus = $this->checkFullPaymentStatus($reservation);
             }
             if ($reservation['status'] == 'Payment Successful') {
                 $checkIsReservationDone = $this->checkIsReservationDone($reservation);
@@ -1003,8 +1048,11 @@ class Reservation extends ResourcePresenter
         if (($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
             $checkIsReservationCancel = $this->checkIsReservationCancel($reservation);
         }
-        if (($reservation['confirmed_at'] != null) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
-            $checkPaymentStatus = $this->checkPaymentStatus($reservation);
+        if (($reservation['confirmed_at'] != null) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Deposit Successful')  && ($reservation['status'] != 'Full Pay Pending') && ($reservation['status'] != 'Full Pay Successful') && ($reservation['status'] != 'Done')) {
+            $checkPaymentStatus = $this->checkDepositPaymentStatus($reservation);
+        }
+        if ((($reservation['status'] == 'Deposit Successful') || ($reservation['status'] == 'Full Pay Pending')) && ($reservation['is_rejected'] == '0') && ($reservation['canceled_at'] == null) && ($reservation['status'] != 'Done')) {
+            $checkPaymentStatus = $this->checkFullPaymentStatus($reservation);
         }
         if ($reservation['status'] == 'Payment Successful') {
             $checkIsReservationDone = $this->checkIsReservationDone($reservation);
@@ -1276,10 +1324,23 @@ class Reservation extends ResourcePresenter
         $dateNow = date("Y-m-d H:i");
 
         $depositDeadline = date("d F Y, H:i", strtotime($reservation['check_in'] . ' - 2 days'));
+        $fullPayDeadline = date("d F Y, 18:00", strtotime($reservation['check_in']));
+
 
         if ((strtotime($dateNow) > strtotime($depositDeadline)) && (($reservation['status'] == null) || ($reservation['status'] == '0') || ($reservation['status'] == '1')) && ($reservation['canceled_at'] == null)) {
             $cancelReservation['canceled_at'] = $dateNow;
             $cancelReservation['cancelation_reason'] = '2';
+            $cancelReservation['is_refund'] = '0';
+            $cancel_reservation = $this->reservationModel->cancel_reservation($cancelReservation, $reservation['id']);
+            $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reservation_by_id($reservation['id'])->getResultArray();
+
+            foreach ($reservation_detail as $reservationDetail) {
+                $reservation_detail_backup = $this->reservationHomestayUnitDetailBackUpModel->add_reservation_detail_api($reservationDetail);
+            }
+            $delete_reservation_detail = $this->reservationHomestayUnitDetailModel->delete_reserv_det_by_reserv_id($reservation['id']);
+        } else if ((strtotime($dateNow) > strtotime($fullPayDeadline)) && (($reservation['status'] == 'Deposit Successful') || ($reservation['status'] == 'Full Pay Pending')) && ($reservation['canceled_at'] == null)) {
+            $cancelReservation['canceled_at'] = $dateNow;
+            $cancelReservation['cancelation_reason'] = '3';
             $cancelReservation['is_refund'] = '0';
             $cancel_reservation = $this->reservationModel->cancel_reservation($cancelReservation, $reservation['id']);
             $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reservation_by_id($reservation['id'])->getResultArray();
@@ -1317,16 +1378,36 @@ class Reservation extends ResourcePresenter
         return redirect()->to(base_url('web/reservation/detail/' . $request['reservation_id']));
     }
 
-    public function checkPaymentStatus($reservation = null)
+    public function checkDepositPaymentStatus($reservation = null)
     {
-        $checkPayment = $this->paymentController->checkPaymentStatus($reservation['id']);
+        $order_id = $reservation['id'] . '01';
+        $checkPayment = $this->paymentController->checkPaymentStatus($order_id);
 
         if ($checkPayment == 'Pending') {
-            $this->reservationModel->update_status($reservation['id'], 'Payment Pending');
+            $this->reservationModel->update_status($reservation['id'], 'Deposit Pending');
         } elseif ($checkPayment == 'Settlement') {
-            $this->reservationModel->update_status($reservation['id'], 'Payment Successful');
+            $this->reservationModel->update_status($reservation['id'], 'Deposit Successful');
         } elseif ($checkPayment == 'Expire') {
-            $this->reservationModel->update_status($reservation['id'], 'Payment Expired');
+            $this->reservationModel->update_status($reservation['id'], 'Deposit Expired');
+            $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reservation_by_id($reservation['id'])->getResultArray();
+
+            foreach ($reservation_detail as $reservationDetail) {
+                $this->reservationHomestayUnitDetailBackUpModel->add_reservation_detail_api($reservationDetail);
+            }
+            $this->reservationHomestayUnitDetailModel->delete_reserv_det_by_reserv_id($reservation['id']);
+        }
+    }
+    public function checkFullPaymentStatus($reservation = null)
+    {
+        $order_id = $reservation['id'] . '02';
+        $checkPayment = $this->paymentController->checkPaymentStatus($order_id);
+
+        if ($checkPayment == 'Pending') {
+            $this->reservationModel->update_status($reservation['id'], 'Full Pay Pending');
+        } elseif ($checkPayment == 'Settlement') {
+            $this->reservationModel->update_status($reservation['id'], 'Full Pay Successful');
+        } elseif ($checkPayment == 'Expire') {
+            $this->reservationModel->update_status($reservation['id'], 'Full Pay Expired');
             $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reservation_by_id($reservation['id'])->getResultArray();
 
             foreach ($reservation_detail as $reservationDetail) {

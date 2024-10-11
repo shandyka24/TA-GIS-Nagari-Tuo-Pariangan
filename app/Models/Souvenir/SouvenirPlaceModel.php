@@ -33,8 +33,22 @@ class SouvenirPlaceModel extends Model
         $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
             ->select("{$columns}, souvenir_place.lat, souvenir_place.lng")
-            ->from('village')
-            ->where($vilGeom)
+            // ->from('village')
+            // ->where($vilGeom)
+            ->get();
+        return $query;
+    }
+    public function get_list_sp_by_vil_api($village_id = null)
+    {
+        // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
+        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.employee_name,{$this->table}.open,{$this->table}.close,{$this->table}.description";
+        $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
+        // $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
+        $query = $this->db->table($this->table)
+            ->select("{$columns}, souvenir_place.lat, souvenir_place.lng, {$geoJson}")
+            ->where('village_id', $village_id)
+            // ->from('village')
+            // ->where($vilGeom)
             ->get();
         return $query;
     }
@@ -57,8 +71,8 @@ class SouvenirPlaceModel extends Model
         $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
             ->select("{$columns}, souvenir_place.lat, souvenir_place.lng, {$geoJson}")
-            ->from('village')
-            ->where($vilGeom)
+            // ->from('village')
+            // ->where($vilGeom)
             ->where('souvenir_place.id', $id)
             ->get();
         return $query;
@@ -146,6 +160,14 @@ class SouvenirPlaceModel extends Model
             ->select('id AS id_object, name AS object_name')
             ->whereNotIN('id', $id)
             ->orderBy('object_name', 'ASC')
+            ->get();
+        return $query;
+    }
+    public function get_sp_by_vil_id($village_id = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select("*")
+            ->where('village_id', $village_id)
             ->get();
         return $query;
     }

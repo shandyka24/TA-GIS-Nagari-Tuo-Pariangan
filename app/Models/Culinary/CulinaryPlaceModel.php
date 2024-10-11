@@ -33,8 +33,18 @@ class CulinaryPlaceModel extends Model
         $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
             ->select("{$columns}, culinary_place.lat, culinary_place.lng")
-            ->from('village')
-            ->where($vilGeom)
+            // ->from('village')
+            // ->where($vilGeom)
+            ->get();
+        return $query;
+    }
+    public function get_list_cp_by_vil_api($village_id = null)
+    {
+        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description";
+        $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
+        $query = $this->db->table($this->table)
+            ->select("{$columns}, culinary_place.lat, culinary_place.lng, {$geoJson}")
+            ->where('village_id', $village_id)
             ->get();
         return $query;
     }
@@ -57,9 +67,7 @@ class CulinaryPlaceModel extends Model
         $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
             ->select("{$columns}, culinary_place.lat, culinary_place.lng, {$geoJson}")
-            ->from('village')
             ->where('culinary_place.id', $id)
-            ->where($vilGeom)
             ->get();
         return $query;
     }
@@ -156,6 +164,14 @@ class CulinaryPlaceModel extends Model
             ->select('id AS id_object, name AS object_name')
             ->whereNotIN('id', $id)
             ->orderBy('object_name', 'ASC')
+            ->get();
+        return $query;
+    }
+    public function get_cp_by_vil_id($village_id = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select("*")
+            ->where('village_id', $village_id)
             ->get();
         return $query;
     }

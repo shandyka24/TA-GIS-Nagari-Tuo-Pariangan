@@ -50,6 +50,16 @@
                                         <td><?= esc($data['name']); ?></td>
                                     </tr>
                                     <tr>
+                                        <td class="fw-bold">Category</td>
+                                        <td>
+                                            <?php if ($data['category'] == '1') : ?>
+                                                <?= esc('Non Syariah'); ?>
+                                            <?php else : ?>
+                                                <?= esc('Syariah'); ?>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td class="fw-bold">Address</td>
                                         <td><?= esc($data['address']); ?></td>
                                     </tr>

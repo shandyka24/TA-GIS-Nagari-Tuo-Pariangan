@@ -80,9 +80,9 @@ $uri3 = $uri[3] ?? '';
                                                     <i class="fa-solid fa-star" id="star-3" onclick="setStar('star-3');"></i>
                                                     <i class="fa-solid fa-star" id="star-4" onclick="setStar('star-4');"></i>
                                                     <i class="fa-solid fa-star" id="star-5" onclick="setStar('star-5');"></i>
-                                                    <input type="hidden" id="star-rating" value="0">
+                                                    <input type="hidden" id="rating" value="0">
                                                 </div>
-                                                <button class="btn btn-outline-primary" type="submit" id="button-addon2" onclick="findByRating('RG')">
+                                                <button class="btn btn-outline-primary" type="submit" id="button-addon2" onclick="findByRating('HS')">
                                                     <span class="material-icons" style="font-size: 1.5rem; vertical-align: bottom">search</span>
                                                 </button>
                                             </div>
@@ -107,15 +107,32 @@ $uri3 = $uri[3] ?? '';
                                         </div>
                                     </li>
                                     <!-- Homestay by Type -->
+                                    <li class="submenu-item submenu-marker" id="rg-by-unit">
+                                        <a data-bs-toggle="collapse" href="#searchUnitRG" role="button" aria-expanded="false" aria-controls="searchUnitRG"><i class="fa-solid fa-bed me-3"></i>By Unit Available</a>
+                                        <div class="collapse mb-3" id="searchUnitRG">
+                                            <div class="d-grid">
+                                                <fieldset class="form-group">
+                                                    <select class="form-select" id="unitHSSelect">
+                                                        <option value="1">Room</option>
+                                                        <option value="2">Vila</option>
+                                                        <option value="3">Hall</option>
+                                                    </select>
+                                                </fieldset>
+                                                <button class="btn btn-outline-primary" type="submit" id="button-addon2" onclick="findByUnit()">
+                                                    <span class="material-icons" style="font-size: 1.5rem; vertical-align: bottom">search</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!-- Homestay by Category -->
                                     <li class="submenu-item submenu-marker" id="rg-by-category">
-                                        <a data-bs-toggle="collapse" href="#searchCategoryRG" role="button" aria-expanded="false" aria-controls="searchCategoryRG"><i class="fa-solid fa-bed me-3"></i>By Unit Available</a>
+                                        <a data-bs-toggle="collapse" href="#searchCategoryRG" role="button" aria-expanded="false" aria-controls="searchCategoryRG"><i class="fa-solid fa-bed me-3"></i>By Category</a>
                                         <div class="collapse mb-3" id="searchCategoryRG">
                                             <div class="d-grid">
                                                 <fieldset class="form-group">
                                                     <select class="form-select" id="categoryHSSelect">
-                                                        <option value="1">Room</option>
-                                                        <option value="2">Vila</option>
-                                                        <option value="3">Hall</option>
+                                                        <option value="1">Non Syariah</option>
+                                                        <option value="2">Syariah</option>
                                                     </select>
                                                 </fieldset>
                                                 <button class="btn btn-outline-primary" type="submit" id="button-addon2" onclick="findByCategory('HS')">

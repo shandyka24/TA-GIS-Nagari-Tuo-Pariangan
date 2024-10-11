@@ -22,6 +22,8 @@ use App\Models\Souvenir\SouvenirPlaceGalleryModel;
 use App\Models\Souvenir\SouvenirProductModel;
 use App\Models\Souvenir\SouvenirProductDetailModel;
 
+use App\Models\VillageModel;
+
 class SouvenirPlace extends BaseController
 {
     use ResponseTrait;
@@ -41,6 +43,8 @@ class SouvenirPlace extends BaseController
     protected $souvenirProductModel;
     protected $souvenirProductDetailModel;
 
+    protected $villageModel;
+
     public function __construct()
     {
         // $this->worshipPlaceModel = new WorshipPlaceModel();
@@ -57,6 +61,7 @@ class SouvenirPlace extends BaseController
         $this->souvenirPlaceGalleryModel = new SouvenirPlaceGalleryModel();
         $this->souvenirProductModel = new SouvenirProductModel();
         $this->souvenirProductDetailModel = new SouvenirProductDetailModel();
+        $this->villageModel = new VillageModel();
     }
     public function index()
     {
@@ -114,8 +119,10 @@ class SouvenirPlace extends BaseController
     {
         $request = $this->request->getPost();
         $id = $this->souvenirPlaceModel->get_new_id_api();
+        $village = $this->villageModel->check_village()->getRowArray();
         $requestData = [
             'id' => $id,
+            'village_id' => $village['id'],
             'name' => $request['name'],
             'address' => $request['address'],
             'open' => $request['open'],

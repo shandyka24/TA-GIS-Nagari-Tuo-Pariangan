@@ -27,6 +27,8 @@ use App\Models\Culinary\CulinaryPlaceGalleryModel;
 use App\Models\Culinary\CulinaryProductModel;
 use App\Models\Culinary\CulinaryProductDetailModel;
 
+use App\Models\VillageModel;
+
 class CulinaryPlace extends BaseController
 {
     use ResponseTrait;
@@ -51,6 +53,8 @@ class CulinaryPlace extends BaseController
     protected $culinaryProductModel;
     protected $culinaryProductDetailModel;
 
+    protected $villageModel;
+
     public function __construct()
     {
         // $this->worshipPlaceModel = new WorshipPlaceModel();
@@ -72,6 +76,7 @@ class CulinaryPlace extends BaseController
         $this->culinaryPlaceGalleryModel = new CulinaryPlaceGalleryModel();
         $this->culinaryProductModel = new CulinaryProductModel();
         $this->culinaryProductDetailModel = new CulinaryProductDetailModel();
+        $this->villageModel = new VillageModel();
     }
     public function index()
     {
@@ -129,8 +134,10 @@ class CulinaryPlace extends BaseController
     {
         $request = $this->request->getPost();
         $id = $this->culinaryPlaceModel->get_new_id_api();
+        $village = $this->villageModel->check_village()->getRowArray();
         $requestData = [
             'id' => $id,
+            'village_id' => $village['id'],
             'name' => $request['name'],
             'address' => $request['address'],
             'open' => $request['open'],

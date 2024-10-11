@@ -12,10 +12,13 @@ use CodeIgniter\RESTful\ResourceController;
 use App\Models\Homestay\HomestayModel;
 use App\Models\Homestay\HomestayGalleryModel;
 use App\Models\Homestay\HomestayFacilityDetailModel;
+use App\Models\Homestay\HomestayUnitModel;
 use App\Models\Homestay\HomestayUnitFacilityModel;
 use App\Models\Homestay\HomestayUnitFacilityDetailModel;
 
 use App\Models\VillageModel;
+use App\Models\Reservation\ReservationHomestayUnitDetailModel;
+use App\Models\Reservation\ReservationModel;
 
 class Homestay extends ResourceController
 {
@@ -29,10 +32,13 @@ class Homestay extends ResourceController
     protected $homestayModel;
     protected $homestayGalleryModel;
     protected $homestayFacilityDetailModel;
+    protected $homestayUnitModel;
     protected $homestayUnitFacilityModel;
     protected $homestayUnitFacilityDetailModel;
 
     protected $villageModel;
+    protected $reservationHomestayUnitDetailModel;
+    protected $reservationModel;
 
     public function __construct()
     {
@@ -44,10 +50,13 @@ class Homestay extends ResourceController
         $this->homestayModel = new HomestayModel();
         $this->homestayGalleryModel = new HomestayGalleryModel();
         $this->homestayFacilityDetailModel = new HomestayFacilityDetailModel();
+        $this->homestayUnitModel = new HomestayUnitModel();
         $this->homestayUnitFacilityModel = new HomestayUnitFacilityModel();
         $this->homestayUnitFacilityDetailModel = new HomestayUnitFacilityDetailModel();
 
         $this->villageModel = new VillageModel();
+        $this->reservationHomestayUnitDetailModel = new ReservationHomestayUnitDetailModel();
+        $this->reservationModel = new ReservationModel();
     }
 
     /**
@@ -436,23 +445,49 @@ class Homestay extends ResourceController
     public function findByRating()
     {
         $request = $this->request->getPost();
-        $rating = $request['rating'];
-        $list_rating = $this->reviewModel->get_object_by_rating_api('rumah_gadang_id', $rating)->getResultArray();
-        $rumah_gadang_id = array();
-        foreach ($list_rating as $rat) {
-            $rumah_gadang_id[] = $rat['rumah_gadang_id'];
-        }
-        if (count($rumah_gadang_id) > 0) {
-            $contents = $this->rumahGadangModel->get_rg_in_id_api($rumah_gadang_id)->getResult();
-        } else {
-            $contents = [];
+
+        $village = $this->villageModel->check_village()->getRowArray();
+
+        $homestays = $this->homestayModel->get_hs_by_vil_id($village['id'])->getResultArray();
+
+        $contents = array();
+
+        foreach ($homestays as $homestay) {
+            $getRID = $this->reservationHomestayUnitDetailModel->get_reservation_by_hs_api($homestay['id'])->getResultArray();
+
+            $rating_review = array();
+            $rating = 0;
+            $rating_divider = 0;
+            foreach ($getRID as $rid) {
+                $reservation = $this->reservationModel->get_reservation_by_id($rid['reservation_id'])->getRowArray();
+                if ($reservation['rating'] != null) {
+                    $user = $this->reservationModel->get_cust($reservation['customer_id'])->getRowArray();
+                    $rr['username'] = $user['username'];
+                    $rr['rating'] = $reservation['rating'];
+                    $rr['review'] = $reservation['review'];
+                    $rating_review[] = $rr;
+                    $rating = $rating + $reservation['rating'];
+                    $rating_divider++;
+                }
+            }
+            if ($rating != 0) {
+                $avg_rating = $rating / $rating_divider;
+                $avg_rating = floor($avg_rating);
+            } else {
+                $avg_rating = 0;
+            }
+            // dd($avg_rating);
+
+            if ($avg_rating == (int)$request['rating']) {
+                $contents[] = $this->homestayModel->get_hs_by_id_api($homestay['id'])->getRowArray();
+            }
         }
 
         $response = [
             'data' => $contents,
             'status' => 200,
             'message' => [
-                "Success find Rumah Gadang by rating"
+                "Success find Homestay by rating"
             ]
         ];
         return $this->respond($response);
@@ -461,23 +496,48 @@ class Homestay extends ResourceController
     public function findByUnit()
     {
         $request = $this->request->getPost();
-        $unit_type = $request['category'];
-        $id = $this->homestayUnitFacilityDetailModel->get_hs_id_by_unit($unit_type)->getResultArray();
-        if (empty($id)) {
-            $id_obj_included = ['AAA'];
-        } else {
-            $newData = array();
-            foreach ($id as $row) {
-                $newData[] = $row['homestay_id'];
+        $unit_type = $request['unit'];
+
+        $village = $this->villageModel->check_village()->getRowArray();
+
+        $homestays = $this->homestayModel->get_hs_by_vil_id($village['id'])->getResultArray();
+
+        foreach ($homestays as $homestay) {
+            $isUnitTypeThere = $this->homestayUnitModel->get_hs_by_hsid_unittype($homestay['id'], $unit_type)->getResultArray();
+
+            if ($isUnitTypeThere) {
+                $contents[] = $this->homestayModel->get_hs_by_id_api($homestay['id'])->getRowArray();
             }
-            $id_obj_included = $newData;
         }
-        $contents = $this->homestayModel->get_hs_in_id_api($id_obj_included)->getResult();
+
         $response = [
             'data' => $contents,
             'status' => 200,
             'message' => [
                 "Success find Homestay by Unit"
+            ]
+        ];
+        return $this->respond($response);
+    }
+
+    public function findByCategory()
+    {
+        $request = $this->request->getPost();
+        $category = $request['category'];
+
+        $village = $this->villageModel->check_village()->getRowArray();
+
+        $homestays = $this->homestayModel->get_hs_by_cat($village['id'], $category)->getResultArray();
+
+        foreach ($homestays as $homestay) {
+            $contents[] = $this->homestayModel->get_hs_by_id_api($homestay['id'])->getRowArray();
+        }
+
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success find Homestay by Category"
             ]
         ];
         return $this->respond($response);

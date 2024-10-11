@@ -9,6 +9,7 @@ use App\Models\Worship\WorshipPlaceCategoryModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
+use App\Models\VillageModel;
 
 class WorshipPlace extends ResourceController
 {
@@ -20,6 +21,8 @@ class WorshipPlace extends ResourceController
 
     protected $worshipPlaceCategoryModel;
 
+    protected $villageModel;
+
     public function __construct()
     {
         $this->worshipPlaceModel = new WorshipPlaceModel();
@@ -27,6 +30,8 @@ class WorshipPlace extends ResourceController
         $this->reviewModel = new ReviewModel();
 
         $this->worshipPlaceCategoryModel = new WorshipPlaceCategoryModel();
+
+        $this->villageModel = new VillageModel();
     }
 
     /**
@@ -36,7 +41,8 @@ class WorshipPlace extends ResourceController
      */
     public function index()
     {
-        $contents = $this->worshipPlaceModel->get_list_wp_api()->getResult();
+        $village = $this->villageModel->check_village()->getRowArray();
+        $contents = $this->worshipPlaceModel->get_list_wp_by_vil_api($village['id'])->getResult();
         $response = [
             'data' => $contents,
             'status' => 200,
@@ -230,7 +236,18 @@ class WorshipPlace extends ResourceController
     public function findByRadius()
     {
         $request = $this->request->getPost();
-        $contents = $this->worshipPlaceModel->get_wp_by_radius_api($request)->getResult();
+        $contents = $this->worshipPlaceModel->get_list_wp_api()->getResultArray();
+
+        $i = 0;
+        foreach ($contents as $content) {
+
+            $isWithinRadius = $this->isWithinRadius($request['lat'], $request['long'], $content['lat'], $content['lng'], (int)$request['radius'] / 1000);
+            if (!$isWithinRadius) {
+                unset($contents[$i]);
+            }
+            $i++;
+        }
+        // $contents = $this->worshipPlaceModel->get_wp_by_radius_api($request)->getResult();
         $response = [
             'data' => $contents,
             'status' => 200,
@@ -266,5 +283,30 @@ class WorshipPlace extends ResourceController
             ]
         ];
         return $this->respond($response);
+    }
+    public function isWithinRadius($lat1, $lon1, $lat2, $lon2, $radius)
+    {
+        // Konstanta jari-jari bumi dalam kilometer
+        $earthRadius = 6371;
+
+        // Konversi derajat ke radian
+        $lat1 = deg2rad($lat1);
+        $lon1 = deg2rad($lon1);
+        $lat2 = deg2rad($lat2);
+        $lon2 = deg2rad($lon2);
+
+        // Menghitung perbedaan lintang dan bujur
+        $dLat = $lat2 - $lat1;
+        $dLon = $lon2 - $lon1;
+
+        // Menggunakan rumus Haversine
+        $a = sin($dLat / 2) * sin($dLat / 2) + cos($lat1) * cos($lat2) * sin($dLon / 2) * sin($dLon / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+        // Menghitung jarak
+        $distance = $earthRadius * $c;
+
+        // Memeriksa apakah jarak berada dalam radius
+        return $distance <= $radius;
     }
 }

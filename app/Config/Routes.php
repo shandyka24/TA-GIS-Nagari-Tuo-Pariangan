@@ -259,9 +259,11 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
     $routes->resource('homestay');
     $routes->post('homestay/findByRadius', 'Homestay::findByRadius');
     $routes->post('homestay/findByName', 'Homestay::findByName');
+    $routes->post('homestay/findByRating', 'Homestay::findByRating');
     $routes->get('homestayFacility', 'Homestay::getFacility');
     $routes->post('homestay/findByFacility', 'Homestay::findByFacility');
     $routes->post('homestay/findByUnit', 'Homestay::findByUnit');
+    $routes->post('homestay/findByCategory', 'Homestay::findByCategory');
     $routes->resource('attraction');
     $routes->post('attraction/findByRadius', 'Attraction::findByRadius');
     $routes->post('attraction/findByName', 'Attraction::findByName');

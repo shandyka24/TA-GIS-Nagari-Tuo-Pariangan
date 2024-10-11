@@ -4,11 +4,13 @@ namespace App\Controllers\Api;
 
 use App\Models\GallerySouvenirPlaceModel;
 use App\Models\ReviewModel;
-use App\Models\SouvenirPlaceModel;
-use App\Models\SouvenirProductModel;
-use App\Models\SouvenirProductDetailModel;
+use App\Models\Souvenir\SouvenirPlaceModel;
+use App\Models\Souvenir\SouvenirProductModel;
+use App\Models\Souvenir\SouvenirProductDetailModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
+
+use App\Models\VillageModel;
 
 class SouvenirPlace extends ResourceController
 {
@@ -19,6 +21,7 @@ class SouvenirPlace extends ResourceController
     protected $souvenirProductDetailModel;
     protected $gallerySouvenirPlaceModel;
     protected $reviewModel;
+    protected $villageModel;
 
     public function __construct()
     {
@@ -27,6 +30,7 @@ class SouvenirPlace extends ResourceController
         $this->souvenirProductDetailModel = new SouvenirProductDetailModel();
         $this->gallerySouvenirPlaceModel = new GallerySouvenirPlaceModel();
         $this->reviewModel = new ReviewModel();
+        $this->villageModel = new VillageModel();
     }
 
     /**
@@ -36,7 +40,9 @@ class SouvenirPlace extends ResourceController
      */
     public function index()
     {
-        $contents = $this->souvenirPlaceModel->get_list_sp_api()->getResult();
+        $village = $this->villageModel->check_village()->getRowArray();
+
+        $contents = $this->souvenirPlaceModel->get_list_sp_by_vil_api($village['id'])->getResult();
         $response = [
             'data' => $contents,
             'status' => 200,
@@ -234,7 +240,19 @@ class SouvenirPlace extends ResourceController
     public function findByRadius()
     {
         $request = $this->request->getPost();
-        $contents = $this->souvenirPlaceModel->get_sp_by_radius_api($request)->getResult();
+
+        $contents = $this->souvenirPlaceModel->get_list_sp_api()->getResultArray();
+
+        $i = 0;
+        foreach ($contents as $content) {
+
+            $isWithinRadius = $this->isWithinRadius($request['lat'], $request['long'], $content['lat'], $content['lng'], (int)$request['radius'] / 1000);
+            if (!$isWithinRadius) {
+                unset($contents[$i]);
+            }
+            $i++;
+        }
+        // $contents = $this->souvenirPlaceModel->get_sp_by_radius_api($request)->getResult();
         $response = [
             'data' => $contents,
             'status' => 200,
@@ -280,5 +298,30 @@ class SouvenirPlace extends ResourceController
             ]
         ];
         return $this->respond($response);
+    }
+    public function isWithinRadius($lat1, $lon1, $lat2, $lon2, $radius)
+    {
+        // Konstanta jari-jari bumi dalam kilometer
+        $earthRadius = 6371;
+
+        // Konversi derajat ke radian
+        $lat1 = deg2rad($lat1);
+        $lon1 = deg2rad($lon1);
+        $lat2 = deg2rad($lat2);
+        $lon2 = deg2rad($lon2);
+
+        // Menghitung perbedaan lintang dan bujur
+        $dLat = $lat2 - $lat1;
+        $dLon = $lon2 - $lon1;
+
+        // Menggunakan rumus Haversine
+        $a = sin($dLat / 2) * sin($dLat / 2) + cos($lat1) * cos($lat2) * sin($dLon / 2) * sin($dLon / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+        // Menghitung jarak
+        $distance = $earthRadius * $c;
+
+        // Memeriksa apakah jarak berada dalam radius
+        return $distance <= $radius;
     }
 }

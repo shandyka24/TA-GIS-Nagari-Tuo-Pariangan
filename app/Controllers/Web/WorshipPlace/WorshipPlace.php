@@ -13,6 +13,8 @@ use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\Files\File;
 use CodeIgniter\RESTful\ResourceController;
 
+use App\Models\VillageModel;
+
 class WorshipPlace extends BaseController
 {
     use ResponseTrait;
@@ -22,12 +24,14 @@ class WorshipPlace extends BaseController
     protected $worshipPlaceCategoryModel;
     protected $galleryWorshipPlaceModel;
     protected $reviewModel;
+    protected $villageModel;
 
     public function __construct()
     {
         $this->worshipPlaceModel = new WorshipPlaceModel();
         $this->worshipPlaceCategoryModel = new WorshipPlaceCategoryModel();
         $this->worshipPlaceGalleryModel = new WorshipPlaceGalleryModel();
+        $this->villageModel = new VillageModel();
         // // $this->galleryWorshipPlaceModel = new GalleryWorshipPlaceModel();
         // $this->reviewModel = new ReviewModel();
     }
@@ -87,8 +91,10 @@ class WorshipPlace extends BaseController
     {
         $request = $this->request->getPost();
         $id = $this->worshipPlaceModel->get_new_id_api();
+        $village = $this->villageModel->check_village()->getRowArray();
         $requestData = [
             'id' => $id,
+            'village_id' => $village['id'],
             'name' => $request['name'],
             'worship_place_category' => $request['worship_place_category'],
             'address' => $request['address'],

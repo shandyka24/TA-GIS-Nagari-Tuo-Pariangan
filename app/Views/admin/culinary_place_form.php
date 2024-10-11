@@ -122,8 +122,7 @@ $edit = in_array('edit', $uri);
                 </div>
                 <?= $this->include('web/layouts/map-body'); ?>
                 <script>
-                    goToVillage();
-                    map.setZoom(20);
+                    digitTourismVillage();
                     initDrawingManager(<?= $edit ?>);
                 </script>
             </div>

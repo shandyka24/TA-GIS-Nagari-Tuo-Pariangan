@@ -221,6 +221,14 @@
                                         : <?= esc("Rp " . number_format($deposit, 0, ',', '.')) ?> <i>*(20% of total price)</i>
                                     </td>
                                 </tr>
+                                <?php if ((($reservation['status'] == 'Deposit Successful') || ($reservation['status'] == 'Full Pay Pending') || ($reservation['status'] == 'Full Pay Successful')) && ($reservation['canceled_at'] == null)) : ?>
+                                    <tr>
+                                        <td class="fw-bold">Full Price</td>
+                                        <td>
+                                            : <?= esc("Rp " . number_format($total_price - $deposit, 0, ',', '.')) ?> <i>*(80% of total price)</i>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
                                 <?php if ($reservation['is_refund'] == '1') : ?>
                                     <tr>
                                         <td class="fw-bold">Refund</td>
@@ -249,7 +257,7 @@
                                 </a>
                             <?php endif; ?>
 
-                            <?php if (($reservation['status'] == 'Payment Successful') && ($reservation['canceled_at'] == null)) : ?>
+                            <?php if (($reservation['status'] == 'Deposit Successful') && ($reservation['canceled_at'] == null)) : ?>
                                 <a title="Cancel Reservation" class="btn icon btn-danger btn-sm mt-3 float-end" onclick="confirmCancelReservation('<?= esc($reservation['id']); ?>')">
                                     <i class="fa-solid fa-xmark"></i> Cancel Reservation
                                 </a>
@@ -324,13 +332,18 @@
                                         <?php elseif (($reservation['status'] == '1') && ($reservation['canceled_at'] == null) && ($reservation['is_rejected'] == '1')) : ?>
                                             <button title="Reservation Rejected" class="btn-sm btn-danger float-center" disabled>Rejected</button>
                                         <?php elseif (($reservation['status'] == '1') && ($reservation['canceled_at'] == null)) : ?>
-                                            <button title="Paying Deposit" class="btn-sm btn-info float-center" disabled>Paying Deposit</button>
-                                        <?php elseif (($reservation['status'] == 'Payment Pending') && ($reservation['canceled_at'] == null)) : ?>
-                                            <button title="Payment Pending" class="btn-sm btn-warning float-center" disabled>Payment Pending</button>
-                                        <?php elseif (($reservation['status'] == 'Payment Successful') && ($reservation['canceled_at'] == null)) : ?>
-                                            <button title="Payment Successful" class="btn-sm btn-success float-center" disabled>Payment Successful</button>
-                                        <?php elseif (($reservation['status'] == 'Payment Expired') && ($reservation['canceled_at'] == null)) : ?>
-                                            <button title="Payment Expired" class="btn-sm btn-danger float-center" disabled>Payment Expired</button>
+                                            <button title="Paying Deposit" class="btn-sm btn-info float-center" disabled>Pay Deposit</button>
+                                        <?php elseif (($reservation['status'] == 'Deposit Pending') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Deposit Pending" class="btn-sm btn-warning float-center" disabled>Deposit Pending</button>
+                                        <?php elseif (($reservation['status'] == 'Deposit Successful') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Deposit Successful" class="btn-sm btn-success float-center" disabled>Deposit Successful</button>
+                                        <?php elseif (($reservation['status'] == 'Deposit Expired') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Deposit Expired" class="btn-sm btn-danger float-center" disabled>Deposit Expired</button>
+                                        <?php elseif (($reservation['status'] == 'Full Pay Pending') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Full Pay Pending" class="btn-sm btn-warning float-center" disabled>Full Pay Pending</button>
+                                        <?php elseif (($reservation['status'] == 'Full Pay Successful') && ($reservation['canceled_at'] == null)) : ?>
+                                            <button title="Full Pay Successful" class="btn-sm btn-success float-center" disabled>Full Pay Successful</button>
+
                                         <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] == null)) : ?>
                                             <button title="Waiting for the homestay owner to pay refund" class="btn-sm btn-danger float-center" disabled>Refund</button>
                                         <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '1') && ($reservation['refund_proof'] != null) && ($reservation['refund_paid_confirmed_at'] == null)) : ?>
@@ -349,7 +362,7 @@
                                         <hr class="hr">
                                     </td>
                                 </tr>
-                                <?php if ((($reservation['status'] == '1') || ($reservation['status'] == 'Payment Pending')) && ($reservation['canceled_at'] == null) && ($reservation['is_rejected'] != '1')) : ?>
+                                <?php if ((($reservation['status'] == '1') || ($reservation['status'] == 'Deposit Pending')) && ($reservation['canceled_at'] == null) && ($reservation['is_rejected'] != '1')) : ?>
                                     <tr>
                                         <td colspan="2">
                                             <span class="fw-bold">To Do : </span>
@@ -360,6 +373,21 @@
                                         <td colspan="2">
                                             <a class="btn icon btn-primary btn-sm mb-1 mt-3" id="pay-button">
                                                 Pay Deposit
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
+                                <?php if ((($reservation['status'] == 'Deposit Successful') || ($reservation['status'] == 'Full Pay Pending')) && ($reservation['canceled_at'] == null) && ($reservation['is_rejected'] != '1')) : ?>
+                                    <tr>
+                                        <td colspan="2">
+                                            <span class="fw-bold">To Do : </span>
+                                            Pay full price by click button bellow
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <a class="btn icon btn-primary btn-sm mb-1 mt-3" id="pay-button">
+                                                Pay Full Price
                                             </a>
                                         </td>
                                     </tr>
@@ -423,15 +451,15 @@
                                                     <div class="card-header text-center">
                                                         <h4 class="card-title">Rating and Review</h4>
                                                         <?php if (in_groups('user')) : ?>
-                                                            <form class="form form-vertical" action="<?= base_url('web/reservation/review/' . $reservation['id']); ?>" method="post" onsubmit="checkStar(event);">
+                                                            <form class="form form-vertical" action="<?= base_url('web/reservation/review/' . $reservation['id']); ?>" method="post" onsubmit="checkRatingStar(event);">
                                                                 <div class="form-body">
                                                                     <div class="star-containter mb-3">
-                                                                        <i class="fa-solid fa-star fs-4" id="star-1" onclick="setStar('star-1');"></i>
-                                                                        <i class="fa-solid fa-star fs-4" id="star-2" onclick="setStar('star-2');"></i>
-                                                                        <i class="fa-solid fa-star fs-4" id="star-3" onclick="setStar('star-3');"></i>
-                                                                        <i class="fa-solid fa-star fs-4" id="star-4" onclick="setStar('star-4');"></i>
-                                                                        <i class="fa-solid fa-star fs-4" id="star-5" onclick="setStar('star-5');"></i>
-                                                                        <input type="hidden" id="rating" value="0" name="rating">
+                                                                        <i class="fa-solid fa-star fs-4" id="rstar-1" onclick="setRatingStar('rstar-1');"></i>
+                                                                        <i class="fa-solid fa-star fs-4" id="rstar-2" onclick="setRatingStar('rstar-2');"></i>
+                                                                        <i class="fa-solid fa-star fs-4" id="rstar-3" onclick="setRatingStar('rstar-3');"></i>
+                                                                        <i class="fa-solid fa-star fs-4" id="rstar-4" onclick="setRatingStar('rstar-4');"></i>
+                                                                        <i class="fa-solid fa-star fs-4" id="rstar-5" onclick="setRatingStar('rstar-5');"></i>
+                                                                        <input type="hidden" id="rating_star" value="0" name="rating">
                                                                     </div>
                                                                     <div class="col-12 mb-3">
                                                                         <div class="form-floating">

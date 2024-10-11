@@ -226,10 +226,18 @@ class ReservationModel extends Model
         return $query;
     }
 
-    public function saveSnapToken($reservation_id = null, $snapToken = null)
+    public function saveDepositSnapToken($reservation_id = null, $snapToken = null)
     {
         $query = $this->db->table($this->table)
-            ->set('snap_token', $snapToken)
+            ->set('deposit_snap_token', $snapToken)
+            ->where('id', $reservation_id)
+            ->update();
+        return $query;
+    }
+    public function savePayFullSnapToken($reservation_id = null, $snapToken = null)
+    {
+        $query = $this->db->table($this->table)
+            ->set('pay_full_snap_token', $snapToken)
             ->where('id', $reservation_id)
             ->update();
         return $query;

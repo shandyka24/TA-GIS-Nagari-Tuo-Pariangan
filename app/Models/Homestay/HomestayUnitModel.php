@@ -140,4 +140,13 @@ class HomestayUnitModel extends Model
             ->get();
         return $query;
     }
+    public function get_hs_by_hsid_unittype($homestay_id = null, $unit_type = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select('*')
+            ->where('homestay_id', $homestay_id)
+            ->where('unit_type', $unit_type)
+            ->get();
+        return $query;
+    }
 }

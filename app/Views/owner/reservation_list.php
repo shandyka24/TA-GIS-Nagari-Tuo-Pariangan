@@ -62,13 +62,17 @@ $users = in_array('users', $uri);
                                         <?php elseif (($item['status'] == '1') && ($item['canceled_at'] == null) && ($item['is_rejected'] == '1')) : ?>
                                             <button title="Reservation Rejected" class="btn-sm btn-danger float-center" disabled>Rejected</button>
                                         <?php elseif (($item['status'] == '1') && ($item['canceled_at'] == null)) : ?>
-                                            <button title="Paying Deposit" class="btn-sm btn-info float-center" disabled>Paying Deposit</button>
-                                        <?php elseif (($item['status'] == 'Payment Pending') && ($item['canceled_at'] == null)) : ?>
-                                            <button title="Payment Pending" class="btn-sm btn-warning float-center" disabled>Payment Pending</button>
-                                        <?php elseif (($item['status'] == 'Payment Successful') && ($item['canceled_at'] == null)) : ?>
-                                            <button title="Payment Successful" class="btn-sm btn-success float-center" disabled>Payment Successful</button>
-                                        <?php elseif (($item['status'] == 'Payment Expired') && ($item['canceled_at'] == null)) : ?>
-                                            <button title="Payment Expired" class="btn-sm btn-danger float-center" disabled>Payment Expired</button>
+                                            <button title="Paying Deposit" class="btn-sm btn-info float-center" disabled>Pay Deposit</button>
+                                        <?php elseif (($item['status'] == 'Deposit Pending') && ($item['canceled_at'] == null)) : ?>
+                                            <button title="Deposit Pending" class="btn-sm btn-warning float-center" disabled>Deposit Pending</button>
+                                        <?php elseif (($item['status'] == 'Deposit Successful') && ($item['canceled_at'] == null)) : ?>
+                                            <button title="Deposit Successful" class="btn-sm btn-success float-center" disabled>Deposit Successful</button>
+                                        <?php elseif (($item['status'] == 'Deposit Expired') && ($item['canceled_at'] == null)) : ?>
+                                            <button title="Deposit Expired" class="btn-sm btn-danger float-center" disabled>Deposit Expired</button>
+                                        <?php elseif (($item['status'] == 'Full Pay Pending') && ($item['canceled_at'] == null)) : ?>
+                                            <button title="Full Pay Pending" class="btn-sm btn-warning float-center" disabled>Full Pay Pending</button>
+                                        <?php elseif (($item['status'] == 'Full Pay Successful') && ($item['canceled_at'] == null)) : ?>
+                                            <button title="Full Pay Successful" class="btn-sm btn-success float-center" disabled>Full Pay Successful</button>
                                         <?php elseif (($item['canceled_at'] != null) && ($item['is_refund'] == '1') && ($item['refund_proof'] == null)) : ?>
                                             <button title="Waiting for the homestay owner to pay refund" class="btn-sm btn-danger float-center" disabled>Refund</button>
                                         <?php elseif (($item['canceled_at'] != null) && ($item['is_refund'] == '1') && ($item['refund_proof'] != null) && ($item['refund_paid_confirmed_at'] == null)) : ?>

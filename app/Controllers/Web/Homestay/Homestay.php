@@ -251,6 +251,7 @@ class Homestay extends ResourcePresenter
             'id' => $id,
             'village_id' => $village['id'],
             'name' => $request['name'],
+            'category' => $request['category'],
             'address' => $request['address'],
             'open' => $request['open'],
             'close' => $request['close'],
@@ -365,6 +366,7 @@ class Homestay extends ResourcePresenter
         $request = $this->request->getPost();
         $requestData = [
             'name' => $request['name'],
+            'category' => $request['category'],
             'address' => $request['address'],
             'open' => $request['open'],
             'close' => $request['close'],

@@ -46,6 +46,18 @@ $edit = in_array('edit', $uri);
                                     <label for="name" class="mb-2">Homestay Name</label>
                                     <input type="text" id="name" class="form-control" name="name" placeholder="Homestay Name" value="<?= ($edit) ? $data['name'] : old('name'); ?>" required>
                                 </div>
+                                <fieldset class="form-group mb-4">
+                                    <label for="category" class="mb-2">Category</label>
+                                    <select class="form-select" id="category" name="category" required>
+                                        <?php if ($edit) : ?>
+                                            <option value="1" <?= ($data['category'] == '1') ? 'selected' : '' ?>>Non Syariah</option>
+                                            <option value="2" <?= ($data['category'] == '2') ? 'selected' : '' ?>>Syariah</option>
+                                        <?php else : ?>
+                                            <option value="1">Non Syariah</option>
+                                            <option value="2">Syariah</option>
+                                        <?php endif; ?>
+                                    </select>
+                                </fieldset>
                                 <div class="form-group mb-4">
                                     <label for="address" class="mb-2">Address</label>
                                     <input type="text" id="address" class="form-control" name="address" placeholder="Address" value="<?= ($edit) ? $data['address'] : old('address'); ?>">

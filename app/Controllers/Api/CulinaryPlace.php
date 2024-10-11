@@ -2,14 +2,16 @@
 
 namespace App\Controllers\Api;
 
-use App\Models\CulinaryPlaceModel;
-use App\Models\CulinaryPlaceGalleryModel;
-use App\Models\CulinaryProductModel;
-use App\Models\CulinaryProductDetailModel;
+use App\Models\Culinary\CulinaryPlaceModel;
+use App\Models\Culinary\CulinaryPlaceGalleryModel;
+use App\Models\Culinary\CulinaryProductModel;
+use App\Models\Culinary\CulinaryProductDetailModel;
 use App\Models\GalleryCulinaryPlaceModel;
 use App\Models\ReviewModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
+
+use App\Models\VillageModel;
 
 class CulinaryPlace extends ResourceController
 {
@@ -22,6 +24,8 @@ class CulinaryPlace extends ResourceController
     protected $galleryCulinaryPlaceModel;
     protected $reviewModel;
 
+    protected $villageModel;
+
     public function __construct()
     {
         $this->culinaryPlaceModel = new CulinaryPlaceModel();
@@ -30,6 +34,8 @@ class CulinaryPlace extends ResourceController
         $this->culinaryProductDetailModel = new CulinaryProductDetailModel();
         $this->galleryCulinaryPlaceModel = new GalleryCulinaryPlaceModel();
         $this->reviewModel = new ReviewModel();
+
+        $this->villageModel = new VillageModel();
     }
 
     /**
@@ -39,7 +45,8 @@ class CulinaryPlace extends ResourceController
      */
     public function index()
     {
-        $contents = $this->culinaryPlaceModel->get_list_cp_api()->getResult();
+        $village = $this->villageModel->check_village()->getRowArray();
+        $contents = $this->culinaryPlaceModel->get_list_cp_by_vil_api($village['id'])->getResult();
         $response = [
             'data' => $contents,
             'status' => 200,
@@ -239,7 +246,19 @@ class CulinaryPlace extends ResourceController
     public function findByRadius()
     {
         $request = $this->request->getPost();
-        $contents = $this->culinaryPlaceModel->get_cp_by_radius_api($request)->getResult();
+
+        $contents = $this->culinaryPlaceModel->get_list_cp_api()->getResultArray();
+
+        $i = 0;
+        foreach ($contents as $content) {
+
+            $isWithinRadius = $this->isWithinRadius($request['lat'], $request['long'], $content['lat'], $content['lng'], (int)$request['radius'] / 1000);
+            if (!$isWithinRadius) {
+                unset($contents[$i]);
+            }
+            $i++;
+        }
+        // $contents = $this->culinaryPlaceModel->get_cp_by_radius_api($request)->getResult();
         $response = [
             'data' => $contents,
             'status' => 200,
@@ -285,5 +304,30 @@ class CulinaryPlace extends ResourceController
             ]
         ];
         return $this->respond($response);
+    }
+    public function isWithinRadius($lat1, $lon1, $lat2, $lon2, $radius)
+    {
+        // Konstanta jari-jari bumi dalam kilometer
+        $earthRadius = 6371;
+
+        // Konversi derajat ke radian
+        $lat1 = deg2rad($lat1);
+        $lon1 = deg2rad($lon1);
+        $lat2 = deg2rad($lat2);
+        $lon2 = deg2rad($lon2);
+
+        // Menghitung perbedaan lintang dan bujur
+        $dLat = $lat2 - $lat1;
+        $dLon = $lon2 - $lon1;
+
+        // Menggunakan rumus Haversine
+        $a = sin($dLat / 2) * sin($dLat / 2) + cos($lat1) * cos($lat2) * sin($dLon / 2) * sin($dLon / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+        // Menghitung jarak
+        $distance = $earthRadius * $c;
+
+        // Memeriksa apakah jarak berada dalam radius
+        return $distance <= $radius;
     }
 }

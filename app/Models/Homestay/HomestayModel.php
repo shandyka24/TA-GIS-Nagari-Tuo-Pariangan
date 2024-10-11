@@ -98,7 +98,7 @@ class HomestayModel extends Model
         $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
         $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
-            ->select("{$columns}, users.phone, homestay.lat, homestay.lng, {$geoJson}")
+            ->select("{$columns}, users.phone, homestay.category, homestay.lat, homestay.lng, {$geoJson}")
             // ->from('village')
             ->where('homestay.id', $id)
             ->join('users', 'users.id = homestay.owner', 'LEFT')
@@ -177,6 +177,23 @@ class HomestayModel extends Model
         $query = $this->db->table('users')
             ->select("*")
             ->where('id', $owner)
+            ->get();
+        return $query;
+    }
+    public function get_hs_by_vil_id($village_id = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select("*")
+            ->where('village_id', $village_id)
+            ->get();
+        return $query;
+    }
+    public function get_hs_by_cat($village_id = null, $category = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select("*")
+            ->where('village_id', $village_id)
+            ->where('category', $category)
             ->get();
         return $query;
     }

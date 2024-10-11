@@ -15,6 +15,8 @@ use App\Models\Souvenir\SouvenirPlaceModel;
 use App\Models\Culinary\CulinaryPlaceModel;
 // use App\Models\AttractionModel;
 
+use App\Models\VillageModel;
+
 class Dashboard extends BaseController
 {
     protected $rumahGadangModel;
@@ -28,6 +30,8 @@ class Dashboard extends BaseController
     protected $souvenirPlaceModel;
     protected $culinaryPlaceModel;
     protected $attractionModel;
+
+    protected $villageModel;
 
     protected $helpers = ['auth'];
 
@@ -43,6 +47,7 @@ class Dashboard extends BaseController
         // $this->serviceProviderModel = new ServiceProviderModel();
         $this->souvenirPlaceModel = new SouvenirPlaceModel();
         $this->culinaryPlaceModel = new CulinaryPlaceModel();
+        $this->villageModel = new VillageModel();
         // $this->attractionModel = new AttractionModel();
     }
     public function index()
@@ -76,7 +81,9 @@ class Dashboard extends BaseController
     {
         $contents = [];
         if (in_groups('admin')) {
-            $contents = $this->homestayModel->get_list_hs_api()->getResultArray();
+            $checkVillage = $this->villageModel->check_village()->getRowArray();
+            $contents = $this->homestayModel->get_hs_by_vil_id($checkVillage['id'])->getResultArray();
+            // $contents = $this->homestayModel->get_list_hs_api()->getResultArray();
         } elseif (in_groups('owner')) {
             $check_owner_has_homestay = $this->homestayModel->check_owner_has_homestay(user()->id)->getResultArray();
             // dd($check_owner_has_homestay);
@@ -99,7 +106,8 @@ class Dashboard extends BaseController
 
     public function worshipPlace()
     {
-        $contents = $this->worshipPlaceModel->get_list_wp_api()->getResultArray();
+        $checkVillage = $this->villageModel->check_village()->getRowArray();
+        $contents = $this->worshipPlaceModel->get_wp_by_vil_id($checkVillage['id'])->getResultArray();
         $data = [
             'title' => 'Manage Worship PLace',
             'category' => 'Worship Place',
@@ -119,7 +127,8 @@ class Dashboard extends BaseController
     }
     public function souvenirPlace()
     {
-        $contents = $this->souvenirPlaceModel->get_list_sp_api()->getResultArray();
+        $checkVillage = $this->villageModel->check_village()->getRowArray();
+        $contents = $this->souvenirPlaceModel->get_sp_by_vil_id($checkVillage['id'])->getResultArray();
         $data = [
             'title' => 'Manage Souvenir Place',
             'category' => 'Souvenir Place',
@@ -129,7 +138,8 @@ class Dashboard extends BaseController
     }
     public function culinaryPlace()
     {
-        $contents = $this->culinaryPlaceModel->get_list_cp_api()->getResultArray();
+        $checkVillage = $this->villageModel->check_village()->getRowArray();
+        $contents = $this->culinaryPlaceModel->get_cp_by_vil_id($checkVillage['id'])->getResultArray();
         $data = [
             'title' => 'Manage Culinary Place',
             'category' => 'Culinary Place',

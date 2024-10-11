@@ -19,12 +19,6 @@
             </div>
             <div class="form-check">
                 <div class="checkbox">
-                    <input type="checkbox" id="check-sv" class="form-check-input">
-                    <label for="check-sv">Service Provider</label>
-                </div>
-            </div>
-            <div class="form-check">
-                <div class="checkbox">
                     <input type="checkbox" id="check-sp" class="form-check-input">
                     <label for="check-cp">Souvenir</label>
                 </div>

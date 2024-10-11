@@ -33,8 +33,21 @@ class WorshipPlaceModel extends Model
         $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
             ->select("{$columns}, worship_place.lat, worship_place.lng")
-            ->from('village')
-            ->where($vilGeom)
+            // ->from('village')
+            // ->where($vilGeom)
+            ->get();
+        return $query;
+    }
+    public function get_list_wp_by_vil_api($village_id = null)
+    {
+        // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
+        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.capacity,{$this->table}.description";
+        $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
+        $query = $this->db->table($this->table)
+            ->select("{$columns}, worship_place.lat, worship_place.lng, {$geoJson}")
+            ->where('village_id', $village_id)
+            // ->from('village')
+            // ->where($vilGeom)
             ->get();
         return $query;
     }
@@ -70,10 +83,8 @@ class WorshipPlaceModel extends Model
         $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
             ->select("{$columns}, worship_place_category.name AS category, worship_place_category.id AS worship_place_category, worship_place.lat, worship_place.lng, {$geoJson}")
-            ->from('village')
             ->where('worship_place.id', $id)
             ->join('worship_place_category', 'worship_place_category.id = worship_place.worship_place_category', 'LEFT')
-            ->where($vilGeom)
             ->get();
         return $query;
     }
@@ -150,6 +161,14 @@ class WorshipPlaceModel extends Model
             ->select('id AS id_object, name AS object_name')
             ->whereNotIN('id', $id)
             ->orderBy('object_name', 'ASC')
+            ->get();
+        return $query;
+    }
+    public function get_wp_by_vil_id($village_id = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select("*")
+            ->where('village_id', $village_id)
             ->get();
         return $query;
     }

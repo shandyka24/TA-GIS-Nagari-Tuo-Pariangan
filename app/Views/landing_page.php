@@ -217,6 +217,7 @@
                     <div class="col-lg-6 wow fadeInUp googlemaps" data-wow-delay="0.5s" id="googlemaps">
                         <script>
                             initMap();
+                            digitTourismVillage();
                         </script>
                         <div id="legend"></div>
                         <script>

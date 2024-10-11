@@ -1262,18 +1262,15 @@ function checkNearby(id) {
   $("#table-cp").empty();
   $("#table-wp").empty();
   $("#table-sp").empty();
-  $("#table-sv").empty();
   $("#table-cp").hide();
   $("#table-wp").hide();
   $("#table-sp").hide();
-  $("#table-sv").hide();
 
   let radiusValue =
     parseFloat(document.getElementById("inputRadiusNearby").value) * 100;
   const checkCP = document.getElementById("check-cp").checked;
   const checkWP = document.getElementById("check-wp").checked;
   const checkSP = document.getElementById("check-sp").checked;
-  const checkSV = document.getElementById("check-sv").checked;
 
   if (!checkCP && !checkWP && !checkSP && !checkSV) {
     document.getElementById("radiusValueNearby").innerHTML = "0 m";
@@ -1292,10 +1289,6 @@ function checkNearby(id) {
   if (checkSP) {
     findNearby("sp", radiusValue);
     $("#table-sp").show();
-  }
-  if (checkSV) {
-    findNearby("sv", radiusValue);
-    $("#table-sv").show();
   }
   drawRadius(new google.maps.LatLng(currentLat, currentLng), radiusValue);
   $("#result-nearby-col").show();
@@ -1778,26 +1771,56 @@ function setStar(star) {
     case "star-1":
       $("#star-1").addClass("star-checked");
       $("#star-2,#star-3,#star-4,#star-5").removeClass("star-checked");
-      document.getElementById("rating").value = "1";
+      document.getElementById("rating").setAttribute("value", "1");
       break;
     case "star-2":
       $("#star-1,#star-2").addClass("star-checked");
       $("#star-3,#star-4,#star-5").removeClass("star-checked");
-      document.getElementById("rating").value = "2";
+      document.getElementById("rating").setAttribute("value", "2");
       break;
     case "star-3":
       $("#star-1,#star-2,#star-3").addClass("star-checked");
       $("#star-4,#star-5").removeClass("star-checked");
-      document.getElementById("rating").value = "3";
+      document.getElementById("rating").setAttribute("value", "3");
       break;
     case "star-4":
       $("#star-1,#star-2,#star-3,#star-4").addClass("star-checked");
       $("#star-5").removeClass("star-checked");
-      document.getElementById("rating").value = "4";
+      document.getElementById("rating").setAttribute("value", "4");
       break;
     case "star-5":
       $("#star-1,#star-2,#star-3,#star-4,#star-5").addClass("star-checked");
-      document.getElementById("rating").value = "5";
+      document.getElementById("rating").setAttribute("value", "5");
+      break;
+  }
+}
+function setRatingStar(star) {
+  switch (star) {
+    case "rstar-1":
+      $("#rstar-1").addClass("star-checked");
+      $("#rstar-2,#rstar-3,#rstar-4,#rstar-5").removeClass("star-checked");
+      document.getElementById("rating_star").setAttribute("value", "1");
+      break;
+    case "rstar-2":
+      $("#rstar-1,#rstar-2").addClass("star-checked");
+      $("#rstar-3,#rstar-4,#rstar-5").removeClass("star-checked");
+      document.getElementById("rating_star").setAttribute("value", "2");
+      break;
+    case "rstar-3":
+      $("#rstar-1,#rstar-2,#rstar-3").addClass("star-checked");
+      $("#rstar-4,#rstar-5").removeClass("star-checked");
+      document.getElementById("rating_star").setAttribute("value", "3");
+      break;
+    case "rstar-4":
+      $("#rstar-1,#rstar-2,#rstar-3,#rstar-4").addClass("star-checked");
+      $("#rstar-5").removeClass("star-checked");
+      document.getElementById("rating_star").setAttribute("value", "4");
+      break;
+    case "rstar-5":
+      $("#rstar-1,#rstar-2,#rstar-3,#rstar-4,#rstar-5").addClass(
+        "star-checked"
+      );
+      document.getElementById("rating_star").setAttribute("value", "5");
       break;
   }
 }
@@ -1812,7 +1835,7 @@ function findByRating(category) {
   google.maps.event.clearListeners(map, "click");
   closeNearby();
 
-  let rating = document.getElementById("star-rating").value;
+  let rating = document.getElementById("rating").value;
   if (category === "RG") {
     $.ajax({
       url: baseUrl + "/api/rumahGadang/findByRating",
@@ -1839,10 +1862,46 @@ function findByRating(category) {
         boundToObject();
       },
     });
+  } else if (category === "HS") {
+    $.ajax({
+      url: baseUrl + "/api/homestay/findByRating",
+      type: "POST",
+      data: {
+        rating: rating,
+      },
+      dataType: "json",
+      success: function (response) {
+        displayFoundObject(response);
+        boundToObject();
+      },
+    });
   }
 }
 
 // Find object by Category
+function findByUnit() {
+  clearRadius();
+  clearRoute();
+  clearMarker();
+  clearUser();
+  destinationMarker.setMap(null);
+  google.maps.event.clearListeners(map, "click");
+  closeNearby();
+
+  let unit = document.getElementById("unitHSSelect").value;
+  $.ajax({
+    url: baseUrl + "/api/homestay/findByUnit",
+    type: "POST",
+    data: {
+      unit: unit,
+    },
+    dataType: "json",
+    success: function (response) {
+      displayFoundObject(response);
+      boundToObject();
+    },
+  });
+}
 function findByCategory(object) {
   clearRadius();
   clearRoute();
@@ -1883,7 +1942,7 @@ function findByCategory(object) {
   } else if (object === "HS") {
     let category = document.getElementById("categoryHSSelect").value;
     $.ajax({
-      url: baseUrl + "/api/homestay/findByUnit",
+      url: baseUrl + "/api/homestay/findByCategory",
       type: "POST",
       data: {
         category: category,
@@ -1957,14 +2016,6 @@ function setCompass() {
 // Create legend
 function getLegend() {
   const icons = {
-    at: {
-      name: "Attraction",
-      icon: baseUrl + "/media/icon/marker_at.png",
-    },
-    ev: {
-      name: "Event",
-      icon: baseUrl + "/media/icon/marker_ev.png",
-    },
     hs: {
       name: "Homestay",
       icon: baseUrl + "/media/icon/marker_hs.png",
@@ -1980,10 +2031,6 @@ function getLegend() {
     sp: {
       name: "Souvenir Place",
       icon: baseUrl + "/media/icon/marker_sp.png",
-    },
-    sv: {
-      name: "Service Provider",
-      icon: baseUrl + "/media/icon/marker_sv.png",
     },
   };
 
@@ -2067,6 +2114,13 @@ function getObjectByCategory() {
 // Validate if star rating picked yet
 function checkStar(event) {
   const star = document.getElementById("rating").value;
+  if (star == "0") {
+    event.preventDefault();
+    Swal.fire("Please put rating star");
+  }
+}
+function checkRatingStar(event) {
+  const star = document.getElementById("rating_star").value;
   if (star == "0") {
     event.preventDefault();
     Swal.fire("Please put rating star");
