@@ -251,7 +251,7 @@
                         <hr class="hr">
 
                         <div class="col-md-11">
-                            <?php if ($reservation['status'] == 'asasa') : ?>
+                            <?php if (($reservation['status'] != null) && ($reservation['status'] != '0')) : ?>
                                 <a title="Download Invoice" class="btn icon btn-success btn-sm mt-3 float-end" href="/web/reservation/invoice/<?= esc($reservation['id']) ?>" target="_blank">
                                     <i class="fa-solid fa-print"></i> Invoice
                                 </a>

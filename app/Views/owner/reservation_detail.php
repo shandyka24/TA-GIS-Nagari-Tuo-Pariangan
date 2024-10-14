@@ -335,7 +335,7 @@
                                             <?php if ($reservation['account_refund'] == null) : ?>
                                                 <span><i>Customer has not entered his refund account</i></span>
                                             <?php else : ?>
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <div class="card border" style="display: flex;">
                                                         <div class="card-body">
                                                             <span class="fw-bold">

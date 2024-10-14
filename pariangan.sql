@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 13, 2024 at 02:01 PM
+-- Generation Time: Oct 14, 2024 at 12:00 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -555,7 +555,15 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (427, '::1', 'daffa@gmail.com', 11, '2024-10-10 05:42:51', 1),
 (428, '::1', 'homestayaaa@gmail.com', 23, '2024-10-10 05:44:21', 1),
 (429, '::1', 'daffa@gmail.com', 11, '2024-10-11 04:36:22', 1),
-(430, '::1', 'homestayaaa@gmail.com', 23, '2024-10-11 04:41:46', 1);
+(430, '::1', 'homestayaaa@gmail.com', 23, '2024-10-11 04:41:46', 1),
+(431, '::1', 'accadmin1', NULL, '2024-10-13 23:55:25', 0),
+(432, '::1', 'accadmin1@email.com', 7, '2024-10-13 23:55:32', 1),
+(433, '::1', 'daffa@gmail.com', 11, '2024-10-14 00:10:55', 1),
+(434, '::1', 'homestayaaa', NULL, '2024-10-14 00:14:29', 0),
+(435, '::1', 'homestayaaa@gmail.com', 23, '2024-10-14 00:14:36', 1),
+(436, '::1', 'daffa@gmail.com', 11, '2024-10-14 01:25:56', 1),
+(437, '::1', 'daffa@gmail.com', 11, '2024-10-14 06:21:34', 1),
+(438, '::1', 'homestayaaa@gmail.com', 23, '2024-10-14 06:25:53', 1);
 
 -- --------------------------------------------------------
 
@@ -1439,7 +1447,13 @@ INSERT INTO `reservation` (`id`, `customer_id`, `request_date`, `check_in`, `tot
 ('R017', 11, '2024-10-11 18:01:35', '2024-10-16 14:00:00', 3, NULL, NULL, 300000, 60000, 'Full Pay Successful', '102496c1-340b-46a6-8dc0-5d448bbfa432', 'dd38c12b-3253-48f4-8ab9-094672edd3fc', '2024-10-11 11:01:55', '0', '2024-10-11 11:02:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('R018', 11, '2024-10-11 19:43:53', '2024-10-18 14:00:00', 3, NULL, NULL, 300000, 60000, 'Deposit Successful', '6adcf2de-e03a-4d34-8e0a-8386a3fd6122', NULL, '2024-10-11 12:44:00', '0', '2024-10-11 12:44:11', '', '2024-10-11 12:44:00', '1', '1', '2024-10-11 12:45:51', 'Dika - Bank ABC - 12345678', '1728650749_b4956a3c25ffc50fdb89.jpg', '1', '2024-10-11 12:46:09'),
 ('R019', 11, '2024-10-11 19:55:11', '2024-10-11 14:00:00', 5, NULL, NULL, 600000, 120000, '1', 'c99df471-3896-4fe0-86b2-ea1f7dbe3937', NULL, '2024-10-11 12:55:18', '0', '2024-10-11 12:55:34', '', '2024-10-11 12:57:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
-('R020', 11, '2024-10-11 19:57:46', '2024-10-11 14:00:00', 5, NULL, NULL, 600000, 120000, 'Deposit Successful', 'cd0ee0ad-a683-4789-8482-64b968721e80', '47366abc-d256-432d-9b9e-a4027ee6fbe7', '2024-10-11 12:57:53', '0', '2024-10-11 12:58:14', '', '2024-10-11 12:59:00', '3', '0', NULL, NULL, NULL, NULL, NULL);
+('R020', 11, '2024-10-11 19:57:46', '2024-10-11 14:00:00', 5, NULL, NULL, 600000, 120000, 'Deposit Successful', 'cd0ee0ad-a683-4789-8482-64b968721e80', '47366abc-d256-432d-9b9e-a4027ee6fbe7', '2024-10-11 12:57:53', '0', '2024-10-11 12:58:14', '', '2024-10-11 12:59:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
+('R021', 11, '2024-10-14 12:13:35', '2024-10-18 14:00:00', 2, NULL, NULL, 150000, 30000, 'Deposit Successful', NULL, NULL, '2024-10-14 05:13:43', '0', '2024-10-14 05:14:49', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R022', 11, '2024-10-14 12:15:48', '2024-10-19 14:00:00', 2, NULL, NULL, 100000, 20000, 'Full Pay Successful', NULL, NULL, '2024-10-14 05:15:53', '0', '2024-10-14 05:16:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R023', 11, '2024-10-14 12:16:38', '2024-10-19 14:00:00', 2, NULL, NULL, 200000, 40000, 'Full Pay Successful', NULL, NULL, '2024-10-14 05:16:43', '0', '2024-10-14 05:16:58', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R024', 11, '2024-10-14 18:24:24', '2024-10-12 14:00:00', 3, '', 4, 250000, 50000, 'Done', '7aa3b21e-431e-4dba-9d61-306902c1781a', '1a47ed95-4544-464d-bc00-90d71d1c4b97', '2024-10-14 11:25:31', '0', '2024-10-14 11:26:01', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R025', 11, '2024-10-14 18:42:36', '2024-10-20 14:00:00', 3, NULL, NULL, 400000, 80000, 'Deposit Successful', '36d6cb5a-8370-4db5-b724-7af3c77c2322', NULL, '2024-10-14 11:42:55', '0', '2024-10-14 11:43:14', '', '2024-10-14 11:45:00', '1', '1', '2024-10-14 11:47:45', 'Wawan - Bank CAB - 69696969', '1728906462_81e712e85c31e9c4bacd.jpg', '1', '2024-10-14 11:48:15'),
+('R026', 11, '2024-10-14 18:49:16', '2024-10-12 14:00:00', 3, NULL, NULL, 100000, 20000, '1', '985d0337-858c-43e1-b76d-a5c617746694', NULL, '2024-10-14 11:49:21', '0', '2024-10-14 11:49:36', '', '2024-10-14 11:50:00', '2', '0', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1457,6 +1471,14 @@ CREATE TABLE `reservation_homestay_additional_amenities_detail` (
   `total_order` int NOT NULL,
   `total_price` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `reservation_homestay_additional_amenities_detail`
+--
+
+INSERT INTO `reservation_homestay_additional_amenities_detail` (`homestay_id`, `additional_amenities_id`, `reservation_id`, `day_order`, `person_order`, `room_order`, `total_order`, `total_price`) VALUES
+('H12', '01', 'R024', 0, 0, 0, 1, 100000),
+('H12', '02', 'R025', 0, 3, 0, 3, 300000);
 
 -- --------------------------------------------------------
 
@@ -1482,7 +1504,11 @@ INSERT INTO `reservation_homestay_unit_detail` (`homestay_id`, `unit_type`, `uni
 ('H12', '1', '2', '2024-10-17', 'R016'),
 ('H12', '1', '2', '2024-10-18', 'R016'),
 ('H12', '1', '3', '2024-10-16', 'R017'),
-('H12', '1', '3', '2024-10-17', 'R017');
+('H12', '1', '3', '2024-10-17', 'R017'),
+('H12', '1', '3', '2024-10-18', 'R021'),
+('H12', '1', '1', '2024-10-19', 'R022'),
+('H12', '1', '2', '2024-10-19', 'R023'),
+('H12', '1', '3', '2024-10-19', 'R024');
 
 -- --------------------------------------------------------
 
@@ -1512,7 +1538,9 @@ INSERT INTO `reservation_homestay_unit_detail_backup` (`homestay_id`, `unit_type
 ('H12', '1', '1', 'R020', '2024-10-14'),
 ('H12', '1', '1', 'R020', '2024-10-15'),
 ('H12', '1', '2', 'R020', '2024-10-14'),
-('H12', '1', '2', 'R020', '2024-10-15');
+('H12', '1', '2', 'R020', '2024-10-15'),
+('H12', '1', '1', 'R025', '2024-10-20'),
+('H12', '1', '1', 'R026', '2024-10-20');
 
 -- --------------------------------------------------------
 
@@ -2215,7 +2243,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=431;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=439;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`

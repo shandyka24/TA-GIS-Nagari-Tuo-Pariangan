@@ -502,6 +502,8 @@ class Homestay extends ResourceController
 
         $homestays = $this->homestayModel->get_hs_by_vil_id($village['id'])->getResultArray();
 
+        $contents = array();
+
         foreach ($homestays as $homestay) {
             $isUnitTypeThere = $this->homestayUnitModel->get_hs_by_hsid_unittype($homestay['id'], $unit_type)->getResultArray();
 

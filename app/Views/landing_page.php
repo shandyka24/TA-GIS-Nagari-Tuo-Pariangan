@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Kawasan Wisata Lembah Harau Nagari Tarantang</title>
+    <title>Tourism Village</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="keywords" />
     <meta content="" name="description" />
@@ -364,6 +364,29 @@
     <script src="assets/lib/counterup/counterup.min.js"></script>
     <script src="assets/lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="assets/lib/lightbox/js/lightbox.min.js"></script>
+
+    <script>
+        window.onload = function() {
+            // Get the current title
+            let title = document.title;
+
+            // Split the title based on the ' - ' separator
+            let parts = title.split(" - ");
+
+            $.ajax({
+                url: baseUrl + "/api/touristVillage/",
+                dataType: "json",
+                success: function(response) {
+                    let data = response.data;
+                    let name = data.name;
+
+                    parts[1] = name;
+                    document.title = parts.join(" - ");
+
+                },
+            });
+        };
+    </script>
 
     <!-- Template Javascript -->
     <script src="<?= base_url('js/landing-page.js'); ?>"></script>

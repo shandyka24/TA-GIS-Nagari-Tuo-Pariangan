@@ -20,7 +20,7 @@ $dateTime = new DateTime('now'); // Waktu sekarang
 $datenow = $dateTime->format('Y-m-d H:i:s');
 ?>
 <h5 style="font-size:14pt;text-align:right">RESERVATION INVOICE</h5>
-<span>Kepada Yth.</span><br />
+<span>Dear Sir/Madam,</span><br />
 <table cellpadding="0">
     <tr>
         <th width="10%">Name</th>
@@ -165,6 +165,12 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
         <td width="78%" style="height: 20px"><strong>Deposit</strong></td>
         <td width="18%" style="height: 20px;text-align:right"><strong><?= 'Rp' . number_format(esc($reservation['deposit']), 0, ',', '.'); ?></strong></td>
     </tr>
+    <?php if ($reservation['canceled_at'] == null) : ?>
+        <tr style="border:1px solid #000">
+            <td width="78%" style="height: 20px"><strong>Full Pay</strong></td>
+            <td width="18%" style="height: 20px;text-align:right"><strong><?= 'Rp' . number_format(esc($reservation['total_price'] - $reservation['deposit']), 0, ',', '.'); ?></strong></td>
+        </tr>
+    <?php endif; ?>
     <?php if ($reservation['is_refund'] == '1') : ?>
         <tr style="border:1px solid #000">
             <td width="78%" style="height: 20px"><strong>Refund</strong></td>
@@ -178,34 +184,16 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
     <?php endif; ?>
 </table>
 <br>
-<p><b>TRANSFER VIA</b></p>
-<p><?= esc($homestay_owner_bank_account['bank_name']) ?> <?= ($homestay_owner_bank_account['bank_code']) ? " - Code " . $homestay_owner_bank_account['bank_code'] : '' ?><br />Account Number : <?= esc($homestay_owner_bank_account['account_number']) ?><br />Account Name : <?= esc($homestay_owner_bank_account['account_name']) ?></p>
+<br>
+<br>
 
 <table cellpadding="0">
     <?php $confirmation_date = strtotime($reservation['confirmed_at']); ?>
-    <?php $deposit_date = strtotime($reservation['deposit_at']); ?>
-    <?php $fullpayment_date = strtotime($reservation['full_paid_at']); ?>
     <?php $refund_date = strtotime($reservation['refund_paid_at']); ?>
     <tr>
         <th width="25%">Confirmation </th>
         <?php if (!empty($reservation['confirmed_at'])) : ?>
             <th width="70%">: Confirmation on <strong><?= esc(date('l, j F Y H:i:s', $confirmation_date)); ?></strong> <br> (by homestay owner)</th>
-        <?php else : ?>
-            <th width="70%">: Incomplete</th>
-        <?php endif; ?>
-    </tr>
-    <tr>
-        <th width="25%">Deposit Payment </th>
-        <?php if (!empty($reservation['deposit_proof'])) : ?>
-            <th width="70%">: Complete on <strong><?= esc(date('l, j F Y H:i:s', $deposit_date)); ?></strong> <br> (checked by homestay owner)</th>
-        <?php else : ?>
-            <th width="70%">: Incomplete</th>
-        <?php endif; ?>
-    </tr>
-    <tr>
-        <th width="25%">Full Payment </th>
-        <?php if (!empty($reservation['full_paid_proof'])) : ?>
-            <th width="70%">: Complete on <strong><?= esc(date('l, j F Y H:i:s', $fullpayment_date)); ?></strong> <br> (checked by homestay owner)</th>
         <?php else : ?>
             <th width="70%">: Incomplete</th>
         <?php endif; ?>
@@ -223,10 +211,18 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
     <br>
     <tr>
         <th width="25%"> Status </th>
-        <?php if (($reservation['status'] == '1') && ($reservation['deposit_proof'] == null) && ($reservation['canceled_at'] == null)) : ?>
-            <th width="15%" style="background-color:#B6E388">: Paying Deposit</th>
-        <?php elseif (($reservation['deposit_proof'] != null) && ($reservation['deposit_confirmed_at'] == null)) : ?>
-            <th width="50%" style="background-color:#FFC436">: Waiting for the homestay owner to confirm deposit payment</th>
+        <?php if (($reservation['status'] == '1') && ($reservation['canceled_at'] == null)) : ?>
+            <th width="20%" style="background-color:#34ebd5">: Pay Deposit</th>
+        <?php elseif (($reservation['status'] == 'Deposit Pending') && ($reservation['canceled_at'] == null)) : ?>
+            <th width="20%" style="background-color:#e1eb34">: Deposit Pending</th>
+        <?php elseif (($reservation['status'] == 'Deposit Successful') && ($reservation['canceled_at'] == null)) : ?>
+            <th width="20%" style="background-color:#30ab3a">: Deposit Successful</th>
+        <?php elseif (($reservation['status'] == 'Full Pay Pending') && ($reservation['canceled_at'] == null)) : ?>
+            <th width="20%" style="background-color:#e1eb34">: Full Pay Pending</th>
+        <?php elseif (($reservation['status'] == 'Full Pay Successful') && ($reservation['canceled_at'] == null)) : ?>
+            <th width="20%" style="background-color:#30ab3a">: Full Pay Successful</th>
+        <?php elseif (($reservation['status'] == 'Done') && ($reservation['canceled_at'] == null)) : ?>
+            <th width="20%" style="background-color:#6772ab">: Done</th>
         <?php elseif (($reservation['canceled_at'] != null) && ($reservation['is_refund'] == '0')) : ?>
             <th width="20%" style="background-color:#F78CA2">: Reservation Canceled</th>
     </tr>
@@ -259,12 +255,6 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
             <th></th>
             <th width="40%"> <i>(full payment has exceeded the deadline)</i></th>
         <?php endif; ?>
-    <?php elseif (($reservation['deposit_confirmed_at'] != null) && ($reservation['full_paid_proof'] == null)) : ?>
-        <th width="15%" style="background-color:#B6E388">: Paying Full Price</th>
-    <?php elseif (($reservation['full_paid_proof'] != null) && ($reservation['full_paid_confirmed_at'] == null)) : ?>
-        <th width="50%" style="background-color:#FFC436">: Waiting for the homestay owner to confirm full payment</th>
-    <?php elseif ($reservation['full_paid_confirmed_at'] != null) : ?>
-        <th width="20%" style="background-color:#B6E388">: Reservation Done</th>
     <?php endif; ?>
     </tr>
 </table>
@@ -276,10 +266,10 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
         <td width="50%" style="height: 20px;text-align:center">
             <?php $date = date('Y-m-d H:i');
             $date_now = strtotime($date); ?>
-            <p>Lima Puluh Kota, <?= esc(date('j F Y', $date_now)); ?></p>
+            <p><?= esc(date('j F Y', $date_now)); ?></p>
             <p>Best regards,</p>
             <p></p>
-            <p>Pokdarwis Kelana LH</p>
+            <p>Chief of <?= esc($village['name']) ?></p>
         </td>
     </tr>
 </table>

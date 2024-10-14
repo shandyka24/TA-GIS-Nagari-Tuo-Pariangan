@@ -985,8 +985,9 @@ function boundToObject(firstTime = true) {
       map.panTo(bounds.getCenter());
     }
   } else {
-    let pos = new google.maps.LatLng(-0.11371891332439286, 100.66784601319584);
-    map.panTo(pos);
+    // let pos = new google.maps.LatLng(-0.4552969270702257, 100.49274351069286);
+    // map.panTo(pos);
+    digitTourismVillage();
   }
 }
 

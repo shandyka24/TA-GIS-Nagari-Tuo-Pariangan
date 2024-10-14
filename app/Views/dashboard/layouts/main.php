@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= esc($title); ?> - Kawasan Wisata Lembah Harau Nagari Tarantang</title>
+    <title><?= esc($title); ?> - Tourism Village</title>
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/main/app.css'); ?>">
@@ -60,6 +60,28 @@
 
     <!-- Custom JS -->
     <?= $this->renderSection('javascript') ?>
+    <script>
+        window.onload = function() {
+            // Get the current title
+            let title = document.title;
+
+            // Split the title based on the ' - ' separator
+            let parts = title.split(" - ");
+
+            $.ajax({
+                url: baseUrl + "/api/touristVillage/",
+                dataType: "json",
+                success: function(response) {
+                    let data = response.data;
+                    let name = data.name;
+
+                    parts[1] = name;
+                    document.title = parts.join(" - ");
+
+                },
+            });
+        };
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))

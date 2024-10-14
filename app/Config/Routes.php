@@ -95,7 +95,7 @@ $routes->group('web', ['namespace' => 'App\Controllers\Web'], function ($routes)
     $routes->get('reservation', 'Reservation::listReservation', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
     $routes->get('reservation/cancel/(:segment)', 'Reservation::cancelReservation/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
     $routes->post('reservation/refund/confirm/(:segment)', 'Reservation::confirmRefund/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
-    $routes->get('reservation/invoice/(:segment)', 'PdfController::generatePDF/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
+    $routes->get('reservation/invoice/(:segment)', 'PdfController::generatePDF/$1', ['namespace' => 'App\Controllers\Web\PdfController', 'filter' => 'role:user']);
     $routes->get('reservation/(:segment)', 'Reservation::newReservation/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
     $routes->get('reservation/detail/(:segment)', 'Reservation::detailReservation/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
     $routes->delete('reservation/delete/(:segment)', 'Reservation::delete/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);

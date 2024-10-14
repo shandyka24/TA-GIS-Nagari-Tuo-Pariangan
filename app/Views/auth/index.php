@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><?= esc($title); ?> - Kawasan Wisata Lembah Harau Nagari Tarantang</title>
+    <title><?= esc($title); ?> - Tourism Village</title>
 
     <!-- Favicon -->
     <link href="media/icon/favicon.svg" rel="icon" />
@@ -31,6 +31,9 @@
     <link href="css/landing-page/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url('assets/css/main/app.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/pages/auth.css'); ?>">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -65,6 +68,28 @@
             <p class="text-center text-white"><?= date('Y'); ?> &copy; Shandyka Tribuana Putra</p>
         </div>
     </div>
+    <script>
+        window.onload = function() {
+            // Get the current title
+            let title = document.title;
+
+            // Split the title based on the ' - ' separator
+            let parts = title.split(" - ");
+
+            $.ajax({
+                url: "<?= base_url('api/touristVillage/'); ?>",
+                dataType: "json",
+                success: function(response) {
+                    let data = response.data;
+                    let name = data.name;
+
+                    parts[1] = name;
+                    document.title = parts.join(" - ");
+
+                },
+            });
+        };
+    </script>
 </body>
 
 </html>

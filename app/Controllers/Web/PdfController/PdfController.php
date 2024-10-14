@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Web;
+namespace App\Controllers\Web\PdfController;
 
 use CodeIgniter\Controller;
 // use TCPDF;
@@ -9,31 +9,32 @@ use CodeIgniter\RESTful\ResourcePresenter;
 use CodeIgniter\Files\File;
 use DateTime;
 
-use App\Models\ReservationHomestayUnitDetailBackUpModel;
-use App\Models\ReservationHomestayUnitDetailModel;
-use App\Models\ReservationModel;
-use App\Models\ReservationHomestayAdditionalAmenitiesDetailModel;
-use App\Models\ReservationHomestayActivityDetailModel;
-use App\Models\HomestayUnitModel;
-use App\Models\HomestayAdditionalAmenitiesModel;
-use App\Models\HomestayExclusiveActivityModel;
+use App\Models\Reservation\ReservationHomestayUnitDetailBackUpModel;
+use App\Models\Reservation\ReservationHomestayUnitDetailModel;
+use App\Models\Reservation\ReservationModel;
+use App\Models\Reservation\ReservationHomestayAdditionalAmenitiesDetailModel;
+use App\Models\Reservation\ReservationHomestayActivityDetailModel;
+use App\Models\Homestay\HomestayUnitModel;
+use App\Models\Homestay\HomestayAdditionalAmenitiesModel;
+use App\Models\Homestay\HomestayExclusiveActivityModel;
 use App\Models\PackageModel;
 use App\Models\PackageDayModel;
 use App\Models\PackageDetailModel;
 use App\Models\PackageServiceModel;
 use App\Models\PackageServiceDetailModel;
 
-use App\Models\CulinaryPlaceModel;
-use App\Models\WorshipPlaceModel;
-// use App\Models\FacilityModel;
-use App\Models\SouvenirPlaceModel;
+use App\Models\Culinary\CulinaryPlaceModel;
+use App\Models\Worship\WorshipPlaceModel;
+use App\Models\Souvenir\SouvenirPlaceModel;
 use App\Models\ServiceProviderModel;
 use App\Models\AttractionModel;
 use App\Models\EventModel;
-use App\Models\HomestayModel;
+use App\Models\Homestay\HomestayModel;
 // use App\Models\AccountModel;
 use Myth\Auth\Models\UserModel;
 use App\Models\UserBankAccountModel;
+
+use App\Models\VillageModel;
 
 class PdfController extends ResourcePresenter
 {
@@ -63,6 +64,7 @@ class PdfController extends ResourcePresenter
     // protected $accountModel;
     protected $userModel;
     protected $userBankAccountModel;
+    protected $villageModel;
     /**
      * Instance of the main Request object.
      *
@@ -101,6 +103,7 @@ class PdfController extends ResourcePresenter
         // $this->accountModel = new AccountModel();
         $this->userModel = new UserModel();
         $this->userBankAccountModel = new UserBankAccountModel();
+        $this->villageModel = new VillageModel();
     }
 
     public function generatePDF($id = null)
@@ -108,12 +111,14 @@ class PdfController extends ResourcePresenter
         // create new PDF document
         $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
+        $village = $this->villageModel->check_village()->getRowArray();
+
         // set document information
         $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('Kawasan Wisata Lembah Harau');
-        $pdf->SetTitle('PDF Invoice Kawasan Wisata Lembah Harau');
-        $pdf->SetSubject('Kawasan Wisata Lembah Harau');
-        $pdf->SetKeywords('TCPDF, PDF, invoice, desawisatagtp.online');
+        $pdf->SetAuthor($village['name']);
+        $pdf->SetTitle('PDF Invoice ' . $village['name']);
+        $pdf->SetSubject($village['name']);
+        $pdf->SetKeywords('TCPDF, PDF, invoice');
 
 
         // set default header data
@@ -220,17 +225,18 @@ class PdfController extends ResourcePresenter
             $reservation_additional_amenities[$i]['id'] = $reservation_additional_amenities[$i]['additional_amenities_id'];
         }
 
-        $homestay_owner_bank_account = $this->userBankAccountModel->get_user_bank_account($homestay_data['owner'])->getRowArray();
+        // $homestay_owner_bank_account = $this->userBankAccountModel->get_user_bank_account($homestay_data['owner'])->getRowArray();
 
-        $customer_bank_account = $this->userBankAccountModel->get_user_bank_account($reservation['customer_id'])->getRowArray();
+        // $customer_bank_account = $this->userBankAccountModel->get_user_bank_account($reservation['customer_id'])->getRowArray();
 
         $data = [
             'title' => 'Reservation',
             'reservation' => $reservation,
             'homestay' => $homestay,
             'customer' => $customer,
-            'homestay_owner_bank_account' => $homestay_owner_bank_account,
-            'customer_bank_account' => $customer_bank_account,
+            // 'homestay_owner_bank_account' => $homestay_owner_bank_account,
+            // 'customer_bank_account' => $customer_bank_account,
+            'village' => $village,
             'homestay_unit' => $homestay_units,
             'reservation_additional_amenities' => $reservation_additional_amenities,
         ];
@@ -265,17 +271,11 @@ class PdfController extends ResourcePresenter
      *
      * @return mixed
      */
-    public function index()
-    {
-    }
+    public function index() {}
 
-    public function edit($id = null)
-    {
-    }
+    public function edit($id = null) {}
 
-    public function update($id = null)
-    {
-    }
+    public function update($id = null) {}
     public function getPackageDetail($reservation_id = null, $homestay_id = null, $id = null)
     {
         $package = $this->packageModel->get_package_by_id_api($homestay_id, $id)->getRowArray();
