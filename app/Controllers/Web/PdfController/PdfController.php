@@ -263,7 +263,7 @@ class PdfController extends ResourcePresenter
         $this->response->setContentType('application/pdf');
         // Close and output PDF document
         // This method has several options, check the source code documentation for more information.
-        $pdf->Output('invoice-pos-sobatcoding.pdf', 'I');
+        $pdf->Output('invoice' . $village['name'] . '.pdf', 'I');
     }
 
     /**

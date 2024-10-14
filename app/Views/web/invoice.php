@@ -189,7 +189,10 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
 
 <table cellpadding="0">
     <?php $confirmation_date = strtotime($reservation['confirmed_at']); ?>
-    <?php $refund_date = strtotime($reservation['refund_paid_at']); ?>
+    <?php if ($reservation['refund_paid_at']) : ?>
+        <?php $refund_date = strtotime($reservation['refund_paid_at']); ?>
+    <?php endif; ?>
+
     <tr>
         <th width="25%">Confirmation </th>
         <?php if (!empty($reservation['confirmed_at'])) : ?>
