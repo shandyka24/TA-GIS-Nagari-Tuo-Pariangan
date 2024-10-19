@@ -1,3 +1,4 @@
+// js
 let baseUrl = "";
 let currentUrl = "";
 let currentLat = 0,
