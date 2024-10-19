@@ -1,4 +1,4 @@
-// js
+// js file
 let baseUrl = "";
 let currentUrl = "";
 let currentLat = 0,
