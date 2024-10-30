@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 14, 2024 at 12:00 PM
+-- Generation Time: Oct 30, 2024 at 10:28 AM
 -- Server version: 8.0.30
--- PHP Version: 8.1.10
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -83,27 +83,10 @@ CREATE TABLE `auth_groups_users` (
 --
 
 INSERT INTO `auth_groups_users` (`group_id`, `user_id`) VALUES
-(1, 1),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 10),
 (1, 11),
-(2, 9),
-(2, 13),
-(2, 14),
-(2, 15),
-(2, 16),
-(2, 17),
-(2, 18),
-(2, 19),
-(2, 20),
-(2, 21),
-(2, 22),
 (2, 23),
 (2, 24),
 (2, 25),
-(2, 26),
 (3, 7);
 
 -- --------------------------------------------------------
@@ -563,7 +546,34 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (435, '::1', 'homestayaaa@gmail.com', 23, '2024-10-14 00:14:36', 1),
 (436, '::1', 'daffa@gmail.com', 11, '2024-10-14 01:25:56', 1),
 (437, '::1', 'daffa@gmail.com', 11, '2024-10-14 06:21:34', 1),
-(438, '::1', 'homestayaaa@gmail.com', 23, '2024-10-14 06:25:53', 1);
+(438, '::1', 'homestayaaa@gmail.com', 23, '2024-10-14 06:25:53', 1),
+(439, '::1', 'homestayaaa@gmail.com', 23, '2024-10-14 08:47:30', 1),
+(440, '::1', 'daffa@gmail.com', 11, '2024-10-14 11:14:20', 1),
+(441, '::1', 'accadmin1@email.com', 7, '2024-10-14 11:17:44', 1),
+(442, '::1', 'homestayaaa@gmail.com', 23, '2024-10-14 11:37:45', 1),
+(443, '::1', 'accadmin1@email.com', 7, '2024-10-21 08:23:35', 1),
+(444, '::1', 'homestayaaa@gmail.com', 23, '2024-10-21 09:21:10', 1),
+(445, '::1', 'daffa@gmail.com', 11, '2024-10-21 09:21:21', 1),
+(446, '::1', 'accadmin1@email.com', 7, '2024-10-24 09:52:36', 1),
+(447, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-10-24 10:19:21', 1),
+(448, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-10-24 12:29:59', 1),
+(449, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-10-25 10:34:59', 1),
+(450, '::1', 'homestayaaa@gmail.com', 23, '2024-10-25 13:39:39', 1),
+(451, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-10-26 02:31:27', 1),
+(452, '::1', 'umegahomestay@gmail.com', 23, '2024-10-26 02:37:01', 1),
+(453, '::1', 'shandyka2403@gmail.com', 11, '2024-10-26 02:55:40', 1),
+(454, '::1', 'gudesterhomestay@gmail.com', 24, '2024-10-26 02:56:27', 1),
+(455, '::1', 'nabilahomestay@gmail.com', 25, '2024-10-26 03:05:31', 1),
+(456, '::1', 'shandyka2403@gmail.com', 11, '2024-10-26 03:41:29', 1),
+(457, '::1', 'gudesterhomestay@gmail.com', 24, '2024-10-26 03:41:46', 1),
+(458, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-10-26 04:41:07', 1),
+(459, '::1', 'shandyka2403@gmail.com', 11, '2024-10-26 04:42:13', 1),
+(460, '::1', 'shandyka2403@gmail.com', 11, '2024-10-26 05:07:21', 1),
+(461, '::1', 'umegahomestay@gmail.com', 23, '2024-10-26 05:08:30', 1),
+(462, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-10-26 05:21:26', 1),
+(463, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-10-30 04:15:30', 1),
+(464, '::1', 'shandyka2403@gmail.com', 11, '2024-10-30 04:26:54', 1),
+(465, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-10-30 05:12:17', 1);
 
 -- --------------------------------------------------------
 
@@ -703,21 +713,12 @@ CREATE TABLE `culinary_place` (
 --
 
 INSERT INTO `culinary_place` (`id`, `village_id`, `name`, `address`, `employee_name`, `phone`, `open`, `close`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('C1', NULL, 'Bintang Fajar', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Dewi', '081261884909', '12:00:00', '18:00:00', 0xe6100000010300000001000000050000007db664a6a52a5940be47b3767bc2babf7cb6446ba62a5940440584962cc4babf7cb604e7a62a59400446e196d5c0babf7cb64411a62a5940bc680d9740bfbabf7db664a6a52a5940be47b3767bc2babf, '-0.10451833', '100.66639869', 'Bintang Fajar adalah tempat kuliner yang menghadirkan keajaiban rasa melalui kreasinya, yaitu Rakik Kacang. Ini bukan sekadar camilan, melainkan sebuah seni kuliner yang meramu kacang pilihan menjadi gurih dan renyah dengan sentuhan rahasia yang memikat lidah.', '2023-12-02 01:13:25', '2023-12-03 16:13:39'),
-('C10', NULL, 'Nasi Ampera & Sate Zal', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000006000000848dd8cb402b5940ae0049b0abdfbbbf848dd8cb402b59409a1be9afd5e2bbbf858d58c3412b59406e70eeafa8e2bbbf848d18b8412b5940985a3eb005e0bbbf848dd8cb402b594063ae3b301ce0bbbf848dd8cb402b5940ae0049b0abdfbbbf, '-0.10890583', '100.67585935', NULL, '2023-12-02 14:36:44', '2023-12-03 16:15:09'),
-('C11', NULL, 'Sarapan Pagi M.Upik', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '07:00:00', '18:00:00', 0xe61000000103000000010000000500000098ad45d8412b594047997c5ff4debbbf98ad45d8412b59405ebefc5e2ce3bbbf97adc5a2422b59403413025fffe2bbbf97ad8597422b594047997c5ff4debbbf98ad45d8412b594047997c5ff4debbbf, '-0.10890295', '100.67591799', NULL, '2023-12-02 15:04:36', '2023-12-03 16:15:48'),
-('C12', NULL, 'Warung Uni Nita', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000005000000d934ff0b442b5940a5d7d09a4fe8bbbfda347f30452b5940b8d9e09ac8e7bbbfda34bf68452b59402cc4f59984efbbbfd9343f44442b5940c26bf099b1efbbbfd934ff0b442b5940a5d7d09a4fe8bbbf, '-0.10906584', '100.67606983', NULL, '2023-12-02 15:06:30', '2023-12-03 16:16:40'),
-('C13', NULL, 'Kini Cheese Tea Sarbun', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '14:00:00', '20:00:00', 0xe61000000103000000010000000500000069e2adbb472b5940084496d790dfbbbf68e22dd2472b5940f25e36d7bae2bbbf68e22de0482b59409d0841d760e2bbbf67e26dbe482b59404936b6d782debbbf69e2adbb472b5940084496d790dfbbbf, '-0.10889619', '100.67628811', NULL, '2023-12-02 15:08:34', '2023-12-03 16:17:36'),
-('C14', NULL, 'Yorafa Food & Drink', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe61000000103000000010000000500000067c15490442b5940274639d3a8f5bbbf66c1d4e1452b59408e5649d321f5bbbf67c114ed452b594069c89dd2c1fabbbf67c114df442b5940d60c93d21bfbbbbf67c15490442b5940274639d3a8f5bbbf, '-0.10925477', '100.67610138', NULL, '2023-12-02 15:10:00', '2023-12-02 15:10:00'),
-('C15', '1', 'Kedai Kuliner 1', 'aaaaaaaaaa', 'andi', '082344125645', '00:00:00', '23:59:00', 0xe6100000010300000001000000050000007ebb6837d31e59402b115e64e936ddbf7dbb88add31e59402e8913617e38ddbf7dbb4837d51e59407417c3012a38ddbf7dbbc899d41e594084a530258436ddbf7ebb6837d31e59402b115e64e936ddbf, '-0.45651275', '100.48170265', 'aaa', '2024-10-09 20:31:48', '2024-10-09 20:31:48'),
-('C2', NULL, 'Warung Yuniar', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Yuniar', '082267248766', '10:00:00', '18:00:00', 0xe610000001030000000100000005000000b161818ea12a59404a3a82f9e2e9b9bfb161410aa22a5940320dbef999e7b9bfb16141fca02a5940d568fef923e5b9bfb261c18ba02a5940f6d7b4f9f3e7b9bfb161818ea12a59404a3a82f9e2e9b9bf, '-0.10118887', '100.66609454', NULL, '2023-12-02 01:29:02', '2023-12-02 01:29:02'),
-('C3', NULL, 'Bhumi Harau Cafe & Resto', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '19:00:00', '23:00:00', 0xe610000001030000000100000005000000b5d63fc46b2a5940c989df167062bebfb6d67f916d2a5940de7f05176261bebfb6d69fda6d2a594016eb3a160267bebfb6d67ffc6b2a5940ce131896f967bebfb5d63fc46b2a5940c989df167062bebf, '-0.11872374', '100.66289125', NULL, '2023-12-02 12:33:23', '2023-12-02 13:14:54'),
-('C4', NULL, 'Nasi Kapau Josi', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '21:00:00', 0xe61000000103000000010000000500000015f95d376b2a594030b78ee9ac46bebf15f91d676c2a59408bd8a7e9f845bebf15f93db06c2a5940e922e868554bbebf15f91d866b2a5940351abc68904cbebf15f95d376b2a594030b78ee9ac46bebf, '-0.11830548', '100.66283889', NULL, '2023-12-02 13:18:41', '2023-12-02 13:18:41'),
-('C5', NULL, 'Leven Coffe & Eatery', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '14:00:00', '22:00:00', 0xe6100000010300000001000000050000003759b3a5a12a594009b92ecdc5d2babf3759f364a22a5940f2d8aecd33cebabf37593335a12a5940f29dfdcd63cbbabf3659738ca02a594020aa78cd22d0babf3759b3a5a12a594009b92ecdc5d2babf, '-0.10472231', '100.66610544', NULL, '2023-12-02 13:22:18', '2023-12-02 13:22:18'),
-('C6', NULL, 'Kedai 4s', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000005000000c4ace737382b5940da31c6ae33e5bbbfc4aca767392b5940458acbae06e5bbbfc4aca767392b5940d62826af09e2bbbfc3ac6721382b5940d62826af09e2bbbfc4ace737382b5940da31c6ae33e5bbbf, '-0.10894195', '100.67533983', NULL, '2023-12-02 13:25:11', '2023-12-02 13:25:11'),
-('C7', NULL, 'Kedai Nasi Keyla', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe6100000010300000001000000050000007b3079a33d2b5940315af9817cedbbbf7c30f9213f2b59406f630982f5ecbbbf7b30b9e93e2b594072f4ae8282e7bbbf7b30b9813d2b59405df29e8209e8bbbf7b3079a33d2b5940315af9817cedbbbf, '-0.10904691', '100.67567869', NULL, '2023-12-02 13:27:05', '2023-12-02 13:27:05'),
-('C8', NULL, 'Warung Kawa Daun Sarasah Aie Luluih', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000005000000af50f425382b594056f4ed7a2dc0bbbfaf50b428392b59401ab9c37a95c1bbbfaf5034e5382b59403cea697a92c4bbbfaf50f4cb372b59401de68e7a57c3bbbfaf50f425382b594056f4ed7a2dc0bbbf, '-0.10843468', '100.67532213', NULL, '2023-12-02 13:30:53', '2023-12-02 13:30:53'),
-('C9', NULL, 'Warung Iyef', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', NULL, NULL, '10:00:00', '18:00:00', 0xe610000001030000000100000006000000e14399013a2b59402e0da94318c6bbbfe14399013a2b5940984d644361c8bbbfe043d9ed3a2b5940af97694334c8bbbfe043d9ed3a2b594050fcb0c3d4c5bbbfe14399013a2b59402e0da94318c6bbbfe14399013a2b59402e0da94318c6bbbf, '-0.10850686', '100.67544358', NULL, '2023-12-02 14:32:48', '2023-12-02 14:33:08');
+('C1', '1', 'Kawa Daun Tanjuang Indah', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putra', '082284978004', '09:00:00', '22:00:00', 0xe61000000103000000010000000600000042504c54fe1e5940c34e13d80286dcbf4350ac7bfe1e5940300ea234bf87dcbf44504c35ff1e59409e3268715f89dcbf43506ce6001f59408f995252e988dcbf42500c38001f5940fc6eaf18b485dcbf42504c54fe1e5940c34e13d80286dcbf, -0.44577259, 100.48435148, 'Kawa Daun Tanjung Indah merupakan sebuah cafe tradisional yang menyediakan berbagai macam makanan dan minuman. Lokasi Kawa Daun Tanjuang Indah ini sangat strategis dan memerikan pemandangan yang sangat indah.', '2024-10-25 04:34:18', '2024-10-25 04:39:07'),
+('C2', '1', 'Kawa Daun  Tanjuang Putuih', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Nasrudin', '081272053141', '09:00:00', '20:00:00', 0xe610000001030000000100000005000000e326fb26001f59402b10e9e49f85dcbfe2267bf1001f5940bd9e5f9eeb88dcbfe2261b32021f5940fb07073f9788dcbfe2263bd5021f5940d1c39026ca84dcbfe326fb26001f59402b10e9e49f85dcbf, -0.44573090, 100.48446610, 'Kawa Daun  Tanjuang Putuih merupakan cafe tradisional yang menediakan berbagai macam makanan dan minuman. Lokasi Kawa Daun Tanjuang Putuih ini sangat strategis dan memerikan pemandangan yang sangat indah.', '2024-10-25 04:38:34', '2024-10-25 04:38:34'),
+('C3', '1', 'Kawa Daun A & F', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Masril', NULL, '10:00:00', '18:00:00', 0xe61000000103000000010000000900000022318b27041f59401db8000c1f85dcbf20318b46031f5940f1b5218b8f85dcbf21316bd0021f5940cf88a6c94e86dcbf21316bd0021f5940a4f083676287dcbf2131eb6d031f594033f98184e688dcbf2131eb2f051f59406d19d024bf88dcbf21312b0e051f59406c3aff28a386dcbf21312b87041f59402877596b7385dcbf22318b27041f59401db8000c1f85dcbf, -0.44574041, 100.48461918, 'Kawa Daun A & F merupakan cafe tradisional yang menediakan berbagai makanan dan minuman. Terdapat juga ampera pada cafe ini. Cafe ini juga menyuguhkan pemandangan yang sangat indah', '2024-10-25 05:39:16', '2024-10-25 05:39:16'),
+('C4', '1', 'Kawa Daun Puncak Mortir', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hesti', NULL, '10:00:00', '20:00:00', 0xe610000001030000000100000006000000824285b9011f5940346f4dad1081dcbf8142c52c031f594014ae4def0d80dcbf81426540041f5940a14221b1217fdcbf81424505051f5940db9e9b8fe67fdcbf8142a5e3021f5940b23a204aab82dcbf824285b9011f5940346f4dad1081dcbf, -0.44536745, 100.48458085, 'Kawa Daun Puncak Mortir merupakan cafe tradisional yang menyuguhkan pemandangan yang sangat indah. Cafe ini menjual berbagai makanan dan minuman.', '2024-10-25 05:51:32', '2024-10-25 05:51:32'),
+('C5', '1', 'Puncak Kawa Gudester', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hana', '082283529664', '09:00:00', '20:00:00', 0xe6100000010300000001000000070000005d90c88b101f5940181d2855f496dcbf5e9068830f1f59405754f2af9199dcbf5e902867111f5940ca16d60c219bdcbf5d90886f121f594057ec3eafeb99dcbf5d90c8a7121f5940abc6bfb22998dcbf5d90e83c121f59407e5fdb559a96dcbf5d90c88b101f5940181d2855f496dcbf, -0.44683020, 100.48541775, 'Puncak Kawa Gudester merupakan sebuah cafe tradisional yang menyediakan berbagai macam makanan dan minuman. Cafe ini juga menyuguhkan pemandangan yang sangat indah.', '2024-10-25 06:11:07', '2024-10-25 06:11:07'),
+('C6', '1', 'Sako Minang Cafe', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Zainul', '082122886454', '09:00:00', '18:00:00', 0xe61000000103000000010000000700000062582f14001f594036000374836cdcbf0086115f011f5940be25be27da6bdcbf008611e6011f5940417cad4bda69dcbfff85714b001f5940fefbb38e5068dcbfff859178fe1e594083abcbadc668dcbf0086119dff1e59402738c987d46bdcbf62582f14001f594036000374836cdcbf, -0.44399500, 100.48438628, 'Cafe ini menyediakan berbagai macam makanan dan minuman. Lokasi dari cafe ini diapit oleh pepohonan yang rimbun dan menyuguhi pemandangan yang indah.', '2024-10-25 06:16:41', '2024-10-25 06:16:41');
 
 -- --------------------------------------------------------
 
@@ -738,24 +739,18 @@ CREATE TABLE `culinary_place_gallery` (
 --
 
 INSERT INTO `culinary_place_gallery` (`id`, `culinary_place_id`, `url`, `created_at`, `updated_at`) VALUES
-('004', 'C2', 'C2-1.jpg', '2023-12-02 01:29:02', '2023-12-02 01:29:02'),
-('005', 'C3', 'C3-1.jpg', '2023-12-02 13:14:54', '2023-12-02 13:14:54'),
-('006', 'C4', 'C4-1.jpg', '2023-12-02 13:18:41', '2023-12-02 13:18:41'),
-('007', 'C5', 'C5-1.jpg', '2023-12-02 13:22:18', '2023-12-02 13:22:18'),
-('008', 'C6', 'C6-1.jpg', '2023-12-02 13:25:11', '2023-12-02 13:25:11'),
-('009', 'C7', 'C7-1.jpg', '2023-12-02 13:27:05', '2023-12-02 13:27:05'),
-('010', 'C8', 'C8-1.jpg', '2023-12-02 13:30:53', '2023-12-02 13:30:53'),
-('011', 'C9', 'C9-1.jpg', '2023-12-02 14:33:08', '2023-12-02 14:33:08'),
-('012', 'C1', 'C1-1.jpg', '2023-12-03 16:13:40', '2023-12-03 16:13:40'),
-('013', 'C1', 'C1-2.jpg', '2023-12-03 16:13:40', '2023-12-03 16:13:40'),
-('015', 'C10', 'C10-1.jpg', '2023-12-03 16:15:09', '2023-12-03 16:15:09'),
-('016', 'C11', 'C11-1.jpg', '2023-12-03 16:15:48', '2023-12-03 16:15:48'),
-('017', 'C12', 'C12-1.jpg', '2023-12-03 16:16:40', '2023-12-03 16:16:40'),
-('018', 'C13', 'C13-1.jpg', '2023-12-03 16:17:36', '2023-12-03 16:17:36'),
-('019', 'C13', 'C13-2.jpg', '2023-12-03 16:17:36', '2023-12-03 16:17:36'),
-('020', 'C15', '1728549083_8f29ff765138acf963b1.png', '2024-10-09 20:31:48', '2024-10-09 20:31:48'),
-('021', 'C15', '1728549082_5fbc63b78fdfc3c91b55.png', '2024-10-09 20:31:48', '2024-10-09 20:31:48'),
-('022', 'C15', '1728549084_f1a581c5f48d82488764.png', '2024-10-09 20:31:48', '2024-10-09 20:31:48');
+('003', 'C2', '1729874271_6dcb3841050ed240cb45.jpg', '2024-10-25 04:38:34', '2024-10-25 04:38:34'),
+('004', 'C2', '1729874271_b98650fd3cf653723469.jpg', '2024-10-25 04:38:34', '2024-10-25 04:38:34'),
+('005', 'C1', '1729874328_29c8ba153e9206fc2d8f.jpg', '2024-10-25 04:39:07', '2024-10-25 04:39:07'),
+('006', 'C1', '1729874328_b7c2761e0920a2ad3870.jpg', '2024-10-25 04:39:07', '2024-10-25 04:39:07'),
+('007', 'C3', '1729877912_fcb9f48e8c98011b588e.jpg', '2024-10-25 05:39:16', '2024-10-25 05:39:16'),
+('008', 'C3', '1729877912_a29f0219713a054d082e.jpg', '2024-10-25 05:39:16', '2024-10-25 05:39:16'),
+('009', 'C4', '1729878653_001f5740fde5888b3d9f.jpg', '2024-10-25 05:51:32', '2024-10-25 05:51:32'),
+('010', 'C4', '1729878653_c07a033bd9dc8bff09f0.jpg', '2024-10-25 05:51:32', '2024-10-25 05:51:32'),
+('011', 'C5', '1729879828_d16bcc84e1d538918170.jpg', '2024-10-25 06:11:07', '2024-10-25 06:11:07'),
+('012', 'C5', '1729879828_29fdc45b9cbea7e208d0.jpg', '2024-10-25 06:11:07', '2024-10-25 06:11:07'),
+('013', 'C6', '1729880115_bcebc18c9c5b742cc42f.jpg', '2024-10-25 06:16:41', '2024-10-25 06:16:41'),
+('014', 'C6', '1729880107_871a7281a4a1d176bf16.jpg', '2024-10-25 06:16:41', '2024-10-25 06:16:41');
 
 -- --------------------------------------------------------
 
@@ -775,10 +770,18 @@ CREATE TABLE `culinary_product` (
 --
 
 INSERT INTO `culinary_product` (`id`, `name`, `created_at`, `updated_at`) VALUES
-('01', 'Nasi Goreng', '2023-11-10 00:51:16', '2023-12-02 15:10:30'),
-('02', 'Rakik Kacang', '2023-11-10 19:00:55', '2023-11-10 19:00:55'),
-('03', 'Roti Bakar', '2023-11-11 19:01:31', '2023-11-11 19:01:31'),
-('04', 'Cheese Tea', '2023-12-02 15:12:39', '2023-12-02 15:12:39');
+('01', 'Kawa Daun', '2024-10-25 20:24:26', '2024-10-25 20:24:26'),
+('02', 'Nasi Goreng', '2024-10-25 20:24:34', '2024-10-25 20:24:34'),
+('03', 'Mie Goreng', '2024-10-25 20:24:41', '2024-10-25 20:24:41'),
+('04', 'Mie Rebus', '2024-10-25 20:24:47', '2024-10-25 20:25:46'),
+('05', 'Mienas', '2024-10-25 20:24:53', '2024-10-25 20:24:53'),
+('06', 'Kopi Hitam', '2024-10-25 20:25:00', '2024-10-25 20:25:00'),
+('07', 'Gorengan', '2024-10-25 20:25:07', '2024-10-25 20:25:07'),
+('08', 'Jus', '2024-10-25 20:25:12', '2024-10-25 20:25:12'),
+('09', 'Teh Es', '2024-10-25 20:25:39', '2024-10-25 20:25:39'),
+('10', 'Teh Hangat', '2024-10-25 20:25:53', '2024-10-25 20:25:58'),
+('11', 'Cappucino', '2024-10-25 20:26:04', '2024-10-25 20:26:04'),
+('12', 'Pop Mie', '2024-10-25 20:26:18', '2024-10-25 20:26:18');
 
 -- --------------------------------------------------------
 
@@ -801,8 +804,18 @@ CREATE TABLE `culinary_product_detail` (
 --
 
 INSERT INTO `culinary_product_detail` (`culinary_place_id`, `culinary_product_id`, `price`, `image_url`, `description`, `created_at`, `updated_at`) VALUES
-('C1', '02', 5000, 'C1P-1.jpg', NULL, '2023-12-02 01:23:06', '2023-12-02 01:23:06'),
-('C13', '04', 20000, 'C13P-1.jpg', NULL, '2023-12-02 15:17:05', '2023-12-02 15:17:05');
+('C1', '01', 7000, '1729931538_13fb5a9f880781ca59e9.webp', 'Minuman khas minang yang terbuat dari daun kopi', '2024-10-25 20:32:34', '2024-10-25 20:32:34'),
+('C1', '02', 15000, '1729931626_9d941b2a491f24c460b3.jpg', 'Nasi goreng dengan telur\r\n', '2024-10-25 20:33:13', '2024-10-25 20:33:49'),
+('C1', '03', 15000, '1729931608_f9d768cb5a469b73f149.jpeg', 'Mie goreng dengan sayuran dan telur\r\n', '2024-10-25 20:33:38', '2024-10-25 20:33:38'),
+('C1', '04', 15000, '1729931718_9ecabc7ce38cdd9fdd76.webp', 'Mie rebus dengan sayuran dan telur', '2024-10-25 20:35:20', '2024-10-25 20:35:20'),
+('C1', '05', 15000, '1729931735_d70317cae68d45ca4294.jpg', 'Percampuran antara nasi goreng dan mie goreng dan diberikan telur\r\n', '2024-10-25 20:35:52', '2024-10-25 20:35:52'),
+('C1', '06', 5000, '1729931766_94d896c52956db5aaad3.jpg', 'Kopi hitam asli pariangan\r\n', '2024-10-25 20:36:17', '2024-10-25 20:36:17'),
+('C1', '07', 1500, '1729931791_697674f518b52a2163e8.jpg', 'Berbagai macam gorengan\r\n', '2024-10-25 20:36:39', '2024-10-25 20:36:39'),
+('C1', '08', 12000, '1729931813_1b38704500d350baa03e.jpg', 'Aneka macam jus buah', '2024-10-25 20:36:59', '2024-10-25 20:36:59'),
+('C1', '09', 7000, '1729931831_1254a68a5065b3f61722.jpg', 'Kesegaran teh dipadukan dengan es batu\r\n', '2024-10-25 20:37:27', '2024-10-25 20:37:27'),
+('C1', '10', 5000, '1729931857_0bc0788503a16a54c1e0.jpeg', 'Teh hangat memerikan kehangatan di cuaca yang sejuk seperti di pariangan', '2024-10-25 20:38:05', '2024-10-25 20:38:05'),
+('C1', '11', 10000, '1729931900_504b51f5398bd9643b40.jpg', 'Cappucino ', '2024-10-25 20:38:37', '2024-10-25 20:38:37'),
+('C1', '12', 10000, '1729931929_83dec133a260492bbc09.jpg', 'Pop Mie dan Mie Sedap Cup\r\n', '2024-10-25 20:39:08', '2024-10-25 20:39:08');
 
 -- --------------------------------------------------------
 
@@ -834,21 +847,9 @@ CREATE TABLE `homestay` (
 --
 
 INSERT INTO `homestay` (`id`, `village_id`, `name`, `category`, `address`, `geom`, `lat`, `lng`, `owner`, `open`, `close`, `description`, `video_url`, `created_at`, `updated_at`, `profil_link`) VALUES
-('H01', NULL, 'Homestay Harau Syafiq', '1', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe6100000010300000001000000090000005a4b0163b62a5940655a3f7f85dbbcbf594b4149bd2a59403e620c7ca8f4bcbf594bc11ec22a5940d697c6796906bdbf594b4173c02a59405a28cbf80e0ebdbf584b81cabf2a594040dd65782211bdbf594ba146ba2a594085b2737a2301bdbf4a390f21b32a594040c41cc5abe5bcbf4b398f48b12a5940b949544617dcbcbf5a4b0163b62a5940655a3f7f85dbbcbf, '-0.11313367', '100.66758434', 9, '10:00:00', '18:00:00', 'Homestay Harau Syafiq adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 12:22:25', '2024-02-26 12:22:25', ''),
-('H02', NULL, 'Homestay Aura', '1', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000005000000564e8a909f2a594017a1314be2eebabf564e0a8b9d2a59401970e44b8ee8babf574eca47992a594058e5f749f5f9babf574eca639b2a5940e82ff948ec02bbbf564e8a909f2a594017a1314be2eebabf, '-0.10531219', '100.66579727', 13, '10:00:00', '18:00:00', 'Homestay Aura adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 12:59:05', '2024-02-26 14:05:06', ''),
-('H03', NULL, 'Meliya Homestay', '1', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000600000018eccacd8c2a5940e7fa5eed7961bbbf18eccaec8b2a5940648434ecab6bbbbf18ecca388b2a5940cb5a4ceb9473bbbf18ec0a28892a594091e0dceba86ebbbf18eccade8a2a5940c391c0ed225ebbbf18eccacd8c2a5940e7fa5eed7961bbbf, '-0.10706877', '100.66473267', 14, '10:00:00', '18:00:00', 'Meliya Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 15:58:36', '2024-02-26 15:58:36', ''),
-('H04', NULL, 'Abyan Homestay', '1', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000007000000f2a9ae22802a594044bcf1de0b67bcbff3a94e09812a59400fe9e35e7c67bcbff4a9ae03812a5940c80f3d615354bcbff2a9ce5d7f2a5940ff0e53619f53bcbff3a9ee4c7f2a5940c151b05ffb60bcbff3a98e527f2a5940e58bff5e9b66bcbff2a9ae22802a594044bcf1de0b67bcbf, '-0.11080252', '100.66407278', 15, '10:00:00', '18:00:00', 'Abyan Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:04:25', '2024-02-26 16:06:12', ''),
-('H05', NULL, 'Homestay Bilza', '1', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000b0000007bfb35a98d2a59400487a321773bbdbf7bfb150e942a5940672d9ca2fe33bdbf7bfb151c952a59400e49d5a1f839bdbf7cfbb55f932a594081c05b619e3dbdbf7bfbc59a932a5940ab371341cb3fbdbf7afb1598912a5940ad3384201444bdbf7afbd513922a5940e035c81fb449bdbf7bfb5568902a594029c17b1ffd4bbdbf7afb35c58f2a59403d5d20201147bdbf7afb55a68e2a5940613df71f4c48bdbf7bfb35a98d2a59400487a321773bbdbf, '-0.11425769', '100.66512362', 16, '10:00:00', '18:00:00', 'Homestay Bilza adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:12:45', '2024-02-26 16:12:45', ''),
-('H06', NULL, 'Homestay IBU', '1', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000005000000fadfac346a2a5940ef6629841954bebffadf6cf96c2a594059de71041452bebffbdfac5e6d2a5940b77372833259bebffadfacbb6a2a594052321d03925bbebffadfac346a2a5940ef6629841954bebf, '-0.11851233', '100.66282884', 17, '10:00:00', '18:00:00', 'Homestay IBU adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:24:11', '2024-02-26 16:24:11', ''),
-('H07', NULL, 'Dangau Pitossa', '1', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe610000001030000000100000007000000cd71909ce82a59402f6520800d9bbcbfcd711050f12a5940bfb6887dcbafbcbfcd7110c0f92a59409c158d796fcfbcbfcc711033ff2a59408ddc177d4fb3bcbfcc711061ef2a5940094a9e83ed7ebcbfcc71101ee72a5940ef167a803d98bcbfcd71909ce82a59402f6520800d9bbcbf, '-0.11192599', '100.67109121', 18, '10:00:00', '18:00:00', 'Dangau pitossa adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:36:27', '2024-02-26 16:36:27', ''),
-('H08', NULL, 'Oston Homestay', '1', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000500000076db4060f92a5940f8d7ecf1a131bcbf75db0060fd2a594083633b73d226bcbf75db4038032b59402b7fefee3d4abcbf75dbc0caff2a59404c96376e2150bcbf76db4060f92a5940f8d7ecf1a131bcbf, '-0.11028254', '100.67177111', 19, '10:00:00', '18:00:00', 'Oston Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:43:34', '2024-02-26 16:43:34', ''),
-('H09', NULL, 'Megahomestay', '1', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe6100000010300000001000000050000003c1b76f5082b594075ac5c818d15bcbf3c1bf6fa0a2b5940d7cd907ec12cbcbf3b1b36b70e2b59400bbf187f5c28bcbf3c1b36f50c2b59400e667980ef1cbcbf3c1b76f5082b594075ac5c818d15bcbf, '-0.10988089', '100.67259749', 20, '10:00:00', '18:00:00', 'Oston Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:47:02', '2024-02-26 16:47:02', ''),
-('H10', NULL, 'Dangau Abah Homestay', '1', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000b0000006d9223fd2a2b59407b6a1e0c4e06bcbf6e92e3dd2f2b5940b31efe0b5c07bcbf6e9263c72f2b594053cd2409171fbcbf6d9223e6322b594094b20909f81fbcbf6e92a3cf322b59404e4ba307922bbcbf6e92e321282b594068dd9d07bf2bbcbf6e92632a272b5940ad4404092520bcbf6d9223492a2b59400a275009af1dbcbf6e92233b292b59407905720bee0bbcbf6e92e3c42a2b5940a168770bc10bbcbf6d9223fd2a2b59407b6a1e0c4e06bcbf, '-0.10975686', '100.67462355', 21, '10:00:00', '18:00:00', 'Oston Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 16:55:41', '2024-02-26 16:55:41', ''),
-('H11', NULL, 'Limpato Homestay', '1', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 0xe61000000103000000010000000500000080afea2f6b2a59406e3aed395306bebf80afcaf46b2a5940f281c4b6431dbebf81af4a276e2a59405be7ec361f1cbebf80afaa6d6d2a59400e1c0c3a7205bebf80afea2f6b2a59406e3aed395306bebf, '-0.11745232', '100.66288271', 22, '10:00:00', '18:00:00', 'Limpato Homestay adalah sebuah penginapan yang nyaman dan bersahaja yang terletak di Lembah Harau, sebuah destinasi alam yang indah di Sumatera Barat, Indonesia. Penginapan ini menawarkan pengalaman menginap yang autentik dan dekat dengan alam, dengan pemandangan yang memukau dari tebing batu yang mengelilingi lembah.', NULL, '2024-02-26 19:17:47', '2024-02-26 19:20:24', ''),
-('H12', '1', 'Homestay aaa', '1', 'Address 1 ', 0xe6100000010300000001000000050000000613e5e17f1f5940cf06575bfd1eddbf051345bd801f5940807d9cdc5f1eddbf05134509801f5940c203101f301dddbf0413c5117f1f5940d384edbdbc1dddbf0613e5e17f1f5940cf06575bfd1eddbf, '-0.45496148', '100.49218166', 23, '00:00:00', '23:59:00', 'des', NULL, '2024-09-26 05:27:13', '2024-09-26 05:27:13', ''),
-('H13', '1', 'Homestay bbb', '1', 'Address 1 ', 0xe610000001030000000100000005000000181ce04c891f5940b5c731b3ac9edcbf181ca07c8a1f5940ca6ae5b3529edcbf181c002b8b1f5940b911f590cb9fdcbf181cc0e4891f5940b2baf2ef4ca0dcbf181ce04c891f5940b5c731b3ac9edcbf, '-0.44722362', '100.49281214', 24, '00:00:00', '23:59:00', 'des', NULL, '2024-09-27 22:09:00', '2024-09-27 22:09:00', ''),
-('H14', '1', 'Homestay ccc', '1', 'ccc', 0xe6100000010300000001000000050000002649cfbe581f59406a2fe6cf5761dcbf47dcccfb581f59404a38eb827a62dcbf46dcec7f5a1f59409ec97a633162dcbf45dc6c0f5a1f594031f3b8e50c61dcbf2649cfbe581f59406a2fe6cf5761dcbf, '-0.44346707', '100.48984513', 25, '00:00:00', '23:59:00', 'ccc', NULL, '2024-10-09 20:18:34', '2024-10-09 20:18:34', ''),
-('H15', '1', 'Homestay ddd', '2', 'ddd', 0xe610000001030000000100000005000000fb4e2e5dd11f59404903b7e42ac9dcbffc4eceaed01f59401aef62c1d0cadcbffc4e4ea6d11f59404361960036cbdcbffc4eae54d21f594071e9f5838ac9dcbffb4e2e5dd11f59404903b7e42ac9dcbf, '-0.44984065', '100.49716228', 26, '00:00:00', '23:59:00', 'ddd', NULL, '2024-10-09 21:12:54', '2024-10-09 21:18:21', '');
+('H12', '1', 'Homestay Umega', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000080000000713a515141f594075a82bd316a5dcbf0413e50f161f594056fa301514a4dcbf0613e5e2151f5940668b498887a2dcbf05134556151f5940477bc4ba49a1dcbf0613b534121f5940d6377fc7eca2dcbf0513c534111f5940e5707455f2a3dcbf0713e531121f594023f47431f2a5dcbf0713a515141f594075a82bd316a5dcbf, -0.44748639, 100.48557337, 23, '10:00:00', '23:59:00', 'Homestay Umega MD di Nagari Tuo Pariangan adalah penginapan yang menawarkan pengalaman menginap dengan nuansa lokal Minangkabau yang kental. Terletak di desa yang kaya akan sejarah dan budaya, homestay ini memberi kesempatan bagi pengunjung untuk merasakan langsung suasana kehidupan masyarakat tradisional Minangkabau sambil menikmati pemandangan alam yang indah, dengan latar belakang pegunungan dan hamparan sawah yang asri.', NULL, '2024-09-26 05:27:13', '2024-10-25 19:51:44', ''),
+('H13', '1', 'Homestay Gudester', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000050000001dc09e63081f59407ec8ede3dfa0dcbf1cc01e0f0a1f5940c98d5f80a7a2dcbf1ec0feb40b1f5940924004a4d4a0dcbf1dc0be140a1f5940e50692070d9fdcbf1dc09e63081f59407ec8ede3dfa0dcbf, -0.44731766, 100.48498829, 24, '10:00:00', '23:59:00', 'Homestay Gudester Pariangan merupakan homestay modern dimana homestay ini hanya menyediakan kamar. Pada tiap-tiap kamar memiliki pemandangan persawahan yang sangat indah', NULL, '2024-10-25 19:48:36', '2024-10-25 19:51:07', ''),
+('H14', '1', 'Homestay Nabila', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000070000006c9b975dc61e5940c422477d5b8edcbf6d9b779bc61e5940a53cea990c90dcbf6c9b973ec71e5940aac034576991dcbf6c9b97b4c91e5940385ed1971a91dcbf6c9b574fc91e5940ceae26feea8ddcbf6c9b97b7c61e5940ee5052dd558edcbf6c9b975dc61e5940c422477d5b8edcbf, -0.44626860, 100.48095920, 25, '10:00:00', '23:59:00', 'Homestay Nabila di Pariangan adalah penginapan nyaman yang menawarkan perpaduan antara arsitektur tradisional Minangkabau dan kenyamanan modern. Terletak di Desa Pariangan, Tanah Datar, homestay ini menghadirkan pemandangan sawah hijau yang luas serta bukit-bukit di sekitar, menjadikannya tempat sempurna bagi para tamu yang ingin menikmati ketenangan dan keindahan alam Sumatera Barat.', NULL, '2024-10-25 19:55:23', '2024-10-25 19:55:23', '');
 
 -- --------------------------------------------------------
 
@@ -877,15 +878,18 @@ CREATE TABLE `homestay_additional_amenities` (
 --
 
 INSERT INTO `homestay_additional_amenities` (`homestay_id`, `additional_amenities_id`, `name`, `category`, `price`, `is_order_count_per_day`, `is_order_count_per_person`, `is_order_count_per_room`, `stock`, `description`, `image_url`, `created_at`, `updated_at`) VALUES
-('H01', '01', 'Breakfast', '2', 15000, '1', '1', '', 0, 'Sarapan dengan menu yang dapat dipilih ketika menginap', '1709108441_15e566c51441ddbb6f12.jpg', '2024-02-27 19:20:43', '2024-02-27 19:20:43'),
-('H01', '02', 'Lunch', '2', 25000, '1', '1', '', 0, 'Makan siang dengan menu yang dapat dipilih ketika menginap', '1709108493_8acb29efb0b2f28978f1.jpg', '2024-02-27 19:21:42', '2024-02-27 19:21:42'),
-('H01', '03', 'Dinner', '2', 25000, '1', '1', '', 0, 'Makan malam dengan menu yang dapat dipilih ketika menginap', '1709108535_ef01c134ee1e28296108.jpg', '2024-02-27 19:22:17', '2024-02-27 19:22:17'),
-('H01', '04', 'Mattress', '1', 50000, '', '', '1', 5, 'Kasur tambahan', '1709108595_9cb67fef27d471f093ce.jpg', '2024-02-27 19:23:18', '2024-02-27 19:23:18'),
-('H01', '05', 'Bathroom amenities', '1', 20000, '', '1', '', 0, 'Perlengkapan mandi', '1709108729_0c2892841396fba08924.jpeg', '2024-02-27 19:25:32', '2024-02-27 19:25:32'),
-('H01', '06', 'Equipment for grilling', '1', 30000, '', '', '', 5, 'Perlengkapan untuk bakar-bakar', '1709108832_5a375e35ec18bb648e8f.jpg', '2024-02-27 19:27:20', '2024-02-27 19:27:20'),
-('H12', '01', 'Kasur', '1', 100000, '0', '0', '0', 5, 'des', '1727615240_1cb4af5b1784dcfbaf7d.png', '2024-09-29 01:07:22', '2024-09-29 01:07:22'),
-('H12', '02', 'Pijat Relaksasi', '2', 100000, '0', '1', '0', 0, 'tes', '1727615278_b042c7317103edd06d63.png', '2024-09-29 01:08:13', '2024-09-29 01:08:13'),
-('H12', '03', 'Sarapan', '2', 15000, '1', '1', '0', 0, 'sarapan enak', '1727700339_8f7c6229898833d4d8a2.png', '2024-09-30 00:45:42', '2024-09-30 00:45:42');
+('H12', '01', 'Kasur', '1', 100000, '0', '0', '1', 5, 'Kasur tambahan', '1729884917_a45c76bf7d804d9fdec4.jpg', '2024-09-29 01:07:22', '2024-10-25 07:35:23'),
+('H12', '02', 'Sarapan', '2', 15000, '1', '1', '0', 0, 'Sarapan', '1729928412_ca7169662ad91e6733b4.jpeg', '2024-10-25 19:40:28', '2024-10-25 19:40:28'),
+('H12', '03', 'Makan siang', '2', 15000, '1', '1', '0', 0, 'Request Makan Siang', '1729928449_649053ff8ddad903b730.jpeg', '2024-10-25 19:40:51', '2024-10-25 19:40:51'),
+('H12', '04', 'Makan Malam', '2', 15000, '1', '1', '0', 0, 'Request Makan Malam', '1729928491_8652a5b7cd88d997e2b6.jpg', '2024-10-25 19:41:33', '2024-10-25 19:41:33'),
+('H13', '01', 'Extra Bed', '1', 250000, '0', '1', '1', 3, 'Kasur Tambahan', '1729929786_7a8905841bc12e975475.jpg', '2024-10-25 20:03:17', '2024-10-25 20:03:17'),
+('H13', '02', 'Makan siang', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729929833_36273e691e8717a109a1.jpeg', '2024-10-25 20:03:55', '2024-10-25 20:03:55'),
+('H13', '03', 'Makan Malam', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729929895_3acd79ef24efa42d0ad4.jpg', '2024-10-25 20:04:58', '2024-10-25 20:04:58'),
+('H14', '01', 'Sarapan', '2', 15000, '1', '1', '0', 0, 'Bisa Request', '1729930482_9973666a16a31dde1159.jpeg', '2024-10-25 20:14:44', '2024-10-25 20:14:44'),
+('H14', '02', 'Extra Bed', '1', 250000, '1', '0', '0', 5, 'Kasur Tambahan', '1729930540_c556b1165d86231b345a.jpg', '2024-10-25 20:15:42', '2024-10-25 20:15:42'),
+('H14', '03', 'Makan Siang', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729930579_c46285355b6831b83f6e.jpeg', '2024-10-25 20:16:21', '2024-10-25 20:16:21'),
+('H14', '04', 'Makan Malam', '2', 20000, '1', '1', '0', 0, 'BIsa Request', '1729930618_feae05476ecb4485033d.jpg', '2024-10-25 20:17:00', '2024-10-25 20:17:00'),
+('H14', '05', 'Bajamba', '2', 30000, '0', '1', '0', 0, 'Makan Bajamba', '1729930848_b080699b1d12b4a89bcf.jpeg', '2024-10-25 20:20:51', '2024-10-25 20:20:51');
 
 -- --------------------------------------------------------
 
@@ -909,8 +913,7 @@ CREATE TABLE `homestay_certification` (
 --
 
 INSERT INTO `homestay_certification` (`homestay_id`, `certification_id`, `certificate_name`, `certificate_num`, `certifying_agency`, `date`, `description`, `image_url`) VALUES
-('H12', '001', 'aaaa', '111', 'aaa', '2024-10-05', 'aaa', '1728133396_9210f340d84dbc9449db.png'),
-('H12', '002', 'bbb', '222', 'bbb', '2024-10-05', 'bbb', '1728132235_031fe81fdba4d90c9c3f.png');
+('H14', '001', 'CHSE STANDART', 'CH5E03399/2021', 'Mentri Pariwisata dan Ekonomi Kreatif', '2021-09-19', 'Sertifikat yang diberikan oleh Kementrian Pariwisata dan Ekonomi Kreatif / Kepala Badan Pariwisata dan Ekonomi Kreatif Republik Indonesia', '1729930091_716199ff1f02f963f6f7.jpg');
 
 -- --------------------------------------------------------
 
@@ -955,64 +958,16 @@ CREATE TABLE `homestay_facility_detail` (
 --
 
 INSERT INTO `homestay_facility_detail` (`homestay_id`, `facility_id`, `created_at`, `updated_at`) VALUES
-('H01', '01', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
-('H01', '02', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
-('H01', '03', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
-('H01', '04', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
-('H01', '05', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
-('H01', '06', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
-('H02', '01', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
-('H02', '02', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
-('H02', '03', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
-('H02', '06', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
-('H03', '01', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
-('H03', '03', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
-('H03', '05', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
-('H03', '06', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
-('H04', '01', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
-('H04', '02', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
-('H04', '03', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
-('H05', '01', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
-('H05', '02', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
-('H05', '03', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
-('H05', '05', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
-('H05', '06', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
-('H06', '01', '2024-02-26 16:24:11', '2024-02-26 16:24:11'),
-('H07', '01', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
-('H07', '02', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
-('H07', '03', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
-('H07', '04', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
-('H07', '05', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
-('H07', '06', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
-('H08', '01', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
-('H08', '02', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
-('H08', '03', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
-('H08', '04', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
-('H08', '05', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
-('H08', '06', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
-('H09', '01', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
-('H09', '02', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
-('H09', '03', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
-('H09', '05', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
-('H09', '06', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
-('H10', '01', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
-('H10', '02', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
-('H10', '03', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
-('H10', '04', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
-('H10', '06', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
-('H11', '01', '2024-02-26 19:20:24', '2024-02-26 19:20:24'),
-('H11', '06', '2024-02-26 19:20:24', '2024-02-26 19:20:24'),
-('H12', '01', '2024-09-26 05:27:13', '2024-09-26 05:27:13'),
-('H12', '06', '2024-09-26 05:27:13', '2024-09-26 05:27:13'),
-('H13', '01', '2024-09-27 22:09:00', '2024-09-27 22:09:00'),
-('H13', '04', '2024-09-27 22:09:00', '2024-09-27 22:09:00'),
-('H13', '06', '2024-09-27 22:09:00', '2024-09-27 22:09:00'),
-('H14', '02', '2024-10-09 20:18:34', '2024-10-09 20:18:34'),
-('H14', '03', '2024-10-09 20:18:34', '2024-10-09 20:18:34'),
-('H14', '04', '2024-10-09 20:18:34', '2024-10-09 20:18:34'),
-('H15', '02', '2024-10-09 21:18:21', '2024-10-09 21:18:21'),
-('H15', '03', '2024-10-09 21:18:21', '2024-10-09 21:18:21'),
-('H15', '05', '2024-10-09 21:18:21', '2024-10-09 21:18:21');
+('H12', '01', '2024-10-25 19:51:44', '2024-10-25 19:51:44'),
+('H12', '02', '2024-10-25 19:51:44', '2024-10-25 19:51:44'),
+('H12', '03', '2024-10-25 19:51:44', '2024-10-25 19:51:44'),
+('H13', '01', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
+('H13', '03', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
+('H13', '04', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
+('H13', '05', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
+('H14', '01', '2024-10-25 19:55:23', '2024-10-25 19:55:23'),
+('H14', '02', '2024-10-25 19:55:23', '2024-10-25 19:55:23'),
+('H14', '04', '2024-10-25 19:55:23', '2024-10-25 19:55:23');
 
 -- --------------------------------------------------------
 
@@ -1033,65 +988,11 @@ CREATE TABLE `homestay_gallery` (
 --
 
 INSERT INTO `homestay_gallery` (`id`, `homestay_id`, `url`, `created_at`, `updated_at`) VALUES
-('001', 'H01', '1708996942_a0187ce30534a5d19779.jpg', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
-('002', 'H01', '1708996756_23818827877eb8777f4f.jpg', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
-('003', 'H01', '1708996733_0459e7788d8cd3204108.jpg', '2024-02-26 12:22:25', '2024-02-26 12:22:25'),
-('004', 'H01', '1708996735_ad723e3380fffc979c22.jpg', '2024-02-26 12:22:26', '2024-02-26 12:22:26'),
-('005', 'H01', '1708996733_669be0e9573b4cc7bd81.jpg', '2024-02-26 12:22:26', '2024-02-26 12:22:26'),
-('006', 'H01', '1708996704_30f2c3d0080c208f327f.jpg', '2024-02-26 12:22:26', '2024-02-26 12:22:26'),
-('007', 'H02', '1709003046_136681fff32821764426.jpg', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
-('008', 'H02', '1709003048_526e1184880a0be1b510.jpg', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
-('009', 'H02', '1709003048_cea56da3bcd3e294d4ca.jpg', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
-('010', 'H02', '1709003046_fa1fd3796cf0e0a6524f.jpg', '2024-02-26 14:05:06', '2024-02-26 14:05:06'),
-('011', 'H03', '1709009913_38ec234c6c8410d8f024.jpg', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
-('012', 'H03', '1709009901_64202b8e394cc2aad90f.jpg', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
-('013', 'H03', '1709009902_7aa91ee4c6b4b7664b38.jpg', '2024-02-26 15:58:36', '2024-02-26 15:58:36'),
-('014', 'H04', '1709010307_2ab7305c50f7691a1a3c.jpg', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
-('015', 'H04', '1709010307_e958d35b54973534718a.jpg', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
-('016', 'H04', '1709010311_59592c3b76ed99cdbc40.jpg', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
-('017', 'H04', '1709010311_9a0dca992e1bdcc61496.jpg', '2024-02-26 16:06:12', '2024-02-26 16:06:12'),
-('018', 'H05', '1709010753_123aa13d80dceeebc438.jpg', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
-('019', 'H05', '1709010753_fb8b97fef7c9b5726fd6.jpg', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
-('020', 'H05', '1709010756_20509d45f03a50ec2795.jpg', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
-('021', 'H05', '1709010756_37ea35ccf9b09dd17bc2.jpg', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
-('022', 'H05', '1709010751_05d184d986687335ea72.jpg', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
-('023', 'H05', '1709010750_b848d619d4223be3749a.jpg', '2024-02-26 16:12:46', '2024-02-26 16:12:46'),
-('024', 'H06', '1709011448_819d97a6d86d3dc6294f.jpg', '2024-02-26 16:24:11', '2024-02-26 16:24:11'),
-('025', 'H07', '1709012184_96150c0d81232727ad9d.jpg', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
-('026', 'H07', '1709012157_192c3c457d626e89d983.jpg', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
-('027', 'H07', '1709012136_a35f9801b8f5f331eff8.jpg', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
-('028', 'H07', '1709012113_5c38dcf83657d231773c.jpg', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
-('029', 'H07', '1709012112_83b76692148ec9b1b9d3.jpg', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
-('030', 'H07', '1709012115_6b82af8c4149003fdf52.jpg', '2024-02-26 16:36:27', '2024-02-26 16:36:27'),
-('031', 'H08', '1709012606_c7b17b2ec7e4c265d284.jpg', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
-('032', 'H08', '1709012604_c399f4fadbeb4e943625.jpg', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
-('033', 'H08', '1709012603_8256e6540187320d4a74.jpg', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
-('034', 'H08', '1709012606_4a8028d98071cdc4dafc.jpg', '2024-02-26 16:43:34', '2024-02-26 16:43:34'),
-('035', 'H09', '1709012814_d99a10ab32c005a0c3d7.jpg', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
-('036', 'H09', '1709012811_80bd16e0bfb315386cb2.jpg', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
-('037', 'H09', '1709012811_8a5597f02c03e659b2ae.jpg', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
-('038', 'H09', '1709012813_6633d657e10d01382dcb.jpg', '2024-02-26 16:47:02', '2024-02-26 16:47:02'),
-('039', 'H10', '1709013336_9cf3df566c684739671d.jpg', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
-('040', 'H10', '1709013328_235f274ef77dad5b9707.jpg', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
-('041', 'H10', '1709013308_880ffbabd9297a05a02a.jpg', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
-('042', 'H10', '1709013312_eab8d2fd7f414955cbb7.jpg', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
-('043', 'H10', '1709013308_bba2e566121a4fd432b7.jpg', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
-('044', 'H10', '1709013311_f6a981f624467a133917.jpg', '2024-02-26 16:55:41', '2024-02-26 16:55:41'),
-('045', 'H11', '1709022020_203ac63eadbc7865792b.jpg', '2024-02-26 19:20:24', '2024-02-26 19:20:24'),
-('046', 'H11', '1709022021_0c0449818d7637b39352.jpg', '2024-02-26 19:20:24', '2024-02-26 19:20:24'),
-('047', 'H11', '1709022022_ea237737fe250c819431.jpg', '2024-02-26 19:20:24', '2024-02-26 19:20:24'),
-('048', 'H12', '1727371628_3542b44db898a7086570.png', '2024-09-26 05:27:13', '2024-09-26 05:27:13'),
-('049', 'H12', '1727371629_43f46daaeffa22ad3b94.png', '2024-09-26 05:27:13', '2024-09-26 05:27:13'),
-('050', 'H12', '1727371630_078d47c2f5afac16855d.png', '2024-09-26 05:27:13', '2024-09-26 05:27:13'),
-('051', 'H13', '1727518067_7b1f7491c7731379d7d4.png', '2024-09-27 22:09:00', '2024-09-27 22:09:00'),
-('052', 'H13', '1727518066_3a842ba3f1336f493577.png', '2024-09-27 22:09:00', '2024-09-27 22:09:00'),
-('053', 'H13', '1727518068_81cb9bae51fb9f8dddc9.png', '2024-09-27 22:09:00', '2024-09-27 22:09:00'),
-('054', 'H14', '1728548287_ce86a76caa72aab14af3.png', '2024-10-09 20:18:34', '2024-10-09 20:18:34'),
-('055', 'H14', '1728548287_5c212257adfd6b67ef5e.png', '2024-10-09 20:18:34', '2024-10-09 20:18:34'),
-('056', 'H14', '1728548290_12fabe538ec1122c3088.png', '2024-10-09 20:18:34', '2024-10-09 20:18:34'),
-('057', 'H15', '1728551896_bf82d11f54e8a838f35e.png', '2024-10-09 21:18:21', '2024-10-09 21:18:21'),
-('058', 'H15', '1728551896_3e97d91dc16f2af47130.png', '2024-10-09 21:18:21', '2024-10-09 21:18:21'),
-('059', 'H15', '1728551898_0a7e3716121ac55a3646.png', '2024-10-09 21:18:21', '2024-10-09 21:18:21');
+('008', 'H13', '1729929046_c18347296961982ed7a1.jpg', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
+('009', 'H12', '1729929097_ead6ae7d5786cb2500f4.jpg', '2024-10-25 19:51:44', '2024-10-25 19:51:44'),
+('010', 'H12', '1729929097_5bcd0c30389b4127c18f.jpg', '2024-10-25 19:51:44', '2024-10-25 19:51:44'),
+('011', 'H12', '1729929099_3045486a242c21cb0f25.jpg', '2024-10-25 19:51:44', '2024-10-25 19:51:44'),
+('012', 'H14', '1729929320_7faf6d2fa8579c1adb8b.jpg', '2024-10-25 19:55:23', '2024-10-25 19:55:23');
 
 -- --------------------------------------------------------
 
@@ -1116,32 +1017,16 @@ CREATE TABLE `homestay_unit` (
 --
 
 INSERT INTO `homestay_unit` (`homestay_id`, `unit_type`, `unit_number`, `name`, `price`, `capacity`, `description`, `created_at`, `updated_at`) VALUES
-('H01', '1', '1', 'Kamar 1', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 01:56:15', '2024-02-27 02:36:04'),
-('H01', '1', '10', 'Kamar 10', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 13:39:10', '2024-02-27 13:39:10'),
-('H01', '1', '11', 'Kamar 11', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 13:42:10', '2024-02-27 13:42:10'),
-('H01', '1', '12', 'Kamar 12', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 13:43:37', '2024-02-27 13:43:37'),
-('H01', '1', '13', 'Kamar 13', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 13:44:48', '2024-02-27 13:44:48'),
-('H01', '1', '14', 'Rumah Barbie', 600000, 8, 'This villa is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 14:28:13', '2024-02-27 14:28:13'),
-('H01', '1', '2', 'Kamar 2', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 02:49:40', '2024-02-27 02:49:40'),
-('H01', '1', '3', 'Kamar 3', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 02:51:43', '2024-02-27 02:51:43'),
-('H01', '1', '4', 'Kamar 4', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 02:54:11', '2024-02-27 02:54:11'),
-('H01', '1', '5', 'Kamar 5', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 02:56:21', '2024-02-27 02:56:21'),
-('H01', '1', '6', 'Kamar 6', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 02:58:49', '2024-02-27 02:58:49'),
-('H01', '1', '7', 'Kamar 7', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 03:01:02', '2024-02-27 03:01:02'),
-('H01', '1', '8', 'Kamar 8', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 13:36:04', '2024-02-27 13:36:04'),
-('H01', '1', '9', 'Kamar 9', 350000, 3, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 13:37:49', '2024-02-27 13:37:49'),
-('H02', '1', '1', 'Kamar 1', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 20:58:10', '2024-02-27 20:58:10'),
-('H02', '1', '2', 'Kamar 2', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:00:43', '2024-02-27 21:00:43'),
-('H02', '1', '3', 'Kamar 3', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:01:09', '2024-02-27 21:01:09'),
-('H02', '1', '4', 'Kamar 4', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:02:08', '2024-02-27 21:02:08'),
-('H02', '1', '5', 'Kamar 5', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:02:52', '2024-02-27 21:02:52'),
-('H02', '1', '6', 'Kamar 6', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:11:35', '2024-02-27 21:11:35'),
-('H02', '1', '7', 'Kamar 7', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:12:31', '2024-02-27 21:12:31'),
-('H02', '1', '8', 'Kamar 8', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:13:30', '2024-02-27 21:13:30'),
-('H02', '1', '9', 'Kamar 9 ', 350000, 2, 'This homestay room is a comfortable place to rest during your holiday. With simple but attractive decoration, this room is equipped with a comfortable bed and is clean', '2024-02-27 21:14:30', '2024-02-27 21:14:30'),
-('H12', '1', '1', 'Kamar 1', 100000, 2, NULL, '2024-09-29 01:05:21', '2024-09-29 01:05:21'),
-('H12', '1', '2', 'Kamar 2', 200000, 2, NULL, '2024-09-29 01:05:52', '2024-09-29 01:05:52'),
-('H12', '1', '3', 'Kamar 3', 150000, 2, NULL, '2024-09-29 01:06:32', '2024-09-29 01:06:32');
+('H12', '1', '1', 'Kamar 1', 350000, 2, 'Kamar 1', '2024-09-29 01:05:21', '2024-10-25 07:09:53'),
+('H12', '1', '2', 'Kamar 2', 349999, 2, 'Kamar 2', '2024-09-29 01:05:52', '2024-10-25 07:25:39'),
+('H12', '1', '3', 'Kamar 3', 350000, 2, 'Kamar 3', '2024-09-29 01:06:32', '2024-10-25 07:28:50'),
+('H12', '1', '4', 'Kamar 4', 350000, 2, 'Kamar 4', '2024-10-25 07:29:25', '2024-10-25 07:31:40'),
+('H12', '1', '5', 'Kamar 5', 350000, 2, 'Kamar 5', '2024-10-25 07:29:37', '2024-10-25 07:32:05'),
+('H13', '1', '1', 'Kamar 1', 400000, 2, 'Free breakfast', '2024-10-25 20:00:05', '2024-10-25 20:00:05'),
+('H13', '1', '2', 'Kamar 2', 400000, 2, 'Free breakfast', '2024-10-25 20:01:19', '2024-10-25 20:01:19'),
+('H13', '1', '3', 'Kamar 3', 400000, 2, 'Free breakfast', '2024-10-25 20:02:05', '2024-10-25 20:02:05'),
+('H14', '1', '1', 'Kamar 1', 300000, 2, 'Kamar 1', '2024-10-25 20:11:07', '2024-10-25 20:12:32'),
+('H14', '1', '2', 'Kamar 2', 300000, 2, 'Kamar 2', '2024-10-25 20:14:01', '2024-10-25 20:14:01');
 
 -- --------------------------------------------------------
 
@@ -1167,7 +1052,8 @@ INSERT INTO `homestay_unit_facility` (`id`, `name`, `created_at`, `updated_at`) 
 ('05', 'Refridgerator', '2023-12-07 15:00:07', '2024-02-27 02:40:01'),
 ('06', 'Toilet', '2024-02-27 01:58:47', '2024-02-27 01:58:47'),
 ('07', 'Bed', '2024-02-27 02:00:17', '2024-02-27 02:00:17'),
-('08', 'Fan', '2024-02-27 20:59:04', '2024-02-27 20:59:04');
+('08', 'Fan', '2024-02-27 20:59:04', '2024-02-27 20:59:04'),
+('09', 'Wardrobe', '2024-10-25 07:20:38', '2024-10-25 07:27:37');
 
 -- --------------------------------------------------------
 
@@ -1190,44 +1076,36 @@ CREATE TABLE `homestay_unit_facility_detail` (
 --
 
 INSERT INTO `homestay_unit_facility_detail` (`homestay_id`, `unit_type`, `unit_number`, `facility_id`, `description`, `created_at`, `updated_at`) VALUES
-('H01', '1', '1', '06', 'toilet in room', '2024-02-27 02:39:15', '2024-02-27 02:39:15'),
-('H01', '1', '1', '07', '1 single bed, 1 double bed', '2024-02-27 02:37:17', '2024-02-27 02:37:17'),
-('H01', '1', '10', '06', 'toilet in room', '2024-02-27 13:39:49', '2024-02-27 13:39:49'),
-('H01', '1', '10', '07', '1 single bed, 1 double bed', '2024-02-27 13:39:31', '2024-02-27 13:39:31'),
-('H01', '1', '11', '06', 'toilet in room', '2024-02-27 13:42:57', '2024-02-27 13:42:57'),
-('H01', '1', '11', '07', '1 single bed, 1 double bed', '2024-02-27 13:42:41', '2024-02-27 13:42:41'),
-('H01', '1', '12', '06', 'toilet in room', '2024-02-27 13:43:55', '2024-02-27 13:43:55'),
-('H01', '1', '12', '07', '1 single bed, 1 double bed', '2024-02-27 13:44:08', '2024-02-27 13:44:08'),
-('H01', '1', '2', '06', 'toilet in room', '2024-02-27 02:50:11', '2024-02-27 02:50:11'),
-('H01', '1', '2', '07', '1 single bed, 1 double bed', '2024-02-27 02:50:37', '2024-02-27 02:50:37'),
-('H01', '1', '3', '06', 'toilet in room', '2024-02-27 02:52:57', '2024-02-27 02:52:57'),
-('H01', '1', '3', '07', '1 single bed, 1 double bed', '2024-02-27 02:52:39', '2024-02-27 02:52:39'),
-('H01', '1', '4', '06', 'toilet in room', '2024-02-27 02:55:18', '2024-02-27 02:55:18'),
-('H01', '1', '4', '07', '1 single bed, 1 double bed', '2024-02-27 02:55:34', '2024-02-27 02:55:34'),
-('H01', '1', '5', '06', 'toilet in room', '2024-02-27 02:56:41', '2024-02-27 02:56:41'),
-('H01', '1', '5', '07', '1 single bed, 1 double bed', '2024-02-27 02:56:58', '2024-02-27 02:56:58'),
-('H01', '1', '6', '06', 'toilet in room', '2024-02-27 02:59:46', '2024-02-27 02:59:46'),
-('H01', '1', '6', '07', '1 single bed, 1 double bed', '2024-02-27 02:59:19', '2024-02-27 02:59:19'),
-('H01', '1', '7', '06', 'toilet in room', '2024-02-27 03:01:35', '2024-02-27 03:01:35'),
-('H01', '1', '7', '07', '1 single bed, 1 double bed', '2024-02-27 03:01:22', '2024-02-27 03:01:22'),
-('H01', '1', '8', '06', 'toilet in room', '2024-02-27 13:36:24', '2024-02-27 13:36:24'),
-('H01', '1', '8', '07', '1 single bed, 1 double bed', '2024-02-27 13:36:46', '2024-02-27 13:36:46'),
-('H01', '1', '9', '06', 'toilet in room', '2024-02-27 13:40:04', '2024-02-27 13:40:04'),
-('H01', '1', '9', '07', '1 single bed, 1 double bed', '2024-02-27 13:40:19', '2024-02-27 13:40:19'),
-('H02', '1', '1', '07', 'Double bed', '2024-02-27 20:59:32', '2024-02-27 20:59:32'),
-('H02', '1', '1', '08', NULL, '2024-02-27 20:59:52', '2024-02-27 20:59:52'),
-('H02', '1', '3', '07', 'Double bed', '2024-02-27 21:01:23', '2024-02-27 21:01:23'),
-('H02', '1', '3', '08', NULL, '2024-02-27 21:01:32', '2024-02-27 21:01:32'),
-('H02', '1', '4', '07', 'Double bed', '2024-02-27 21:03:49', '2024-02-27 21:03:49'),
-('H02', '1', '4', '08', NULL, '2024-02-27 21:03:57', '2024-02-27 21:03:57'),
-('H02', '1', '5', '07', 'Double bed', '2024-02-27 21:03:09', '2024-02-27 21:03:09'),
-('H02', '1', '5', '08', NULL, '2024-02-27 21:03:16', '2024-02-27 21:03:16'),
-('H02', '1', '6', '07', 'Double bed', '2024-02-27 21:11:52', '2024-02-27 21:11:52'),
-('H02', '1', '6', '08', NULL, '2024-02-27 21:12:00', '2024-02-27 21:12:00'),
-('H02', '1', '7', '07', 'Double bed', '2024-02-27 21:12:44', '2024-02-27 21:12:44'),
-('H02', '1', '7', '08', NULL, '2024-02-27 21:12:52', '2024-02-27 21:12:52'),
-('H02', '1', '8', '07', 'Double bed', '2024-02-27 21:13:46', '2024-02-27 21:13:46'),
-('H02', '1', '8', '08', NULL, '2024-02-27 21:13:56', '2024-02-27 21:13:56');
+('H12', '1', '1', '07', NULL, '2024-10-25 07:10:23', '2024-10-25 07:10:23'),
+('H12', '1', '1', '08', NULL, '2024-10-25 07:11:28', '2024-10-25 07:11:28'),
+('H12', '1', '1', '09', NULL, '2024-10-25 07:26:10', '2024-10-25 07:26:10'),
+('H12', '1', '2', '07', NULL, '2024-10-25 07:25:47', '2024-10-25 07:25:47'),
+('H12', '1', '2', '08', NULL, '2024-10-25 07:25:59', '2024-10-25 07:25:59'),
+('H12', '1', '2', '09', NULL, '2024-10-25 07:25:54', '2024-10-25 07:25:54'),
+('H12', '1', '3', '07', NULL, '2024-10-25 07:28:04', '2024-10-25 07:28:04'),
+('H12', '1', '3', '08', NULL, '2024-10-25 07:28:07', '2024-10-25 07:28:07'),
+('H12', '1', '3', '09', NULL, '2024-10-25 07:28:12', '2024-10-25 07:28:12'),
+('H12', '1', '4', '07', NULL, '2024-10-25 07:31:49', '2024-10-25 07:31:49'),
+('H12', '1', '4', '08', NULL, '2024-10-25 07:31:45', '2024-10-25 07:31:45'),
+('H12', '1', '4', '09', NULL, '2024-10-25 07:31:54', '2024-10-25 07:31:54'),
+('H12', '1', '5', '07', NULL, '2024-10-25 07:29:42', '2024-10-25 07:29:42'),
+('H12', '1', '5', '08', NULL, '2024-10-25 07:29:49', '2024-10-25 07:29:49'),
+('H12', '1', '5', '09', NULL, '2024-10-25 07:29:53', '2024-10-25 07:29:53'),
+('H13', '1', '1', '06', 'Shower', '2024-10-25 20:00:41', '2024-10-25 20:00:41'),
+('H13', '1', '1', '07', 'King Size\r\n', '2024-10-25 20:00:25', '2024-10-25 20:00:25'),
+('H13', '1', '1', '09', NULL, '2024-10-25 20:00:29', '2024-10-25 20:00:29'),
+('H13', '1', '2', '06', 'Shower', '2024-10-25 20:01:29', '2024-10-25 20:01:29'),
+('H13', '1', '2', '07', 'King Size', '2024-10-25 20:01:38', '2024-10-25 20:01:38'),
+('H13', '1', '2', '09', NULL, '2024-10-25 20:01:42', '2024-10-25 20:01:42'),
+('H13', '1', '3', '06', 'Shower', '2024-10-25 20:02:25', '2024-10-25 20:02:25'),
+('H13', '1', '3', '07', 'King Size', '2024-10-25 20:02:13', '2024-10-25 20:02:13'),
+('H13', '1', '3', '09', NULL, '2024-10-25 20:02:19', '2024-10-25 20:02:19'),
+('H14', '1', '1', '06', NULL, '2024-10-25 20:12:43', '2024-10-25 20:12:43'),
+('H14', '1', '1', '07', NULL, '2024-10-25 20:11:20', '2024-10-25 20:11:20'),
+('H14', '1', '1', '09', NULL, '2024-10-25 20:11:16', '2024-10-25 20:11:16'),
+('H14', '1', '2', '06', NULL, '2024-10-25 20:14:07', '2024-10-25 20:14:07'),
+('H14', '1', '2', '07', NULL, '2024-10-25 20:14:17', '2024-10-25 20:14:17'),
+('H14', '1', '2', '09', NULL, '2024-10-25 20:14:13', '2024-10-25 20:14:13');
 
 -- --------------------------------------------------------
 
@@ -1250,50 +1128,16 @@ CREATE TABLE `homestay_unit_gallery` (
 --
 
 INSERT INTO `homestay_unit_gallery` (`id`, `homestay_id`, `unit_type`, `unit_number`, `url`, `created_at`, `updated_at`) VALUES
-('001', 'H01', '1', '1', '1709048137_33da4cd2457d45d6753f.jpg', '2024-02-27 02:36:04', '2024-02-27 02:36:04'),
-('002', 'H01', '1', '1', '1709048136_f4828cd6163e17399e0a.jpg', '2024-02-27 02:36:04', '2024-02-27 02:36:04'),
-('003', 'H01', '1', '2', '1709048959_a639287ae4825fa670c1.jpg', '2024-02-27 02:49:41', '2024-02-27 02:49:41'),
-('004', 'H01', '1', '2', '1709048941_7ab7c9172b40439ad887.jpg', '2024-02-27 02:49:41', '2024-02-27 02:49:41'),
-('005', 'H01', '1', '3', '1709049101_4e58552968da3d2aacb4.jpg', '2024-02-27 02:51:43', '2024-02-27 02:51:43'),
-('006', 'H01', '1', '3', '1709049092_c731f125bfd623c1bb31.jpg', '2024-02-27 02:51:43', '2024-02-27 02:51:43'),
-('007', 'H01', '1', '4', '1709049246_2eb0c8f50bbe8ed7fe07.jpg', '2024-02-27 02:54:11', '2024-02-27 02:54:11'),
-('008', 'H01', '1', '4', '1709049236_3d72adadc95e451e0aa5.jpg', '2024-02-27 02:54:11', '2024-02-27 02:54:11'),
-('009', 'H01', '1', '5', '1709049379_a0ab403704768fe12008.jpg', '2024-02-27 02:56:21', '2024-02-27 02:56:21'),
-('010', 'H01', '1', '6', '1709049526_05e84963f460200fb9ed.jpg', '2024-02-27 02:58:49', '2024-02-27 02:58:49'),
-('011', 'H01', '1', '6', '1709049517_7cf01fd8a1b057ec0d67.jpg', '2024-02-27 02:58:49', '2024-02-27 02:58:49'),
-('012', 'H01', '1', '7', '1709049658_2dd9b63de577f65f2be7.jpg', '2024-02-27 03:01:02', '2024-02-27 03:01:02'),
-('013', 'H01', '1', '7', '1709049650_9763ebc12c88a6d0a6be.jpg', '2024-02-27 03:01:02', '2024-02-27 03:01:02'),
-('014', 'H01', '1', '8', '1709087762_8c322c07fbb8715a6c16.jpg', '2024-02-27 13:36:05', '2024-02-27 13:36:05'),
-('015', 'H01', '1', '9', '1709087866_d45d26763fc16c4b5221.jpg', '2024-02-27 13:37:49', '2024-02-27 13:37:49'),
-('016', 'H01', '1', '9', '1709087857_eb25ebd9258f1a26e023.jpg', '2024-02-27 13:37:49', '2024-02-27 13:37:49'),
-('017', 'H01', '1', '10', '1709087947_b581c478dd5447dcc977.jpg', '2024-02-27 13:39:10', '2024-02-27 13:39:10'),
-('018', 'H01', '1', '10', '1709087935_58eaa6d4557ca3b2efd7.jpg', '2024-02-27 13:39:10', '2024-02-27 13:39:10'),
-('019', 'H01', '1', '11', '1709088128_3cce2f9c10e18c639b46.jpg', '2024-02-27 13:42:10', '2024-02-27 13:42:10'),
-('020', 'H01', '1', '11', '1709088121_060e6b763bb9c2103c78.jpg', '2024-02-27 13:42:10', '2024-02-27 13:42:10'),
-('021', 'H01', '1', '12', '1709088215_2e2f53467cca2fa7913f.jpg', '2024-02-27 13:43:37', '2024-02-27 13:43:37'),
-('022', 'H01', '1', '12', '1709088210_e929bf3e5f0a9de6002f.jpg', '2024-02-27 13:43:37', '2024-02-27 13:43:37'),
-('023', 'H01', '1', '13', '1709088285_18320006cf92743d41a5.jpg', '2024-02-27 13:44:48', '2024-02-27 13:44:48'),
-('024', 'H01', '1', '14', '1709090887_7bcaf37569300e0ea0d3.jpg', '2024-02-27 14:28:13', '2024-02-27 14:28:13'),
-('025', 'H01', '1', '14', '1709090818_eb933525341cffa99209.jpg', '2024-02-27 14:28:13', '2024-02-27 14:28:13'),
-('026', 'H01', '1', '14', '1709090807_7f4892280beb29e29565.jpg', '2024-02-27 14:28:13', '2024-02-27 14:28:13'),
-('027', 'H01', '1', '14', '1709090806_e32135f2176fd80b698a.jpg', '2024-02-27 14:28:13', '2024-02-27 14:28:13'),
-('028', 'H01', '1', '14', '1709090808_ac04f57d00c9b6512a8e.jpg', '2024-02-27 14:28:13', '2024-02-27 14:28:13'),
-('029', 'H02', '1', '1', '1709114288_fbcd38b91d0eaa988aaf.jpg', '2024-02-27 20:58:10', '2024-02-27 20:58:10'),
-('030', 'H02', '1', '3', '1709114466_53ec48de09dcce5be4c9.jpg', '2024-02-27 21:01:09', '2024-02-27 21:01:09'),
-('031', 'H02', '1', '4', '1709114525_68d14ad42431ebf669dd.jpg', '2024-02-27 21:02:08', '2024-02-27 21:02:08'),
-('032', 'H02', '1', '5', '1709114569_c7c42f2f1b61d3cf5506.jpg', '2024-02-27 21:02:52', '2024-02-27 21:02:52'),
-('033', 'H02', '1', '5', '1709114569_d516b2cba42f8ccd5b81.jpg', '2024-02-27 21:02:52', '2024-02-27 21:02:52'),
-('034', 'H02', '1', '2', '1709114525_68d14ad42431ebf669dd.jpg', NULL, NULL),
-('035', 'H02', '1', '6', '1709115093_c8f85854a59c47400402.jpg', '2024-02-27 21:11:35', '2024-02-27 21:11:35'),
-('036', 'H02', '1', '7', '1709115149_d0b5039619b5aedce3b2.jpg', '2024-02-27 21:12:31', '2024-02-27 21:12:31'),
-('037', 'H02', '1', '8', '1709115208_635d071e0621807372b0.jpg', '2024-02-27 21:13:30', '2024-02-27 21:13:30'),
-('038', 'H02', '1', '9', '1709115268_fa9e6da631963f15a510.jpg', '2024-02-27 21:14:30', '2024-02-27 21:14:30'),
-('039', 'H12', '1', '1', '1727615118_f2516067a8b74a009b0f.png', '2024-09-29 01:05:21', '2024-09-29 01:05:21'),
-('040', 'H12', '1', '1', '1727615118_6c476410ff00a155fcd1.png', '2024-09-29 01:05:21', '2024-09-29 01:05:21'),
-('041', 'H12', '1', '2', '1727615149_b031537f8d8f3ad0b4a3.png', '2024-09-29 01:05:52', '2024-09-29 01:05:52'),
-('042', 'H12', '1', '2', '1727615150_5d82169020b981420316.png', '2024-09-29 01:05:52', '2024-09-29 01:05:52'),
-('043', 'H12', '1', '3', '1727615187_d2b8c00e51de9750d277.png', '2024-09-29 01:06:32', '2024-09-29 01:06:32'),
-('044', 'H12', '1', '3', '1727615187_b09a9153ab96b6a162d9.png', '2024-09-29 01:06:32', '2024-09-29 01:06:32');
+('045', 'H12', '1', '1', '1729883391_f5b3347ad1ee53cd3e8a.jpg', '2024-10-25 07:09:53', '2024-10-25 07:09:53'),
+('046', 'H12', '1', '2', '1729884332_38e77dd9f6e2ababa105.jpg', '2024-10-25 07:25:39', '2024-10-25 07:25:39'),
+('047', 'H12', '1', '3', '1729884519_7293299c49c0176a2795.jpg', '2024-10-25 07:28:50', '2024-10-25 07:28:50'),
+('049', 'H12', '1', '4', '1729884698_014796f4f33265b8c372.jpg', '2024-10-25 07:31:40', '2024-10-25 07:31:40'),
+('050', 'H12', '1', '5', '1729884721_2a623bb00849724309d6.jpg', '2024-10-25 07:32:05', '2024-10-25 07:32:05'),
+('051', 'H13', '1', '1', '1729929602_f121029ca16bd5e91ef4.jpg', '2024-10-25 20:00:05', '2024-10-25 20:00:05'),
+('052', 'H13', '1', '2', '1729929677_e8fcf9c699dc2f2d9c40.jpeg', '2024-10-25 20:01:19', '2024-10-25 20:01:19'),
+('053', 'H13', '1', '3', '1729929722_c5173c0859b6a60b9266.jpeg', '2024-10-25 20:02:05', '2024-10-25 20:02:05'),
+('054', 'H14', '1', '1', '1729930348_3313b6e7273fc7ec409b.jpg', '2024-10-25 20:12:32', '2024-10-25 20:12:32'),
+('055', 'H14', '1', '2', '1729930439_d61518894390505b60df.jpeg', '2024-10-25 20:14:01', '2024-10-25 20:14:01');
 
 -- --------------------------------------------------------
 
@@ -1448,12 +1292,16 @@ INSERT INTO `reservation` (`id`, `customer_id`, `request_date`, `check_in`, `tot
 ('R018', 11, '2024-10-11 19:43:53', '2024-10-18 14:00:00', 3, NULL, NULL, 300000, 60000, 'Deposit Successful', '6adcf2de-e03a-4d34-8e0a-8386a3fd6122', NULL, '2024-10-11 12:44:00', '0', '2024-10-11 12:44:11', '', '2024-10-11 12:44:00', '1', '1', '2024-10-11 12:45:51', 'Dika - Bank ABC - 12345678', '1728650749_b4956a3c25ffc50fdb89.jpg', '1', '2024-10-11 12:46:09'),
 ('R019', 11, '2024-10-11 19:55:11', '2024-10-11 14:00:00', 5, NULL, NULL, 600000, 120000, '1', 'c99df471-3896-4fe0-86b2-ea1f7dbe3937', NULL, '2024-10-11 12:55:18', '0', '2024-10-11 12:55:34', '', '2024-10-11 12:57:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
 ('R020', 11, '2024-10-11 19:57:46', '2024-10-11 14:00:00', 5, NULL, NULL, 600000, 120000, 'Deposit Successful', 'cd0ee0ad-a683-4789-8482-64b968721e80', '47366abc-d256-432d-9b9e-a4027ee6fbe7', '2024-10-11 12:57:53', '0', '2024-10-11 12:58:14', '', '2024-10-11 12:59:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
-('R021', 11, '2024-10-14 12:13:35', '2024-10-18 14:00:00', 2, NULL, NULL, 150000, 30000, 'Deposit Successful', NULL, NULL, '2024-10-14 05:13:43', '0', '2024-10-14 05:14:49', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R021', 11, '2024-10-14 12:13:35', '2024-10-18 14:00:00', 2, NULL, NULL, 150000, 30000, 'Deposit Successful', NULL, NULL, '2024-10-14 05:13:43', '0', '2024-10-14 05:14:49', '', '2024-10-21 14:21:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
 ('R022', 11, '2024-10-14 12:15:48', '2024-10-19 14:00:00', 2, NULL, NULL, 100000, 20000, 'Full Pay Successful', NULL, NULL, '2024-10-14 05:15:53', '0', '2024-10-14 05:16:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('R023', 11, '2024-10-14 12:16:38', '2024-10-19 14:00:00', 2, NULL, NULL, 200000, 40000, 'Full Pay Successful', NULL, NULL, '2024-10-14 05:16:43', '0', '2024-10-14 05:16:58', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('R024', 11, '2024-10-14 18:24:24', '2024-10-12 14:00:00', 3, '', 4, 250000, 50000, 'Done', '7aa3b21e-431e-4dba-9d61-306902c1781a', '1a47ed95-4544-464d-bc00-90d71d1c4b97', '2024-10-14 11:25:31', '0', '2024-10-14 11:26:01', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('R025', 11, '2024-10-14 18:42:36', '2024-10-20 14:00:00', 3, NULL, NULL, 400000, 80000, 'Deposit Successful', '36d6cb5a-8370-4db5-b724-7af3c77c2322', NULL, '2024-10-14 11:42:55', '0', '2024-10-14 11:43:14', '', '2024-10-14 11:45:00', '1', '1', '2024-10-14 11:47:45', 'Wawan - Bank CAB - 69696969', '1728906462_81e712e85c31e9c4bacd.jpg', '1', '2024-10-14 11:48:15'),
-('R026', 11, '2024-10-14 18:49:16', '2024-10-12 14:00:00', 3, NULL, NULL, 100000, 20000, '1', '985d0337-858c-43e1-b76d-a5c617746694', NULL, '2024-10-14 11:49:21', '0', '2024-10-14 11:49:36', '', '2024-10-14 11:50:00', '2', '0', NULL, NULL, NULL, NULL, NULL);
+('R026', 11, '2024-10-14 18:49:16', '2024-10-12 14:00:00', 3, NULL, NULL, 100000, 20000, '1', '985d0337-858c-43e1-b76d-a5c617746694', NULL, '2024-10-14 11:49:21', '0', '2024-10-14 11:49:36', '', '2024-10-14 11:50:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R027', 11, '2024-10-14 20:47:57', '2024-10-20 14:00:00', 2, NULL, NULL, 300000, 60000, 'Full Pay Successful', '7bf4ba9e-58ee-4923-8b9a-f2c1dcd04077', '818786ed-9c35-4397-883b-6d3c511ceefc', '2024-10-14 13:48:40', '0', '2024-10-14 13:48:48', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R028', 11, '2024-10-21 21:21:53', '2024-10-20 14:00:00', 2, 'mantap', 5, 300000, 60000, 'Done', '649e8678-240a-4860-839c-8a185389ab5c', '285a8c3e-fb15-4f52-9734-a97cf83d69d6', '2024-10-21 14:22:10', '0', '2024-10-21 14:22:29', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R029', 11, '2024-10-26 15:43:29', '2024-10-23 14:00:00', 2, 'bagus', 5, 840000, 168000, 'Done', '785c69af-5675-4a5c-8b7c-5adcdf4bd0ce', '8bc0f8f6-4246-4262-9712-baf745cf99fb', '2024-10-26 08:43:52', '0', '2024-10-26 08:44:07', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R030', 11, '2024-10-26 17:07:52', '2024-10-31 14:00:00', 4, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-10-26 10:08:15', '1', '2024-10-26 10:08:39', '', '2024-10-30 09:45:00', '2', '0', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1478,7 +1326,7 @@ CREATE TABLE `reservation_homestay_additional_amenities_detail` (
 
 INSERT INTO `reservation_homestay_additional_amenities_detail` (`homestay_id`, `additional_amenities_id`, `reservation_id`, `day_order`, `person_order`, `room_order`, `total_order`, `total_price`) VALUES
 ('H12', '01', 'R024', 0, 0, 0, 1, 100000),
-('H12', '02', 'R025', 0, 3, 0, 3, 300000);
+('H13', '02', 'R029', 1, 2, 0, 2, 40000);
 
 -- --------------------------------------------------------
 
@@ -1505,10 +1353,13 @@ INSERT INTO `reservation_homestay_unit_detail` (`homestay_id`, `unit_type`, `uni
 ('H12', '1', '2', '2024-10-18', 'R016'),
 ('H12', '1', '3', '2024-10-16', 'R017'),
 ('H12', '1', '3', '2024-10-17', 'R017'),
-('H12', '1', '3', '2024-10-18', 'R021'),
 ('H12', '1', '1', '2024-10-19', 'R022'),
 ('H12', '1', '2', '2024-10-19', 'R023'),
-('H12', '1', '3', '2024-10-19', 'R024');
+('H12', '1', '3', '2024-10-19', 'R024'),
+('H12', '1', '1', '2024-10-20', 'R027'),
+('H12', '1', '1', '2024-10-25', 'R028'),
+('H13', '1', '1', '2024-10-29', 'R029'),
+('H13', '1', '1', '2024-10-30', 'R029');
 
 -- --------------------------------------------------------
 
@@ -1539,8 +1390,10 @@ INSERT INTO `reservation_homestay_unit_detail_backup` (`homestay_id`, `unit_type
 ('H12', '1', '1', 'R020', '2024-10-15'),
 ('H12', '1', '2', 'R020', '2024-10-14'),
 ('H12', '1', '2', 'R020', '2024-10-15'),
+('H12', '1', '3', 'R021', '2024-10-18'),
 ('H12', '1', '1', 'R025', '2024-10-20'),
-('H12', '1', '1', 'R026', '2024-10-20');
+('H12', '1', '1', 'R026', '2024-10-20'),
+('H12', '1', '1', 'R030', '2024-10-31');
 
 -- --------------------------------------------------------
 
@@ -1570,11 +1423,8 @@ CREATE TABLE `souvenir_place` (
 --
 
 INSERT INTO `souvenir_place` (`id`, `village_id`, `name`, `address`, `employee_name`, `phone`, `open`, `close`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('S1', NULL, 'Wida Gallery 99 Sarasah Bunta', 'Tarantang village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Wida', '082344125645', '10:00:00', '18:00:00', 0xe61000000103000000010000000500000086127dfd3a2b59400c2bed4b08e9bbbf8512fdf43b2b5940e17ff24bdbe8bbbf86127d0b3c2b5940517b374b02efbbbf8612bd083b2b5940232c424ba8eebbbf86127dfd3a2b59400c2bed4b08e9bbbf, '-0.10906880', '100.67550766', 'Selamat datang di Wida Gallery 99, destinasi yang memukau untuk menemukan cinderamata istimewa, yang terletak di dekat Sarasah Bunta! Wida Gallery 99 merupakan surga bagi para pencinta souvenir, menawarkan pengalaman berbelanja yang tak terlupakan di tengah-tengah keindahan lokal yang khas.', '2023-12-01 21:13:53', '2023-12-01 23:15:15'),
-('S2', NULL, 'Harau Collection & Souvenir', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Iwan', '082267348821', '10:00:00', '18:00:00', 0xe610000001030000000100000006000000fa7e921d732a5940edfd04e0c8febcbffa7e0215752a59402e0a0a80a1febcbffa7e1223752a594030bc775f1703bdbffb7ed228732a59407f346c5f7103bdbffa7e921d732a5940edfd04e0c8febcbffa7e921d732a5940edfd04e0c8febcbf, '-0.11329707', '100.66333778', 'Selamat datang di Harau Collection & Souvenir, destinasi yang memukau untuk menemukan cinderamata istimewa, yang terletak di Lembah Harau. Harau Collection & Souvenir merupakan surga bagi para pencinta souvenir, menawarkan pengalaman berbelanja yang tak terlupakan di tengah-tengah keindahan lokal yang khas.', '2023-12-01 23:44:52', '2023-12-01 23:45:32'),
-('S3', NULL, 'Harau Cell & Fashion', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Andi', '082211213349', '10:00:00', '18:00:00', 0xe610000001030000000100000006000000df514b7e4b2b5940b3e53046e1e0bbbfdd51b3524b2b594083f9ae252ae5bbbfdd5173554c2b5940c44d94250be6bbbfdd51f36b4c2b594095961926a6e1bbbfdf51b3ac4b2b5940dd902b460ee1bbbfdf514b7e4b2b5940b3e53046e1e0bbbf, '-0.10893954', '100.67650588', 'Harau Cell & Fashion bukan hanya sekadar toko, melainkan pusat inspirasi yang memadukan kecantikan budaya dan fesyen terkini. Dengan atmosfer yang ramah dan penuh semangat, setiap pengunjung diundang untuk menjelajahi koleksi souvenir yang dipilih dengan cermat dan penuh cinta.', '2023-12-02 00:16:18', '2023-12-02 00:17:47'),
-('S4', NULL, 'Sarasah Bunta Garden', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 'Wan', '081287723412', '09:00:00', '18:00:00', 0xe61000000103000000010000000500000038c2b2224d2b5940e301fbf550e7bbbf37c2f2684e2b59407c50d0f5b8e8bbbf37c2f20e4e2b5940757455f5c3ecbbbf38c272ea4c2b5940d83990f5d4eabbbf38c2b2224d2b5940e301fbf550e7bbbf, '-0.10903993', '100.67661517', 'Sarasah Bunta Garden bagaikan oase yang memelihara tanaman-tanaman endemik yang tumbuh subur di kawasan ini. Setiap sudut taman dipenuhi dengan keindahan alami dan aroma harum dari berbagai jenis tanaman yang khas. Dari flora yang langka hingga tanaman hias yang menawan, setiap pot dan wadah dipilih dengan hati untuk memamerkan keunikan dan keindahan masing-masing.', '2023-12-02 00:44:34', '2023-12-02 00:44:34'),
-('S5', '1', 'Toko Souvenir 1', 'aaa', 'zaki', '081270263970', '00:00:00', '23:59:00', 0xe6100000010300000001000000070000007988e2ffaa1f59403c4a9bf454afdcbf7a88829aac1f59407dd847367faedcbf7b88a26aad1f5940ca9b3d5303b0dcbf7a884235ac1f59409ab501d2a0b0dcbf7a884208ac1f59404f83c13241b0dcbf7a882292ab1f594044b0507279b0dcbf7988e2ffaa1f59403c4a9bf454afdcbf, '-0.44821549', '100.49488575', 'aaa', '2024-10-09 20:24:44', '2024-10-09 20:24:44');
+('S1', '1', 'Galeri Seni', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putri', '085267256677', '09:00:00', '18:00:00', 0xe610000001030000000100000005000000f91c9feb981f5940b693dd870756ddbff91c9f539a1f594090ba82c8b855ddbff91c5f759a1f59400d3d9306a556ddbffa1cff3f991f594098a50586e856ddbff91c9feb981f5940b693dd870756ddbf, -0.45839325, 100.49375546, 'Galeri Seni merupakan sebuah toko souvenir di Nagari Tuo Pariangan. Galeri Seni menjual berbagai macam sovenir khas dari Nagari Tuo Pariangan.', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
+('S2', '1', 'Rumah UKM Batik Nagari Tuo Pariangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Martini', '081266124955', '21:00:00', '06:00:00', 0xe610000001030000000100000006000000bb04dbc2681f59403dbd097af00addbfbc043bf8691f59402b655f7ed408ddbfbc04fb276b1f59409c9d259ef008ddbfba04fb086c1f5940c77b3e1d6109ddbfbc041bbd6a1f5940961124b8dc0bddbfbb04dbc2681f59403dbd097af00addbf, -0.45375648, 100.49086903, 'Rumah UKM Batik Nagari Tuo Pariangan merupakan sebuah UMKM yang membuat batik khas Nagari Tuo Pariangan', '2024-10-25 04:04:07', '2024-10-25 04:04:07');
 
 -- --------------------------------------------------------
 
@@ -1595,19 +1445,14 @@ CREATE TABLE `souvenir_place_gallery` (
 --
 
 INSERT INTO `souvenir_place_gallery` (`id`, `souvenir_place_id`, `url`, `created_at`, `updated_at`) VALUES
-('001', 'S1', 'S1-1.jpg', '2023-12-01 23:15:16', '2023-12-01 23:15:16'),
-('002', 'S1', 'S1-2.jpg', '2023-12-01 23:15:16', '2023-12-01 23:15:16'),
-('003', 'S2', 'S2-1.jpg', '2023-12-01 23:45:32', '2023-12-01 23:45:32'),
-('004', 'S2', 'S2-2.jpg', '2023-12-01 23:45:32', '2023-12-01 23:45:32'),
-('005', 'S2', 'S2-3.jpg', '2023-12-01 23:45:32', '2023-12-01 23:45:32'),
-('006', 'S3', 'S3-1.jpg', '2023-12-02 00:17:47', '2023-12-02 00:17:47'),
-('007', 'S3', 'S3-2.jpg', '2023-12-02 00:17:47', '2023-12-02 00:17:47'),
-('008', 'S4', 'S4-1.jpg', '2023-12-02 00:44:34', '2023-12-02 00:44:34'),
-('009', 'S4', 'S4-2.jpg', '2023-12-02 00:44:34', '2023-12-02 00:44:34'),
-('010', 'S4', 'S4-3.jpg', '2023-12-02 00:44:34', '2023-12-02 00:44:34'),
-('011', 'S5', '1728548650_1751cd36aa1dc9d527a8.png', '2024-10-09 20:24:44', '2024-10-09 20:24:44'),
-('012', 'S5', '1728548648_e91720121bc34bb51828.png', '2024-10-09 20:24:44', '2024-10-09 20:24:44'),
-('013', 'S5', '1728548648_5ba3f0b01d09260b3965.png', '2024-10-09 20:24:44', '2024-10-09 20:24:44');
+('001', 'S1', '1729871401_671e3da426af550d5f5d.jpg', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
+('002', 'S1', '1729871402_f57c197a3860b28a43e1.jpg', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
+('003', 'S1', '1729871403_4a2dab39e3f99b8e216c.jpg', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
+('004', 'S1', '1729871404_f9518595c7eec23848ec.jpg', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
+('005', 'S1', '1729871403_6074b50d9f1c7720f2e1.jpg', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
+('006', 'S2', '1729872184_7712cd186c4c942f5796.jpg', '2024-10-25 04:04:07', '2024-10-25 04:04:07'),
+('007', 'S2', '1729872184_8085f26cc2893a3baa57.jpg', '2024-10-25 04:04:07', '2024-10-25 04:04:07'),
+('008', 'S2', '1729872184_140b46e22304dd584409.jpg', '2024-10-25 04:04:07', '2024-10-25 04:04:07');
 
 -- --------------------------------------------------------
 
@@ -1627,15 +1472,12 @@ CREATE TABLE `souvenir_product` (
 --
 
 INSERT INTO `souvenir_product` (`id`, `name`, `created_at`, `updated_at`) VALUES
-('02', 'Baju Piyama Wisata', '2023-11-07 01:19:46', '2023-12-01 23:25:14'),
-('03', 'Gantungan Kunci', '2023-11-07 01:22:31', '2023-12-01 23:25:41'),
-('04', 'Miniatur Rumah Gadang', '2023-11-07 19:03:04', '2023-12-01 23:25:57'),
-('05', 'Baju Kaos Wisata', '2023-11-07 23:45:41', '2023-12-01 23:26:13'),
-('06', 'Tas Rajutan', '2023-12-01 23:26:28', '2023-12-01 23:26:28'),
-('07', 'Gelang Tangan', '2023-12-01 23:26:40', '2023-12-01 23:26:40'),
-('08', 'Pakis Monyet', '2023-12-01 23:27:00', '2023-12-01 23:27:00'),
-('09', 'Topi Pantai', '2023-12-02 00:28:44', '2023-12-02 00:28:44'),
-('10', 'Kacamata Sunglasses', '2023-12-02 00:37:44', '2023-12-02 00:37:44');
+('01', 'Batik Nagari Tuo Pariangan', '2024-10-25 03:54:38', '2024-10-25 03:54:42'),
+('02', 'Gantungan Kunci Sendal', '2024-10-25 03:55:22', '2024-10-25 03:55:22'),
+('03', 'Songket Nagari Tuo Pariangan', '2024-10-25 03:55:35', '2024-10-25 03:55:35'),
+('04', 'Topi Batik Khas Pariangan', '2024-10-25 03:56:13', '2024-10-25 03:56:13'),
+('05', 'Kerajinan Tangan Limbah Plastik Tas Tangan', '2024-10-25 03:57:27', '2024-10-25 03:57:27'),
+('06', 'Kerajinan Tangan Tas Kain', '2024-10-25 04:19:39', '2024-10-25 04:19:39');
 
 -- --------------------------------------------------------
 
@@ -1658,18 +1500,13 @@ CREATE TABLE `souvenir_product_detail` (
 --
 
 INSERT INTO `souvenir_product_detail` (`souvenir_place_id`, `souvenir_product_id`, `price`, `image_url`, `description`, `created_at`, `updated_at`) VALUES
-('S1', '03', 2000, 'S1P-1.jpg', NULL, '2023-12-01 23:38:30', '2023-12-01 23:38:30'),
-('S1', '05', 30000, 'S1P-2.jpg', 'Setiap baju kaos ini adalah potongan fesyen yang menceritakan cerita destinasi yang memikat. Dibuat dengan perhatian terhadap detail, kaos ini menjadi pilihan sempurna untuk mereka yang ingin merayakan dan mengenang setiap perjalanan mereka. Desainnya yang cerdas dan nyaman memastikan bahwa Anda tidak hanya terlihat modis, tetapi juga merasa nyaman sepanjang hari.', '2023-12-01 23:37:01', '2023-12-01 23:37:01'),
-('S1', '06', 35000, 'S1P-3.jpg', 'Tas rajutan ini bukan sekadar aksesori, melainkan cerminan seni dan dedikasi pengrajinnya. Terbuat dari serat alami yang lembut dan tahan lama, setiap tas menjadi sebuah karya seni yang menggabungkan keanggunan fungsionalitas dengan daya tarik estetika.', '2023-12-01 23:29:17', '2023-12-01 23:29:17'),
-('S1', '07', 4000, 'S1P-4.jpg', 'Gelang ini adalah perwujudan sempurna dari seni kerajinan tangan yang menggabungkan kehalusan dan keindahan. Dibuat dengan hati-hati oleh tangan ahli pengrajin, gelang ini bukan hanya sebuah aksesori, melainkan simbol dari keterampilan tinggi dan dedikasi terhadap seni.', '2023-12-01 23:34:31', '2023-12-01 23:39:09'),
-('S2', '02', 35000, 'S2P-1.jpg', 'Setiap baju piyama ini adalah penggabungan harmonis antara kenyamanan dan inspirasi perjalanan. Terbuat dari bahan lembut yang memeluk tubuh dengan lembut, setiap sentuhan kain seperti memeluk kehangatan kasih sayang. Desainnya yang cerdas dan ergonomis memastikan tidur Anda menjadi pengalaman yang mewah, seolah-olah Anda berada dalam perjalanan indah di malam hari.', '2023-12-01 23:47:41', '2023-12-01 23:47:41'),
-('S2', '03', 2000, 'S2P-2.jpg', NULL, '2023-12-01 23:49:25', '2023-12-01 23:49:25'),
-('S2', '04', 120000, 'S2P-3.jpg', 'Setiap miniatur rumah gadang adalah pameran keahlian tinggi pengrajin yang mengabadikan kecantikan dan keunikannya. Dengan cermat dan teliti, setiap goresan menggambarkan keindahan arsitektur khas, dari atap bergonjong hingga hiasan-hiasan artistik yang menghiasi dindingnya. Setiap detail mengandung pesan sejarah dan nilai-nilai kultural yang diwariskan dari generasi ke generasi.', '2023-12-01 23:50:55', '2023-12-01 23:50:55'),
-('S3', '02', 35000, 'S3P-1.jpg', NULL, '2023-12-02 00:26:19', '2023-12-02 00:26:19'),
-('S3', '05', 30000, 'S3P-2.jpg', NULL, '2023-12-02 00:26:57', '2023-12-02 00:26:57'),
-('S3', '09', 40000, 'S3P-3.jpg', NULL, '2023-12-02 00:30:59', '2023-12-02 00:30:59'),
-('S3', '10', 35000, 'S3P-4.jpg', NULL, '2023-12-02 00:38:27', '2023-12-02 00:38:27'),
-('S4', '08', 25000, 'S4P-1.jpg', NULL, '2023-12-02 00:46:48', '2023-12-02 00:46:48');
+('S1', '01', 200000, '1729872735_9afa37f516ad8beac01e.jpg', 'Batik Khas Nagari Tuo Pariangan\r\n', '2024-10-25 04:12:25', '2024-10-25 04:12:25'),
+('S1', '02', 10000, '1729872762_ec76a4cd974506678e13.jpg', 'Kerajinan Tangan Gantungan Kunci Sendal terbuat dari   karet khusus dan kulit sintetis', '2024-10-25 04:14:16', '2024-10-25 04:14:16'),
+('S1', '03', 350000, '1729872873_f10454f30383ec9bc3f6.jpg', 'Songket khas Nagari Tuo Pariangan dengan motif khas Pariangan', '2024-10-25 04:15:01', '2024-10-25 04:15:01'),
+('S1', '04', 100000, '1729872974_44d689115c64690a6fa3.jpg', 'Bermotif batik khas Pariangan', '2024-10-25 04:16:40', '2024-10-25 04:16:40'),
+('S1', '05', 35000, '1729873140_00df20a5ba32c35f7537.jpg', 'Terbuat dari limbah plastik', '2024-10-25 04:19:20', '2024-10-25 04:19:20'),
+('S1', '06', 50000, '1729873199_826f4040b7787956ef47.jpg', 'Kerajinan tangan tas berbahan dasar kain bermotif\r\n', '2024-10-25 04:20:27', '2024-10-25 04:20:27'),
+('S2', '01', 150000, '1729872687_689a5dc9724284bee54e.jpg', 'Batik Khas Nagari Tuo Pariangan', '2024-10-25 04:11:40', '2024-10-25 04:11:40');
 
 -- --------------------------------------------------------
 
@@ -1736,28 +1573,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `first_name`, `last_name`, `address`, `phone`, `avatar`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'accuser1@email.com', 'accuser1', 'User 1', 'Account', 'Desa Wisata Kampuang Minang Nagari Sumpu', '081966159032', 'default.jpg', '$2y$10$W2TphwPWSmS9S/XIIWOU7eiCg7SxapyAuGRwXZ/7oPmSngs8vZJuO', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:28', '2023-10-28 22:51:28', NULL),
-(2, 'accuser2@email.com', 'accuser2', 'User 2', 'Account', 'Desa Wisata Kampuang Minang Nagari Sumpu', '081211536051', 'default.jpg', '$2y$10$PyeB88Z/oU0ZpS7EqejH5unNVhWqwXGmRk0f5f1TeRgXdZ37s.g6e', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:28', '2023-10-28 22:51:28', NULL),
-(3, 'accuser3@email.com', 'accuser3', 'User 3', 'Account', 'Desa Wisata Kampuang Minang Nagari Sumpu', '081673777122', 'default.jpg', '$2y$10$7YbcXjv8uL2bsYbdX1EJPucZr7v.F1lDXOmNiHalcUVo2.BeA0oY6', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:29', '2023-10-28 22:51:29', NULL),
-(4, 'accuser4@email.com', 'accuser4', 'User 4', 'Account', 'Desa Wisata Kampuang Minang Nagari Sumpu', '081375337211', 'default.jpg', '$2y$10$2AmltcPtgE0h0FyHBvzjB.96QAvoZ1JPgTc5qmpzt5NOYRo//TNZW', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:29', '2023-10-28 22:51:29', NULL),
-(7, 'accadmin1@email.com', 'accadmin1', 'Zuherman', 'Account', 'Desa Wisata Kampuang Minang Nagari Sumpu', '08111678345', 'default.jpg', '$2y$10$Qj.hWZHW4uLNI2G8TMxSH.iY3A.B6auTcHB3lVPwPWkNsDyC5esRi', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:29', '2023-10-28 22:51:29', NULL),
-(9, 'homestayharausyafiq@gmail.com', 'homestayharausyafiqaccount', 'Andi', NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '085213100756', 'default.jpg', '$2y$10$VumDbbWe08c0kNuMKeSpJuvhpgPcdYM9NEQ2t/qjYZzIfK5Fg4U5e', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-08 10:27:24', '2023-12-08 10:27:24', NULL),
-(10, 'ari@gmail.com', 'arie', NULL, NULL, NULL, NULL, 'default.jpg', '$2y$10$I76ASpG4aFnFakR212BTm.MkremdoUllq7dJkJRa1aDK2OC.4IPpa', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-14 01:20:26', '2023-12-14 01:20:26', NULL),
-(11, 'daffa@gmail.com', 'daffa', 'Daffa', 'Muyassar', 'Bukittinggi', '082223556788', 'default.jpg', '$2y$10$6dlvr8vNqXtFACvXFTAhx.g4DQXUt9ED9zuIkljB3jTHuRgzyqiMO', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-14 20:28:36', '2023-12-14 20:28:36', NULL),
-(13, 'aurahomesta@gmail.com', 'aurahomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '081270263970', 'default.jpg', '$2y$10$tXgnmtgKzebhj7t6.EBqR.IkxWMLp1biVfgle2HKx1EJgapvRQIFO', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 19:27:21', '2024-02-26 19:27:21', NULL),
-(14, 'meliyahomestay@gmail.com', 'meliyahomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '085274265850', 'default.jpg', '$2y$10$LeHmdAe2g.22UfdwkHquLeZl1nK7.AtIu2HuYgtpBLWoW02lfQ6zi', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 22:54:14', '2024-02-26 22:54:14', NULL),
-(15, 'abyanhomestay@gmail.com', 'abyanhomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '081270377333', 'default.jpg', '$2y$10$DHia3.HzTpmHJANPOJM4ReyM7EJ8pyWbhOcZqOh8RDcR.AvPV/rb6', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 22:59:42', '2024-02-26 22:59:42', NULL),
-(16, 'homestaybilza@gmail.com', 'homestaybilzaaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '081363876893', 'default.jpg', '$2y$10$5sod.IT34FbcaKDwIRgD9.NB.6sjciZcb5clPjW0uXlYAP99No5wK', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:08:20', '2024-02-26 23:08:20', NULL),
-(17, 'homestayibu@gmail.com', 'homestayibuaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '082381976256', 'default.jpg', '$2y$10$Sm3bMZsbox0B7PCXekXiw.WMMf7KusogYbD1T7oh0NkgHvQuNilwm', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:14:20', '2024-02-26 23:14:20', NULL),
-(18, 'dangaupitossa@gmail.com', 'dangaupitossaaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '085285333018', 'default.jpg', '$2y$10$oaMkGwJ6P2dtvfNacFm2tOWkAKBVYED1nj/C3cLyfCq85M0y5HMRC', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:28:12', '2024-02-26 23:28:12', NULL),
-(19, 'ostonhomestay@gmail.com', 'ostonhomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '082174854400', 'default.jpg', '$2y$10$Av7FOrEUF5/M33bIJiQwIueHlpae.2WgIKquWCqf9OQZMijp4bjhW', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:37:28', '2024-02-26 23:37:28', NULL),
-(20, 'megahomestay@gmail.com', 'megahomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '081266724140', 'default.jpg', '$2y$10$hLY4EbUhD29vSBcTu7Q3P.FL9mWl..QzYgaXy/6hsh6nY/nFMCkJS', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:44:25', '2024-02-26 23:44:25', NULL),
-(21, 'dangauabahhomestay@gmail.com', 'dangauabahhomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '082391158500', 'default.jpg', '$2y$10$AJA4Um/doSqcEvhi1FJGaeRIYt9noTCycT6OMdg9rmYpILkUhmqWW', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:47:49', '2024-02-26 23:47:49', NULL),
-(22, 'limpatohomesaty@gmail.com', 'limpatohomestayaccount', NULL, NULL, 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', '081364348921', 'default.jpg', '$2y$10$388h3htWTvMWy19Yk4uhY.2wto/Y.Fx5ASRHkuwWJ3k4JG1o.FuNC', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-02-26 23:56:58', '2024-02-26 23:56:58', NULL),
-(23, 'homestayaaa@gmail.com', 'homestayaaa', NULL, NULL, NULL, NULL, 'default.jpg', '$2y$10$jsPLyiULsgQuOb00IhcWAONVhuqQ.Mz/Nuxj08sLVi9wTRSYAbv3e', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-26 11:40:48', '2024-09-26 11:40:48', NULL),
-(24, 'homestaybbb@gmail.com', 'homestaybbb', NULL, NULL, NULL, NULL, 'default.jpg', '$2y$10$ctEctlQP2cUs4/dUcYLFG.QKFpsfHsnnMnQ1GCdaeTHSDzvi1PS1O', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-28 05:04:12', '2024-09-28 05:04:12', NULL),
-(25, 'homestayccc@gmail.com', 'homestayccc', NULL, NULL, NULL, NULL, 'default.jpg', '$2y$10$DVIA/L20cS3gfxl52Y6WDOalj0jBARzIUVPj.yJyV9QCFkIozwazu', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-10 03:16:39', '2024-10-10 03:16:39', NULL),
-(26, 'homestayddd@gmail.com', 'homestayddd', NULL, NULL, NULL, NULL, 'default.jpg', '$2y$10$sjWmi8HsbVb7CGc4BiohD.dYvqcUrcVoFRd7RjuX.XK/GKleb4/Vq', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-10 04:06:21', '2024-10-10 04:06:21', NULL);
+(7, 'pokdarwispariangan1@gmail.com', 'pokdarwis.pariangan', 'Fakhrudoni Putra', 'Account', 'Desa Wisata Nagari Tuo Pariangan', '082218141289', 'default.jpg', '$2y$10$KKs/QMWOtQgv6eN0wOiCQO5SDa14h2o387oiOCPyn9nGDKFs0usAu', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:29', '2023-10-28 22:51:29', NULL),
+(11, 'shandyka2403@gmail.com', 'dykdyk', 'Dyka', 'Dyka', 'Padang', '081364928950', 'default.jpg', '$2y$10$fVxJTbgT/Ja7xSc56553suT/tYJA8XzUL9zkl61yBYR/qtNQ35OoG', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-14 20:28:36', '2023-12-14 20:28:36', NULL),
+(23, 'umegahomestay@gmail.com', 'umegahomestay', 'Owner Umega', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '081374106956', 'default.jpg', '$2y$10$t/tLnMQiHV.4x9rez4BozenBzYWYsax3IZy5apnWa729tS1p944xq', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-26 11:40:48', '2024-09-26 11:40:48', NULL),
+(24, 'gudesterhomestay@gmail.com', 'gudesterhomestay', 'Owner Gudester', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '082269375195', 'default.jpg', '$2y$10$e4cqmQwqIh8drtCvobmCuOodW.zIHGRwqIn9RKfG6u6MapDSJ2dva', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-28 05:04:12', '2024-09-28 05:04:12', NULL),
+(25, 'nabilahomestay@gmail.com', 'nabilahomestay', 'Owner Nabila', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '082249063128', 'default.jpg', '$2y$10$hb.4auiFDNFb8uPEePqiauI2jyTKKm47b.4WXfMdB5hxSc6iWmTgq', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-10 03:16:39', '2024-10-10 03:16:39', NULL);
 
 -- --------------------------------------------------------
 
@@ -1790,7 +1610,7 @@ CREATE TABLE `village` (
 --
 
 INSERT INTO `village` (`id`, `name`, `geom_file`, `selected`, `description`, `ticket_price`, `open`, `close`, `address`, `email`, `facebook`, `instagram`, `youtube`, `tiktok`, `video_url`, `created_at`, `updated_at`) VALUES
-('1', 'Nagari Tuo Pariangan', 'Pariangan.geojson', '1', 'desc', 1, '00:00:00', '23:59:00', 'Pariangan, Kecamatan Pariangan, Kabupaten Tanah Datar, Sumatera Barat', 'pariangan@gmail.com', 'f', 'i', NULL, 't', '1727614484_c2e89f13f679fb18a052.mp4', NULL, NULL),
+('1', 'Nagari Tuo Pariangan', 'Pariangan.geojson', '1', 'Desa wisata Nagari Tuo Pariangan adalah sebuah desa indah yang terletak di lereng Gunung Marapi, sebuah gunung api aktif yang berada di dataran tinggi Provinsi Sumatera Barat. Berada di ketinggian 800 - 1000 mdpl, Pariangan memiliki topografi daerah perbukitan dan pegunungan dengan udara yang sejuk. Posisi geografis ini juga memberikan anugerah alam yang elok dan subur bagi desa wisata Pariangan dimana sawah berjenjang memanjakan mata dari lereng Gunung Marapi hingga lembah-lembah yang ada dibawahnya bahkan hingga ke Danau Singkarak.\r\n\r\nPariangan adalah sebuah desa yang istimewa. Tambo, tradisi lisan Masayarakat Minangkabau, menyebut Pariangan sebagai desa atau nagari tertua tempat nenek moyang dan peradaban mereka bermula. Hal ini tertuang dalam pepatah kuno “dari mano dating titiak palito, dari telong nan Batali. Dari mano asa nenek moyang kito, dari puncak gunuang Marapi.” Hingga saat ini, masih ditemukan berbagai bukti peradaban tua Masyarakat Minangkabau di nagari ini seperti Batu Lantak Tigo, Kuburan Panjang Datuak Tantejo Gurhano, Sawah Satampang Baniah, Lurah Indak Barayia dan masih banyak lagi yang lainnya. ', 1, '06:00:00', '23:59:00', 'Pariangan, Kecamatan Pariangan, Kabupaten Tanah Datar, Sumatera Barat', 'pokdarwispariangan1@gmail.com', 'pokdarwis.pariangan', 'pokdarwis.pariangan', NULL, 'pokdarwis.pariangan', '1729874403_b6f40f9b39e8ec29c967.mp4', NULL, NULL),
 ('10', 'Danau Ateh Alahan Panjang', 'Alahan_Panjang.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('11', 'Kumanis', 'Kumanis.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('12', 'Sisawah', 'Sisawah.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1840,11 +1660,10 @@ CREATE TABLE `village_gallery` (
 --
 
 INSERT INTO `village_gallery` (`id`, `village_id`, `url`) VALUES
-('001', '1', '1727614495_f0ba376c28ae87e8df80.png'),
-('002', '1', '1727614479_2f0ee2c1ce316d37d3ca.jpg'),
-('003', '1', '1727614479_5f9a92807eae6f09ccbd.jpg'),
-('004', '1', '1727614482_37a4d005face04127013.jpg'),
-('005', '1', '1727614481_20ae5c4e6ed020accd68.jpg');
+('001', '1', '1729874400_44ed68a82624a547c37a.webp'),
+('002', '1', '1729874400_39ad3f97336f25c40b5a.jpg'),
+('003', '1', '1729874402_1b5e09f9fe295370361a.jpg'),
+('004', '1', '1729874402_940eb56dce211088c4f5.jpg');
 
 -- --------------------------------------------------------
 
@@ -1872,9 +1691,8 @@ CREATE TABLE `worship_place` (
 --
 
 INSERT INTO `worship_place` (`id`, `village_id`, `name`, `worship_place_category`, `address`, `capacity`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('W1', NULL, 'Masjid Raya Al-Muttaqin', '01', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 100, 0xe610000001030000000100000005000000f5a554ee772a5940ba53f3e79f3abcbff5a59437762a594043365666e547bcbff5a514ff792a59408f7588e57c4ebcbff4a554727b2a5940ad453167dd40bcbff5a554ee772a5940ba53f3e79f3abcbf, '-0.11042109', '100.66362499', 'Masjid Raya Al-Muttaqin adalah sebuah tempat ibadah Islam yang menakjubkan dan penuh makna, terletak di tengah Nagari Tarantang. Dibangun dengan arsitektur yang megah dan indah, masjid ini menjadi ikon keagamaan di Nagari Tarantang.', '2023-12-02 17:11:28', '2023-12-02 17:11:28'),
-('W2', NULL, 'Mushalla Nurul Ikhlas', '02', 'Tarantang Village, Harau Subdistrict, Lima Puluh Kota Regency, West Sumatra Province', 50, 0xe61000000103000000010000000900000061c9dd3b7d2a594028bbc2bcab9ebcbf60c91d557e2a5940d015e93d7195bcbf62c95df87c2a5940b7dc313e2893bcbf61c9fda37c2a59407049cabd6896bcbf62c93d557c2a5940334bd83df895bcbf61c9dd2d7c2a5940b9779dbdd097bcbf60c95d717c2a5940a440843d9b98bcbf61c99df57b2a59409db00bbd629cbcbf61c9dd3b7d2a594028bbc2bcab9ebcbf, '-0.11170828', '100.66388830', NULL, '2023-12-02 17:16:46', '2023-12-02 17:17:48'),
-('W3', '1', 'Masjid 1', '01', 'aaab', 299, 0xe6100000010300000001000000060000001ad15a47661f59405dfb0f625127dcbf1bd1dab7661f5940b47a585fb928dcbf1bd19a60671f594082a5f09f6a28dcbf1bd1caa6691f594063d1f4715f27dcbf1ad1fa49691f5940392e7bc41026dcbf1ad15a47661f59405dfb0f625127dcbf, '-0.43990447', '100.49072053', 'aaa', '2024-10-09 20:37:08', '2024-10-09 20:37:33');
+('W1', '1', 'Masjid Ishlah', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 300, 0xe610000001030000000100000008000000aa28c5e6801f59402eac9f117654ddbfaa28c505801f59408abbe06cb956ddbfa928451c801f59406dbc2fcc0d57ddbfaa284535851f59400dbaae48b958ddbfaa28a510861f59400e89b1eccf56ddbfaa284535851f594043481f8e2156ddbfaa284519831f5940707855901355ddbfaa28c5e6801f59402eac9f117654ddbf, -0.45841019, 100.49237328, 'Masjid Islah Nagari Tuo Pariangan adalah sebuah masjid bersejarah yang terletak di Nagari Pariangan, Kabupaten Tanah Datar, Sumatera Barat. Masjid ini dikenal sebagai salah satu bangunan religius tertua di Minangkabau, dengan arsitektur tradisional yang mencerminkan nilai budaya dan keagamaan yang kuat. Dibangun dengan dominasi gaya arsitektur Minangkabau, masjid ini memiliki atap berbentuk gonjong, mirip dengan rumah adat Minangkabau (rumah gadang), yang memberikan kesan megah dan khas. Bangunan ini menggunakan material alami seperti kayu dan batu, yang menjadikannya sejalan dengan lingkungan alam sekitarnya yang asri dan indah.', '2024-10-25 03:42:41', '2024-10-25 03:42:41'),
+('W2', '1', 'Mesjid AT TAQWA Pariangan', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 250, 0xe6100000010300000001000000080000004f5e6bf6051f594064b19c518078dcbf505e4bcc041f594030bbb3cf7779dcbf505e4b45041f5940519666eda17adcbf4f5e6be8041f59406c4e670a267cdcbf505e0b18081f59409e13f8495e7cdcbf505ecb39081f59400d9f508c2e7bdcbf515e4b9c071f594069200111cf78dcbf4f5e6bf6051f594064b19c518078dcbf, -0.44497283, 100.48475636, 'Masjid At-Taqwa Pariangan adalah sebuah masjid ikonik yang berada di Nagari Pariangan, Kabupaten Tanah Datar, Sumatera Barat. Masjid ini terletak di kawasan yang terkenal sebagai salah satu desa tertua di Minangkabau, menjadikannya pusat spiritual dan sosial bagi masyarakat setempat. Meskipun tidak setua Masjid Islah, Masjid At-Taqwa tetap memiliki nilai penting dalam sejarah perkembangan Islam di Pariangan. Arsitektur masjid ini merupakan perpaduan antara desain modern dan tradisional Minangkabau. Atap masjid yang berbentuk limas dipadukan dengan ornamen khas lokal, memberikan keseimbangan antara estetika kontemporer dan nilai-nilai budaya setempat. Struktur bangunan ini dibangun dengan menggunakan bahan-bahan yang kuat dan tahan lama, serta didesain untuk menampung jamaah dalam jumlah yang cukup besar, khususnya pada saat perayaan hari-hari besar Islam.', '2024-10-25 03:44:16', '2024-10-25 03:44:16');
 
 -- --------------------------------------------------------
 
@@ -1916,11 +1734,11 @@ CREATE TABLE `worship_place_gallery` (
 --
 
 INSERT INTO `worship_place_gallery` (`id`, `worship_place_id`, `url`, `created_at`, `updated_at`) VALUES
-('001', 'W1', 'W1-1.jpg', '2023-12-02 17:11:28', '2023-12-02 17:11:28'),
-('002', 'W2', 'W2-1.jpg', '2023-12-02 17:17:48', '2023-12-02 17:17:48'),
-('003', 'W3', '1728549449_6756fab991c5f4c77d1e.png', '2024-10-09 20:37:33', '2024-10-09 20:37:33'),
-('004', 'W3', '1728549449_193481ed33f962bcf5bf.png', '2024-10-09 20:37:33', '2024-10-09 20:37:33'),
-('005', 'W3', '1728549451_f18f62013298fa627e44.png', '2024-10-09 20:37:33', '2024-10-09 20:37:33');
+('001', 'W1', '1729870953_39736c9f5b1a82faaad3.jpg', '2024-10-25 03:42:41', '2024-10-25 03:42:41'),
+('002', 'W1', '1729870950_679848b3cdf5dab16f8f.jpeg', '2024-10-25 03:42:41', '2024-10-25 03:42:41'),
+('003', 'W1', '1729870951_ac3494ee57ef5f6caa2d.webp', '2024-10-25 03:42:41', '2024-10-25 03:42:41'),
+('004', 'W2', '1729871032_52bd6ff5a3622ba75099.jpg', '2024-10-25 03:44:16', '2024-10-25 03:44:16'),
+('005', 'W2', '1729871032_618ab41827c11668f78e.jpg', '2024-10-25 03:44:16', '2024-10-25 03:44:16');
 
 --
 -- Indexes for dumped tables
@@ -2243,7 +2061,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=439;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=466;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
