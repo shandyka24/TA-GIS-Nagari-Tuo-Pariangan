@@ -65,6 +65,7 @@
             // Get the current title
             let title = document.title;
 
+            const villageName = document.getElementById("villageName");
             // Split the title based on the ' - ' separator
             let parts = title.split(" - ");
 
@@ -77,6 +78,9 @@
 
                     parts[1] = name;
                     document.title = parts.join(" - ");
+
+                    villageName.innerText = name;
+
 
                 },
             });

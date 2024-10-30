@@ -63,7 +63,7 @@
             position: relative;
             width: 100%;
             /* Make sure it takes the full width */
-            height: 450px;
+            height: 650px;
             /* Set a fixed height or adjust as needed */
             overflow: hidden;
             /* Hide overflow when the image zooms */

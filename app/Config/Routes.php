@@ -83,9 +83,9 @@ $routes->group('web', ['namespace' => 'App\Controllers\Web'], function ($routes)
     $routes->get('homestayAdditionalAmenities/(:segment)', 'AdditionalAmenities::getListAdditionalAmenities/$1', ['namespace' => 'App\Controllers\Web\AdditionalAmenities']);
     $routes->get('getAdditionalAmenities/(:segment)/(:segment)', 'AdditionalAmenities::getAdditionalAmenities/$1/$2',  ['namespace' => 'App\Controllers\Web\AdditionalAmenities', 'filter' => 'role:user']);
     $routes->delete('additionalAmenities/delete/(:segment)/(:segment)/(:segment)', 'AdditionalAmenities::deleteAdditionalAmenities/$1/$2/$3',  ['namespace' => 'App\Controllers\Web\AdditionalAmenities', 'filter' => 'role:user']);
-    $routes->presenter('souvenirPlace');
-    $routes->presenter('culinaryPlace');
-    $routes->presenter('worshipPlace');
+    $routes->presenter('souvenirPlace', ['namespace' => 'App\Controllers\Web\SouvenirPlace']);
+    $routes->presenter('culinaryPlace', ['namespace' => 'App\Controllers\Web\CulinaryPlace']);
+    $routes->presenter('worshipPlace', ['namespace' => 'App\Controllers\Web\WorshipPlace']);
     $routes->presenter('serviceProvider');
     $routes->presenter('rumahGadang');
     $routes->get('/', 'TouristArea::index');
@@ -167,7 +167,7 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Web', 'filter' => '
     $routes->delete('facilityHomestay/delete/(:segment)', 'Homestay::deleteFacilityHomestay/$1',  ['namespace' => 'App\Controllers\Web\Homestay', 'filter' => 'role:admin']);
 
     $routes->get('facilityUnit', 'Homestay::facilityUnit',  ['namespace' => 'App\Controllers\Web\Homestay', 'filter' => 'role:admin']);
-    $routes->post('facilityUnit', 'Homestay::addNewFacilityHomestayUnit',  ['namespace' => 'App\Controllers\Web\HomestayUnit', 'filter' => 'role:admin']);
+    $routes->post('facilityUnit', 'Homestay::addNewFacilityHomestayUnit',  ['namespace' => 'App\Controllers\Web\Homestay', 'filter' => 'role:admin']);
     $routes->post('facilityUnit/edit/(:segment)', 'Homestay::editFacilityUnit/$1',  ['namespace' => 'App\Controllers\Web\Homestay', 'filter' => 'role:admin']);
     $routes->delete('facilityUnit/delete/(:segment)', 'Homestay::deleteFacilityUnit/$1',  ['namespace' => 'App\Controllers\Web\Homestay', 'filter' => 'role:admin']);
 

@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Tourism Village</h3>
-                <p class="text-subtitle text-muted">Kawasan Wisata Lembah Harau</p>
+                <p class="text-subtitle text-muted" id="villageName"></p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first mb-md-0 mb-3">
                 <div class="float-end">
@@ -44,3 +44,29 @@
 <script>
     setBaseUrl("<?= base_url(); ?>");
 </script>
+<script>
+        window.onload = function() {
+            // Get the current title
+            let title = document.title;
+
+            const villageName = document.getElementById("villageName");
+            // Split the title based on the ' - ' separator
+            let parts = title.split(" - ");
+
+            $.ajax({
+                url: baseUrl + "/api/touristVillage/",
+                dataType: "json",
+                success: function(response) {
+                    let data = response.data;
+                    let name = data.name;
+
+                    parts[1] = name;
+                    document.title = parts.join(" - ");
+
+                    villageName.innerText = name;
+
+
+                },
+            });
+        };
+    </script>

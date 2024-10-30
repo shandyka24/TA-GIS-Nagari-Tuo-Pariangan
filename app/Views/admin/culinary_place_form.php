@@ -160,7 +160,7 @@ $edit = in_array('edit', $uri);
     function checkRequired(event) {
         if (!$('#geo-json').val()) {
             event.preventDefault();
-            Swal.fire('Please select location for the New Rumah Gadang');
+            Swal.fire('Please select location for the New Culinary Place');
         }
     }
 </script>
