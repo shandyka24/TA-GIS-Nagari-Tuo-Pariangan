@@ -23,7 +23,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title"><?= esc($title); ?></h4>
+                            <h4 class="card-title"><?= esc($title); ?> for Personal</h4>
                         </div>
                         <div class="col">
                             <button form="reservation-form" type="submit" class="float-end btn btn-primary">Make Reservation</button>
