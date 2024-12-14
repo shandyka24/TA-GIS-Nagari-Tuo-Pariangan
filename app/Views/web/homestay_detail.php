@@ -209,26 +209,4 @@
         document.getElementById('video').setAttribute('src', '');
     });
 </script>
-<script>
-    // Tambahkan event listener untuk tombol
-    document.getElementById("btn-booking").addEventListener("click", function() {
-        // Tampilkan SweetAlert
-        Swal.fire({
-            title: 'Select Booking Options',
-            text: 'Please choose one of the booking options below:',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Personal',
-            confirmButtonColor: "#3085d6",
-            cancelButtonText: 'Event',
-            cancelButtonColor: "#039e00",
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.open('<?= base_url('web/reservation'); ?><?= esc('/' . $homestay_id); ?>', '_blank');
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                window.open('<?= base_url('web/reservationEvent'); ?><?= esc('/' . $homestay_id); ?>', '_blank');
-            }
-        });
-    });
-</script>
 <?= $this->endSection() ?>
