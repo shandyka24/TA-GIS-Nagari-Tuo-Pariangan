@@ -296,7 +296,7 @@ class Reservation extends ResourcePresenter
             $homestay_units[] = $homestay_unit_data[$i];
             $total_price = $total_price + $homestay_unit_data[$i]['price'];
         }
-        $total_price = $total_price * $request['day_of_stay'];
+        $total_price = $total_price * $request['day_of_stay'] * 90 / 100;
         $deposit = $total_price * 20 / 100;
 
         $requestData = [
@@ -304,7 +304,7 @@ class Reservation extends ResourcePresenter
             'customer_id' => user()->id,
             'check_in' => $request['check_in'] . ' 14:00',
             'total_people' => $request['total_people'],
-            'total_price' => $total_price * 90 / 100,
+            'total_price' => $total_price,
             'deposit' => $deposit,
             'reservation_finish_at' => Time::now(),
             'reservation_type' => '2',
@@ -1524,6 +1524,4 @@ class Reservation extends ResourcePresenter
             $this->reservationModel->update_status($reservation['id'], 'Done');
         }
     }
-
-
 }
