@@ -330,4 +330,18 @@ class CulinaryPlace extends ResourceController
         // Memeriksa apakah jarak berada dalam radius
         return $distance <= $radius;
     }
+
+    function findAll()
+    {
+        $contents = $this->culinaryPlaceModel->get_list_cp_api()->getResult();
+
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success find all culinary place"
+            ]
+        ];
+        return $this->respond($response);
+    }
 }

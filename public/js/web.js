@@ -16,6 +16,18 @@ let routeArray = [],
   circleArray = [],
   markerArray = {};
 let bounds = new google.maps.LatLngBounds();
+let overlays = [];
+let airplaneMarkers = [];
+let carMarkers = [];
+let digitNegLayers = [];
+let digitProvLayers = [];
+let digitKabKotaLayers = [];
+let digitVillageLayers = [];
+let customLabels = [];
+let customLabelsCountry = [];
+let latVillage = 0;
+let lngVillage = 0;
+
 let selectedShape,
   drawingManager = new google.maps.drawing.DrawingManager();
 let customStyled = [
@@ -59,41 +71,71 @@ function setBaseUrl(url) {
 }
 
 // Initialize and add the map
-function initMap(
-  lat = -0.11371891332439286,
-  lng = 100.66784601319584,
-  mobile = false
-) {
+// function initMap(
+//   lat = -0.11371891332439286,
+//   lng = 100.66784601319584,
+//   mobile = false
+// ) {
+//   directionsService = new google.maps.DirectionsService();
+//   const center = new google.maps.LatLng(lat, lng);
+//   if (!mobile) {
+//     map = new google.maps.Map(document.getElementById("googlemaps"), {
+//       zoom: 6,
+//       center: center,
+//       mapTypeId: "satellite",
+//     });
+//   } else {
+//     map = new google.maps.Map(document.getElementById("googlemaps"), {
+//       zoom: 18,
+//       center: center,
+//       mapTypeControl: false,
+//     });
+//   }
+//   var rendererOptions = {
+//     map: map,
+//   };
+//   map.set("styles", customStyled);
+//   directionsRenderer = new google.maps.DirectionsRenderer(rendererOptions);
+
+//   // digitCountries();
+//   for (let n = 1; n < 4; n++) {
+//     const idcoun = n;
+//     digitCountries(idcoun);
+//   }
+//   digitProvinces();
+//   digitCities();
+// }
+
+function initMap(lat = -0.45645247101825404, lng = 100.49283409109306) {
   directionsService = new google.maps.DirectionsService();
   const center = new google.maps.LatLng(lat, lng);
-  if (!mobile) {
-    map = new google.maps.Map(document.getElementById("googlemaps"), {
-      zoom: 6,
-      center: center,
-      mapTypeId: "roadmap",
-    });
-  } else {
-    map = new google.maps.Map(document.getElementById("googlemaps"), {
-      zoom: 18,
-      center: center,
-      mapTypeControl: false,
-    });
-  }
+  map = new google.maps.Map(document.getElementById("googlemaps"), {
+    zoom: 6,
+    center: center,
+    mapTypeId: "hybrid",
+    // styles: ,
+  });
   var rendererOptions = {
     map: map,
   };
   map.set("styles", customStyled);
   directionsRenderer = new google.maps.DirectionsRenderer(rendererOptions);
-
-  digitCountries();
+  for (let n = 1; n < 4; n++) {
+    const idcoun = n;
+    digitCountries(idcoun);
+  }
   digitProvinces();
   digitCities();
+  addCustomLabels(map);
+  addCustomLabelsCountry(map);
 }
+
 function goToVillage() {
   // map.setCenter({ lat: -0.11371891332439286, lng: 100.66784601319584 });
   map.panTo({ lat: -0.11371891332439286, lng: 100.66784601319584 });
   map.setZoom(16);
 }
+
 function digitCountries() {
   $.ajax({
     url: baseUrl + "/api/countries",
@@ -101,17 +143,19 @@ function digitCountries() {
     dataType: "json",
     success: function (response) {
       const data = response.data;
-      const digit_color = ["#fc0303", "#0b03fc"];
+      const digit_color = ["#FF8C00", "#FFB6C1", "#87CEEB"];
+      const country_name = ["Singapore", "Malaysia", "Brunei Darussalam"];
       for (i in data) {
         const village = new google.maps.Data();
         let item = data[i];
         village.loadGeoJson("/map/" + item.geom);
         // village.addGeoJson(data);
         village.setStyle({
-          fillColor: "#0b03fc",
+          content: country_name[i],
+          fillColor: digit_color[i],
           strokeWeight: 0.5,
           strokeColor: "#005000",
-          fillOpacity: 0.5,
+          fillOpacity: 0.3,
           clickable: true,
           title: item.name,
         });
@@ -123,10 +167,12 @@ function digitCountries() {
           villageInfoWindow.open(map);
         });
         village.setMap(map);
+        digitNegLayers.push(village);
       }
     },
   });
 }
+
 function digitProvinces() {
   $.ajax({
     url: baseUrl + "/api/provinces",
@@ -140,10 +186,10 @@ function digitProvinces() {
         village.loadGeoJson("/map/" + item.geom);
         // village.addGeoJson(data);
         village.setStyle({
-          fillColor: "#fcf803",
+          fillColor: "#ffffff",
           strokeWeight: 0.5,
-          strokeColor: "#005000",
-          fillOpacity: 0.2,
+          strokeColor: "#ffffff",
+          fillOpacity: 0,
           clickable: true,
           title: item.name,
         });
@@ -155,6 +201,7 @@ function digitProvinces() {
           villageInfoWindow.open(map);
         });
         village.setMap(map);
+        digitProvLayers.push(village);
       }
     },
   });
@@ -172,10 +219,10 @@ function digitCities() {
         village.loadGeoJson("/map/" + item.geom);
         // village.addGeoJson(data);
         village.setStyle({
-          fillColor: "#fa02d5",
+          fillColor: "#ffffff",
           strokeWeight: 0.5,
-          strokeColor: "#005000",
-          fillOpacity: 0.2,
+          strokeColor: "#ffffff",
+          fillOpacity: 0,
           clickable: false,
           title: item.name,
         });
@@ -187,6 +234,7 @@ function digitCities() {
           villageInfoWindow.open(map);
         });
         village.setMap(map);
+        digitKabKotaLayers.push(village);
       }
     },
   });
@@ -223,6 +271,7 @@ function digitSubdistricts() {
     },
   });
 }
+
 function digitVillages() {
   $.ajax({
     url: baseUrl + "/api/villages",
@@ -274,13 +323,14 @@ function digitVillage() {
         strokeWeight: 0.5,
         strokeColor: "#005000",
         fillOpacity: 0.1,
-        clickable: false,
+        clickable: true,
       });
       village.setMap(map);
     },
   });
 }
-function digitTourismVillage() {
+
+function digitTourismVillage(goToVillage = false) {
   if (currentVillage) {
     currentVillage.setMap(null); // Menghapus polygon sebelumnya
   }
@@ -307,14 +357,24 @@ function digitTourismVillage() {
           });
 
           // Fokuskan peta ke area village
-          map.fitBounds(bounds);
+          const currentUrl = window.location.href;
+          if (
+            currentUrl === "http://localhost:8080/web" &&
+            goToVillage == false
+          ) {
+            // map.setZoom(6);
+          } else {
+            map.fitBounds(bounds);
+          }
 
           // Mendapatkan pusat dari bounds
           let center = bounds.getCenter();
+          latVillage = center.lat();
+          lngVillage = center.lng();
 
           // Set style untuk village polygon
           currentVillage.setStyle({
-            fillColor: "#f3fa32",
+            fillColor: "#ffffff",
             strokeWeight: 0.5,
             strokeColor: "#005000",
             fillOpacity: 0.2,
@@ -325,6 +385,7 @@ function digitTourismVillage() {
           // Tampilkan info window di tengah village
           villageInfoWindow.setContent(data.name);
           villageInfoWindow.setPosition(center);
+          objectMarker("L", center.lat(), center.lng());
         }
       );
       //Tambahkan listener untuk klik pada village
@@ -336,9 +397,11 @@ function digitTourismVillage() {
       });
       // Set village polygon pada peta
       currentVillage.setMap(map);
+      digitVillageLayers.push(currentVillage);
     },
   });
 }
+
 function digitUniqueAtt() {
   const village = new google.maps.Data();
   $.ajax({
@@ -355,12 +418,13 @@ function digitUniqueAtt() {
         strokeWeight: 0.8,
         strokeColor: "#005000",
         fillOpacity: 0.1,
-        clickable: false,
+        clickable: true,
       });
       village.setMap(map);
     },
   });
 }
+
 function digitObject(dataraw) {
   const village = new google.maps.Data();
   dataraw = dataraw.replace(/&quot;/g, '"');
@@ -374,7 +438,7 @@ function digitObject(dataraw) {
     strokeWeight: 0.8,
     strokeColor: "#005000",
     fillOpacity: 0.5,
-    clickable: false,
+    clickable: true,
   });
   village.setMap(map);
 }
@@ -423,6 +487,9 @@ function clearMarker() {
 function currentPosition() {
   clearRadius();
   clearRoute();
+  clearAirplaneMarkers();
+  clearCarMarkers();
+  clearOverlay();
 
   google.maps.event.clearListeners(map, "click");
   if (navigator.geolocation) {
@@ -481,6 +548,9 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 function manualPosition() {
   clearRadius();
   clearRoute();
+  clearAirplaneMarkers();
+  clearCarMarkers();
+  clearOverlay();
 
   if (userLat == 0 && userLng == 0) {
     Swal.fire("Click on Map");
@@ -563,7 +633,7 @@ function objectMarker(id, lat, lng, anim = true) {
   } else if (id.substring(0, 1) === "E") {
     icon = baseUrl + "/media/icon/marker_ev.png";
   } else if (id.substring(0, 1) === "L") {
-    icon = baseUrl + "/media/icon/marker_lh.png";
+    icon = baseUrl + "/media/icon/marker_pr.png";
   } else if (id.substring(0, 1) === "A") {
     icon = baseUrl + "/media/icon/marker_at.png";
   } else if (id.substring(0, 1) === "V") {
@@ -582,10 +652,7 @@ function objectMarker(id, lat, lng, anim = true) {
   if (!anim) {
     marker.setAnimation(null);
   }
-  if (
-    currentUrl === "http://localhost:8080/web" ||
-    currentUrl === "http://localhost:8080/web/uniqueAttraction"
-  ) {
+  if (currentUrl === "http://localhost:8080/web/uniqueAttraction") {
   } else {
     marker.addListener("click", () => {
       infoWindow.close();
@@ -905,15 +972,45 @@ function objectInfoWindow(id) {
       success: function (response) {
         let data = response.data;
         let name = data.name;
+        let open = data.open.substring(0, data.open.length - 3);
+        let close = data.close.substring(0, data.close.length - 3);
+        let rgid = data.id;
+        let lat = data.lat;
+        let lng = data.lng;
 
         content =
           '<div class="text-center">' +
           '<p class="fw-bold fs-6">' +
           name +
           "</p>" +
+          '<p><i class="fa-solid fa-clock me-2"></i> ' +
+          open +
+          " - " +
+          close +
+          " WIB</p>" +
+          "</div>";
+        contentButton =
+          '<br><div class="text-center">' +
+          '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
+          lat +
+          ", " +
+          lng +
+          ')"><i class="fa-solid fa-road"></i></a>' +
+          '<a title="Info" class="btn icon btn-outline-primary mx-1" target="_blank" id="infoInfoWindow" href=' +
+          baseUrl +
+          "/web/culinaryPlace/" +
+          rgid +
+          '><i class="fa-solid fa-info"></i></a>' +
+          '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+          rgid +
+          "`," +
+          lat +
+          "," +
+          lng +
+          ')"><i class="fa-solid fa-compass"></i></a>' +
           "</div>";
 
-        infoWindow.setContent(content);
+        infoWindow.setContent(content + contentButton);
       },
     });
   } else if (id.substring(0, 1) === "W") {
@@ -923,6 +1020,9 @@ function objectInfoWindow(id) {
       success: function (response) {
         let data = response.data;
         let name = data.name;
+        let rgid = data.id;
+        let lat = data.lat;
+        let lng = data.lng;
 
         content =
           '<div class="text-center">' +
@@ -930,8 +1030,34 @@ function objectInfoWindow(id) {
           name +
           "</p>" +
           "</div>";
+        contentButton =
+          '<br><div class="text-center">' +
+          '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
+          lat +
+          ", " +
+          lng +
+          ')"><i class="fa-solid fa-road"></i></a>' +
+          '<a title="Info" class="btn icon btn-outline-primary mx-1" target="_blank" id="infoInfoWindow" href=' +
+          baseUrl +
+          "/web/worshipPlace/" +
+          rgid +
+          '><i class="fa-solid fa-info"></i></a>' +
+          '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+          rgid +
+          "`," +
+          lat +
+          "," +
+          lng +
+          ')"><i class="fa-solid fa-compass"></i></a>' +
+          "</div>";
+        content =
+          '<div class="text-center">' +
+          '<p class="fw-bold fs-6">' +
+          name +
+          "</p>" +
+          "</div>";
 
-        infoWindow.setContent(content);
+        infoWindow.setContent(content + contentButton);
       },
     });
   } else if (id.substring(0, 1) === "S") {
@@ -941,15 +1067,45 @@ function objectInfoWindow(id) {
       success: function (response) {
         let data = response.data;
         let name = data.name;
+        let open = data.open.substring(0, data.open.length - 3);
+        let close = data.close.substring(0, data.close.length - 3);
+        let rgid = data.id;
+        let lat = data.lat;
+        let lng = data.lng;
 
         content =
           '<div class="text-center">' +
           '<p class="fw-bold fs-6">' +
           name +
           "</p>" +
+          '<p><i class="fa-solid fa-clock me-2"></i> ' +
+          open +
+          " - " +
+          close +
+          " WIB</p>" +
+          "</div>";
+        contentButton =
+          '<br><div class="text-center">' +
+          '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
+          lat +
+          ", " +
+          lng +
+          ')"><i class="fa-solid fa-road"></i></a>' +
+          '<a title="Info" class="btn icon btn-outline-primary mx-1" target="_blank" id="infoInfoWindow" href=' +
+          baseUrl +
+          "/web/souvenirPlace/" +
+          rgid +
+          '><i class="fa-solid fa-info"></i></a>' +
+          '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+          rgid +
+          "`," +
+          lat +
+          "," +
+          lng +
+          ')"><i class="fa-solid fa-compass"></i></a>' +
           "</div>";
 
-        infoWindow.setContent(content);
+        infoWindow.setContent(content + contentButton);
       },
     });
   } else if (id.substring(0, 1) === "V") {
@@ -965,6 +1121,25 @@ function objectInfoWindow(id) {
           '<p class="fw-bold fs-6">' +
           name +
           "</p>" +
+          "</div>";
+
+        infoWindow.setContent(content);
+      },
+    });
+  } else if (id.substring(0, 1) === "L") {
+    $.ajax({
+      url: baseUrl + "/api/touristVillage",
+      dataType: "json",
+      success: function (response) {
+        let data = response.data;
+        let name = data.name;
+
+        content =
+          '<div style="max-width:200px;max-height:300px;" class="text-center">' +
+          '<p class="fw-bold fs-6">' +
+          name +
+          "</p>" +
+          '<p><i class="fa-solid fa-spa"></i> Tourism Village</p>' +
           "</div>";
 
         infoWindow.setContent(content);
@@ -4288,4 +4463,760 @@ function deleteAdditionalAmenities(
       });
     }
   });
+}
+
+function allObject() {
+  clearRadius();
+  clearRoute();
+  clearMarker();
+  clearAirplaneMarkers();
+  clearCarMarkers();
+  clearOverlay();
+  objectMarker("L", latVillage, lngVillage);
+  $("#table-homestay").show();
+  $("#table-Culinary").show();
+  $("#table-Souvenir").show();
+  $("#table-Worship").show();
+  $("#result-explore-col").show();
+  // displayFoundObject(response);
+  // boundToObject();
+  const checkHomestay = document.getElementById("checkHomestay");
+  checkHomestay.checked = true;
+  const checkCulinary = document.getElementById("checkCulinary");
+  checkCulinary.checked = true;
+  const checkSouvenir = document.getElementById("checkSouvenir");
+  checkSouvenir.checked = true;
+  const checkWorship = document.getElementById("checkWorship");
+  checkWorship.checked = true;
+  checkObject();
+
+  // $.ajax({
+  //   url: baseUrl + "/web/allObject",
+  //   dataType: "json",
+  //   success: function (response) {
+  //     displayFoundObject(response);
+  //     boundToObject();
+  //     const checkHomestay = document.getElementById("checkHomestay");
+  //     checkHomestay.checked = true;
+  //     const checkCulinary = document.getElementById("checkCulinary");
+  //     checkCulinary.checked = true;
+  //     const checkSouvenir = document.getElementById("checkSouvenir");
+  //     checkSouvenir.checked = true;
+  //     const checkWorship = document.getElementById("checkWorship");
+  //     checkWorship.checked = true;
+  //   },
+  // });
+}
+
+function checkObject() {
+  // Bersihkan peta dan tabel
+  clearRadius();
+  clearRoute();
+  clearMarker();
+  clearAirplaneMarkers();
+  clearCarMarkers();
+  clearOverlay();
+  // initMap5();
+  objectMarker("L", latVillage, lngVillage);
+  destinationMarker.setMap(null);
+  google.maps.event.clearListeners(map, "click");
+
+  // Sembunyikan semua tabel
+  $("#table-Homestay").empty().hide();
+  $("#table-Culinary").empty().hide();
+  $("#table-Souvenir").empty().hide();
+  $("#table-Worship").empty().hide();
+
+  // Koordinat posisi default (misal pusat peta)
+  let pos = new google.maps.LatLng(currentLat, currentLng);
+
+  // Periksa status setiap checkbox
+
+  if (document.getElementById("checkHomestay").checked) {
+    findAll("Homestay");
+    $("#table-Homestay").show();
+  }
+  if (document.getElementById("checkCulinary").checked) {
+    findAll("Culinary");
+    $("#table-Culinary").show();
+  }
+  if (document.getElementById("checkSouvenir").checked) {
+    findAll("Souvenir");
+    $("#table-Souvenir").show();
+  }
+  if (document.getElementById("checkWorship").checked) {
+    findAll("Worship");
+    $("#table-Worship").show();
+  }
+
+  // Atur bound ke objek yang ditemukan
+  boundToObject();
+
+  // Tampilkan kolom hasil pencarian
+  if (
+    document.getElementById("checkHomestay").checked ||
+    document.getElementById("checkCulinary").checked ||
+    document.getElementById("checkSouvenir").checked ||
+    document.getElementById("checkWorship").checked
+  ) {
+    $("#result-explore-col").show();
+  } else {
+    $("#result-explore-col").hide();
+  }
+}
+
+function findAll(category) {
+  // let pos = new google.maps.LatLng(currentLat, currentLng);
+  if (category === "Culinary") {
+    $.ajax({
+      url: baseUrl + "/api/culinaryPlace/findAll",
+      type: "POST",
+      data: {},
+      dataType: "json",
+      success: function (response) {
+        displayExploreResult(category, response);
+        boundToObject();
+      },
+    });
+  } else if (category === "Homestay") {
+    $.ajax({
+      url: baseUrl + "/api/homestay/findAll",
+      type: "POST",
+      data: {},
+      dataType: "json",
+      success: function (response) {
+        displayExploreResult(category, response);
+        boundToObject();
+      },
+    });
+  } else if (category === "Souvenir") {
+    $.ajax({
+      url: baseUrl + "/api/souvenirPlace/findAll",
+      type: "POST",
+      data: {},
+      dataType: "json",
+      success: function (response) {
+        displayExploreResult(category, response);
+        boundToObject();
+      },
+    });
+  } else if (category === "Worship") {
+    $.ajax({
+      url: baseUrl + "/api/worshipPlace/findAll",
+      type: "POST",
+      data: {},
+      dataType: "json",
+      success: function (response) {
+        displayExploreResult(category, response);
+        boundToObject();
+      },
+    });
+  }
+
+  function displayExploreResult(category, response) {
+    let data = response.data;
+    let headerName;
+    if (category === "Culinary") {
+      headerName = "Culinary Place";
+    } else if (category === "Homestay") {
+      headerName = "Homestay";
+    } else if (category === "Souvenir") {
+      headerName = "Souvenir Place";
+    } else if (category === "Worship") {
+      headerName = "Worship Place";
+    }
+
+    let table =
+      "<thead><tr>" +
+      '<th style="width: 70%;">' +
+      headerName +
+      " Name</th>" +
+      '<th style="width: 30%;">Action</th>' +
+      "</tr></thead>" +
+      '<tbody id="data-' +
+      category +
+      '">' +
+      "</tbody>";
+    $("#table-" + category).append(table);
+
+    for (i in data) {
+      let item = data[i];
+      let row =
+        "<tr>" +
+        "<td>" +
+        item.name +
+        "</td>" +
+        "<td><center>" +
+        '<a title="Location" class="btn-sm icon btn-primary" onclick="focusObject(`' +
+        item.id +
+        '`);"><i class="fa-solid fa-map-location-dot"></i></a>' +
+        "</center></td>" +
+        "</tr>";
+      $("#data-" + category).append(row);
+      objectMarker(item.id, item.lat, item.lng);
+    }
+  }
+}
+
+function checkLayer() {
+  // Bersihkan peta dan tabel
+  clearRadius();
+  clearRoute();
+  clearMarker();
+  clearAirplaneMarkers();
+  clearCarMarkers();
+  clearOverlay();
+
+  // initMap();
+  objectMarker("L", latVillage, lngVillage);
+
+  destinationMarker.setMap(null);
+  google.maps.event.clearListeners(map, "click");
+
+  // Koordinat posisi default (misal pusat peta)
+  // let pos = new google.maps.LatLng(currentLat, currentLng);
+
+  // Periksa status setiap checkbox
+
+  if (document.getElementById("checkCountry").checked) {
+    // clearAllAll();
+    clearDigitNeg();
+    for (let n = 1; n < 4; n++) {
+      const idcoun = n;
+      digitCountries(idcoun);
+    }
+  } else {
+    // clearAllAll();
+    clearDigitNeg();
+  }
+
+  if (document.getElementById("checkProvince").checked) {
+    // clearAllAll();
+    clearDigitProv();
+    for (let p = 1; p < 11; p++) {
+      const idprov = p;
+      digitProvinces(idprov);
+    }
+  } else {
+    // clearAllAll();
+    clearDigitProv();
+  }
+
+  if (document.getElementById("checkCity").checked) {
+    // digitKabKota(nameprov);
+    // nameprovv = "Sumatera_Barat";
+    // digitKabKota(nameprovv);
+    clearDigitKabKota();
+    digitCities();
+  } else {
+    // clearAllAll();
+    clearDigitKabKota();
+  }
+
+  if (document.getElementById("checkVillage").checked) {
+    // clearAllAll();
+    clearDigitVillage();
+    digitTourismVillage();
+  } else {
+    // clearAllAll();
+    clearDigitVillage();
+  }
+}
+
+function clearDigitNeg() {
+  digitNegLayers.forEach((layer) => {
+    layer.setMap(null);
+  });
+  digitNegLayers = [];
+}
+
+function clearDigitProv() {
+  digitProvLayers.forEach((layer) => {
+    layer.setMap(null);
+  });
+  digitProvLayers = [];
+}
+
+function clearDigitKabKota() {
+  digitKabKotaLayers.forEach((layer) => {
+    layer.setMap(null);
+  });
+  digitKabKotaLayers = [];
+}
+
+function clearDigitVillage() {
+  digitVillageLayers.forEach((layer) => {
+    layer.setMap(null);
+  });
+  digitVillageLayers = [];
+}
+
+function clickLayer() {
+  clearRadius();
+  clearRoute();
+  clearMarker();
+  // clearAllDigitasi();
+  clearAirplaneMarkers();
+  clearCarMarkers();
+  clearOverlay();
+  clearDigitNeg();
+  clearDigitProv();
+  clearDigitKabKota();
+  // clearDigitKec();
+  // clearDigitNagari1();
+  clearDigitVillage();
+  $("#list-object-col").hide();
+
+  let buttons = document.querySelectorAll(".day-route-btn");
+  let dayDetails = document.querySelectorAll(".div-day-detail");
+  let allActivityRows = document.querySelectorAll('[id^="activity-row-"]');
+
+  buttons.forEach(function (button) {
+    button.style.backgroundColor = ""; // reset to default background color
+    button.style.color = ""; // reset to default text color
+  });
+
+  dayDetails.forEach(function (detailDiv) {
+    detailDiv.style.border = ""; // reset div border
+  });
+
+  allActivityRows.forEach(function (activityRow) {
+    activityRow.style.visibility = "hidden"; // Sembunyikan semua activity row
+    activityRow.style.display = "none"; // Pastikan elemen tidak terlihat
+  });
+
+  // initMap5();
+  // objectMarker("L", -0.45645247101825404, 100.49283409109306);
+
+  destinationMarker.setMap(null);
+  google.maps.event.clearListeners(map, "click");
+
+  // let pos = new google.maps.LatLng(-0.54145013, 100.48094882);
+  // map.panTo(pos);
+
+  for (let n = 1; n < 4; n++) {
+    const idcoun = n;
+    digitCountries(idcoun);
+  }
+  digitProvinces();
+  digitCities();
+  objectMarker("L", latVillage, lngVillage);
+
+  const checkCountry = document.getElementById("checkCountry");
+  checkCountry.checked = true;
+  const checkProvince = document.getElementById("checkProvince");
+  checkProvince.checked = true;
+  const checkCity = document.getElementById("checkCity");
+  checkCity.checked = true;
+  const checkVillage = document.getElementById("checkVillage");
+  checkVillage.checked = true;
+
+  Promise.all(promises).then(() => {
+    boundToObject();
+    $("#result-explore-col").show();
+  });
+}
+
+function howToReachPariangan() {
+  clearAirplaneMarkers();
+  clearCarMarkers();
+  clearOverlay();
+  clearMarker();
+  clearRoute();
+  clearRadius();
+
+  objectMarker("L", latVillage, lngVillage);
+
+  const clearHtro = document.getElementById("clearHtro");
+  clearHtro.checked = true;
+
+  // 1.192689, 103.910130
+
+  // Coordinates
+  const singapore = { lat: 1.192689, lng: 103.91013 }; // Singapore
+  const malaysia = { lat: 3.1503614007038454, lng: 101.97940881384584 }; // Kuala Lumpur
+  const jakarta = { lat: -6.516948, lng: 106.930035 }; // Jakarta
+  const padang = { lat: -0.9478502987473912, lng: 100.3628232695202 }; // Padang
+  const bandaAceh = { lat: 5.537368838813003, lng: 95.50780215398227 }; // Banda Aceh
+  const nagari = { lat: latVillage, lng: lngVillage }; // Nagari Tuo Pariangan
+
+  // Animate flight
+  function animateFlight(map, fromLatLng, toLatLng) {
+    const airplaneIcon = {
+      url: baseUrl + "/media/icon/airplane-icon.png", // Airplane icon path
+      scaledSize: new google.maps.Size(60, 60), // Icon size
+      anchor: new google.maps.Point(25, 25), // Center the icon
+    };
+
+    const airplaneMarker = new google.maps.Marker({
+      position: fromLatLng,
+      map: map,
+      icon: airplaneIcon,
+      title: "Flight",
+    });
+
+    airplaneMarkers.push(airplaneMarker); // Store marker for later clearing
+
+    let step = 0;
+    const totalSteps = 100; // Number of animation steps
+    const interval = setInterval(() => {
+      if (step <= totalSteps) {
+        const lat =
+          fromLatLng.lat +
+          (toLatLng.lat - fromLatLng.lat) * (step / totalSteps);
+        const lng =
+          fromLatLng.lng +
+          (toLatLng.lng - fromLatLng.lng) * (step / totalSteps);
+        const newPosition = { lat, lng };
+        airplaneMarker.setPosition(newPosition);
+        step++;
+      } else {
+        clearInterval(interval); // Stop animation when complete
+      }
+    }, 50); // Animation speed (50ms per step)
+  }
+
+  // Animate car
+  function animateCar(map, fromLatLng, toLatLng) {
+    const carIcon = {
+      url: baseUrl + "/media/icon/car2.png", // Airplane icon path
+      scaledSize: new google.maps.Size(50, 50), // Icon size
+      anchor: new google.maps.Point(20, 20), // Center the icon
+    };
+
+    const carMarker = new google.maps.Marker({
+      position: fromLatLng,
+      map: map,
+      icon: carIcon,
+      title: "Car Journey",
+      zIndex: 1000,
+    });
+    carMarkers.push(carMarker); // Store marker for later clearing
+
+    let step = 0;
+    const totalSteps = 100;
+    const interval = setInterval(() => {
+      if (step <= totalSteps) {
+        const lat =
+          fromLatLng.lat +
+          (toLatLng.lat - fromLatLng.lat) * (step / totalSteps);
+        const lng =
+          fromLatLng.lng +
+          (toLatLng.lng - fromLatLng.lng) * (step / totalSteps);
+        const newPosition = { lat, lng };
+        carMarker.setPosition(newPosition);
+        step++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 50);
+  }
+
+  // Add text overlays
+  function createTextOverlay(map, position, steps) {
+    const overlay = new google.maps.OverlayView();
+
+    overlay.onAdd = function () {
+      const div = document.createElement("div");
+      div.style.position = "absolute";
+      div.style.fontSize = "14px";
+      div.style.fontWeight = "bold";
+      div.style.color = "#4a2f13";
+      div.style.backgroundColor = "#ffe6cc";
+      div.style.padding = "10px";
+      div.style.borderRadius = "5px";
+      div.style.boxShadow = "0 2px 6px rgba(0, 0, 0, 0.3)";
+      div.style.zIndex = "9999";
+      div.innerHTML = steps;
+
+      const panes = this.getPanes();
+      panes.overlayLayer.appendChild(div);
+
+      this.draw = function () {
+        const projection = this.getProjection();
+        const positionPixel = projection.fromLatLngToDivPixel(position);
+        div.style.left = `${positionPixel.x}px`;
+        div.style.top = `${positionPixel.y}px`;
+      };
+
+      overlay.div = div; // Simpan referensi ke elemen DOM
+    };
+
+    overlay.onRemove = function () {
+      if (overlay.div) {
+        overlay.div.parentNode.removeChild(overlay.div);
+        overlay.div = null;
+      }
+    };
+
+    overlay.setMap(map);
+    overlays.push(overlay); // Simpan overlay dalam array
+    return overlay;
+  }
+
+  // Map animations
+  animateFlight(map, singapore, padang);
+  animateFlight(map, malaysia, padang);
+  animateCar(map, bandaAceh, nagari);
+  animateFlight(map, jakarta, padang);
+
+  setTimeout(() => {
+    animateCar(map, padang, nagari);
+  }, 6000); // Delay of 6 seconds before car animation
+
+  // Add overlays
+  createTextOverlay(
+    map,
+    singapore,
+    `
+    <div style="display: flex; align-items: center;">
+      
+      <div>
+        <b>From Singapore <img src="${baseUrl}/media/icon/sg.svg" alt="Singapore Flag" style="width: 24px; height: 16px; margin-right: 4px;">(SIN):</b><br>
+        1. Take a flight from Singapore (SIN) to Padang (PDG), Indonesia.<br>
+        2. Rent a car to Nagari Tuo Pariangan.
+      </div>
+    </div>
+  `
+  );
+
+  createTextOverlay(
+    map,
+    malaysia,
+    `
+    <div style="display: flex; align-items: center;">
+      
+      <div>
+        <b>From Kuala Lumpur <img src="${baseUrl}/media/icon/my.svg" alt="Malaysia Flag" style="width: 24px; height: 16px; margin-right: 4px;">(KUL):</b><br>
+        1. Take a flight from Kuala Lumpur (KUL) to Padang (PDG), Indonesia.<br>
+        2. Rent a car to Nagari Tuo Pariangan.
+      </div>
+    </div>
+  `
+  );
+
+  createTextOverlay(
+    map,
+    jakarta,
+    `
+    <div style="display: flex; align-items: center;">
+      
+      <div>
+        <b>From Jakarta <img src="${baseUrl}/media/icon/id.svg" alt="Indonesia Flag" style="width: 24px; height: 16px; margin-right: 4px;">:</b><br>
+        1. Take a domestic flight to Padang (PDG), Indonesia.<br>
+        2. Rent a car to Nagari Tuo Pariangan.
+      </div>
+    </div>
+  `
+  );
+
+  createTextOverlay(
+    map,
+    bandaAceh,
+    `
+    <div style="display: flex; align-items: center;">      
+      <div>
+        <b>From anywhere in Sumatra <img src="${baseUrl}/media/icon/id.svg" alt="Indonesia Flag" style="width: 24px; height: 16px; margin-right: 4px;">:</b><br>
+        1. Travel by land directly to Nagari Tuo Pariangan.<br>
+        2. Alternatively, fly to Padang (PDG) and rent a car to Nagari Tuo Pariangan.
+      </div>
+    </div>
+  `
+  );
+
+  map.setZoom(6);
+}
+
+function clearAirplaneMarkers() {
+  airplaneMarkers.forEach((marker) => marker.setMap(null));
+  airplaneMarkers.length = 0; // Clear the array
+}
+
+// Clear all car markers
+function clearCarMarkers() {
+  carMarkers.forEach((marker) => marker.setMap(null));
+  carMarkers.length = 0; // Clear the array
+}
+
+function clearOverlay() {
+  overlays.forEach((overlay) => {
+    overlay.setMap(null); // Remove overlay from the map
+  });
+  overlays = []; // Clear the array
+}
+
+function checkLabel() {
+  const checkBox = document.getElementById("check-label");
+  isLabelChecked = checkBox.checked; // Update status global
+
+  const defaultStyled = [
+    { elementType: "labels", stylers: [{ visibility: "on" }] },
+    {
+      featureType: "poi",
+      elementType: "labels",
+      stylers: [{ visibility: "off" }],
+    },
+    {
+      featureType: "administrative.land_parcel",
+      stylers: [{ visibility: "off" }],
+    },
+    {
+      featureType: "administrative.neighborhood",
+      stylers: [{ visibility: "off" }],
+    },
+    {
+      featureType: "road",
+      elementType: "labels",
+      stylers: [{ visibility: "on" }],
+    },
+  ];
+
+  const hideLabels = [
+    { elementType: "labels", stylers: [{ visibility: "off" }] },
+  ];
+
+  if (isLabelChecked) {
+    // Tampilkan label default
+    map.setOptions({ styles: defaultStyled });
+    customLabels.forEach((label) => label.setMap(null));
+    customLabelsCountry.forEach((label) => label.setMap(null));
+    customLabels = [];
+    customLabelsCountry = [];
+  } else {
+    // Sembunyikan label default
+    map.setOptions({ styles: hideLabels });
+    addCustomLabels(map);
+    addCustomLabelsCountry(map);
+  }
+}
+
+function checkTerrain() {
+  const checkBox = document.getElementById("check-terrain");
+  isTerrainChecked = checkBox.checked; // Update status global
+
+  if (isTerrainChecked) {
+    map.setMapTypeId("terrain");
+  } else {
+    map.setMapTypeId("hybrid");
+  }
+
+  // Terapkan ulang gaya label jika checkbox label aktif
+  if (isLabelChecked) {
+    checkLabel();
+  }
+}
+
+function addCustomLabels(map) {
+  const locations = [
+    { position: { lat: -6.2088, lng: 106.8456 }, name: "JAKARTA" },
+    { position: { lat: -0.9446, lng: 100.3714 }, name: "PADANG" },
+    { position: { lat: 1.047, lng: 104.0305 }, name: "BATAM" },
+  ];
+
+  locations.forEach((location) => {
+    const label = new google.maps.OverlayView();
+    label.onAdd = function () {
+      const div = document.createElement("div");
+      div.style.position = "absolute";
+      div.style.padding = "5px 10px";
+      div.style.fontFamily = "Product Sans, Arial, sans-serif"; // Alternatif mendekati Google Sans
+      div.style.fontSize = "13px";
+      div.style.fontWeight = "800"; // Berat font normal seperti label Maps
+      div.style.color = "#fff"; // Warna teks putih
+      div.style.webkitTextFillColor = "#fff"; // Stroke hitam pada teks
+      div.style.webkitTextStroke = "1px #000"; // Stroke hitam pada teks
+      // div.style.letterSpacing = "-0.0325em"; // Simulasi semi-condensed 87.5%
+      div.style.textAlign = "center"; // Posisi teks rata tengah
+      div.style.zIndex = "999";
+      div.innerHTML = location.name;
+
+      const panes = this.getPanes();
+      panes.overlayLayer.appendChild(div);
+
+      this.div = div;
+    };
+
+    label.draw = function () {
+      const projection = this.getProjection();
+      const position = projection.fromLatLngToDivPixel(location.position);
+      if (this.div) {
+        const width = this.div.offsetWidth; // Lebar elemen label
+        const height = this.div.offsetHeight; // Tinggi elemen label
+
+        this.div.style.left = `${position.x - width / 2}px`; // Pusatkan secara horizontal
+        this.div.style.top = `${position.y - height / 2}px`; // Pusatkan secara vertikal
+      }
+    };
+
+    label.onRemove = function () {
+      if (this.div) {
+        this.div.parentNode.removeChild(this.div);
+        this.div = null;
+      }
+    };
+
+    label.setMap(map);
+    customLabels.push(label); // Simpan label ke array
+  });
+}
+
+function addCustomLabelsCountry(map) {
+  const locations = [
+    { position: { lat: 3.440052, lng: 101.957396 }, name: "MALAYSIA" },
+    { position: { lat: 1.3521, lng: 103.8198 }, name: "SINGAPORE" },
+    { position: { lat: 4.9031, lng: 114.9398 }, name: "BRUNEI" },
+    { position: { lat: -1.377737, lng: 113.217183 }, name: "INDONESIA" },
+  ];
+
+  locations.forEach((location) => {
+    const label = new google.maps.OverlayView();
+    label.onAdd = function () {
+      const div = document.createElement("div");
+      div.style.position = "absolute";
+      div.style.padding = "5px 10px";
+      div.style.fontFamily = "Product Sans, Arial, sans-serif"; // Alternatif mendekati Google Sans
+      div.style.fontSize = "18px";
+      div.style.fontWeight = "800"; // Berat font normal seperti label Maps
+      div.style.color = "#fff"; // Warna teks putih
+      div.style.webkitTextFillColor = "#fff"; // Stroke hitam pada teks
+      div.style.webkitTextStroke = "1px #000"; // Stroke hitam pada teks
+      // div.style.letterSpacing = "-0.0325em"; // Simulasi semi-condensed 87.5%
+      div.style.textAlign = "center"; // Posisi teks rata tengah
+      div.style.zIndex = "999";
+      div.innerHTML = location.name;
+
+      const panes = this.getPanes();
+      panes.overlayLayer.appendChild(div);
+
+      this.div = div;
+    };
+
+    label.draw = function () {
+      const projection = this.getProjection();
+      const position = projection.fromLatLngToDivPixel(location.position);
+      if (this.div) {
+        const width = this.div.offsetWidth; // Lebar elemen label
+        const height = this.div.offsetHeight; // Tinggi elemen label
+
+        this.div.style.left = `${position.x - width / 2}px`; // Pusatkan secara horizontal
+        this.div.style.top = `${position.y - height / 2}px`; // Pusatkan secara vertikal
+      }
+    };
+
+    label.onRemove = function () {
+      if (this.div) {
+        this.div.parentNode.removeChild(this.div);
+        this.div = null;
+      }
+    };
+
+    label.setMap(map);
+    customLabelsCountry.push(label); // Simpan label ke array
+  });
+}
+
+function clearHtro() {
+  clearAirplaneMarkers();
+  clearCarMarkers();
+  clearOverlay();
 }

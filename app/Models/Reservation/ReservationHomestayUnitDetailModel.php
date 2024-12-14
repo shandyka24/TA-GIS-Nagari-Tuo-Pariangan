@@ -113,4 +113,26 @@ class ReservationHomestayUnitDetailModel extends Model
             ->get();
         return $query;
     }
+
+    public function get_date_disable()
+    {
+        $now = Time::now('Asia/Jakarta');
+        $now = $now->toDateString();
+
+        $query = $this->db->table($this->table)
+            ->select("date")
+            ->where('date >=', $now)
+            ->groupBy('date')
+            ->get();
+        return $query;
+    }
+
+    public function get_reseration_by_date($date = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select("reservation_id, date")
+            ->where('date', $date)
+            ->get();
+        return $query;
+    }
 }

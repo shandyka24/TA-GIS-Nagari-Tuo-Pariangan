@@ -94,7 +94,7 @@ class HomestayModel extends Model
     public function get_hs_by_id_api($id = null)
     {
         //$coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
-        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.open,{$this->table}.close,{$this->table}.owner,{$this->table}.description";
+        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.open,{$this->table}.close,{$this->table}.owner,{$this->table}.max_people_for_event,{$this->table}.description";
         $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
         $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)

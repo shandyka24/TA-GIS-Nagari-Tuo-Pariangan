@@ -9,8 +9,23 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row align-items-center">
-                        <div class="col-md-auto">
+                        <!-- <div class="col-md-auto">
                             <h5 class="card-title">Google Maps with Location</h5>
+                        </div> -->
+                        <div class="col-md-auto">
+                            <h4 class="card-title">Google Maps</h4>
+                            <div class="col-12 d-flex align-items-center gap-1">
+                                <!-- Checkbox 1 -->
+                                <div class="form-check" style="font-size: 14px;">
+                                    <input class="form-check-input" type="checkbox" id="check-label" value="check-label" onchange="checkLabel()">
+                                    <label class="form-check-label" for="check-label">Labels</label>
+                                </div>&nbsp;
+                                <!-- Checkbox 2 -->
+                                <div class="form-check" style="font-size: 14px;">
+                                    <input class="form-check-input" type="checkbox" id="check-terrain" value="check-terrain" onchange="checkTerrain()">
+                                    <label class="form-check-label" for="check-terrain">Terrain</label>
+                                </div>
+                            </div>
                         </div>
                         <?= $this->include('web/layouts/map-head'); ?>
                     </div>
@@ -35,6 +50,15 @@
                                 clearRadius();
                                 clearRoute();
                                 digitTourismVillage();
+                                // objectMarker("L", -0.45645247101825404, 100.49283409109306);
+                                const checkCountry = document.getElementById("checkCountry");
+                                checkCountry.checked = true;
+                                const checkProvince = document.getElementById("checkProvince");
+                                checkProvince.checked = true;
+                                const checkCity = document.getElementById("checkCity");
+                                checkCity.checked = true;
+                                const checkVillage = document.getElementById("checkVillage");
+                                checkVillage.checked = true;
                             </script>
                             <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                                 <ol class="carousel-indicators">
@@ -95,8 +119,55 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Search result all -->
+            <!-- <div class="col-12" id="result-exploreall-col">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title text-center">Search Result All Object</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive overflow-auto" id="table-resultall-nearby">
+                            <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Homestay">
+                            </table>
+                            <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Culinary">
+                            </table>
+                            <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Souvenir">
+                            </table>
+                            <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Worship">
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Search result nearby -->
+
+
             <!-- Nearby section -->
             <?= $this->include('web/layouts/nearby'); ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12" id="result-explore-col">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title text-center">Result Object</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive overflow-auto" id="table-result-nearby">
+                        <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Homestay">
+                        </table>
+                        <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Culinary">
+                        </table>
+                        <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Souvenir">
+                        </table>
+                        <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Worship">
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- Direction section -->
@@ -110,5 +181,7 @@
     $('#direction-row').hide();
     $('#check-nearby-col').hide();
     $('#result-nearby-col').hide();
+    $("#result-explore-col").hide();
+    map.setZoom(6);
 </script>
 <?= $this->endSection() ?>

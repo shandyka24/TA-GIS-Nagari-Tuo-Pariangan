@@ -324,4 +324,18 @@ class SouvenirPlace extends ResourceController
         // Memeriksa apakah jarak berada dalam radius
         return $distance <= $radius;
     }
+
+    function findAll()
+    {
+        $contents = $this->souvenirPlaceModel->get_list_sp_api()->getResult();
+
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success find all suovenir place"
+            ]
+        ];
+        return $this->respond($response);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Web\Reservation;
 
+use CodeIgniter\I18n\Time;
 use CodeIgniter\Files\File;
 use CodeIgniter\RESTful\ResourcePresenter;
 use CodeIgniter\API\ResponseTrait;
@@ -135,6 +136,29 @@ class Reservation extends ResourcePresenter
         return view('web/reservation_form', $data);
     }
 
+    public function newReservationEvent($homestay_id = null)
+    {
+        $homestay = $this->homestayModel->get_hs_by_id_api($homestay_id)->getRowArray();
+
+        $date_disable = $this->reservationHomestayUnitDetailModel->get_date_disable()->getResultArray();
+
+        $disabled_date = array();
+
+        foreach ($date_disable as $date) {
+            $disabled_date[] = $date['date'];
+        }
+        // dd(implode('", "', $disabled_date));
+
+        $data = [
+            'title' =>  $homestay['name'] . ' Reservation',
+            'homestay_id' => $homestay_id,
+            'max_people_for_event' => $homestay['max_people_for_event'],
+            'date_disabled' => $disabled_date
+        ];
+
+        return view('web/reservation_event_form', $data);
+    }
+
     public function getUnit($homestay_id = null, $unit_type = null, $check_in = null, $day_of_stay = null)
     {
         $number_not_available = array();
@@ -187,6 +211,7 @@ class Reservation extends ResourcePresenter
         ];
         return $this->respond($response);
     }
+
     public function createReservation($homestay_id = null)
     {
         $request = $this->request->getPost();
@@ -234,6 +259,73 @@ class Reservation extends ResourcePresenter
             $date_array[] = $date;
             for ($j = 0; $j < count($homestay_units); $j++) {
                 $addReservationDetail = $this->reservationHomestayUnitDetailModel->add_reservation_detail_api($homestay_id, $request['unit_type'], $homestay_units[$j]['unit_number'], $date, $new_id);
+            }
+            $date = date("Y-m-d", strtotime($date . ' + 1 days'));
+        }
+
+        if ($addReservation) {
+            return redirect()->to(base_url('web/reservation/detail/' . $new_id));
+        } else {
+            return redirect()->back()->withInput();
+        }
+    }
+
+    public function createReservationEvent($homestay_id = null)
+    {
+
+        $request = $this->request->getPost();
+        $date = $request['check_in'];
+        for ($i = 0; $i < (int) $request['day_of_stay']; $i++) {
+            $date = date('Y-m-d', strtotime($date));
+            $date_array[] = $date;
+            $reservation_detail = $this->reservationHomestayUnitDetailModel->get_reseration_by_date($date)->getRowArray();
+            if ($reservation_detail) {
+                session()->setFlashdata('failed', date('d F Y', strtotime($date)));
+                return redirect()->back()->withInput();
+            }
+            $date = date("Y-m-d", strtotime($date . ' + 1 days'));
+        }
+        $new_id = $this->reservationModel->get_new_id_api();
+
+        $total_price = 0;
+
+        $homestay_units = array();
+        $homestay_unit_data = $this->homestayUnitModel->get_list_hu_api($homestay_id)->getResultArray();
+
+        for ($i = 0; $i < count($homestay_unit_data); $i++) {
+            $homestay_units[] = $homestay_unit_data[$i];
+            $total_price = $total_price + $homestay_unit_data[$i]['price'];
+        }
+        $total_price = $total_price * $request['day_of_stay'];
+        $deposit = $total_price * 20 / 100;
+
+        $requestData = [
+            'id' => $new_id,
+            'customer_id' => user()->id,
+            'check_in' => $request['check_in'] . ' 14:00',
+            'total_people' => $request['total_people'],
+            'total_price' => $total_price * 90 / 100,
+            'deposit' => $deposit,
+            'reservation_finish_at' => Time::now(),
+            'reservation_type' => '2',
+            'status' => '0'
+        ];
+
+        foreach ($requestData as $key => $value) {
+            if (empty($value)) {
+                unset($requestData[$key]);
+            }
+        }
+
+        $addReservation = $this->reservationModel->add_reservation_event_api($requestData);
+
+        $date = $request['check_in'];
+        $date_array = array();
+        for ($i = 0; $i < (int) $request['day_of_stay']; $i++) {
+            $date = date('Y-m-d', strtotime($date));
+            $date_array[] = $date;
+            for ($j = 0; $j < count($homestay_units); $j++) {
+                $addReservationDetail = $this->reservationHomestayUnitDetailModel->add_reservation_detail_api($homestay_id, $homestay_units[$j]['unit_type'], $homestay_units[$j]['unit_number'], $date, $new_id);
             }
             $date = date("Y-m-d", strtotime($date . ' + 1 days'));
         }
@@ -1432,4 +1524,6 @@ class Reservation extends ResourcePresenter
             $this->reservationModel->update_status($reservation['id'], 'Done');
         }
     }
+
+
 }

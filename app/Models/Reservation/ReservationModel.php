@@ -259,4 +259,19 @@ class ReservationModel extends Model
             ->update();
         return $query;
     }
+
+    public function add_reservation_event_api($reservation = null)
+    {
+        $reservation['request_date'] = Time::now('Asia/Jakarta', 'en_US');
+
+        $insert = $this->db->table($this->table)
+            ->insert($reservation);
+
+        $update = $this->db->table($this->table)
+            ->set('status', '0')
+            ->where('id', $reservation['id'])
+            ->update();
+
+        return $insert;
+    }
 }

@@ -10,6 +10,10 @@ use App\Models\TouristAreaModel;
 use App\Models\VillageModel;
 use App\Models\VillageGalleryModel;
 use Myth\Auth\Models\UserModel;
+use App\Models\Homestay\HomestayModel;
+use App\Models\Culinary\CulinaryPlaceModel;
+use App\Models\Souvenir\SouvenirPlaceModel;
+use App\Models\Worship\WorshipPlaceModel;
 
 class TouristArea extends ResourcePresenter
 {
@@ -20,6 +24,10 @@ class TouristArea extends ResourcePresenter
     protected $villageModel;
     protected $villageGalleryModel;
     protected $userModel;
+    protected $homestayModel;
+    protected $culinaryPlaceModel;
+    protected $worshipPlaceModel;
+    protected $souvenirPlaceModel;
 
     protected $helpers = ['auth', 'url', 'filesystem'];
 
@@ -29,11 +37,15 @@ class TouristArea extends ResourcePresenter
         $this->villageModel = new VillageModel();
         $this->villageGalleryModel = new VillageGalleryModel();
         $this->userModel = new UserModel();
+        $this->homestayModel = new HomestayModel();
+        $this->culinaryPlaceModel = new CulinaryPlaceModel();
+        $this->souvenirPlaceModel = new SouvenirPlaceModel();
+        $this->worshipPlaceModel = new WorshipPlaceModel();
     }
 
     public function index()
     {
-
+        // $("#result-explore-col").hide();
         $village = $this->villageModel->check_village()->getRowArray();
         $user_phone = $this->userModel->get_admin_phone()->getRowArray();
         $village['phone'] = $user_phone['phone'];
@@ -80,5 +92,35 @@ class TouristArea extends ResourcePresenter
         } else {
             return redirect()->back()->withInput();
         }
+    }
+
+    public function allObject()
+    {
+        $data = array();
+        $homestay = $this->homestayModel->get_list_hs_api()->getResultArray();
+        for ($i = 0; $i < count($homestay); $i++) {
+            $data[] = $homestay[$i];
+        }
+        $culinary = $this->culinaryPlaceModel->get_list_cp_api()->getResultArray();
+        for ($i = 0; $i < count($culinary); $i++) {
+            $data[] = $culinary[$i];
+        }
+        $souvenir = $this->souvenirPlaceModel->get_list_sp_api()->getResultArray();
+        for ($i = 0; $i < count($souvenir); $i++) {
+            $data[] = $souvenir[$i];
+        }
+        $worship = $this->worshipPlaceModel->get_list_wp_api()->getResultArray();
+        for ($i = 0; $i < count($worship); $i++) {
+            $data[] = $worship[$i];
+        }
+
+        $response = [
+            'data' => $data,
+            'status' => 200,
+            'message' => [
+                "Success get list of facility"
+            ]
+        ];
+        return $this->respond($response);
     }
 }

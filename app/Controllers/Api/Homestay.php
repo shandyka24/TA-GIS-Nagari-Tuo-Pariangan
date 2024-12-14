@@ -683,4 +683,18 @@ class Homestay extends ResourceController
         // Memeriksa apakah jarak berada dalam radius
         return $distance <= $radius;
     }
+
+    function findAll()
+    {
+        $contents = $this->homestayModel->get_list_hs_api()->getResult();
+
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success find all homestay"
+            ]
+        ];
+        return $this->respond($response);
+    }
 }

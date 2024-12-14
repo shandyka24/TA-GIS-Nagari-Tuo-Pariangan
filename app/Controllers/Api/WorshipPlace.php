@@ -309,4 +309,18 @@ class WorshipPlace extends ResourceController
         // Memeriksa apakah jarak berada dalam radius
         return $distance <= $radius;
     }
+
+    function findAll()
+    {
+        $contents = $this->worshipPlaceModel->get_list_wp_api()->getResult();
+
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success find all worship place"
+            ]
+        ];
+        return $this->respond($response);
+    }
 }

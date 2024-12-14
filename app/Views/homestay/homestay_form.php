@@ -70,6 +70,13 @@ $edit = in_array('edit', $uri);
                                     </div>
                                 </div>
                                 <div class="form-group mb-4">
+                                    <label for="max_people_for_event" class="mb-2">Maximum Capacity for Event</label>
+                                    <div class="input-group">
+                                        <input type="number" min="0" id="max_people_for_event" class="form-control" name="max_people_for_event" placeholder="Homestay Name" value="<?= ($edit) ? $data['max_people_for_event'] : old('max_people_for_event'); ?>" required>
+                                        <span class="input-group-text">People</span>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4">
                                     <label for="close" class="mb-2">Closing Hours</label>
                                     <div class="input-group">
                                         <input type="time" id="close" class="form-control" name="close" placeholder="Closing Hours" aria-label="Closing Hours" aria-describedby="close" value="<?= ($edit) ? $data['close'] : old('close'); ?>" required>

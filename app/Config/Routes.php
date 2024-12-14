@@ -47,6 +47,7 @@ $routes->get('/register', 'Web\Profile\Profile::register');
 $routes->get('/setup', 'LandingPage::setup',  ['filter' => 'role:admin']);
 $routes->post('/setup', 'LandingPage::selectVillage',  ['filter' => 'role:admin']);
 
+
 // Upload files
 $routes->group('upload', ['namespace' => 'App\Controllers\Web\Upload'], function ($routes) {
     $routes->post('photo', 'Upload::photo');
@@ -70,6 +71,7 @@ $routes->group('web', ['namespace' => 'App\Controllers\Web\Profile'], function (
 
 // App
 $routes->group('web', ['namespace' => 'App\Controllers\Web'], function ($routes) {
+    // $routes->get('explore', 'TouristArea::explore');
     $routes->get('attraction/maps', 'Attraction::maps');
     $routes->get('attraction/detail/(:segment)', 'Attraction::detail/$1');
     $routes->get('uniqueAttraction', 'Attraction::uniqueAttraction');
@@ -136,6 +138,9 @@ $routes->group('web', ['namespace' => 'App\Controllers\Web'], function ($routes)
     $routes->get('payment/(:segment)', 'PaymentController::checkPaymentStatus/$1');
     $routes->post('saveToken', 'ReservationController::saveToken');
     $routes->post('reservationRefund', 'Reservation::addAccountRefund', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
+    $routes->get('allObject', 'TouristArea::allObject');
+    $routes->get('reservationEvent/(:segment)', 'Reservation::newReservationEvent/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
+    $routes->post('reservationEvent/(:segment)', 'Reservation::createReservationEvent/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' =>'role:user']);
 });
 
 // Dashboard
@@ -330,6 +335,11 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
     $routes->get('homestayUnitFac/(:segment)/(:segment)/(:segment)', 'Homestay::homestayUnitFac/$1/$2/$3');
     $routes->get('getHomestayNameByUser/(:segment)', 'Homestay::getNameByUser/$1');
     $routes->get('socials', 'Village::getSocials');
+
+    $routes->post('homestay/findAll', 'Homestay::findAll');
+    $routes->post('culinaryPlace/findAll', 'CulinaryPlace::findAll');
+    $routes->post('souvenirPlace/findAll', 'SouvenirPlace::findAll');
+    $routes->post('worshipPlace/findAll', 'WorshipPlace::findAll');
 });
 
 /*
