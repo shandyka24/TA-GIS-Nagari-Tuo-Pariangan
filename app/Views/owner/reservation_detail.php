@@ -114,7 +114,11 @@
                                             </div>
                                             <?php $homestay_unit_total_price = $homestay_unit_total_price + ($item['price'] * $reservation['day_of_stay']); ?>
                                         <?php endforeach; ?>
-                                        <span>Homestay unit total price = <?= esc("Rp " . number_format($homestay_unit_total_price, 0, ',', '.')) ?></span>
+                                        <?php if ($reservation['reservation_type'] == "1") : ?>
+                                            <span>Homestay unit total price = <?= esc("Rp " . number_format($homestay_unit_total_price, 0, ',', '.')) ?></span>
+                                        <?php else: ?>
+                                            <span>Homestay unit total price = <?= esc("Rp " . number_format($homestay_unit_total_price * 90 / 100, 0, ',', '.')) ?></span>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -187,13 +191,19 @@
                             <tbody>
                                 <tr>
                                     <td class="fw-bold">Total Price</td>
-                                    <td>: <?= esc("Rp " . number_format($total_price, 0, ',', '.')) ?></td>
+                                    <?php if ($reservation['reservation_type'] == "1") : ?>
+                                        <td>: <?= esc("Rp " . number_format($total_price, 0, ',', '.')) ?></td>
+                                    <?php else: ?>
+                                        <td>: <?= esc("Rp " . number_format($total_price * 90 / 100, 0, ',', '.')) ?></td>
+                                    <?php endif; ?>
                                 </tr>
                                 <tr>
                                     <td class="fw-bold">Deposit</td>
-                                    <td>
-                                        : <?= esc("Rp " . number_format($deposit, 0, ',', '.')) ?> <i>*(20% of total price)</i>
-                                    </td>
+                                    <?php if ($reservation['reservation_type'] == "1") : ?>
+                                        <td> : <?= esc("Rp " . number_format($deposit, 0, ',', '.')) ?> <i>*(20% of total price)</i> </td>
+                                    <?php else: ?>
+                                        <td> : <?= esc("Rp " . number_format($deposit * 90 / 100, 0, ',', '.')) ?> <i>*(20% of total price)</i> </td>
+                                    <?php endif; ?>
                                 </tr>
                                 <?php if ((($reservation['status'] == 'Deposit Successful') || ($reservation['status'] == 'Full Pay Pending') || ($reservation['status'] == 'Full Pay Successful')) && ($reservation['canceled_at'] == null)) : ?>
                                     <tr>

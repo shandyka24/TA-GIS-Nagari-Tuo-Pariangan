@@ -297,6 +297,7 @@ class Reservation extends ResourcePresenter
             $total_price = $total_price + $homestay_unit_data[$i]['price'];
         }
         $total_price = $total_price * $request['day_of_stay'] * 90 / 100;
+        // dd($total_price);
         $deposit = $total_price * 20 / 100;
 
         $requestData = [
