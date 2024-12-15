@@ -249,6 +249,12 @@ $users = in_array('users', $uri);
                                     </div>
                                 </div>
                                 <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="2" id="flexCheckDefault" name="additional_amenities_type">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        For Event
+                                    </label>
+                                </div>
+                                <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="is_order_count_per_day">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         Order Count by Day
@@ -310,6 +316,9 @@ $users = in_array('users', $uri);
                                         <div class="col-md-6">
                                             <div class="card-body">
                                                 <h5 class="card-title"><?= esc($activity['name']); ?></h5>
+                                                <?php if ($activity['additional_amenities_type'] == '2'): ?>
+                                                    <p class="card-text">For Event</p>
+                                                <?php endif; ?>
                                                 <p class="card-text"><?= esc($activity['description']); ?></p>
                                                 <p class="card-text"><small class="text-dark"><?= esc("Rp " . number_format($activity['price'], 0, ',', '.')) ?><?= ($activity['is_order_count_per_day'] == '1') ? '/day' : '' ?><?= ($activity['is_order_count_per_person'] == '1') ? '/person' : '' ?><?= ($activity['is_order_count_per_room'] == '1') ? '/room' : '' ?></small></p>
                                             </div>
@@ -357,6 +366,12 @@ $users = in_array('users', $uri);
                                                     <span class="input-group-text">Rp.</span>
                                                     <input type="number" id="name" class="form-control" name="price" placeholder="Price" value="<?= esc($activity['price']) ?>" min="0" required>
                                                 </div>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="2" id="flexCheckDefault" name="additional_amenities_type" <?= ($activity['additional_amenities_type'] == '2' ? 'checked' : '') ?>>
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    For Event
+                                                </label>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="is_order_count_per_day" <?= ($activity['is_order_count_per_day'] == '1' ? 'checked' : '') ?>>

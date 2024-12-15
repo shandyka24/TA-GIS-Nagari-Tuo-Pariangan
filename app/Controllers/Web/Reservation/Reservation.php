@@ -331,6 +331,21 @@ class Reservation extends ResourcePresenter
             $date = date("Y-m-d", strtotime($date . ' + 1 days'));
         }
 
+        $additionalAmenities = $this->homestayAdditionalAmenitiesModel->get_haa_for_event($homestay_id)->getResultArray();
+        foreach ($additionalAmenities as $item) {
+            $data = [
+                'homestay_id' => $homestay_id,
+                'additional_amenities_id' => $item['additional_amenities_id'],
+                'reservation_id' => $new_id,
+                'day_order' => '0',
+                'person_order' => '0',
+                'room_order' => '0',
+                'total_order' => '1',
+                'total_price' => '0',
+            ];
+            $addAdditionalAmenities = $this->reservationHomestayAdditionalAmenitiesDetailModel->add_detail_haa($data);
+        }
+
         if ($addReservation) {
             return redirect()->to(base_url('web/reservation/detail/' . $new_id));
         } else {

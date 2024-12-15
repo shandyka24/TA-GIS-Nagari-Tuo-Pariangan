@@ -126,4 +126,13 @@ class HomestayAdditionalAmenitiesModel extends Model
             ->delete();
         return $query;
     }
+    public function get_haa_for_event($homestay_id = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select("*")
+            ->where('homestay_id', $homestay_id)
+            ->where('additional_amenities_type', '2')
+            ->get();
+        return $query;
+    }
 }

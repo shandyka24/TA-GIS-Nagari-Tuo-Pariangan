@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 30, 2024 at 10:28 AM
+-- Generation Time: Dec 15, 2024 at 04:08 PM
 -- Server version: 8.0.30
--- PHP Version: 8.2.4
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -573,7 +573,29 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (462, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-10-26 05:21:26', 1),
 (463, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-10-30 04:15:30', 1),
 (464, '::1', 'shandyka2403@gmail.com', 11, '2024-10-30 04:26:54', 1),
-(465, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-10-30 05:12:17', 1);
+(465, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-10-30 05:12:17', 1),
+(466, '::1', 'dykdyk', NULL, '2024-11-17 03:00:02', 0),
+(467, '::1', 'shandyka2403@gmail.com', 11, '2024-11-17 03:00:13', 1),
+(468, '::1', 'umegahomestay@gmail.com', 23, '2024-11-17 03:01:52', 1),
+(469, '::1', 'shandyka2403@gmail.com', 11, '2024-11-17 09:11:50', 1),
+(470, '::1', 'shandyka2403@gmail.com', 11, '2024-11-24 01:44:54', 1),
+(471, '::1', 'umegahomestay@gmail.com', 23, '2024-11-24 02:16:23', 1),
+(472, '::1', 'shandyka2403@gmail.com', 11, '2024-11-24 08:37:16', 1),
+(473, '::1', 'umegahomestay@gmail.com', 23, '2024-11-24 08:38:15', 1),
+(474, '::1', 'dykdyk', NULL, '2024-11-26 08:19:40', 0),
+(475, '::1', 'dykdyk', NULL, '2024-11-26 08:19:50', 0),
+(476, '::1', 'dykdyk', NULL, '2024-11-26 08:19:59', 0),
+(477, '::1', 'shandyka2403@gmail.com', 11, '2024-11-26 08:20:16', 1),
+(478, '::1', 'dyk', NULL, '2024-11-30 01:48:23', 0),
+(479, '::1', 'dyk', NULL, '2024-11-30 01:48:32', 0),
+(480, '::1', 'dykdyk', NULL, '2024-11-30 01:48:45', 0),
+(481, '::1', 'shandyka2403@gmail.com', 11, '2024-11-30 01:48:56', 1),
+(482, '::1', 'dykdyk', NULL, '2024-12-14 10:48:22', 0),
+(483, '::1', 'shandyka2403@gmail.com', 11, '2024-12-14 10:48:30', 1),
+(484, '::1', 'umegahomestay@gmail.com', 23, '2024-12-14 11:07:32', 1),
+(485, '::1', 'umegahomestay@gmail.com', 23, '2024-12-15 09:31:05', 1),
+(486, '::1', 'shandyka2403@gmail.com', 11, '2024-12-15 09:50:41', 1),
+(487, '::1', 'umegahomestay@gmail.com', 23, '2024-12-15 09:51:31', 1);
 
 -- --------------------------------------------------------
 
@@ -713,12 +735,12 @@ CREATE TABLE `culinary_place` (
 --
 
 INSERT INTO `culinary_place` (`id`, `village_id`, `name`, `address`, `employee_name`, `phone`, `open`, `close`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('C1', '1', 'Kawa Daun Tanjuang Indah', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putra', '082284978004', '09:00:00', '22:00:00', 0xe61000000103000000010000000600000042504c54fe1e5940c34e13d80286dcbf4350ac7bfe1e5940300ea234bf87dcbf44504c35ff1e59409e3268715f89dcbf43506ce6001f59408f995252e988dcbf42500c38001f5940fc6eaf18b485dcbf42504c54fe1e5940c34e13d80286dcbf, -0.44577259, 100.48435148, 'Kawa Daun Tanjung Indah merupakan sebuah cafe tradisional yang menyediakan berbagai macam makanan dan minuman. Lokasi Kawa Daun Tanjuang Indah ini sangat strategis dan memerikan pemandangan yang sangat indah.', '2024-10-25 04:34:18', '2024-10-25 04:39:07'),
-('C2', '1', 'Kawa Daun  Tanjuang Putuih', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Nasrudin', '081272053141', '09:00:00', '20:00:00', 0xe610000001030000000100000005000000e326fb26001f59402b10e9e49f85dcbfe2267bf1001f5940bd9e5f9eeb88dcbfe2261b32021f5940fb07073f9788dcbfe2263bd5021f5940d1c39026ca84dcbfe326fb26001f59402b10e9e49f85dcbf, -0.44573090, 100.48446610, 'Kawa Daun  Tanjuang Putuih merupakan cafe tradisional yang menediakan berbagai macam makanan dan minuman. Lokasi Kawa Daun Tanjuang Putuih ini sangat strategis dan memerikan pemandangan yang sangat indah.', '2024-10-25 04:38:34', '2024-10-25 04:38:34'),
-('C3', '1', 'Kawa Daun A & F', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Masril', NULL, '10:00:00', '18:00:00', 0xe61000000103000000010000000900000022318b27041f59401db8000c1f85dcbf20318b46031f5940f1b5218b8f85dcbf21316bd0021f5940cf88a6c94e86dcbf21316bd0021f5940a4f083676287dcbf2131eb6d031f594033f98184e688dcbf2131eb2f051f59406d19d024bf88dcbf21312b0e051f59406c3aff28a386dcbf21312b87041f59402877596b7385dcbf22318b27041f59401db8000c1f85dcbf, -0.44574041, 100.48461918, 'Kawa Daun A & F merupakan cafe tradisional yang menediakan berbagai makanan dan minuman. Terdapat juga ampera pada cafe ini. Cafe ini juga menyuguhkan pemandangan yang sangat indah', '2024-10-25 05:39:16', '2024-10-25 05:39:16'),
-('C4', '1', 'Kawa Daun Puncak Mortir', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hesti', NULL, '10:00:00', '20:00:00', 0xe610000001030000000100000006000000824285b9011f5940346f4dad1081dcbf8142c52c031f594014ae4def0d80dcbf81426540041f5940a14221b1217fdcbf81424505051f5940db9e9b8fe67fdcbf8142a5e3021f5940b23a204aab82dcbf824285b9011f5940346f4dad1081dcbf, -0.44536745, 100.48458085, 'Kawa Daun Puncak Mortir merupakan cafe tradisional yang menyuguhkan pemandangan yang sangat indah. Cafe ini menjual berbagai makanan dan minuman.', '2024-10-25 05:51:32', '2024-10-25 05:51:32'),
-('C5', '1', 'Puncak Kawa Gudester', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hana', '082283529664', '09:00:00', '20:00:00', 0xe6100000010300000001000000070000005d90c88b101f5940181d2855f496dcbf5e9068830f1f59405754f2af9199dcbf5e902867111f5940ca16d60c219bdcbf5d90886f121f594057ec3eafeb99dcbf5d90c8a7121f5940abc6bfb22998dcbf5d90e83c121f59407e5fdb559a96dcbf5d90c88b101f5940181d2855f496dcbf, -0.44683020, 100.48541775, 'Puncak Kawa Gudester merupakan sebuah cafe tradisional yang menyediakan berbagai macam makanan dan minuman. Cafe ini juga menyuguhkan pemandangan yang sangat indah.', '2024-10-25 06:11:07', '2024-10-25 06:11:07'),
-('C6', '1', 'Sako Minang Cafe', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Zainul', '082122886454', '09:00:00', '18:00:00', 0xe61000000103000000010000000700000062582f14001f594036000374836cdcbf0086115f011f5940be25be27da6bdcbf008611e6011f5940417cad4bda69dcbfff85714b001f5940fefbb38e5068dcbfff859178fe1e594083abcbadc668dcbf0086119dff1e59402738c987d46bdcbf62582f14001f594036000374836cdcbf, -0.44399500, 100.48438628, 'Cafe ini menyediakan berbagai macam makanan dan minuman. Lokasi dari cafe ini diapit oleh pepohonan yang rimbun dan menyuguhi pemandangan yang indah.', '2024-10-25 06:16:41', '2024-10-25 06:16:41');
+('C1', '1', 'Kawa Daun Tanjuang Indah', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putra', '082284978004', '09:00:00', '22:00:00', 0xe61000000103000000010000000600000042504c54fe1e5940c34e13d80286dcbf4350ac7bfe1e5940300ea234bf87dcbf44504c35ff1e59409e3268715f89dcbf43506ce6001f59408f995252e988dcbf42500c38001f5940fc6eaf18b485dcbf42504c54fe1e5940c34e13d80286dcbf, '-0.44577259', '100.48435148', 'Kawa Daun Tanjung Indah merupakan sebuah cafe tradisional yang menyediakan berbagai macam makanan dan minuman. Lokasi Kawa Daun Tanjuang Indah ini sangat strategis dan memerikan pemandangan yang sangat indah.', '2024-10-25 04:34:18', '2024-10-25 04:39:07'),
+('C2', '1', 'Kawa Daun  Tanjuang Putuih', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Nasrudin', '081272053141', '09:00:00', '20:00:00', 0xe610000001030000000100000005000000e326fb26001f59402b10e9e49f85dcbfe2267bf1001f5940bd9e5f9eeb88dcbfe2261b32021f5940fb07073f9788dcbfe2263bd5021f5940d1c39026ca84dcbfe326fb26001f59402b10e9e49f85dcbf, '-0.44573090', '100.48446610', 'Kawa Daun  Tanjuang Putuih merupakan cafe tradisional yang menediakan berbagai macam makanan dan minuman. Lokasi Kawa Daun Tanjuang Putuih ini sangat strategis dan memerikan pemandangan yang sangat indah.', '2024-10-25 04:38:34', '2024-10-25 04:38:34'),
+('C3', '1', 'Kawa Daun A & F', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Masril', NULL, '10:00:00', '18:00:00', 0xe61000000103000000010000000900000022318b27041f59401db8000c1f85dcbf20318b46031f5940f1b5218b8f85dcbf21316bd0021f5940cf88a6c94e86dcbf21316bd0021f5940a4f083676287dcbf2131eb6d031f594033f98184e688dcbf2131eb2f051f59406d19d024bf88dcbf21312b0e051f59406c3aff28a386dcbf21312b87041f59402877596b7385dcbf22318b27041f59401db8000c1f85dcbf, '-0.44574041', '100.48461918', 'Kawa Daun A & F merupakan cafe tradisional yang menediakan berbagai makanan dan minuman. Terdapat juga ampera pada cafe ini. Cafe ini juga menyuguhkan pemandangan yang sangat indah', '2024-10-25 05:39:16', '2024-10-25 05:39:16'),
+('C4', '1', 'Kawa Daun Puncak Mortir', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hesti', NULL, '10:00:00', '20:00:00', 0xe610000001030000000100000006000000824285b9011f5940346f4dad1081dcbf8142c52c031f594014ae4def0d80dcbf81426540041f5940a14221b1217fdcbf81424505051f5940db9e9b8fe67fdcbf8142a5e3021f5940b23a204aab82dcbf824285b9011f5940346f4dad1081dcbf, '-0.44536745', '100.48458085', 'Kawa Daun Puncak Mortir merupakan cafe tradisional yang menyuguhkan pemandangan yang sangat indah. Cafe ini menjual berbagai makanan dan minuman.', '2024-10-25 05:51:32', '2024-10-25 05:51:32'),
+('C5', '1', 'Puncak Kawa Gudester', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hana', '082283529664', '09:00:00', '20:00:00', 0xe6100000010300000001000000070000005d90c88b101f5940181d2855f496dcbf5e9068830f1f59405754f2af9199dcbf5e902867111f5940ca16d60c219bdcbf5d90886f121f594057ec3eafeb99dcbf5d90c8a7121f5940abc6bfb22998dcbf5d90e83c121f59407e5fdb559a96dcbf5d90c88b101f5940181d2855f496dcbf, '-0.44683020', '100.48541775', 'Puncak Kawa Gudester merupakan sebuah cafe tradisional yang menyediakan berbagai macam makanan dan minuman. Cafe ini juga menyuguhkan pemandangan yang sangat indah.', '2024-10-25 06:11:07', '2024-10-25 06:11:07'),
+('C6', '1', 'Sako Minang Cafe', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Zainul', '082122886454', '09:00:00', '18:00:00', 0xe61000000103000000010000000700000062582f14001f594036000374836cdcbf0086115f011f5940be25be27da6bdcbf008611e6011f5940417cad4bda69dcbfff85714b001f5940fefbb38e5068dcbfff859178fe1e594083abcbadc668dcbf0086119dff1e59402738c987d46bdcbf62582f14001f594036000374836cdcbf, '-0.44399500', '100.48438628', 'Cafe ini menyediakan berbagai macam makanan dan minuman. Lokasi dari cafe ini diapit oleh pepohonan yang rimbun dan menyuguhi pemandangan yang indah.', '2024-10-25 06:16:41', '2024-10-25 06:16:41');
 
 -- --------------------------------------------------------
 
@@ -835,6 +857,7 @@ CREATE TABLE `homestay` (
   `owner` int UNSIGNED NOT NULL,
   `open` time DEFAULT NULL,
   `close` time DEFAULT NULL,
+  `max_people_for_event` int NOT NULL,
   `description` text,
   `video_url` text,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -846,10 +869,10 @@ CREATE TABLE `homestay` (
 -- Dumping data for table `homestay`
 --
 
-INSERT INTO `homestay` (`id`, `village_id`, `name`, `category`, `address`, `geom`, `lat`, `lng`, `owner`, `open`, `close`, `description`, `video_url`, `created_at`, `updated_at`, `profil_link`) VALUES
-('H12', '1', 'Homestay Umega', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000080000000713a515141f594075a82bd316a5dcbf0413e50f161f594056fa301514a4dcbf0613e5e2151f5940668b498887a2dcbf05134556151f5940477bc4ba49a1dcbf0613b534121f5940d6377fc7eca2dcbf0513c534111f5940e5707455f2a3dcbf0713e531121f594023f47431f2a5dcbf0713a515141f594075a82bd316a5dcbf, -0.44748639, 100.48557337, 23, '10:00:00', '23:59:00', 'Homestay Umega MD di Nagari Tuo Pariangan adalah penginapan yang menawarkan pengalaman menginap dengan nuansa lokal Minangkabau yang kental. Terletak di desa yang kaya akan sejarah dan budaya, homestay ini memberi kesempatan bagi pengunjung untuk merasakan langsung suasana kehidupan masyarakat tradisional Minangkabau sambil menikmati pemandangan alam yang indah, dengan latar belakang pegunungan dan hamparan sawah yang asri.', NULL, '2024-09-26 05:27:13', '2024-10-25 19:51:44', ''),
-('H13', '1', 'Homestay Gudester', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000050000001dc09e63081f59407ec8ede3dfa0dcbf1cc01e0f0a1f5940c98d5f80a7a2dcbf1ec0feb40b1f5940924004a4d4a0dcbf1dc0be140a1f5940e50692070d9fdcbf1dc09e63081f59407ec8ede3dfa0dcbf, -0.44731766, 100.48498829, 24, '10:00:00', '23:59:00', 'Homestay Gudester Pariangan merupakan homestay modern dimana homestay ini hanya menyediakan kamar. Pada tiap-tiap kamar memiliki pemandangan persawahan yang sangat indah', NULL, '2024-10-25 19:48:36', '2024-10-25 19:51:07', ''),
-('H14', '1', 'Homestay Nabila', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000070000006c9b975dc61e5940c422477d5b8edcbf6d9b779bc61e5940a53cea990c90dcbf6c9b973ec71e5940aac034576991dcbf6c9b97b4c91e5940385ed1971a91dcbf6c9b574fc91e5940ceae26feea8ddcbf6c9b97b7c61e5940ee5052dd558edcbf6c9b975dc61e5940c422477d5b8edcbf, -0.44626860, 100.48095920, 25, '10:00:00', '23:59:00', 'Homestay Nabila di Pariangan adalah penginapan nyaman yang menawarkan perpaduan antara arsitektur tradisional Minangkabau dan kenyamanan modern. Terletak di Desa Pariangan, Tanah Datar, homestay ini menghadirkan pemandangan sawah hijau yang luas serta bukit-bukit di sekitar, menjadikannya tempat sempurna bagi para tamu yang ingin menikmati ketenangan dan keindahan alam Sumatera Barat.', NULL, '2024-10-25 19:55:23', '2024-10-25 19:55:23', '');
+INSERT INTO `homestay` (`id`, `village_id`, `name`, `category`, `address`, `geom`, `lat`, `lng`, `owner`, `open`, `close`, `max_people_for_event`, `description`, `video_url`, `created_at`, `updated_at`, `profil_link`) VALUES
+('H12', '1', 'Homestay Umega', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000080000000713a515141f594075a82bd316a5dcbf0413e50f161f594056fa301514a4dcbf0613e5e2151f5940668b498887a2dcbf05134556151f5940477bc4ba49a1dcbf0613b534121f5940d6377fc7eca2dcbf0513c534111f5940e5707455f2a3dcbf0713e531121f594023f47431f2a5dcbf0713a515141f594075a82bd316a5dcbf, '-0.44748639', '100.48557337', 23, '10:00:00', '23:59:00', 50, 'Homestay Umega MD di Nagari Tuo Pariangan adalah penginapan yang menawarkan pengalaman menginap dengan nuansa lokal Minangkabau yang kental. Terletak di desa yang kaya akan sejarah dan budaya, homestay ini memberi kesempatan bagi pengunjung untuk merasakan langsung suasana kehidupan masyarakat tradisional Minangkabau sambil menikmati pemandangan alam yang indah, dengan latar belakang pegunungan dan hamparan sawah yang asri.', NULL, '2024-09-26 05:27:13', '2024-10-25 19:51:44', ''),
+('H13', '1', 'Homestay Gudester', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000050000001dc09e63081f59407ec8ede3dfa0dcbf1cc01e0f0a1f5940c98d5f80a7a2dcbf1ec0feb40b1f5940924004a4d4a0dcbf1dc0be140a1f5940e50692070d9fdcbf1dc09e63081f59407ec8ede3dfa0dcbf, '-0.44731766', '100.48498829', 24, '10:00:00', '23:59:00', 50, 'Homestay Gudester Pariangan merupakan homestay modern dimana homestay ini hanya menyediakan kamar. Pada tiap-tiap kamar memiliki pemandangan persawahan yang sangat indah', NULL, '2024-10-25 19:48:36', '2024-10-25 19:51:07', ''),
+('H14', '1', 'Homestay Nabila', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000070000006c9b975dc61e5940c422477d5b8edcbf6d9b779bc61e5940a53cea990c90dcbf6c9b973ec71e5940aac034576991dcbf6c9b97b4c91e5940385ed1971a91dcbf6c9b574fc91e5940ceae26feea8ddcbf6c9b97b7c61e5940ee5052dd558edcbf6c9b975dc61e5940c422477d5b8edcbf, '-0.44626860', '100.48095920', 25, '10:00:00', '23:59:00', 50, 'Homestay Nabila di Pariangan adalah penginapan nyaman yang menawarkan perpaduan antara arsitektur tradisional Minangkabau dan kenyamanan modern. Terletak di Desa Pariangan, Tanah Datar, homestay ini menghadirkan pemandangan sawah hijau yang luas serta bukit-bukit di sekitar, menjadikannya tempat sempurna bagi para tamu yang ingin menikmati ketenangan dan keindahan alam Sumatera Barat.', NULL, '2024-10-25 19:55:23', '2024-10-25 19:55:23', '');
 
 -- --------------------------------------------------------
 
@@ -860,6 +883,7 @@ INSERT INTO `homestay` (`id`, `village_id`, `name`, `category`, `address`, `geom
 CREATE TABLE `homestay_additional_amenities` (
   `homestay_id` varchar(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `additional_amenities_id` varchar(3) NOT NULL,
+  `additional_amenities_type` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '1',
   `name` varchar(50) NOT NULL,
   `category` varchar(1) NOT NULL,
   `price` int NOT NULL,
@@ -877,19 +901,20 @@ CREATE TABLE `homestay_additional_amenities` (
 -- Dumping data for table `homestay_additional_amenities`
 --
 
-INSERT INTO `homestay_additional_amenities` (`homestay_id`, `additional_amenities_id`, `name`, `category`, `price`, `is_order_count_per_day`, `is_order_count_per_person`, `is_order_count_per_room`, `stock`, `description`, `image_url`, `created_at`, `updated_at`) VALUES
-('H12', '01', 'Kasur', '1', 100000, '0', '0', '1', 5, 'Kasur tambahan', '1729884917_a45c76bf7d804d9fdec4.jpg', '2024-09-29 01:07:22', '2024-10-25 07:35:23'),
-('H12', '02', 'Sarapan', '2', 15000, '1', '1', '0', 0, 'Sarapan', '1729928412_ca7169662ad91e6733b4.jpeg', '2024-10-25 19:40:28', '2024-10-25 19:40:28'),
-('H12', '03', 'Makan siang', '2', 15000, '1', '1', '0', 0, 'Request Makan Siang', '1729928449_649053ff8ddad903b730.jpeg', '2024-10-25 19:40:51', '2024-10-25 19:40:51'),
-('H12', '04', 'Makan Malam', '2', 15000, '1', '1', '0', 0, 'Request Makan Malam', '1729928491_8652a5b7cd88d997e2b6.jpg', '2024-10-25 19:41:33', '2024-10-25 19:41:33'),
-('H13', '01', 'Extra Bed', '1', 250000, '0', '1', '1', 3, 'Kasur Tambahan', '1729929786_7a8905841bc12e975475.jpg', '2024-10-25 20:03:17', '2024-10-25 20:03:17'),
-('H13', '02', 'Makan siang', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729929833_36273e691e8717a109a1.jpeg', '2024-10-25 20:03:55', '2024-10-25 20:03:55'),
-('H13', '03', 'Makan Malam', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729929895_3acd79ef24efa42d0ad4.jpg', '2024-10-25 20:04:58', '2024-10-25 20:04:58'),
-('H14', '01', 'Sarapan', '2', 15000, '1', '1', '0', 0, 'Bisa Request', '1729930482_9973666a16a31dde1159.jpeg', '2024-10-25 20:14:44', '2024-10-25 20:14:44'),
-('H14', '02', 'Extra Bed', '1', 250000, '1', '0', '0', 5, 'Kasur Tambahan', '1729930540_c556b1165d86231b345a.jpg', '2024-10-25 20:15:42', '2024-10-25 20:15:42'),
-('H14', '03', 'Makan Siang', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729930579_c46285355b6831b83f6e.jpeg', '2024-10-25 20:16:21', '2024-10-25 20:16:21'),
-('H14', '04', 'Makan Malam', '2', 20000, '1', '1', '0', 0, 'BIsa Request', '1729930618_feae05476ecb4485033d.jpg', '2024-10-25 20:17:00', '2024-10-25 20:17:00'),
-('H14', '05', 'Bajamba', '2', 30000, '0', '1', '0', 0, 'Makan Bajamba', '1729930848_b080699b1d12b4a89bcf.jpeg', '2024-10-25 20:20:51', '2024-10-25 20:20:51');
+INSERT INTO `homestay_additional_amenities` (`homestay_id`, `additional_amenities_id`, `additional_amenities_type`, `name`, `category`, `price`, `is_order_count_per_day`, `is_order_count_per_person`, `is_order_count_per_room`, `stock`, `description`, `image_url`, `created_at`, `updated_at`) VALUES
+('H12', '01', '1', 'Kasur', '1', 100000, '0', '0', '1', 5, 'Kasur tambahan', '1729884917_a45c76bf7d804d9fdec4.jpg', '2024-09-29 01:07:22', '2024-10-25 07:35:23'),
+('H12', '02', '1', 'Sarapan', '2', 15000, '1', '1', '0', 0, 'Sarapan', '1729928412_ca7169662ad91e6733b4.jpeg', '2024-10-25 19:40:28', '2024-10-25 19:40:28'),
+('H12', '03', '1', 'Makan siang', '2', 15000, '1', '1', '0', 0, 'Request Makan Siang', '1729928449_649053ff8ddad903b730.jpeg', '2024-10-25 19:40:51', '2024-10-25 19:40:51'),
+('H12', '04', '1', 'Makan Malam', '2', 15000, '1', '1', '0', 0, 'Request Makan Malam', '1729928491_8652a5b7cd88d997e2b6.jpg', '2024-10-25 19:41:33', '2024-10-25 19:41:33'),
+('H12', '05', '2', 'sound system', '1', 1000000, '0', '0', '0', 5, 'sound system', '1734277391_4f6c3828e11c844c6406.png', '2024-12-15 02:43:14', '2024-12-15 02:43:14'),
+('H13', '01', '1', 'Extra Bed', '1', 250000, '0', '1', '1', 3, 'Kasur Tambahan', '1729929786_7a8905841bc12e975475.jpg', '2024-10-25 20:03:17', '2024-10-25 20:03:17'),
+('H13', '02', '1', 'Makan siang', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729929833_36273e691e8717a109a1.jpeg', '2024-10-25 20:03:55', '2024-10-25 20:03:55'),
+('H13', '03', '1', 'Makan Malam', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729929895_3acd79ef24efa42d0ad4.jpg', '2024-10-25 20:04:58', '2024-10-25 20:04:58'),
+('H14', '01', '1', 'Sarapan', '2', 15000, '1', '1', '0', 0, 'Bisa Request', '1729930482_9973666a16a31dde1159.jpeg', '2024-10-25 20:14:44', '2024-10-25 20:14:44'),
+('H14', '02', '1', 'Extra Bed', '1', 250000, '1', '0', '0', 5, 'Kasur Tambahan', '1729930540_c556b1165d86231b345a.jpg', '2024-10-25 20:15:42', '2024-10-25 20:15:42'),
+('H14', '03', '1', 'Makan Siang', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729930579_c46285355b6831b83f6e.jpeg', '2024-10-25 20:16:21', '2024-10-25 20:16:21'),
+('H14', '04', '1', 'Makan Malam', '2', 20000, '1', '1', '0', 0, 'BIsa Request', '1729930618_feae05476ecb4485033d.jpg', '2024-10-25 20:17:00', '2024-10-25 20:17:00'),
+('H14', '05', '1', 'Bajamba', '2', 30000, '0', '1', '0', 0, 'Makan Bajamba', '1729930848_b080699b1d12b4a89bcf.jpeg', '2024-10-25 20:20:51', '2024-10-25 20:20:51');
 
 -- --------------------------------------------------------
 
@@ -1018,7 +1043,7 @@ CREATE TABLE `homestay_unit` (
 
 INSERT INTO `homestay_unit` (`homestay_id`, `unit_type`, `unit_number`, `name`, `price`, `capacity`, `description`, `created_at`, `updated_at`) VALUES
 ('H12', '1', '1', 'Kamar 1', 350000, 2, 'Kamar 1', '2024-09-29 01:05:21', '2024-10-25 07:09:53'),
-('H12', '1', '2', 'Kamar 2', 349999, 2, 'Kamar 2', '2024-09-29 01:05:52', '2024-10-25 07:25:39'),
+('H12', '1', '2', 'Kamar 2', 350000, 2, 'Kamar 2', '2024-09-29 01:05:52', '2024-10-25 07:25:39'),
 ('H12', '1', '3', 'Kamar 3', 350000, 2, 'Kamar 3', '2024-09-29 01:06:32', '2024-10-25 07:28:50'),
 ('H12', '1', '4', 'Kamar 4', 350000, 2, 'Kamar 4', '2024-10-25 07:29:25', '2024-10-25 07:31:40'),
 ('H12', '1', '5', 'Kamar 5', 350000, 2, 'Kamar 5', '2024-10-25 07:29:37', '2024-10-25 07:32:05'),
@@ -1258,6 +1283,7 @@ INSERT INTO `province` (`id`, `name`, `geom`) VALUES
 CREATE TABLE `reservation` (
   `id` varchar(4) NOT NULL,
   `customer_id` int UNSIGNED DEFAULT NULL,
+  `reservation_type` varchar(1) NOT NULL DEFAULT '1',
   `request_date` datetime NOT NULL,
   `check_in` datetime NOT NULL,
   `total_people` int DEFAULT NULL,
@@ -1286,22 +1312,29 @@ CREATE TABLE `reservation` (
 -- Dumping data for table `reservation`
 --
 
-INSERT INTO `reservation` (`id`, `customer_id`, `request_date`, `check_in`, `total_people`, `review`, `rating`, `total_price`, `deposit`, `status`, `deposit_snap_token`, `pay_full_snap_token`, `reservation_finish_at`, `is_rejected`, `confirmed_at`, `feedback`, `canceled_at`, `cancelation_reason`, `is_refund`, `refund_paid_at`, `account_refund`, `refund_proof`, `is_refund_proof_correct`, `refund_paid_confirmed_at`) VALUES
-('R016', 11, '2024-10-11 17:27:25', '2024-10-17 14:00:00', 5, NULL, NULL, 600000, 120000, 'Full Pay Successful', '4833097b-9063-41f3-a17f-b69da590496d', 'e3ebbcd1-c32f-4463-90b2-e4e8881974b1', '2024-10-11 10:28:14', '0', '2024-10-11 10:28:36', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R017', 11, '2024-10-11 18:01:35', '2024-10-16 14:00:00', 3, NULL, NULL, 300000, 60000, 'Full Pay Successful', '102496c1-340b-46a6-8dc0-5d448bbfa432', 'dd38c12b-3253-48f4-8ab9-094672edd3fc', '2024-10-11 11:01:55', '0', '2024-10-11 11:02:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R018', 11, '2024-10-11 19:43:53', '2024-10-18 14:00:00', 3, NULL, NULL, 300000, 60000, 'Deposit Successful', '6adcf2de-e03a-4d34-8e0a-8386a3fd6122', NULL, '2024-10-11 12:44:00', '0', '2024-10-11 12:44:11', '', '2024-10-11 12:44:00', '1', '1', '2024-10-11 12:45:51', 'Dika - Bank ABC - 12345678', '1728650749_b4956a3c25ffc50fdb89.jpg', '1', '2024-10-11 12:46:09'),
-('R019', 11, '2024-10-11 19:55:11', '2024-10-11 14:00:00', 5, NULL, NULL, 600000, 120000, '1', 'c99df471-3896-4fe0-86b2-ea1f7dbe3937', NULL, '2024-10-11 12:55:18', '0', '2024-10-11 12:55:34', '', '2024-10-11 12:57:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
-('R020', 11, '2024-10-11 19:57:46', '2024-10-11 14:00:00', 5, NULL, NULL, 600000, 120000, 'Deposit Successful', 'cd0ee0ad-a683-4789-8482-64b968721e80', '47366abc-d256-432d-9b9e-a4027ee6fbe7', '2024-10-11 12:57:53', '0', '2024-10-11 12:58:14', '', '2024-10-11 12:59:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
-('R021', 11, '2024-10-14 12:13:35', '2024-10-18 14:00:00', 2, NULL, NULL, 150000, 30000, 'Deposit Successful', NULL, NULL, '2024-10-14 05:13:43', '0', '2024-10-14 05:14:49', '', '2024-10-21 14:21:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
-('R022', 11, '2024-10-14 12:15:48', '2024-10-19 14:00:00', 2, NULL, NULL, 100000, 20000, 'Full Pay Successful', NULL, NULL, '2024-10-14 05:15:53', '0', '2024-10-14 05:16:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R023', 11, '2024-10-14 12:16:38', '2024-10-19 14:00:00', 2, NULL, NULL, 200000, 40000, 'Full Pay Successful', NULL, NULL, '2024-10-14 05:16:43', '0', '2024-10-14 05:16:58', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R024', 11, '2024-10-14 18:24:24', '2024-10-12 14:00:00', 3, '', 4, 250000, 50000, 'Done', '7aa3b21e-431e-4dba-9d61-306902c1781a', '1a47ed95-4544-464d-bc00-90d71d1c4b97', '2024-10-14 11:25:31', '0', '2024-10-14 11:26:01', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R025', 11, '2024-10-14 18:42:36', '2024-10-20 14:00:00', 3, NULL, NULL, 400000, 80000, 'Deposit Successful', '36d6cb5a-8370-4db5-b724-7af3c77c2322', NULL, '2024-10-14 11:42:55', '0', '2024-10-14 11:43:14', '', '2024-10-14 11:45:00', '1', '1', '2024-10-14 11:47:45', 'Wawan - Bank CAB - 69696969', '1728906462_81e712e85c31e9c4bacd.jpg', '1', '2024-10-14 11:48:15'),
-('R026', 11, '2024-10-14 18:49:16', '2024-10-12 14:00:00', 3, NULL, NULL, 100000, 20000, '1', '985d0337-858c-43e1-b76d-a5c617746694', NULL, '2024-10-14 11:49:21', '0', '2024-10-14 11:49:36', '', '2024-10-14 11:50:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
-('R027', 11, '2024-10-14 20:47:57', '2024-10-20 14:00:00', 2, NULL, NULL, 300000, 60000, 'Full Pay Successful', '7bf4ba9e-58ee-4923-8b9a-f2c1dcd04077', '818786ed-9c35-4397-883b-6d3c511ceefc', '2024-10-14 13:48:40', '0', '2024-10-14 13:48:48', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R028', 11, '2024-10-21 21:21:53', '2024-10-20 14:00:00', 2, 'mantap', 5, 300000, 60000, 'Done', '649e8678-240a-4860-839c-8a185389ab5c', '285a8c3e-fb15-4f52-9734-a97cf83d69d6', '2024-10-21 14:22:10', '0', '2024-10-21 14:22:29', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R029', 11, '2024-10-26 15:43:29', '2024-10-23 14:00:00', 2, 'bagus', 5, 840000, 168000, 'Done', '785c69af-5675-4a5c-8b7c-5adcdf4bd0ce', '8bc0f8f6-4246-4262-9712-baf745cf99fb', '2024-10-26 08:43:52', '0', '2024-10-26 08:44:07', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R030', 11, '2024-10-26 17:07:52', '2024-10-31 14:00:00', 4, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-10-26 10:08:15', '1', '2024-10-26 10:08:39', '', '2024-10-30 09:45:00', '2', '0', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `reservation` (`id`, `customer_id`, `reservation_type`, `request_date`, `check_in`, `total_people`, `review`, `rating`, `total_price`, `deposit`, `status`, `deposit_snap_token`, `pay_full_snap_token`, `reservation_finish_at`, `is_rejected`, `confirmed_at`, `feedback`, `canceled_at`, `cancelation_reason`, `is_refund`, `refund_paid_at`, `account_refund`, `refund_proof`, `is_refund_proof_correct`, `refund_paid_confirmed_at`) VALUES
+('R016', 11, '1', '2024-10-11 17:27:25', '2024-10-17 14:00:00', 5, NULL, NULL, 600000, 120000, 'Full Pay Successful', '4833097b-9063-41f3-a17f-b69da590496d', 'e3ebbcd1-c32f-4463-90b2-e4e8881974b1', '2024-10-11 10:28:14', '0', '2024-10-11 10:28:36', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R017', 11, '1', '2024-10-11 18:01:35', '2024-10-16 14:00:00', 3, NULL, NULL, 300000, 60000, 'Full Pay Successful', '102496c1-340b-46a6-8dc0-5d448bbfa432', 'dd38c12b-3253-48f4-8ab9-094672edd3fc', '2024-10-11 11:01:55', '0', '2024-10-11 11:02:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R018', 11, '1', '2024-10-11 19:43:53', '2024-10-18 14:00:00', 3, NULL, NULL, 300000, 60000, 'Deposit Successful', '6adcf2de-e03a-4d34-8e0a-8386a3fd6122', NULL, '2024-10-11 12:44:00', '0', '2024-10-11 12:44:11', '', '2024-10-11 12:44:00', '1', '1', '2024-10-11 12:45:51', 'Dika - Bank ABC - 12345678', '1728650749_b4956a3c25ffc50fdb89.jpg', '1', '2024-10-11 12:46:09'),
+('R019', 11, '1', '2024-10-11 19:55:11', '2024-10-11 14:00:00', 5, NULL, NULL, 600000, 120000, '1', 'c99df471-3896-4fe0-86b2-ea1f7dbe3937', NULL, '2024-10-11 12:55:18', '0', '2024-10-11 12:55:34', '', '2024-10-11 12:57:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R020', 11, '1', '2024-10-11 19:57:46', '2024-10-11 14:00:00', 5, NULL, NULL, 600000, 120000, 'Deposit Successful', 'cd0ee0ad-a683-4789-8482-64b968721e80', '47366abc-d256-432d-9b9e-a4027ee6fbe7', '2024-10-11 12:57:53', '0', '2024-10-11 12:58:14', '', '2024-10-11 12:59:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
+('R021', 11, '1', '2024-10-14 12:13:35', '2024-10-18 14:00:00', 2, NULL, NULL, 150000, 30000, 'Deposit Successful', NULL, NULL, '2024-10-14 05:13:43', '0', '2024-10-14 05:14:49', '', '2024-10-21 14:21:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
+('R022', 11, '1', '2024-10-14 12:15:48', '2024-10-19 14:00:00', 2, NULL, NULL, 100000, 20000, 'Full Pay Successful', NULL, NULL, '2024-10-14 05:15:53', '0', '2024-10-14 05:16:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R023', 11, '1', '2024-10-14 12:16:38', '2024-10-19 14:00:00', 2, NULL, NULL, 200000, 40000, 'Full Pay Successful', NULL, NULL, '2024-10-14 05:16:43', '0', '2024-10-14 05:16:58', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R024', 11, '1', '2024-10-14 18:24:24', '2024-10-12 14:00:00', 3, '', 4, 250000, 50000, 'Done', '7aa3b21e-431e-4dba-9d61-306902c1781a', '1a47ed95-4544-464d-bc00-90d71d1c4b97', '2024-10-14 11:25:31', '0', '2024-10-14 11:26:01', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R025', 11, '1', '2024-10-14 18:42:36', '2024-10-20 14:00:00', 3, NULL, NULL, 400000, 80000, 'Deposit Successful', '36d6cb5a-8370-4db5-b724-7af3c77c2322', NULL, '2024-10-14 11:42:55', '0', '2024-10-14 11:43:14', '', '2024-10-14 11:45:00', '1', '1', '2024-10-14 11:47:45', 'Wawan - Bank CAB - 69696969', '1728906462_81e712e85c31e9c4bacd.jpg', '1', '2024-10-14 11:48:15'),
+('R026', 11, '1', '2024-10-14 18:49:16', '2024-10-12 14:00:00', 3, NULL, NULL, 100000, 20000, '1', '985d0337-858c-43e1-b76d-a5c617746694', NULL, '2024-10-14 11:49:21', '0', '2024-10-14 11:49:36', '', '2024-10-14 11:50:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R027', 11, '1', '2024-10-14 20:47:57', '2024-10-20 14:00:00', 2, NULL, NULL, 300000, 60000, 'Full Pay Successful', '7bf4ba9e-58ee-4923-8b9a-f2c1dcd04077', '818786ed-9c35-4397-883b-6d3c511ceefc', '2024-10-14 13:48:40', '0', '2024-10-14 13:48:48', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R028', 11, '1', '2024-10-21 21:21:53', '2024-10-20 14:00:00', 2, 'mantap', 5, 300000, 60000, 'Done', '649e8678-240a-4860-839c-8a185389ab5c', '285a8c3e-fb15-4f52-9734-a97cf83d69d6', '2024-10-21 14:22:10', '0', '2024-10-21 14:22:29', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R029', 11, '1', '2024-10-26 15:43:29', '2024-10-23 14:00:00', 2, 'bagus', 5, 840000, 168000, 'Done', '785c69af-5675-4a5c-8b7c-5adcdf4bd0ce', '8bc0f8f6-4246-4262-9712-baf745cf99fb', '2024-10-26 08:43:52', '0', '2024-10-26 08:44:07', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R030', 11, '1', '2024-10-26 17:07:52', '2024-10-31 14:00:00', 4, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-10-26 10:08:15', '1', '2024-10-26 10:08:39', '', '2024-10-30 09:45:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R031', 11, '1', '2024-11-17 17:45:13', '2024-11-20 14:00:00', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-24 07:45:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R032', 11, '1', '2024-11-24 14:57:58', '2024-11-27 14:00:00', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-26 14:20:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R033', 11, '1', '2024-11-30 14:51:08', '2024-12-03 14:00:00', 5, NULL, NULL, 1399998, 280000, '0', NULL, NULL, '2024-11-30 08:55:03', NULL, NULL, NULL, '2024-12-14 17:07:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R034', 11, '2', '2024-11-30 16:08:54', '2024-12-05 14:00:00', 50, NULL, NULL, 3500000, 700000, '0', NULL, NULL, '2024-11-29 20:08:54', NULL, NULL, NULL, '2024-12-14 17:07:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R035', 11, '2', '2024-12-14 23:59:01', '2024-12-17 14:00:00', 50, NULL, NULL, 4725000, 945000, '0', NULL, NULL, '2024-12-14 03:59:01', NULL, NULL, NULL, '2024-12-15 15:50:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R036', 11, '2', '2024-12-15 23:05:24', '2024-12-18 14:00:00', 20, NULL, NULL, 4725000, 945000, '0', NULL, NULL, '2024-12-15 03:05:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R037', 11, '2', '2024-12-15 23:06:36', '2024-12-21 14:00:00', 20, NULL, NULL, 3150000, 630000, '0', NULL, NULL, '2024-12-15 03:06:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1326,6 +1359,8 @@ CREATE TABLE `reservation_homestay_additional_amenities_detail` (
 
 INSERT INTO `reservation_homestay_additional_amenities_detail` (`homestay_id`, `additional_amenities_id`, `reservation_id`, `day_order`, `person_order`, `room_order`, `total_order`, `total_price`) VALUES
 ('H12', '01', 'R024', 0, 0, 0, 1, 100000),
+('H12', '05', 'R036', 0, 0, 0, 1, 0),
+('H12', '05', 'R037', 0, 0, 0, 1, 0),
 ('H13', '02', 'R029', 1, 2, 0, 2, 40000);
 
 -- --------------------------------------------------------
@@ -1359,7 +1394,32 @@ INSERT INTO `reservation_homestay_unit_detail` (`homestay_id`, `unit_type`, `uni
 ('H12', '1', '1', '2024-10-20', 'R027'),
 ('H12', '1', '1', '2024-10-25', 'R028'),
 ('H13', '1', '1', '2024-10-29', 'R029'),
-('H13', '1', '1', '2024-10-30', 'R029');
+('H13', '1', '1', '2024-10-30', 'R029'),
+('H12', '1', '1', '2024-12-18', 'R036'),
+('H12', '1', '1', '2024-12-19', 'R036'),
+('H12', '1', '1', '2024-12-20', 'R036'),
+('H12', '1', '2', '2024-12-18', 'R036'),
+('H12', '1', '2', '2024-12-19', 'R036'),
+('H12', '1', '2', '2024-12-20', 'R036'),
+('H12', '1', '3', '2024-12-18', 'R036'),
+('H12', '1', '3', '2024-12-19', 'R036'),
+('H12', '1', '3', '2024-12-20', 'R036'),
+('H12', '1', '4', '2024-12-18', 'R036'),
+('H12', '1', '4', '2024-12-19', 'R036'),
+('H12', '1', '4', '2024-12-20', 'R036'),
+('H12', '1', '5', '2024-12-18', 'R036'),
+('H12', '1', '5', '2024-12-19', 'R036'),
+('H12', '1', '5', '2024-12-20', 'R036'),
+('H12', '1', '1', '2024-12-21', 'R037'),
+('H12', '1', '1', '2024-12-22', 'R037'),
+('H12', '1', '2', '2024-12-21', 'R037'),
+('H12', '1', '2', '2024-12-22', 'R037'),
+('H12', '1', '3', '2024-12-21', 'R037'),
+('H12', '1', '3', '2024-12-22', 'R037'),
+('H12', '1', '4', '2024-12-21', 'R037'),
+('H12', '1', '4', '2024-12-22', 'R037'),
+('H12', '1', '5', '2024-12-21', 'R037'),
+('H12', '1', '5', '2024-12-22', 'R037');
 
 -- --------------------------------------------------------
 
@@ -1393,7 +1453,44 @@ INSERT INTO `reservation_homestay_unit_detail_backup` (`homestay_id`, `unit_type
 ('H12', '1', '3', 'R021', '2024-10-18'),
 ('H12', '1', '1', 'R025', '2024-10-20'),
 ('H12', '1', '1', 'R026', '2024-10-20'),
-('H12', '1', '1', 'R030', '2024-10-31');
+('H12', '1', '1', 'R030', '2024-10-31'),
+('H12', '1', '1', 'R031', '2024-11-20'),
+('H12', '1', '1', 'R031', '2024-11-21'),
+('H12', '1', '2', 'R031', '2024-11-20'),
+('H12', '1', '2', 'R031', '2024-11-21'),
+('H12', '1', '1', 'R032', '2024-11-27'),
+('H12', '1', '1', 'R032', '2024-11-28'),
+('H12', '1', '2', 'R032', '2024-11-27'),
+('H12', '1', '2', 'R032', '2024-11-28'),
+('H12', '1', '1', 'R033', '2024-12-03'),
+('H12', '1', '1', 'R033', '2024-12-04'),
+('H12', '1', '2', 'R033', '2024-12-03'),
+('H12', '1', '2', 'R033', '2024-12-04'),
+('H12', '1', '1', 'R034', '2024-12-05'),
+('H12', '1', '1', 'R034', '2024-12-06'),
+('H12', '1', '2', 'R034', '2024-12-05'),
+('H12', '1', '2', 'R034', '2024-12-06'),
+('H12', '1', '3', 'R034', '2024-12-05'),
+('H12', '1', '3', 'R034', '2024-12-06'),
+('H12', '1', '4', 'R034', '2024-12-05'),
+('H12', '1', '4', 'R034', '2024-12-06'),
+('H12', '1', '5', 'R034', '2024-12-05'),
+('H12', '1', '5', 'R034', '2024-12-06'),
+('H12', '1', '1', 'R035', '2024-12-17'),
+('H12', '1', '1', 'R035', '2024-12-18'),
+('H12', '1', '1', 'R035', '2024-12-19'),
+('H12', '1', '2', 'R035', '2024-12-17'),
+('H12', '1', '2', 'R035', '2024-12-18'),
+('H12', '1', '2', 'R035', '2024-12-19'),
+('H12', '1', '3', 'R035', '2024-12-17'),
+('H12', '1', '3', 'R035', '2024-12-18'),
+('H12', '1', '3', 'R035', '2024-12-19'),
+('H12', '1', '4', 'R035', '2024-12-17'),
+('H12', '1', '4', 'R035', '2024-12-18'),
+('H12', '1', '4', 'R035', '2024-12-19'),
+('H12', '1', '5', 'R035', '2024-12-17'),
+('H12', '1', '5', 'R035', '2024-12-18'),
+('H12', '1', '5', 'R035', '2024-12-19');
 
 -- --------------------------------------------------------
 
@@ -1423,8 +1520,8 @@ CREATE TABLE `souvenir_place` (
 --
 
 INSERT INTO `souvenir_place` (`id`, `village_id`, `name`, `address`, `employee_name`, `phone`, `open`, `close`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('S1', '1', 'Galeri Seni', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putri', '085267256677', '09:00:00', '18:00:00', 0xe610000001030000000100000005000000f91c9feb981f5940b693dd870756ddbff91c9f539a1f594090ba82c8b855ddbff91c5f759a1f59400d3d9306a556ddbffa1cff3f991f594098a50586e856ddbff91c9feb981f5940b693dd870756ddbf, -0.45839325, 100.49375546, 'Galeri Seni merupakan sebuah toko souvenir di Nagari Tuo Pariangan. Galeri Seni menjual berbagai macam sovenir khas dari Nagari Tuo Pariangan.', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
-('S2', '1', 'Rumah UKM Batik Nagari Tuo Pariangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Martini', '081266124955', '21:00:00', '06:00:00', 0xe610000001030000000100000006000000bb04dbc2681f59403dbd097af00addbfbc043bf8691f59402b655f7ed408ddbfbc04fb276b1f59409c9d259ef008ddbfba04fb086c1f5940c77b3e1d6109ddbfbc041bbd6a1f5940961124b8dc0bddbfbb04dbc2681f59403dbd097af00addbf, -0.45375648, 100.49086903, 'Rumah UKM Batik Nagari Tuo Pariangan merupakan sebuah UMKM yang membuat batik khas Nagari Tuo Pariangan', '2024-10-25 04:04:07', '2024-10-25 04:04:07');
+('S1', '1', 'Galeri Seni', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putri', '085267256677', '09:00:00', '18:00:00', 0xe610000001030000000100000005000000f91c9feb981f5940b693dd870756ddbff91c9f539a1f594090ba82c8b855ddbff91c5f759a1f59400d3d9306a556ddbffa1cff3f991f594098a50586e856ddbff91c9feb981f5940b693dd870756ddbf, '-0.45839325', '100.49375546', 'Galeri Seni merupakan sebuah toko souvenir di Nagari Tuo Pariangan. Galeri Seni menjual berbagai macam sovenir khas dari Nagari Tuo Pariangan.', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
+('S2', '1', 'Rumah UKM Batik Nagari Tuo Pariangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Martini', '081266124955', '21:00:00', '06:00:00', 0xe610000001030000000100000006000000bb04dbc2681f59403dbd097af00addbfbc043bf8691f59402b655f7ed408ddbfbc04fb276b1f59409c9d259ef008ddbfba04fb086c1f5940c77b3e1d6109ddbfbc041bbd6a1f5940961124b8dc0bddbfbb04dbc2681f59403dbd097af00addbf, '-0.45375648', '100.49086903', 'Rumah UKM Batik Nagari Tuo Pariangan merupakan sebuah UMKM yang membuat batik khas Nagari Tuo Pariangan', '2024-10-25 04:04:07', '2024-10-25 04:04:07');
 
 -- --------------------------------------------------------
 
@@ -1691,8 +1788,8 @@ CREATE TABLE `worship_place` (
 --
 
 INSERT INTO `worship_place` (`id`, `village_id`, `name`, `worship_place_category`, `address`, `capacity`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('W1', '1', 'Masjid Ishlah', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 300, 0xe610000001030000000100000008000000aa28c5e6801f59402eac9f117654ddbfaa28c505801f59408abbe06cb956ddbfa928451c801f59406dbc2fcc0d57ddbfaa284535851f59400dbaae48b958ddbfaa28a510861f59400e89b1eccf56ddbfaa284535851f594043481f8e2156ddbfaa284519831f5940707855901355ddbfaa28c5e6801f59402eac9f117654ddbf, -0.45841019, 100.49237328, 'Masjid Islah Nagari Tuo Pariangan adalah sebuah masjid bersejarah yang terletak di Nagari Pariangan, Kabupaten Tanah Datar, Sumatera Barat. Masjid ini dikenal sebagai salah satu bangunan religius tertua di Minangkabau, dengan arsitektur tradisional yang mencerminkan nilai budaya dan keagamaan yang kuat. Dibangun dengan dominasi gaya arsitektur Minangkabau, masjid ini memiliki atap berbentuk gonjong, mirip dengan rumah adat Minangkabau (rumah gadang), yang memberikan kesan megah dan khas. Bangunan ini menggunakan material alami seperti kayu dan batu, yang menjadikannya sejalan dengan lingkungan alam sekitarnya yang asri dan indah.', '2024-10-25 03:42:41', '2024-10-25 03:42:41'),
-('W2', '1', 'Mesjid AT TAQWA Pariangan', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 250, 0xe6100000010300000001000000080000004f5e6bf6051f594064b19c518078dcbf505e4bcc041f594030bbb3cf7779dcbf505e4b45041f5940519666eda17adcbf4f5e6be8041f59406c4e670a267cdcbf505e0b18081f59409e13f8495e7cdcbf505ecb39081f59400d9f508c2e7bdcbf515e4b9c071f594069200111cf78dcbf4f5e6bf6051f594064b19c518078dcbf, -0.44497283, 100.48475636, 'Masjid At-Taqwa Pariangan adalah sebuah masjid ikonik yang berada di Nagari Pariangan, Kabupaten Tanah Datar, Sumatera Barat. Masjid ini terletak di kawasan yang terkenal sebagai salah satu desa tertua di Minangkabau, menjadikannya pusat spiritual dan sosial bagi masyarakat setempat. Meskipun tidak setua Masjid Islah, Masjid At-Taqwa tetap memiliki nilai penting dalam sejarah perkembangan Islam di Pariangan. Arsitektur masjid ini merupakan perpaduan antara desain modern dan tradisional Minangkabau. Atap masjid yang berbentuk limas dipadukan dengan ornamen khas lokal, memberikan keseimbangan antara estetika kontemporer dan nilai-nilai budaya setempat. Struktur bangunan ini dibangun dengan menggunakan bahan-bahan yang kuat dan tahan lama, serta didesain untuk menampung jamaah dalam jumlah yang cukup besar, khususnya pada saat perayaan hari-hari besar Islam.', '2024-10-25 03:44:16', '2024-10-25 03:44:16');
+('W1', '1', 'Masjid Ishlah', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 300, 0xe610000001030000000100000008000000aa28c5e6801f59402eac9f117654ddbfaa28c505801f59408abbe06cb956ddbfa928451c801f59406dbc2fcc0d57ddbfaa284535851f59400dbaae48b958ddbfaa28a510861f59400e89b1eccf56ddbfaa284535851f594043481f8e2156ddbfaa284519831f5940707855901355ddbfaa28c5e6801f59402eac9f117654ddbf, '-0.45841019', '100.49237328', 'Masjid Islah Nagari Tuo Pariangan adalah sebuah masjid bersejarah yang terletak di Nagari Pariangan, Kabupaten Tanah Datar, Sumatera Barat. Masjid ini dikenal sebagai salah satu bangunan religius tertua di Minangkabau, dengan arsitektur tradisional yang mencerminkan nilai budaya dan keagamaan yang kuat. Dibangun dengan dominasi gaya arsitektur Minangkabau, masjid ini memiliki atap berbentuk gonjong, mirip dengan rumah adat Minangkabau (rumah gadang), yang memberikan kesan megah dan khas. Bangunan ini menggunakan material alami seperti kayu dan batu, yang menjadikannya sejalan dengan lingkungan alam sekitarnya yang asri dan indah.', '2024-10-25 03:42:41', '2024-10-25 03:42:41'),
+('W2', '1', 'Mesjid AT TAQWA Pariangan', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 250, 0xe6100000010300000001000000080000004f5e6bf6051f594064b19c518078dcbf505e4bcc041f594030bbb3cf7779dcbf505e4b45041f5940519666eda17adcbf4f5e6be8041f59406c4e670a267cdcbf505e0b18081f59409e13f8495e7cdcbf505ecb39081f59400d9f508c2e7bdcbf515e4b9c071f594069200111cf78dcbf4f5e6bf6051f594064b19c518078dcbf, '-0.44497283', '100.48475636', 'Masjid At-Taqwa Pariangan adalah sebuah masjid ikonik yang berada di Nagari Pariangan, Kabupaten Tanah Datar, Sumatera Barat. Masjid ini terletak di kawasan yang terkenal sebagai salah satu desa tertua di Minangkabau, menjadikannya pusat spiritual dan sosial bagi masyarakat setempat. Meskipun tidak setua Masjid Islah, Masjid At-Taqwa tetap memiliki nilai penting dalam sejarah perkembangan Islam di Pariangan. Arsitektur masjid ini merupakan perpaduan antara desain modern dan tradisional Minangkabau. Atap masjid yang berbentuk limas dipadukan dengan ornamen khas lokal, memberikan keseimbangan antara estetika kontemporer dan nilai-nilai budaya setempat. Struktur bangunan ini dibangun dengan menggunakan bahan-bahan yang kuat dan tahan lama, serta didesain untuk menampung jamaah dalam jumlah yang cukup besar, khususnya pada saat perayaan hari-hari besar Islam.', '2024-10-25 03:44:16', '2024-10-25 03:44:16');
 
 -- --------------------------------------------------------
 
@@ -2061,7 +2158,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=466;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=488;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`

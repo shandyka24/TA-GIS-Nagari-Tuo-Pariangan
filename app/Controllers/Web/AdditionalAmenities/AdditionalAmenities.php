@@ -119,6 +119,11 @@ class AdditionalAmenities extends ResourcePresenter
         } else {
             $request['is_order_count_per_room'] = '0';
         }
+        if (isset($request['additional_amenities_type'])) {
+            $request['additional_amenities_type'] = '2';
+        } else {
+            $request['additional_amenities_type'] = '1';
+        }
 
         $request['image_url'] = $gallery[0];
         $updateHS = $this->homestayAdditionalAmenitiesModel->update_haa_api($request, $homestay['id'], $activity_id);
