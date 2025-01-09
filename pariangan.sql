@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 15, 2024 at 04:08 PM
+-- Generation Time: Jan 09, 2025 at 10:08 AM
 -- Server version: 8.0.30
--- PHP Version: 8.1.10
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,113 @@ SET time_zone = "+00:00";
 --
 -- Database: `pariangan`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attraction`
+--
+
+CREATE TABLE `attraction` (
+  `id` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `address` text NOT NULL,
+  `open` time NOT NULL,
+  `close` time NOT NULL,
+  `price` int NOT NULL,
+  `employee_name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `phone` varchar(13) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `description` text NOT NULL,
+  `video_url` varchar(30) NOT NULL,
+  `lat` decimal(10,8) NOT NULL,
+  `lng` decimal(11,8) NOT NULL,
+  `geom` geometry DEFAULT NULL,
+  `geom_area` geometry DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `attraction`
+--
+
+INSERT INTO `attraction` (`id`, `name`, `address`, `open`, `close`, `price`, `employee_name`, `phone`, `description`, `video_url`, `lat`, `lng`, `geom`, `geom_area`, `created_at`, `updated_at`) VALUES
+('A1', 'blablabla123', 'dasdasd123', '12:31:00', '12:33:00', 12345678, 'asdasd123', '21323111', 'aasdqweqwe', '', -0.44330777, 100.48646784, 0xe610000001030000000100000005000000389605d2121f5940e4f9144d4f82dcbf37960572451f594069c39e8f8f60dcbf37960582261f5940db4602d7ff3bdcbf38960522ff1e5940225726b6df4cdcbf389605d2121f5940e4f9144d4f82dcbf, NULL, '2025-01-06 02:58:30', '2025-01-06 03:03:03'),
+('A2', 'asdasd', 'asdads', '12:03:00', '15:21:00', 13123, 'aweqwe', '123123', 'qweqwe', '', -0.44747143, 100.48350195, 0xe61000000103000000010000000500000033f42648e31e594008eac639db9fdcbf33f42634e81e5940a104b02467aadcbf33f4261c001f59402ab9ab37e9a0dcbf33f42666f21e59406b19cb40579cdcbf33f42648e31e594008eac639db9fdcbf, NULL, '2025-01-06 18:31:22', '2025-01-06 18:31:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attraction_category`
+--
+
+CREATE TABLE `attraction_category` (
+  `id` varchar(2) NOT NULL,
+  `category` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attraction_facility`
+--
+
+CREATE TABLE `attraction_facility` (
+  `id` varchar(2) NOT NULL,
+  `name` varchar(25) NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `attraction_facility`
+--
+
+INSERT INTO `attraction_facility` (`id`, `name`, `created_at`, `updated_at`) VALUES
+('01', 'Parking Area', '2025-01-06 03:02:23', '2025-01-06 03:02:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attraction_facility_detail`
+--
+
+CREATE TABLE `attraction_facility_detail` (
+  `attraction_id` varchar(2) NOT NULL,
+  `attraction_facility_id` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `attraction_facility_detail`
+--
+
+INSERT INTO `attraction_facility_detail` (`attraction_id`, `attraction_facility_id`, `created_at`, `updated_at`) VALUES
+('A1', '01', '2025-01-06 03:03:03', '2025-01-06 03:03:03'),
+('A2', '01', '2025-01-06 18:31:22', '2025-01-06 18:31:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attraction_gallery`
+--
+
+CREATE TABLE `attraction_gallery` (
+  `id` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `attraction_id` varchar(2) NOT NULL,
+  `url` text NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `attraction_gallery`
+--
+
+INSERT INTO `attraction_gallery` (`id`, `attraction_id`, `url`, `created_at`, `updated_at`) VALUES
+('001', 'A1', '1736179352_a2005a273c4c88448cd9.jpg', '2025-01-06 03:03:03', '2025-01-06 03:03:03'),
+('002', 'A2', '1736235073_c8d0c14a54a8678ef29d.png', '2025-01-06 18:31:22', '2025-01-06 18:31:22');
 
 -- --------------------------------------------------------
 
@@ -595,7 +702,57 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (484, '::1', 'umegahomestay@gmail.com', 23, '2024-12-14 11:07:32', 1),
 (485, '::1', 'umegahomestay@gmail.com', 23, '2024-12-15 09:31:05', 1),
 (486, '::1', 'shandyka2403@gmail.com', 11, '2024-12-15 09:50:41', 1),
-(487, '::1', 'umegahomestay@gmail.com', 23, '2024-12-15 09:51:31', 1);
+(487, '::1', 'umegahomestay@gmail.com', 23, '2024-12-15 09:51:31', 1),
+(488, '::1', 'shandyka2403@gmail.com', 11, '2024-12-15 21:02:08', 1),
+(489, '::1', 'umegahomestay@gmail.com', 23, '2024-12-15 21:18:30', 1),
+(490, '::1', 'shandyka2403@gmail.com', 11, '2024-12-16 00:44:11', 1),
+(491, '::1', 'shandyka2403@gmail.com', 11, '2024-12-16 04:23:08', 1),
+(492, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-12-16 04:45:01', 1),
+(493, '::1', 'shandyka2403@gmail.com', 11, '2024-12-16 04:47:53', 1),
+(494, '::1', 'shandyka2403@gmail.com', 11, '2024-12-16 08:58:44', 1),
+(495, '::1', 'umegahomestay@gmail.com', 23, '2024-12-16 09:08:21', 1),
+(496, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-12-16 11:03:15', 1),
+(497, '::1', 'umegahomestay@gmail.com', 23, '2024-12-16 11:17:49', 1),
+(498, '::1', 'shandyka2403@gmail.com', 11, '2024-12-17 01:18:31', 1),
+(499, '::1', 'shandyka2403@gmail.com', 11, '2024-12-17 07:51:06', 1),
+(500, '::1', 'shandyka2403@gmail.com', 11, '2024-12-17 22:19:59', 1),
+(501, '::1', 'gudesterhomestay@gmail.com', 24, '2024-12-18 00:39:05', 1),
+(502, '::1', 'umegahomestay@gmail.com', 23, '2024-12-18 03:03:23', 1),
+(503, '::1', 'shandyka2403@gmail.com', 11, '2024-12-22 09:23:10', 1),
+(504, '::1', 'shandyka2403@gmail.com', 11, '2024-12-23 09:20:30', 1),
+(505, '::1', 'shandyka2403@gmail.com', 11, '2024-12-24 08:46:07', 1),
+(506, '::1', 'gudesterhomestay@gmail.com', 24, '2024-12-24 09:35:34', 1),
+(507, '::1', 'shandyka2403@gmail.com', 11, '2024-12-26 06:34:30', 1),
+(508, '::1', 'umegahomestay@gmail.com', 23, '2024-12-26 07:28:05', 1),
+(509, '::1', 'umegahomestay@gmail.com', 23, '2024-12-26 12:44:45', 1),
+(510, '::1', 'shandyka2403@gmail.com', 11, '2024-12-26 13:22:51', 1),
+(511, '::1', 'shandyka2403@gmail.com', 11, '2024-12-27 01:01:53', 1),
+(512, '::1', 'umegahomestay@gmail.com', 23, '2024-12-27 01:26:47', 1),
+(513, '::1', 'shandyka2403@gmail.com', 11, '2024-12-27 08:27:38', 1),
+(514, '::1', 'umegahomestay@gmail.com', 23, '2024-12-27 08:43:42', 1),
+(515, '::1', 'umegahomestay@gmail.com', 23, '2024-12-28 02:09:34', 1),
+(516, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-12-28 02:10:13', 1),
+(517, '::1', 'shandyka2403@gmail.com', 11, '2024-12-28 02:11:41', 1),
+(518, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-12-29 08:56:31', 1),
+(519, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-12-30 02:58:26', 1),
+(520, '::1', 'shandyka2403@gmail.com', 11, '2024-12-30 03:34:24', 1),
+(521, '::1', 'pokdarwispariangan1@gmail.com', 7, '2024-12-30 18:32:56', 1),
+(522, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-04 03:37:02', 1),
+(523, '::1', 'shandyka2403@gmail.com', 11, '2025-01-04 06:35:31', 1),
+(524, '::1', 'shandyka2403@gmail.com', 11, '2025-01-06 01:19:56', 1),
+(525, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-06 02:03:29', 1),
+(526, '::1', 'shandyka2403@gmail.com', 11, '2025-01-06 02:29:29', 1),
+(527, '::1', 'shandyka2403@gmail.com', 11, '2025-01-06 08:07:56', 1),
+(528, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-06 09:05:55', 1),
+(529, '::1', 'shandyka2403@gmail.com', 11, '2025-01-06 10:17:17', 1),
+(530, '::1', 'shandyka2403@gmail.com', 11, '2025-01-07 01:19:38', 1),
+(531, '::1', 'pokdarwis.pariangan', NULL, '2025-01-07 01:30:39', 0),
+(532, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-07 01:30:42', 1),
+(533, '::1', 'shandyka2403@gmail.com', 11, '2025-01-07 01:31:35', 1),
+(534, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-07 02:33:52', 1),
+(535, '::1', 'umegahomestay', NULL, '2025-01-07 02:34:54', 0),
+(536, '::1', 'umegahomestay@gmail.com', 23, '2025-01-07 02:34:57', 1),
+(537, '::1', 'shandyka2403@gmail.com', 11, '2025-01-07 02:35:24', 1);
 
 -- --------------------------------------------------------
 
@@ -705,7 +862,8 @@ CREATE TABLE `country` (
 INSERT INTO `country` (`id`, `name`, `geom`) VALUES
 ('N01', 'Singapura', 'N01.geojson'),
 ('N02', 'Malaysia', 'N02.geojson'),
-('N03', 'Indonesia', 'N03.geojson');
+('N03', 'Indonesia', 'N03.geojson'),
+('N04', 'Brunei Darussalam', 'N04.geojson');
 
 -- --------------------------------------------------------
 
@@ -735,12 +893,66 @@ CREATE TABLE `culinary_place` (
 --
 
 INSERT INTO `culinary_place` (`id`, `village_id`, `name`, `address`, `employee_name`, `phone`, `open`, `close`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('C1', '1', 'Kawa Daun Tanjuang Indah', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putra', '082284978004', '09:00:00', '22:00:00', 0xe61000000103000000010000000600000042504c54fe1e5940c34e13d80286dcbf4350ac7bfe1e5940300ea234bf87dcbf44504c35ff1e59409e3268715f89dcbf43506ce6001f59408f995252e988dcbf42500c38001f5940fc6eaf18b485dcbf42504c54fe1e5940c34e13d80286dcbf, '-0.44577259', '100.48435148', 'Kawa Daun Tanjung Indah merupakan sebuah cafe tradisional yang menyediakan berbagai macam makanan dan minuman. Lokasi Kawa Daun Tanjuang Indah ini sangat strategis dan memerikan pemandangan yang sangat indah.', '2024-10-25 04:34:18', '2024-10-25 04:39:07'),
-('C2', '1', 'Kawa Daun  Tanjuang Putuih', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Nasrudin', '081272053141', '09:00:00', '20:00:00', 0xe610000001030000000100000005000000e326fb26001f59402b10e9e49f85dcbfe2267bf1001f5940bd9e5f9eeb88dcbfe2261b32021f5940fb07073f9788dcbfe2263bd5021f5940d1c39026ca84dcbfe326fb26001f59402b10e9e49f85dcbf, '-0.44573090', '100.48446610', 'Kawa Daun  Tanjuang Putuih merupakan cafe tradisional yang menediakan berbagai macam makanan dan minuman. Lokasi Kawa Daun Tanjuang Putuih ini sangat strategis dan memerikan pemandangan yang sangat indah.', '2024-10-25 04:38:34', '2024-10-25 04:38:34'),
-('C3', '1', 'Kawa Daun A & F', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Masril', NULL, '10:00:00', '18:00:00', 0xe61000000103000000010000000900000022318b27041f59401db8000c1f85dcbf20318b46031f5940f1b5218b8f85dcbf21316bd0021f5940cf88a6c94e86dcbf21316bd0021f5940a4f083676287dcbf2131eb6d031f594033f98184e688dcbf2131eb2f051f59406d19d024bf88dcbf21312b0e051f59406c3aff28a386dcbf21312b87041f59402877596b7385dcbf22318b27041f59401db8000c1f85dcbf, '-0.44574041', '100.48461918', 'Kawa Daun A & F merupakan cafe tradisional yang menediakan berbagai makanan dan minuman. Terdapat juga ampera pada cafe ini. Cafe ini juga menyuguhkan pemandangan yang sangat indah', '2024-10-25 05:39:16', '2024-10-25 05:39:16'),
-('C4', '1', 'Kawa Daun Puncak Mortir', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hesti', NULL, '10:00:00', '20:00:00', 0xe610000001030000000100000006000000824285b9011f5940346f4dad1081dcbf8142c52c031f594014ae4def0d80dcbf81426540041f5940a14221b1217fdcbf81424505051f5940db9e9b8fe67fdcbf8142a5e3021f5940b23a204aab82dcbf824285b9011f5940346f4dad1081dcbf, '-0.44536745', '100.48458085', 'Kawa Daun Puncak Mortir merupakan cafe tradisional yang menyuguhkan pemandangan yang sangat indah. Cafe ini menjual berbagai makanan dan minuman.', '2024-10-25 05:51:32', '2024-10-25 05:51:32'),
-('C5', '1', 'Puncak Kawa Gudester', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hana', '082283529664', '09:00:00', '20:00:00', 0xe6100000010300000001000000070000005d90c88b101f5940181d2855f496dcbf5e9068830f1f59405754f2af9199dcbf5e902867111f5940ca16d60c219bdcbf5d90886f121f594057ec3eafeb99dcbf5d90c8a7121f5940abc6bfb22998dcbf5d90e83c121f59407e5fdb559a96dcbf5d90c88b101f5940181d2855f496dcbf, '-0.44683020', '100.48541775', 'Puncak Kawa Gudester merupakan sebuah cafe tradisional yang menyediakan berbagai macam makanan dan minuman. Cafe ini juga menyuguhkan pemandangan yang sangat indah.', '2024-10-25 06:11:07', '2024-10-25 06:11:07'),
-('C6', '1', 'Sako Minang Cafe', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Zainul', '082122886454', '09:00:00', '18:00:00', 0xe61000000103000000010000000700000062582f14001f594036000374836cdcbf0086115f011f5940be25be27da6bdcbf008611e6011f5940417cad4bda69dcbfff85714b001f5940fefbb38e5068dcbfff859178fe1e594083abcbadc668dcbf0086119dff1e59402738c987d46bdcbf62582f14001f594036000374836cdcbf, '-0.44399500', '100.48438628', 'Cafe ini menyediakan berbagai macam makanan dan minuman. Lokasi dari cafe ini diapit oleh pepohonan yang rimbun dan menyuguhi pemandangan yang indah.', '2024-10-25 06:16:41', '2024-10-25 06:16:41');
+('C1', '1', 'Kawa Daun Tanjuang Indah', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putra', '082284978004', '09:00:00', '22:00:00', 0xe61000000103000000010000000600000042504c54fe1e5940c34e13d80286dcbf4350ac7bfe1e5940300ea234bf87dcbf44504c35ff1e59409e3268715f89dcbf43506ce6001f59408f995252e988dcbf42500c38001f5940fc6eaf18b485dcbf42504c54fe1e5940c34e13d80286dcbf, -0.44577259, 100.48435148, 'Kawa Daun Tanjung Indah merupakan sebuah cafe tradisional yang menyediakan berbagai macam makanan dan minuman. Lokasi Kawa Daun Tanjuang Indah ini sangat strategis dan memerikan pemandangan yang sangat indah.', '2024-10-25 04:34:18', '2025-01-03 23:30:49'),
+('C2', '1', 'Kawa Daun  Tanjuang Putuih', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Nasrudin', '081272053141', '09:00:00', '20:00:00', 0xe610000001030000000100000005000000e326fb26001f59402b10e9e49f85dcbfe2267bf1001f5940bd9e5f9eeb88dcbfe2261b32021f5940fb07073f9788dcbfe2263bd5021f5940d1c39026ca84dcbfe326fb26001f59402b10e9e49f85dcbf, -0.44573090, 100.48446610, 'Kawa Daun  Tanjuang Putuih merupakan cafe tradisional yang menediakan berbagai macam makanan dan minuman. Lokasi Kawa Daun Tanjuang Putuih ini sangat strategis dan memerikan pemandangan yang sangat indah.', '2024-10-25 04:38:34', '2025-01-03 23:31:02'),
+('C3', '1', 'Kawa Daun A & F', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Masril', NULL, '10:00:00', '18:00:00', 0xe61000000103000000010000000900000022318b27041f59401db8000c1f85dcbf20318b46031f5940f1b5218b8f85dcbf21316bd0021f5940cf88a6c94e86dcbf21316bd0021f5940a4f083676287dcbf2131eb6d031f594033f98184e688dcbf2131eb2f051f59406d19d024bf88dcbf21312b0e051f59406c3aff28a386dcbf21312b87041f59402877596b7385dcbf22318b27041f59401db8000c1f85dcbf, -0.44574041, 100.48461918, 'Kawa Daun A & F merupakan cafe tradisional yang menediakan berbagai makanan dan minuman. Terdapat juga ampera pada cafe ini. Cafe ini juga menyuguhkan pemandangan yang sangat indah', '2024-10-25 05:39:16', '2025-01-03 23:30:36'),
+('C4', '1', 'Kawa Daun Puncak Mortir', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hesti', NULL, '10:00:00', '20:00:00', 0xe610000001030000000100000006000000824285b9011f5940346f4dad1081dcbf8142c52c031f594014ae4def0d80dcbf81426540041f5940a14221b1217fdcbf81424505051f5940db9e9b8fe67fdcbf8142a5e3021f5940b23a204aab82dcbf824285b9011f5940346f4dad1081dcbf, -0.44536745, 100.48458085, 'Kawa Daun Puncak Mortir merupakan cafe tradisional yang menyuguhkan pemandangan yang sangat indah. Cafe ini menjual berbagai makanan dan minuman.', '2024-10-25 05:51:32', '2025-01-03 23:31:21'),
+('C5', '1', 'Puncak Kawa Gudester', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hana', '082283529664', '09:00:00', '20:00:00', 0xe6100000010300000001000000070000005d90c88b101f5940181d2855f496dcbf5e9068830f1f59405754f2af9199dcbf5e902867111f5940ca16d60c219bdcbf5d90886f121f594057ec3eafeb99dcbf5d90c8a7121f5940abc6bfb22998dcbf5d90e83c121f59407e5fdb559a96dcbf5d90c88b101f5940181d2855f496dcbf, -0.44683020, 100.48541775, 'Puncak Kawa Gudester merupakan sebuah cafe tradisional yang menyediakan berbagai macam makanan dan minuman. Cafe ini juga menyuguhkan pemandangan yang sangat indah.', '2024-10-25 06:11:07', '2025-01-03 23:31:35'),
+('C6', '1', 'Sako Minang Cafe', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Zainul', '082122886454', '09:00:00', '18:00:00', 0xe61000000103000000010000000700000062582f14001f594036000374836cdcbf0086115f011f5940be25be27da6bdcbf008611e6011f5940417cad4bda69dcbfff85714b001f5940fefbb38e5068dcbfff859178fe1e594083abcbadc668dcbf0086119dff1e59402738c987d46bdcbf62582f14001f594036000374836cdcbf, -0.44399500, 100.48438628, 'Cafe ini menyediakan berbagai macam makanan dan minuman. Lokasi dari cafe ini diapit oleh pepohonan yang rimbun dan menyuguhi pemandangan yang indah.', '2024-10-25 06:16:41', '2024-10-25 06:16:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `culinary_place_facility`
+--
+
+CREATE TABLE `culinary_place_facility` (
+  `id` varchar(2) NOT NULL,
+  `name` varchar(25) NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `culinary_place_facility`
+--
+
+INSERT INTO `culinary_place_facility` (`id`, `name`, `created_at`, `updated_at`) VALUES
+('01', 'Parking Area', '2025-01-03 21:03:46', '2025-01-03 21:03:46'),
+('02', 'Toilet', '2025-01-03 22:04:02', '2025-01-03 22:04:02'),
+('03', 'Mushalla', '2025-01-03 22:28:39', '2025-01-03 22:28:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `culinary_place_facility_detail`
+--
+
+CREATE TABLE `culinary_place_facility_detail` (
+  `culinary_place_id` varchar(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `culinary_place_facility_id` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `culinary_place_facility_detail`
+--
+
+INSERT INTO `culinary_place_facility_detail` (`culinary_place_id`, `culinary_place_facility_id`) VALUES
+('C1', '01'),
+('C2', '01'),
+('C3', '01'),
+('C4', '01'),
+('C5', '01'),
+('C1', '02'),
+('C2', '02'),
+('C3', '02'),
+('C4', '02'),
+('C5', '02'),
+('C1', '03'),
+('C2', '03'),
+('C3', '03'),
+('C4', '03'),
+('C5', '03');
 
 -- --------------------------------------------------------
 
@@ -761,18 +973,18 @@ CREATE TABLE `culinary_place_gallery` (
 --
 
 INSERT INTO `culinary_place_gallery` (`id`, `culinary_place_id`, `url`, `created_at`, `updated_at`) VALUES
-('003', 'C2', '1729874271_6dcb3841050ed240cb45.jpg', '2024-10-25 04:38:34', '2024-10-25 04:38:34'),
-('004', 'C2', '1729874271_b98650fd3cf653723469.jpg', '2024-10-25 04:38:34', '2024-10-25 04:38:34'),
-('005', 'C1', '1729874328_29c8ba153e9206fc2d8f.jpg', '2024-10-25 04:39:07', '2024-10-25 04:39:07'),
-('006', 'C1', '1729874328_b7c2761e0920a2ad3870.jpg', '2024-10-25 04:39:07', '2024-10-25 04:39:07'),
-('007', 'C3', '1729877912_fcb9f48e8c98011b588e.jpg', '2024-10-25 05:39:16', '2024-10-25 05:39:16'),
-('008', 'C3', '1729877912_a29f0219713a054d082e.jpg', '2024-10-25 05:39:16', '2024-10-25 05:39:16'),
-('009', 'C4', '1729878653_001f5740fde5888b3d9f.jpg', '2024-10-25 05:51:32', '2024-10-25 05:51:32'),
-('010', 'C4', '1729878653_c07a033bd9dc8bff09f0.jpg', '2024-10-25 05:51:32', '2024-10-25 05:51:32'),
-('011', 'C5', '1729879828_d16bcc84e1d538918170.jpg', '2024-10-25 06:11:07', '2024-10-25 06:11:07'),
-('012', 'C5', '1729879828_29fdc45b9cbea7e208d0.jpg', '2024-10-25 06:11:07', '2024-10-25 06:11:07'),
 ('013', 'C6', '1729880115_bcebc18c9c5b742cc42f.jpg', '2024-10-25 06:16:41', '2024-10-25 06:16:41'),
-('014', 'C6', '1729880107_871a7281a4a1d176bf16.jpg', '2024-10-25 06:16:41', '2024-10-25 06:16:41');
+('014', 'C6', '1729880107_871a7281a4a1d176bf16.jpg', '2024-10-25 06:16:41', '2024-10-25 06:16:41'),
+('019', 'C3', '1735993831_01f2c4cfed2c482a2350.jpg', '2025-01-03 23:30:36', '2025-01-03 23:30:36'),
+('020', 'C3', '1735993832_76d7ce74286cd4043eb2.jpg', '2025-01-03 23:30:36', '2025-01-03 23:30:36'),
+('021', 'C1', '1735993846_82f69c1ded898f97864f.jpg', '2025-01-03 23:30:49', '2025-01-03 23:30:49'),
+('022', 'C1', '1735993846_305d9f7291c965689b2c.jpg', '2025-01-03 23:30:49', '2025-01-03 23:30:49'),
+('023', 'C2', '1735993857_c73caeb96158c9680f38.jpg', '2025-01-03 23:31:02', '2025-01-03 23:31:02'),
+('024', 'C2', '1735993858_59da8be22810767dfce0.jpg', '2025-01-03 23:31:02', '2025-01-03 23:31:02'),
+('025', 'C4', '1735993878_f07ad021d32c1ecab2eb.jpg', '2025-01-03 23:31:21', '2025-01-03 23:31:21'),
+('026', 'C4', '1735993878_22c24b0ebafa359bac63.jpg', '2025-01-03 23:31:21', '2025-01-03 23:31:21'),
+('027', 'C5', '1735993892_d6286298a7f8f5fa263b.jpg', '2025-01-03 23:31:35', '2025-01-03 23:31:35'),
+('028', 'C5', '1735993891_ef657c15234e8cb7dc1c.jpg', '2025-01-03 23:31:35', '2025-01-03 23:31:35');
 
 -- --------------------------------------------------------
 
@@ -870,9 +1082,9 @@ CREATE TABLE `homestay` (
 --
 
 INSERT INTO `homestay` (`id`, `village_id`, `name`, `category`, `address`, `geom`, `lat`, `lng`, `owner`, `open`, `close`, `max_people_for_event`, `description`, `video_url`, `created_at`, `updated_at`, `profil_link`) VALUES
-('H12', '1', 'Homestay Umega', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000080000000713a515141f594075a82bd316a5dcbf0413e50f161f594056fa301514a4dcbf0613e5e2151f5940668b498887a2dcbf05134556151f5940477bc4ba49a1dcbf0613b534121f5940d6377fc7eca2dcbf0513c534111f5940e5707455f2a3dcbf0713e531121f594023f47431f2a5dcbf0713a515141f594075a82bd316a5dcbf, '-0.44748639', '100.48557337', 23, '10:00:00', '23:59:00', 50, 'Homestay Umega MD di Nagari Tuo Pariangan adalah penginapan yang menawarkan pengalaman menginap dengan nuansa lokal Minangkabau yang kental. Terletak di desa yang kaya akan sejarah dan budaya, homestay ini memberi kesempatan bagi pengunjung untuk merasakan langsung suasana kehidupan masyarakat tradisional Minangkabau sambil menikmati pemandangan alam yang indah, dengan latar belakang pegunungan dan hamparan sawah yang asri.', NULL, '2024-09-26 05:27:13', '2024-10-25 19:51:44', ''),
-('H13', '1', 'Homestay Gudester', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000050000001dc09e63081f59407ec8ede3dfa0dcbf1cc01e0f0a1f5940c98d5f80a7a2dcbf1ec0feb40b1f5940924004a4d4a0dcbf1dc0be140a1f5940e50692070d9fdcbf1dc09e63081f59407ec8ede3dfa0dcbf, '-0.44731766', '100.48498829', 24, '10:00:00', '23:59:00', 50, 'Homestay Gudester Pariangan merupakan homestay modern dimana homestay ini hanya menyediakan kamar. Pada tiap-tiap kamar memiliki pemandangan persawahan yang sangat indah', NULL, '2024-10-25 19:48:36', '2024-10-25 19:51:07', ''),
-('H14', '1', 'Homestay Nabila', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000070000006c9b975dc61e5940c422477d5b8edcbf6d9b779bc61e5940a53cea990c90dcbf6c9b973ec71e5940aac034576991dcbf6c9b97b4c91e5940385ed1971a91dcbf6c9b574fc91e5940ceae26feea8ddcbf6c9b97b7c61e5940ee5052dd558edcbf6c9b975dc61e5940c422477d5b8edcbf, '-0.44626860', '100.48095920', 25, '10:00:00', '23:59:00', 50, 'Homestay Nabila di Pariangan adalah penginapan nyaman yang menawarkan perpaduan antara arsitektur tradisional Minangkabau dan kenyamanan modern. Terletak di Desa Pariangan, Tanah Datar, homestay ini menghadirkan pemandangan sawah hijau yang luas serta bukit-bukit di sekitar, menjadikannya tempat sempurna bagi para tamu yang ingin menikmati ketenangan dan keindahan alam Sumatera Barat.', NULL, '2024-10-25 19:55:23', '2024-10-25 19:55:23', '');
+('H12', '1', 'Homestay Umega', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000080000000713a515141f594075a82bd316a5dcbf0413e50f161f594056fa301514a4dcbf0613e5e2151f5940668b498887a2dcbf05134556151f5940477bc4ba49a1dcbf0613b534121f5940d6377fc7eca2dcbf0513c534111f5940e5707455f2a3dcbf0713e531121f594023f47431f2a5dcbf0713a515141f594075a82bd316a5dcbf, -0.44748639, 100.48557337, 23, '10:00:00', '23:59:00', 50, 'Homestay Umega MD in Nagari Tuo Pariangan is an accommodation that offers a stay experience with a strong local Minangkabau feel. Located in a village rich in history and culture, this homestay provides an opportunity for visitors to experience firsthand the atmosphere of traditional Minangkabau community life while enjoying beautiful natural scenery, with a backdrop of mountains and lush rice fields.', NULL, '2024-09-26 05:27:13', '2024-12-16 04:21:01', ''),
+('H13', '1', 'Homestay Gudester', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000050000001dc09e63081f59407ec8ede3dfa0dcbf1cc01e0f0a1f5940c98d5f80a7a2dcbf1ec0feb40b1f5940924004a4d4a0dcbf1dc0be140a1f5940e50692070d9fdcbf1dc09e63081f59407ec8ede3dfa0dcbf, -0.44731766, 100.48498829, 24, '10:00:00', '23:59:00', 50, 'Homestay Gudester Pariangan merupakan homestay modern dimana homestay ini hanya menyediakan kamar. Pada tiap-tiap kamar memiliki pemandangan persawahan yang sangat indah', NULL, '2024-10-25 19:48:36', '2024-10-25 19:51:07', ''),
+('H14', '1', 'Homestay Nabila', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000070000006c9b975dc61e5940c422477d5b8edcbf6d9b779bc61e5940a53cea990c90dcbf6c9b973ec71e5940aac034576991dcbf6c9b97b4c91e5940385ed1971a91dcbf6c9b574fc91e5940ceae26feea8ddcbf6c9b97b7c61e5940ee5052dd558edcbf6c9b975dc61e5940c422477d5b8edcbf, -0.44626860, 100.48095920, 25, '10:00:00', '23:59:00', 50, 'Homestay Nabila di Pariangan adalah penginapan nyaman yang menawarkan perpaduan antara arsitektur tradisional Minangkabau dan kenyamanan modern. Terletak di Desa Pariangan, Tanah Datar, homestay ini menghadirkan pemandangan sawah hijau yang luas serta bukit-bukit di sekitar, menjadikannya tempat sempurna bagi para tamu yang ingin menikmati ketenangan dan keindahan alam Sumatera Barat.', NULL, '2024-10-25 19:55:23', '2024-10-25 19:55:23', '');
 
 -- --------------------------------------------------------
 
@@ -902,11 +1114,12 @@ CREATE TABLE `homestay_additional_amenities` (
 --
 
 INSERT INTO `homestay_additional_amenities` (`homestay_id`, `additional_amenities_id`, `additional_amenities_type`, `name`, `category`, `price`, `is_order_count_per_day`, `is_order_count_per_person`, `is_order_count_per_room`, `stock`, `description`, `image_url`, `created_at`, `updated_at`) VALUES
-('H12', '01', '1', 'Kasur', '1', 100000, '0', '0', '1', 5, 'Kasur tambahan', '1729884917_a45c76bf7d804d9fdec4.jpg', '2024-09-29 01:07:22', '2024-10-25 07:35:23'),
-('H12', '02', '1', 'Sarapan', '2', 15000, '1', '1', '0', 0, 'Sarapan', '1729928412_ca7169662ad91e6733b4.jpeg', '2024-10-25 19:40:28', '2024-10-25 19:40:28'),
-('H12', '03', '1', 'Makan siang', '2', 15000, '1', '1', '0', 0, 'Request Makan Siang', '1729928449_649053ff8ddad903b730.jpeg', '2024-10-25 19:40:51', '2024-10-25 19:40:51'),
-('H12', '04', '1', 'Makan Malam', '2', 15000, '1', '1', '0', 0, 'Request Makan Malam', '1729928491_8652a5b7cd88d997e2b6.jpg', '2024-10-25 19:41:33', '2024-10-25 19:41:33'),
-('H12', '05', '2', 'sound system', '1', 1000000, '0', '0', '0', 5, 'sound system', '1734277391_4f6c3828e11c844c6406.png', '2024-12-15 02:43:14', '2024-12-15 02:43:14'),
+('H12', '01', '1', 'Bed', '1', 100000, '0', '0', '1', 5, 'Extra Bed\r\n', '1734369782_7c2e5e33b62cf15eab04.jpg', '2024-09-29 01:07:22', '2024-12-16 04:23:16'),
+('H12', '02', '1', 'Breakfast', '2', 15000, '1', '1', '0', 0, 'Breakfast', '1734369797_c86ef3b4dcca248b4279.jpeg', '2024-10-25 19:40:28', '2024-12-16 04:23:28'),
+('H12', '03', '1', 'lunch', '2', 15000, '1', '1', '0', 0, 'Request menu for lunch\r\n', '1734369809_2d2c91e8abd699833e38.jpeg', '2024-10-25 19:40:51', '2024-12-16 04:24:18'),
+('H12', '04', '1', 'Dinner', '2', 15000, '1', '1', '0', 0, 'Request menu for dinner', '1734369859_e19d2a6a517c511e29c6.jpg', '2024-10-25 19:41:33', '2024-12-16 04:24:34'),
+('H12', '05', '2', 'Sound System', '1', 1000000, '0', '0', '0', 5, 'Sound system', '1734369946_5c4ca5a23b5212dbbb05.webp', '2024-12-15 02:43:14', '2024-12-16 04:25:49'),
+('H12', '06', '2', 'Extra Bed for Event', '1', 300000, '0', '0', '0', 5, 'Extra Bed', '1735373719_0b68c2f67a577d0cdd61.jpg', '2024-12-27 19:14:57', '2024-12-27 19:16:22'),
 ('H13', '01', '1', 'Extra Bed', '1', 250000, '0', '1', '1', 3, 'Kasur Tambahan', '1729929786_7a8905841bc12e975475.jpg', '2024-10-25 20:03:17', '2024-10-25 20:03:17'),
 ('H13', '02', '1', 'Makan siang', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729929833_36273e691e8717a109a1.jpeg', '2024-10-25 20:03:55', '2024-10-25 20:03:55'),
 ('H13', '03', '1', 'Makan Malam', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729929895_3acd79ef24efa42d0ad4.jpg', '2024-10-25 20:04:58', '2024-10-25 20:04:58'),
@@ -958,11 +1171,11 @@ CREATE TABLE `homestay_facility` (
 --
 
 INSERT INTO `homestay_facility` (`id`, `name`, `created_at`, `updated_at`) VALUES
-('01', 'Area Parkir', '2023-10-28 15:51:29', '2023-10-28 15:51:29'),
-('02', 'Taman', '2023-10-28 15:51:29', '2023-10-28 15:51:29'),
-('03', 'Spot Foto', '2023-10-28 15:51:29', '2023-10-28 15:51:29'),
+('01', 'Parking Area', '2023-10-28 15:51:29', '2024-12-16 04:16:35'),
+('02', 'Park', '2023-10-28 15:51:29', '2024-12-16 04:17:04'),
+('03', 'Photo Spot', '2023-10-28 15:51:29', '2024-12-16 04:16:52'),
 ('04', 'Mushalla', '2023-10-28 15:51:29', '2023-10-28 15:51:29'),
-('05', 'Kantin', '2023-10-28 15:51:29', '2023-10-28 15:51:29'),
+('05', 'Canteen', '2023-10-28 15:51:29', '2024-12-16 04:16:42'),
 ('06', 'Gazebo', '2023-10-28 15:51:29', '2023-10-28 15:51:29');
 
 -- --------------------------------------------------------
@@ -983,9 +1196,9 @@ CREATE TABLE `homestay_facility_detail` (
 --
 
 INSERT INTO `homestay_facility_detail` (`homestay_id`, `facility_id`, `created_at`, `updated_at`) VALUES
-('H12', '01', '2024-10-25 19:51:44', '2024-10-25 19:51:44'),
-('H12', '02', '2024-10-25 19:51:44', '2024-10-25 19:51:44'),
-('H12', '03', '2024-10-25 19:51:44', '2024-10-25 19:51:44'),
+('H12', '01', '2024-12-16 04:21:01', '2024-12-16 04:21:01'),
+('H12', '02', '2024-12-16 04:21:01', '2024-12-16 04:21:01'),
+('H12', '03', '2024-12-16 04:21:01', '2024-12-16 04:21:01'),
 ('H13', '01', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
 ('H13', '03', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
 ('H13', '04', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
@@ -1014,10 +1227,10 @@ CREATE TABLE `homestay_gallery` (
 
 INSERT INTO `homestay_gallery` (`id`, `homestay_id`, `url`, `created_at`, `updated_at`) VALUES
 ('008', 'H13', '1729929046_c18347296961982ed7a1.jpg', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
-('009', 'H12', '1729929097_ead6ae7d5786cb2500f4.jpg', '2024-10-25 19:51:44', '2024-10-25 19:51:44'),
-('010', 'H12', '1729929097_5bcd0c30389b4127c18f.jpg', '2024-10-25 19:51:44', '2024-10-25 19:51:44'),
-('011', 'H12', '1729929099_3045486a242c21cb0f25.jpg', '2024-10-25 19:51:44', '2024-10-25 19:51:44'),
-('012', 'H14', '1729929320_7faf6d2fa8579c1adb8b.jpg', '2024-10-25 19:55:23', '2024-10-25 19:55:23');
+('012', 'H14', '1729929320_7faf6d2fa8579c1adb8b.jpg', '2024-10-25 19:55:23', '2024-10-25 19:55:23'),
+('013', 'H12', '1734369479_9278475630aaacd1a8a7.jpg', '2024-12-16 04:21:01', '2024-12-16 04:21:01'),
+('014', 'H12', '1734369477_91e0bc4b8a2023f156af.jpg', '2024-12-16 04:21:01', '2024-12-16 04:21:01'),
+('015', 'H12', '1734369477_9ce2215cc2309e9faa3d.jpg', '2024-12-16 04:21:01', '2024-12-16 04:21:01');
 
 -- --------------------------------------------------------
 
@@ -1042,11 +1255,11 @@ CREATE TABLE `homestay_unit` (
 --
 
 INSERT INTO `homestay_unit` (`homestay_id`, `unit_type`, `unit_number`, `name`, `price`, `capacity`, `description`, `created_at`, `updated_at`) VALUES
-('H12', '1', '1', 'Kamar 1', 350000, 2, 'Kamar 1', '2024-09-29 01:05:21', '2024-10-25 07:09:53'),
-('H12', '1', '2', 'Kamar 2', 350000, 2, 'Kamar 2', '2024-09-29 01:05:52', '2024-10-25 07:25:39'),
-('H12', '1', '3', 'Kamar 3', 350000, 2, 'Kamar 3', '2024-09-29 01:06:32', '2024-10-25 07:28:50'),
-('H12', '1', '4', 'Kamar 4', 350000, 2, 'Kamar 4', '2024-10-25 07:29:25', '2024-10-25 07:31:40'),
-('H12', '1', '5', 'Kamar 5', 350000, 2, 'Kamar 5', '2024-10-25 07:29:37', '2024-10-25 07:32:05'),
+('H12', '1', '1', 'Room 1', 350000, 2, 'Room 1\r\n', '2024-09-29 01:05:21', '2024-12-16 04:22:23'),
+('H12', '1', '2', 'Room 2', 350000, 2, 'Room 2', '2024-09-29 01:05:52', '2024-12-16 04:22:32'),
+('H12', '1', '3', 'Room 3', 350000, 2, 'Room 3', '2024-09-29 01:06:32', '2024-12-16 04:22:40'),
+('H12', '1', '4', 'Room 4', 350000, 2, 'Room 4', '2024-10-25 07:29:25', '2024-12-16 04:22:51'),
+('H12', '1', '5', 'Room 5', 350000, 2, 'Room 5', '2024-10-25 07:29:37', '2024-12-16 04:23:01'),
 ('H13', '1', '1', 'Kamar 1', 400000, 2, 'Free breakfast', '2024-10-25 20:00:05', '2024-10-25 20:00:05'),
 ('H13', '1', '2', 'Kamar 2', 400000, 2, 'Free breakfast', '2024-10-25 20:01:19', '2024-10-25 20:01:19'),
 ('H13', '1', '3', 'Kamar 3', 400000, 2, 'Free breakfast', '2024-10-25 20:02:05', '2024-10-25 20:02:05'),
@@ -1153,16 +1366,16 @@ CREATE TABLE `homestay_unit_gallery` (
 --
 
 INSERT INTO `homestay_unit_gallery` (`id`, `homestay_id`, `unit_type`, `unit_number`, `url`, `created_at`, `updated_at`) VALUES
-('045', 'H12', '1', '1', '1729883391_f5b3347ad1ee53cd3e8a.jpg', '2024-10-25 07:09:53', '2024-10-25 07:09:53'),
-('046', 'H12', '1', '2', '1729884332_38e77dd9f6e2ababa105.jpg', '2024-10-25 07:25:39', '2024-10-25 07:25:39'),
-('047', 'H12', '1', '3', '1729884519_7293299c49c0176a2795.jpg', '2024-10-25 07:28:50', '2024-10-25 07:28:50'),
-('049', 'H12', '1', '4', '1729884698_014796f4f33265b8c372.jpg', '2024-10-25 07:31:40', '2024-10-25 07:31:40'),
-('050', 'H12', '1', '5', '1729884721_2a623bb00849724309d6.jpg', '2024-10-25 07:32:05', '2024-10-25 07:32:05'),
 ('051', 'H13', '1', '1', '1729929602_f121029ca16bd5e91ef4.jpg', '2024-10-25 20:00:05', '2024-10-25 20:00:05'),
 ('052', 'H13', '1', '2', '1729929677_e8fcf9c699dc2f2d9c40.jpeg', '2024-10-25 20:01:19', '2024-10-25 20:01:19'),
 ('053', 'H13', '1', '3', '1729929722_c5173c0859b6a60b9266.jpeg', '2024-10-25 20:02:05', '2024-10-25 20:02:05'),
 ('054', 'H14', '1', '1', '1729930348_3313b6e7273fc7ec409b.jpg', '2024-10-25 20:12:32', '2024-10-25 20:12:32'),
-('055', 'H14', '1', '2', '1729930439_d61518894390505b60df.jpeg', '2024-10-25 20:14:01', '2024-10-25 20:14:01');
+('055', 'H14', '1', '2', '1729930439_d61518894390505b60df.jpeg', '2024-10-25 20:14:01', '2024-10-25 20:14:01'),
+('061', 'H12', '1', '1', '1734369732_5f977ccc009972cec611.jpg', '2024-12-16 04:22:23', '2024-12-16 04:22:23'),
+('062', 'H12', '1', '2', '1734369750_e03582d6269e594dd228.jpg', '2024-12-16 04:22:32', '2024-12-16 04:22:32'),
+('063', 'H12', '1', '3', '1734369758_0855cd12a0374b0d5041.jpg', '2024-12-16 04:22:40', '2024-12-16 04:22:40'),
+('064', 'H12', '1', '4', '1734369767_9662eb8cf692b397c323.jpg', '2024-12-16 04:22:51', '2024-12-16 04:22:51'),
+('065', 'H12', '1', '5', '1734369778_939e21618045835516c8.jpg', '2024-12-16 04:23:01', '2024-12-16 04:23:01');
 
 -- --------------------------------------------------------
 
@@ -1289,6 +1502,8 @@ CREATE TABLE `reservation` (
   `total_people` int DEFAULT NULL,
   `review` text,
   `rating` int DEFAULT NULL,
+  `bonus_coin` int DEFAULT NULL,
+  `coin_use` int DEFAULT NULL,
   `total_price` int DEFAULT NULL,
   `deposit` int DEFAULT NULL,
   `status` varchar(20) DEFAULT NULL,
@@ -1312,29 +1527,86 @@ CREATE TABLE `reservation` (
 -- Dumping data for table `reservation`
 --
 
-INSERT INTO `reservation` (`id`, `customer_id`, `reservation_type`, `request_date`, `check_in`, `total_people`, `review`, `rating`, `total_price`, `deposit`, `status`, `deposit_snap_token`, `pay_full_snap_token`, `reservation_finish_at`, `is_rejected`, `confirmed_at`, `feedback`, `canceled_at`, `cancelation_reason`, `is_refund`, `refund_paid_at`, `account_refund`, `refund_proof`, `is_refund_proof_correct`, `refund_paid_confirmed_at`) VALUES
-('R016', 11, '1', '2024-10-11 17:27:25', '2024-10-17 14:00:00', 5, NULL, NULL, 600000, 120000, 'Full Pay Successful', '4833097b-9063-41f3-a17f-b69da590496d', 'e3ebbcd1-c32f-4463-90b2-e4e8881974b1', '2024-10-11 10:28:14', '0', '2024-10-11 10:28:36', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R017', 11, '1', '2024-10-11 18:01:35', '2024-10-16 14:00:00', 3, NULL, NULL, 300000, 60000, 'Full Pay Successful', '102496c1-340b-46a6-8dc0-5d448bbfa432', 'dd38c12b-3253-48f4-8ab9-094672edd3fc', '2024-10-11 11:01:55', '0', '2024-10-11 11:02:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R018', 11, '1', '2024-10-11 19:43:53', '2024-10-18 14:00:00', 3, NULL, NULL, 300000, 60000, 'Deposit Successful', '6adcf2de-e03a-4d34-8e0a-8386a3fd6122', NULL, '2024-10-11 12:44:00', '0', '2024-10-11 12:44:11', '', '2024-10-11 12:44:00', '1', '1', '2024-10-11 12:45:51', 'Dika - Bank ABC - 12345678', '1728650749_b4956a3c25ffc50fdb89.jpg', '1', '2024-10-11 12:46:09'),
-('R019', 11, '1', '2024-10-11 19:55:11', '2024-10-11 14:00:00', 5, NULL, NULL, 600000, 120000, '1', 'c99df471-3896-4fe0-86b2-ea1f7dbe3937', NULL, '2024-10-11 12:55:18', '0', '2024-10-11 12:55:34', '', '2024-10-11 12:57:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
-('R020', 11, '1', '2024-10-11 19:57:46', '2024-10-11 14:00:00', 5, NULL, NULL, 600000, 120000, 'Deposit Successful', 'cd0ee0ad-a683-4789-8482-64b968721e80', '47366abc-d256-432d-9b9e-a4027ee6fbe7', '2024-10-11 12:57:53', '0', '2024-10-11 12:58:14', '', '2024-10-11 12:59:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
-('R021', 11, '1', '2024-10-14 12:13:35', '2024-10-18 14:00:00', 2, NULL, NULL, 150000, 30000, 'Deposit Successful', NULL, NULL, '2024-10-14 05:13:43', '0', '2024-10-14 05:14:49', '', '2024-10-21 14:21:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
-('R022', 11, '1', '2024-10-14 12:15:48', '2024-10-19 14:00:00', 2, NULL, NULL, 100000, 20000, 'Full Pay Successful', NULL, NULL, '2024-10-14 05:15:53', '0', '2024-10-14 05:16:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R023', 11, '1', '2024-10-14 12:16:38', '2024-10-19 14:00:00', 2, NULL, NULL, 200000, 40000, 'Full Pay Successful', NULL, NULL, '2024-10-14 05:16:43', '0', '2024-10-14 05:16:58', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R024', 11, '1', '2024-10-14 18:24:24', '2024-10-12 14:00:00', 3, '', 4, 250000, 50000, 'Done', '7aa3b21e-431e-4dba-9d61-306902c1781a', '1a47ed95-4544-464d-bc00-90d71d1c4b97', '2024-10-14 11:25:31', '0', '2024-10-14 11:26:01', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R025', 11, '1', '2024-10-14 18:42:36', '2024-10-20 14:00:00', 3, NULL, NULL, 400000, 80000, 'Deposit Successful', '36d6cb5a-8370-4db5-b724-7af3c77c2322', NULL, '2024-10-14 11:42:55', '0', '2024-10-14 11:43:14', '', '2024-10-14 11:45:00', '1', '1', '2024-10-14 11:47:45', 'Wawan - Bank CAB - 69696969', '1728906462_81e712e85c31e9c4bacd.jpg', '1', '2024-10-14 11:48:15'),
-('R026', 11, '1', '2024-10-14 18:49:16', '2024-10-12 14:00:00', 3, NULL, NULL, 100000, 20000, '1', '985d0337-858c-43e1-b76d-a5c617746694', NULL, '2024-10-14 11:49:21', '0', '2024-10-14 11:49:36', '', '2024-10-14 11:50:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
-('R027', 11, '1', '2024-10-14 20:47:57', '2024-10-20 14:00:00', 2, NULL, NULL, 300000, 60000, 'Full Pay Successful', '7bf4ba9e-58ee-4923-8b9a-f2c1dcd04077', '818786ed-9c35-4397-883b-6d3c511ceefc', '2024-10-14 13:48:40', '0', '2024-10-14 13:48:48', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R028', 11, '1', '2024-10-21 21:21:53', '2024-10-20 14:00:00', 2, 'mantap', 5, 300000, 60000, 'Done', '649e8678-240a-4860-839c-8a185389ab5c', '285a8c3e-fb15-4f52-9734-a97cf83d69d6', '2024-10-21 14:22:10', '0', '2024-10-21 14:22:29', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R029', 11, '1', '2024-10-26 15:43:29', '2024-10-23 14:00:00', 2, 'bagus', 5, 840000, 168000, 'Done', '785c69af-5675-4a5c-8b7c-5adcdf4bd0ce', '8bc0f8f6-4246-4262-9712-baf745cf99fb', '2024-10-26 08:43:52', '0', '2024-10-26 08:44:07', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R030', 11, '1', '2024-10-26 17:07:52', '2024-10-31 14:00:00', 4, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-10-26 10:08:15', '1', '2024-10-26 10:08:39', '', '2024-10-30 09:45:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
-('R031', 11, '1', '2024-11-17 17:45:13', '2024-11-20 14:00:00', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-24 07:45:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
-('R032', 11, '1', '2024-11-24 14:57:58', '2024-11-27 14:00:00', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-26 14:20:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
-('R033', 11, '1', '2024-11-30 14:51:08', '2024-12-03 14:00:00', 5, NULL, NULL, 1399998, 280000, '0', NULL, NULL, '2024-11-30 08:55:03', NULL, NULL, NULL, '2024-12-14 17:07:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
-('R034', 11, '2', '2024-11-30 16:08:54', '2024-12-05 14:00:00', 50, NULL, NULL, 3500000, 700000, '0', NULL, NULL, '2024-11-29 20:08:54', NULL, NULL, NULL, '2024-12-14 17:07:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
-('R035', 11, '2', '2024-12-14 23:59:01', '2024-12-17 14:00:00', 50, NULL, NULL, 4725000, 945000, '0', NULL, NULL, '2024-12-14 03:59:01', NULL, NULL, NULL, '2024-12-15 15:50:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
-('R036', 11, '2', '2024-12-15 23:05:24', '2024-12-18 14:00:00', 20, NULL, NULL, 4725000, 945000, '0', NULL, NULL, '2024-12-15 03:05:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R037', 11, '2', '2024-12-15 23:06:36', '2024-12-21 14:00:00', 20, NULL, NULL, 3150000, 630000, '0', NULL, NULL, '2024-12-15 03:06:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `reservation` (`id`, `customer_id`, `reservation_type`, `request_date`, `check_in`, `total_people`, `review`, `rating`, `bonus_coin`, `coin_use`, `total_price`, `deposit`, `status`, `deposit_snap_token`, `pay_full_snap_token`, `reservation_finish_at`, `is_rejected`, `confirmed_at`, `feedback`, `canceled_at`, `cancelation_reason`, `is_refund`, `refund_paid_at`, `account_refund`, `refund_proof`, `is_refund_proof_correct`, `refund_paid_confirmed_at`) VALUES
+('R016', 11, '1', '2024-10-11 17:27:25', '2024-10-17 14:00:00', 5, NULL, NULL, NULL, NULL, 600000, 120000, 'Done', '4833097b-9063-41f3-a17f-b69da590496d', 'e3ebbcd1-c32f-4463-90b2-e4e8881974b1', '2024-10-11 10:28:14', '0', '2024-10-11 10:28:36', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R017', 11, '1', '2024-10-11 18:01:35', '2024-10-16 14:00:00', 3, NULL, NULL, NULL, NULL, 300000, 60000, 'Done', '102496c1-340b-46a6-8dc0-5d448bbfa432', 'dd38c12b-3253-48f4-8ab9-094672edd3fc', '2024-10-11 11:01:55', '0', '2024-10-11 11:02:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R018', 11, '1', '2024-10-11 19:43:53', '2024-10-18 14:00:00', 3, NULL, NULL, NULL, NULL, 300000, 60000, 'Deposit Successful', '6adcf2de-e03a-4d34-8e0a-8386a3fd6122', NULL, '2024-10-11 12:44:00', '0', '2024-10-11 12:44:11', '', '2024-10-11 12:44:00', '1', '1', '2024-10-11 12:45:51', 'Dika - Bank ABC - 12345678', '1728650749_b4956a3c25ffc50fdb89.jpg', '1', '2024-10-11 12:46:09'),
+('R019', 11, '1', '2024-10-11 19:55:11', '2024-10-11 14:00:00', 5, NULL, NULL, NULL, NULL, 600000, 120000, '1', 'c99df471-3896-4fe0-86b2-ea1f7dbe3937', NULL, '2024-10-11 12:55:18', '0', '2024-10-11 12:55:34', '', '2024-10-11 12:57:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R020', 11, '1', '2024-10-11 19:57:46', '2024-10-11 14:00:00', 5, NULL, NULL, NULL, NULL, 600000, 120000, 'Deposit Successful', 'cd0ee0ad-a683-4789-8482-64b968721e80', '47366abc-d256-432d-9b9e-a4027ee6fbe7', '2024-10-11 12:57:53', '0', '2024-10-11 12:58:14', '', '2024-10-11 12:59:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
+('R021', 11, '1', '2024-10-14 12:13:35', '2024-10-18 14:00:00', 2, NULL, NULL, NULL, NULL, 150000, 30000, 'Deposit Successful', NULL, NULL, '2024-10-14 05:13:43', '0', '2024-10-14 05:14:49', '', '2024-10-21 14:21:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
+('R022', 11, '1', '2024-10-14 12:15:48', '2024-10-19 14:00:00', 2, NULL, NULL, NULL, NULL, 100000, 20000, 'Done', NULL, NULL, '2024-10-14 05:15:53', '0', '2024-10-14 05:16:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R023', 11, '1', '2024-10-14 12:16:38', '2024-10-19 14:00:00', 2, NULL, NULL, NULL, NULL, 200000, 40000, 'Done', NULL, NULL, '2024-10-14 05:16:43', '0', '2024-10-14 05:16:58', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R024', 11, '1', '2024-10-14 18:24:24', '2024-10-12 14:00:00', 3, '', 4, NULL, NULL, 250000, 50000, 'Done', '7aa3b21e-431e-4dba-9d61-306902c1781a', '1a47ed95-4544-464d-bc00-90d71d1c4b97', '2024-10-14 11:25:31', '0', '2024-10-14 11:26:01', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R025', 11, '1', '2024-10-14 18:42:36', '2024-10-20 14:00:00', 3, NULL, NULL, NULL, NULL, 400000, 80000, 'Deposit Successful', '36d6cb5a-8370-4db5-b724-7af3c77c2322', NULL, '2024-10-14 11:42:55', '0', '2024-10-14 11:43:14', '', '2024-10-14 11:45:00', '1', '1', '2024-10-14 11:47:45', 'Wawan - Bank CAB - 69696969', '1728906462_81e712e85c31e9c4bacd.jpg', '1', '2024-10-14 11:48:15'),
+('R026', 11, '1', '2024-10-14 18:49:16', '2024-10-12 14:00:00', 3, NULL, NULL, NULL, NULL, 100000, 20000, '1', '985d0337-858c-43e1-b76d-a5c617746694', NULL, '2024-10-14 11:49:21', '0', '2024-10-14 11:49:36', '', '2024-10-14 11:50:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R027', 11, '1', '2024-10-14 20:47:57', '2024-10-20 14:00:00', 2, NULL, NULL, NULL, NULL, 300000, 60000, 'Done', '7bf4ba9e-58ee-4923-8b9a-f2c1dcd04077', '818786ed-9c35-4397-883b-6d3c511ceefc', '2024-10-14 13:48:40', '0', '2024-10-14 13:48:48', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R028', 11, '1', '2024-10-21 21:21:53', '2024-10-20 14:00:00', 2, 'mantap', 5, NULL, NULL, 300000, 60000, 'Done', '649e8678-240a-4860-839c-8a185389ab5c', '285a8c3e-fb15-4f52-9734-a97cf83d69d6', '2024-10-21 14:22:10', '0', '2024-10-21 14:22:29', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R029', 11, '1', '2024-10-26 15:43:29', '2024-10-23 14:00:00', 2, 'bagus', 5, NULL, NULL, 840000, 168000, 'Done', '785c69af-5675-4a5c-8b7c-5adcdf4bd0ce', '8bc0f8f6-4246-4262-9712-baf745cf99fb', '2024-10-26 08:43:52', '0', '2024-10-26 08:44:07', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R030', 11, '1', '2024-10-26 17:07:52', '2024-10-31 14:00:00', 4, NULL, NULL, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-10-26 10:08:15', '1', '2024-10-26 10:08:39', '', '2024-10-30 09:45:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R031', 11, '1', '2024-11-17 17:45:13', '2024-11-20 14:00:00', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-24 07:45:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R032', 11, '1', '2024-11-24 14:57:58', '2024-11-27 14:00:00', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-11-26 14:20:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R033', 11, '1', '2024-11-30 14:51:08', '2024-12-03 14:00:00', 5, NULL, NULL, NULL, NULL, 1399998, 280000, '0', NULL, NULL, '2024-11-30 08:55:03', NULL, NULL, NULL, '2024-12-14 17:07:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R034', 11, '2', '2024-11-30 16:08:54', '2024-12-05 14:00:00', 50, NULL, NULL, NULL, NULL, 3500000, 700000, '0', NULL, NULL, '2024-11-29 20:08:54', NULL, NULL, NULL, '2024-12-14 17:07:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R035', 11, '2', '2024-12-14 23:59:01', '2024-12-17 14:00:00', 50, NULL, NULL, NULL, NULL, 4725000, 945000, '0', NULL, NULL, '2024-12-14 03:59:01', NULL, NULL, NULL, '2024-12-15 15:50:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R036', 11, '2', '2024-12-15 23:05:24', '2024-12-18 14:00:00', 20, NULL, NULL, NULL, NULL, 4725000, 945000, '0', NULL, NULL, '2024-12-15 03:05:24', NULL, NULL, NULL, '2024-12-16 15:08:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R037', 11, '2', '2024-12-15 23:06:36', '2024-12-21 14:00:00', 20, NULL, NULL, NULL, NULL, 3150000, 630000, '0', NULL, NULL, '2024-12-15 03:06:36', NULL, NULL, NULL, '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R038', 11, '1', '2024-12-16 10:09:28', '2024-12-26 14:00:00', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R039', 11, '2', '2024-12-16 10:10:19', '2024-12-27 14:00:00', 4, NULL, NULL, NULL, NULL, 3150000, 630000, '1', NULL, NULL, '2024-12-15 14:10:19', '1', '2024-12-16 04:10:13', '', '2024-12-26 12:34:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R040', 11, '1', '2024-12-16 10:17:10', '2024-12-23 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-12-16 03:17:39', '1', '2024-12-16 04:09:58', '', '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R041', 11, '2', '2024-12-16 11:06:50', '2024-12-31 14:00:00', 1, NULL, NULL, NULL, NULL, 1575000, 315000, '1', NULL, NULL, '2024-12-15 15:06:50', '1', '2024-12-16 04:09:49', '', '2025-01-04 16:00:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R042', 11, '1', '2024-12-16 11:08:59', '2024-12-31 14:00:00', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-04 16:00:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R043', 11, '1', '2024-12-16 11:09:08', '2024-12-25 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, 70000, 'Deposit Successful', '60442d37-f437-4260-9187-93296cbe8e0c', 'eff6a69c-2e16-415f-ac0d-e6b8c9648721', '2024-12-16 04:11:00', '0', '2024-12-16 04:11:08', '', '2024-12-26 12:34:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
+('R044', 11, '1', '2024-12-16 11:16:38', '2024-12-27 14:00:00', 2, NULL, NULL, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-12-16 15:09:30', '1', '2024-12-16 15:10:03', '', '2024-12-26 12:34:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R045', 11, '1', '2024-12-16 13:47:02', '2024-12-26 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-12-16 15:09:19', '1', '2024-12-16 15:09:55', '', '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R046', 11, '2', '2024-12-16 13:49:04', '2024-12-23 14:00:00', 1, NULL, NULL, NULL, NULL, 1575000, 315000, '1', NULL, NULL, '2024-12-15 17:49:04', '1', '2024-12-16 15:08:38', '', '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R047', 11, '1', '2024-12-16 14:47:37', '2024-12-26 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-12-16 15:09:13', '1', '2024-12-16 15:09:46', '', '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R048', 11, '1', '2024-12-16 22:10:52', '2024-12-25 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-12-16 15:26:34', '1', '2024-12-16 15:27:28', '', '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R049', 11, '2', '2024-12-16 22:17:42', '2024-12-23 14:00:00', 1, NULL, NULL, NULL, NULL, 1575000, 315000, '1', NULL, NULL, '2024-12-16 02:17:42', '1', '2024-12-16 15:18:44', '', '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R050', 11, '2', '2024-12-16 22:19:05', '2024-12-23 14:00:00', 1, NULL, NULL, NULL, NULL, 1575000, 315000, '1', NULL, NULL, NULL, '1', '2024-12-16 15:27:18', '', '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R051', 11, '2', '2024-12-16 22:21:56', '2024-12-24 14:00:00', 1, NULL, NULL, NULL, NULL, 1575000, 315000, '1', NULL, NULL, NULL, '1', '2024-12-16 15:27:10', '', '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R052', 11, '2', '2024-12-16 22:23:48', '2024-12-27 14:00:00', 1, NULL, NULL, NULL, NULL, 1750000, 350000, '1', NULL, NULL, '2024-12-16 15:26:24', '1', '2024-12-16 15:27:02', '', '2024-12-26 12:34:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R053', 11, '1', '2024-12-16 22:54:54', '2024-12-19 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-12-16 15:55:08', '1', '2024-12-16 16:05:38', '', '2024-12-17 07:18:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R054', 11, '1', '2024-12-16 22:55:38', '2024-12-19 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-12-16 15:55:44', '1', '2024-12-16 16:05:30', '', '2024-12-17 07:18:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R055', 11, '1', '2024-12-16 23:00:54', '2024-12-19 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-12-16 16:01:00', '1', '2024-12-16 16:05:22', '', '2024-12-17 07:18:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R056', 11, '1', '2024-12-16 23:04:55', '2024-12-19 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-12-16 16:05:03', '1', '2024-12-16 16:05:12', '', '2024-12-17 07:18:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R057', 11, '1', '2024-12-16 23:06:29', '2024-12-19 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-12-16 16:06:42', '1', '2024-12-16 16:06:54', '', '2024-12-17 07:18:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R058', 11, '1', '2024-12-16 23:07:55', '2024-12-19 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, 70000, '1', NULL, NULL, '2024-12-16 16:09:48', '1', '2024-12-16 16:45:22', '', '2024-12-17 07:18:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R059', 11, '1', '2024-12-16 23:44:55', '2024-12-19 14:00:00', 1, NULL, NULL, NULL, NULL, 700000, 140000, '1', NULL, NULL, '2024-12-16 16:45:04', '1', '2024-12-16 16:45:15', '', '2024-12-17 07:18:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R060', 11, '1', '2024-12-17 14:54:21', '2024-12-25 14:00:00', 1, NULL, NULL, NULL, NULL, 400000, 80000, '0', NULL, NULL, '2024-12-17 14:50:08', NULL, NULL, NULL, '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R061', 11, '1', '2024-12-17 21:54:25', '2024-12-20 14:00:00', 1, NULL, NULL, NULL, 30000, 400000, 80000, '0', NULL, NULL, '2024-12-17 14:55:09', NULL, NULL, NULL, '2024-12-18 07:01:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R062', 11, '1', '2024-12-17 22:15:16', '2024-12-20 14:00:00', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-12-18 07:01:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R063', 11, '2', '2024-12-17 22:33:39', '2024-12-23 14:00:00', 1, NULL, NULL, NULL, NULL, 1080000, 216000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R064', 11, '2', '2024-12-17 22:35:18', '2024-12-24 14:00:00', 1, NULL, NULL, NULL, NULL, 1080000, 216000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R065', 11, '1', '2024-12-18 11:37:39', '2024-12-21 14:00:00', 1, NULL, NULL, NULL, 30000, 400000, 80000, '0', NULL, NULL, '2024-12-18 04:41:00', NULL, NULL, NULL, '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R066', 11, '1', '2024-12-18 12:02:42', '2024-12-21 14:00:00', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R067', 11, '2', '2024-12-18 12:03:35', '2024-12-27 14:00:00', 1, NULL, NULL, NULL, NULL, 1080000, 216000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-12-26 12:34:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R068', 11, '2', '2024-12-18 12:22:07', '2024-12-28 14:00:00', 1, NULL, NULL, NULL, 0, 1080000, 216000, 'Done', '5b9d81d0-cbff-487e-b651-1e35c5026cd7', '9b0e197f-6966-4d6f-b393-b769bd46e0c4', '2024-12-18 06:16:03', '0', '2024-12-18 06:41:41', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R069', 11, '1', '2024-12-18 12:50:00', '2024-12-15 14:00:00', 1, 'mantap', 5, NULL, 0, 400000, 80000, 'Done', 'fb5daa4e-3cb6-471a-a1fc-28697a4fb52f', '0a79adec-4349-47d5-838d-27e94af58e41', '2024-12-18 06:15:04', '0', '2024-12-18 06:39:22', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R070', 11, '1', '2024-12-18 13:43:38', '2024-12-16 14:00:00', 1, 'asgdsfg', 5, 20000, 25000, 400000, 80000, 'Done', '589a40c7-55a2-41d0-894e-94e2bedfb922', '3a43067a-dc68-478d-851f-3d05bd94d869', '2024-12-18 06:43:49', '0', '2024-12-18 06:45:46', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R071', 11, '2', '2024-12-18 13:55:55', '2024-12-29 14:00:00', 1, NULL, NULL, NULL, 40000, 1080000, 216000, 'Done', 'aa46f1f4-c2d7-43d7-a4c4-6074507b882d', '93b8a914-faca-4799-983f-d083856791cb', '2024-12-18 06:56:35', '0', '2024-12-18 06:56:57', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R072', 11, '1', '2024-12-18 15:12:21', '2024-12-27 14:00:00', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-12-26 12:34:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R073', 11, '1', '2024-12-18 15:56:17', '2024-12-27 14:00:00', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-12-26 12:34:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R074', 11, '1', '2024-12-22 22:23:45', '2024-12-27 14:00:00', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-12-26 12:34:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R075', 11, '1', '2024-12-22 22:41:36', '2024-12-26 14:00:00', 1, NULL, NULL, NULL, 25000, 350000, 70000, '0', NULL, NULL, '2024-12-22 16:28:49', NULL, NULL, NULL, '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R076', 11, '1', '2024-12-22 23:26:49', '2024-12-26 14:00:00', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-12-24 14:46:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R077', 11, '2', '2024-12-22 23:56:17', '2024-12-30 14:00:00', 1, NULL, NULL, NULL, NULL, 1575000, 315000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2024-12-28 08:34:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R078', 11, '1', '2024-12-23 22:21:08', '2024-12-27 14:00:00', 1, NULL, NULL, NULL, 52500, 350000, 70000, '0', NULL, NULL, '2024-12-24 15:14:44', NULL, NULL, NULL, '2024-12-26 12:34:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R079', 11, '2', '2024-12-24 22:19:14', '2024-12-31 14:00:00', 1, NULL, NULL, NULL, 162000, 1080000, 216000, 'Deposit Successful', 'f72b4970-4adb-4918-aaa1-1fdcf7b82440', '7ab10c29-7947-4ee4-9166-c6ec786a00a1', '2024-12-24 15:34:02', '0', '2024-12-24 15:35:46', '', '2025-01-04 16:00:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
+('R080', 11, '1', '2024-12-24 22:41:00', '2024-12-30 14:00:00', 1, NULL, NULL, NULL, 60000, 400000, 80000, 'Done', '86794626-20d2-4309-be14-175542a432e0', '48744e13-7b50-4734-a264-09a9fa539473', '2024-12-24 15:51:31', '0', '2024-12-24 15:52:49', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R081', 11, '1', '2024-12-26 20:50:56', '2024-12-31 14:00:00', 1, NULL, NULL, NULL, 0, 350000, 70000, 'Deposit Successful', '809d78aa-f7b0-421a-8b78-1149047cae12', 'a466426a-77c0-4979-9331-d3243045c1dc', '2024-12-26 14:36:03', '0', '2024-12-26 15:04:13', '', '2024-12-26 16:00:00', '1', '1', '2024-12-26 19:20:53', 'ari - bank bjb - 123123123', '1735240850_25b585b1aae8c7600b9f.webp', '1', '2024-12-27 07:53:36'),
+('R082', 11, '1', '2024-12-26 21:47:15', '2024-12-31 14:00:00', 1, NULL, NULL, NULL, 52500, 350000, 70000, '1', NULL, NULL, '2024-12-26 14:49:37', '1', '2024-12-26 15:05:30', '', '2025-01-04 16:00:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R083', 11, '1', '2024-12-26 22:13:56', '2024-12-31 14:00:00', 1, NULL, NULL, NULL, 0, 350000, 70000, 'Done', 'a65ee144-d779-4f6f-9ed1-2a6bc64c7783', '0139e4a7-43af-4fbb-8f42-c1d839efcc06', '2024-12-26 15:14:01', '0', '2024-12-26 15:14:19', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R084', 11, '1', '2024-12-26 22:35:56', '2024-12-31 14:00:00', 1, NULL, NULL, NULL, 0, 350000, 70000, 'Done', '9c0446f3-7279-4f4e-966f-75fa06d817b2', '5ca234da-539d-40f6-80dd-ba69ec97649c', '2024-12-26 15:36:00', '0', '2024-12-26 15:36:12', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R085', 11, '1', '2024-12-27 14:27:07', '2024-12-20 14:00:00', 1, 'mantap', 5, 17500, 0, 350000, 70000, 'Done', '2f9e2832-e09e-4bbf-8363-299160fd2d4e', 'ae2e1098-a8b6-4271-847c-32e55290e675', '2024-12-27 07:27:13', '0', '2024-12-27 07:27:28', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R086', 11, '1', '2024-12-27 14:30:39', '2024-12-25 14:00:00', 1, '123123', 5, 17500, 0, 350000, 70000, 'Done', '1bca1e0a-932a-43a5-a6d4-1e85bcd0181b', 'cb1cecba-600f-414f-8fd9-557f42ab48fd', '2024-12-27 07:31:10', '0', '2024-12-27 07:31:21', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R087', 11, '1', '2024-12-27 22:12:26', '2024-12-31 14:00:00', 1, NULL, NULL, 52500, 52500, 350000, 70000, '1', NULL, NULL, '2024-12-27 15:16:05', '1', '2024-12-27 15:16:40', '', '2025-01-04 16:00:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R088', 11, '2', '2024-12-28 15:15:38', '2024-12-26 14:00:00', 1, NULL, NULL, NULL, 236250, 1575000, 315000, 'Done', '0ae9d5a9-7bd9-43df-9851-568c83e986ce', 'd627a993-7c1b-47bf-b485-1f8520c52255', '2024-12-28 08:17:53', '0', '2024-12-28 08:34:38', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R089', 11, '1', '2024-12-28 15:21:05', '2024-12-27 14:00:00', 1, NULL, NULL, NULL, 41750, 350000, 70000, 'Done', '5b7d8665-ac9f-4315-ab9f-7e4977b662ff', '8d46e432-1dd2-41ab-b7c2-17d8a6df80df', '2024-12-28 08:21:14', '0', '2024-12-28 08:34:46', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R090', 11, '2', '2024-12-28 15:48:12', '2025-01-03 14:00:00', 30, NULL, NULL, NULL, 0, 1575000, 315000, '0', NULL, NULL, '2024-12-28 08:50:15', NULL, NULL, NULL, '2025-01-04 16:00:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R091', 11, '1', '2024-12-28 15:50:40', '2025-01-04 14:00:00', 1, NULL, NULL, NULL, 25000, 700000, 140000, '0', NULL, NULL, '2024-12-28 08:51:05', NULL, NULL, NULL, '2025-01-04 16:00:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R092', 11, '1', '2024-12-28 15:51:27', '2025-01-04 14:00:00', 1, NULL, NULL, NULL, 0, 350000, 70000, '0', NULL, NULL, '2024-12-28 08:51:32', NULL, NULL, NULL, '2025-01-04 16:00:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R093', NULL, '1', '2024-12-28 15:55:41', '2024-12-29 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, NULL, 'Done', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R094', 11, '1', '2024-12-28 16:16:26', '2025-01-10 14:00:00', 2, NULL, NULL, NULL, 52500, 350000, 70000, '0', NULL, NULL, '2024-12-28 09:16:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1361,6 +1633,18 @@ INSERT INTO `reservation_homestay_additional_amenities_detail` (`homestay_id`, `
 ('H12', '01', 'R024', 0, 0, 0, 1, 100000),
 ('H12', '05', 'R036', 0, 0, 0, 1, 0),
 ('H12', '05', 'R037', 0, 0, 0, 1, 0),
+('H12', '05', 'R039', 0, 0, 0, 1, 0),
+('H12', '05', 'R041', 0, 0, 0, 1, 0),
+('H12', '05', 'R046', 0, 0, 0, 1, 0),
+('H12', '05', 'R049', 0, 0, 0, 1, 0),
+('H12', '05', 'R050', 0, 0, 0, 1, 0),
+('H12', '05', 'R051', 0, 0, 0, 1, 0),
+('H12', '05', 'R052', 0, 0, 0, 1, 0),
+('H12', '05', 'R077', 0, 0, 0, 1, 0),
+('H12', '05', 'R088', 0, 0, 0, 1, 0),
+('H12', '05', 'R090', 0, 0, 0, 1, 0),
+('H12', '06', 'R088', 0, 0, 0, 1, 0),
+('H12', '06', 'R090', 0, 0, 0, 1, 0),
 ('H13', '02', 'R029', 1, 2, 0, 2, 40000);
 
 -- --------------------------------------------------------
@@ -1395,31 +1679,27 @@ INSERT INTO `reservation_homestay_unit_detail` (`homestay_id`, `unit_type`, `uni
 ('H12', '1', '1', '2024-10-25', 'R028'),
 ('H13', '1', '1', '2024-10-29', 'R029'),
 ('H13', '1', '1', '2024-10-30', 'R029'),
-('H12', '1', '1', '2024-12-18', 'R036'),
-('H12', '1', '1', '2024-12-19', 'R036'),
-('H12', '1', '1', '2024-12-20', 'R036'),
-('H12', '1', '2', '2024-12-18', 'R036'),
-('H12', '1', '2', '2024-12-19', 'R036'),
-('H12', '1', '2', '2024-12-20', 'R036'),
-('H12', '1', '3', '2024-12-18', 'R036'),
-('H12', '1', '3', '2024-12-19', 'R036'),
-('H12', '1', '3', '2024-12-20', 'R036'),
-('H12', '1', '4', '2024-12-18', 'R036'),
-('H12', '1', '4', '2024-12-19', 'R036'),
-('H12', '1', '4', '2024-12-20', 'R036'),
-('H12', '1', '5', '2024-12-18', 'R036'),
-('H12', '1', '5', '2024-12-19', 'R036'),
-('H12', '1', '5', '2024-12-20', 'R036'),
-('H12', '1', '1', '2024-12-21', 'R037'),
-('H12', '1', '1', '2024-12-22', 'R037'),
-('H12', '1', '2', '2024-12-21', 'R037'),
-('H12', '1', '2', '2024-12-22', 'R037'),
-('H12', '1', '3', '2024-12-21', 'R037'),
-('H12', '1', '3', '2024-12-22', 'R037'),
-('H12', '1', '4', '2024-12-21', 'R037'),
-('H12', '1', '4', '2024-12-22', 'R037'),
-('H12', '1', '5', '2024-12-21', 'R037'),
-('H12', '1', '5', '2024-12-22', 'R037');
+('H13', '1', '1', '2024-12-28', 'R068'),
+('H13', '1', '2', '2024-12-28', 'R068'),
+('H13', '1', '3', '2024-12-28', 'R068'),
+('H13', '1', '2', '2024-12-25', 'R069'),
+('H13', '1', '3', '2024-12-21', 'R070'),
+('H13', '1', '1', '2024-12-29', 'R071'),
+('H13', '1', '2', '2024-12-29', 'R071'),
+('H13', '1', '3', '2024-12-29', 'R071'),
+('H13', '1', '1', '2024-12-30', 'R080'),
+('H12', '1', '2', '2024-12-31', 'R083'),
+('H12', '1', '3', '2024-12-31', 'R084'),
+('H12', '1', '1', '2024-12-31', 'R085'),
+('H12', '1', '4', '2024-12-31', 'R086'),
+('H12', '1', '1', '2025-01-01', 'R088'),
+('H12', '1', '2', '2025-01-01', 'R088'),
+('H12', '1', '3', '2025-01-01', 'R088'),
+('H12', '1', '4', '2025-01-01', 'R088'),
+('H12', '1', '5', '2025-01-01', 'R088'),
+('H12', '1', '1', '2025-01-02', 'R089'),
+('H12', '1', '1', '2024-12-29', 'R093'),
+('H12', '1', '2', '2025-01-10', 'R094');
 
 -- --------------------------------------------------------
 
@@ -1490,7 +1770,126 @@ INSERT INTO `reservation_homestay_unit_detail_backup` (`homestay_id`, `unit_type
 ('H12', '1', '4', 'R035', '2024-12-19'),
 ('H12', '1', '5', 'R035', '2024-12-17'),
 ('H12', '1', '5', 'R035', '2024-12-18'),
-('H12', '1', '5', 'R035', '2024-12-19');
+('H12', '1', '5', 'R035', '2024-12-19'),
+('H12', '1', '1', 'R036', '2024-12-18'),
+('H12', '1', '1', 'R036', '2024-12-19'),
+('H12', '1', '1', 'R036', '2024-12-20'),
+('H12', '1', '2', 'R036', '2024-12-18'),
+('H12', '1', '2', 'R036', '2024-12-19'),
+('H12', '1', '2', 'R036', '2024-12-20'),
+('H12', '1', '3', 'R036', '2024-12-18'),
+('H12', '1', '3', 'R036', '2024-12-19'),
+('H12', '1', '3', 'R036', '2024-12-20'),
+('H12', '1', '4', 'R036', '2024-12-18'),
+('H12', '1', '4', 'R036', '2024-12-19'),
+('H12', '1', '4', 'R036', '2024-12-20'),
+('H12', '1', '5', 'R036', '2024-12-18'),
+('H12', '1', '5', 'R036', '2024-12-19'),
+('H12', '1', '5', 'R036', '2024-12-20'),
+('H12', '1', '1', 'R037', '2024-12-21'),
+('H12', '1', '1', 'R037', '2024-12-22'),
+('H12', '1', '2', 'R037', '2024-12-21'),
+('H12', '1', '2', 'R037', '2024-12-22'),
+('H12', '1', '3', 'R037', '2024-12-21'),
+('H12', '1', '3', 'R037', '2024-12-22'),
+('H12', '1', '4', 'R037', '2024-12-21'),
+('H12', '1', '4', 'R037', '2024-12-22'),
+('H12', '1', '5', 'R037', '2024-12-21'),
+('H12', '1', '5', 'R037', '2024-12-22'),
+('H12', '1', '1', 'R038', '2024-12-26'),
+('H12', '1', '1', 'R039', '2024-12-27'),
+('H12', '1', '1', 'R039', '2024-12-28'),
+('H12', '1', '2', 'R039', '2024-12-27'),
+('H12', '1', '2', 'R039', '2024-12-28'),
+('H12', '1', '3', 'R039', '2024-12-27'),
+('H12', '1', '3', 'R039', '2024-12-28'),
+('H12', '1', '4', 'R039', '2024-12-27'),
+('H12', '1', '4', 'R039', '2024-12-28'),
+('H12', '1', '5', 'R039', '2024-12-27'),
+('H12', '1', '5', 'R039', '2024-12-28'),
+('H12', '1', '1', 'R040', '2024-12-23'),
+('H12', '1', '1', 'R041', '2024-12-31'),
+('H12', '1', '2', 'R041', '2024-12-31'),
+('H12', '1', '3', 'R041', '2024-12-31'),
+('H12', '1', '4', 'R041', '2024-12-31'),
+('H12', '1', '5', 'R041', '2024-12-31'),
+('H12', '1', '1', 'R043', '2024-12-25'),
+('H12', '1', '1', 'R044', '2024-12-27'),
+('H12', '1', '2', 'R045', '2024-12-26'),
+('H12', '1', '1', 'R046', '2024-12-23'),
+('H12', '1', '2', 'R046', '2024-12-23'),
+('H12', '1', '3', 'R046', '2024-12-23'),
+('H12', '1', '4', 'R046', '2024-12-23'),
+('H12', '1', '5', 'R046', '2024-12-23'),
+('H12', '1', '3', 'R047', '2024-12-26'),
+('H12', '1', '2', 'R048', '2024-12-25'),
+('H12', '1', '1', 'R049', '2024-12-23'),
+('H12', '1', '2', 'R049', '2024-12-23'),
+('H12', '1', '3', 'R049', '2024-12-23'),
+('H12', '1', '4', 'R049', '2024-12-23'),
+('H12', '1', '5', 'R049', '2024-12-23'),
+('H12', '1', '1', 'R050', '2024-12-23'),
+('H12', '1', '2', 'R050', '2024-12-23'),
+('H12', '1', '3', 'R050', '2024-12-23'),
+('H12', '1', '4', 'R050', '2024-12-23'),
+('H12', '1', '5', 'R050', '2024-12-23'),
+('H12', '1', '1', 'R051', '2024-12-24'),
+('H12', '1', '2', 'R051', '2024-12-24'),
+('H12', '1', '3', 'R051', '2024-12-24'),
+('H12', '1', '4', 'R051', '2024-12-24'),
+('H12', '1', '5', 'R051', '2024-12-24'),
+('H12', '1', '1', 'R052', '2024-12-27'),
+('H12', '1', '2', 'R052', '2024-12-27'),
+('H12', '1', '3', 'R052', '2024-12-27'),
+('H12', '1', '4', 'R052', '2024-12-27'),
+('H12', '1', '5', 'R052', '2024-12-27'),
+('H12', '1', '1', 'R053', '2024-12-19'),
+('H12', '1', '2', 'R054', '2024-12-19'),
+('H12', '1', '3', 'R055', '2024-12-19'),
+('H12', '1', '4', 'R056', '2024-12-19'),
+('H12', '1', '1', 'R057', '2024-12-19'),
+('H12', '1', '1', 'R058', '2024-12-19'),
+('H12', '1', '2', 'R059', '2024-12-19'),
+('H12', '1', '2', 'R059', '2024-12-20'),
+('H13', '1', '1', 'R060', '2024-12-25'),
+('H13', '1', '1', 'R061', '2024-12-20'),
+('H13', '1', '2', 'R062', '2024-12-20'),
+('H13', '1', '1', 'R063', '2024-12-23'),
+('H13', '1', '2', 'R063', '2024-12-23'),
+('H13', '1', '3', 'R063', '2024-12-23'),
+('H13', '1', '1', 'R064', '2024-12-24'),
+('H13', '1', '2', 'R064', '2024-12-24'),
+('H13', '1', '3', 'R064', '2024-12-24'),
+('H13', '1', '1', 'R065', '2024-12-21'),
+('H13', '1', '2', 'R066', '2024-12-21'),
+('H13', '1', '1', 'R067', '2024-12-27'),
+('H13', '1', '2', 'R067', '2024-12-27'),
+('H13', '1', '3', 'R067', '2024-12-27'),
+('H12', '1', '1', 'R072', '2024-12-27'),
+('H12', '1', '2', 'R073', '2024-12-27'),
+('H12', '1', '3', 'R074', '2024-12-27'),
+('H12', '1', '2', 'R075', '2024-12-26'),
+('H12', '1', '3', 'R076', '2024-12-26'),
+('H12', '1', '1', 'R077', '2024-12-30'),
+('H12', '1', '2', 'R077', '2024-12-30'),
+('H12', '1', '3', 'R077', '2024-12-30'),
+('H12', '1', '4', 'R077', '2024-12-30'),
+('H12', '1', '5', 'R077', '2024-12-30'),
+('H12', '1', '4', 'R078', '2024-12-27'),
+('H13', '1', '1', 'R079', '2024-12-31'),
+('H13', '1', '2', 'R079', '2024-12-31'),
+('H13', '1', '3', 'R079', '2024-12-31'),
+('H12', '1', '1', 'R081', '2024-12-31'),
+('H12', '1', '2', 'R082', '2024-12-31'),
+('H12', '1', '5', 'R087', '2024-12-31'),
+('H12', '1', '1', 'R090', '2025-01-03'),
+('H12', '1', '2', 'R090', '2025-01-03'),
+('H12', '1', '3', 'R090', '2025-01-03'),
+('H12', '1', '4', 'R090', '2025-01-03'),
+('H12', '1', '5', 'R090', '2025-01-03'),
+('H12', '1', '1', 'R091', '2025-01-04'),
+('H12', '1', '2', 'R091', '2025-01-04'),
+('H12', '1', '3', 'R092', '2025-01-04');
 
 -- --------------------------------------------------------
 
@@ -1520,8 +1919,50 @@ CREATE TABLE `souvenir_place` (
 --
 
 INSERT INTO `souvenir_place` (`id`, `village_id`, `name`, `address`, `employee_name`, `phone`, `open`, `close`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('S1', '1', 'Galeri Seni', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putri', '085267256677', '09:00:00', '18:00:00', 0xe610000001030000000100000005000000f91c9feb981f5940b693dd870756ddbff91c9f539a1f594090ba82c8b855ddbff91c5f759a1f59400d3d9306a556ddbffa1cff3f991f594098a50586e856ddbff91c9feb981f5940b693dd870756ddbf, '-0.45839325', '100.49375546', 'Galeri Seni merupakan sebuah toko souvenir di Nagari Tuo Pariangan. Galeri Seni menjual berbagai macam sovenir khas dari Nagari Tuo Pariangan.', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
-('S2', '1', 'Rumah UKM Batik Nagari Tuo Pariangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Martini', '081266124955', '21:00:00', '06:00:00', 0xe610000001030000000100000006000000bb04dbc2681f59403dbd097af00addbfbc043bf8691f59402b655f7ed408ddbfbc04fb276b1f59409c9d259ef008ddbfba04fb086c1f5940c77b3e1d6109ddbfbc041bbd6a1f5940961124b8dc0bddbfbb04dbc2681f59403dbd097af00addbf, '-0.45375648', '100.49086903', 'Rumah UKM Batik Nagari Tuo Pariangan merupakan sebuah UMKM yang membuat batik khas Nagari Tuo Pariangan', '2024-10-25 04:04:07', '2024-10-25 04:04:07');
+('S1', '1', 'Galeri Seni', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putri', '085267256677', '09:00:00', '18:00:00', 0xe610000001030000000100000005000000f91c9feb981f5940b693dd870756ddbff91c9f539a1f594090ba82c8b855ddbff91c5f759a1f59400d3d9306a556ddbffa1cff3f991f594098a50586e856ddbff91c9feb981f5940b693dd870756ddbf, -0.45839325, 100.49375546, 'Galeri Seni merupakan sebuah toko souvenir di Nagari Tuo Pariangan. Galeri Seni menjual berbagai macam sovenir khas dari Nagari Tuo Pariangan.', '2024-10-25 03:51:07', '2025-01-03 23:29:23'),
+('S2', '1', 'Rumah UKM Batik Nagari Tuo Pariangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Martini', '081266124955', '21:00:00', '06:00:00', 0xe610000001030000000100000006000000bb04dbc2681f59403dbd097af00addbfbc043bf8691f59402b655f7ed408ddbfbc04fb276b1f59409c9d259ef008ddbfba04fb086c1f5940c77b3e1d6109ddbfbc041bbd6a1f5940961124b8dc0bddbfbb04dbc2681f59403dbd097af00addbf, -0.45375648, 100.49086903, 'Rumah UKM Batik Nagari Tuo Pariangan merupakan sebuah UMKM yang membuat batik khas Nagari Tuo Pariangan', '2024-10-25 04:04:07', '2025-01-03 23:29:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `souvenir_place_facility`
+--
+
+CREATE TABLE `souvenir_place_facility` (
+  `id` varchar(2) NOT NULL,
+  `name` varchar(25) NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `souvenir_place_facility`
+--
+
+INSERT INTO `souvenir_place_facility` (`id`, `name`, `created_at`, `updated_at`) VALUES
+('01', 'Parking Area', '2025-01-03 21:03:37', '2025-01-03 21:03:37'),
+('02', 'Toilet', '2025-01-03 23:02:35', '2025-01-03 23:02:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `souvenir_place_facility_detail`
+--
+
+CREATE TABLE `souvenir_place_facility_detail` (
+  `souvenir_place_id` varchar(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `souvenir_place_facility_id` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `souvenir_place_facility_detail`
+--
+
+INSERT INTO `souvenir_place_facility_detail` (`souvenir_place_id`, `souvenir_place_facility_id`) VALUES
+('S1', '01'),
+('S2', '01'),
+('S1', '02'),
+('S2', '02');
 
 -- --------------------------------------------------------
 
@@ -1542,14 +1983,14 @@ CREATE TABLE `souvenir_place_gallery` (
 --
 
 INSERT INTO `souvenir_place_gallery` (`id`, `souvenir_place_id`, `url`, `created_at`, `updated_at`) VALUES
-('001', 'S1', '1729871401_671e3da426af550d5f5d.jpg', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
-('002', 'S1', '1729871402_f57c197a3860b28a43e1.jpg', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
-('003', 'S1', '1729871403_4a2dab39e3f99b8e216c.jpg', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
-('004', 'S1', '1729871404_f9518595c7eec23848ec.jpg', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
-('005', 'S1', '1729871403_6074b50d9f1c7720f2e1.jpg', '2024-10-25 03:51:07', '2024-10-25 03:51:07'),
-('006', 'S2', '1729872184_7712cd186c4c942f5796.jpg', '2024-10-25 04:04:07', '2024-10-25 04:04:07'),
-('007', 'S2', '1729872184_8085f26cc2893a3baa57.jpg', '2024-10-25 04:04:07', '2024-10-25 04:04:07'),
-('008', 'S2', '1729872184_140b46e22304dd584409.jpg', '2024-10-25 04:04:07', '2024-10-25 04:04:07');
+('009', 'S1', '1735993756_46190019d36c517b2b8f.jpg', '2025-01-03 23:29:23', '2025-01-03 23:29:23'),
+('010', 'S1', '1735993758_2586c19c895efd6f3420.jpg', '2025-01-03 23:29:23', '2025-01-03 23:29:23'),
+('011', 'S1', '1735993756_0347978843eb26890757.jpg', '2025-01-03 23:29:23', '2025-01-03 23:29:23'),
+('012', 'S1', '1735993758_ae563fb1c4404b4938de.jpg', '2025-01-03 23:29:23', '2025-01-03 23:29:23'),
+('013', 'S1', '1735993760_be0bd976c2b2cf092913.jpg', '2025-01-03 23:29:23', '2025-01-03 23:29:23'),
+('014', 'S2', '1735993781_c1983c5ae3b543b6e34b.jpg', '2025-01-03 23:29:46', '2025-01-03 23:29:46'),
+('015', 'S2', '1735993781_ed553abedf956414866d.jpg', '2025-01-03 23:29:46', '2025-01-03 23:29:46'),
+('016', 'S2', '1735993783_85093794e2f726076985.jpg', '2025-01-03 23:29:46', '2025-01-03 23:29:46');
 
 -- --------------------------------------------------------
 
@@ -1651,6 +2092,7 @@ CREATE TABLE `users` (
   `address` varchar(100) DEFAULT NULL,
   `phone` varchar(13) DEFAULT NULL,
   `avatar` varchar(100) DEFAULT 'default.jpg',
+  `total_coin` int DEFAULT NULL,
   `password_hash` varchar(255) NOT NULL,
   `reset_hash` varchar(255) DEFAULT NULL,
   `reset_at` datetime DEFAULT NULL,
@@ -1669,12 +2111,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `username`, `first_name`, `last_name`, `address`, `phone`, `avatar`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(7, 'pokdarwispariangan1@gmail.com', 'pokdarwis.pariangan', 'Fakhrudoni Putra', 'Account', 'Desa Wisata Nagari Tuo Pariangan', '082218141289', 'default.jpg', '$2y$10$KKs/QMWOtQgv6eN0wOiCQO5SDa14h2o387oiOCPyn9nGDKFs0usAu', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:29', '2023-10-28 22:51:29', NULL),
-(11, 'shandyka2403@gmail.com', 'dykdyk', 'Dyka', 'Dyka', 'Padang', '081364928950', 'default.jpg', '$2y$10$fVxJTbgT/Ja7xSc56553suT/tYJA8XzUL9zkl61yBYR/qtNQ35OoG', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-14 20:28:36', '2023-12-14 20:28:36', NULL),
-(23, 'umegahomestay@gmail.com', 'umegahomestay', 'Owner Umega', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '081374106956', 'default.jpg', '$2y$10$t/tLnMQiHV.4x9rez4BozenBzYWYsax3IZy5apnWa729tS1p944xq', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-26 11:40:48', '2024-09-26 11:40:48', NULL),
-(24, 'gudesterhomestay@gmail.com', 'gudesterhomestay', 'Owner Gudester', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '082269375195', 'default.jpg', '$2y$10$e4cqmQwqIh8drtCvobmCuOodW.zIHGRwqIn9RKfG6u6MapDSJ2dva', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-28 05:04:12', '2024-09-28 05:04:12', NULL),
-(25, 'nabilahomestay@gmail.com', 'nabilahomestay', 'Owner Nabila', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '082249063128', 'default.jpg', '$2y$10$hb.4auiFDNFb8uPEePqiauI2jyTKKm47b.4WXfMdB5hxSc6iWmTgq', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-10 03:16:39', '2024-10-10 03:16:39', NULL);
+INSERT INTO `users` (`id`, `email`, `username`, `first_name`, `last_name`, `address`, `phone`, `avatar`, `total_coin`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(7, 'pokdarwispariangan1@gmail.com', 'pokdarwis.pariangan', 'Fakhrudoni Putra', 'Account', 'Desa Wisata Nagari Tuo Pariangan', '082218141289', 'default.jpg', NULL, '$2y$10$KKs/QMWOtQgv6eN0wOiCQO5SDa14h2o387oiOCPyn9nGDKFs0usAu', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:29', '2023-10-28 22:51:29', NULL),
+(11, 'shandyka2403@gmail.com', 'dykdyk', 'Dyka', 'Dyka', 'Padang', '081364928950', 'default.jpg', 147500, '$2y$10$fVxJTbgT/Ja7xSc56553suT/tYJA8XzUL9zkl61yBYR/qtNQ35OoG', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-14 20:28:36', '2023-12-14 20:28:36', NULL),
+(23, 'umegahomestay@gmail.com', 'umegahomestay', 'Owner Umega', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '0895329272378', 'default.jpg', NULL, '$2y$10$t/tLnMQiHV.4x9rez4BozenBzYWYsax3IZy5apnWa729tS1p944xq', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-26 11:40:48', '2024-09-26 11:40:48', NULL),
+(24, 'gudesterhomestay@gmail.com', 'gudesterhomestay', 'Owner Gudester', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '082269375195', 'default.jpg', NULL, '$2y$10$e4cqmQwqIh8drtCvobmCuOodW.zIHGRwqIn9RKfG6u6MapDSJ2dva', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-28 05:04:12', '2024-09-28 05:04:12', NULL),
+(25, 'nabilahomestay@gmail.com', 'nabilahomestay', 'Owner Nabila', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '082249063128', 'default.jpg', NULL, '$2y$10$hb.4auiFDNFb8uPEePqiauI2jyTKKm47b.4WXfMdB5hxSc6iWmTgq', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-10 03:16:39', '2024-10-10 03:16:39', NULL);
 
 -- --------------------------------------------------------
 
@@ -1707,7 +2149,7 @@ CREATE TABLE `village` (
 --
 
 INSERT INTO `village` (`id`, `name`, `geom_file`, `selected`, `description`, `ticket_price`, `open`, `close`, `address`, `email`, `facebook`, `instagram`, `youtube`, `tiktok`, `video_url`, `created_at`, `updated_at`) VALUES
-('1', 'Nagari Tuo Pariangan', 'Pariangan.geojson', '1', 'Desa wisata Nagari Tuo Pariangan adalah sebuah desa indah yang terletak di lereng Gunung Marapi, sebuah gunung api aktif yang berada di dataran tinggi Provinsi Sumatera Barat. Berada di ketinggian 800 - 1000 mdpl, Pariangan memiliki topografi daerah perbukitan dan pegunungan dengan udara yang sejuk. Posisi geografis ini juga memberikan anugerah alam yang elok dan subur bagi desa wisata Pariangan dimana sawah berjenjang memanjakan mata dari lereng Gunung Marapi hingga lembah-lembah yang ada dibawahnya bahkan hingga ke Danau Singkarak.\r\n\r\nPariangan adalah sebuah desa yang istimewa. Tambo, tradisi lisan Masayarakat Minangkabau, menyebut Pariangan sebagai desa atau nagari tertua tempat nenek moyang dan peradaban mereka bermula. Hal ini tertuang dalam pepatah kuno “dari mano dating titiak palito, dari telong nan Batali. Dari mano asa nenek moyang kito, dari puncak gunuang Marapi.” Hingga saat ini, masih ditemukan berbagai bukti peradaban tua Masyarakat Minangkabau di nagari ini seperti Batu Lantak Tigo, Kuburan Panjang Datuak Tantejo Gurhano, Sawah Satampang Baniah, Lurah Indak Barayia dan masih banyak lagi yang lainnya. ', 1, '06:00:00', '23:59:00', 'Pariangan, Kecamatan Pariangan, Kabupaten Tanah Datar, Sumatera Barat', 'pokdarwispariangan1@gmail.com', 'pokdarwis.pariangan', 'pokdarwis.pariangan', NULL, 'pokdarwis.pariangan', '1729874403_b6f40f9b39e8ec29c967.mp4', NULL, NULL),
+('1', 'Nagari Tuo Pariangan', 'Pariangan.geojson', '1', 'Nagari Tuo Pariangan is a traditional village situated in the Tanah Datar Regency of West Sumatra province, Indonesia. It is renowned for being one of the oldest and most well-preserved Minangkabau traditional villages, often considered the original homeland of the Minangkabau people.\r\nLocated in the Pariangan sub-district, this village is nestled at the foot of Mount Merapi, offering a picturesque setting that combines natural beauty with rich cultural heritage. The village is particularly famous for its authentic traditional architecture, traditional customs, and historical significance in Minangkabau culture.', 1, '06:00:00', '23:59:00', 'Pariangan, Kecamatan Pariangan, Kabupaten Tanah Datar, Sumatera Barat', 'pokdarwispariangan1@gmail.com', 'pokdarwis.pariangan', 'pokdarwis.pariangan', NULL, 'pokdarwis.pariangan', '1734368605_d02906a9d8c576faae5c.mp4', NULL, NULL),
 ('10', 'Danau Ateh Alahan Panjang', 'Alahan_Panjang.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('11', 'Kumanis', 'Kumanis.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('12', 'Sisawah', 'Sisawah.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1757,10 +2199,10 @@ CREATE TABLE `village_gallery` (
 --
 
 INSERT INTO `village_gallery` (`id`, `village_id`, `url`) VALUES
-('001', '1', '1729874400_44ed68a82624a547c37a.webp'),
-('002', '1', '1729874400_39ad3f97336f25c40b5a.jpg'),
-('003', '1', '1729874402_1b5e09f9fe295370361a.jpg'),
-('004', '1', '1729874402_940eb56dce211088c4f5.jpg');
+('001', '1', '1734368601_f983971aabab36c21ab6.webp'),
+('002', '1', '1734368601_3b1e1bada09e95b74f2f.jpg'),
+('003', '1', '1734368603_5b42fbf55f69a9e38c3b.jpg'),
+('004', '1', '1734368603_9fd9542694baa5a5d267.jpg');
 
 -- --------------------------------------------------------
 
@@ -1788,8 +2230,8 @@ CREATE TABLE `worship_place` (
 --
 
 INSERT INTO `worship_place` (`id`, `village_id`, `name`, `worship_place_category`, `address`, `capacity`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('W1', '1', 'Masjid Ishlah', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 300, 0xe610000001030000000100000008000000aa28c5e6801f59402eac9f117654ddbfaa28c505801f59408abbe06cb956ddbfa928451c801f59406dbc2fcc0d57ddbfaa284535851f59400dbaae48b958ddbfaa28a510861f59400e89b1eccf56ddbfaa284535851f594043481f8e2156ddbfaa284519831f5940707855901355ddbfaa28c5e6801f59402eac9f117654ddbf, '-0.45841019', '100.49237328', 'Masjid Islah Nagari Tuo Pariangan adalah sebuah masjid bersejarah yang terletak di Nagari Pariangan, Kabupaten Tanah Datar, Sumatera Barat. Masjid ini dikenal sebagai salah satu bangunan religius tertua di Minangkabau, dengan arsitektur tradisional yang mencerminkan nilai budaya dan keagamaan yang kuat. Dibangun dengan dominasi gaya arsitektur Minangkabau, masjid ini memiliki atap berbentuk gonjong, mirip dengan rumah adat Minangkabau (rumah gadang), yang memberikan kesan megah dan khas. Bangunan ini menggunakan material alami seperti kayu dan batu, yang menjadikannya sejalan dengan lingkungan alam sekitarnya yang asri dan indah.', '2024-10-25 03:42:41', '2024-10-25 03:42:41'),
-('W2', '1', 'Mesjid AT TAQWA Pariangan', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 250, 0xe6100000010300000001000000080000004f5e6bf6051f594064b19c518078dcbf505e4bcc041f594030bbb3cf7779dcbf505e4b45041f5940519666eda17adcbf4f5e6be8041f59406c4e670a267cdcbf505e0b18081f59409e13f8495e7cdcbf505ecb39081f59400d9f508c2e7bdcbf515e4b9c071f594069200111cf78dcbf4f5e6bf6051f594064b19c518078dcbf, '-0.44497283', '100.48475636', 'Masjid At-Taqwa Pariangan adalah sebuah masjid ikonik yang berada di Nagari Pariangan, Kabupaten Tanah Datar, Sumatera Barat. Masjid ini terletak di kawasan yang terkenal sebagai salah satu desa tertua di Minangkabau, menjadikannya pusat spiritual dan sosial bagi masyarakat setempat. Meskipun tidak setua Masjid Islah, Masjid At-Taqwa tetap memiliki nilai penting dalam sejarah perkembangan Islam di Pariangan. Arsitektur masjid ini merupakan perpaduan antara desain modern dan tradisional Minangkabau. Atap masjid yang berbentuk limas dipadukan dengan ornamen khas lokal, memberikan keseimbangan antara estetika kontemporer dan nilai-nilai budaya setempat. Struktur bangunan ini dibangun dengan menggunakan bahan-bahan yang kuat dan tahan lama, serta didesain untuk menampung jamaah dalam jumlah yang cukup besar, khususnya pada saat perayaan hari-hari besar Islam.', '2024-10-25 03:44:16', '2024-10-25 03:44:16');
+('W1', '1', 'Masjid Ishlah', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 300, 0xe610000001030000000100000008000000aa28c5e6801f59402eac9f117654ddbfaa28c505801f59408abbe06cb956ddbfa928451c801f59406dbc2fcc0d57ddbfaa284535851f59400dbaae48b958ddbfaa28a510861f59400e89b1eccf56ddbfaa284535851f594043481f8e2156ddbfaa284519831f5940707855901355ddbfaa28c5e6801f59402eac9f117654ddbf, -0.45841019, 100.49237328, 'Masjid Islah Nagari Tuo Pariangan adalah sebuah masjid bersejarah yang terletak di Nagari Pariangan, Kabupaten Tanah Datar, Sumatera Barat. Masjid ini dikenal sebagai salah satu bangunan religius tertua di Minangkabau, dengan arsitektur tradisional yang mencerminkan nilai budaya dan keagamaan yang kuat. Dibangun dengan dominasi gaya arsitektur Minangkabau, masjid ini memiliki atap berbentuk gonjong, mirip dengan rumah adat Minangkabau (rumah gadang), yang memberikan kesan megah dan khas. Bangunan ini menggunakan material alami seperti kayu dan batu, yang menjadikannya sejalan dengan lingkungan alam sekitarnya yang asri dan indah.', '2024-10-25 03:42:41', '2025-01-03 22:00:36'),
+('W2', '1', 'Mesjid AT TAQWA Pariangan', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 250, 0xe6100000010300000001000000080000004f5e6bf6051f594064b19c518078dcbf505e4bcc041f594030bbb3cf7779dcbf505e4b45041f5940519666eda17adcbf4f5e6be8041f59406c4e670a267cdcbf505e0b18081f59409e13f8495e7cdcbf505ecb39081f59400d9f508c2e7bdcbf515e4b9c071f594069200111cf78dcbf4f5e6bf6051f594064b19c518078dcbf, -0.44497283, 100.48475636, 'Masjid At-Taqwa Pariangan adalah sebuah masjid ikonik yang berada di Nagari Pariangan, Kabupaten Tanah Datar, Sumatera Barat. Masjid ini terletak di kawasan yang terkenal sebagai salah satu desa tertua di Minangkabau, menjadikannya pusat spiritual dan sosial bagi masyarakat setempat. Meskipun tidak setua Masjid Islah, Masjid At-Taqwa tetap memiliki nilai penting dalam sejarah perkembangan Islam di Pariangan. Arsitektur masjid ini merupakan perpaduan antara desain modern dan tradisional Minangkabau. Atap masjid yang berbentuk limas dipadukan dengan ornamen khas lokal, memberikan keseimbangan antara estetika kontemporer dan nilai-nilai budaya setempat. Struktur bangunan ini dibangun dengan menggunakan bahan-bahan yang kuat dan tahan lama, serta didesain untuk menampung jamaah dalam jumlah yang cukup besar, khususnya pada saat perayaan hari-hari besar Islam.', '2024-10-25 03:44:16', '2025-01-03 22:00:52');
 
 -- --------------------------------------------------------
 
@@ -1815,6 +2257,48 @@ INSERT INTO `worship_place_category` (`id`, `name`, `created_at`, `updated_at`) 
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `worship_place_facility`
+--
+
+CREATE TABLE `worship_place_facility` (
+  `id` varchar(2) NOT NULL,
+  `name` varchar(25) NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `worship_place_facility`
+--
+
+INSERT INTO `worship_place_facility` (`id`, `name`, `created_at`, `updated_at`) VALUES
+('01', 'Parking Area', '2025-01-03 21:21:28', '2025-01-03 21:21:28'),
+('02', 'Toilet', '2025-01-03 21:31:32', '2025-01-03 21:31:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `worship_place_facility_detail`
+--
+
+CREATE TABLE `worship_place_facility_detail` (
+  `worship_place_id` varchar(2) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `worship_place_facility_id` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `worship_place_facility_detail`
+--
+
+INSERT INTO `worship_place_facility_detail` (`worship_place_id`, `worship_place_facility_id`) VALUES
+('W1', '01'),
+('W2', '01'),
+('W1', '02'),
+('W2', '02');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `worship_place_gallery`
 --
 
@@ -1831,15 +2315,47 @@ CREATE TABLE `worship_place_gallery` (
 --
 
 INSERT INTO `worship_place_gallery` (`id`, `worship_place_id`, `url`, `created_at`, `updated_at`) VALUES
-('001', 'W1', '1729870953_39736c9f5b1a82faaad3.jpg', '2024-10-25 03:42:41', '2024-10-25 03:42:41'),
-('002', 'W1', '1729870950_679848b3cdf5dab16f8f.jpeg', '2024-10-25 03:42:41', '2024-10-25 03:42:41'),
-('003', 'W1', '1729870951_ac3494ee57ef5f6caa2d.webp', '2024-10-25 03:42:41', '2024-10-25 03:42:41'),
-('004', 'W2', '1729871032_52bd6ff5a3622ba75099.jpg', '2024-10-25 03:44:16', '2024-10-25 03:44:16'),
-('005', 'W2', '1729871032_618ab41827c11668f78e.jpg', '2024-10-25 03:44:16', '2024-10-25 03:44:16');
+('006', 'W1', '1735988431_1aef838c9cd01c222625.jpg', '2025-01-03 22:00:36', '2025-01-03 22:00:36'),
+('007', 'W1', '1735988431_eb9dc64ab0a967c2b388.jpeg', '2025-01-03 22:00:36', '2025-01-03 22:00:36'),
+('008', 'W1', '1735988433_19fb6cff5aa58ff92a90.webp', '2025-01-03 22:00:36', '2025-01-03 22:00:36'),
+('009', 'W2', '1735988450_e77988d5f3d0253b4eaf.jpg', '2025-01-03 22:00:52', '2025-01-03 22:00:52'),
+('010', 'W2', '1735988450_ff732471df6d747457d1.jpg', '2025-01-03 22:00:52', '2025-01-03 22:00:52');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `attraction`
+--
+ALTER TABLE `attraction`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `attraction_category`
+--
+ALTER TABLE `attraction_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `attraction_facility`
+--
+ALTER TABLE `attraction_facility`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `attraction_facility_detail`
+--
+ALTER TABLE `attraction_facility_detail`
+  ADD PRIMARY KEY (`attraction_id`,`attraction_facility_id`),
+  ADD KEY `facility_id` (`attraction_facility_id`);
+
+--
+-- Indexes for table `attraction_gallery`
+--
+ALTER TABLE `attraction_gallery`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `attraction_id` (`attraction_id`);
 
 --
 -- Indexes for table `auth_activation_attempts`
@@ -1920,6 +2436,19 @@ ALTER TABLE `country`
 ALTER TABLE `culinary_place`
   ADD PRIMARY KEY (`id`),
   ADD KEY `village_id` (`village_id`);
+
+--
+-- Indexes for table `culinary_place_facility`
+--
+ALTER TABLE `culinary_place_facility`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `culinary_place_facility_detail`
+--
+ALTER TABLE `culinary_place_facility_detail`
+  ADD PRIMARY KEY (`culinary_place_id`,`culinary_place_facility_id`),
+  ADD KEY `culinary_facility_id` (`culinary_place_facility_id`);
 
 --
 -- Indexes for table `culinary_place_gallery`
@@ -2070,6 +2599,19 @@ ALTER TABLE `souvenir_place`
   ADD KEY `village_id` (`village_id`);
 
 --
+-- Indexes for table `souvenir_place_facility`
+--
+ALTER TABLE `souvenir_place_facility`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `souvenir_place_facility_detail`
+--
+ALTER TABLE `souvenir_place_facility_detail`
+  ADD PRIMARY KEY (`souvenir_place_id`,`souvenir_place_facility_id`),
+  ADD KEY `souvenir_facility_id` (`souvenir_place_facility_id`);
+
+--
 -- Indexes for table `souvenir_place_gallery`
 --
 ALTER TABLE `souvenir_place_gallery`
@@ -2132,6 +2674,19 @@ ALTER TABLE `worship_place_category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `worship_place_facility`
+--
+ALTER TABLE `worship_place_facility`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `worship_place_facility_detail`
+--
+ALTER TABLE `worship_place_facility_detail`
+  ADD PRIMARY KEY (`worship_place_id`,`worship_place_facility_id`),
+  ADD KEY `worship_facility_id` (`worship_place_facility_id`);
+
+--
 -- Indexes for table `worship_place_gallery`
 --
 ALTER TABLE `worship_place_gallery`
@@ -2158,7 +2713,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=488;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=538;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -2195,6 +2750,19 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `attraction_facility_detail`
+--
+ALTER TABLE `attraction_facility_detail`
+  ADD CONSTRAINT `attraction_facility_detail_ibfk_2` FOREIGN KEY (`attraction_facility_id`) REFERENCES `attraction_facility` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `attraction_facility_detail_ibfk_3` FOREIGN KEY (`attraction_id`) REFERENCES `attraction` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `attraction_gallery`
+--
+ALTER TABLE `attraction_gallery`
+  ADD CONSTRAINT `attraction_gallery_ibfk_1` FOREIGN KEY (`attraction_id`) REFERENCES `attraction` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `auth_groups_permissions`
 --
 ALTER TABLE `auth_groups_permissions`
@@ -2226,6 +2794,13 @@ ALTER TABLE `auth_users_permissions`
 --
 ALTER TABLE `culinary_place`
   ADD CONSTRAINT `culinary_place_ibfk_1` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `culinary_place_facility_detail`
+--
+ALTER TABLE `culinary_place_facility_detail`
+  ADD CONSTRAINT `culinary_place_facility_detail_ibfk_1` FOREIGN KEY (`culinary_place_facility_id`) REFERENCES `culinary_place_facility` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `culinary_place_facility_detail_ibfk_2` FOREIGN KEY (`culinary_place_id`) REFERENCES `culinary_place` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `culinary_place_gallery`
@@ -2319,6 +2894,13 @@ ALTER TABLE `souvenir_place`
   ADD CONSTRAINT `souvenir_place_ibfk_1` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `souvenir_place_facility_detail`
+--
+ALTER TABLE `souvenir_place_facility_detail`
+  ADD CONSTRAINT `souvenir_place_facility_detail_ibfk_1` FOREIGN KEY (`souvenir_place_id`) REFERENCES `souvenir_place` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `souvenir_place_facility_detail_ibfk_2` FOREIGN KEY (`souvenir_place_facility_id`) REFERENCES `souvenir_place_facility` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `souvenir_place_gallery`
 --
 ALTER TABLE `souvenir_place_gallery`
@@ -2343,6 +2925,13 @@ ALTER TABLE `village_gallery`
 ALTER TABLE `worship_place`
   ADD CONSTRAINT `worship_place_ibfk_1` FOREIGN KEY (`village_id`) REFERENCES `village` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `worship_place_worship_place_category_foreign` FOREIGN KEY (`worship_place_category`) REFERENCES `worship_place_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `worship_place_facility_detail`
+--
+ALTER TABLE `worship_place_facility_detail`
+  ADD CONSTRAINT `worship_place_facility_detail_ibfk_1` FOREIGN KEY (`worship_place_facility_id`) REFERENCES `worship_place_facility` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `worship_place_facility_detail_ibfk_2` FOREIGN KEY (`worship_place_id`) REFERENCES `worship_place` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `worship_place_gallery`
