@@ -9,7 +9,7 @@ use App\Models\RumahGadangModel;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourceController;
 
-use App\Models\HomestayModel;
+use App\Models\Homestay\HomestayModel;
 use App\Models\AttractionModel;
 use App\Models\AttractionGalleryModel;
 use App\Models\AttractionFacilityDetailModel;
@@ -97,19 +97,19 @@ class Attraction extends ResourceController
             $facilities[] = $facility['name'];
         }
 
-        $list_ticket = $this->attractionTicketPriceModel->get_ticket_by_at_api($id)->getResultArray();
-        $ticketPrices = array();
-        foreach ($list_ticket as $ticket) {
-            $ticketPrices[] = $ticket['price'];
-        }
+        // $list_ticket = $this->attractionTicketPriceModel->get_ticket_by_at_api($id)->getResultArray();
+        // $ticketPrices = array();
+        // foreach ($list_ticket as $ticket) {
+        //     $ticketPrices[] = $ticket['price'];
+        // }
 
         $attraction['facilities'] = $facilities;
         $attraction['gallery'] = $galleries;
-        if (!$list_ticket) {
-            $attraction['ticket_price'] = 'Free';
-        } else {
-            $attraction['ticket_price'] = 'Rp ' . number_format(min($ticketPrices), 2, ',', '.') . ' - Rp ' . number_format(max($ticketPrices), 2, ',', '.');
-        }
+        // if (!$list_ticket) {
+        //     $attraction['ticket_price'] = 'Free';
+        // } else {
+        //     $attraction['ticket_price'] = 'Rp ' . number_format(min($ticketPrices), 2, ',', '.') . ' - Rp ' . number_format(max($ticketPrices), 2, ',', '.');
+        // }
 
         $response = [
             'data' => $attraction,
@@ -379,7 +379,16 @@ class Attraction extends ResourceController
     public function findByRadius()
     {
         $request = $this->request->getPost();
-        $contents = $this->attractionModel->get_at_by_radius_api($request)->getResult();
+        $contents = $this->attractionModel->get_list_at_api()->getResultArray();
+        $i = 0;
+        foreach ($contents as $content) {
+
+            $isWithinRadius = $this->isWithinRadius($request['lat'], $request['long'], $content['lat'], $content['lng'], (int)$request['radius'] / 1000);
+            if (!$isWithinRadius) {
+                unset($contents[$i]);
+            }
+            $i++;
+        }
         $response = [
             'data' => $contents,
             'status' => 200,
@@ -388,6 +397,32 @@ class Attraction extends ResourceController
             ]
         ];
         return $this->respond($response);
+    }
+
+    public function isWithinRadius($lat1, $lon1, $lat2, $lon2, $radius)
+    {
+        // Konstanta jari-jari bumi dalam kilometer
+        $earthRadius = 6371;
+
+        // Konversi derajat ke radian
+        $lat1 = deg2rad($lat1);
+        $lon1 = deg2rad($lon1);
+        $lat2 = deg2rad($lat2);
+        $lon2 = deg2rad($lon2);
+
+        // Menghitung perbedaan lintang dan bujur
+        $dLat = $lat2 - $lat1;
+        $dLon = $lon2 - $lon1;
+
+        // Menggunakan rumus Haversine
+        $a = sin($dLat / 2) * sin($dLat / 2) + cos($lat1) * cos($lat2) * sin($dLon / 2) * sin($dLon / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+
+        // Menghitung jarak
+        $distance = $earthRadius * $c;
+
+        // Memeriksa apakah jarak berada dalam radius
+        return $distance <= $radius;
     }
 
     public function getFacility()
@@ -472,6 +507,20 @@ class Attraction extends ResourceController
             'status' => 200,
             'message' => [
                 "Success get list of Rumah Gadang"
+            ]
+        ];
+        return $this->respond($response);
+    }
+
+    function findAll()
+    {
+        $contents = $this->attractionModel->get_list_at_api()->getResult();
+
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success find all homestay"
             ]
         ];
         return $this->respond($response);

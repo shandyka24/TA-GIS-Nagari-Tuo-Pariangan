@@ -21,10 +21,21 @@ $uri3 = $uri[3] ?? '';
                 <?php endif; ?>
                 <?php if (logged_in()) : ?>
                     <div class="p-2 text-center">
-                        <?php if (!empty(user()->first_name)) : ?>
-                            Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-muted mb-0">@<?= user()->username; ?></span>
-                        <?php else : ?>
-                            Hello, <span class="fw-bold">@<?= user()->username; ?></span>
+                        <?php if (!empty(user()->first_name)): ?>
+                            <?php if (in_groups(['owner', 'admin'])) : ?>
+                                Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-muted mb-0">@<?= user()->username; ?></span><br>
+                            <?php else : ?>
+                                Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-muted mb-0">@<?= user()->username; ?></span><br>
+                                <span class="fw-bold">Your Coin : <?= number_format(user()->total_coin); ?></span>
+                            <?php endif; ?>
+
+                        <?php else: ?>
+                            <?php if (in_groups(['owner', 'admin'])) : ?>
+                                Hello, <span class="fw-bold">@<?= user()->username; ?></span><br>
+                            <?php else : ?>
+                                Hello, <span class="fw-bold">@<?= user()->username; ?></span><br>
+                                <span class="fw-bold">Your Coin : <?= number_format(user()->total_coin); ?></span>
+                            <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 <?php else : ?>

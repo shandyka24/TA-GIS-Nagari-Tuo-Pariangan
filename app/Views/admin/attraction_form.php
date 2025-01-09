@@ -61,6 +61,10 @@ $edit = in_array('edit', $uri);
                                 </div>
                             </div>
                             <div class="form-group mb-4">
+                                <label for="price" class="mb-2">Entry Price</label>
+                                <input type="number" maxlength="25" id="price" class="form-control" name="price" placeholder="Entry Price" value="<?= ($edit) ? $data['price'] : old('price'); ?>">
+                            </div>
+                            <div class="form-group mb-4">
                                 <label for="employee_name" class="mb-2">Employee Name</label>
                                 <input type="text" maxlength="25" id="employee_name" class="form-control" name="employee_name" placeholder="Employee Name" value="<?= ($edit) ? $data['employee_name'] : old('employee_name'); ?>">
                             </div>
@@ -138,8 +142,7 @@ $edit = in_array('edit', $uri);
                 </div>
                 <?= $this->include('web/layouts/map-body'); ?>
                 <script>
-                    goToVillage();
-                    map.setZoom(16);
+                    digitTourismVillage();
                     initDrawingManager(<?= $edit ?>);
                 </script>
             </div>

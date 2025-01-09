@@ -109,6 +109,25 @@ class AccountModel extends Model
         return $query;
     }
 
+    public function calculate_coin($id = null, $coin = null)
+    {
+        $query = $this->db->table('users')
+            ->set('users.total_coin', 'users.total_coin - ' . (int)$coin, false) // Mengurangi total_coin
+            ->where('users.id', $id)
+            ->update();
+        return $query;
+    }
+
+    public function add_coin($id = null, $coin = null)
+    {
+        $query = $this->db->table('users')
+            ->set('users.total_coin', 'users.total_coin + ' . (int)$coin, false) 
+            ->where('users.id', $id)
+            ->update();
+        return $query;
+    }
+
+
     public function change_password_user($id = null, $data = null)
     {
         $query = $this->db->table('users')

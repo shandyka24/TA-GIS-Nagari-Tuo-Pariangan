@@ -74,7 +74,12 @@
                                         <td class="fw-bold">Contact Person</td>
                                         <td><?= esc($homestay['phone']); ?></td>
                                     </tr>
-                                    <?php if ($reservation['rating'] != null) : ?>
+                                    <?php
+
+                                    use App\Controllers\Web\Reservation\Reservation;
+                                    use phpDocumentor\Reflection\Types\Null_;
+
+                                    if ($reservation['rating'] != null) : ?>
                                         <tr>
                                             <td class="fw-bold">Rating</td>
                                             <td>
@@ -90,6 +95,11 @@
                                             <td class="fw-bold">Review</td>
                                             <td><?= esc($reservation['review']); ?></td>
                                         </tr>
+                                        <tr>
+                                            <td class="fw-bold">Bonus Coin</td>
+                                            <td><?= number_format($reservation['total_price'] * 0.05); ?></td>
+                                        </tr>
+
                                     <?php endif; ?>
                                 </tbody>
                             </table>
@@ -130,7 +140,7 @@
                                         <?php if ($reservation['reservation_type'] == "1") : ?>
                                             <span>Homestay unit total price = <?= esc("Rp " . number_format($homestay_unit_total_price, 0, ',', '.')) ?></span>
                                         <?php else: ?>
-                                            <span>Homestay unit total price = <?= esc("Rp " . number_format($homestay_unit_total_price * 90 / 100, 0, ',', '.')) ?></span>
+                                            <span>Homestay unit total price = <?= esc("Rp " . number_format($homestay_unit_total_price, 0, ',', '.')) ?></span>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -146,14 +156,14 @@
                                         <div class="accordion-body">
                                             <div class="mb-3">
                                                 <span class="fw-bold"><?= esc($homestay['name']) ?></span>
-                                                <?php if (($reservation['status'] == null) && ($reservation['canceled_at'] == null)) : ?>
+                                                <?php if (($reservation['status'] == null) && ($reservation['canceled_at'] == null) && ($reservation['reservation_type'] == 1)) : ?>
                                                     <a title="Detail" class="text-success float-end" data-bs-toggle="modal" data-bs-target="#insertService"><i class="fa-solid fa-add"></i> Additional Amenities</a>
                                                 <?php endif; ?>
                                             </div>
                                             <?php if (!empty($reservation_additional_amenities)) : ?>
                                                 <?php foreach ($reservation_additional_amenities as $activity) : ?>
                                                     <li><?= esc($activity['name']) ?>
-                                                        <?php if ($reservation['status'] == null) : ?>
+                                                        <?php if (($reservation['status'] == null) && ($reservation['reservation_type'] == 1)) : ?>
                                                             <a class="text-danger float-end ms-2" onclick="deleteAdditionalAmenities('<?= esc($activity['homestay_id']); ?>','<?= esc($activity['additional_amenities_id']); ?>','<?= esc($activity['reservation_id']); ?>')"><i class="fa-solid fa-trash"></i></a>
                                                         <?php endif; ?>
                                                         <a class="text-info float-end" target="_blank"><i class="fa-solid fa-circle-info" data-bs-toggle="modal" data-bs-target="#infoActivity<?= esc($activity['id']); ?>"></i></a><br>
@@ -178,30 +188,96 @@
                                 </div>
                             <?php endif; ?>
                         </div>
+
+                        <?php if ($reservation['reservation_type'] == 1 && $reservation['total_price'] == null && $reservation['deposit'] == null) : ?>
+                            <div class="form-check form-switch mt-3">
+                                <?php if (!empty($coin) && $coin['total_coin'] > 0): ?>
+                                    <input hidden readonly type="number" id="coin" name="coin" class="form-control" value="<?= esc($coin['total_coin']); ?>">
+                                    <div class="mb-1 d-flex align-items-center">
+                                        <label class="form-check-label me-auto" for="useCoinsSwitch">
+                                            Use Coins? <span class="text-muted"><i>*(Min. 25.000, Max. 15% of Total Price)</i></span>
+                                        </label>
+                                        <input
+                                            onchange="getTpac()"
+                                            class="form-check-input ms-2"
+                                            type="checkbox"
+                                            id="useCoinsSwitch"
+                                            data-total-coins="<?= esc($coin['total_coin']) ?>" <?= ($coin['total_coin'] < 25000) ? 'disabled' : '' ?>>
+                                    </div>
+                                <?php else: ?>
+                                    <p>No coins available</p>
+                                <?php endif; ?>
+                            </div>
+
+                        <?php elseif ($reservation['reservation_type'] == 2 && $reservation['total_price'] != null && $reservation['deposit'] != null && $reservation['status'] == null) : ?>
+                            <div class="form-check form-switch mt-3">
+                                <?php if (!empty($coin) && $coin['total_coin'] > 0): ?>
+                                    <input hidden readonly type="number" id="coin" name="coin" class="form-control" value="<?= esc($coin['total_coin']); ?>">
+                                    <div class="mb-1 d-flex align-items-center">
+                                        <label class="form-check-label me-auto" for="useCoinsSwitch">
+                                            Use Coins? <span class="text-muted"><i>*(Min. 25.000, Max. 15% of Total Price)</i></span>
+                                        </label>
+                                        <input
+                                            onchange="getTpac()"
+                                            class="form-check-input ms-2"
+                                            type="checkbox"
+                                            id="useCoinsSwitch"
+                                            data-total-coins="<?= esc($coin['total_coin']) ?>" <?= ($coin['total_coin'] < 50000) ? 'disabled' : '' ?>>
+                                    </div>
+                                <?php else: ?>
+                                    <p>No coins available</p>
+                                <?php endif; ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
         <?php
-        $total_price = $homestay_unit_total_price + $homestay_activity_total_price + $package_total_price;
-        $deposit = $total_price * 20 / 100;
-        $fullPay = $total_price * 80 / 100;
+        // // Calculate total price on the server side
 
-        if ($reservation['is_refund'] == '1') {
-            $refund = $deposit * 50 / 100;
-        } elseif ($reservation['is_refund'] == '0') {
-            $refund = 0;
+        // // Check if the switch is checked and adjust the total price accordingly
+        // if (isset($_POST['useCoinsSwitch']) && $_POST['useCoinsSwitch'] == 'on') {
+        //     $total_price -= $coin['total_coin'];
+        // }
+
+        // Calculate deposit and full payment
+        $total_price = $homestay_unit_total_price + $homestay_activity_total_price + $package_total_price;
+        $deposit = $total_price * 0.20; // 20%
+        $fullPay = $total_price * 0.80; // 80%
+        $total_price_after_coin = $total_price - $coin['total_coin'];
+        $coin = $coin['total_coin'];
+
+        if ($reservation['reservation_type'] == '1') {
+            if (($coin > 0.15 * $total_price)) {
+                $coin = 0.15 * $total_price;
+            }
+        } else {
+            if (($coin > 0.15 * $homestay_unit_total_price * 0.9)) {
+                $coin = 0.15 * $homestay_unit_total_price * 0.9;
+            }
         }
+
+        // Calculate refund based on reservation status
+        $refund = ($reservation['is_refund'] == '1') ? ($deposit * 0.50) : 0; // 50% of deposit if refundable
         ?>
+
         <?php if (($reservation['status'] == null) && ($reservation['canceled_at'] == null)) : ?>
             <div class="row">
                 <div class="col">
-                    <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($deposit); ?>','<?= esc($total_price); ?>')">
-                        <i class="fa-solid fa-check"></i> Done
-                    </a>
+                    <?php if (($reservation['reservation_type'] == 1)) : ?>
+                        <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($deposit); ?>','<?= esc($total_price); ?>','<?= esc($coin); ?>')">
+                            <i class="fa-solid fa-check"></i> Done
+                        </a>
+                    <?php elseif (($reservation['reservation_type'] == 2)) : ?>
+                        <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($reservation['deposit']); ?>','<?= esc($reservation['total_price']); ?>','<?= esc($coin); ?>')">
+                            <i class="fa-solid fa-check"></i> Done
+                        </a>
+                    <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>
+
         <div class="row">
             <div class="card">
                 <div class="card-header text-center">
@@ -215,29 +291,105 @@
                     <div class="col table-responsive">
                         <table class="table table-borderless text-dark">
                             <tbody>
-                                <tr>
-                                    <td class="fw-bold">Total Price</td>
-                                    <?php if ($reservation['reservation_type'] == "1") : ?>
-                                        <td>: <?= esc("Rp " . number_format($total_price, 0, ',', '.')) ?></td>
-                                    <?php else: ?>
-                                        <td>: <?= esc("Rp " . number_format($total_price * 90 / 100, 0, ',', '.')) ?></td>
-                                    <?php endif; ?>
-                                </tr>
-                                <tr>
-                                    <td class="fw-bold">Deposit</td>
-                                    <?php if ($reservation['reservation_type'] == "1") : ?>
-                                        <td> : <?= esc("Rp " . number_format($deposit, 0, ',', '.')) ?> <i>*(20% of total price)</i> </td>
-                                    <?php else: ?>
-                                        <td> : <?= esc("Rp " . number_format($deposit * 90 / 100, 0, ',', '.')) ?> <i>*(20% of total price)</i> </td>
-                                    <?php endif; ?>
-                                </tr>
-                                <?php if ((($reservation['status'] == 'Deposit Successful') || ($reservation['status'] == 'Full Pay Pending') || ($reservation['status'] == 'Full Pay Successful')) && ($reservation['canceled_at'] == null)) : ?>
+                                <?php if (($reservation['reservation_type'] == 1)) : ?>
                                     <tr>
-                                        <td class="fw-bold">Full Price</td>
-                                        <td>
-                                            : <?= esc("Rp " . number_format($total_price - $deposit, 0, ',', '.')) ?> <i>*(80% of total price)</i>
-                                        </td>
+                                        <td class="fw-bold">Total Price</td>
+                                        <td>: <?= esc("Rp " . number_format($total_price, 0, ',', '.')) ?></td>
+                                        <input hidden type="number" id="total_price_for_bonus_coin" name="coin" class="form-control" value="<?= esc($total_price); ?>">
+
                                     </tr>
+                                    <tr>
+                                        <td class="fw-bold">Deposit</td>
+                                        <td>: <?= esc("Rp " . number_format($deposit, 0, ',', '.')) ?> <i>*(20% of total price)</i></td>
+                                    </tr>
+                                <?php elseif (($reservation['reservation_type'] == 2 && $tpac_save != null && $tpac_save > 0)) : ?>
+                                    <tr>
+                                        <td class="fw-bold">Total Price</td>
+                                        <td>: <?= esc("Rp " . number_format($homestay_unit_total_price * 90 / 100, 0, ',', '.')) ?></td>
+                                        <input hidden type="number" id="total_price_for_bonus_coin" name="coin" class="form-control" value="<?= esc($homestay_unit_total_price * 90 / 100); ?>">
+
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">Deposit</td>
+                                        <td>: <?= esc("Rp " . number_format($homestay_unit_total_price * 90 / 100 * 20 / 100, 0, ',', '.')) ?> <i>*(20% of total price)</i></td>
+                                    </tr>
+                                <?php endif; ?>
+
+                                <tr>
+                                    <td class="fw-bold">
+                                        <div id="used_coin_1" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0')) ? 'style="display: none;"' : '' ?>>Coin Used</div>
+                                    </td>
+                                    <td>
+                                        <div id="used_coin_2" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0')) ? 'style="display: none;"' : '' ?>>:
+                                            <?php if ($reservation['status'] != null) : ?>
+                                                <?= esc("-Rp " . number_format($reservation['coin_use'], 0, ',', '.')) ?>
+                                            <?php else : ?>
+                                                <?= esc("-Rp " . number_format($coin, 0, ',', '.')) ?>
+                                            <?php endif; ?>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="fw-bold">
+                                        <div id="used_coin_3" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0')) ? 'style="display: none;"' : '' ?>>Total Price After Coin</div>
+                                    </td>
+                                    <td>
+                                        <?php if (($reservation['status'] != null)) : ?>
+                                            <div id="used_coin_4" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0')) ? 'style="display: none;"' : '' ?>>: <?= esc("Rp " . number_format($reservation['total_price'] - $reservation['coin_use'], 0, ',', '.')) ?></div>
+                                        <?php else : ?>
+                                            <?php if (($reservation['reservation_type'] == 1)) : ?>
+                                                <?php if (($coin > 0.15 * $total_price)) : ?>
+                                                    <div id="used_coin_4" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0')) ? 'style="display: none;"' : '' ?>>: <?= esc("Rp " . number_format($total_price - 0.15 * $total_price, 0, ',', '.')) ?></div>
+                                                <?php else : ?>
+                                                    <div id="used_coin_4" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0')) ? 'style="display: none;"' : '' ?>>: <?= esc("Rp " . number_format($total_price - $coin, 0, ',', '.')) ?></div>
+                                                <?php endif; ?>
+                                            <?php else : ?>
+                                                <?php if (($coin > 0.15 * $total_price)) : ?>
+                                                    <div id="used_coin_4" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0')) ? 'style="display: none;"' : '' ?>>: <?= esc("Rp " . number_format(($homestay_unit_total_price * 90 / 100) - (0.15 * $homestay_unit_total_price * 90 / 100), 0, ',', '.')) ?></div>
+                                                <?php else : ?>
+                                                    <div id="used_coin_4" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0')) ? 'style="display: none;"' : '' ?>>: <?= esc("Rp " . number_format($homestay_unit_total_price * 90 / 100 - $coin, 0, ',', '.')) ?></div>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+
+                                <script>
+                                    usedCoinText();
+                                </script>
+
+                                <?php if ((($reservation['status'] == 'Deposit Successful') || ($reservation['status'] == 'Full Pay Pending') || ($reservation['status'] == 'Full Pay Successful')) && ($reservation['canceled_at'] == null)) : ?>
+                                    <?php if (($reservation['reservation_type'] == 1 && $reservation['coin_use'] == 0)) : ?>
+                                        <tr>
+                                            <td class="fw-bold">Full Price</td>
+                                            <td>
+                                                : <?= esc("Rp " . number_format($reservation['total_price'] - $reservation['deposit'], 0, ',', '.')) ?> <i>*(80% of total price)</i>
+                                            </td>
+                                        </tr>
+                                    <?php elseif (($reservation['reservation_type'] == 2 &&  $reservation['coin_use'] == 0)) : ?>
+                                        <tr>
+                                            <td class="fw-bold">Full Price</td>
+                                            <td>
+                                                : <?= esc("Rp " . number_format($reservation['total_price'] - $reservation['deposit'], 0, ',', '.')) ?> <i>*(80% of total price)</i>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if (($reservation['reservation_type'] == 1 && $reservation['coin_use'] > 0)) : ?>
+                                        <tr>
+                                            <td class="fw-bold">Full Price</td>
+                                            <td>
+                                                : <?= esc("Rp " . number_format($reservation['total_price'] - $reservation['coin_use'] - $reservation['deposit'], 0, ',', '.')) ?> <i>*(Total Price After Deposit and Using Coin)</i>
+                                            </td>
+                                        </tr>
+                                    <?php elseif (($reservation['reservation_type'] == 2 &&  $reservation['coin_use'] > 0)) : ?>
+                                        <tr>
+                                            <td class="fw-bold">Full Price</td>
+                                            <td>
+                                                : <?= esc("Rp " . number_format($reservation['total_price'] - $reservation['coin_use'] - $reservation['deposit'], 0, ',', '.')) ?> <i>*(Total Price After Deposit and Using Coin)</i>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                                 <?php if ($reservation['is_refund'] == '1') : ?>
                                     <tr>
@@ -450,7 +602,7 @@
                                     <tr>
                                         <td colspan="2">
                                             <span class="fw-bold">To Do : </span>
-                                            Add rating and review.
+                                            Add rating and review. And get Bonus Coin 5% from your reservation total prcie
                                         </td>
                                     </tr>
                                     <tr>
@@ -461,7 +613,7 @@
                                                     <div class="card-header text-center">
                                                         <h4 class="card-title">Rating and Review</h4>
                                                         <?php if (in_groups('user')) : ?>
-                                                            <form class="form form-vertical" action="<?= base_url('web/reservation/review/' . $reservation['id']); ?>" method="post" onsubmit="checkRatingStar(event);">
+                                                            <form class="form form-vertical" method="post" onsubmit="checkRatingStar(event);">
                                                                 <div class="form-body">
                                                                     <div class="star-containter mb-3">
                                                                         <i class="fa-solid fa-star fs-4" id="rstar-1" onclick="setRatingStar('rstar-1');"></i>
@@ -478,7 +630,7 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-12 d-flex justify-content-center mb-3">
-                                                                        <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                                                        <a type="submit" onclick="reviewAndCoin('<?= esc($reservation['id']); ?>')" class="btn btn-primary me-1 mb-1">Submit</a>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -620,17 +772,67 @@
 <?= $this->section('javascript') ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    function confirmDone(reservation_id, deposit, total_price) {
+    function confirmDone(reservation_id, deposit, total_price, coin) {
+        if ($('#useCoinsSwitch').is(':checked')) {
+            Swal.fire({
+                title: "Do you want to finish reservation?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/web/reservation/finish/" + reservation_id + "/" + deposit + "/" + total_price + "/" + coin;
+                }
+            });
+        } else {
+            var zerocoin = 0;
+            Swal.fire({
+                title: "Do you want to finish reservation?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/web/reservation/finish/" + reservation_id + "/" + deposit + "/" + total_price + "/" + zerocoin;
+                }
+            });
+        }
+    }
+</script>
+
+<script>
+    function reviewAndCoin(reservation_id) {
+        var rating = document.getElementById("rating_star").value;
+        var review = document.getElementById("floatingTextarea").value;
+        var total_price_for_bonus_coin = document.getElementById("total_price_for_bonus_coin").value
+        var bonus = total_price_for_bonus_coin * 0.05;
+
+        $.ajax({
+            url: baseUrl + "/web/reservation/review/" + reservation_id,
+            type: "POST",
+            data: {
+                rating: rating,
+                review: review,
+            },
+            dataType: "json",
+            success: function(response) {
+                // swal.fire("Thanks for the ratings and review!, you got " + bonus + " bonus coin");
+            },
+        });
         Swal.fire({
-            title: "Do you want to finish reservation?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: "Yes",
+            title: "Thanks for the ratings and review!, you got " + bonus + " bonus coin",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonText: "Ok",
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = "/web/reservation/finish/" + reservation_id + "/" + deposit + "/" + total_price;
+                location.reload();
+            } else {
+                location.reload();
             }
         });
+        //alert
+
     }
 </script>
 <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
@@ -782,5 +984,51 @@ if (strtotime(date("d F Y, H:i")) < strtotime($cancelDeadline)) {
             },
         }
     });
+</script>
+<script>
+    function getTpac() {
+        usedCoinText();
+        if ($('#useCoinsSwitch').is(':checked')) {
+            // If "Custom" is checked, uncheck "Default"
+            const coin = parseInt($('#coin').val());
+            const total_price = parseInt($('#total_price_price').val());
+            var total_price_after_coin = total_price - coin;
+            console.log(total_price);
+            console.log(coin);
+            console.log(total_price_after_coin);
+            $("#cointpac").val(total_price_after_coin);
+        } else {
+            const coin = parseInt($('#coin').val());
+            const total_price = parseInt($('#total_price_price').val());
+            var total_price_after_coin = total_price;
+            console.log(total_price);
+            console.log(coin);
+            console.log(total_price_after_coin);
+            $("#cointpac").val(total_price_after_coin);
+        }
+    };
+
+    function usedCoinText() {
+        $("#used_coin_1").hide();
+        $("#used_coin_2").hide();
+        $("#used_coin_3").hide();
+        $("#used_coin_4").hide();
+        const coinDiv = document.getElementById('used_coin_text');
+        if ($('#useCoinsSwitch').is(':checked')) {
+            $("#used_coin_1").show();
+            $("#used_coin_2").show();
+            $("#used_coin_3").show();
+            $("#used_coin_4").show();
+        } else {
+            $("#used_coin_1").hide();
+            $("#used_coin_2").hide();
+            $("#used_coin_3").hide();
+            $("#used_coin_4").hide();
+        }
+    };
+
+    window.onload = function() {
+        usedCoinText();
+    };
 </script>
 <?= $this->endSection() ?>

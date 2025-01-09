@@ -13,7 +13,7 @@ use App\Models\Worship\WorshipPlaceModel;
 // use App\Models\ServiceProviderModel;
 use App\Models\Souvenir\SouvenirPlaceModel;
 use App\Models\Culinary\CulinaryPlaceModel;
-// use App\Models\AttractionModel;
+use App\Models\AttractionModel;
 
 use App\Models\VillageModel;
 
@@ -48,7 +48,7 @@ class Dashboard extends BaseController
         $this->souvenirPlaceModel = new SouvenirPlaceModel();
         $this->culinaryPlaceModel = new CulinaryPlaceModel();
         $this->villageModel = new VillageModel();
-        // $this->attractionModel = new AttractionModel();
+        $this->attractionModel = new AttractionModel();
     }
     public function index()
     {

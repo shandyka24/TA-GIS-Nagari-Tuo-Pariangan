@@ -123,6 +123,7 @@ class ReservationHomestayUnitDetailModel extends Model
             ->select("date")
             ->where('date >=', $now)
             ->groupBy('date')
+            ->orderBy('date')
             ->get();
         return $query;
     }
@@ -135,4 +136,15 @@ class ReservationHomestayUnitDetailModel extends Model
             ->get();
         return $query;
     }
+    
+    public function get_hs_by_id($reservation_id = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select("*")
+            ->where('reservation_id', $reservation_id)
+            ->get();
+        return $query;
+    }
+
+
 }

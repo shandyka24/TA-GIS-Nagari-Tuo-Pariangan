@@ -21,6 +21,8 @@ use App\Models\Souvenir\SouvenirPlaceModel;
 use App\Models\Souvenir\SouvenirPlaceGalleryModel;
 use App\Models\Souvenir\SouvenirProductModel;
 use App\Models\Souvenir\SouvenirProductDetailModel;
+use App\Models\Souvenir\SouvenirPlaceFacilityModel;
+use App\Models\Souvenir\SouvenirPlaceFacilityDetailModel;
 
 use App\Models\VillageModel;
 
@@ -42,6 +44,8 @@ class SouvenirPlace extends BaseController
     protected $souvenirPlaceGalleryModel;
     protected $souvenirProductModel;
     protected $souvenirProductDetailModel;
+    protected $souvenirPlaceFacilityModel;
+    protected $souvenirPlaceFacilityDetailModel;
 
     protected $villageModel;
 
@@ -61,6 +65,8 @@ class SouvenirPlace extends BaseController
         $this->souvenirPlaceGalleryModel = new SouvenirPlaceGalleryModel();
         $this->souvenirProductModel = new SouvenirProductModel();
         $this->souvenirProductDetailModel = new SouvenirProductDetailModel();
+        $this->souvenirPlaceFacilityModel = new SouvenirPlaceFacilityModel();
+        $this->souvenirPlaceFacilityDetailModel = new SouvenirPlaceFacilityDetailModel();
         $this->villageModel = new VillageModel();
     }
     public function index()
@@ -84,12 +90,19 @@ class SouvenirPlace extends BaseController
 
         $list_product = $this->souvenirProductDetailModel->get_product_by_sp_api($id)->getResultArray();
 
+        $list_facility = $this->souvenirPlaceFacilityDetailModel->get_facility_by_sp_api($id)->getResultArray();
+        $facilities = array();
+        foreach ($list_facility as $facility) {
+            $facilities[] = $facility['name'];
+        }
+    
         $list_gallery = $this->souvenirPlaceGalleryModel->get_gallery_api($id)->getResultArray();
         $galleries = array();
         foreach ($list_gallery as $gallery) {
             $galleries[] = $gallery['url'];
         }
 
+        $souvenirPlace['facilities'] = $facilities;
         $souvenirPlace['gallery'] = $galleries;
         $data = [
             'title' => $souvenirPlace['name'],
@@ -110,8 +123,10 @@ class SouvenirPlace extends BaseController
     }
     public function new()
     {
+        $facilities = $this->souvenirPlaceFacilityModel->get_list_fc_api()->getResultArray();
         $data = [
             'title' => 'New Souvenir Place',
+            'facilities' => $facilities,
         ];
         return view('admin/souvenir_place_form', $data);
     }
@@ -143,6 +158,12 @@ class SouvenirPlace extends BaseController
 
         $addSP = $this->souvenirPlaceModel->add_sp_api($requestData, $geojson);
 
+        $addFacilities = true;
+        if (isset($request['facilities'])) {
+            $facilities = $request['facilities'];
+            $addFacilities = $this->souvenirPlaceFacilityDetailModel->add_facility_api($id, $facilities);
+        } 
+
         if (isset($request['gallery'])) {
             $folders = $request['gallery'];
             $gallery = array();
@@ -166,9 +187,16 @@ class SouvenirPlace extends BaseController
     }
     public function edit($id = null)
     {
+        $facilities = $this->souvenirPlaceFacilityModel->get_list_fc_api()->getResultArray();
         $souvenirPlace = $this->souvenirPlaceModel->get_sp_by_id_api($id)->getRowArray();
         if (empty($souvenirPlace)) {
             return redirect()->to('dashboard/souvenirPlace');
+        }
+
+        $list_facility = $this->souvenirPlaceFacilityDetailModel->get_facility_by_sp_api($id)->getResultArray();
+        $selectedFac = array();
+        foreach ($list_facility as $facility) {
+            $selectedFac[] = $facility['name'];
         }
 
         $list_gallery = $this->souvenirPlaceGalleryModel->get_gallery_api($id)->getResultArray();
@@ -176,10 +204,13 @@ class SouvenirPlace extends BaseController
         foreach ($list_gallery as $gallery) {
             $galleries[] = $gallery['url'];
         }
+
+        $souvenirPlace['facilities'] = $selectedFac;
         $souvenirPlace['gallery'] = $galleries;
         $data = [
             'title' => 'Edit Souvenir Place',
             'data' => $souvenirPlace,
+            'facilities' => $facilities,
         ];
         return view('admin/souvenir_place_form', $data);
     }
@@ -203,6 +234,13 @@ class SouvenirPlace extends BaseController
                 unset($requestData[$key]);
             }
         }
+
+        $updateFacilities = true;
+        if (isset($request['facilities'])) {
+            $facilities = $request['facilities'];
+            $updateFacilities = $this->souvenirPlaceFacilityDetailModel->update_facility_api($id, $facilities);
+        }
+
         $geojson = $request['geo-json'];
         $updateSV = $this->souvenirPlaceModel->update_sp_api($id, $requestData, $geojson);
         if (isset($request['gallery'])) {
@@ -394,6 +432,81 @@ class SouvenirPlace extends BaseController
                 'status' => 404,
                 'message' => [
                     "Product not found"
+                ]
+            ];
+            return $this->failNotFound($response);
+        }
+    }
+
+    public function facilitySouvenirPlace()
+    {
+        $contents = $this->souvenirPlaceFacilityModel->get_list_fc_api()->getResultArray();
+        $data = [
+            'title' => 'Manage Souvenir Place Facility',
+            'category' => 'Souvenir Place Facility',
+            'data' => $contents,
+        ];
+        return view('admin/manage_admin', $data);
+    }
+    public function addNewFacilitySouvenirPlace()
+    {
+        $request = $this->request->getPost();
+
+        $requestData = [
+            'name' => $request['name'],
+        ];
+        foreach ($requestData as $key => $value) {
+            if (empty($value)) {
+                unset($requestData[$key]);
+            }
+        }
+
+        $addSV = $this->souvenirPlaceFacilityModel->add_spf_api($requestData);
+
+        if ($addSV) {
+            return redirect()->to(base_url('dashboard/facilitySouvenirPlace'));
+        } else {
+            return redirect()->back()->withInput();
+        }
+    }
+    public function editFacilitySouvenirPlace($id = null)
+    {
+        $request = $this->request->getPost();
+
+        $requestData = [
+            'id' => $id,
+            'name' => $request['name'],
+        ];
+        foreach ($requestData as $key => $value) {
+            if (empty($value)) {
+                unset($requestData[$key]);
+            }
+        }
+
+        $editSV = $this->souvenirPlaceFacilityModel->edit_spf_api($requestData);
+
+        if ($editSV) {
+            return redirect()->to(base_url('dashboard/facilitySouvenirPlace'));
+        } else {
+            return redirect()->back()->withInput();
+        }
+    }
+    public function deleteFacilitySouvenirPlace($id = null)
+    {
+        $deleteS = $this->souvenirPlaceFacilityModel->delete(['id' => $id]);
+        if ($deleteS) {
+            $response = [
+                'status' => 200,
+                'message' => [
+                    "Success delete Souvenir Place Facility"
+                ]
+            ];
+            return $this->respondDeleted($response);
+        } else {
+            $response = [
+                'status' => 404,
+                'message' => [
+                    "SouvenirPlace Facility not found"
                 ]
             ];
             return $this->failNotFound($response);

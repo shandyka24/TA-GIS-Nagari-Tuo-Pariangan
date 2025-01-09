@@ -66,6 +66,7 @@ class TouristArea extends ResourcePresenter
 
         return view('home/home', $data);
     }
+
     public function addTouristArea()
     {
         $request = $this->request->getPost();
@@ -122,5 +123,14 @@ class TouristArea extends ResourcePresenter
             ]
         ];
         return $this->respond($response);
+    }
+
+    public function aroundYou()
+    {
+      $data = [
+            'title' => 'Around You',
+        ];
+
+        return view('around_you', $data);
     }
 }

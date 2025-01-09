@@ -18,10 +18,21 @@ $uri3 = $uri[3] ?? '';
                 </div>
                 <?php if (logged_in()) : ?>
                     <div class="p-2 text-center">
-                        <?php if (!empty(user()->first_name)) : ?>
-                            Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-muted mb-0">@<?= user()->username; ?></span>
-                        <?php else : ?>
-                            Hello, <span class="fw-bold">@<?= user()->username; ?></span>
+                        <?php if (!empty(user()->first_name)): ?>
+                            <?php if (in_groups(['owner', 'admin'])) : ?>
+                                Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-muted mb-0">@<?= user()->username; ?></span><br>
+                            <?php else : ?>
+                                Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-muted mb-0">@<?= user()->username; ?></span><br>
+                                <span class="fw-bold">Your Coin : <?= number_format(user()->total_coin); ?></span>
+                            <?php endif; ?>
+
+                        <?php else: ?>
+                            <?php if (in_groups(['owner', 'admin'])) : ?>
+                                Hello, <span class="fw-bold">@<?= user()->username; ?></span><br>
+                            <?php else : ?>
+                                Hello, <span class="fw-bold">@<?= user()->username; ?></span><br>
+                                <span class="fw-bold">Your Coin : <?= number_format(user()->total_coin); ?></span>
+                            <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 <?php else : ?>
@@ -32,6 +43,20 @@ $uri3 = $uri[3] ?? '';
                     <li class="sidebar-item <?= ($uri1 == 'index') ? 'active' : '' ?>">
                         <a href="/web" class="sidebar-link">
                             <i class="fa-solid fa-house"></i><span class="text-dark fw-bold">Home</span>
+                        </a>
+                    </li>
+
+                    <!-- Attraction -->
+                    <li class="sidebar-item <?= ($uri1 == 'attraction') ? 'active' : '' ?>">
+                        <a href="/web/attraction" class="sidebar-link">
+                            <i class="fa-solid fa-signs-post"></i><span class="text-dark fw-bold">Attraction</span>
+                        </a>
+                    </li>
+
+                    <!-- Arround You -->
+                    <li class="sidebar-item <?= ($uri1 == 'aroundYou') ? 'active' : '' ?>">
+                        <a href="/web/aroundYou" class="sidebar-link">
+                            <i class="fa-solid fa-compass"></i><span class="text-dark fw-bold">Around You</span>
                         </a>
                     </li>
 
@@ -47,7 +72,7 @@ $uri3 = $uri[3] ?? '';
                             </li>
                             <!-- Homestay Around You -->
                             <li class="submenu-item" id="rg-around-you">
-                                <a data-bs-toggle="collapse" href="#searchRadiusRG" role="button" aria-expanded="false" aria-controls="searchRadiusRG"><i class="fa-solid fa-compass me-3"></i>Around You</a>
+                                <a data-bs-toggle="collapse" href="#searchRadiusRG" role="button" aria-expanded="false" aria-controls="searchRadiusRG"><i class="fa-solid fa-compass me-3"></i>Homestay Around You</a>
                                 <div class="collapse mb-3" id="searchRadiusRG">
                                     <label for="inputRadiusRG" class="form-label">Radius: </label>
                                     <label id="radiusValueHS" class="form-label">0 m</label>

@@ -143,7 +143,7 @@ function digitCountries() {
     dataType: "json",
     success: function (response) {
       const data = response.data;
-      const digit_color = ["#FF8C00", "#FFB6C1", "#87CEEB"];
+      const digit_color = ["#FF8C00", "#FF00FF", "#87CEEB"];
       const country_name = ["Singapore", "Malaysia", "Brunei Darussalam"];
       for (i in data) {
         const village = new google.maps.Data();
@@ -385,7 +385,7 @@ function digitTourismVillage(goToVillage = false) {
           // Tampilkan info window di tengah village
           villageInfoWindow.setContent(data.name);
           villageInfoWindow.setPosition(center);
-          objectMarker("L", center.lat(), center.lng());
+          objectMarker("L", -0.4556825246682917, 100.49283664396526);
         }
       );
       //Tambahkan listener untuk klik pada village
@@ -751,7 +751,7 @@ function objectInfoWindow(id) {
         let name = data.name;
         let lat = data.lat;
         let lng = data.lng;
-        let ticket_price = data.ticket_price;
+        let ticket_price = data.price;
         let open = data.open.substring(0, data.open.length - 3);
         let close = data.close.substring(0, data.close.length - 3);
 
@@ -1211,6 +1211,11 @@ function updateRadius(postfix) {
   );
 }
 
+// function updateRadius(postfix) {
+//   document.getElementById("radiusValue" + postfix).innerHTML =
+//     document.getElementById("inputRadius" + postfix).value * 100 + " m";
+// }
+
 // Render search by radius
 function radiusSearch({ postfix = null } = {}) {
   if (userLat == 0 && userLng == 0) {
@@ -1227,12 +1232,15 @@ function radiusSearch({ postfix = null } = {}) {
   closeNearby();
 
   let pos = new google.maps.LatLng(currentLat, currentLng);
+  console.log(postfix);
   let radiusValue =
     parseFloat(document.getElementById("inputRadius" + postfix).value) * 100;
   map.panTo(pos);
 
   // find object in radius
-  if (postfix === "RG") {
+  if (postfix === "Nearby") {
+    drawRadius(pos, radiusValue);
+  } else if (postfix === "RG") {
     $.ajax({
       url: baseUrl + "/api/rumahGadang/findByRadius",
       type: "POST",
@@ -1400,6 +1408,7 @@ function closeNearby() {
   $("#direction-row").hide();
   $("#check-nearby-col").hide();
   $("#result-nearby-col").hide();
+  $("#result-nearbyyou-col").hide();
   $("#list-rec-col").show();
   $("#list-rg-col").show();
   $("#list-ev-col").show();
@@ -1436,25 +1445,100 @@ function checkNearby(id) {
 
   objectMarker(id, currentLat, currentLng, false);
 
+  $("#table-att").empty();
+  $("#table-hs").empty();
   $("#table-cp").empty();
   $("#table-wp").empty();
   $("#table-sp").empty();
+  $("#table-att").hide();
+  $("#table-hs").hide();
   $("#table-cp").hide();
   $("#table-wp").hide();
   $("#table-sp").hide();
 
   let radiusValue =
     parseFloat(document.getElementById("inputRadiusNearby").value) * 100;
+  const checkATT = document.getElementById("check-att").checked;
+  const checkHS = document.getElementById("check-hs").checked;
   const checkCP = document.getElementById("check-cp").checked;
   const checkWP = document.getElementById("check-wp").checked;
   const checkSP = document.getElementById("check-sp").checked;
 
-  if (!checkCP && !checkWP && !checkSP && !checkSV) {
+  if (!checkATT && !checkHS && !checkCP && !checkWP && !checkSP) {
     document.getElementById("radiusValueNearby").innerHTML = "0 m";
     document.getElementById("inputRadiusNearby").value = 0;
     return Swal.fire("Please choose one object");
   }
 
+  if (checkATT) {
+    findNearby("att", radiusValue);
+    $("#table-att").show();
+  }
+  if (checkHS) {
+    findNearby("hs", radiusValue);
+    $("#table-hs").show();
+  }
+  if (checkCP) {
+    findNearby("cp", radiusValue);
+    $("#table-cp").show(); 
+  }
+  if (checkWP) {
+    findNearby("wp", radiusValue);
+    $("#table-wp").show();
+  }
+  if (checkSP) {
+    findNearby("sp", radiusValue);
+    $("#table-sp").show();
+  }
+  drawRadius(new google.maps.LatLng(currentLat, currentLng), radiusValue);
+  $("#result-nearby-col").show();
+}
+
+function checkAround(id) {
+  clearRadius();
+  clearRoute();
+  clearMarker();
+  clearUser();
+  destinationMarker.setMap(null);
+  google.maps.event.clearListeners(map, "click");
+
+  // if(id !== 'Nearby'){
+  objectMarker(id, currentLat, currentLng, false);
+  // }
+
+  $("#table-att").empty();
+  $("#table-hs").empty();
+  $("#table-cp").empty();
+  $("#table-wp").empty();
+  $("#table-sp").empty();
+  $("#table-att").hide();
+  $("#table-hs").hide();
+  $("#table-cp").hide();
+  $("#table-wp").hide();
+  $("#table-sp").hide();
+
+  let radiusValue =
+    parseFloat(document.getElementById("inputRadiusNearby").value) * 100;
+  const checkATT = document.getElementById("check-att").checked;
+  const checkHS = document.getElementById("check-hs").checked;
+  const checkCP = document.getElementById("check-cp").checked;
+  const checkWP = document.getElementById("check-wp").checked;
+  const checkSP = document.getElementById("check-sp").checked;
+
+  if (!checkATT && !checkHS && !checkCP && !checkWP && !checkSP) {
+    document.getElementById("radiusValueNearby").innerHTML = "0 m";
+    document.getElementById("inputRadiusNearby").value = 0;
+    return Swal.fire("Please choose one object");
+  }
+
+  if (checkATT) {
+    findNearby("att", radiusValue);
+    $("#table-att").show();
+  }
+  if (checkHS) {
+    findNearby("hs", radiusValue);
+    $("#table-hs").show();
+  }
   if (checkCP) {
     findNearby("cp", radiusValue);
     $("#table-cp").show();
@@ -1474,7 +1558,35 @@ function checkNearby(id) {
 // Fetch object nearby by category
 function findNearby(category, radius) {
   let pos = new google.maps.LatLng(currentLat, currentLng);
-  if (category === "cp") {
+  if (category === "att") {
+    $.ajax({
+      url: baseUrl + "/api/attraction/findByRadius",
+      type: "POST",
+      data: {
+        lat: currentLat,
+        long: currentLng,
+        radius: radius,
+      },
+      dataType: "json",
+      success: function (response) {
+        displayNearbyResult(category, response);
+      },
+    });
+  } else if (category === "hs") {
+    $.ajax({
+      url: baseUrl + "/api/homestay/findByRadius",
+      type: "POST",
+      data: {
+        lat: currentLat,
+        long: currentLng,
+        radius: radius,
+      },
+      dataType: "json",
+      success: function (response) {
+        displayNearbyResult(category, response);
+      },
+    });
+  } else if (category === "cp") {
     $.ajax({
       url: baseUrl + "/api/culinaryPlace/findByRadius",
       type: "POST",
@@ -1537,7 +1649,11 @@ function findNearby(category, radius) {
 function displayNearbyResult(category, response) {
   let data = response.data;
   let headerName;
-  if (category === "cp") {
+  if (category === "att") {
+    headerName = "Attraction";
+  } else if (category === "hs") {
+    headerName = "Homestay";
+  } else if (category === "cp") {
     headerName = "Culinary";
   } else if (category === "wp") {
     headerName = "Worship";
@@ -1546,12 +1662,13 @@ function displayNearbyResult(category, response) {
   } else if (category === "sv") {
     headerName = "Service";
   }
+
   let table =
     "<thead><tr>" +
-    "<th>" +
+    '<th style="width: 50%;">' +
     headerName +
     " Name</th>" +
-    "<th>Action</th>" +
+    '<th style="width: 50%;">Action</th>' +
     "</tr></thead>" +
     '<tbody id="data-' +
     category +
@@ -3407,6 +3524,8 @@ function deleteObject(id = null, name = null, user = false) {
 
   let content, apiUri, urlok, contentParam, homestay_id;
   let souvenirPlaceId, souvenirProductId;
+  let culinaryPlaceId, culinaryProductId;
+  let worshipPlaceId;
 
   if (id.substring(0, 1) === "R") {
     content = "Reservation";
@@ -3417,6 +3536,15 @@ function deleteObject(id = null, name = null, user = false) {
   } else if (id.substring(0, 1) === "B") {
     id = id.substring(1, 3);
     content = "Homestay Facility";
+  } else if (id.substring(0, 1) === "K") {
+    id = id.substring(1, 3);
+    content = "Souvenir Place Facility";
+  } else if (id.substring(0, 1) === "M") {
+    id = id.substring(1, 3);
+    content = "Culinary Place Facility";
+  } else if (id.substring(0, 1) === "N") {
+    id = id.substring(1, 3);
+    content = "Worship Place Facility";
   } else if (id.substring(0, 1) === "D") {
     id = id.substring(1, 3);
     content = "Homestay Unit Facility";
@@ -3504,6 +3632,15 @@ function deleteObject(id = null, name = null, user = false) {
   }
   if (content === "Homestay Facility") {
     urlok = "/dashboard/facilityHomestay/delete/" + id;
+  }
+  if (content === "Souvenir Place Facility") {
+    urlok = "/dashboard/facilitySouvenirPlace/delete/" + id;
+  }
+  if (content === "Culinary Place Facility") {
+    urlok = "/dashboard/facilityCulinaryPlace/delete/" + id;
+  }
+  if (content === "Worship Place Facility") {
+    urlok = "/dashboard/facilityWorshipPlace/delete/" + id;
   }
   if (content === "Homestay Unit") {
     urlok = "/dashboard/homestayUnit/delete/" + id;
@@ -4472,7 +4609,8 @@ function allObject() {
   clearAirplaneMarkers();
   clearCarMarkers();
   clearOverlay();
-  objectMarker("L", latVillage, lngVillage);
+  objectMarker("L", -0.4556825246682917, 100.49283664396526);
+  $("#table-attraction").show();
   $("#table-homestay").show();
   $("#table-Culinary").show();
   $("#table-Souvenir").show();
@@ -4480,6 +4618,8 @@ function allObject() {
   $("#result-explore-col").show();
   // displayFoundObject(response);
   // boundToObject();
+  const checkAttraction = document.getElementById("checkAttraction");
+  checkAttraction.checked = true;
   const checkHomestay = document.getElementById("checkHomestay");
   checkHomestay.checked = true;
   const checkCulinary = document.getElementById("checkCulinary");
@@ -4517,11 +4657,12 @@ function checkObject() {
   clearCarMarkers();
   clearOverlay();
   // initMap5();
-  objectMarker("L", latVillage, lngVillage);
+  objectMarker("L", -0.4556825246682917, 100.49283664396526);
   destinationMarker.setMap(null);
   google.maps.event.clearListeners(map, "click");
 
   // Sembunyikan semua tabel
+  $("#table-Attraction").empty().hide();
   $("#table-Homestay").empty().hide();
   $("#table-Culinary").empty().hide();
   $("#table-Souvenir").empty().hide();
@@ -4532,6 +4673,10 @@ function checkObject() {
 
   // Periksa status setiap checkbox
 
+  if (document.getElementById("checkAttraction").checked) {
+    findAll("Attraction");
+    $("#table-Attraction").show();
+  }
   if (document.getElementById("checkHomestay").checked) {
     findAll("Homestay");
     $("#table-Homestay").show();
@@ -4554,6 +4699,7 @@ function checkObject() {
 
   // Tampilkan kolom hasil pencarian
   if (
+    document.getElementById("checkAttraction").checked ||
     document.getElementById("checkHomestay").checked ||
     document.getElementById("checkCulinary").checked ||
     document.getElementById("checkSouvenir").checked ||
@@ -4567,7 +4713,18 @@ function checkObject() {
 
 function findAll(category) {
   // let pos = new google.maps.LatLng(currentLat, currentLng);
-  if (category === "Culinary") {
+  if (category === "Attraction") {
+    $.ajax({
+      url: baseUrl + "/api/attraction/findAll",
+      type: "POST",
+      data: {},
+      dataType: "json",
+      success: function (response) {
+        displayExploreResult(category, response);
+        boundToObject();
+      },
+    });
+  } else if (category === "Culinary") {
     $.ajax({
       url: baseUrl + "/api/culinaryPlace/findAll",
       type: "POST",
@@ -4616,7 +4773,9 @@ function findAll(category) {
   function displayExploreResult(category, response) {
     let data = response.data;
     let headerName;
-    if (category === "Culinary") {
+    if (category === "Attraction") {
+      headerName = "Attraction";
+    } else if (category === "Culinary") {
       headerName = "Culinary Place";
     } else if (category === "Homestay") {
       headerName = "Homestay";
@@ -4668,7 +4827,7 @@ function checkLayer() {
   clearOverlay();
 
   // initMap();
-  objectMarker("L", latVillage, lngVillage);
+  objectMarker("L", -0.4556825246682917, 100.49283664396526);
 
   destinationMarker.setMap(null);
   google.maps.event.clearListeners(map, "click");
@@ -4800,7 +4959,7 @@ function clickLayer() {
   }
   digitProvinces();
   digitCities();
-  objectMarker("L", latVillage, lngVillage);
+  objectMarker("L", -0.4556825246682917, 100.49283664396526);
 
   const checkCountry = document.getElementById("checkCountry");
   checkCountry.checked = true;
@@ -4825,7 +4984,7 @@ function howToReachPariangan() {
   clearRoute();
   clearRadius();
 
-  objectMarker("L", latVillage, lngVillage);
+  objectMarker("L", -0.4556825246682917, 100.49283664396526);
 
   const clearHtro = document.getElementById("clearHtro");
   clearHtro.checked = true;

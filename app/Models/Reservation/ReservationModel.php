@@ -56,6 +56,17 @@ class ReservationModel extends Model
         return $query;
     }
 
+    public function get_coin_use_history_by_user_id($customer_id = null)
+    {
+        $query = $this->db->table('reservation')
+            ->select("*")
+            ->where('customer_id', $customer_id)
+            ->where('coin_use > 0')
+            ->orderBy('id', 'DESC')
+            ->get();
+        return $query;
+    }
+
     public function get_reservation_by_id($id = null)
     {
 
@@ -104,18 +115,21 @@ class ReservationModel extends Model
             ->update();
         return $query;
     }
-    public function finish_reservation($reservation_id = null, $deposit = null, $total_price = null)
+
+    public function finish_reservation($reservation_id = null, $deposit = null, $total_price = null, $coin = null)
     {
         $reservation_finish_at = Time::now('Asia/Jakarta', 'en_US');
         $query = $this->db->table($this->table)
             ->set('status', '0')
             ->set('total_price', $total_price)
             ->set('deposit', $deposit)
+            ->set('coin_use', $coin)
             ->set('reservation_finish_at', $reservation_finish_at)
             ->where('id', $reservation_id)
             ->update();
         return $query;
     }
+
     public function confirm_reservation($reservation = null, $reservation_id = null)
     {
         $confirmed_at = Time::now('Asia/Jakarta', 'en_US');
@@ -217,6 +231,16 @@ class ReservationModel extends Model
             ->update($reservation);
         return $query;
     }
+
+    public function bonus_coin($reservation_id = null, $coin = null)
+    {
+        $query = $this->db->table('reservation')
+            ->set('reservation.bonus_coin', $coin)
+            ->where('reservation.id', $reservation_id)
+            ->update();
+        return $query;
+    }
+
     public function get_cust($user_id = null)
     {
         $query = $this->db->table('users')
@@ -267,10 +291,10 @@ class ReservationModel extends Model
         $insert = $this->db->table($this->table)
             ->insert($reservation);
 
-        $update = $this->db->table($this->table)
-            ->set('status', '0')
-            ->where('id', $reservation['id'])
-            ->update();
+        // $update = $this->db->table($this->table)
+        //     ->set('status', '0')
+        //     ->where('id', $reservation['id'])
+        //     ->update();
 
         return $insert;
     }

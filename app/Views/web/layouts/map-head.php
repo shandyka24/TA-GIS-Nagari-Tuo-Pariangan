@@ -17,7 +17,7 @@
 
     <?php
     $currentURL = $_SERVER['REQUEST_URI'];
-    if ($currentURL === '/web') {
+    if ($currentURL === '/web' ) {
         // Jika URL adalah '/web', tampilkan tombol
         // echo '<a data-bs-toggle="tooltip" data-bs-placement="bottom" title="How to Reach Pariangan" class="btn icon btn-primary mx-1" id="go-to" onclick="howToReachPariangan()">
         // <i style="height:1.72rem;width:1.5rem" class="fa-solid fa-person-walking-luggage"></i>
@@ -42,6 +42,10 @@
             </button>
             <ul class="dropdown-menu p-3" aria-labelledby="dropdownMenuButton">
                 <li class="form-check">
+                    <input class="form-check-input" type="checkbox" id="checkAttraction" value="Attraction" onchange="checkObject()">
+                    <label class="form-check-label" for="checkAttraction">Attraction</label>
+                </li>
+                <li class="form-check">
                     <input class="form-check-input" type="checkbox" id="checkHomestay" value="Homestay" onchange="checkObject()">
                     <label class="form-check-label" for="checkHomestay">Homestay</label>
                 </li>
@@ -65,13 +69,17 @@
 
     <?php
     $currentURL = $_SERVER['REQUEST_URI'];
-    if ($currentURL === '/web'): ?>
+    if (($currentURL === '/web')): ?>
         <div class="btn-group mx-1">
             <button style="height:2.8rem" class="btn btn-primary" type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" title="View All Objects" onclick="allObject()"><i style="height:1.3rem;width:1.3rem" class="material-symbols-outlined">file_map_stack</i></button>
             <button style="height:2.8rem" class="btn btn-primary dropdown-toggle dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="visually-hidden">Toggle Dropdown</span>
             </button>
             <ul class="dropdown-menu p-2">
+                <li class="form-check">
+                    <input class="form-check-input" type="checkbox" id="checkAttraction" value="Attraction" onchange="checkObject()">
+                    <label class="form-check-label" for="checkAttraction">Attraction</label>
+                </li>
                 <li class="form-check">
                     <input class="form-check-input" type="checkbox" id="checkHomestay" value="Homestay" onchange="checkObject()">
                     <label class="form-check-label" for="checkHomestay">Homestay</label>

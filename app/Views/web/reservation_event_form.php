@@ -8,14 +8,47 @@
             currentUrl = '<?= current_url(); ?>';
 
             function checkRequired(event) {
-                var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-                var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
-                if (!checkedOne) {
-                    event.preventDefault();
-                    Swal.fire('Please select at least 1 unit to make reservation!');
-                }
+                event.preventDefault();
+                Swal.fire({
+                    title: "Are you sure about the weather predictions for that day?",
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: "OK",
+                    denyButtonText: `Cancel`
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.target.submit();
+                    } else if (result.isDenied) {
+                        return false;
+                    }
+                });
             }
         </script>
+
+        <div class="col-md-12 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="seven-days-weather">
+                        <p>Prediksi Cuaca hingga 14 Hari ke Depan</p>
+                        <div class="overflow-auto">
+                            <ul class="list-unstyled d-flex">
+                                <?php foreach ($weather_dates as $index => $date): ?>
+                                    <li class="mx-3 text-center">
+                                        <strong><?= $date ?></strong>
+                                        <img src="<?= $weather_icons[$index] ?>" alt="Weather Icon">
+                                        <div class="weather-desc mb-2">
+                                            <?= $weather_data['weather_descriptions'][$index] ?? 'N/A' ?>
+                                        </div>
+                                        <span>Min: <?= $weather_data['temperature_2m_min'][$index] ?? 'N/A' ?>°C</span>
+                                        <span>Max: <?= $weather_data['temperature_2m_max'][$index] ?? 'N/A' ?>°C</span>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Object Detail Information -->
         <div class="col-md-12 col-12">
@@ -40,7 +73,7 @@
                     </script>
                 <?php endif; ?>
                 <div class="card-body">
-                    <form id="reservation-form" class="form form-vertical" action="" method="post" enctype="multipart/form-data">
+                    <form id="reservation-form" class="form form-vertical" action="" method="post" enctype="multipart/form-data" onsubmit="checkRequired(event)">
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-md-8 col-12">

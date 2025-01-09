@@ -26,6 +26,8 @@ use App\Models\Culinary\CulinaryPlaceModel;
 use App\Models\Culinary\CulinaryPlaceGalleryModel;
 use App\Models\Culinary\CulinaryProductModel;
 use App\Models\Culinary\CulinaryProductDetailModel;
+use App\Models\Culinary\CulinaryPlaceFacilityModel;
+use App\Models\Culinary\CulinaryPlaceFacilityDetailModel;
 
 use App\Models\VillageModel;
 
@@ -52,6 +54,8 @@ class CulinaryPlace extends BaseController
     protected $culinaryPlaceGalleryModel;
     protected $culinaryProductModel;
     protected $culinaryProductDetailModel;
+    protected $culinaryPlaceFacilityModel;
+    protected $culinaryPlaceFacilityDetailModel;
 
     protected $villageModel;
 
@@ -77,6 +81,8 @@ class CulinaryPlace extends BaseController
         $this->culinaryProductModel = new CulinaryProductModel();
         $this->culinaryProductDetailModel = new CulinaryProductDetailModel();
         $this->villageModel = new VillageModel();
+        $this->culinaryPlaceFacilityModel = new CulinaryPlaceFacilityModel();
+        $this->culinaryPlaceFacilityDetailModel = new CulinaryPlaceFacilityDetailModel();
     }
     public function index()
     {
@@ -98,6 +104,12 @@ class CulinaryPlace extends BaseController
         }
 
         $list_product = $this->culinaryProductDetailModel->get_product_by_sp_api($id)->getResultArray();
+        
+        $list_facility = $this->culinaryPlaceFacilityDetailModel->get_facility_by_cp_api($id)->getResultArray();
+        $facilities = array();
+        foreach ($list_facility as $facility) {
+            $facilities[] = $facility['name'];
+        }
 
         $list_gallery = $this->culinaryPlaceGalleryModel->get_gallery_api($id)->getResultArray();
         $galleries = array();
@@ -105,6 +117,7 @@ class CulinaryPlace extends BaseController
             $galleries[] = $gallery['url'];
         }
 
+        $culinaryPlace['facilities'] = $facilities;
         $culinaryPlace['gallery'] = $galleries;
         $data = [
             'title' => $culinaryPlace['name'],
@@ -125,8 +138,10 @@ class CulinaryPlace extends BaseController
     }
     public function new()
     {
+        $facilities = $this->culinaryPlaceFacilityModel->get_list_fc_api()->getResultArray();
         $data = [
             'title' => 'New Culinary Place',
+            'facilities' => $facilities,
         ];
         return view('admin/culinary_place_form', $data);
     }
@@ -158,6 +173,12 @@ class CulinaryPlace extends BaseController
 
         $addSP = $this->culinaryPlaceModel->add_cp_api($requestData, $geojson);
 
+        $addFacilities = true;
+        if (isset($request['facilities'])) {
+            $facilities = $request['facilities'];
+            $addFacilities = $this->culinaryPlaceFacilityDetailModel->add_facility_api($id, $facilities);
+        } 
+
         if (isset($request['gallery'])) {
             $folders = $request['gallery'];
             $gallery = array();
@@ -181,9 +202,16 @@ class CulinaryPlace extends BaseController
     }
     public function edit($id = null)
     {
+        $facilities = $this->culinaryPlaceFacilityModel->get_list_fc_api()->getResultArray();
         $culinaryPlace = $this->culinaryPlaceModel->get_cp_by_id_api($id)->getRowArray();
         if (empty($culinaryPlace)) {
             return redirect()->to('dashboard/culinaryPlace');
+        }
+
+        $list_facility = $this->culinaryPlaceFacilityDetailModel->get_facility_by_cp_api($id)->getResultArray();
+        $selectedFac = array();
+        foreach ($list_facility as $facility) {
+            $selectedFac[] = $facility['name'];
         }
 
         $list_gallery = $this->culinaryPlaceGalleryModel->get_gallery_api($id)->getResultArray();
@@ -191,10 +219,13 @@ class CulinaryPlace extends BaseController
         foreach ($list_gallery as $gallery) {
             $galleries[] = $gallery['url'];
         }
+
+        $culinaryPlace['facilities'] = $selectedFac;
         $culinaryPlace['gallery'] = $galleries;
         $data = [
             'title' => 'Edit Culinary Place',
             'data' => $culinaryPlace,
+            'facilities' => $facilities,
         ];
         return view('admin/culinary_place_form', $data);
     }
@@ -217,6 +248,11 @@ class CulinaryPlace extends BaseController
             if (empty($value)) {
                 unset($requestData[$key]);
             }
+        }
+        $updateFacilities = true;
+        if (isset($request['facilities'])) {
+            $facilities = $request['facilities'];
+            $updateFacilities = $this->culinaryPlaceFacilityDetailModel->update_facility_api($id, $facilities);
         }
         $geojson = $request['geo-json'];
         $updateSV = $this->culinaryPlaceModel->update_cp_api($id, $requestData, $geojson);
@@ -409,6 +445,81 @@ class CulinaryPlace extends BaseController
                 'status' => 404,
                 'message' => [
                     "Product not found"
+                ]
+            ];
+            return $this->failNotFound($response);
+        }
+    }
+
+    public function facilityCulinaryPlace()
+    {
+        $contents = $this->culinaryPlaceFacilityModel->get_list_fc_api()->getResultArray();
+        $data = [
+            'title' => 'Manage Culinary Place Facility',
+            'category' => 'Culinary Place Facility',
+            'data' => $contents,
+        ];
+        return view('admin/manage_admin', $data);
+    }
+    public function addNewFacilityCulinaryPlace()
+    {
+        $request = $this->request->getPost();
+
+        $requestData = [
+            'name' => $request['name'],
+        ];
+        foreach ($requestData as $key => $value) {
+            if (empty($value)) {
+                unset($requestData[$key]);
+            }
+        }
+
+        $addSV = $this->culinaryPlaceFacilityModel->add_cpf_api($requestData);
+
+        if ($addSV) {
+            return redirect()->to(base_url('dashboard/facilityCulinaryPlace'));
+        } else {
+            return redirect()->back()->withInput();
+        }
+    }
+    public function editFacilityCulinaryPlace($id = null)
+    {
+        $request = $this->request->getPost();
+
+        $requestData = [
+            'id' => $id,
+            'name' => $request['name'],
+        ];
+        foreach ($requestData as $key => $value) {
+            if (empty($value)) {
+                unset($requestData[$key]);
+            }
+        }
+
+        $editSV = $this->culinaryPlaceFacilityModel->edit_cpf_api($requestData);
+
+        if ($editSV) {
+            return redirect()->to(base_url('dashboard/facilityCulinaryPlace'));
+        } else {
+            return redirect()->back()->withInput();
+        }
+    }
+    public function deleteFacilityCulinaryPlace($id = null)
+    {
+        $deleteS = $this->culinaryPlaceFacilityModel->delete(['id' => $id]);
+        if ($deleteS) {
+            $response = [
+                'status' => 200,
+                'message' => [
+                    "Success delete Culinary Place Facility"
+                ]
+            ];
+            return $this->respondDeleted($response);
+        } else {
+            $response = [
+                'status' => 404,
+                'message' => [
+                    "Culinary Place Facility not found"
                 ]
             ];
             return $this->failNotFound($response);

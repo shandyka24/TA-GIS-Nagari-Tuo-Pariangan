@@ -156,4 +156,22 @@ class UserModel extends Model
             ->get();
         return $query;
     }
+
+    public function get_user_coin_by_id($id = null)
+    {
+        $query = $this->db->table('users')
+            ->select('total_coin')
+            ->where('id', $id)
+            ->get();
+        return $query;
+    }
+
+    public function get_role_by_id($id = null){
+        $query = $this->db->table('auth_groups_users')
+            ->select('*')
+            ->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id')
+            ->where('user_id', $id)
+            ->get();
+        return $query;
+    }
 }

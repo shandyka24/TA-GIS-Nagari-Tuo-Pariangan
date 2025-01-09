@@ -597,6 +597,7 @@ class Homestay extends ResourcePresenter
             return $this->failNotFound($response);
         }
     }
+    
     public function facilityUnit()
     {
         $contents = $this->homestayUnitFacilityModel->get_list_fc_api()->getResultArray();

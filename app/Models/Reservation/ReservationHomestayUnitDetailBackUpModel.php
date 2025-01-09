@@ -50,4 +50,13 @@ class ReservationHomestayUnitDetailBackUpModel extends Model
             ->get();
         return $query;
     }
+
+    public function get_hs_by_id($reservation_id = null)
+    {
+        $query = $this->db->table($this->table)
+            ->select("*")
+            ->where('reservation_id', $reservation_id)
+            ->get();
+        return $query;
+    }
 }

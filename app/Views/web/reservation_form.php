@@ -3,19 +3,161 @@
 <?= $this->section('content') ?>
 
 <section class="section text-dark">
+    <!-- <style>
+        .seven-days-weather {
+            padding: 10px 0;
+        }
+
+        .weather-item {
+            min-width: 120px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .weather-item:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .weather-img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .date-box {
+            font-size: 0.9rem;
+        }
+
+        .weather-description span {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+        }
+
+        .temperature-box {
+            font-size: 0.85rem;
+        }
+
+        .temp-min,
+        .temp-max {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .overflow-auto::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .overflow-auto::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .overflow-auto::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        .overflow-auto::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style> -->
     <div class="row">
         <script>
             currentUrl = '<?= current_url(); ?>';
 
             function checkRequired(event) {
+                event.preventDefault();
+
                 var checkboxes = document.querySelectorAll('input[type="checkbox"]');
                 var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
+
                 if (!checkedOne) {
-                    event.preventDefault();
                     Swal.fire('Please select at least 1 unit to make reservation!');
+                    return false;
                 }
+
+                Swal.fire({
+                    title: "Are you sure about the weather predictions for that day?",
+                    showDenyButton: true,
+                    showCancelButton: false,
+                    confirmButtonText: "OK",
+                    denyButtonText: `Cancel`
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        event.target.submit();
+                    } else if (result.isDenied) {
+                        return false;
+                    }
+                });
             }
         </script>
+
+        <div class="col-md-12 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="seven-days-weather">
+                        <p>Prediksi Cuaca hingga 14 Hari ke Depan</p>
+                        <div class="overflow-auto">
+                            <ul class="list-unstyled d-flex">
+                                <?php foreach ($weather_dates as $index => $date): ?>
+                                    <li class="mx-3 text-center">
+                                        <strong><?= $date ?></strong>
+                                        <img src="<?= $weather_icons[$index] ?>" alt="Weather Icon">
+                                        <div class="weather-desc mb-2">
+                                            <?= $weather_data['weather_descriptions'][$index] ?? 'N/A' ?>
+                                        </div>
+                                        <span>Min: <?= $weather_data['temperature_2m_min'][$index] ?? 'N/A' ?>°C</span>
+                                        <span>Max: <?= $weather_data['temperature_2m_max'][$index] ?? 'N/A' ?>°C</span>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="col-md-12 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="seven-days-weather">
+                        <h5 class="card-title mb-3">Prediksi Cuaca hingga 14 Hari ke Depan</h5>
+                        <div class="overflow-auto">
+                            <ul class="list-unstyled d-flex">
+                                <?php foreach ($weather_dates as $index => $date): ?>
+                                    <li class="mx-3 text-center weather-item">
+                                        <div class="date-box mb-2">
+                                            <strong><?= $date ?></strong>
+                                        </div>
+                                        <div class="weather-icon mb-2">
+                                            <img src="<?= $weather_icons[$index] ?>" alt="Weather Icon" class="weather-img">
+                                        </div>
+                                        <div class="weather-description mb-2">
+                                            <span class="badge bg-light text-dark">
+                                                <?= $weather_descriptions[$index] ?? 'N/A' ?>
+                                            </span>
+                                        </div>
+                                        <div class="temperature-box">
+                                            <div class="temp-min mb-1">
+                                                <i class="bi bi-thermometer-low"></i>
+                                                <span><?= $weather_data['temperature_2m_min'][$index] ?? 'N/A' ?>°C</span>
+                                            </div>
+                                            <div class="temp-max">
+                                                <i class="bi bi-thermometer-high"></i>
+                                                <span><?= $weather_data['temperature_2m_max'][$index] ?? 'N/A' ?>°C</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
 
         <!-- Object Detail Information -->
         <div class="col-md-12 col-12">

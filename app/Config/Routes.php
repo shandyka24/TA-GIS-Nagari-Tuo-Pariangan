@@ -47,6 +47,8 @@ $routes->get('/register', 'Web\Profile\Profile::register');
 $routes->get('/setup', 'LandingPage::setup',  ['filter' => 'role:admin']);
 $routes->post('/setup', 'LandingPage::selectVillage',  ['filter' => 'role:admin']);
 
+$routes->post('api/message/send', 'Api\Notification::sendMessage');
+
 
 // Upload files
 $routes->group('upload', ['namespace' => 'App\Controllers\Web\Upload'], function ($routes) {
@@ -66,6 +68,8 @@ $routes->group('web', ['namespace' => 'App\Controllers\Web\Profile'], function (
         $routes->post('changePassword', 'Profile::changePassword', ['filter' => 'login']);
         $routes->get('update', 'Profile::updateProfile', ['filter' => 'login']);
         $routes->post('update', 'Profile::update', ['filter' => 'login']);
+        $routes->get('coinHistory', 'Profile::coinHistory', ['filter' => 'login']);
+
     });
 });
 
@@ -106,7 +110,7 @@ $routes->group('web', ['namespace' => 'App\Controllers\Web'], function ($routes)
     $routes->post('reservation/review/(:segment)', 'Reservation::addReview/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
     $routes->post('reservation/(:segment)', 'Reservation::createReservation/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
     $routes->get('reservation/unit/(:segment)/(:segment)/(:segment)/(:segment)', 'Reservation::getUnit/$1/$2/$3/$4', ['namespace' => 'App\Controllers\Web\Reservation']);
-    $routes->get('reservation/finish/(:segment)/(:segment)/(:segment)', 'Reservation::finishReservation/$1/$2/$3', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
+    $routes->get('reservation/finish/(:segment)/(:segment)/(:segment)/(:segment)', 'Reservation::finishReservation/$1/$2/$3/$4', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
     $routes->get('reservation/package/price/confirm/(:segment)/(:segment)', 'Reservation::confirmPackagePrice/$1/$2', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
     $routes->get('reservation/package/delete/(:segment)', 'Reservation::deletePackage/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
     $routes->get('reservation/package/extendPackage/(:segment)/(:segment)/(:segment)', 'Reservation::customPackage/$1/$2/$3', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
@@ -141,6 +145,8 @@ $routes->group('web', ['namespace' => 'App\Controllers\Web'], function ($routes)
     $routes->get('allObject', 'TouristArea::allObject');
     $routes->get('reservationEvent/(:segment)', 'Reservation::newReservationEvent/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:user']);
     $routes->post('reservationEvent/(:segment)', 'Reservation::createReservationEvent/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' =>'role:user']);
+
+    $routes->get('aroundYou', 'TouristArea::aroundYou', ['namespace' => 'App\Controllers\Web']);
 });
 
 // Dashboard
@@ -170,6 +176,21 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Web', 'filter' => '
     $routes->post('facilityHomestay', 'Homestay::addNewFacilityHomestay',  ['namespace' => 'App\Controllers\Web\Homestay', 'filter' => 'role:admin']);
     $routes->post('facilityHomestay/edit/(:segment)', 'Homestay::editFacilityHomestay/$1',  ['namespace' => 'App\Controllers\Web\Homestay', 'filter' => 'role:admin']);
     $routes->delete('facilityHomestay/delete/(:segment)', 'Homestay::deleteFacilityHomestay/$1',  ['namespace' => 'App\Controllers\Web\Homestay', 'filter' => 'role:admin']);
+    
+    $routes->get('facilitySouvenirPlace', 'SouvenirPlace::facilitySouvenirPlace',  ['namespace' => 'App\Controllers\Web\SouvenirPlace', 'filter' => 'role:admin']);
+    $routes->post('facilitySouvenirPlace', 'SouvenirPlace::addNewFacilitySouvenirPlace',  ['namespace' => 'App\Controllers\Web\SouvenirPlace', 'filter' => 'role:admin']);
+    $routes->post('facilitySouvenirPlace/edit/(:segment)', 'SouvenirPlace::editFacilitySouvenirPlace/$1',  ['namespace' => 'App\Controllers\Web\SouvenirPlace', 'filter' => 'role:admin']);
+    $routes->delete('facilitySouvenirPlace/delete/(:segment)', 'SouvenirPlace::deleteFacilitySouvenirPlace/$1',  ['namespace' => 'App\Controllers\Web\SouvenirPlace', 'filter' => 'role:admin']);
+    
+    $routes->get('facilityCulinaryPlace', 'CulinaryPlace::facilityCulinaryPlace',  ['namespace' => 'App\Controllers\Web\CulinaryPlace', 'filter' => 'role:admin']);
+    $routes->post('facilityCulinaryPlace', 'CulinaryPlace::addNewFacilityCulinaryPlace',  ['namespace' => 'App\Controllers\Web\CulinaryPlace', 'filter' => 'role:admin']);
+    $routes->post('facilityCulinaryPlace/edit/(:segment)', 'CulinaryPlace::editFacilityCulinaryPlace/$1',  ['namespace' => 'App\Controllers\Web\CulinaryPlace', 'filter' => 'role:admin']);
+    $routes->delete('facilityCulinaryPlace/delete/(:segment)', 'CulinaryPlace::deleteFacilityCulinaryPlace/$1',  ['namespace' => 'App\Controllers\Web\CulinaryPlace', 'filter' => 'role:admin']);
+    
+    $routes->get('facilityWorshipPlace', 'WorshipPlace::facilityWorshipPlace',  ['namespace' => 'App\Controllers\Web\WorshipPlace', 'filter' => 'role:admin']);
+    $routes->post('facilityWorshipPlace', 'WorshipPlace::addNewFacilityWorshipPlace',  ['namespace' => 'App\Controllers\Web\WorshipPlace', 'filter' => 'role:admin']);
+    $routes->post('facilityWorshipPlace/edit/(:segment)', 'WorshipPlace::editFacilityWorshipPlace/$1',  ['namespace' => 'App\Controllers\Web\WorshipPlace', 'filter' => 'role:admin']);
+    $routes->delete('facilityWorshipPlace/delete/(:segment)', 'WorshipPlace::deleteFacilityWorshipPlace/$1',  ['namespace' => 'App\Controllers\Web\WorshipPlace', 'filter' => 'role:admin']);
 
     $routes->get('facilityUnit', 'Homestay::facilityUnit',  ['namespace' => 'App\Controllers\Web\Homestay', 'filter' => 'role:admin']);
     $routes->post('facilityUnit', 'Homestay::addNewFacilityHomestayUnit',  ['namespace' => 'App\Controllers\Web\Homestay', 'filter' => 'role:admin']);
@@ -213,6 +234,7 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Web', 'filter' => '
     $routes->post('reservation/deposit/confirm/(:segment)', 'Reservation::confirmDepositReservation/$1',  ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:owner']);
     $routes->post('reservation/confirm/(:segment)', 'Reservation::confirmReservation/$1',  ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:owner']);
     $routes->delete('reservation/delete/(:segment)', 'Reservation::delete/$1',  ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:owner']);
+    $routes->get('reservation/detail/(:segment)', 'reservation::show/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:owner']);
     $routes->presenter('reservation',  ['namespace' => 'App\Controllers\Web\Reservation', 'filter' => 'role:owner']);
 
     $routes->presenter('rumahGadang',  ['filter' => 'role:owner']);
@@ -336,6 +358,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
     $routes->get('getHomestayNameByUser/(:segment)', 'Homestay::getNameByUser/$1');
     $routes->get('socials', 'Village::getSocials');
 
+    $routes->post('attraction/findAll', 'Attraction::findAll');
     $routes->post('homestay/findAll', 'Homestay::findAll');
     $routes->post('culinaryPlace/findAll', 'CulinaryPlace::findAll');
     $routes->post('souvenirPlace/findAll', 'SouvenirPlace::findAll');

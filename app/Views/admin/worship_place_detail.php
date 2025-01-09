@@ -53,7 +53,16 @@
                             <p><?= esc($data['description']); ?></p>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col">
+                            <p class="fw-bold">Facilities</p>
+                            <?php $i = 1; ?>
+                            <?php foreach ($data['facilities'] as $facility) : ?>
+                                <p><?= esc($i) . '. ' . esc($facility); ?></p>
+                                <?php $i++; ?>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

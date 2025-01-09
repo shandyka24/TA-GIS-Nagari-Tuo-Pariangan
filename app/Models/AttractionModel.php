@@ -29,13 +29,13 @@ class AttractionModel extends Model
     public function get_list_oat_api()
     {
         // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
-        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description";
-        $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
+        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.price,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description";
+        // $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
             ->select("{$columns}, attraction.lat, attraction.lng")
-            ->from('village')
-            ->where($vilGeom)
-            ->where('status', 'Ordinary')
+            // ->from('village')
+            // ->where($vilGeom)
+            // ->where('status', 'Ordinary')
             ->get();
         return $query;
     }
@@ -50,13 +50,10 @@ class AttractionModel extends Model
 
     public function get_list_at_api()
     {
-        // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
         $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description";
-        $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
+        $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
         $query = $this->db->table($this->table)
-            ->select("{$columns}, attraction.lat, attraction.lng")
-            ->from('village')
-            ->where($vilGeom)
+            ->select("{$columns}, attraction.lat, attraction.lng, {$geoJson}")
             ->get();
         return $query;
     }
@@ -74,7 +71,7 @@ class AttractionModel extends Model
     public function get_at_by_id_api($id = null)
     {
         // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
-        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.price_for_package,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description,{$this->table}.video_url";
+        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description,{$this->table}.video_url,{$this->table}.price";
         $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
         $query = $this->db->table($this->table)
             ->select("{$columns}, attraction.lat, attraction.lng, {$geoJson}")
@@ -105,20 +102,12 @@ class AttractionModel extends Model
         return $query;
     }
 
-    public function get_at_by_radius_api($data = null)
+    public function get_at_by_radius_api()
     {
-        $radius = (int)$data['radius'] / 1000;
-        $lat = $data['lat'];
-        $long = $data['long'];
-        $jarak = "(6371 * acos(cos(radians({$lat})) * cos(radians({$this->table}.lat)) * cos(radians({$this->table}.lng) - radians({$long})) + sin(radians({$lat}))* sin(radians({$this->table}.lat))))";
-        // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
         $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description";
-        $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
+        $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
         $query = $this->db->table($this->table)
-            ->select("{$columns}, attraction.lat, attraction.lng, {$jarak} as jarak")
-            ->from('village')
-            ->where($vilGeom)
-            ->having(['jarak <=' => $radius])
+            ->select("{$columns}, attraction.lat, attraction.lng, {$geoJson}")
             ->get();
         return $query;
     }

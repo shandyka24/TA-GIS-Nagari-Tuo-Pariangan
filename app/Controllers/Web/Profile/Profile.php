@@ -5,6 +5,10 @@ namespace App\Controllers\Web\Profile;
 use App\Controllers\BaseController;
 use App\Models\VillageModel;
 use App\Models\AccountModel;
+use App\Models\Reservation\ReservationModel;
+use App\Models\Reservation\ReservationHomestayUnitDetailModel;
+use App\Models\Reservation\ReservationHomestayUnitDetailBackUpModel;
+use App\Models\Homestay\HomestayModel;
 use App\Models\VisitHistoryModel;
 use CodeIgniter\Session\Session;
 use CodeIgniter\Files\File;
@@ -16,8 +20,12 @@ class Profile extends BaseController
 {
     protected $villageModel;
     protected $accountModel;
+    protected $reservationModel;
     protected $visitHistoryModel;
     protected $auth;
+    protected $reservationHomestayUnitDetailModel;
+    protected $homestayModel;
+    protected $reservationHomestayUnitDetailBackUpModel;
 
     /**
      * @var AuthConfig
@@ -33,7 +41,11 @@ class Profile extends BaseController
     {
         $this->villageModel = new VillageModel();
         $this->accountModel = new AccountModel();
+        $this->reservationModel = new ReservationModel();
         $this->visitHistoryModel = new VisitHistoryModel();
+        $this->reservationHomestayUnitDetailModel = new ReservationHomestayUnitDetailModel();
+        $this->homestayModel = new HomestayModel();
+        $this->reservationHomestayUnitDetailBackUpModel = new ReservationHomestayUnitDetailBackUpModel();
 
         // Most services in this controller require
         // the session to be started - so fire it up!
@@ -160,5 +172,31 @@ class Profile extends BaseController
             'errors' => ['Error update. ' . $query]
         ];
         return view('profile/update_profile', $data);
+    }
+
+    public function coinHistory()
+    {
+        $coin_use = $this->reservationModel->get_coin_use_history_by_user_id(user()->id)->getResultArray();
+        // dd($coin_use);
+        $i = 0;
+        foreach ($coin_use as $coin) {
+            if (($coin['canceled_at'] == null) && (($coin['is_rejected'] == '0') || ($coin['is_rejected'] == null))) {
+                $id = $this->reservationHomestayUnitDetailModel->get_hs_by_id($coin['id'])->getRowArray();
+            }
+            else {
+                $id = $this->reservationHomestayUnitDetailBackUpModel->get_hs_by_id($coin['id'])->getRowArray();
+            }
+            // dd($id);
+            $homestay = $this->homestayModel->get_hs_by_id_api($id['homestay_id'])->getRowArray();
+            // dd($homestay);
+            $coin_use[$i]['homestay_name'] = $homestay['name'];
+            $i++;
+        }
+        $data = [
+            'title' => 'Coin History',
+            'data' => $coin_use,
+        ];
+
+        return view('profile/coin_history', $data);
     }
 }

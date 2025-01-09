@@ -121,7 +121,7 @@
                 <div class="col-lg-6 p-0 wow fadeIn" data-wow-delay="0.1s">
                     <div class="header-bg h-100 d-flex flex-column justify-content-center p-5" style="background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url(media/photos/<?= $gallery[array_rand($gallery)]; ?>) center center no-repeat; background-size: cover;">
                         <h2 class="display-6 text-light mb-2">
-                            Welcome to
+                            Welcome to 
                         </h2>
                         <h1 class="display-4 text-light mb-5">
                             <?= $village['name']; ?>
@@ -172,7 +172,7 @@
             <div class="container">
                 <div class="row p-5">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <p><span class="text-primary me-2">#</span>Welcome To Desa Wisata </p>
+                        <p><span class="text-primary me-2">#</span>Welcome To Tourism Village </p>
                         <h1 class="display-5 mb-4">
                             Why You Should Visit
                             <span class="text-primary">

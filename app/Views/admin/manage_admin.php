@@ -27,7 +27,7 @@ $users = in_array('users', $uri);
                 </div>
                 <div class="col">
                     <?php if ($category != 'Users') : ?>
-                        <?php if (($category == 'Souvenir Product') || ($category == 'Culinary Product') || ($category == 'Attraction Facility') || ($category == 'Homestay Facility') || ($category == 'Homestay Unit Facility')) : ?>
+                        <?php if (($category == 'Souvenir Product') || ($category == 'Culinary Product') || ($category == 'Attraction Facility') || ($category == 'Homestay Facility') || ($category == 'Homestay Unit Facility') || ($category == 'Souvenir Place Facility') || ($category == 'Culinary Place Facility') || ($category == 'Worship Place Facility')) : ?>
                             <a class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#insertNewProduct"><i class="fa-solid fa-add me-3"></i> New <?= $category; ?></a>
                         <?php elseif ($category == 'Homestay Exclusive Activity') : ?>
                             <a class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#insertNewActivity"><i class="fa-solid fa-add me-3"></i> New <?= $category; ?></a>
@@ -85,7 +85,7 @@ $users = in_array('users', $uri);
                                         <td><?= ucfirst(esc($item['role'])); ?></td>
                                     <?php endif; ?>
                                     <td>
-                                        <?php if (($category == 'Souvenir Product') || ($category == 'Culinary Product') || ($category == 'Attraction Facility') || ($category == 'Homestay Facility') || ($category == 'Homestay Unit Facility')) : ?>
+                                        <?php if (($category == 'Souvenir Product') || ($category == 'Culinary Product') || ($category == 'Attraction Facility') || ($category == 'Homestay Facility') || ($category == 'Homestay Unit Facility') || ($category == 'Souvenir Place Facility') || ($category == 'Culinary Place Facility') || ($category == 'Worship Place Facility')) : ?>
                                             <a title="Edit" class="btn icon btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editProduct<?= esc($item['id']); ?>">
                                                 <i class="fa-solid fa-edit"></i>
                                             </a>
@@ -108,8 +108,8 @@ $users = in_array('users', $uri);
                                                 <i class="fa-solid fa-circle-info"></i>
                                             </a>
                                         <?php endif; ?>
-                                        <?php if (($category == 'Souvenir Product') || ($category == 'Culinary Product') || ($category == 'Attraction Facility') || ($category == 'Homestay Facility') || ($category == 'Homestay Unit') || ($category == 'Homestay Unit Facility') || ($category == 'Homestay Exclusive Activity') || ($category == 'Package') || ($category == 'Homestay Additional Amenities')) : ?>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete" class="btn icon btn-outline-danger btn-sm" onclick="deleteObject('<?= ($category == 'Souvenir Product') ? 'Z' . $item['id'] : ''; ?><?= ($category == 'Culinary Product') ? 'X' . $item['id'] : ''; ?><?= ($category == 'Attraction Facility') ? 'T' . $item['id'] : ''; ?><?= ($category == 'Homestay Facility') ? 'B' . $item['id'] : ''; ?><?= ($category == 'Homestay Unit') ? 'I' . $item['id'] : ''; ?><?= ($category == 'Homestay Unit Facility') ? 'D' . $item['id'] : ''; ?><?= ($category == 'Homestay Additional Amenities') ? 'G' . $item['id'] . $item['homestay_id'] : ''; ?><?= ($category == 'Package') ? $item['id'] . $item['homestay_id'] : ''; ?>', '<?= esc($item['name']); ?>', 'false')">
+                                        <?php if (($category == 'Souvenir Product') || ($category == 'Culinary Product') || ($category == 'Attraction Facility') || ($category == 'Homestay Facility') || ($category == 'Homestay Unit') || ($category == 'Homestay Unit Facility') || ($category == 'Homestay Exclusive Activity') || ($category == 'Package') || ($category == 'Homestay Additional Amenities') || ($category == 'Souvenir Place Facility') || ($category == 'Culinary Place Facility') || ($category == 'Worship Place Facility')) : ?>
+                                            <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete" class="btn icon btn-outline-danger btn-sm" onclick="deleteObject('<?= ($category == 'Souvenir Product') ? 'Z' . $item['id'] : ''; ?><?= ($category == 'Culinary Product') ? 'X' . $item['id'] : ''; ?><?= ($category == 'Attraction Facility') ? 'T' . $item['id'] : ''; ?><?= ($category == 'Homestay Facility') ? 'B' . $item['id'] : ''; ?><?= ($category == 'Souvenir Place Facility') ? 'K' . $item['id'] : ''; ?><?= ($category == 'Culinary Place Facility') ? 'M' . $item['id'] : ''; ?><?= ($category == 'Worship Place Facility') ? 'N' . $item['id'] : ''; ?><?= ($category == 'Homestay Unit') ? 'I' . $item['id'] : ''; ?><?= ($category == 'Homestay Unit Facility') ? 'D' . $item['id'] : ''; ?><?= ($category == 'Homestay Additional Amenities') ? 'G' . $item['id'] . $item['homestay_id'] : ''; ?><?= ($category == 'Package') ? $item['id'] . $item['homestay_id'] : ''; ?>', '<?= esc($item['name']); ?>', 'false')">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
                                         <?php else : ?>
@@ -151,18 +151,27 @@ $users = in_array('users', $uri);
                                     <?php if ($category == 'Homestay Facility') : ?>
                                         <form class="form form-vertical" action="" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
                                         <?php endif; ?>
-                                        <?php if ($category == 'Homestay Unit Facility') : ?>
+                                        <?php if ($category == 'Souvenir Place Facility') : ?>
                                             <form class="form form-vertical" action="" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
                                             <?php endif; ?>
-                                            <div class="form-body">
-                                                <div class="form-group">
-                                                    <label for="name" class="mb-2"><?= esc($category); ?> Name</label>
-                                                    <input type="text" id="name" class="form-control" name="name" placeholder="<?= esc($category); ?> Name" required>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
-                                                <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>
-                                            </div>
-                                            </form>
+                                            <?php if ($category == 'Culinary Place Facility') : ?>
+                                                <form class="form form-vertical" action="" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                                                <?php endif; ?>
+                                                <?php if ($category == 'Worship Place Facility') : ?>
+                                                    <form class="form form-vertical" action="" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                                                    <?php endif; ?>
+                                                    <?php if ($category == 'Homestay Unit Facility') : ?>
+                                                        <form class="form form-vertical" action="" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                                                        <?php endif; ?>
+                                                        <div class="form-body">
+                                                            <div class="form-group">
+                                                                <label for="name" class="mb-2"><?= esc($category); ?> Name</label>
+                                                                <input type="text" id="name" class="form-control" name="name" placeholder="<?= esc($category); ?> Name" required>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
+                                                            <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>
+                                                        </div>
+                                                        </form>
                     </div>
                 </div>
             </div>
@@ -195,19 +204,28 @@ $users = in_array('users', $uri);
                                                 <?php if ($category == 'Homestay Facility') : ?>
                                                     <form class="form form-vertical" action="/dashboard/facilityHomestay/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
                                                     <?php endif; ?>
-                                                    <?php if ($category == 'Homestay Unit Facility') : ?>
-                                                        <form class="form form-vertical" action="/dashboard/facilityUnit/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                                                    <?php if ($category == 'Souvenir Place Facility') : ?>
+                                                        <form class="form form-vertical" action="/dashboard/facilitySouvenirPlace/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
                                                         <?php endif; ?>
-                                                        <form class="form form-vertical" action="<?= ($category == 'Attraction Facility') ? 'facility' : 'product'; ?>/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
-                                                            <div class="form-body">
-                                                                <div class="form-group">
-                                                                    <label for="name" class="mb-2"><?= esc($category); ?> Name</label>
-                                                                    <input type="text" id="name" class="form-control" name="name" placeholder="<?= esc($category); ?> Name" value="<?= esc($product['name']); ?>" required>
-                                                                </div>
-                                                                <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
-                                                                <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>
-                                                            </div>
-                                                        </form>
+                                                        <?php if ($category == 'Culinary Place Facility') : ?>
+                                                            <form class="form form-vertical" action="/dashboard/facilityCulinaryPlace/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                                                            <?php endif; ?>
+                                                            <?php if ($category == 'Worship Place Facility') : ?>
+                                                                <form class="form form-vertical" action="/dashboard/facilityWorshipPlace/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                                                                <?php endif; ?>
+                                                                <?php if ($category == 'Homestay Unit Facility') : ?>
+                                                                    <form class="form form-vertical" action="/dashboard/facilityUnit/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                                                                    <?php endif; ?>
+                                                                    <form class="form form-vertical" action="<?= ($category == 'Attraction Facility') ? 'facility' : 'product'; ?>/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                                                                        <div class="form-body">
+                                                                            <div class="form-group">
+                                                                                <label for="name" class="mb-2"><?= esc($category); ?> Name</label>
+                                                                                <input type="text" id="name" class="form-control" name="name" placeholder="<?= esc($category); ?> Name" value="<?= esc($product['name']); ?>" required>
+                                                                            </div>
+                                                                            <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
+                                                                            <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>
+                                                                        </div>
+                                                                    </form>
                                 </div>
                             </div>
                         </div>

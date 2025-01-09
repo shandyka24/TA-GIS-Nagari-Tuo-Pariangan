@@ -165,10 +165,18 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
         <td width="78%" style="height: 20px"><strong>Deposit</strong></td>
         <td width="18%" style="height: 20px;text-align:right"><strong><?= 'Rp' . number_format(esc($reservation['deposit']), 0, ',', '.'); ?></strong></td>
     </tr>
+    <tr style="border:1px solid #000">
+        <td width="78%" style="height: 20px"><strong>Coin Used</strong></td>
+        <td width="18%" style="height: 20px;text-align:right"><strong><?= '-Rp' . number_format(esc($reservation['coin_use']), 0, ',', '.'); ?></strong></td>
+    </tr>
+    <tr style="border:1px solid #000">
+        <td width="78%" style="height: 20px"><strong>Grand Total After Using Coin</strong></td>
+        <td width="18%" style="height: 20px;text-align:right"><strong><?= 'Rp' . number_format(esc($reservation['total_price'] - $reservation['coin_use']), 0, ',', '.'); ?></strong></td>
+    </tr>
     <?php if ($reservation['canceled_at'] == null) : ?>
         <tr style="border:1px solid #000">
             <td width="78%" style="height: 20px"><strong>Full Pay</strong></td>
-            <td width="18%" style="height: 20px;text-align:right"><strong><?= 'Rp' . number_format(esc($reservation['total_price'] - $reservation['deposit']), 0, ',', '.'); ?></strong></td>
+            <td width="18%" style="height: 20px;text-align:right"><strong><?= 'Rp' . number_format(esc($reservation['total_price'] - $reservation['deposit'] - $reservation['coin_use']), 0, ',', '.'); ?></strong></td>
         </tr>
     <?php endif; ?>
     <?php if ($reservation['is_refund'] == '1') : ?>

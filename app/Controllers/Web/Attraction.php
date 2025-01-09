@@ -11,10 +11,10 @@ use CodeIgniter\Files\File;
 use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\RESTful\ResourcePresenter;
 
-use App\Models\HomestayModel;
-use App\Models\HomestayFacilityModel;
-use App\Models\HomestayFacilityDetailModel;
-use App\Models\HomestayGalleryModel;
+use App\Models\Homestay\HomestayModel;
+use App\Models\Homestay\HomestayFacilityModel;
+use App\Models\Homestay\HomestayFacilityDetailModel;
+use App\Models\Homestay\HomestayGalleryModel;
 
 use App\Models\AttractionModel;
 use App\Models\AttractionTicketPriceModel;
@@ -95,7 +95,6 @@ class Attraction extends ResourcePresenter
             return redirect()->to(substr(current_url(), 0, -strlen($id)));
         }
 
-        $list_ticketPrice = $this->attractionTicketPriceModel->get_ticket_by_at_api($id)->getResultArray();
         $list_facility = $this->attractionFacilityDetailModel->get_facility_by_at_api($id)->getResultArray();
         $facilities = array();
         foreach ($list_facility as $facility) {
@@ -114,7 +113,6 @@ class Attraction extends ResourcePresenter
         $data = [
             'title' => $attraction['name'],
             'data' => $attraction,
-            'ticket_prices' => $list_ticketPrice,
         ];
 
         $data['data']['geoJson'] = [
@@ -157,14 +155,13 @@ class Attraction extends ResourcePresenter
     {
         $request = $this->request->getPost();
         $id = $this->attractionModel->get_new_id_api();
-        $request['status'] = 'Ordinary';
         $requestData = [
             'id' => $id,
             'name' => $request['name'],
-            'status' => $request['status'],
             'address' => $request['address'],
             'open' => $request['open'],
             'close' => $request['close'],
+            'price' => $request['price'],
             'employee_name' => $request['employee_name'],
             'phone' => $request['phone'],
             'description' => $request['description'],
@@ -270,6 +267,7 @@ class Attraction extends ResourcePresenter
             'address' => $request['address'],
             'open' => $request['open'],
             'close' => $request['close'],
+            'price' => $request['price'],
             'employee_name' => $request['employee_name'],
             'phone' => $request['phone'],
             'description' => $request['description'],

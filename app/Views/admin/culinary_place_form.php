@@ -73,6 +73,18 @@ $edit = in_array('edit', $uri);
                                 <textarea class="form-control" id="description" name="description" rows="4"><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
                             </div>
                             <div class="form-group mb-4">
+                                <label for="facilities" class="mb-2">Facilities</label>
+                                <select class="choices form-select multiple-remove" multiple="multiple" id="facilities" name="facilities[]">
+                                    <?php foreach ($facilities as $facility) : ?>
+                                        <?php if ($edit && in_array(esc($facility['name']), $data['facilities'])) : ?>
+                                            <option value="<?= esc($facility['id']); ?>" selected><?= esc($facility['name']); ?></option>
+                                        <?php else : ?>
+                                            <option value="<?= esc($facility['id']); ?>"><?= esc($facility['name']); ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group mb-4">
                                 <label for="gallery" class="form-label">Gallery</label>
                                 <input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
                             </div>

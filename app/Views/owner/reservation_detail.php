@@ -169,7 +169,24 @@
         $total_price = $homestay_unit_total_price + $homestay_activity_total_price;
         $deposit = $total_price * 20 / 100;
         $fullPay = $total_price * 80 / 100;
+        if($reservation['customer_id'] == null){
+            $coin['total_coin'] = 0;
+            $total_price_after_coin = 0;
+        } else{
+            $total_price_after_coin = $total_price - $coin['total_coin'];
+        }
+        $coin = $coin['total_coin'];
 
+        if ($reservation['reservation_type'] == '1') {
+            if (($coin > 0.15 * $total_price)) {
+                $coin = 0.15 * $total_price;
+            }
+        } else {
+            if (($coin > 0.15 * $homestay_unit_total_price * 0.9)) {
+                $coin = 0.15 * $homestay_unit_total_price * 0.9;
+            }
+        }
+        
         if ($reservation['is_refund'] == '1') {
             $refund = $deposit * 50 / 100;
         } elseif ($reservation['is_refund'] == '0') {
@@ -205,13 +222,71 @@
                                         <td> : <?= esc("Rp " . number_format($deposit * 90 / 100, 0, ',', '.')) ?> <i>*(20% of total price)</i> </td>
                                     <?php endif; ?>
                                 </tr>
+
+                                <tr>
+                                    <td class="fw-bold">
+                                        <div id="used_coin_1" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0') || $reservation['customer_id'] == null) ? 'style="display: none;"' : '' ?>>Coin Used</div>
+                                    </td>
+                                    <td>
+                                        <div id="used_coin_2" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0') || $reservation['customer_id'] == null) ? 'style="display: none;"' : '' ?>>: <?= esc("-Rp " . number_format($coin, 0, ',', '.')) ?></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">
+                                        <div id="used_coin_3" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0') || $reservation['customer_id'] == null) ? 'style="display: none;"' : '' ?>>Total Price After Coin</div>
+                                    </td>
+                                    <td>
+                                        <?php if (($reservation['reservation_type'] == 1)) : ?>
+                                            <?php if (($coin > 0.15 * $total_price)) : ?>
+                                                <div id="used_coin_4" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0') || $reservation['customer_id'] == null) ? 'style="display: none;"' : '' ?>>: <?= esc("Rp " . number_format($total_price - 0.15 * $total_price, 0, ',', '.')) ?></div>
+                                            <?php else : ?>
+                                                <div id="used_coin_4" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0') || $reservation['customer_id'] == null) ? 'style="display: none;"' : '' ?>>: <?= esc("Rp " . number_format($total_price - $coin, 0, ',', '.')) ?></div>
+                                            <?php endif; ?>
+                                        <?php else : ?>
+                                            <?php if (($coin > 0.15 * $total_price)) : ?>
+                                                <div id="used_coin_4" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0') || $reservation['customer_id'] == null) ? 'style="display: none;"' : '' ?>>: <?= esc("Rp " . number_format(($homestay_unit_total_price * 90 / 100) - (0.15 * $homestay_unit_total_price * 90 / 100), 0, ',', '.')) ?></div>
+                                            <?php else : ?>
+                                                <div id="used_coin_4" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0') || $reservation['customer_id'] == null) ? 'style="display: none;"' : '' ?>>: <?= esc("Rp " . number_format($homestay_unit_total_price * 90 / 100 - $coin, 0, ',', '.')) ?></div>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+
+                                <script>
+                                    usedCoinText();
+                                </script>
+
                                 <?php if ((($reservation['status'] == 'Deposit Successful') || ($reservation['status'] == 'Full Pay Pending') || ($reservation['status'] == 'Full Pay Successful')) && ($reservation['canceled_at'] == null)) : ?>
-                                    <tr>
-                                        <td class="fw-bold">Full Price</td>
-                                        <td>
-                                            : <?= esc("Rp " . number_format($total_price - $deposit, 0, ',', '.')) ?> <i>*(80% of total price)</i>
-                                        </td>
-                                    </tr>
+                                    <?php if (($reservation['reservation_type'] == 1 && $reservation['coin_use'] == 0)) : ?>
+                                        <tr>
+                                            <td class="fw-bold">Full Price</td>
+                                            <td>
+                                                : <?= esc("Rp " . number_format($reservation['total_price'] - $reservation['deposit'], 0, ',', '.')) ?> <i>*(80% of total price)</i>
+                                            </td>
+                                        </tr>
+                                    <?php elseif (($reservation['reservation_type'] == 2 &&  $reservation['coin_use'] == 0)) : ?>
+                                        <tr>
+                                            <td class="fw-bold">Full Price</td>
+                                            <td>
+                                                : <?= esc("Rp " . number_format($reservation['total_price'] - $reservation['deposit'], 0, ',', '.')) ?> <i>*(80% of total price)</i>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    <?php if (($reservation['reservation_type'] == 1 && $reservation['coin_use'] > 0)) : ?>
+                                        <tr>
+                                            <td class="fw-bold">Full Price</td>
+                                            <td>
+                                                : <?= esc("Rp " . number_format($reservation['total_price'] - $reservation['coin_use'] - $reservation['deposit'], 0, ',', '.')) ?> <i>*(Total Price After Deposit and Using Coin)</i>
+                                            </td>
+                                        </tr>
+                                    <?php elseif (($reservation['reservation_type'] == 2 &&  $reservation['coin_use'] > 0)) : ?>
+                                        <tr>
+                                            <td class="fw-bold">Full Price</td>
+                                            <td>
+                                                : <?= esc("Rp " . number_format($reservation['total_price'] - $reservation['coin_use'] - $reservation['deposit'], 0, ',', '.')) ?> <i>*(Total Price After Deposit and Using Coin)</i>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                                 <?php if ($reservation['is_refund'] == '1') : ?>
                                     <tr>

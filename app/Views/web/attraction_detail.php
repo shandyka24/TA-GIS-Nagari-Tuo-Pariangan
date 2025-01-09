@@ -59,43 +59,16 @@
                                         <td class="fw-bold">Contact Person</td>
                                         <td><?= esc($data['phone']); ?> (<?= esc($data['employee_name']); ?>)</td>
                                     </tr>
-                                    <?php if (empty($ticket_prices)) : ?>
-                                        <tr>
-                                            <td class="fw-bold">Ticket Prices</td>
-                                            <td>Free <a class="float-end" data-bs-toggle="modal" data-bs-target="#insertService"></td>
-                                        </tr>
-                                    <?php else : ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col table-responsive">
-                            <table class="table table-borderless text-dark">
-                                <tbody>
                                     <tr>
-                                        <td class="fw-bold" colspan="3">List of Ticket Prices</td>
+                                        <td class="fw-bold">Price</td>
+                                        <td><?= esc($data['price']); ?></td>
                                     </tr>
-                                    <?php $no = 1; ?>
-                                    <?php foreach ($ticket_prices as $ticket_price) : ?>
-                                        <tr style="font-size: 15px;">
-                                            <td><?= esc($no); ?></td>
-                                            <td><?= esc($ticket_price['name']); ?></td>
-                                            <?php if ($ticket_price['price'] == "0") : ?>
-                                                <td>Free</td>
-                                            <?php else : ?>
-                                                <td>Rp <?= number_format(esc($ticket_price['price']), 0, ',', '.'); ?></td>
-                                            <?php endif; ?>
-                                        </tr>
-                                        <?php $no++; ?>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                                <tr>
-                                    <td class="fw-bold" colspan="3">Description</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3"><?= esc($data['description']); ?></td>
-                                </tr>
+                                    <tr>
+                                        <td class="fw-bold" colspan="3">Description</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><?= esc($data['description']); ?></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

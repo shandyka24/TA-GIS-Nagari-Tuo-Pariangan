@@ -7,7 +7,19 @@
         <div class="card-body">
             <div class="form-check">
                 <div class="checkbox">
-                    <input type="checkbox" id="check-cp" class="form-check-input" checked>
+                    <input type="checkbox" id="check-att" class="form-check-input">
+                    <label for="check-att">Attraction</label>
+                </div>
+            </div>
+            <div class="form-check">
+                <div class="checkbox">
+                    <input type="checkbox" id="check-hs" class="form-check-input">
+                    <label for="check-hs">Homestay</label>
+                </div>
+            </div>
+            <div class="form-check">
+                <div class="checkbox">
+                    <input type="checkbox" id="check-cp" class="form-check-input">
                     <label for="check-cp">Culinary</label>
                 </div>
             </div>
@@ -40,13 +52,15 @@
         </div>
         <div class="card-body">
             <div class="table-responsive overflow-auto" id="table-result-nearby">
-                <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-cp">
+                <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-att">
                 </table>
-                <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-wp">
+                <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-hs">
+                </table>
+                <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-cp">
                 </table>
                 <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-sp">
                 </table>
-                <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-sv">
+                <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-wp">
                 </table>
             </div>
         </div>
