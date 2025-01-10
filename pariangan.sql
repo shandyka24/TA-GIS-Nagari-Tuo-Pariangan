@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 09, 2025 at 10:08 AM
+-- Generation Time: Jan 10, 2025 at 05:06 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.4
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `attraction` (
   `id` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `attraction_category` varchar(2) NOT NULL DEFAULT '2',
   `name` varchar(40) NOT NULL,
   `address` text NOT NULL,
   `open` time NOT NULL,
@@ -50,9 +51,13 @@ CREATE TABLE `attraction` (
 -- Dumping data for table `attraction`
 --
 
-INSERT INTO `attraction` (`id`, `name`, `address`, `open`, `close`, `price`, `employee_name`, `phone`, `description`, `video_url`, `lat`, `lng`, `geom`, `geom_area`, `created_at`, `updated_at`) VALUES
-('A1', 'blablabla123', 'dasdasd123', '12:31:00', '12:33:00', 12345678, 'asdasd123', '21323111', 'aasdqweqwe', '', -0.44330777, 100.48646784, 0xe610000001030000000100000005000000389605d2121f5940e4f9144d4f82dcbf37960572451f594069c39e8f8f60dcbf37960582261f5940db4602d7ff3bdcbf38960522ff1e5940225726b6df4cdcbf389605d2121f5940e4f9144d4f82dcbf, NULL, '2025-01-06 02:58:30', '2025-01-06 03:03:03'),
-('A2', 'asdasd', 'asdads', '12:03:00', '15:21:00', 13123, 'aweqwe', '123123', 'qweqwe', '', -0.44747143, 100.48350195, 0xe61000000103000000010000000500000033f42648e31e594008eac639db9fdcbf33f42634e81e5940a104b02467aadcbf33f4261c001f59402ab9ab37e9a0dcbf33f42666f21e59406b19cb40579cdcbf33f42648e31e594008eac639db9fdcbf, NULL, '2025-01-06 18:31:22', '2025-01-06 18:31:22');
+INSERT INTO `attraction` (`id`, `attraction_category`, `name`, `address`, `open`, `close`, `price`, `employee_name`, `phone`, `description`, `video_url`, `lat`, `lng`, `geom`, `geom_area`, `created_at`, `updated_at`) VALUES
+('A1', '1', 'Kuburan Panjang DT Tantejo', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '06:00:00', '18:00:00', 10000, 'Pokdarwis Pariangan', '082284978004', 'The length of this grave is around 24-25 m, based on the experience of the community and visitors who have measured the length of this grave, the results always change, sometimes it is 24, sometimes 25 m. The body that rests in this grave is Tantejo Gurhano, he was the one who first came up with the idea of ​​building a bagonjoang house inspired by a boat that had sharp corners at both ends. Tantejo Gurhano is thought to have lived during the Hindu-Buddhist era, when she died her body was burned according to Hindu-Buddhist religious rituals and her ashes were scattered throughout this cemetery area.', '', -0.45885615, 100.49400967, 0xe610000001030000000100000005000000e1972b6d9b1f594040e518fdad5cddbfe2974b0d9f1f594018a8e9df565bddbfe2974b48a01f5940fa37d5372f5fddbfe2974bf19c1f5940603527757560ddbfe1972b6d9b1f594040e518fdad5cddbf, NULL, '2025-01-08 21:21:14', '2025-01-09 02:48:07'),
+('A2', '1', 'Batu Agam', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 15000, 'Pokdarwis Pariangan', '082284978004', 'Agam stone is one of the relics in Pariangan which is included in the 3 sajarangan stones, where the agam stone is directed towards the agam area', '', -0.45815154, 100.49220609, 0xe610000001030000000100000008000000aa48e4c6801f59404d422f59ea51ddbfab48a407801f5940e5be81f9c251ddbfab48a4ad7f1f5940e510f1378252ddbfaa48443a801f5940d05505b7f252ddbfab4844ee801f5940d18f9e97a952ddbfab4844ee801f594019fe2b186652ddbfac4804e3801f5940d88de8180c52ddbfaa48e4c6801f59404d422f59ea51ddbf, NULL, '2025-01-09 02:41:54', '2025-01-09 04:56:54'),
+('A3', '1', 'Batu 50 Kota', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 123123, 'Pokdarwis Pariangan', '082284978004', 'The 50 Kota Stone is one of the relics in Pariangan which is included in the 3 Saurangan Stones, where the 50 Kota stones point towards the 50 Kota area.', '', -0.45884599, 100.49264716, 0xe6100000010300000001000000060000001a9ce479871f5940de5f5dc3315dddbf1a9c041d881f5940d65adba26f5dddbf1b9ca4f5871f594077231a61455eddbf199ca414871f59405af625c13f5eddbf1a9ce4f2861f5940032665e2a75dddbf1a9ce479871f5940de5f5dc3315dddbf, NULL, '2025-01-09 02:49:05', '2025-01-09 04:49:51'),
+('A4', '1', 'Batu Tanah Datar', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Pokdarwis Pariangan', '082284978004', 'The Tanah Datar Stone is one of the relics in Pariangan which is included in the 3 Sajarangan Stones, where the Tanah Datar stones point towards the Tanah Datar area.', '', -0.45891036, 100.49210310, 0xe610000001030000000100000006000000864b3c227e1f594081194fcc4d5eddbf854b3c307f1f59400b09960c2c5eddbf874b5c4c7f1f5940972c2f8a505fddbf864b1c607e1f59405adeff09675fddbf854b9cef7d1f5940bd07044beb5eddbf864b3c227e1f594081194fcc4d5eddbf, NULL, '2025-01-09 04:56:23', '2025-01-09 04:56:23'),
+('A5', '1', 'Masjid Ishlah', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', 'Masjid Islah Nagari Tuo Pariangan is a historic mosque located in Nagari Pariangan, Tanah Datar Regency, West Sumatra. This mosque is known as one of the oldest religious buildings in Minangkabau, with traditional architecture that reflects strong cultural and religious values. Built with a dominant Minangkabau architectural style, this mosque has a gonjong-shaped roof, similar to the Minangkabau traditional house (rumah gadang), which gives a magnificent and distinctive impression. This building uses natural materials such as wood and stone, which makes it in line with the surrounding natural environment which is beautiful and beautiful.', '', -0.45851320, 100.49233294, 0xe610000001030000000100000008000000a4aac794801f59402ba5d79a7354ddbfa4aa272f861f59403ae582568456ddbfa3aae742851f594016d864b1f458ddbfa3aa474e831f5940f3f4c5da1b5cddbfa4aa2735801f59400153a84dbc5addbfa5aae7947e1f5940afb72f010e59ddbfa5aac7b37f1f594035b7a235ef56ddbfa4aac794801f59402ba5d79a7354ddbf, NULL, '2025-01-09 04:59:58', '2025-01-09 04:59:58'),
+('A6', '2', 'Tabuah Larangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45865213, 100.49220402, 0xe61000000103000000010000000700000014805cad801f59405a7f00b6125addbf15803ceb801f594034d4ad153a5addbf15803c91801f59409ecef8330a5bddbf13803cb07f1f5940543e1c54f95addbf13805c9f7f1f5940e46ccdf4a45addbf1480fc2b801f594096359655455addbf14805cad801f59405a7f00b6125addbf, NULL, '2025-01-09 05:05:28', '2025-01-09 05:05:28');
 
 -- --------------------------------------------------------
 
@@ -62,8 +67,16 @@ INSERT INTO `attraction` (`id`, `name`, `address`, `open`, `close`, `price`, `em
 
 CREATE TABLE `attraction_category` (
   `id` varchar(2) NOT NULL,
-  `category` varchar(20) NOT NULL
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `attraction_category`
+--
+
+INSERT INTO `attraction_category` (`id`, `name`) VALUES
+('1', 'Unique'),
+('2', 'Ordinary');
 
 -- --------------------------------------------------------
 
@@ -83,7 +96,8 @@ CREATE TABLE `attraction_facility` (
 --
 
 INSERT INTO `attraction_facility` (`id`, `name`, `created_at`, `updated_at`) VALUES
-('01', 'Parking Area', '2025-01-06 03:02:23', '2025-01-06 03:02:23');
+('01', 'Parking Area', '2025-01-06 03:02:23', '2025-01-06 03:02:23'),
+('02', 'Toilet', '2025-01-10 01:14:04', '2025-01-10 01:14:04');
 
 -- --------------------------------------------------------
 
@@ -103,8 +117,11 @@ CREATE TABLE `attraction_facility_detail` (
 --
 
 INSERT INTO `attraction_facility_detail` (`attraction_id`, `attraction_facility_id`, `created_at`, `updated_at`) VALUES
-('A1', '01', '2025-01-06 03:03:03', '2025-01-06 03:03:03'),
-('A2', '01', '2025-01-06 18:31:22', '2025-01-06 18:31:22');
+('A1', '01', '2025-01-09 02:48:07', '2025-01-09 02:48:07'),
+('A2', '01', '2025-01-09 04:56:54', '2025-01-09 04:56:54'),
+('A3', '01', '2025-01-09 04:49:51', '2025-01-09 04:49:51'),
+('A4', '01', '2025-01-09 04:56:23', '2025-01-09 04:56:23'),
+('A5', '01', '2025-01-09 04:59:58', '2025-01-09 04:59:58');
 
 -- --------------------------------------------------------
 
@@ -125,8 +142,13 @@ CREATE TABLE `attraction_gallery` (
 --
 
 INSERT INTO `attraction_gallery` (`id`, `attraction_id`, `url`, `created_at`, `updated_at`) VALUES
-('001', 'A1', '1736179352_a2005a273c4c88448cd9.jpg', '2025-01-06 03:03:03', '2025-01-06 03:03:03'),
-('002', 'A2', '1736235073_c8d0c14a54a8678ef29d.png', '2025-01-06 18:31:22', '2025-01-06 18:31:22');
+('003', 'A1', '1736437681_38bf3146835ae4d64666.jpg', '2025-01-09 02:48:07', '2025-01-09 02:48:07'),
+('004', 'A3', '1736444853_bd2fefb534f7210c526c.webp', '2025-01-09 04:49:51', '2025-01-09 04:49:51'),
+('006', 'A4', '1736445141_de1babf7c8cf43dcb45b.jpg', '2025-01-09 04:56:23', '2025-01-09 04:56:23'),
+('007', 'A2', '1736445411_ce8a89f44dfd7e3c0177.png', '2025-01-09 04:56:54', '2025-01-09 04:56:54'),
+('008', 'A5', '1736445552_7c3b409524517b78303a.webp', '2025-01-09 04:59:58', '2025-01-09 04:59:58'),
+('009', 'A5', '1736445552_02f44c589d2a5c22cdfd.jpg', '2025-01-09 04:59:58', '2025-01-09 04:59:58'),
+('010', 'A6', '1736445925_315801ab9d02f69ef3f4.png', '2025-01-09 05:05:28', '2025-01-09 05:05:28');
 
 -- --------------------------------------------------------
 
@@ -752,7 +774,14 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (534, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-07 02:33:52', 1),
 (535, '::1', 'umegahomestay', NULL, '2025-01-07 02:34:54', 0),
 (536, '::1', 'umegahomestay@gmail.com', 23, '2025-01-07 02:34:57', 1),
-(537, '::1', 'shandyka2403@gmail.com', 11, '2025-01-07 02:35:24', 1);
+(537, '::1', 'shandyka2403@gmail.com', 11, '2025-01-07 02:35:24', 1),
+(538, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-09 04:12:12', 1),
+(539, '::1', 'pokdarwis.pariangan', NULL, '2025-01-09 09:00:42', 0),
+(540, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-09 09:00:46', 1),
+(541, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-10 08:12:40', 1),
+(542, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-10 08:12:46', 1),
+(543, '::1', 'shandyka2403@gmail.com', 11, '2025-01-10 09:06:39', 1),
+(544, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-10 10:43:34', 1);
 
 -- --------------------------------------------------------
 
@@ -893,11 +922,11 @@ CREATE TABLE `culinary_place` (
 --
 
 INSERT INTO `culinary_place` (`id`, `village_id`, `name`, `address`, `employee_name`, `phone`, `open`, `close`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('C1', '1', 'Kawa Daun Tanjuang Indah', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putra', '082284978004', '09:00:00', '22:00:00', 0xe61000000103000000010000000600000042504c54fe1e5940c34e13d80286dcbf4350ac7bfe1e5940300ea234bf87dcbf44504c35ff1e59409e3268715f89dcbf43506ce6001f59408f995252e988dcbf42500c38001f5940fc6eaf18b485dcbf42504c54fe1e5940c34e13d80286dcbf, -0.44577259, 100.48435148, 'Kawa Daun Tanjung Indah merupakan sebuah cafe tradisional yang menyediakan berbagai macam makanan dan minuman. Lokasi Kawa Daun Tanjuang Indah ini sangat strategis dan memerikan pemandangan yang sangat indah.', '2024-10-25 04:34:18', '2025-01-03 23:30:49'),
-('C2', '1', 'Kawa Daun  Tanjuang Putuih', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Nasrudin', '081272053141', '09:00:00', '20:00:00', 0xe610000001030000000100000005000000e326fb26001f59402b10e9e49f85dcbfe2267bf1001f5940bd9e5f9eeb88dcbfe2261b32021f5940fb07073f9788dcbfe2263bd5021f5940d1c39026ca84dcbfe326fb26001f59402b10e9e49f85dcbf, -0.44573090, 100.48446610, 'Kawa Daun  Tanjuang Putuih merupakan cafe tradisional yang menediakan berbagai macam makanan dan minuman. Lokasi Kawa Daun Tanjuang Putuih ini sangat strategis dan memerikan pemandangan yang sangat indah.', '2024-10-25 04:38:34', '2025-01-03 23:31:02'),
-('C3', '1', 'Kawa Daun A & F', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Masril', NULL, '10:00:00', '18:00:00', 0xe61000000103000000010000000900000022318b27041f59401db8000c1f85dcbf20318b46031f5940f1b5218b8f85dcbf21316bd0021f5940cf88a6c94e86dcbf21316bd0021f5940a4f083676287dcbf2131eb6d031f594033f98184e688dcbf2131eb2f051f59406d19d024bf88dcbf21312b0e051f59406c3aff28a386dcbf21312b87041f59402877596b7385dcbf22318b27041f59401db8000c1f85dcbf, -0.44574041, 100.48461918, 'Kawa Daun A & F merupakan cafe tradisional yang menediakan berbagai makanan dan minuman. Terdapat juga ampera pada cafe ini. Cafe ini juga menyuguhkan pemandangan yang sangat indah', '2024-10-25 05:39:16', '2025-01-03 23:30:36'),
-('C4', '1', 'Kawa Daun Puncak Mortir', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hesti', NULL, '10:00:00', '20:00:00', 0xe610000001030000000100000006000000824285b9011f5940346f4dad1081dcbf8142c52c031f594014ae4def0d80dcbf81426540041f5940a14221b1217fdcbf81424505051f5940db9e9b8fe67fdcbf8142a5e3021f5940b23a204aab82dcbf824285b9011f5940346f4dad1081dcbf, -0.44536745, 100.48458085, 'Kawa Daun Puncak Mortir merupakan cafe tradisional yang menyuguhkan pemandangan yang sangat indah. Cafe ini menjual berbagai makanan dan minuman.', '2024-10-25 05:51:32', '2025-01-03 23:31:21'),
-('C5', '1', 'Puncak Kawa Gudester', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hana', '082283529664', '09:00:00', '20:00:00', 0xe6100000010300000001000000070000005d90c88b101f5940181d2855f496dcbf5e9068830f1f59405754f2af9199dcbf5e902867111f5940ca16d60c219bdcbf5d90886f121f594057ec3eafeb99dcbf5d90c8a7121f5940abc6bfb22998dcbf5d90e83c121f59407e5fdb559a96dcbf5d90c88b101f5940181d2855f496dcbf, -0.44683020, 100.48541775, 'Puncak Kawa Gudester merupakan sebuah cafe tradisional yang menyediakan berbagai macam makanan dan minuman. Cafe ini juga menyuguhkan pemandangan yang sangat indah.', '2024-10-25 06:11:07', '2025-01-03 23:31:35'),
+('C1', '1', 'Kawa Daun Tanjuang Indah', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putra', '082284978004', '09:00:00', '22:00:00', 0xe61000000103000000010000000600000042504c54fe1e5940c34e13d80286dcbf4350ac7bfe1e5940300ea234bf87dcbf44504c35ff1e59409e3268715f89dcbf43506ce6001f59408f995252e988dcbf42500c38001f5940fc6eaf18b485dcbf42504c54fe1e5940c34e13d80286dcbf, -0.44577259, 100.48435148, 'Kawa Daun Tanjung Indah is a charming traditional café offering a wide variety of food and beverages. Strategically located, this café provides breathtaking views, making it an ideal spot to relax and enjoy the scenery.', '2024-10-25 04:34:18', '2025-01-10 01:15:57'),
+('C2', '1', 'Kawa Daun  Tanjuang Putuih', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Nasrudin', '081272053141', '09:00:00', '20:00:00', 0xe610000001030000000100000005000000e326fb26001f59402b10e9e49f85dcbfe2267bf1001f5940bd9e5f9eeb88dcbfe2261b32021f5940fb07073f9788dcbfe2263bd5021f5940d1c39026ca84dcbfe326fb26001f59402b10e9e49f85dcbf, -0.44573090, 100.48446610, 'Kawa Daun Tanjuang Putuih is a traditional café that offers a wide selection of food and beverages. Conveniently located, this café boasts stunning views, making it a perfect destination for relaxation and enjoyment.', '2024-10-25 04:38:34', '2025-01-10 01:16:29'),
+('C3', '1', 'Kawa Daun A & F', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Masril', NULL, '10:00:00', '18:00:00', 0xe61000000103000000010000000900000022318b27041f59401db8000c1f85dcbf20318b46031f5940f1b5218b8f85dcbf21316bd0021f5940cf88a6c94e86dcbf21316bd0021f5940a4f083676287dcbf2131eb6d031f594033f98184e688dcbf2131eb2f051f59406d19d024bf88dcbf21312b0e051f59406c3aff28a386dcbf21312b87041f59402877596b7385dcbf22318b27041f59401db8000c1f85dcbf, -0.44574041, 100.48461918, 'Kawa Daun A & F is a traditional café offering a variety of food and beverages. The café also features an ampera dining area and showcases breathtaking views, making it an inviting spot for guests.', '2024-10-25 05:39:16', '2025-01-10 01:17:14'),
+('C4', '1', 'Kawa Daun Puncak Mortir', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hesti', NULL, '10:00:00', '20:00:00', 0xe610000001030000000100000006000000824285b9011f5940346f4dad1081dcbf8142c52c031f594014ae4def0d80dcbf81426540041f5940a14221b1217fdcbf81424505051f5940db9e9b8fe67fdcbf8142a5e3021f5940b23a204aab82dcbf824285b9011f5940346f4dad1081dcbf, -0.44536745, 100.48458085, 'Kawa Daun Puncak Mortir is a traditional café that offers stunning views. The café serves a variety of food and beverages, making it a delightful place to unwind and enjoy the scenery.', '2024-10-25 05:51:32', '2025-01-10 01:17:45'),
+('C5', '1', 'Puncak Kawa Gudester', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Hana', '082283529664', '09:00:00', '20:00:00', 0xe6100000010300000001000000070000005d90c88b101f5940181d2855f496dcbf5e9068830f1f59405754f2af9199dcbf5e902867111f5940ca16d60c219bdcbf5d90886f121f594057ec3eafeb99dcbf5d90c8a7121f5940abc6bfb22998dcbf5d90e83c121f59407e5fdb559a96dcbf5d90c88b101f5940181d2855f496dcbf, -0.44683020, 100.48541775, 'Puncak Kawa Gudester is a traditional café offering a wide range of food and beverages. It also features breathtaking views, making it a perfect spot to relax and enjoy nature\'s beauty.', '2024-10-25 06:11:07', '2025-01-10 01:18:12'),
 ('C6', '1', 'Sako Minang Cafe', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Zainul', '082122886454', '09:00:00', '18:00:00', 0xe61000000103000000010000000700000062582f14001f594036000374836cdcbf0086115f011f5940be25be27da6bdcbf008611e6011f5940417cad4bda69dcbfff85714b001f5940fefbb38e5068dcbfff859178fe1e594083abcbadc668dcbf0086119dff1e59402738c987d46bdcbf62582f14001f594036000374836cdcbf, -0.44399500, 100.48438628, 'Cafe ini menyediakan berbagai macam makanan dan minuman. Lokasi dari cafe ini diapit oleh pepohonan yang rimbun dan menyuguhi pemandangan yang indah.', '2024-10-25 06:16:41', '2024-10-25 06:16:41');
 
 -- --------------------------------------------------------
@@ -975,16 +1004,16 @@ CREATE TABLE `culinary_place_gallery` (
 INSERT INTO `culinary_place_gallery` (`id`, `culinary_place_id`, `url`, `created_at`, `updated_at`) VALUES
 ('013', 'C6', '1729880115_bcebc18c9c5b742cc42f.jpg', '2024-10-25 06:16:41', '2024-10-25 06:16:41'),
 ('014', 'C6', '1729880107_871a7281a4a1d176bf16.jpg', '2024-10-25 06:16:41', '2024-10-25 06:16:41'),
-('019', 'C3', '1735993831_01f2c4cfed2c482a2350.jpg', '2025-01-03 23:30:36', '2025-01-03 23:30:36'),
-('020', 'C3', '1735993832_76d7ce74286cd4043eb2.jpg', '2025-01-03 23:30:36', '2025-01-03 23:30:36'),
-('021', 'C1', '1735993846_82f69c1ded898f97864f.jpg', '2025-01-03 23:30:49', '2025-01-03 23:30:49'),
-('022', 'C1', '1735993846_305d9f7291c965689b2c.jpg', '2025-01-03 23:30:49', '2025-01-03 23:30:49'),
-('023', 'C2', '1735993857_c73caeb96158c9680f38.jpg', '2025-01-03 23:31:02', '2025-01-03 23:31:02'),
-('024', 'C2', '1735993858_59da8be22810767dfce0.jpg', '2025-01-03 23:31:02', '2025-01-03 23:31:02'),
-('025', 'C4', '1735993878_f07ad021d32c1ecab2eb.jpg', '2025-01-03 23:31:21', '2025-01-03 23:31:21'),
-('026', 'C4', '1735993878_22c24b0ebafa359bac63.jpg', '2025-01-03 23:31:21', '2025-01-03 23:31:21'),
-('027', 'C5', '1735993892_d6286298a7f8f5fa263b.jpg', '2025-01-03 23:31:35', '2025-01-03 23:31:35'),
-('028', 'C5', '1735993891_ef657c15234e8cb7dc1c.jpg', '2025-01-03 23:31:35', '2025-01-03 23:31:35');
+('029', 'C1', '1736518521_118d7bd6d8dd99e3590d.jpg', '2025-01-10 01:15:57', '2025-01-10 01:15:57'),
+('030', 'C1', '1736518521_166e697f9b3d239b18ea.jpg', '2025-01-10 01:15:57', '2025-01-10 01:15:57'),
+('031', 'C2', '1736518572_a3a0ad100204e1b33cfa.jpg', '2025-01-10 01:16:29', '2025-01-10 01:16:29'),
+('032', 'C2', '1736518572_ff2a7420181606d07117.jpg', '2025-01-10 01:16:29', '2025-01-10 01:16:29'),
+('033', 'C3', '1736518598_53297d5f59c7948ad905.jpg', '2025-01-10 01:17:14', '2025-01-10 01:17:14'),
+('034', 'C3', '1736518598_8bcb7efbfb17e7ad4196.jpg', '2025-01-10 01:17:14', '2025-01-10 01:17:14'),
+('035', 'C4', '1736518648_c9884e8e4f259ee67876.jpg', '2025-01-10 01:17:45', '2025-01-10 01:17:45'),
+('036', 'C4', '1736518648_fd4f369595d3ecb29cdc.jpg', '2025-01-10 01:17:45', '2025-01-10 01:17:45'),
+('037', 'C5', '1736518675_4588aa1167012bee595d.jpg', '2025-01-10 01:18:12', '2025-01-10 01:18:12'),
+('038', 'C5', '1736518675_4827bdca2875e31a172a.jpg', '2025-01-10 01:18:12', '2025-01-10 01:18:12');
 
 -- --------------------------------------------------------
 
@@ -1919,8 +1948,8 @@ CREATE TABLE `souvenir_place` (
 --
 
 INSERT INTO `souvenir_place` (`id`, `village_id`, `name`, `address`, `employee_name`, `phone`, `open`, `close`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('S1', '1', 'Galeri Seni', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putri', '085267256677', '09:00:00', '18:00:00', 0xe610000001030000000100000005000000f91c9feb981f5940b693dd870756ddbff91c9f539a1f594090ba82c8b855ddbff91c5f759a1f59400d3d9306a556ddbffa1cff3f991f594098a50586e856ddbff91c9feb981f5940b693dd870756ddbf, -0.45839325, 100.49375546, 'Galeri Seni merupakan sebuah toko souvenir di Nagari Tuo Pariangan. Galeri Seni menjual berbagai macam sovenir khas dari Nagari Tuo Pariangan.', '2024-10-25 03:51:07', '2025-01-03 23:29:23'),
-('S2', '1', 'Rumah UKM Batik Nagari Tuo Pariangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Martini', '081266124955', '21:00:00', '06:00:00', 0xe610000001030000000100000006000000bb04dbc2681f59403dbd097af00addbfbc043bf8691f59402b655f7ed408ddbfbc04fb276b1f59409c9d259ef008ddbfba04fb086c1f5940c77b3e1d6109ddbfbc041bbd6a1f5940961124b8dc0bddbfbb04dbc2681f59403dbd097af00addbf, -0.45375648, 100.49086903, 'Rumah UKM Batik Nagari Tuo Pariangan merupakan sebuah UMKM yang membuat batik khas Nagari Tuo Pariangan', '2024-10-25 04:04:07', '2025-01-03 23:29:46');
+('S1', '1', 'Galeri Seni', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Putri', '085267256677', '09:00:00', '18:00:00', 0xe610000001030000000100000005000000f91c9feb981f5940b693dd870756ddbff91c9f539a1f594090ba82c8b855ddbff91c5f759a1f59400d3d9306a556ddbffa1cff3f991f594098a50586e856ddbff91c9feb981f5940b693dd870756ddbf, -0.45839325, 100.49375546, 'Galeri Seni is a souvenir shop located in Nagari Tuo Pariangan. It offers a wide range of unique souvenirs that reflect the rich heritage of Nagari Tuo Pariangan.', '2024-10-25 03:51:07', '2025-01-10 01:18:45'),
+('S2', '1', 'Rumah UKM Batik Nagari Tuo Pariangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 'Martini', '081266124955', '21:00:00', '06:00:00', 0xe610000001030000000100000006000000bb04dbc2681f59403dbd097af00addbfbc043bf8691f59402b655f7ed408ddbfbc04fb276b1f59409c9d259ef008ddbfba04fb086c1f5940c77b3e1d6109ddbfbc041bbd6a1f5940961124b8dc0bddbfbb04dbc2681f59403dbd097af00addbf, -0.45375648, 100.49086903, 'Rumah UKM Batik Nagari Tuo Pariangan is a small business specializing in creating traditional batik unique to Nagari Tuo Pariangan. It offers a variety of distinctive batik patterns that showcase the cultural richness of Pariangan.', '2024-10-25 04:04:07', '2025-01-10 01:19:39');
 
 -- --------------------------------------------------------
 
@@ -1983,14 +2012,14 @@ CREATE TABLE `souvenir_place_gallery` (
 --
 
 INSERT INTO `souvenir_place_gallery` (`id`, `souvenir_place_id`, `url`, `created_at`, `updated_at`) VALUES
-('009', 'S1', '1735993756_46190019d36c517b2b8f.jpg', '2025-01-03 23:29:23', '2025-01-03 23:29:23'),
-('010', 'S1', '1735993758_2586c19c895efd6f3420.jpg', '2025-01-03 23:29:23', '2025-01-03 23:29:23'),
-('011', 'S1', '1735993756_0347978843eb26890757.jpg', '2025-01-03 23:29:23', '2025-01-03 23:29:23'),
-('012', 'S1', '1735993758_ae563fb1c4404b4938de.jpg', '2025-01-03 23:29:23', '2025-01-03 23:29:23'),
-('013', 'S1', '1735993760_be0bd976c2b2cf092913.jpg', '2025-01-03 23:29:23', '2025-01-03 23:29:23'),
-('014', 'S2', '1735993781_c1983c5ae3b543b6e34b.jpg', '2025-01-03 23:29:46', '2025-01-03 23:29:46'),
-('015', 'S2', '1735993781_ed553abedf956414866d.jpg', '2025-01-03 23:29:46', '2025-01-03 23:29:46'),
-('016', 'S2', '1735993783_85093794e2f726076985.jpg', '2025-01-03 23:29:46', '2025-01-03 23:29:46');
+('017', 'S1', '1736518713_0bb94d0165d062bff32d.jpg', '2025-01-10 01:18:45', '2025-01-10 01:18:45'),
+('018', 'S1', '1736518713_151743965a84e2270944.jpg', '2025-01-10 01:18:45', '2025-01-10 01:18:45'),
+('019', 'S1', '1736518713_a085e26c748369920488.jpg', '2025-01-10 01:18:45', '2025-01-10 01:18:45'),
+('020', 'S1', '1736518714_9d9d8f744c82d938754c.jpg', '2025-01-10 01:18:45', '2025-01-10 01:18:45'),
+('021', 'S1', '1736518713_0d1db409ef0555862542.jpg', '2025-01-10 01:18:45', '2025-01-10 01:18:45'),
+('022', 'S2', '1736518738_bd7481d7ede26aa9890b.jpg', '2025-01-10 01:19:39', '2025-01-10 01:19:39'),
+('023', 'S2', '1736518738_df399012aabff9994fd1.jpg', '2025-01-10 01:19:39', '2025-01-10 01:19:39'),
+('024', 'S2', '1736518738_baaf5e80ae69c2a0e729.jpg', '2025-01-10 01:19:39', '2025-01-10 01:19:39');
 
 -- --------------------------------------------------------
 
@@ -2230,8 +2259,8 @@ CREATE TABLE `worship_place` (
 --
 
 INSERT INTO `worship_place` (`id`, `village_id`, `name`, `worship_place_category`, `address`, `capacity`, `geom`, `lat`, `lng`, `description`, `created_at`, `updated_at`) VALUES
-('W1', '1', 'Masjid Ishlah', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 300, 0xe610000001030000000100000008000000aa28c5e6801f59402eac9f117654ddbfaa28c505801f59408abbe06cb956ddbfa928451c801f59406dbc2fcc0d57ddbfaa284535851f59400dbaae48b958ddbfaa28a510861f59400e89b1eccf56ddbfaa284535851f594043481f8e2156ddbfaa284519831f5940707855901355ddbfaa28c5e6801f59402eac9f117654ddbf, -0.45841019, 100.49237328, 'Masjid Islah Nagari Tuo Pariangan adalah sebuah masjid bersejarah yang terletak di Nagari Pariangan, Kabupaten Tanah Datar, Sumatera Barat. Masjid ini dikenal sebagai salah satu bangunan religius tertua di Minangkabau, dengan arsitektur tradisional yang mencerminkan nilai budaya dan keagamaan yang kuat. Dibangun dengan dominasi gaya arsitektur Minangkabau, masjid ini memiliki atap berbentuk gonjong, mirip dengan rumah adat Minangkabau (rumah gadang), yang memberikan kesan megah dan khas. Bangunan ini menggunakan material alami seperti kayu dan batu, yang menjadikannya sejalan dengan lingkungan alam sekitarnya yang asri dan indah.', '2024-10-25 03:42:41', '2025-01-03 22:00:36'),
-('W2', '1', 'Mesjid AT TAQWA Pariangan', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 250, 0xe6100000010300000001000000080000004f5e6bf6051f594064b19c518078dcbf505e4bcc041f594030bbb3cf7779dcbf505e4b45041f5940519666eda17adcbf4f5e6be8041f59406c4e670a267cdcbf505e0b18081f59409e13f8495e7cdcbf505ecb39081f59400d9f508c2e7bdcbf515e4b9c071f594069200111cf78dcbf4f5e6bf6051f594064b19c518078dcbf, -0.44497283, 100.48475636, 'Masjid At-Taqwa Pariangan adalah sebuah masjid ikonik yang berada di Nagari Pariangan, Kabupaten Tanah Datar, Sumatera Barat. Masjid ini terletak di kawasan yang terkenal sebagai salah satu desa tertua di Minangkabau, menjadikannya pusat spiritual dan sosial bagi masyarakat setempat. Meskipun tidak setua Masjid Islah, Masjid At-Taqwa tetap memiliki nilai penting dalam sejarah perkembangan Islam di Pariangan. Arsitektur masjid ini merupakan perpaduan antara desain modern dan tradisional Minangkabau. Atap masjid yang berbentuk limas dipadukan dengan ornamen khas lokal, memberikan keseimbangan antara estetika kontemporer dan nilai-nilai budaya setempat. Struktur bangunan ini dibangun dengan menggunakan bahan-bahan yang kuat dan tahan lama, serta didesain untuk menampung jamaah dalam jumlah yang cukup besar, khususnya pada saat perayaan hari-hari besar Islam.', '2024-10-25 03:44:16', '2025-01-03 22:00:52');
+('W1', '1', 'Masjid Ishlah', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 300, 0xe610000001030000000100000008000000aa28c5e6801f59402eac9f117654ddbfaa28c505801f59408abbe06cb956ddbfa928451c801f59406dbc2fcc0d57ddbfaa284535851f59400dbaae48b958ddbfaa28a510861f59400e89b1eccf56ddbfaa284535851f594043481f8e2156ddbfaa284519831f5940707855901355ddbfaa28c5e6801f59402eac9f117654ddbf, -0.45841019, 100.49237328, 'Masjid Islah Nagari Tuo Pariangan is a historic mosque located in Nagari Pariangan, Tanah Datar Regency, West Sumatra. This mosque is known as one of the oldest religious buildings in Minangkabau, with traditional architecture that reflects strong cultural and religious values. Built with a dominant Minangkabau architectural style, this mosque has a gonjong-shaped roof, similar to the Minangkabau traditional house (rumah gadang), which gives a magnificent and distinctive impression. This building uses natural materials such as wood and stone, which makes it in line with the surrounding natural environment which is beautiful and beautiful.', '2024-10-25 03:42:41', '2025-01-09 05:05:57'),
+('W2', '1', 'Mesjid AT TAQWA Pariangan', '01', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 250, 0xe6100000010300000001000000080000004f5e6bf6051f594064b19c518078dcbf505e4bcc041f594030bbb3cf7779dcbf505e4b45041f5940519666eda17adcbf4f5e6be8041f59406c4e670a267cdcbf505e0b18081f59409e13f8495e7cdcbf505ecb39081f59400d9f508c2e7bdcbf515e4b9c071f594069200111cf78dcbf4f5e6bf6051f594064b19c518078dcbf, -0.44497283, 100.48475636, 'At-Taqwa Pariangan Mosque is an iconic mosque located in Nagari Pariangan, Tanah Datar Regency, West Sumatra. The mosque is located in an area known as one of the oldest villages in Minangkabau, making it a spiritual and social center for the local community. Although not as old as the Islah Mosque, the At-Taqwa Mosque still has an important value in the history of the development of Islam in Pariangan. The architecture of this mosque is a blend of modern and traditional Minangkabau designs. The pyramid-shaped roof of the mosque is combined with local ornaments, providing a balance between contemporary aesthetics and local cultural values. The structure of this building was built using strong and durable materials, and was designed to accommodate a large number of worshipers, especially during the celebration of Islamic holidays.', '2024-10-25 03:44:16', '2025-01-09 05:06:32');
 
 -- --------------------------------------------------------
 
@@ -2315,11 +2344,11 @@ CREATE TABLE `worship_place_gallery` (
 --
 
 INSERT INTO `worship_place_gallery` (`id`, `worship_place_id`, `url`, `created_at`, `updated_at`) VALUES
-('006', 'W1', '1735988431_1aef838c9cd01c222625.jpg', '2025-01-03 22:00:36', '2025-01-03 22:00:36'),
-('007', 'W1', '1735988431_eb9dc64ab0a967c2b388.jpeg', '2025-01-03 22:00:36', '2025-01-03 22:00:36'),
-('008', 'W1', '1735988433_19fb6cff5aa58ff92a90.webp', '2025-01-03 22:00:36', '2025-01-03 22:00:36'),
-('009', 'W2', '1735988450_e77988d5f3d0253b4eaf.jpg', '2025-01-03 22:00:52', '2025-01-03 22:00:52'),
-('010', 'W2', '1735988450_ff732471df6d747457d1.jpg', '2025-01-03 22:00:52', '2025-01-03 22:00:52');
+('011', 'W1', '1736445951_679bee11bc1fd3cbee48.jpg', '2025-01-09 05:05:57', '2025-01-09 05:05:57'),
+('012', 'W1', '1736445951_dd38efdf3c742e1eaecc.jpeg', '2025-01-09 05:05:57', '2025-01-09 05:05:57'),
+('013', 'W1', '1736445953_f6bb3edfbab20a02ade9.webp', '2025-01-09 05:05:57', '2025-01-09 05:05:57'),
+('014', 'W2', '1736445968_22c16b663b1a218fdb9f.jpg', '2025-01-09 05:06:32', '2025-01-09 05:06:32'),
+('015', 'W2', '1736445968_252999ada11aa831c1bb.jpg', '2025-01-09 05:06:32', '2025-01-09 05:06:32');
 
 --
 -- Indexes for dumped tables
@@ -2329,7 +2358,8 @@ INSERT INTO `worship_place_gallery` (`id`, `worship_place_id`, `url`, `created_a
 -- Indexes for table `attraction`
 --
 ALTER TABLE `attraction`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `attraction_category` (`attraction_category`);
 
 --
 -- Indexes for table `attraction_category`
@@ -2713,7 +2743,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=538;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=545;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -2748,6 +2778,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `attraction`
+--
+ALTER TABLE `attraction`
+  ADD CONSTRAINT `attraction_ibfk_1` FOREIGN KEY (`attraction_category`) REFERENCES `attraction_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `attraction_facility_detail`

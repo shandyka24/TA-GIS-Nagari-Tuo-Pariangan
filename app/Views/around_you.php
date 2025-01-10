@@ -39,9 +39,15 @@
                 <div class="card-body">
                     <div class="sidebar-items">
                         <div class="form-check sidebar-item">
+                            <input type="checkbox" id="check-uatt" class="form-check-input">
+                            <label for="check-uatt" class="sidebar-link">
+                                <i></i><span class="text-dark fw-bold">Unique Attraction</span>
+                            </label>
+                        </div>
+                        <div class="form-check sidebar-item">
                             <input type="checkbox" id="check-att" class="form-check-input">
                             <label for="check-att" class="sidebar-link">
-                                <i></i><span class="text-dark fw-bold">Attraction</span>
+                                <i></i><span class="text-dark fw-bold">Ordinary Attraction</span>
                             </label>
                         </div>
                         <div class="form-check sidebar-item">
@@ -84,6 +90,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive overflow-auto" id="table-result-nearby">
+                        <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-uatt"></table>
                         <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-att"></table>
                         <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-hs"></table>
                         <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-cp"></table>

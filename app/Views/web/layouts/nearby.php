@@ -7,8 +7,14 @@
         <div class="card-body">
             <div class="form-check">
                 <div class="checkbox">
+                    <input type="checkbox" id="check-uatt" class="form-check-input">
+                    <label for="check-uatt">Unique Attraction</label>
+                </div>
+            </div>
+            <div class="form-check">
+                <div class="checkbox">
                     <input type="checkbox" id="check-att" class="form-check-input">
-                    <label for="check-att">Attraction</label>
+                    <label for="check-att">Ordinary Attraction</label>
                 </div>
             </div>
             <div class="form-check">
@@ -52,6 +58,8 @@
         </div>
         <div class="card-body">
             <div class="table-responsive overflow-auto" id="table-result-nearby">
+                <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-uatt">
+                </table>
                 <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-att">
                 </table>
                 <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-hs">

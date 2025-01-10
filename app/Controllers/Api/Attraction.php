@@ -52,7 +52,34 @@ class Attraction extends ResourceController
     public function index()
     {
         $attraction = array();
-        $contents = $this->attractionModel->get_list_at_api()->getResult();
+        $contents = $this->attractionModel->get_list_oat_api()->getResult();
+        foreach ($contents as $content) {
+            $list_gallery = $this->attractionGalleryModel->get_gallery_api($content->id)->getResultArray();
+            $galleries = array();
+            foreach ($list_gallery as $gallery) {
+                $galleries[] = $gallery['url'];
+            }
+            if (empty($galleries)) {
+                $content->gallery = null;
+            } else {
+                $content->gallery = $galleries[0];
+            }
+            $attraction[] = $content;
+        }
+        $response = [
+            'data' => $attraction,
+            'status' => 200,
+            'message' => [
+                "Success get list of Attraction"
+            ]
+        ];
+        return $this->respond($response);
+    }
+
+    public function uIndex()
+    {
+        $attraction = array();
+        $contents = $this->attractionModel->get_uat_api()->getResult();
         foreach ($contents as $content) {
             $list_gallery = $this->attractionGalleryModel->get_gallery_api($content->id)->getResultArray();
             $galleries = array();
@@ -97,19 +124,9 @@ class Attraction extends ResourceController
             $facilities[] = $facility['name'];
         }
 
-        // $list_ticket = $this->attractionTicketPriceModel->get_ticket_by_at_api($id)->getResultArray();
-        // $ticketPrices = array();
-        // foreach ($list_ticket as $ticket) {
-        //     $ticketPrices[] = $ticket['price'];
-        // }
-
+        
         $attraction['facilities'] = $facilities;
         $attraction['gallery'] = $galleries;
-        // if (!$list_ticket) {
-        //     $attraction['ticket_price'] = 'Free';
-        // } else {
-        //     $attraction['ticket_price'] = 'Rp ' . number_format(min($ticketPrices), 2, ',', '.') . ' - Rp ' . number_format(max($ticketPrices), 2, ',', '.');
-        // }
 
         $response = [
             'data' => $attraction,
@@ -379,7 +396,12 @@ class Attraction extends ResourceController
     public function findByRadius()
     {
         $request = $this->request->getPost();
-        $contents = $this->attractionModel->get_list_at_api()->getResultArray();
+        if ($request['category'] == '1') {
+            $contents = $this->attractionModel->get_uat_api()->getResultArray();
+        } else {
+            $contents = $this->attractionModel->get_list_oat_api()->getResultArray();
+        }
+        // $contents = $this->attractionModel->get_list_at_api()->getResultArray();
         $i = 0;
         foreach ($contents as $content) {
 
@@ -514,13 +536,31 @@ class Attraction extends ResourceController
 
     function findAll()
     {
-        $contents = $this->attractionModel->get_list_at_api()->getResult();
+        $request = $this->request->getPost();
+        if ($request['category'] == '1') {
+            $contents = $this->attractionModel->get_uat_api()->getResult();
+        } else {
+            $contents = $this->attractionModel->get_list_oat_api()->getResult();
+        }
 
         $response = [
             'data' => $contents,
             'status' => 200,
             'message' => [
                 "Success find all homestay"
+            ]
+        ];
+        return $this->respond($response);
+    }
+
+    public function getATTCat()
+    {
+        $contents = $this->attractionModel->get_list_attcat_api()->getResult();
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success get list of Owner"
             ]
         ];
         return $this->respond($response);

@@ -615,7 +615,7 @@ function routeTo(lat, lng, routeFromUser = true) {
 }
 
 // Display marker for loaded object
-function objectMarker(id, lat, lng, anim = true) {
+function objectMarker(id, lat, lng, anim = true, attcat = null) {
   const currentUrl = window.location.href;
   google.maps.event.clearListeners(map, "click");
   let pos = new google.maps.LatLng(lat, lng);
@@ -635,7 +635,11 @@ function objectMarker(id, lat, lng, anim = true) {
   } else if (id.substring(0, 1) === "L") {
     icon = baseUrl + "/media/icon/marker_pr.png";
   } else if (id.substring(0, 1) === "A") {
-    icon = baseUrl + "/media/icon/marker_at.png";
+    if (attcat === "1") {
+      icon = baseUrl + "/media/icon/marker_uat.png";
+    } else {
+      icon = baseUrl + "/media/icon/marker_at.png";
+    }
   } else if (id.substring(0, 1) === "V") {
     icon = baseUrl + "/media/icon/marker_sv.png";
   } else if (id.substring(0, 1) === "H") {
@@ -652,21 +656,21 @@ function objectMarker(id, lat, lng, anim = true) {
   if (!anim) {
     marker.setAnimation(null);
   }
-  if (currentUrl === "http://localhost:8080/web/uniqueAttraction") {
-  } else {
-    marker.addListener("click", () => {
-      infoWindow.close();
-      villageInfoWindow.close();
-      objectInfoWindow(id);
-      infoWindow.open(map, marker);
-    });
-  }
+  // if (currentUrl === "http://localhost:8080/web/uniquexAttraction") {
+  // } else {
+  // }
+  marker.addListener("click", () => {
+    infoWindow.close();
+    villageInfoWindow.close();
+    objectInfoWindow(id, attcat);
+    infoWindow.open(map, marker);
+  });
 
   markerArray[id] = marker;
 }
 
 // Display info window for loaded object
-function objectInfoWindow(id) {
+function objectInfoWindow(id, attcat = null) {
   let content = "";
   let contentButton = "";
   let contentMobile = "";
@@ -1445,11 +1449,13 @@ function checkNearby(id) {
 
   objectMarker(id, currentLat, currentLng, false);
 
+  $("#table-uatt").empty();
   $("#table-att").empty();
   $("#table-hs").empty();
   $("#table-cp").empty();
   $("#table-wp").empty();
   $("#table-sp").empty();
+  $("#table-uatt").hide();
   $("#table-att").hide();
   $("#table-hs").hide();
   $("#table-cp").hide();
@@ -1458,18 +1464,23 @@ function checkNearby(id) {
 
   let radiusValue =
     parseFloat(document.getElementById("inputRadiusNearby").value) * 100;
+  const checkUATT = document.getElementById("check-uatt").checked;
   const checkATT = document.getElementById("check-att").checked;
   const checkHS = document.getElementById("check-hs").checked;
   const checkCP = document.getElementById("check-cp").checked;
   const checkWP = document.getElementById("check-wp").checked;
   const checkSP = document.getElementById("check-sp").checked;
 
-  if (!checkATT && !checkHS && !checkCP && !checkWP && !checkSP) {
+  if (!checkUATT && !checkATT && !checkHS && !checkCP && !checkWP && !checkSP) {
     document.getElementById("radiusValueNearby").innerHTML = "0 m";
     document.getElementById("inputRadiusNearby").value = 0;
     return Swal.fire("Please choose one object");
   }
 
+  if (checkUATT) {
+    findNearby("uatt", radiusValue);
+    $("#table-uatt").show();
+  }
   if (checkATT) {
     findNearby("att", radiusValue);
     $("#table-att").show();
@@ -1480,7 +1491,7 @@ function checkNearby(id) {
   }
   if (checkCP) {
     findNearby("cp", radiusValue);
-    $("#table-cp").show(); 
+    $("#table-cp").show();
   }
   if (checkWP) {
     findNearby("wp", radiusValue);
@@ -1506,11 +1517,13 @@ function checkAround(id) {
   objectMarker(id, currentLat, currentLng, false);
   // }
 
+  $("#table-uatt").empty();
   $("#table-att").empty();
   $("#table-hs").empty();
   $("#table-cp").empty();
   $("#table-wp").empty();
   $("#table-sp").empty();
+  $("#table-uatt").hide();
   $("#table-att").hide();
   $("#table-hs").hide();
   $("#table-cp").hide();
@@ -1519,18 +1532,23 @@ function checkAround(id) {
 
   let radiusValue =
     parseFloat(document.getElementById("inputRadiusNearby").value) * 100;
+  const checkuATT = document.getElementById("check-uatt").checked;
   const checkATT = document.getElementById("check-att").checked;
   const checkHS = document.getElementById("check-hs").checked;
   const checkCP = document.getElementById("check-cp").checked;
   const checkWP = document.getElementById("check-wp").checked;
   const checkSP = document.getElementById("check-sp").checked;
 
-  if (!checkATT && !checkHS && !checkCP && !checkWP && !checkSP) {
+  if (!checkuATT && !checkATT && !checkHS && !checkCP && !checkWP && !checkSP) {
     document.getElementById("radiusValueNearby").innerHTML = "0 m";
     document.getElementById("inputRadiusNearby").value = 0;
     return Swal.fire("Please choose one object");
   }
 
+  if (checkuATT) {
+    findNearby("uatt", radiusValue);
+    $("#table-uatt").show();
+  }
   if (checkATT) {
     findNearby("att", radiusValue);
     $("#table-att").show();
@@ -1558,11 +1576,27 @@ function checkAround(id) {
 // Fetch object nearby by category
 function findNearby(category, radius) {
   let pos = new google.maps.LatLng(currentLat, currentLng);
-  if (category === "att") {
+  if (category === "uatt") {
     $.ajax({
       url: baseUrl + "/api/attraction/findByRadius",
       type: "POST",
       data: {
+        category: "1",
+        lat: currentLat,
+        long: currentLng,
+        radius: radius,
+      },
+      dataType: "json",
+      success: function (response) {
+        displayNearbyResult(category, response);
+      },
+    });
+  } else if (category === "att") {
+    $.ajax({
+      url: baseUrl + "/api/attraction/findByRadius",
+      type: "POST",
+      data: {
+        category: "2",
         lat: currentLat,
         long: currentLng,
         radius: radius,
@@ -1649,8 +1683,10 @@ function findNearby(category, radius) {
 function displayNearbyResult(category, response) {
   let data = response.data;
   let headerName;
-  if (category === "att") {
-    headerName = "Attraction";
+  if (category === "uatt") {
+    headerName = "Unique Attraction";
+  } else if (category === "att") {
+    headerName = "Ordinary Attraction";
   } else if (category === "hs") {
     headerName = "Homestay";
   } else if (category === "cp") {
@@ -1698,7 +1734,11 @@ function displayNearbyResult(category, response) {
       "</td>" +
       "</tr>";
     $("#data-" + category).append(row);
-    objectMarker(item.id, item.lat, item.lng);
+    if (category === "uatt" || category === "att") {
+      objectMarker(item.id, item.lat, item.lng, true, item.attraction_category);
+    } else {
+      objectMarker(item.id, item.lat, item.lng);
+    }
   }
 }
 
@@ -1707,181 +1747,14 @@ function infoModal(id) {
   let title, content;
   if (id.substring(0, 1) === "C") {
     window.open(baseUrl + "/web/culinaryPlace/" + id, "_blank");
-    // $.ajax({
-    //   url: baseUrl + "/api/culinaryPlace/" + id,
-    //   dataType: "json",
-    //   success: function (response) {
-    //     let item = response.data;
-    //     let open = item.open.substring(0, item.open.length - 3);
-    //     let close = item.close.substring(0, item.close.length - 3);
-
-    //     title = "<h3>" + item.name + "</h3>";
-    //     content =
-    //       '<div class="text-start">' +
-    //       '<p><span class="fw-bold">Address</span>: ' +
-    //       item.address +
-    //       "</p>" +
-    //       '<p><span class="fw-bold">Open</span>: ' +
-    //       open +
-    //       " - " +
-    //       close +
-    //       " WIB</p>" +
-    //       '<p><span class="fw-bold">Contact Person:</span> ' +
-    //       (item.phone ? item.phone : "-") +
-    //       "</p>" +
-    //       '<p><span class="fw-bold">Employee</span>: ' +
-    //       (item.employee_name ? item.employee_name : "-") +
-    //       item.gallery +
-    //       "</p>" +
-    //       "</div>" +
-    //       '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">' +
-    //       '<ol class="carousel-indicators">' +
-    //       '<li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>' +
-    //       '</ol><div class="carousel-inner">' +
-    //       '<div class="carousel-item active">' +
-    //       '<img src="/media/photos/' +
-    //       item.gallery[0] +
-    //       '" alt="' +
-    //       item.name +
-    //       '" class="w-50" alt="' +
-    //       item.name +
-    //       '">' +
-    //       "</div></div>" +
-    //       '<a style="color: #000" class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">\n' +
-    //       '<i class="fa-solid fa-angle-left" aria-hidden="true"></i>' +
-    //       '<span class="visually-hidden">Previous</span>' +
-    //       " </a>" +
-    //       '<a style="color: #000" class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">' +
-    //       '<i class="fa-solid fa-angle-right" aria-hidden="true"></i>' +
-    //       '<span class="visually-hidden">Next</span>' +
-    //       "</a>" +
-    //       "</div>";
-
-    //     Swal.fire({
-    //       title: title,
-    //       html: content,
-    //       width: "50%",
-    //       position: "top",
-    //     });
-    //   },
-    // });
+  } else if (id.substring(0, 1) === "H") {
+    window.open(baseUrl + "/web/homestay/" + id, "_blank");
+  } else if (id.substring(0, 1) === "A") {
+    window.open(baseUrl + "/web/attraction/" + id, "_blank");
   } else if (id.substring(0, 1) === "W") {
     window.open(baseUrl + "/web/worshipPlace/" + id, "_blank");
-    // $.ajax({
-    //   url: baseUrl + "/api/worshipPlace/" + id,
-    //   dataType: "json",
-    //   success: function (response) {
-    //     let item = response.data;
-
-    //     title = "<h3>" + item.name + "</h3>";
-    //     content =
-    //       '<div class="text-start">' +
-    //       '<p><span class="fw-bold">Address</span>: ' +
-    //       item.address +
-    //       "</p>" +
-    //       '<p><span class="fw-bold">Park Area :</span> ' +
-    //       item.park_area_size +
-    //       " m<sup>2</sup></p>" +
-    //       '<p><span class="fw-bold">Building Area</span>: ' +
-    //       item.building_size +
-    //       " m<sup>2</sup></p>" +
-    //       '<p><span class="fw-bold">Capacity</span>: ' +
-    //       item.capacity +
-    //       "</p>" +
-    //       '<p><span class="fw-bold">Last Renovation</span>: ' +
-    //       item.last_renovation +
-    //       "</p>" +
-    //       "</div>" +
-    //       '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">' +
-    //       '<ol class="carousel-indicators">' +
-    //       '<li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>' +
-    //       '</ol><div class="carousel-inner">' +
-    //       '<div class="carousel-item active">' +
-    //       '<img src="/media/photos/' +
-    //       item.gallery[0] +
-    //       '" alt="' +
-    //       item.name +
-    //       '" class="w-50" alt="' +
-    //       item.name +
-    //       '">' +
-    //       "</div></div>" +
-    //       '<a style="color: #000" class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">\n' +
-    //       '<i class="fa-solid fa-angle-left" aria-hidden="true"></i>' +
-    //       '<span class="visually-hidden">Previous</span>' +
-    //       " </a>" +
-    //       '<a style="color: #000" class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">' +
-    //       '<i class="fa-solid fa-angle-right" aria-hidden="true"></i>' +
-    //       '<span class="visually-hidden">Next</span>' +
-    //       "</a>" +
-    //       "</div>";
-
-    //     Swal.fire({
-    //       title: title,
-    //       html: content,
-    //       width: "50%",
-    //       position: "top",
-    //     });
-    //   },
-    // });
   } else if (id.substring(0, 1) === "S") {
     window.open(baseUrl + "/web/souvenirPlace/" + id, "_blank");
-    // $.ajax({
-    //   url: baseUrl + "/api/souvenirPlace/" + id,
-    //   dataType: "json",
-    //   success: function (response) {
-    //     let item = response.data;
-    //     let open = item.open.substring(0, item.open.length - 3);
-    //     let close = item.close.substring(0, item.close.length - 3);
-
-    //     title = "<h3>" + item.name + "</h3>";
-    //     content =
-    //       '<div class="text-start">' +
-    //       '<p><span class="fw-bold">Address</span>: ' +
-    //       item.address +
-    //       "</p>" +
-    //       '<p><span class="fw-bold">Contact Person :</span> ' +
-    //       item.contact_person +
-    //       "</p>" +
-    //       '<p><span class="fw-bold">Employee</span>: ' +
-    //       item.employee +
-    //       "</p>" +
-    //       '<p><span class="fw-bold">Open</span>: ' +
-    //       open +
-    //       " - " +
-    //       close +
-    //       " WIB</p>" +
-    //       "</div>" +
-    //       '<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">' +
-    //       '<ol class="carousel-indicators">' +
-    //       '<li data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>' +
-    //       '</ol><div class="carousel-inner">' +
-    //       '<div class="carousel-item active">' +
-    //       '<img src="/media/photos/' +
-    //       item.gallery[0] +
-    //       '" alt="' +
-    //       item.name +
-    //       '" class="w-50" alt="' +
-    //       item.name +
-    //       '">' +
-    //       "</div></div>" +
-    //       '<a style="color: #000" class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">\n' +
-    //       '<i class="fa-solid fa-angle-left" aria-hidden="true"></i>' +
-    //       '<span class="visually-hidden">Previous</span>' +
-    //       " </a>" +
-    //       '<a style="color: #000" class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">' +
-    //       '<i class="fa-solid fa-angle-right" aria-hidden="true"></i>' +
-    //       '<span class="visually-hidden">Next</span>' +
-    //       "</a>" +
-    //       "</div>";
-
-    //     Swal.fire({
-    //       title: title,
-    //       html: content,
-    //       width: "50%",
-    //       position: "top",
-    //     });
-    //   },
-    // });
   } else if (id.substring(0, 1) === "V") {
     window.open(baseUrl + "/web/serviceProvider/" + id, "_blank");
   }
@@ -3033,6 +2906,33 @@ function getVillageGeom(id_village) {
 }
 
 // Get list of Worship Place Category
+function getListATTCat(cat_id) {
+  let cats;
+  $("#catSelect").empty();
+  $.ajax({
+    url: baseUrl + "/api/aTTCat",
+    dataType: "json",
+    success: function (response) {
+      let data = response.data;
+      console.log(data);
+      for (i in data) {
+        let item = data[i];
+        if (item.id == cat_id) {
+          cats =
+            '<option value="' +
+            item.id +
+            '" selected>' +
+            item.name +
+            "</option>";
+        } else {
+          cats = '<option value="' + item.id + '">' + item.name + "</option>";
+        }
+        $("#catSelect").append(cats);
+      }
+    },
+  });
+}
+
 function getListWPCat(cat_id) {
   let cats;
   $("#catSelect").empty();
@@ -4610,14 +4510,17 @@ function allObject() {
   clearCarMarkers();
   clearOverlay();
   objectMarker("L", -0.4556825246682917, 100.49283664396526);
-  $("#table-attraction").show();
-  $("#table-homestay").show();
+  $("#table-uAttraction").show();
+  $("#table-Attraction").show();
+  $("#table-Homestay").show();
   $("#table-Culinary").show();
   $("#table-Souvenir").show();
   $("#table-Worship").show();
   $("#result-explore-col").show();
   // displayFoundObject(response);
   // boundToObject();
+  const checkuAttraction = document.getElementById("checkuAttraction");
+  checkuAttraction.checked = true;
   const checkAttraction = document.getElementById("checkAttraction");
   checkAttraction.checked = true;
   const checkHomestay = document.getElementById("checkHomestay");
@@ -4662,6 +4565,7 @@ function checkObject() {
   google.maps.event.clearListeners(map, "click");
 
   // Sembunyikan semua tabel
+  $("#table-uAttraction").empty().hide();
   $("#table-Attraction").empty().hide();
   $("#table-Homestay").empty().hide();
   $("#table-Culinary").empty().hide();
@@ -4673,6 +4577,10 @@ function checkObject() {
 
   // Periksa status setiap checkbox
 
+  if (document.getElementById("checkuAttraction").checked) {
+    findAll("uAttraction");
+    $("#table-uAttraction").show();
+  }
   if (document.getElementById("checkAttraction").checked) {
     findAll("Attraction");
     $("#table-Attraction").show();
@@ -4713,11 +4621,26 @@ function checkObject() {
 
 function findAll(category) {
   // let pos = new google.maps.LatLng(currentLat, currentLng);
-  if (category === "Attraction") {
+  if (category === "uAttraction") {
     $.ajax({
       url: baseUrl + "/api/attraction/findAll",
       type: "POST",
-      data: {},
+      data: {
+        category: "1",
+      },
+      dataType: "json",
+      success: function (response) {
+        displayExploreResult(category, response);
+        boundToObject();
+      },
+    });
+  } else if (category === "Attraction") {
+    $.ajax({
+      url: baseUrl + "/api/attraction/findAll",
+      type: "POST",
+      data: {
+        category: "2",
+      },
       dataType: "json",
       success: function (response) {
         displayExploreResult(category, response);
@@ -4774,7 +4697,9 @@ function findAll(category) {
     let data = response.data;
     let headerName;
     if (category === "Attraction") {
-      headerName = "Attraction";
+      headerName = "Ordinary Attraction";
+    } else if (category === "uAttraction") {
+      headerName = "Unique Attraction";
     } else if (category === "Culinary") {
       headerName = "Culinary Place";
     } else if (category === "Homestay") {
@@ -4812,7 +4737,17 @@ function findAll(category) {
         "</center></td>" +
         "</tr>";
       $("#data-" + category).append(row);
-      objectMarker(item.id, item.lat, item.lng);
+      if (category === "uAttraction" || category === "Attraction") {
+        objectMarker(
+          item.id,
+          item.lat,
+          item.lng,
+          true,
+          item.attraction_category
+        );
+      } else {
+        objectMarker(item.id, item.lat, item.lng);
+      }
     }
   }
 }

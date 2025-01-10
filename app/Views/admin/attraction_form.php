@@ -42,6 +42,14 @@ $edit = in_array('edit', $uri);
                                 <label for="name" class="mb-2">Attraction Name</label>
                                 <input type="text" id="name" class="form-control" name="name" placeholder="Attraction Name" value="<?= ($edit) ? $data['name'] : old('name'); ?>" required>
                             </div>
+                            <fieldset class="form-group mb-4">
+                                <script>
+                                    getListATTCat('<?= ($edit) ? esc($data['attraction_category']) : ''; ?>');
+                                </script>
+                                <label for="catSelect" class="mb-2">Attraction Category</label>
+                                <select class="form-select" id="catSelect" name="attraction_category" required>
+                                </select>
+                            </fieldset>
                             <div class="form-group mb-4">
                                 <label for="address" class="mb-2">Address</label>
                                 <input type="text" id="address" class="form-control" name="address" placeholder="Address" value="<?= ($edit) ? $data['address'] : old('address'); ?>">
@@ -180,7 +188,7 @@ $edit = in_array('edit', $uri);
     function checkRequired(event) {
         if (!$('#geo-json').val()) {
             event.preventDefault();
-            Swal.fire('Please select location for the New Rumah Gadang');
+            Swal.fire('Please select location for the New Attraction');
         }
     }
 </script>

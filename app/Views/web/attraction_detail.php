@@ -102,7 +102,7 @@
                     digitObject("<?= esc(json_encode($data['geoJson'])); ?>");
                 </script>
                 <script>
-                    objectMarker("<?= esc($data['id']); ?>", <?= esc($data['lat']); ?>, <?= esc($data['lng']); ?>);
+                    objectMarker("<?= esc($data['id']); ?>", <?= esc($data['lat']); ?>, <?= esc($data['lng']); ?>, true, "<?= esc($data['attraction_category']); ?>");
                 </script>
             </div>
 

@@ -157,6 +157,10 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive overflow-auto" id="table-result-nearby">
+                        <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-uAttraction">
+                        </table>
+                        <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Attraction">
+                        </table>
                         <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Homestay">
                         </table>
                         <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Culinary">

@@ -29,21 +29,29 @@ class AttractionModel extends Model
     public function get_list_oat_api()
     {
         // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
-        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.price,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description";
+        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.price,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description,{$this->table}.attraction_category";
+        $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
         // $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
-            ->select("{$columns}, attraction.lat, attraction.lng")
+            ->select("{$columns}, attraction.lat, attraction.lng, {$geoJson}")
             // ->from('village')
             // ->where($vilGeom)
-            // ->where('status', 'Ordinary')
+            ->where('attraction_category', '2')
             ->get();
         return $query;
     }
+
     public function get_uat_api()
     {
+         // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
+        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.price,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description,{$this->table}.attraction_category";
+        $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
+        // $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
         $query = $this->db->table($this->table)
-            ->select("*")
-            ->where('status', 'Unique')
+            ->select("{$columns}, attraction.lat, attraction.lng, {$geoJson}")
+            // ->from('village')
+            // ->where($vilGeom)
+            ->where('attraction_category', '1')
             ->get();
         return $query;
     }
@@ -71,7 +79,7 @@ class AttractionModel extends Model
     public function get_at_by_id_api($id = null)
     {
         // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
-        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description,{$this->table}.video_url,{$this->table}.price";
+        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description,{$this->table}.video_url,{$this->table}.price,{$this->table}.attraction_category";
         $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
         $query = $this->db->table($this->table)
             ->select("{$columns}, attraction.lat, attraction.lng, {$geoJson}")
@@ -174,6 +182,13 @@ class AttractionModel extends Model
             ->select('id AS id_object, name AS object_name, price_for_package')
             ->whereNotIN('id', $id)
             ->orderBy('object_name', 'ASC')
+            ->get();
+        return $query;
+    }
+
+    public function get_list_attcat_api(){
+        $query = $this->db->table('attraction_category')
+            ->select('id, name')
             ->get();
         return $query;
     }

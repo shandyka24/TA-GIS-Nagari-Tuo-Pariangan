@@ -121,7 +121,7 @@
                 <div class="col-lg-6 p-0 wow fadeIn" data-wow-delay="0.1s">
                     <div class="header-bg h-100 d-flex flex-column justify-content-center p-5" style="background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url(media/photos/<?= $gallery[array_rand($gallery)]; ?>) center center no-repeat; background-size: cover;">
                         <h2 class="display-6 text-light mb-2">
-                            Welcome to 
+                            Welcome to
                         </h2>
                         <h1 class="display-4 text-light mb-5">
                             <?= $village['name']; ?>
@@ -172,7 +172,9 @@
             <div class="container">
                 <div class="row p-5">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <p><span class="text-primary me-2">#</span>Welcome To Tourism Village </p>
+                        <p><span class="text-primary me-2">#</span>Welcome To <span>
+                                <?= $village['name']; ?>
+                            </span></p>
                         <h1 class="display-5 mb-4">
                             Why You Should Visit
                             <span class="text-primary">
@@ -182,6 +184,16 @@
                         <p class="mb-4">
                             <?= $village['description']; ?>
                         </p>
+                        <h5 class="mb-3">
+                            <a href="#map" class="text-reset" onclick="showMap('uat');">
+                                <i class="far fa-check-circle text-primary me-3"></i>Unique Attraction
+                            </a>
+                        </h5>
+                        <h5 class="mb-3">
+                            <a href="#map" class="text-reset" onclick="showMap('at');">
+                                <i class="far fa-check-circle text-primary me-3"></i>Ordinary Attraction
+                            </a>
+                        </h5>
                         <h5 class="mb-3">
                             <a href="#map" class="text-reset" onclick="showMap('hs');">
                                 <i class="far fa-check-circle text-primary me-3"></i>Homestay
@@ -234,11 +246,20 @@
         <div class="container-xxl bg-primary facts my-5 py-5 wow fadeInUp" data-wow-delay="0.1s" id="award">
             <div class="container py-5">
                 <div class="row g-4">
-                    <center>
+                    <center style="display: flex; justify-content: center;">
                         <div class="col-md-12 col-lg-6 text-center wow fadeIn" data-wow-delay="0.1s">
                             <img src="media/photos/landing-page/trophy.png" alt="" style="filter: invert(100%); max-width: 4em" class="mb-3">
-                            <!-- <h1 class="text-white mb-2" data-toggle="counter-up">50</h1> -->
-                            <p class="text-white mb-0">UNESCO GLOBAL GEOPARK</p>
+                            <p class="text-white mb-0">WON</p>
+                            <h1 class="text-white mb-2">
+                                1<sup>st</sup>
+                            </h1>
+                            <p class="text-white mb-0">Developing Tourist Village Category</p>
+                            <p class="text-white mb-0">ADWI 2022</p>
+                        </div>
+                        <div class="col-md-6 col-lg-6 text-center">
+                            <img src="media/photos/landing-page/rumah-gadang.png" alt="" style="filter: invert(100%); max-width: 5em">
+                            <h1 class="text-white mb-2" data-toggle="counter-up">3</h1>
+                            <p class="text-white mb-0">Unique Atraction</p>
                         </div>
                     </center>
 
@@ -409,6 +430,8 @@
             clearRoute();
             if (category == 'rg') {
                 URI = URI + '/rumahGadang'
+            } else if (category == 'uat') {
+                URI = URI + '/uAttraction'
             } else if (category == 'at') {
                 URI = URI + '/attraction'
             } else if (category == 'hs') {
@@ -434,7 +457,11 @@
                     for (i in data) {
                         let item = data[i];
                         currentUrl = currentUrl + item.id;
-                        objectMarker(item.id, item.lat, item.lng);
+                        if (item.id.substring(0, 1) === "A"){
+                            objectMarker(item.id, item.lat, item.lng, true, item.attraction_category);
+                        } else {
+                            objectMarker(item.id, item.lat, item.lng);
+                        }
                     }
                     boundToObject();
 

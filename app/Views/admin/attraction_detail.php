@@ -47,6 +47,10 @@
                                         <td><?= esc($data['name']); ?></td>
                                     </tr>
                                     <tr>
+                                        <td class="fw-bold">Category</td>
+                                        <td><?= ($data['attraction_category'] == '1') ? 'Unique' : 'Ordinary'; ?></td>
+                                    </tr>
+                                    <tr>
                                         <td class="fw-bold">Address</td>
                                         <td><?= esc($data['address']); ?></td>
                                     </tr>
@@ -186,7 +190,7 @@
                     digitObject("<?= esc(json_encode($data['geoJson'])); ?>");
                 </script>
                 <script>
-                    objectMarker("<?= esc($data['id']); ?>", <?= esc($data['lat']); ?>, <?= esc($data['lng']); ?>);
+                    objectMarker("<?= esc($data['id']); ?>", <?= esc($data['lat']); ?>, <?= esc($data['lng']); ?>, true, "<?= esc($data['attraction_category']); ?>");
                     map.setZoom(16);
                 </script>
             </div>

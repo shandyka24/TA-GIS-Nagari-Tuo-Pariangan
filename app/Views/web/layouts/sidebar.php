@@ -47,9 +47,16 @@ $uri3 = $uri[3] ?? '';
                     </li>
 
                     <!-- Attraction -->
+                    <li class="sidebar-item <?= ($uri1 == 'uniqueAttraction') ? 'active' : '' ?>">
+                        <a href="/web/uniqueAttraction" class="sidebar-link">
+                            <i class="fa-solid fa-star"></i><span class="text-dark fw-bold">Unique Attraction</span>
+                        </a>
+                    </li>
+
+                    <!-- Attraction -->
                     <li class="sidebar-item <?= ($uri1 == 'attraction') ? 'active' : '' ?>">
                         <a href="/web/attraction" class="sidebar-link">
-                            <i class="fa-solid fa-signs-post"></i><span class="text-dark fw-bold">Attraction</span>
+                            <i class="fa-solid fa-signs-post"></i><span class="text-dark fw-bold">Ordinary Attraction</span>
                         </a>
                     </li>
 

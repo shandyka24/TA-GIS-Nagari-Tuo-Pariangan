@@ -291,7 +291,9 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
     $routes->post('homestay/findByFacility', 'Homestay::findByFacility');
     $routes->post('homestay/findByUnit', 'Homestay::findByUnit');
     $routes->post('homestay/findByCategory', 'Homestay::findByCategory');
+    $routes->get('uAttraction', 'Attraction::uIndex');
     $routes->resource('attraction');
+    $routes->post('attraction/get/(:segment)', 'Attraction::show');
     $routes->post('attraction/findByRadius', 'Attraction::findByRadius');
     $routes->post('attraction/findByName', 'Attraction::findByName');
     $routes->get('attractionFacility', 'Attraction::getFacility');
@@ -350,6 +352,7 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
     $routes->post('profile', 'Profile::profile');
     $routes->get('logout', 'Profile::logout');
 
+    $routes->get('aTTCat', 'Attraction::getATTCat');
     $routes->get('wPCat', 'WorshipPlace::getWPCat');
     $routes->get('selectVillage', 'Village::selectVillage');
     $routes->get('proList/(:segment)', 'souvenirPlace::proList/$1');

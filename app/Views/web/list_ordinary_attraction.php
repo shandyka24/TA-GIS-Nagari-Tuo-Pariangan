@@ -33,6 +33,7 @@
                                     clearMarker();
                                     clearRadius();
                                     clearRoute();
+                                    digitTourismVillage();
                                 </script>
                                 <table class="table table-hover mb-0 table-lg text-dark">
                                     <thead>
@@ -48,7 +49,7 @@
                                             <?php foreach ($data as $item) : ?>
                                                 <tr>
                                                     <script>
-                                                        objectMarker("<?= esc($item['id']); ?>", <?= esc($item['lat']); ?>, <?= esc($item['lng']); ?>);
+                                                        objectMarker("<?= esc($item['id']); ?>", <?= esc($item['lat']); ?>, <?= esc($item['lng']); ?>, true, "<?= esc($item['attraction_category']); ?>");
                                                     </script>
                                                     <td><?= esc($i); ?></td>
                                                     <td class="fw-bold"><?= esc($item['name']); ?></td>

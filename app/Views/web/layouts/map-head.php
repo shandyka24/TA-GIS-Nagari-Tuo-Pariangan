@@ -77,6 +77,10 @@
             </button>
             <ul class="dropdown-menu p-2">
                 <li class="form-check">
+                    <input class="form-check-input" type="checkbox" id="checkuAttraction" value="Attraction" onchange="checkObject()">
+                    <label class="form-check-label" for="checkuAttraction">Unique Attraction</label>
+                </li>
+                <li class="form-check">
                     <input class="form-check-input" type="checkbox" id="checkAttraction" value="Attraction" onchange="checkObject()">
                     <label class="form-check-label" for="checkAttraction">Attraction</label>
                 </li>

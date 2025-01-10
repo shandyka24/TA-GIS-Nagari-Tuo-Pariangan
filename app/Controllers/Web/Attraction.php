@@ -158,6 +158,7 @@ class Attraction extends ResourcePresenter
         $requestData = [
             'id' => $id,
             'name' => $request['name'],
+            'attraction_category' => $request['attraction_category'],
             'address' => $request['address'],
             'open' => $request['open'],
             'close' => $request['close'],
@@ -264,6 +265,7 @@ class Attraction extends ResourcePresenter
         $request = $this->request->getPost();
         $requestData = [
             'name' => $request['name'],
+            'attraction_category' => $request['attraction_category'],
             'address' => $request['address'],
             'open' => $request['open'],
             'close' => $request['close'],
@@ -555,23 +557,15 @@ class Attraction extends ResourcePresenter
             return $this->failNotFound($response);
         }
     }
+
     public function uniqueAttraction()
     {
-        $uniqueAttraction = $this->attractionModel->get_uat_api()->getRowArray();
-        $list_gallery = $this->attractionGalleryModel->get_gallery_api($uniqueAttraction['id'])->getResultArray();
-        $uniqueAttraction['id_ta'] = $uniqueAttraction['id'];
-        unset($uniqueAttraction['id']);
-        $galleries = array();
-        foreach ($list_gallery as $gallery) {
-            $galleries[] = $gallery['url'];
-        }
-        $uniqueAttraction['gallery'] = $galleries;
-
+        $contents = $this->attractionModel->get_uat_api()->getResultArray();
         $data = [
             'title' => 'Unique Attraction',
-            'data' => $uniqueAttraction,
+            'data' => $contents,
         ];
 
-        return view('web/unique_attraction', $data);
+        return view('web/list_ordinary_attraction', $data);
     }
 }
