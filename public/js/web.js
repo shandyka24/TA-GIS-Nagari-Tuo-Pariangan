@@ -4607,6 +4607,7 @@ function checkObject() {
 
   // Tampilkan kolom hasil pencarian
   if (
+    document.getElementById("checkuAttraction").checked ||
     document.getElementById("checkAttraction").checked ||
     document.getElementById("checkHomestay").checked ||
     document.getElementById("checkCulinary").checked ||

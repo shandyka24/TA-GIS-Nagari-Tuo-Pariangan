@@ -42,12 +42,12 @@
                                         <td class="fw-bold">Close</td>
                                         <td><?= date('H:i', strtotime(esc($data['close']))) . ' WIB'; ?></td>
                                     </tr>
-                                    <!-- <tr>
+                                    <tr>
                                         <td class="fw-bold">Ticket Price</td>
-                                        <td><?php
-                                            // 'Rp ' . number_format(esc($data['ticket_price']), 0, ',', '.'); 
+                                        <td><?=
+                                            'Rp ' . number_format(esc($data['ticket_price']), 0, ',', '.'); 
                                             ?></td>
-                                    </tr> -->
+                                    </tr>
                                     <tr>
                                         <td class="fw-bold">Contact Person</td>
                                         <td><?= esc($data['phone']);

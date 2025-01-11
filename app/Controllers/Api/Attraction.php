@@ -111,7 +111,7 @@ class Attraction extends ResourceController
     public function show($id = null)
     {
         $attraction = $this->attractionModel->get_at_by_id_api($id)->getRowArray();
-
+        $attraction['price'] = 'Rp ' . number_format($attraction['price'], 0, ',', '.');
         $list_gallery = $this->attractionGalleryModel->get_gallery_api($id)->getResultArray();
         $galleries = array();
         foreach ($list_gallery as $gallery) {
@@ -163,7 +163,7 @@ class Attraction extends ResourceController
             'address' => $request['address'],
             'open' => $request['open'],
             'close' => $request['close'],
-            'ticket_price' => $request['ticket_price'],
+            'price' => $request['price'],
             'contact_person' => $request['contact_person'],
             'status' => $request['status'],
             'recom' => $request['recom'],
@@ -227,7 +227,7 @@ class Attraction extends ResourceController
             'address' => $request['address'],
             'open' => $request['open'],
             'close' => $request['close'],
-            'ticket_price' => $request['ticket_price'],
+            'price' => $request['price'],
             'contact_person' => $request['contact_person'],
             'status' => $request['status'],
             'recom' => $request['recom'],

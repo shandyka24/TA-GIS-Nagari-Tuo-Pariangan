@@ -61,7 +61,7 @@
                                     </tr>
                                     <tr>
                                         <td class="fw-bold">Price</td>
-                                        <td><?= esc($data['price']); ?></td>
+                                        <td>Rp <?= number_format(esc($data['price']), 0, ',', '.'); ?></td>
                                     </tr>
                                     <tr>
                                         <td class="fw-bold" colspan="3">Description</td>

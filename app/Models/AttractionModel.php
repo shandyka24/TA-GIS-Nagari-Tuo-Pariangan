@@ -43,7 +43,7 @@ class AttractionModel extends Model
 
     public function get_uat_api()
     {
-         // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
+        // $coords = "ST_Y(ST_Centroid({$this->table}.geom)) AS lat, ST_X(ST_Centroid({$this->table}.geom)) AS lng";
         $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.price,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description,{$this->table}.attraction_category";
         $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
         // $vilGeom = "village.id = '1' AND ST_Contains(village.geom, {$this->table}.geom)";
@@ -160,6 +160,7 @@ class AttractionModel extends Model
 
     public function update_at_api($id = null, $attraction = null, $geojson = null)
     {
+        // dd($attraction);
         foreach ($attraction as $key => $value) {
             if (empty($value)) {
                 unset($attraction[$key]);
@@ -173,7 +174,14 @@ class AttractionModel extends Model
             ->set('geom', "ST_GeomFromGeoJSON('{$geojson}')", false)
             ->where('id', $id)
             ->update();
-        return $query && $update;
+        
+        if (!isset ($attraction['price'])) {
+            $update = $this->db->table($this->table)
+            ->set('price', '0')
+            ->where('id', $id)
+            ->update();
+        }
+            return $query && $update;
     }
     public function get_att_for_package($id = null)
     {
@@ -186,7 +194,8 @@ class AttractionModel extends Model
         return $query;
     }
 
-    public function get_list_attcat_api(){
+    public function get_list_attcat_api()
+    {
         $query = $this->db->table('attraction_category')
             ->select('id, name')
             ->get();

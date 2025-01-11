@@ -103,7 +103,7 @@ $uri3 = $uri[3] ?? '';
 
                     <!-- Manage Homestay -->
                     <?php if (in_groups(['admin'])) : ?>
-                        <li class="sidebar-item <?= ($uri1 == 'homestay') ? 'active' : '' ?> has-sub">
+                        <li class="sidebar-item <?= ($uri1 == 'homestay') ? 'active' : '' ?><?= ($uri1 == 'facilityHomestay') ? 'active' : '' ?><?= ($uri1 == 'facilityUnit') ? 'active' : '' ?> has-sub">
                             <a href="<?= base_url('dashboard/homestay/manage'); ?>" class="sidebar-link">
                                 <i class="fa-solid fa-bed"></i><span class="text-dark fw-bold"> Homestay</span>
                             </a>
@@ -126,11 +126,11 @@ $uri3 = $uri[3] ?? '';
 
                     <!-- Manage Souvenir Place -->
                     <?php if (in_groups(['admin'])) : ?>
-                        <li class="sidebar-item <?= ($uri1 == 'culinarysouvenirPlace') ? 'active' : '' ?> has-sub">
+                        <li class="sidebar-item <?= ($uri1 == 'souvenirPlace') ? 'active' : '' ?><?= ($uri1 == 'facilitySouvenirPlace') ? 'active' : '' ?> has-sub">
                             <a href="" class="sidebar-link">
                                 <i class="fa-solid fa-bag-shopping"></i><span class="text-dark fw-bold"> Souvenir Place</span>
                             </a>
-                            <ul class="submenu <?= ($uri1 == 'souvenirPlace') ? 'active' : '' ?>">
+                            <ul class="submenu <?= ($uri1 == 'souvenirPlace') ? 'active' : '' ?><?= ($uri1 == 'facilitySouvenirPlace') ? 'active' : '' ?>">
                                 <!-- Manage Souvenir Place -->
                                 <li class="submenu-item" id="mg-sp">
                                     <a href="<?= base_url('dashboard/souvenirPlace'); ?>"><i class="fa-solid fa-list me-3"></i>List</a>
@@ -149,11 +149,11 @@ $uri3 = $uri[3] ?? '';
 
                     <!-- Manage Culinary Place -->
                     <?php if (in_groups(['admin'])) : ?>
-                        <li class="sidebar-item <?= ($uri1 == 'culinaryPlace') ? 'active' : '' ?> has-sub">
+                        <li class="sidebar-item <?= ($uri1 == 'culinaryPlace') ? 'active' : '' ?><?= ($uri1 == 'facilityCulinaryPlace') ? 'active' : '' ?> has-sub">
                             <a href="" class="sidebar-link">
                                 <i class="fa-solid fa-mortar-pestle"></i><span class="text-dark fw-bold"> Culinary Place</span>
                             </a>
-                            <ul class="submenu <?= ($uri1 == 'culinaryPlace') ? 'active' : '' ?>">
+                            <ul class="submenu <?= ($uri1 == 'culinaryPlace') ? 'active' : '' ?><?= ($uri1 == 'facilityCulinaryPlace') ? 'active' : '' ?>">
                                 <!-- Manage Souvenir Place -->
                                 <li class="submenu-item" id="mg-sp">
                                     <a href="<?= base_url('dashboard/culinaryPlace'); ?>"><i class="fa-solid fa-list me-3"></i>List</a>
@@ -172,11 +172,11 @@ $uri3 = $uri[3] ?? '';
 
                     <!-- Manage Worship Place -->
                     <?php if (in_groups(['admin'])) : ?>
-                        <li class="sidebar-item <?= ($uri1 == 'worshipPlace') ? 'active' : '' ?> has-sub">
+                        <li class="sidebar-item <?= ($uri1 == 'worshipPlace') ? 'active' : '' ?><?= ($uri1 == 'facilityWorshipPlace') ? 'active' : '' ?> has-sub">
                             <a href="" class="sidebar-link">
                                 <i class="fa-solid fa-place-of-worship"></i><span class="text-dark fw-bold"> Worship Place</span>
                             </a>
-                            <ul class="submenu <?= ($uri1 == 'worshipPlace') ? 'active' : '' ?>">
+                            <ul class="submenu <?= ($uri1 == 'worshipPlace') ? 'active' : '' ?><?= ($uri1 == 'facilityWorshipPlace') ? 'active' : '' ?>">
                                 <!-- Manage Worship Place -->
                                 <li class="submenu-item" id="mg-sp">
                                     <a href="<?= base_url('dashboard/worshipPlace'); ?>"><i class="fa-solid fa-list me-3"></i>List</a>

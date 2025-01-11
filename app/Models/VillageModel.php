@@ -172,6 +172,12 @@ class VillageModel extends Model
             ->where('id', $id)
             ->update($data);
 
+            if (!isset ($data['ticket_price'])) {
+                $this->db->table($this->table)
+                ->set('ticket_price', '0')
+                ->where('id', $id)
+                ->update();
+            }
         return $query;
     }
 }
