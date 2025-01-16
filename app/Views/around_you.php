@@ -59,19 +59,19 @@
                         <div class="form-check sidebar-item">
                             <input type="checkbox" id="check-cp" class="form-check-input">
                             <label for="check-cp" class="sidebar-link">
-                                <i></i><span class="text-dark fw-bold">Culinary</span>
-                            </label>
-                        </div>
-                        <div class="form-check sidebar-item">
-                            <input type="checkbox" id="check-wp" class="form-check-input">
-                            <label for="check-wp" class="sidebar-link">
-                                <i></i><span class="text-dark fw-bold">Worship</span>
+                                <i></i><span class="text-dark fw-bold">Culinary Place</span>
                             </label>
                         </div>
                         <div class="form-check sidebar-item">
                             <input type="checkbox" id="check-sp" class="form-check-input">
                             <label for="check-sp" class="sidebar-link">
-                                <i></i><span class="text-dark fw-bold">Souvenir</span>
+                                <i></i><span class="text-dark fw-bold">Souvenir Place</span>
+                            </label>
+                        </div>
+                        <div class="form-check sidebar-item">
+                            <input type="checkbox" id="check-wp" class="form-check-input">
+                            <label for="check-wp" class="sidebar-link">
+                                <i></i><span class="text-dark fw-bold">Worship Place</span>
                             </label>
                         </div>
                         <div class="mt-2 mb-3" id="radiusNearby">
@@ -119,7 +119,7 @@
     clearRadius();
     clearRoute();
     digitTourismVillage();
-    
+
 
     // Set initial checkbox states
     const checkCountry = document.getElementById("checkCountry");
@@ -149,6 +149,5 @@
             }
         });
     });
-
 </script>
 <?= $this->endSection() ?>

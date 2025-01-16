@@ -26,19 +26,19 @@
             <div class="form-check">
                 <div class="checkbox">
                     <input type="checkbox" id="check-cp" class="form-check-input">
-                    <label for="check-cp">Culinary</label>
-                </div>
-            </div>
-            <div class="form-check">
-                <div class="checkbox">
-                    <input type="checkbox" id="check-wp" class="form-check-input">
-                    <label for="check-cp">Worship</label>
+                    <label for="check-cp">Culinary Place</label>
                 </div>
             </div>
             <div class="form-check">
                 <div class="checkbox">
                     <input type="checkbox" id="check-sp" class="form-check-input">
-                    <label for="check-cp">Souvenir</label>
+                    <label for="check-cp">Souvenir Place</label>
+                </div>
+            </div>
+            <div class="form-check">
+                <div class="checkbox">
+                    <input type="checkbox" id="check-wp" class="form-check-input">
+                    <label for="check-cp">Worship Place</label>
                 </div>
             </div>
             <div class="mt-3">
