@@ -89,6 +89,11 @@ $users = in_array('users', $uri);
                                         <a title="Detail Reservation" class="btn icon btn-outline-info btn-sm" href="reservation/<?= esc($item['id']); ?>">
                                             <i class="fa-solid fa-circle-info"></i>
                                         </a>
+                                        <?php if ((($item['status'] == null) && ($item['canceled_at'] == null)) || (($item['status'] == '1') && ($item['canceled_at'] == null) && ($item['is_rejected'] == '1'))) : ?>
+                                            <a title="Delete Reservation" class="btn icon btn-outline-danger btn-sm" href="#" onclick="deleteObject('<?= $item['id']?>', '<?= $item['id']?>')">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                                 <?php $i++ ?>

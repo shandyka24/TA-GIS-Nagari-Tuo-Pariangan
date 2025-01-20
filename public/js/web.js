@@ -580,6 +580,7 @@ function manualPosition() {
     });
 
     setUserLoc(pos.lat().toFixed(8), pos.lng().toFixed(8));
+    // console.log(userLat, userLng);
   });
 }
 
@@ -1509,7 +1510,7 @@ function checkAround(id) {
   clearRadius();
   clearRoute();
   clearMarker();
-  clearUser();
+  // clearUser();
   destinationMarker.setMap(null);
   google.maps.event.clearListeners(map, "click");
 
@@ -1523,6 +1524,7 @@ function checkAround(id) {
   $("#table-cp").empty();
   $("#table-wp").empty();
   $("#table-sp").empty();
+
   $("#table-uatt").hide();
   $("#table-att").hide();
   $("#table-hs").hide();
@@ -3552,7 +3554,11 @@ function deleteObject(id = null, name = null, user = false) {
     urlok = "/dashboard/additionalAmenities/delete/" + homestay_id + "/" + id;
   }
   if (content === "Reservation") {
-    urlok = "/web/reservation/delete/" + id;
+    if (user === true) {
+      urlok = "/web/reservation/delete/" + id;
+    } else {
+      urlok = "/dashboard/reservation/delete/" + id;
+    }
   }
   if (content === "Package") {
     urlok = "/dashboard/tourismPackage/delete/" + homestay_id + "/" + id;

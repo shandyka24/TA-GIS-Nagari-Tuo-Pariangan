@@ -73,8 +73,6 @@ $users = in_array('users', $uri);
                                             <button title="Full Pay Pending" class="btn-sm btn-warning float-center" disabled>Full Pay Pending</button>
                                         <?php elseif (($item['status'] == 'Full Pay Successful') && ($item['canceled_at'] == null)) : ?>
                                             <button title="Full Pay Successful" class="btn-sm btn-success float-center" disabled>Full Pay Successful</button>
-
-
                                         <?php elseif (($item['canceled_at'] != null) && ($item['is_refund'] == '1') && ($item['refund_proof'] == null)) : ?>
                                             <button title="Waiting for the homestay owner to pay refund" class="btn-sm btn-danger float-center" disabled>Refund</button>
                                         <?php elseif (($item['canceled_at'] != null) && ($item['is_refund'] == '1') && ($item['refund_proof'] != null) && ($item['refund_paid_confirmed_at'] == null)) : ?>
@@ -91,6 +89,11 @@ $users = in_array('users', $uri);
                                         <a title="More Info" class="btn icon btn-outline-info btn-sm" href="reservation/detail/<?= esc($item['id']); ?>">
                                             <i class="fa-solid fa-circle-info"></i>
                                         </a>
+                                        <?php if ((($item['status'] == null) && ($item['canceled_at'] == null)) || (($item['status'] == '1') && ($item['canceled_at'] == null) && ($item['is_rejected'] == '1'))) : ?>
+                                            <a title="Delete Reservation" class="btn icon btn-outline-danger btn-sm" href="#" onclick="deleteObject('<?= $item['id']?>', '<?= $item['id']?>', true)">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        <?php endif; ?>
                                     </td>
                                 </tr>
                                 <?php $i++ ?>
