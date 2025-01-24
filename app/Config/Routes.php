@@ -202,7 +202,7 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Web', 'filter' => '
     $routes->delete('homestayUnit/facility/delete/(:segment)/(:segment)/(:segment)/(:segment)', 'HomestayUnit::deleteFacility/$1/$2/$3/$4',  ['namespace' => 'App\Controllers\Web\HomestayUnit', 'filter' => 'role:owner']);
 
     $routes->presenter('homestayUnit',  ['namespace' => 'App\Controllers\Web\HomestayUnit', 'filter' => 'role:owner']);
-    $routes->delete('homestayUnit/delete/(:segment)', 'HomestayUnit::delete/$1',  ['namespace' => 'App\Controllers\Web\Homestay', 'filter' => 'role:owner']);
+    $routes->delete('homestayUnit/delete/(:segment)', 'HomestayUnit::delete/$1',  ['namespace' => 'App\Controllers\Web\HomestayUnit', 'filter' => 'role:owner']);
 
     $routes->presenter('exclusiveActivity',  ['filter' => 'role:owner']);
     $routes->delete('exclusiveActivity/delete/(:segment)/(:segment)', 'ExclusiveActivity::delete/$1/$2',  ['filter' => 'role:owner']);

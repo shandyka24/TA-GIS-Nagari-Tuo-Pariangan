@@ -198,14 +198,20 @@ $uri3 = $uri[3] ?? '';
 
                     <li class="sidebar-item">
                         <div class="d-flex justify-content-around" id="socials">
+                            <!-- <a href="https://www.instagram.com/pokdarwis.pariangan/" class="sidebar-link" target="_blank">
+                                <i class="fa-brands fa-instagram"></i><span>Instagram</span>
+                            </a>
+                            <a href="https://www.tiktok.com/@pokdarwis.pariangan" class="sidebar-link" target="_blank">
+                                <i class="fa-brands fa-tiktok"></i><span>TikTok</span>
+                            </a> -->
                         </div>
                     </li>
+
                     <script>
-                        window.onload = function() {
+                        document.addEventListener("DOMContentLoaded", function() {
                             let socs = '';
                             $("#socials").empty();
-
-                            console.log('Fungsi ini dijalankan saat halaman dimuat.');
+                            // console.log('Fungsi ini dijalankan saat halaman dimuat.');
                             $.ajax({
                                 url: baseUrl + "/api/socials/",
                                 type: "GET",
@@ -224,12 +230,13 @@ $uri3 = $uri[3] ?? '';
                                     if (data.tiktok) {
                                         socs = socs + '<a href="https://www.tiktok.com/' + data.tiktok + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-tiktok"></i></a>'
                                     }
-                                    console.log(data);
+                                    // console.log(data);
                                     $("#socials").append(socs);
                                 },
                             });
-
-                        };
+                        });
+                        // window.onload = function() {
+                        // };
                     </script>
                 </ul>
 

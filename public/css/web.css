@@ -52,6 +52,18 @@
     vertical-align: middle;
 }
 
+#legend_t {
+    background: #fff;
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid #000;
+}
+
+#legend_t img {
+    max-height: 25px;
+    vertical-align: middle;
+}
+
 #compass {
     background: #fff;
     padding: 5px;

@@ -2,7 +2,7 @@
 <?= $this->extend('auth/index'); ?>
 
 <?= $this->section('content'); ?>
-<div class="row justify-content-center align-items-center h-flex" style="background-color: #2d499d">
+<div class="row justify-content-center align-items-center h-100" style="background-color: #2d499d">
     <div class="col-xl-4 col-lg-5 col-10">
         <div class="card mt-3">
             <div class="card-content">

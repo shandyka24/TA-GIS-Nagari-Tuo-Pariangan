@@ -41,7 +41,7 @@
                 <div class="col-12" id="list-rec-col">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title text-center"></h5>
+                            <h5 class="card-title text-center"><?= esc($data['name']); ?></h5>
                         </div>
                         <div class="card-body">
                             <?php $i = 0; ?>

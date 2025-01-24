@@ -155,9 +155,10 @@ function digitCountries() {
           fillColor: digit_color[i],
           strokeWeight: 0.5,
           strokeColor: "#005000",
-          fillOpacity: 0.3,
+          fillOpacity: 0.1,
           clickable: true,
           title: item.name,
+          index : 1,
         });
         village.addListener("click", function (event) {
           villageInfoWindow.close();
@@ -192,6 +193,7 @@ function digitProvinces() {
           fillOpacity: 0,
           clickable: true,
           title: item.name,
+          index : 2,
         });
         village.addListener("click", function (event) {
           villageInfoWindow.close();
@@ -223,8 +225,9 @@ function digitCities() {
           strokeWeight: 0.5,
           strokeColor: "#ffffff",
           fillOpacity: 0,
-          clickable: false,
+          clickable: true,
           title: item.name,
+          index : 3,
         });
         village.addListener("click", function (event) {
           villageInfoWindow.close();
@@ -258,6 +261,7 @@ function digitSubdistricts() {
           fillOpacity: 0.2,
           clickable: true,
           title: item.name,
+          index : 4,
         });
         village.addListener("click", function (event) {
           villageInfoWindow.close();
@@ -291,6 +295,7 @@ function digitVillages() {
           fillOpacity: 0.2,
           clickable: true,
           title: item.name,
+          index : 5,
         });
         village.addListener("click", function (event) {
           infoWindow.close();
@@ -375,8 +380,8 @@ function digitTourismVillage(goToVillage = false) {
           // Set style untuk village polygon
           currentVillage.setStyle({
             fillColor: "#ffffff",
-            strokeWeight: 0.5,
-            strokeColor: "#005000",
+            strokeWeight: 1,
+            strokeColor: "#ffffff",
             fillOpacity: 0.2,
             clickable: false,
             title: data.name,
@@ -551,6 +556,10 @@ function manualPosition() {
   clearAirplaneMarkers();
   clearCarMarkers();
   clearOverlay();
+  clearDigitNeg();
+  clearDigitKabKota();
+  clearDigitProv();
+  clearDigitVillage();
 
   if (userLat == 0 && userLng == 0) {
     Swal.fire("Click on Map");
@@ -1208,7 +1217,7 @@ function drawRadius(position, radius) {
 
 // Update radiusValue on search by radius
 function updateRadius(postfix) {
-  userInfoWindow.close();
+  // userInfoWindow.close();
   document.getElementById("radiusValue" + postfix).innerHTML =
     document.getElementById("inputRadius" + postfix).value * 100 + " m";
   console.log(
@@ -1507,6 +1516,11 @@ function checkNearby(id) {
 }
 
 function checkAround(id) {
+  if (userLat == 0 && userLng == 0) {
+    document.getElementById("radiusValueNearby").innerHTML = "0 m";
+    document.getElementById("inputRadiusNearby").value = 0;
+    return Swal.fire("Determine your position first!");
+  }
   clearRadius();
   clearRoute();
   clearMarker();
@@ -1514,9 +1528,6 @@ function checkAround(id) {
   destinationMarker.setMap(null);
   google.maps.event.clearListeners(map, "click");
 
-  // if(id !== 'Nearby'){
-  objectMarker(id, currentLat, currentLng, false);
-  // }
 
   $("#table-uatt").empty();
   $("#table-att").empty();
@@ -1574,6 +1585,79 @@ function checkAround(id) {
   drawRadius(new google.maps.LatLng(currentLat, currentLng), radiusValue);
   $("#result-nearby-col").show();
 }
+
+// function checkAround() {
+//   if (userLat == 0 && userLng == 0) {
+//     document.getElementById("radiusValueNearby").innerHTML = "0 m";
+//     document.getElementById("inputRadiusNearby").value = 0;
+//     return Swal.fire("Determine your position first!");
+//   }
+
+//   clearRadius();
+//   clearRoute();
+//   clearMarker();
+//   destinationMarker.setMap(null);
+//   google.maps.event.clearListeners(map, "click");
+
+//   $("#table-uatt").empty();
+//   $("#table-att").empty();
+//   $("#table-hs").empty();
+//   $("#table-cp").empty();
+//   $("#table-wp").empty();
+//   $("#table-sp").empty();
+
+//   $("#table-uatt").hide();
+//   $("#table-att").hide();
+//   $("#table-hs").hide();
+//   $("#table-cp").hide();
+//   $("#table-wp").hide();
+//   $("#table-sp").hide();
+
+//   let pos = new google.maps.LatLng(currentLat, currentLng);
+//   let radiusValue =
+//     parseFloat(document.getElementById("inputRadiusNearby").value) * 100;
+//   map.panTo(pos);
+
+//   const checkuATT = document.getElementById("check-uatt").checked;
+//   const checkATT = document.getElementById("check-att").checked;
+//   const checkHS = document.getElementById("check-hs").checked;
+//   const checkCP = document.getElementById("check-cp").checked;
+//   const checkWP = document.getElementById("check-wp").checked;
+//   const checkSP = document.getElementById("check-sp").checked;
+
+//   if (!checkuATT && !checkATT && !checkHS && !checkCP && !checkWP && !checkSP) {
+//     document.getElementById("radiusValueNearby").innerHTML = "0 m";
+//     document.getElementById("inputRadiusNearby").value = 0;
+//     return Swal.fire("Please choose one object");
+//   }
+
+//   if (checkuATT) {
+//     findNearby("uatt", radiusValue);
+//     $("#table-uatt").show();
+//   }
+//   if (checkATT) {
+//     findNearby("att", radiusValue);
+//     $("#table-att").show();
+//   }
+//   if (checkHS) {
+//     findNearby("hs", radiusValue);
+//     $("#table-hs").show();
+//   }
+//   if (checkCP) {
+//     findNearby("cp", radiusValue);
+//     $("#table-cp").show();
+//   }
+//   if (checkWP) {
+//     findNearby("wp", radiusValue);
+//     $("#table-wp").show();
+//   }
+//   if (checkSP) {
+//     findNearby("sp", radiusValue);
+//     $("#table-sp").show();
+//   }
+//   drawRadius(new google.maps.LatLng(currentLat, currentLng), radiusValue);
+//   $("#result-nearby-col").show();
+// }
 
 // Fetch object nearby by category
 function findNearby(category, radius) {
@@ -2185,6 +2269,26 @@ function setCompass() {
 // Create legend
 function getLegend() {
   const icons = {
+    my: {
+      name: "Malaysia",
+      icon: baseUrl + "/media/icon/my.png",
+    },
+    sg: {
+      name: "Singapore",
+      icon: baseUrl + "/media/icon/sg.png",
+    },
+    brd: {
+      name: "Brunei Darussalam",
+      icon: baseUrl + "/media/icon/brd.png",
+    },
+    uAtt: {
+      name: "Unique Attraction",
+      icon: baseUrl + "/media/icon/marker_uat.png",
+    },
+    oAtt: {
+      name: "Ordinary Attraction",
+      icon: baseUrl + "/media/icon/marker_at.png",
+    },
     hs: {
       name: "Homestay",
       icon: baseUrl + "/media/icon/marker_hs.png",
@@ -2226,6 +2330,48 @@ function viewLegend() {
   }
 }
 
+function getLegendTraffic() {
+  const icons = {
+    green: {
+      name: "No Traffic Jam",
+      icon: baseUrl + "/media/icon/traffic_green.png",
+    },
+    yellow: {
+      name: "Light Traffic Jam", 
+      icon: baseUrl + "/media/icon/traffic_yellow.png",
+    },
+    medred: {
+      name: "Heavy Traffic Jam",
+      icon: baseUrl + "/media/icon/traffic_medred.png",
+    },
+    red: {
+      name: "Severe Traffic Jam",
+      icon: baseUrl + "/media/icon/traffic_red.png",
+    },
+  };
+
+  const title = '<p class="fw-bold fs-6">Traffic Legend</p>';
+  $("#legend_t").append(title);
+
+  for (key in icons) {
+    const type = icons[key];
+    const name = type.name;
+    const icon = type.icon;
+    const div = '<div><img src="' + icon + '"> ' + name + "</div>";
+
+    $("#legend_t").append(div);
+  }
+  map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend_t);
+}
+
+function viewLegendTraffic() {
+  if ($("#legend_t").is(":hidden")) {
+    $("#legend_t").show();
+  } else {
+    $("#legend_t").hide();
+  }
+}
+
 let trafficVisible = false;
 
 const trafficLayer = new google.maps.TrafficLayer();
@@ -2233,8 +2379,10 @@ const trafficLayer = new google.maps.TrafficLayer();
 function showTraffic() {
   if (trafficVisible) {
     trafficLayer.setMap(null); // Remove traffic layer from the map
+    $("#legend_t").show();
   } else {
     trafficLayer.setMap(map); // Add traffic layer to the map
+    $("#legend_t").hide();
   }
   trafficVisible = !trafficVisible;
 }
