@@ -559,7 +559,7 @@ function manualPosition() {
   clearDigitNeg();
   clearDigitKabKota();
   clearDigitProv();
-  clearDigitVillage();
+  // clearDigitVillage();
 
   if (userLat == 0 && userLng == 0) {
     Swal.fire("Click on Map");
