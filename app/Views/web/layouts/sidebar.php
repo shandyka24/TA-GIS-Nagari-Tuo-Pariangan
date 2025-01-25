@@ -219,16 +219,16 @@ $uri3 = $uri[3] ?? '';
                                 success: function(response) {
                                     const data = response.data;
                                     if (data.instagram) {
-                                        socs = socs + '<a href="https://www.instagram.com/' + data.instagram + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-instagram"></i></a>'
+                                        socs = socs + '<a href="https://www.instagram.com/' + data.instagram + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-instagram" title="Intagram"></i></a>'
                                     }
                                     if (data.facebook) {
-                                        socs = socs + '<a href="https://www.facebook.com/' + data.facebook + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-facebook"></i></a>'
+                                        socs = socs + '<a href="https://www.facebook.com/' + data.facebook + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-facebook" title="Facebook"></i></a>'
                                     }
                                     if (data.youtube) {
-                                        socs = socs + '<a href="https://www.youtube.com/' + data.youtube + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-youtube"></i></a>'
+                                        socs = socs + '<a href="https://www.youtube.com/' + data.youtube + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-youtube" title="Youtube"></i></a>'
                                     }
                                     if (data.tiktok) {
-                                        socs = socs + '<a href="https://www.tiktok.com/' + data.tiktok + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-tiktok"></i></a>'
+                                        socs = socs + '<a href="https://www.tiktok.com/' + data.tiktok + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-tiktok" title="Tiktok"></i></a>'
                                     }
                                     // console.log(data);
                                     $("#socials").append(socs);
