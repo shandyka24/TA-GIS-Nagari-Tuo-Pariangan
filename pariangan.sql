@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 11, 2025 at 05:16 PM
+-- Generation Time: Jan 24, 2025 at 09:19 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.4
 
@@ -42,7 +42,6 @@ CREATE TABLE `attraction` (
   `lat` decimal(10,8) NOT NULL,
   `lng` decimal(11,8) NOT NULL,
   `geom` geometry DEFAULT NULL,
-  `geom_area` geometry DEFAULT NULL,
   `created_at` timestamp NOT NULL,
   `updated_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -51,19 +50,19 @@ CREATE TABLE `attraction` (
 -- Dumping data for table `attraction`
 --
 
-INSERT INTO `attraction` (`id`, `attraction_category`, `name`, `address`, `open`, `close`, `price`, `employee_name`, `phone`, `description`, `video_url`, `lat`, `lng`, `geom`, `geom_area`, `created_at`, `updated_at`) VALUES
-('A1', '1', 'Kuburan Panjang DT Tantejo', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '06:00:00', '18:00:00', 10000, 'Pokdarwis Pariangan', '082284978004', 'The length of this grave is around 24-25 m, based on the experience of the community and visitors who have measured the length of this grave, the results always change, sometimes it is 24, sometimes 25 m. The body that rests in this grave is Tantejo Gurhano, he was the one who first came up with the idea of ​​building a bagonjoang house inspired by a boat that had sharp corners at both ends. Tantejo Gurhano is thought to have lived during the Hindu-Buddhist era, when she died her body was burned according to Hindu-Buddhist religious rituals and her ashes were scattered throughout this cemetery area.', '', -0.45885615, 100.49400967, 0xe610000001030000000100000005000000e1972b6d9b1f594040e518fdad5cddbfe2974b0d9f1f594018a8e9df565bddbfe2974b48a01f5940fa37d5372f5fddbfe2974bf19c1f5940603527757560ddbfe1972b6d9b1f594040e518fdad5cddbf, NULL, '2025-01-08 21:21:14', '2025-01-09 02:48:07'),
-('A10', '2', 'Surau Suri Maharajo', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45823353, 100.49225133, 0xe610000001030000000100000005000000e53b0ccb801f594019adf667b852ddbfe43b8cef811f59408791e7c63953ddbfe33bec62811f5940ea66dd03ad54ddbfe43bec27801f5940579deca42b54ddbfe53b0ccb801f594019adf667b852ddbf, NULL, '2025-01-11 03:02:46', '2025-01-11 03:02:46'),
-('A11', '2', 'Surau Melayu', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45847879, 100.49211505, 0xe610000001030000000100000005000000bf13a15f7e1f5940207691f2ec56ddbfbf1381ab7f1f5940900d82516e57ddbfbf1381247f1f59408fb43fef8158ddbfbf13c1f47d1f594028c92b701158ddbfbf13a15f7e1f5940207691f2ec56ddbf, NULL, '2025-01-11 03:04:21', '2025-01-11 03:04:21'),
-('A12', '2', 'Surau Inyiak Janna', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45875639, 100.49186641, 0xe610000001030000000100000005000000602acbd3791f594030ad58096e5bddbf602aabd37b1f5940487e6469685bddbf602a8bb77b1f594008ceca251f5dddbf602acba6791f59404b5b2926f25cddbf602acbd3791f594030ad58096e5bddbf, NULL, '2025-01-11 03:06:04', '2025-01-11 03:06:04'),
-('A2', '1', 'Batu Agam', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Pokdarwis Pariangan', '082284978004', 'Agam stone is one of the relics in Pariangan which is included in the 3 sajarangan stones, where the agam stone is directed towards the agam area', '', -0.45815154, 100.49220609, 0xe610000001030000000100000008000000aa48e4c6801f59404d422f59ea51ddbfab48a407801f5940e5be81f9c251ddbfab48a4ad7f1f5940e510f1378252ddbfaa48443a801f5940d05505b7f252ddbfab4844ee801f5940d18f9e97a952ddbfab4844ee801f594019fe2b186652ddbfac4804e3801f5940d88de8180c52ddbfaa48e4c6801f59404d422f59ea51ddbf, NULL, '2025-01-09 02:41:54', '2025-01-11 03:29:13'),
-('A3', '1', 'Batu 50 Kota', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Pokdarwis Pariangan', '082284978004', 'The 50 Kota Stone is one of the relics in Pariangan which is included in the 3 Saurangan Stones, where the 50 Kota stones point towards the 50 Kota area.', '', -0.45884599, 100.49264716, 0xe6100000010300000001000000060000001a9ce479871f5940de5f5dc3315dddbf1a9c041d881f5940d65adba26f5dddbf1b9ca4f5871f594077231a61455eddbf199ca414871f59405af625c13f5eddbf1a9ce4f2861f5940032665e2a75dddbf1a9ce479871f5940de5f5dc3315dddbf, NULL, '2025-01-09 02:49:05', '2025-01-11 03:29:46'),
-('A4', '1', 'Batu Tanah Datar', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Pokdarwis Pariangan', '082284978004', 'The Tanah Datar Stone is one of the relics in Pariangan which is included in the 3 Sajarangan Stones, where the Tanah Datar stones point towards the Tanah Datar area.', '', -0.45891036, 100.49210310, 0xe610000001030000000100000006000000864b3c227e1f594081194fcc4d5eddbf854b3c307f1f59400b09960c2c5eddbf874b5c4c7f1f5940972c2f8a505fddbf864b1c607e1f59405adeff09675fddbf854b9cef7d1f5940bd07044beb5eddbf864b3c227e1f594081194fcc4d5eddbf, NULL, '2025-01-09 04:56:23', '2025-01-11 02:07:50'),
-('A5', '1', 'Masjid Ishlah', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', 'Masjid Islah Nagari Tuo Pariangan is a historic mosque located in Nagari Pariangan, Tanah Datar Regency, West Sumatra. This mosque is known as one of the oldest religious buildings in Minangkabau, with traditional architecture that reflects strong cultural and religious values. Built with a dominant Minangkabau architectural style, this mosque has a gonjong-shaped roof, similar to the Minangkabau traditional house (rumah gadang), which gives a magnificent and distinctive impression. This building uses natural materials such as wood and stone, which makes it in line with the surrounding natural environment which is beautiful and beautiful.', '', -0.45851320, 100.49233294, 0xe610000001030000000100000008000000a4aac794801f59402ba5d79a7354ddbfa4aa272f861f59403ae582568456ddbfa3aae742851f594016d864b1f458ddbfa3aa474e831f5940f3f4c5da1b5cddbfa4aa2735801f59400153a84dbc5addbfa5aae7947e1f5940afb72f010e59ddbfa5aac7b37f1f594035b7a235ef56ddbfa4aac794801f59402ba5d79a7354ddbf, NULL, '2025-01-09 04:59:58', '2025-01-09 04:59:58'),
-('A6', '2', 'Tabuah Larangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Nagari Tuo Pariangan', '', 'Tabuah Larangan Nagari Tuo Pariangan is a traditional cultural heritage from Nagari Tuo Pariangan, located in Tanah Datar, West Sumatra. It holds profound cultural and spiritual significance. This \"tabuah\" refers to a traditional communication tool, often a drum or gong, used by the local community to convey important messages. The beating of the tabuah follows specific rhythms to announce significant events such as adat (customary) meetings, warnings of danger, or religious ceremonies.\r\n\r\nIn Minangkabau tradition, the tabuah larangan holds sacred meaning and is governed by strict customary norms. Only specific individuals, such as adat leaders or elders (ninik mamak), are authorized to beat the tabuah, and it cannot be sounded carelessly. Its sound is believed to serve as a call for the community to gather and engage in discussions, ensuring harmony and the continuity of customary values in the village.\r\n\r\nThe existence of the tabuah larangan also reflects the local wisdom of the Minangkabau people in preserving tradition and fostering collective communication. To this day, the tabuah larangan of Nagari Tuo Pariangan remains a symbol of cultural identity, passed down through generations.', '', -0.45865213, 100.49220402, 0xe61000000103000000010000000700000014805cad801f59405a7f00b6125addbf15803ceb801f594034d4ad153a5addbf15803c91801f59409ecef8330a5bddbf13803cb07f1f5940543e1c54f95addbf13805c9f7f1f5940e46ccdf4a45addbf1480fc2b801f594096359655455addbf14805cad801f59405a7f00b6125addbf, NULL, '2025-01-09 05:05:28', '2025-01-11 02:11:32'),
-('A7', '2', 'Panorama Pariangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '06:00:00', '22:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.44612581, 100.48522601, 0xe610000001030000000100000005000000e65a6114fa1e59404ead4d51c485dcbfe65ae1bb0e1f594096aae066de7adcbfe65a61ce211f59404077b82e2b97dcbfe65ae13d051f594027f78a1dc89fdcbfe65a6114fa1e59404ead4d51c485dcbf, NULL, '2025-01-11 02:30:24', '2025-01-11 02:30:36'),
-('A8', '2', 'Surau Bandaro Kayo', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45832160, 100.49214289, 0xe610000001030000000100000005000000e5c7e2bd7e1f5940d09c2e2eca53ddbfe5c742047e1f5940badae549d555ddbfe5c742c67f1f594033f083087e56ddbfe4c78285801f5940f20dfc6c5c54ddbfe5c7e2bd7e1f5940d09c2e2eca53ddbf, NULL, '2025-01-11 02:39:47', '2025-01-11 02:58:45'),
-('A9', '2', 'Surau Sampono Kayo', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45810202, 100.49207359, 0xe610000001030000000100000005000000c4065fb77d1f5940542c52419950ddbfc306bf467f1f594066ff4e001551ddbfc2061f607e1f594074d95cfd7c52ddbfc306bffd7c1f5940bdaf77fef551ddbfc4065fb77d1f5940542c52419950ddbf, NULL, '2025-01-11 02:47:22', '2025-01-11 02:47:22');
+INSERT INTO `attraction` (`id`, `attraction_category`, `name`, `address`, `open`, `close`, `price`, `employee_name`, `phone`, `description`, `video_url`, `lat`, `lng`, `geom`, `created_at`, `updated_at`) VALUES
+('A1', '1', 'Kuburan Panjang DT Tantejo', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '06:00:00', '18:00:00', 10000, 'Pokdarwis Pariangan', '082284978004', 'The length of this grave is around 24-25 m, based on the experience of the community and visitors who have measured the length of this grave, the results always change, sometimes it is 24, sometimes 25 m. The body that rests in this grave is Tantejo Gurhano, he was the one who first came up with the idea of ​​building a bagonjoang house inspired by a boat that had sharp corners at both ends. Tantejo Gurhano is thought to have lived during the Hindu-Buddhist era, when she died her body was burned according to Hindu-Buddhist religious rituals and her ashes were scattered throughout this cemetery area.', '', -0.45885615, 100.49400967, 0xe610000001030000000100000005000000e1972b6d9b1f594040e518fdad5cddbfe2974b0d9f1f594018a8e9df565bddbfe2974b48a01f5940fa37d5372f5fddbfe2974bf19c1f5940603527757560ddbfe1972b6d9b1f594040e518fdad5cddbf, '2025-01-08 21:21:14', '2025-01-09 02:48:07'),
+('A10', '2', 'Surau Suri Maharajo', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45823353, 100.49225133, 0xe610000001030000000100000005000000e53b0ccb801f594019adf667b852ddbfe43b8cef811f59408791e7c63953ddbfe33bec62811f5940ea66dd03ad54ddbfe43bec27801f5940579deca42b54ddbfe53b0ccb801f594019adf667b852ddbf, '2025-01-11 03:02:46', '2025-01-11 03:02:46'),
+('A11', '2', 'Surau Melayu', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45847879, 100.49211505, 0xe610000001030000000100000005000000bf13a15f7e1f5940207691f2ec56ddbfbf1381ab7f1f5940900d82516e57ddbfbf1381247f1f59408fb43fef8158ddbfbf13c1f47d1f594028c92b701158ddbfbf13a15f7e1f5940207691f2ec56ddbf, '2025-01-11 03:04:21', '2025-01-11 03:04:21'),
+('A12', '2', 'Surau Inyiak Janna', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45875639, 100.49186641, 0xe610000001030000000100000005000000602acbd3791f594030ad58096e5bddbf602aabd37b1f5940487e6469685bddbf602a8bb77b1f594008ceca251f5dddbf602acba6791f59404b5b2926f25cddbf602acbd3791f594030ad58096e5bddbf, '2025-01-11 03:06:04', '2025-01-11 03:06:04'),
+('A2', '1', 'Batu Agam', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Pokdarwis Pariangan', '082284978004', 'Agam stone is one of the relics in Pariangan which is included in the 3 sajarangan stones, where the agam stone is directed towards the agam area', '', -0.45815154, 100.49220609, 0xe610000001030000000100000008000000aa48e4c6801f59404d422f59ea51ddbfab48a407801f5940e5be81f9c251ddbfab48a4ad7f1f5940e510f1378252ddbfaa48443a801f5940d05505b7f252ddbfab4844ee801f5940d18f9e97a952ddbfab4844ee801f594019fe2b186652ddbfac4804e3801f5940d88de8180c52ddbfaa48e4c6801f59404d422f59ea51ddbf, '2025-01-09 02:41:54', '2025-01-11 03:29:13'),
+('A3', '1', 'Batu 50 Kota', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Pokdarwis Pariangan', '082284978004', 'The 50 Kota Stone is one of the relics in Pariangan which is included in the 3 Saurangan Stones, where the 50 Kota stones point towards the 50 Kota area.', '', -0.45884599, 100.49264716, 0xe6100000010300000001000000060000001a9ce479871f5940de5f5dc3315dddbf1a9c041d881f5940d65adba26f5dddbf1b9ca4f5871f594077231a61455eddbf199ca414871f59405af625c13f5eddbf1a9ce4f2861f5940032665e2a75dddbf1a9ce479871f5940de5f5dc3315dddbf, '2025-01-09 02:49:05', '2025-01-11 03:29:46'),
+('A4', '1', 'Batu Tanah Datar', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Pokdarwis Pariangan', '082284978004', 'The Tanah Datar Stone is one of the relics in Pariangan which is included in the 3 Sajarangan Stones, where the Tanah Datar stones point towards the Tanah Datar area.', '', -0.45891036, 100.49210310, 0xe610000001030000000100000006000000864b3c227e1f594081194fcc4d5eddbf854b3c307f1f59400b09960c2c5eddbf874b5c4c7f1f5940972c2f8a505fddbf864b1c607e1f59405adeff09675fddbf854b9cef7d1f5940bd07044beb5eddbf864b3c227e1f594081194fcc4d5eddbf, '2025-01-09 04:56:23', '2025-01-11 02:07:50'),
+('A5', '1', 'Masjid Ishlah', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', 'Masjid Islah Nagari Tuo Pariangan is a historic mosque located in Nagari Pariangan, Tanah Datar Regency, West Sumatra. This mosque is known as one of the oldest religious buildings in Minangkabau, with traditional architecture that reflects strong cultural and religious values. Built with a dominant Minangkabau architectural style, this mosque has a gonjong-shaped roof, similar to the Minangkabau traditional house (rumah gadang), which gives a magnificent and distinctive impression. This building uses natural materials such as wood and stone, which makes it in line with the surrounding natural environment which is beautiful and beautiful.', '', -0.45851320, 100.49233294, 0xe610000001030000000100000008000000a4aac794801f59402ba5d79a7354ddbfa4aa272f861f59403ae582568456ddbfa3aae742851f594016d864b1f458ddbfa3aa474e831f5940f3f4c5da1b5cddbfa4aa2735801f59400153a84dbc5addbfa5aae7947e1f5940afb72f010e59ddbfa5aac7b37f1f594035b7a235ef56ddbfa4aac794801f59402ba5d79a7354ddbf, '2025-01-09 04:59:58', '2025-01-09 04:59:58'),
+('A6', '2', 'Tabuah Larangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Nagari Tuo Pariangan', '', 'Tabuah Larangan Nagari Tuo Pariangan is a traditional cultural heritage from Nagari Tuo Pariangan, located in Tanah Datar, West Sumatra. It holds profound cultural and spiritual significance. This \"tabuah\" refers to a traditional communication tool, often a drum or gong, used by the local community to convey important messages. The beating of the tabuah follows specific rhythms to announce significant events such as adat (customary) meetings, warnings of danger, or religious ceremonies.\r\n\r\nIn Minangkabau tradition, the tabuah larangan holds sacred meaning and is governed by strict customary norms. Only specific individuals, such as adat leaders or elders (ninik mamak), are authorized to beat the tabuah, and it cannot be sounded carelessly. Its sound is believed to serve as a call for the community to gather and engage in discussions, ensuring harmony and the continuity of customary values in the village.\r\n\r\nThe existence of the tabuah larangan also reflects the local wisdom of the Minangkabau people in preserving tradition and fostering collective communication. To this day, the tabuah larangan of Nagari Tuo Pariangan remains a symbol of cultural identity, passed down through generations.', '', -0.45865213, 100.49220402, 0xe61000000103000000010000000700000014805cad801f59405a7f00b6125addbf15803ceb801f594034d4ad153a5addbf15803c91801f59409ecef8330a5bddbf13803cb07f1f5940543e1c54f95addbf13805c9f7f1f5940e46ccdf4a45addbf1480fc2b801f594096359655455addbf14805cad801f59405a7f00b6125addbf, '2025-01-09 05:05:28', '2025-01-11 02:11:32'),
+('A7', '2', 'Panorama Pariangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '06:00:00', '22:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.44612581, 100.48522601, 0xe610000001030000000100000005000000e65a6114fa1e59404ead4d51c485dcbfe65ae1bb0e1f594096aae066de7adcbfe65a61ce211f59404077b82e2b97dcbfe65ae13d051f594027f78a1dc89fdcbfe65a6114fa1e59404ead4d51c485dcbf, '2025-01-11 02:30:24', '2025-01-11 02:30:36'),
+('A8', '2', 'Surau Bandaro Kayo', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45832160, 100.49214289, 0xe610000001030000000100000005000000e5c7e2bd7e1f5940d09c2e2eca53ddbfe5c742047e1f5940badae549d555ddbfe5c742c67f1f594033f083087e56ddbfe4c78285801f5940f20dfc6c5c54ddbfe5c7e2bd7e1f5940d09c2e2eca53ddbf, '2025-01-11 02:39:47', '2025-01-11 02:58:45'),
+('A9', '2', 'Surau Sampono Kayo', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45810202, 100.49207359, 0xe610000001030000000100000005000000c4065fb77d1f5940542c52419950ddbfc306bf467f1f594066ff4e001551ddbfc2061f607e1f594074d95cfd7c52ddbfc306bffd7c1f5940bdaf77fef551ddbfc4065fb77d1f5940542c52419950ddbf, '2025-01-11 02:47:22', '2025-01-11 02:47:22');
 
 -- --------------------------------------------------------
 
@@ -813,7 +812,65 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (542, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-10 08:12:46', 1),
 (543, '::1', 'shandyka2403@gmail.com', 11, '2025-01-10 09:06:39', 1),
 (544, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-10 10:43:34', 1),
-(545, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-11 09:01:54', 1);
+(545, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-11 09:01:54', 1),
+(546, '::1', 'shandyka2403@gmail.com', 11, '2025-01-11 11:22:27', 1),
+(547, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-14 12:53:17', 1),
+(548, '::1', 'umegahomestay@gmail.com', 23, '2025-01-14 12:53:43', 1),
+(549, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-14 12:54:48', 1),
+(550, '::1', 'umegahomestay@gmail.com', 23, '2025-01-16 09:55:36', 1),
+(551, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-16 10:08:35', 1),
+(552, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-16 10:43:52', 1),
+(553, '::1', 'umegahomestay@gmail.com', 23, '2025-01-16 11:22:06', 1),
+(554, '::1', 'dykdyk', NULL, '2025-01-16 11:45:11', 0),
+(555, '::1', 'shandyka2403@gmail.com', 11, '2025-01-16 11:45:14', 1),
+(556, '::1', 'shandyka2403@gmail.com', 11, '2025-01-16 14:46:25', 1),
+(557, '::1', 'shandyka2403@gmail.com', 11, '2025-01-16 15:22:24', 1),
+(558, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-16 16:58:04', 1),
+(559, '::1', 'shandyka2403@gmail.com', 11, '2025-01-17 10:53:00', 1),
+(560, '::1', 'umegahomestay@gmail.com', 23, '2025-01-17 10:55:00', 1),
+(561, '::1', 'umegahomestay', NULL, '2025-01-17 12:00:28', 0),
+(562, '::1', 'umegahomestay@gmail.com', 23, '2025-01-17 12:00:31', 1),
+(563, '::1', 'shandyka2403@gmail.com', 11, '2025-01-17 12:23:55', 1),
+(564, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-18 06:49:52', 1),
+(565, '::1', 'umegahomestay@gmail.com', 23, '2025-01-18 11:59:44', 1),
+(566, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-21 09:39:56', 1),
+(567, '::1', 'shandyka2403@gmail.com', 11, '2025-01-21 10:22:19', 1),
+(568, '::1', 'pokdarwis.pariangan', NULL, '2025-01-21 10:22:36', 0),
+(569, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-21 10:22:40', 1),
+(570, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-21 10:36:44', 1),
+(571, '::1', 'umegahomestay@gmail.com', 23, '2025-01-21 11:33:57', 1),
+(572, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-21 11:35:45', 1),
+(573, '::1', 'homestayowner@gmail.com', 27, '2025-01-21 11:36:38', 1),
+(574, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-21 11:37:27', 1),
+(575, '::1', 'umegahomestay@gmail.com', 23, '2025-01-21 11:37:50', 1),
+(576, '::1', 'shandyka2403@gmail.com', 11, '2025-01-21 12:23:27', 1),
+(577, '::1', 'shandyka2403@gmail.com', 11, '2025-01-21 12:58:34', 1),
+(578, '::1', 'gudesterhomestay@gmail.com', 24, '2025-01-21 13:29:25', 1),
+(579, '::1', 'nabilahomestay@gmail.com', 25, '2025-01-21 13:33:27', 1),
+(580, '::1', 'gudesterhomestay@gmail.com', 24, '2025-01-21 13:37:09', 1),
+(581, '::1', 'umegahomestay@gmail.com', 23, '2025-01-21 13:40:27', 1),
+(582, '::1', 'shandyka2403@gmail.com', 11, '2025-01-22 02:52:32', 1),
+(583, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-22 03:04:34', 1),
+(584, '::1', 'shandyka2403@gmail.com', 11, '2025-01-22 09:26:52', 1),
+(585, '::1', 'shandyka2403@gmail.com', 11, '2025-01-23 09:22:58', 1),
+(586, '::1', 'gudesterhomestay@gmail.com', 24, '2025-01-23 09:44:00', 1),
+(587, '::1', 'shandyka2403@gmail.com', 11, '2025-01-23 12:16:01', 1),
+(588, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-23 12:36:59', 1),
+(589, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-23 12:45:04', 1),
+(590, '::1', 'pokdarwis.pariangan', NULL, '2025-01-23 12:46:09', 0),
+(591, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-23 12:46:12', 1),
+(592, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-23 12:47:26', 1),
+(593, '::1', 'abcd@gmail.com', 28, '2025-01-23 12:47:51', 1),
+(594, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-23 12:49:57', 1),
+(595, '::1', 'umegahomestay@gmail.com', 23, '2025-01-23 12:59:52', 1),
+(596, '::1', 'umegahomestay@gmail.com', 23, '2025-01-23 13:20:45', 1),
+(597, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-24 03:05:06', 1),
+(598, '::1', 'umegahomestay@gmail.com', 23, '2025-01-24 03:05:57', 1),
+(599, '::1', 'dykdyk', NULL, '2025-01-24 03:09:49', 0),
+(600, '::1', 'shandyka2403@gmail.com', 11, '2025-01-24 03:09:53', 1),
+(601, '::1', 'umegahomestay@gmail.com', 23, '2025-01-24 03:10:30', 1),
+(602, '::1', 'shandyka2403@gmail.com', 11, '2025-01-24 03:16:12', 1),
+(603, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-01-24 03:16:50', 1);
 
 -- --------------------------------------------------------
 
@@ -1112,7 +1169,12 @@ INSERT INTO `culinary_product_detail` (`culinary_place_id`, `culinary_product_id
 ('C1', '09', 7000, '1729931831_1254a68a5065b3f61722.jpg', 'Kesegaran teh dipadukan dengan es batu\r\n', '2024-10-25 20:37:27', '2024-10-25 20:37:27'),
 ('C1', '10', 5000, '1729931857_0bc0788503a16a54c1e0.jpeg', 'Teh hangat memerikan kehangatan di cuaca yang sejuk seperti di pariangan', '2024-10-25 20:38:05', '2024-10-25 20:38:05'),
 ('C1', '11', 10000, '1729931900_504b51f5398bd9643b40.jpg', 'Cappucino ', '2024-10-25 20:38:37', '2024-10-25 20:38:37'),
-('C1', '12', 10000, '1729931929_83dec133a260492bbc09.jpg', 'Pop Mie dan Mie Sedap Cup\r\n', '2024-10-25 20:39:08', '2024-10-25 20:39:08');
+('C1', '12', 10000, '1729931929_83dec133a260492bbc09.jpg', 'Pop Mie dan Mie Sedap Cup\r\n', '2024-10-25 20:39:08', '2024-10-25 20:39:08'),
+('C2', '01', 5000, '1736615992_deac373ba9cdae5c723d.webp', 'Kawa Daun', '2025-01-11 04:19:59', '2025-01-11 04:19:59'),
+('C3', '01', 5000, '1736616052_d0579a4b0b6e58db4da8.webp', 'Kawa Daun', '2025-01-11 04:21:01', '2025-01-11 04:21:01'),
+('C4', '01', 5000, '1736616077_2093d9ab503a056850c1.webp', 'Kawa Daun\r\n', '2025-01-11 04:21:21', '2025-01-11 04:21:21'),
+('C5', '01', 5000, '1736616100_f85e7158c5f5862dbf64.webp', 'Kawa Daun', '2025-01-11 04:21:43', '2025-01-11 04:21:43'),
+('C6', '01', 5000, '1736616118_b64dcc8f3aebf90b48e2.webp', 'Kawa Daun', '2025-01-11 04:22:05', '2025-01-11 04:22:05');
 
 -- --------------------------------------------------------
 
@@ -1146,8 +1208,8 @@ CREATE TABLE `homestay` (
 
 INSERT INTO `homestay` (`id`, `village_id`, `name`, `category`, `address`, `geom`, `lat`, `lng`, `owner`, `open`, `close`, `max_people_for_event`, `description`, `video_url`, `created_at`, `updated_at`, `profil_link`) VALUES
 ('H12', '1', 'Homestay Umega', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000080000000713a515141f594075a82bd316a5dcbf0413e50f161f594056fa301514a4dcbf0613e5e2151f5940668b498887a2dcbf05134556151f5940477bc4ba49a1dcbf0613b534121f5940d6377fc7eca2dcbf0513c534111f5940e5707455f2a3dcbf0713e531121f594023f47431f2a5dcbf0713a515141f594075a82bd316a5dcbf, -0.44748639, 100.48557337, 23, '10:00:00', '23:59:00', 50, 'Homestay Umega MD in Nagari Tuo Pariangan is an accommodation that offers a stay experience with a strong local Minangkabau feel. Located in a village rich in history and culture, this homestay provides an opportunity for visitors to experience firsthand the atmosphere of traditional Minangkabau community life while enjoying beautiful natural scenery, with a backdrop of mountains and lush rice fields.', NULL, '2024-09-26 05:27:13', '2024-12-16 04:21:01', ''),
-('H13', '1', 'Homestay Gudester', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000050000001dc09e63081f59407ec8ede3dfa0dcbf1cc01e0f0a1f5940c98d5f80a7a2dcbf1ec0feb40b1f5940924004a4d4a0dcbf1dc0be140a1f5940e50692070d9fdcbf1dc09e63081f59407ec8ede3dfa0dcbf, -0.44731766, 100.48498829, 24, '10:00:00', '23:59:00', 50, 'Homestay Gudester Pariangan merupakan homestay modern dimana homestay ini hanya menyediakan kamar. Pada tiap-tiap kamar memiliki pemandangan persawahan yang sangat indah', NULL, '2024-10-25 19:48:36', '2024-10-25 19:51:07', ''),
-('H14', '1', 'Homestay Nabila', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000070000006c9b975dc61e5940c422477d5b8edcbf6d9b779bc61e5940a53cea990c90dcbf6c9b973ec71e5940aac034576991dcbf6c9b97b4c91e5940385ed1971a91dcbf6c9b574fc91e5940ceae26feea8ddcbf6c9b97b7c61e5940ee5052dd558edcbf6c9b975dc61e5940c422477d5b8edcbf, -0.44626860, 100.48095920, 25, '10:00:00', '23:59:00', 50, 'Homestay Nabila di Pariangan adalah penginapan nyaman yang menawarkan perpaduan antara arsitektur tradisional Minangkabau dan kenyamanan modern. Terletak di Desa Pariangan, Tanah Datar, homestay ini menghadirkan pemandangan sawah hijau yang luas serta bukit-bukit di sekitar, menjadikannya tempat sempurna bagi para tamu yang ingin menikmati ketenangan dan keindahan alam Sumatera Barat.', NULL, '2024-10-25 19:55:23', '2024-10-25 19:55:23', '');
+('H13', '1', 'Homestay Gudester', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000050000001dc09e63081f59407ec8ede3dfa0dcbf1cc01e0f0a1f5940c98d5f80a7a2dcbf1ec0feb40b1f5940924004a4d4a0dcbf1dc0be140a1f5940e50692070d9fdcbf1dc09e63081f59407ec8ede3dfa0dcbf, -0.44731766, 100.48498829, 24, '10:00:00', '23:59:00', 50, 'Gudester Pariangan Homestay is a modern homestay that exclusively offers rooms. Each room features a breathtaking view of the rice fields.', NULL, '2024-10-25 19:48:36', '2025-01-21 06:40:00', ''),
+('H14', '1', 'Homestay Nabila', '2', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', 0xe6100000010300000001000000070000006c9b975dc61e5940c422477d5b8edcbf6d9b779bc61e5940a53cea990c90dcbf6c9b973ec71e5940aac034576991dcbf6c9b97b4c91e5940385ed1971a91dcbf6c9b574fc91e5940ceae26feea8ddcbf6c9b97b7c61e5940ee5052dd558edcbf6c9b975dc61e5940c422477d5b8edcbf, -0.44626860, 100.48095920, 25, '10:00:00', '23:59:00', 50, 'Nabila Homestay in Pariangan is a comfortable accommodation that offers a blend of traditional Minangkabau architecture and modern comfort. Located in Pariangan Village, Tanah Datar, this homestay presents expansive views of green rice paddies and surrounding hills, making it the perfect place for guests who want to enjoy the tranquility and natural beauty of West Sumatra. ', NULL, '2024-10-25 19:55:23', '2025-01-21 06:36:53', '');
 
 -- --------------------------------------------------------
 
@@ -1186,10 +1248,10 @@ INSERT INTO `homestay_additional_amenities` (`homestay_id`, `additional_amenitie
 ('H13', '01', '1', 'Extra Bed', '1', 250000, '0', '1', '1', 3, 'Kasur Tambahan', '1729929786_7a8905841bc12e975475.jpg', '2024-10-25 20:03:17', '2024-10-25 20:03:17'),
 ('H13', '02', '1', 'Makan siang', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729929833_36273e691e8717a109a1.jpeg', '2024-10-25 20:03:55', '2024-10-25 20:03:55'),
 ('H13', '03', '1', 'Makan Malam', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729929895_3acd79ef24efa42d0ad4.jpg', '2024-10-25 20:04:58', '2024-10-25 20:04:58'),
-('H14', '01', '1', 'Sarapan', '2', 15000, '1', '1', '0', 0, 'Bisa Request', '1729930482_9973666a16a31dde1159.jpeg', '2024-10-25 20:14:44', '2024-10-25 20:14:44'),
+('H14', '01', '1', 'Breakfast', '2', 15000, '1', '1', '0', 0, 'Request breakfast', '1737488030_1e7bb499298d3687c3cc.jpeg', '2024-10-25 20:14:44', '2025-01-21 06:34:18'),
 ('H14', '02', '1', 'Extra Bed', '1', 250000, '1', '0', '0', 5, 'Kasur Tambahan', '1729930540_c556b1165d86231b345a.jpg', '2024-10-25 20:15:42', '2024-10-25 20:15:42'),
-('H14', '03', '1', 'Makan Siang', '2', 20000, '1', '1', '0', 0, 'Bisa Request', '1729930579_c46285355b6831b83f6e.jpeg', '2024-10-25 20:16:21', '2024-10-25 20:16:21'),
-('H14', '04', '1', 'Makan Malam', '2', 20000, '1', '1', '0', 0, 'BIsa Request', '1729930618_feae05476ecb4485033d.jpg', '2024-10-25 20:17:00', '2024-10-25 20:17:00'),
+('H14', '03', '1', 'Lunch', '2', 20000, '1', '1', '0', 0, 'Request lunch', '1737488059_b64c1dd57c4784505fd6.jpeg', '2024-10-25 20:16:21', '2025-01-21 06:34:51'),
+('H14', '04', '1', 'Dinner', '2', 20000, '1', '1', '0', 0, 'Request dinner', '1737488092_abf26f0aa190b5c3f2e3.jpg', '2024-10-25 20:17:00', '2025-01-21 06:35:10'),
 ('H14', '05', '1', 'Bajamba', '2', 30000, '0', '1', '0', 0, 'Makan Bajamba', '1729930848_b080699b1d12b4a89bcf.jpeg', '2024-10-25 20:20:51', '2024-10-25 20:20:51');
 
 -- --------------------------------------------------------
@@ -1262,13 +1324,13 @@ INSERT INTO `homestay_facility_detail` (`homestay_id`, `facility_id`, `created_a
 ('H12', '01', '2024-12-16 04:21:01', '2024-12-16 04:21:01'),
 ('H12', '02', '2024-12-16 04:21:01', '2024-12-16 04:21:01'),
 ('H12', '03', '2024-12-16 04:21:01', '2024-12-16 04:21:01'),
-('H13', '01', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
-('H13', '03', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
-('H13', '04', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
-('H13', '05', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
-('H14', '01', '2024-10-25 19:55:23', '2024-10-25 19:55:23'),
-('H14', '02', '2024-10-25 19:55:23', '2024-10-25 19:55:23'),
-('H14', '04', '2024-10-25 19:55:23', '2024-10-25 19:55:23');
+('H13', '01', '2025-01-21 06:40:00', '2025-01-21 06:40:00'),
+('H13', '03', '2025-01-21 06:40:00', '2025-01-21 06:40:00'),
+('H13', '04', '2025-01-21 06:40:00', '2025-01-21 06:40:00'),
+('H13', '05', '2025-01-21 06:40:00', '2025-01-21 06:40:00'),
+('H14', '01', '2025-01-21 06:36:53', '2025-01-21 06:36:53'),
+('H14', '02', '2025-01-21 06:36:53', '2025-01-21 06:36:53'),
+('H14', '04', '2025-01-21 06:36:53', '2025-01-21 06:36:53');
 
 -- --------------------------------------------------------
 
@@ -1289,11 +1351,11 @@ CREATE TABLE `homestay_gallery` (
 --
 
 INSERT INTO `homestay_gallery` (`id`, `homestay_id`, `url`, `created_at`, `updated_at`) VALUES
-('008', 'H13', '1729929046_c18347296961982ed7a1.jpg', '2024-10-25 19:51:07', '2024-10-25 19:51:07'),
-('012', 'H14', '1729929320_7faf6d2fa8579c1adb8b.jpg', '2024-10-25 19:55:23', '2024-10-25 19:55:23'),
 ('013', 'H12', '1734369479_9278475630aaacd1a8a7.jpg', '2024-12-16 04:21:01', '2024-12-16 04:21:01'),
 ('014', 'H12', '1734369477_91e0bc4b8a2023f156af.jpg', '2024-12-16 04:21:01', '2024-12-16 04:21:01'),
-('015', 'H12', '1734369477_9ce2215cc2309e9faa3d.jpg', '2024-12-16 04:21:01', '2024-12-16 04:21:01');
+('015', 'H12', '1734369477_9ce2215cc2309e9faa3d.jpg', '2024-12-16 04:21:01', '2024-12-16 04:21:01'),
+('016', 'H14', '1737488198_93f9d038097c821a29e4.jpg', '2025-01-21 06:36:53', '2025-01-21 06:36:53'),
+('017', 'H13', '1737488391_d5e61d4aee21d8bc60e0.jpg', '2025-01-21 06:40:00', '2025-01-21 06:40:00');
 
 -- --------------------------------------------------------
 
@@ -1319,15 +1381,15 @@ CREATE TABLE `homestay_unit` (
 
 INSERT INTO `homestay_unit` (`homestay_id`, `unit_type`, `unit_number`, `name`, `price`, `capacity`, `description`, `created_at`, `updated_at`) VALUES
 ('H12', '1', '1', 'Room 1', 350000, 2, 'Room 1\r\n', '2024-09-29 01:05:21', '2024-12-16 04:22:23'),
-('H12', '1', '2', 'Room 2', 350000, 2, 'Room 2', '2024-09-29 01:05:52', '2024-12-16 04:22:32'),
-('H12', '1', '3', 'Room 3', 350000, 2, 'Room 3', '2024-09-29 01:06:32', '2024-12-16 04:22:40'),
-('H12', '1', '4', 'Room 4', 350000, 2, 'Room 4', '2024-10-25 07:29:25', '2024-12-16 04:22:51'),
-('H12', '1', '5', 'Room 5', 350000, 2, 'Room 5', '2024-10-25 07:29:37', '2024-12-16 04:23:01'),
+('H12', '1', '2', 'Room 2', 350000, 2, 'Room 2', '2024-09-29 01:05:52', '2025-01-23 20:13:30'),
+('H12', '1', '3', 'Room 3', 350000, 2, 'Room 3', '2024-09-29 01:06:32', '2025-01-23 20:15:24'),
+('H12', '1', '4', 'Room 4', 350000, 2, 'Room 4', '2024-10-25 07:29:25', '2025-01-23 20:15:41'),
+('H12', '1', '5', 'Room 5', 350000, 2, 'Room 5', '2024-10-25 07:29:37', '2025-01-23 20:15:55'),
 ('H13', '1', '1', 'Kamar 1', 400000, 2, 'Free breakfast', '2024-10-25 20:00:05', '2024-10-25 20:00:05'),
 ('H13', '1', '2', 'Kamar 2', 400000, 2, 'Free breakfast', '2024-10-25 20:01:19', '2024-10-25 20:01:19'),
-('H13', '1', '3', 'Kamar 3', 400000, 2, 'Free breakfast', '2024-10-25 20:02:05', '2024-10-25 20:02:05'),
-('H14', '1', '1', 'Kamar 1', 300000, 2, 'Kamar 1', '2024-10-25 20:11:07', '2024-10-25 20:12:32'),
-('H14', '1', '2', 'Kamar 2', 300000, 2, 'Kamar 2', '2024-10-25 20:14:01', '2024-10-25 20:14:01');
+('H13', '1', '3', 'Kamar 3', 400000, 2, 'Free breakfast', '2024-10-25 20:02:05', '2025-01-21 06:29:43'),
+('H14', '1', '1', 'Room 1', 300000, 2, 'Room 1', '2024-10-25 20:11:07', '2025-01-21 06:35:32'),
+('H14', '1', '2', 'Room 2', 300000, 2, 'Room 2', '2024-10-25 20:14:01', '2025-01-21 06:35:52');
 
 -- --------------------------------------------------------
 
@@ -1354,7 +1416,9 @@ INSERT INTO `homestay_unit_facility` (`id`, `name`, `created_at`, `updated_at`) 
 ('06', 'Toilet', '2024-02-27 01:58:47', '2024-02-27 01:58:47'),
 ('07', 'Bed', '2024-02-27 02:00:17', '2024-02-27 02:00:17'),
 ('08', 'Fan', '2024-02-27 20:59:04', '2024-02-27 20:59:04'),
-('09', 'Wardrobe', '2024-10-25 07:20:38', '2024-10-25 07:27:37');
+('09', 'Wardrobe', '2024-10-25 07:20:38', '2024-10-25 07:27:37'),
+('10', 'Chair', '2025-01-23 20:17:06', '2025-01-23 20:17:06'),
+('11', 'Table', '2025-01-23 20:17:12', '2025-01-23 20:17:12');
 
 -- --------------------------------------------------------
 
@@ -1431,14 +1495,14 @@ CREATE TABLE `homestay_unit_gallery` (
 INSERT INTO `homestay_unit_gallery` (`id`, `homestay_id`, `unit_type`, `unit_number`, `url`, `created_at`, `updated_at`) VALUES
 ('051', 'H13', '1', '1', '1729929602_f121029ca16bd5e91ef4.jpg', '2024-10-25 20:00:05', '2024-10-25 20:00:05'),
 ('052', 'H13', '1', '2', '1729929677_e8fcf9c699dc2f2d9c40.jpeg', '2024-10-25 20:01:19', '2024-10-25 20:01:19'),
-('053', 'H13', '1', '3', '1729929722_c5173c0859b6a60b9266.jpeg', '2024-10-25 20:02:05', '2024-10-25 20:02:05'),
-('054', 'H14', '1', '1', '1729930348_3313b6e7273fc7ec409b.jpg', '2024-10-25 20:12:32', '2024-10-25 20:12:32'),
-('055', 'H14', '1', '2', '1729930439_d61518894390505b60df.jpeg', '2024-10-25 20:14:01', '2024-10-25 20:14:01'),
 ('061', 'H12', '1', '1', '1734369732_5f977ccc009972cec611.jpg', '2024-12-16 04:22:23', '2024-12-16 04:22:23'),
-('062', 'H12', '1', '2', '1734369750_e03582d6269e594dd228.jpg', '2024-12-16 04:22:32', '2024-12-16 04:22:32'),
-('063', 'H12', '1', '3', '1734369758_0855cd12a0374b0d5041.jpg', '2024-12-16 04:22:40', '2024-12-16 04:22:40'),
-('064', 'H12', '1', '4', '1734369767_9662eb8cf692b397c323.jpg', '2024-12-16 04:22:51', '2024-12-16 04:22:51'),
-('065', 'H12', '1', '5', '1734369778_939e21618045835516c8.jpg', '2024-12-16 04:23:01', '2024-12-16 04:23:01');
+('066', 'H13', '1', '3', '1737487779_2f03dce596a9b9bc8ec4.jpeg', '2025-01-21 06:29:43', '2025-01-21 06:29:43'),
+('067', 'H14', '1', '1', '1737488122_bb0d3bc9b68ac4b75106.jpg', '2025-01-21 06:35:32', '2025-01-21 06:35:32'),
+('068', 'H14', '1', '2', '1737488146_ab53262428641452fe91.jpeg', '2025-01-21 06:35:52', '2025-01-21 06:35:52'),
+('069', 'H12', '1', '2', '1737710007_fd6398aea1dfc6cb3d8c.jpg', '2025-01-23 20:13:30', '2025-01-23 20:13:30'),
+('070', 'H12', '1', '3', '1737710122_bb046bcff71b0ea6dd66.jpg', '2025-01-23 20:15:24', '2025-01-23 20:15:24'),
+('071', 'H12', '1', '4', '1737710139_fb5e9ea1e2072b10b7e2.jpg', '2025-01-23 20:15:42', '2025-01-23 20:15:42'),
+('072', 'H12', '1', '5', '1737710152_94c8efe7e4c1a44d94f3.jpg', '2025-01-23 20:15:55', '2025-01-23 20:15:55');
 
 -- --------------------------------------------------------
 
@@ -1669,7 +1733,13 @@ INSERT INTO `reservation` (`id`, `customer_id`, `reservation_type`, `request_dat
 ('R091', 11, '1', '2024-12-28 15:50:40', '2025-01-04 14:00:00', 1, NULL, NULL, NULL, 25000, 700000, 140000, '0', NULL, NULL, '2024-12-28 08:51:05', NULL, NULL, NULL, '2025-01-04 16:00:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
 ('R092', 11, '1', '2024-12-28 15:51:27', '2025-01-04 14:00:00', 1, NULL, NULL, NULL, 0, 350000, 70000, '0', NULL, NULL, '2024-12-28 08:51:32', NULL, NULL, NULL, '2025-01-04 16:00:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
 ('R093', NULL, '1', '2024-12-28 15:55:41', '2024-12-29 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, NULL, 'Done', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R094', 11, '1', '2024-12-28 16:16:26', '2025-01-10 14:00:00', 2, NULL, NULL, NULL, 52500, 350000, 70000, '0', NULL, NULL, '2024-12-28 09:16:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+('R094', 11, '1', '2024-12-28 16:16:26', '2025-01-10 14:00:00', 2, NULL, NULL, NULL, 52500, 350000, 70000, '0', NULL, NULL, '2024-12-28 09:16:32', NULL, NULL, NULL, '2025-01-11 17:23:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R095', 11, '1', '2025-01-18 01:24:20', '2025-01-22 14:00:00', 1, NULL, NULL, NULL, 0, 350000, 70000, 'Done', '0455aded-d48c-4198-9296-1aebd9d5de16', '83210831-987b-4d8d-aa52-ef8144fbe680', '2025-01-17 18:24:27', '0', '2025-01-17 18:24:46', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R096', NULL, '1', '2025-01-19 01:03:25', '2025-01-19 14:00:00', 1, NULL, NULL, NULL, NULL, 350000, NULL, 'Done', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R097', 11, '1', '2025-01-22 01:24:00', '2025-01-25 14:00:00', 1, NULL, NULL, NULL, 0, 350000, 70000, 'Deposit Successful', '326de1c2-1809-4af6-8156-ddb757d03edd', NULL, '2025-01-21 18:24:07', '0', '2025-01-21 18:27:16', '', '2025-01-21 18:28:00', '1', '1', NULL, 'dyka - bca - 1234567890', NULL, NULL, NULL),
+('R098', 11, '1', '2025-01-22 01:32:43', '2025-01-25 14:00:00', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-01-23 15:22:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R099', 11, '1', '2025-01-23 22:30:56', '2025-01-22 14:00:00', 1, 'Good ', 5, 20000, 60000, 400000, 80000, 'Done', '99b928ca-a4c0-447e-9b50-73145ae4ef24', 'd11d3ed8-6f66-4293-b639-bf8198a740ad', '2025-01-23 15:43:46', '0', '2025-01-23 15:46:20', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R100', 11, '1', '2025-01-23 22:52:34', '2025-01-26 14:00:00', 1, NULL, NULL, NULL, 0, 400000, 80000, 'Deposit Successful', '87426077-298d-441b-b3a5-2a50ac1e2bd6', '6512810b-c46c-4a38-b57a-006438dc9e54', '2025-01-23 15:52:50', '0', '2025-01-23 15:53:07', '', '2025-01-23 15:54:00', '1', '1', '2025-01-23 16:00:33', 'Dyka - BCA - 1233214567', '1737648030_a88bc32aaf556143fdfe.png', '1', '2025-01-23 16:02:19');
 
 -- --------------------------------------------------------
 
@@ -1762,7 +1832,9 @@ INSERT INTO `reservation_homestay_unit_detail` (`homestay_id`, `unit_type`, `uni
 ('H12', '1', '5', '2025-01-01', 'R088'),
 ('H12', '1', '1', '2025-01-02', 'R089'),
 ('H12', '1', '1', '2024-12-29', 'R093'),
-('H12', '1', '2', '2025-01-10', 'R094');
+('H12', '1', '1', '2025-01-22', 'R095'),
+('H12', '1', '1', '2025-01-19', 'R096'),
+('H13', '1', '1', '2025-01-26', 'R099');
 
 -- --------------------------------------------------------
 
@@ -1952,7 +2024,11 @@ INSERT INTO `reservation_homestay_unit_detail_backup` (`homestay_id`, `unit_type
 ('H12', '1', '5', 'R090', '2025-01-03'),
 ('H12', '1', '1', 'R091', '2025-01-04'),
 ('H12', '1', '2', 'R091', '2025-01-04'),
-('H12', '1', '3', 'R092', '2025-01-04');
+('H12', '1', '3', 'R092', '2025-01-04'),
+('H12', '1', '2', 'R094', '2025-01-10'),
+('H12', '1', '1', 'R097', '2025-01-25'),
+('H12', '1', '1', 'R098', '2025-01-25'),
+('H13', '1', '2', 'R100', '2025-01-26');
 
 -- --------------------------------------------------------
 
@@ -2176,9 +2252,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `username`, `first_name`, `last_name`, `address`, `phone`, `avatar`, `total_coin`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (7, 'pokdarwispariangan1@gmail.com', 'pokdarwis.pariangan', 'Fakhrudoni Putra', 'Account', 'Desa Wisata Nagari Tuo Pariangan', '082218141289', 'default.jpg', NULL, '$2y$10$KKs/QMWOtQgv6eN0wOiCQO5SDa14h2o387oiOCPyn9nGDKFs0usAu', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:29', '2023-10-28 22:51:29', NULL),
-(11, 'shandyka2403@gmail.com', 'dykdyk', 'Dyka', 'Dyka', 'Padang', '081364928950', 'default.jpg', 147500, '$2y$10$fVxJTbgT/Ja7xSc56553suT/tYJA8XzUL9zkl61yBYR/qtNQ35OoG', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-14 20:28:36', '2023-12-14 20:28:36', NULL),
+(11, 'shandyka2403@gmail.com', 'dykdyk', 'Dyka', 'Dyka', 'Padang', '081364928950', 'default.jpg', 107500, '$2y$10$fVxJTbgT/Ja7xSc56553suT/tYJA8XzUL9zkl61yBYR/qtNQ35OoG', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-14 20:28:36', '2023-12-14 20:28:36', NULL),
 (23, 'umegahomestay@gmail.com', 'umegahomestay', 'Owner Umega', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '0895329272378', 'default.jpg', NULL, '$2y$10$t/tLnMQiHV.4x9rez4BozenBzYWYsax3IZy5apnWa729tS1p944xq', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-26 11:40:48', '2024-09-26 11:40:48', NULL),
-(24, 'gudesterhomestay@gmail.com', 'gudesterhomestay', 'Owner Gudester', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '082269375195', 'default.jpg', NULL, '$2y$10$e4cqmQwqIh8drtCvobmCuOodW.zIHGRwqIn9RKfG6u6MapDSJ2dva', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-28 05:04:12', '2024-09-28 05:04:12', NULL),
+(24, 'gudesterhomestay@gmail.com', 'gudesterhomestay', 'Owner Gudester', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '0895329272378', 'default.jpg', NULL, '$2y$10$e4cqmQwqIh8drtCvobmCuOodW.zIHGRwqIn9RKfG6u6MapDSJ2dva', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-28 05:04:12', '2024-09-28 05:04:12', NULL),
 (25, 'nabilahomestay@gmail.com', 'nabilahomestay', 'Owner Nabila', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '082249063128', 'default.jpg', NULL, '$2y$10$hb.4auiFDNFb8uPEePqiauI2jyTKKm47b.4WXfMdB5hxSc6iWmTgq', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-10 03:16:39', '2024-10-10 03:16:39', NULL);
 
 -- --------------------------------------------------------
@@ -2540,6 +2616,7 @@ ALTER TABLE `culinary_product_detail`
 --
 ALTER TABLE `homestay`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`),
   ADD KEY `homestay_owner_foreign` (`owner`);
 
 --
@@ -2777,7 +2854,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=546;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=604;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -2807,7 +2884,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Constraints for dumped tables
