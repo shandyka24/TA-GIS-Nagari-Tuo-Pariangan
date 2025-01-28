@@ -19,6 +19,8 @@ use App\Models\Homestay\HomestayUnitFacilityModel;
 use App\Models\Homestay\HomestayFacilityDetailModel;
 use App\Models\Homestay\HomestayGalleryModel;
 use App\Models\HomestayCertificationModel;
+use App\Models\Homestay\HomestayUnitModel;
+use App\Models\Homestay\HomestayAdditionalAmenitiesModel;
 
 use App\Models\Reservation\ReservationModel;
 use App\Models\Reservation\ReservationHomestayUnitDetailModel;
@@ -41,6 +43,8 @@ class Homestay extends ResourcePresenter
     protected $homestayFacilityDetailModel;
     protected $homestayGalleryModel;
     protected $homestayCertificationModel;
+    protected $homestayUnitModel;
+    protected $homestayAdditionalAmenitiesModel;
 
     protected $reservationModel;
     protected $reservationHomestayUnitDetailModel;
@@ -63,6 +67,8 @@ class Homestay extends ResourcePresenter
         $this->homestayFacilityDetailModel = new HomestayFacilityDetailModel();
         $this->homestayGalleryModel = new HomestayGalleryModel();
         $this->homestayCertificationModel = new HomestayCertificationModel();
+        $this->homestayUnitModel = new HomestayUnitModel();
+        $this->homestayAdditionalAmenitiesModel = new HomestayAdditionalAmenitiesModel();
 
         $this->reservationModel = new ReservationModel();
         $this->reservationHomestayUnitDetailModel = new ReservationHomestayUnitDetailModel();
@@ -474,53 +480,124 @@ class Homestay extends ResourcePresenter
 
     public function maps()
     {
-        $contents = $this->rumahGadangModel->get_list_rg_api()->getResultArray();
+        $contents = $this->homestayModel->get_list_hs_api()->getResultArray();
+
         $data = [
-            'title' => 'Rumah Gadang',
+            'title' => 'Homestay',
             'data' => $contents,
         ];
 
-        return view('maps/rumah_gadang', $data);
+        return view('maps/homestay', $data);
     }
 
     public function detail($id = null)
     {
-        $rumahGadang = $this->rumahGadangModel->get_rg_by_id_api($id)->getRowArray();
-        if (empty($rumahGadang)) {
-            return redirect()->to(substr(current_url(), 0, -strlen($id)));
-        }
+        // $rumahGadang = $this->rumahGadangModel->get_rg_by_id_api($id)->getRowArray();
+        // if (empty($rumahGadang)) {
+        //     return redirect()->to(substr(current_url(), 0, -strlen($id)));
+        // }
 
-        $avg_rating = $this->reviewModel->get_rating('rumah_gadang_id', $id)->getRowArray()['avg_rating'];
+        // $avg_rating = $this->reviewModel->get_rating('rumah_gadang_id', $id)->getRowArray()['avg_rating'];
 
-        $list_facility = $this->detailFacilityRumahGadangModel->get_facility_by_rg_api($id)->getResultArray();
+        // $list_facility = $this->detailFacilityRumahGadangModel->get_facility_by_rg_api($id)->getResultArray();
+        // $facilities = array();
+        // foreach ($list_facility as $facility) {
+        //     $facilities[] = $facility['facility'];
+        // }
+
+        // $list_review = $this->reviewModel->get_review_object_api('rumah_gadang_id', $id)->getResultArray();
+
+        // $list_gallery = $this->galleryRumahGadangModel->get_gallery_api($id)->getResultArray();
+        // $galleries = array();
+        // foreach ($list_gallery as $gallery) {
+        //     $galleries[] = $gallery['url'];
+        // }
+
+
+        // $rumahGadang['avg_rating'] = $avg_rating;
+        // $rumahGadang['facilities'] = $facilities;
+        // $rumahGadang['reviews'] = $list_review;
+        // $rumahGadang['gallery'] = $galleries;
+
+        // $data = [
+        //     'title' => $rumahGadang['name'],
+        //     'data' => $rumahGadang,
+        // ];
+
+        // if (url_is('*dashboard*')) {
+        //     return view('dashboard/detail_rumah_gadang', $data);
+        // }
+        // return view('maps/detail_rumah_gadang', $data);
+
+        $homestay = $this->homestayModel->get_hs_by_id_api($id)->getRowArray();
+
+        $list_facility = $this->homestayFacilityDetailModel->get_facility_by_hs_api($id)->getResultArray();
         $facilities = array();
         foreach ($list_facility as $facility) {
-            $facilities[] = $facility['facility'];
+            $facilities[] = $facility['name'];
         }
 
-        $list_review = $this->reviewModel->get_review_object_api('rumah_gadang_id', $id)->getResultArray();
+        $getRID = $this->reservationHomestayUnitDetailModel->get_reservation_by_hs_api($id)->getResultArray();
 
-        $list_gallery = $this->galleryRumahGadangModel->get_gallery_api($id)->getResultArray();
+        $rating_review = array();
+        $rating = 0;
+        $rating_divider = 0;
+        foreach ($getRID as $rid) {
+            $reservation = $this->reservationModel->get_reservation_by_id($rid['reservation_id'])->getRowArray();
+            if ($reservation['rating'] != null) {
+                $user = $this->reservationModel->get_cust($reservation['customer_id'])->getRowArray();
+                $rr['username'] = $user['username'];
+                $rr['rating'] = $reservation['rating'];
+                $rr['review'] = $reservation['review'];
+                $rating_review[] = $rr;
+                $rating = $rating + $reservation['rating'];
+                $rating_divider++;
+            }
+        }
+        if ($rating != 0) {
+            $avg_rating = $rating / $rating_divider;
+        } else {
+            $avg_rating = 0;
+        }
+
+        $homestay['avg_rating'] = $avg_rating;
+        $homestay['rating_review'] = $rating_review;
+
+        $list_gallery = $this->homestayGalleryModel->get_gallery_api($id)->getResultArray();
         $galleries = array();
         foreach ($list_gallery as $gallery) {
             $galleries[] = $gallery['url'];
         }
 
+        $homestay_unit = $this->homestayUnitModel->get_list_hu_api($homestay['id'])->getResultArray();
+        $homestay['unit'] = $homestay_unit;
 
-        $rumahGadang['avg_rating'] = $avg_rating;
-        $rumahGadang['facilities'] = $facilities;
-        $rumahGadang['reviews'] = $list_review;
-        $rumahGadang['gallery'] = $galleries;
+        // $package = $this->packageModel->list_by_homestay_api($homestay['id'])->getResultArray();
+        // $homestay['package'] = $package;
+
+        $additional_amenities = $this->homestayAdditionalAmenitiesModel->get_list_haa_api($homestay['id'])->getResultArray();
+        $homestay['additional_amenities'] = $additional_amenities;
+
+        $homestay['facilities'] = $facilities;
+        $homestay['gallery'] = $galleries;
 
         $data = [
-            'title' => $rumahGadang['name'],
-            'data' => $rumahGadang,
+            'title' => $homestay['name'],
+            'data' => $homestay,
+        ];
+
+        $data['data']['geoJson'] = [
+            'type' => 'Feature',
+            'geometry' => json_decode($data['data']['geoJson']),
+            'properties' => []
         ];
 
         if (url_is('*dashboard*')) {
-            return view('dashboard/detail_rumah_gadang', $data);
+            return view('dashboard/homestay_detail', $data);
         }
-        return view('maps/detail_rumah_gadang', $data);
+
+        $data['homestay_id'] = $homestay['id'];
+        return view('maps/homestay_detail', $data);
     }
 
     public function facilityHomestay()
@@ -597,7 +674,7 @@ class Homestay extends ResourcePresenter
             return $this->failNotFound($response);
         }
     }
-    
+
     public function facilityUnit()
     {
         $contents = $this->homestayUnitFacilityModel->get_list_fc_api()->getResultArray();
@@ -672,4 +749,76 @@ class Homestay extends ResourcePresenter
             return $this->failNotFound($response);
         }
     }
+
+    public function detailMobile($id = null)
+    {
+        // dd($id);
+        $homestay = $this->homestayModel->get_hs_by_id_api_mobile($id)->getRowArray();
+
+        $list_facility = $this->homestayFacilityDetailModel->get_facility_by_hs_api($id)->getResultArray();
+        $facilities = array();
+        foreach ($list_facility as $facility) {
+            $facilities[] = $facility['name'];
+        }
+
+        $getRID = $this->reservationHomestayUnitDetailModel->get_reservation_by_hs_api($id)->getResultArray();
+
+        $rating_review = array();
+        $rating = 0;
+        $rating_divider = 0;
+        foreach ($getRID as $rid) {
+            $reservation = $this->reservationModel->get_reservation_by_id($rid['reservation_id'])->getRowArray();
+            if ($reservation['rating'] != null) {
+                $user = $this->reservationModel->get_cust($reservation['customer_id'])->getRowArray();
+                $rr['username'] = $user['username'];
+                $rr['rating'] = $reservation['rating'];
+                $rr['review'] = $reservation['review'];
+                $rating_review[] = $rr;
+                $rating = $rating + $reservation['rating'];
+                $rating_divider++;
+            }
+        }
+        if ($rating != 0) {
+            $avg_rating = $rating / $rating_divider;
+        } else {
+            $avg_rating = 0;
+        }
+
+        $homestay['avg_rating'] = $avg_rating;
+        $homestay['rating_review'] = $rating_review;
+
+        $list_gallery = $this->homestayGalleryModel->get_gallery_api($id)->getResultArray();
+        $galleries = array();
+        foreach ($list_gallery as $gallery) {
+            $galleries[] = $gallery['url'];
+        }
+
+        $homestay_unit = $this->homestayUnitModel->get_list_hu_api($id)->getResultArray();
+        $homestay['unit'] = $homestay_unit;
+
+        $additional_amenities = $this->homestayAdditionalAmenitiesModel->get_list_haa_api($id)->getResultArray();
+        $homestay['additional_amenities'] = $additional_amenities;
+
+        $homestay['facilities'] = $facilities;
+        $homestay['gallery'] = $galleries;
+
+        $data = [
+            'title' => $homestay['name'],
+            'data' => $homestay,
+        ];
+
+        // $data['data']['geoJson'] = [
+        //     'type' => 'Feature',
+        //     // 'geometry' => json_decode($data['data']['geoJson']),
+        //     'properties' => []
+        // ];
+
+        if (url_is('*dashboard*')) {
+            return view('dashboard/homestay_detail', $data);
+        }
+
+        $data['homestay_id'] = $homestay['id'];
+        return view('maps/homestay_detail', $data);
+    }
+
 }

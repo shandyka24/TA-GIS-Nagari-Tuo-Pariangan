@@ -66,6 +66,16 @@ class AttractionModel extends Model
         return $query;
     }
 
+    public function get_list_at_api_mobile()
+    {
+        $columns = "{$this->table}.id,{$this->table}.name,{$this->table}.address,{$this->table}.phone,{$this->table}.open,{$this->table}.close,{$this->table}.employee_name,{$this->table}.description, {$this->table}.attraction_category";
+        $geoJson = "ST_AsGeoJSON({$this->table}.geom) AS geoJson";
+        $query = $this->db->table($this->table)
+            ->select("{$columns}, attraction.lat, attraction.lng, {$geoJson}")
+            ->get();
+        return $query;
+    }
+
     public function list_by_owner($id = null)
     {
         $query = $this->db->table($this->table)
@@ -174,14 +184,14 @@ class AttractionModel extends Model
             ->set('geom', "ST_GeomFromGeoJSON('{$geojson}')", false)
             ->where('id', $id)
             ->update();
-        
-        if (!isset ($attraction['price'])) {
+
+        if (!isset($attraction['price'])) {
             $update = $this->db->table($this->table)
-            ->set('price', '0')
-            ->where('id', $id)
-            ->update();
+                ->set('price', '0')
+                ->where('id', $id)
+                ->update();
         }
-            return $query && $update;
+        return $query && $update;
     }
     public function get_att_for_package($id = null)
     {

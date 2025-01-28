@@ -9,7 +9,7 @@
 if (isset($data)):
     foreach ($data as $item): ?>
         <script>currentUrl = currentUrl + "<?= esc($item['id']); ?>"</script>
-        <script>objectMarker("<?= esc($item['id']); ?>", <?= esc($item['lat']); ?>, <?= esc($item['lng']); ?>);</script>
+        <script>objectMarker("<?= esc($item['id']); ?>", <?= esc($item['lat']); ?>, <?= esc($item['lng']); ?>, true, "<?= esc($item['attraction_category']); ?>")</script>
 <?php
     endforeach;?>
     <script>boundToObject();</script>

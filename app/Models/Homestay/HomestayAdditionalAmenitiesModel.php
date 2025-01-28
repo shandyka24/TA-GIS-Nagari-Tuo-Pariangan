@@ -113,6 +113,7 @@ class HomestayAdditionalAmenitiesModel extends Model
         $query = $this->db->table($this->table)
             ->select('*')
             ->where('homestay_id', $homestay_id)
+            ->where('additional_amenities_type', '1')
             ->whereNotIN('additional_amenities_id', $id)
             ->orderBy('name', 'ASC')
             ->get();

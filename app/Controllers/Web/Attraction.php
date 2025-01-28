@@ -371,7 +371,7 @@ class Attraction extends ResourcePresenter
 
     public function maps()
     {
-        $contents = $this->attractionModel->get_list_at_api()->getResultArray();
+        $contents = $this->attractionModel->get_list_at_api_mobile()->getResultArray();
         $data = [
             'title' => 'Attraction',
             'data' => $contents,
@@ -387,7 +387,7 @@ class Attraction extends ResourcePresenter
             return redirect()->to(substr(current_url(), 0, -strlen($id)));
         }
 
-        $list_ticketPrice = $this->attractionTicketPriceModel->get_ticket_by_at_api($id)->getResultArray();
+        // $list_ticketPrice = $this->attractionTicketPriceModel->get_ticket_by_at_api($id)->getResultArray();
         $list_facility = $this->attractionFacilityDetailModel->get_facility_by_at_api($id)->getResultArray();
         $facilities = array();
         foreach ($list_facility as $facility) {
@@ -406,7 +406,6 @@ class Attraction extends ResourcePresenter
         $data = [
             'title' => $attraction['name'],
             'data' => $attraction,
-            'ticket_prices' => $list_ticketPrice,
         ];
 
         $data['data']['geoJson'] = [

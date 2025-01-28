@@ -147,6 +147,13 @@ $routes->group('web', ['namespace' => 'App\Controllers\Web'], function ($routes)
     $routes->post('reservationEvent/(:segment)', 'Reservation::createReservationEvent/$1', ['namespace' => 'App\Controllers\Web\Reservation', 'filter' =>'role:user']);
 
     $routes->get('aroundYou', 'TouristArea::aroundYou', ['namespace' => 'App\Controllers\Web']);
+    
+    $routes->get('homestay_detail_mobile/(:segment)', 'Homestay::detailMobile/$1', ['namespace' => 'App\Controllers\Web\Homestay']);
+    $routes->get('homestay_unit_detail_mobile/(:segment)/(:segment)/(:segment)', 'HomestayUnit::unitDetailMobile/$1/$2/$3', ['namespace' => 'App\Controllers\Web\HomestayUnit']);
+    $routes->get('additional_amenitie_detail_mobile/(:segment)/(:segment)', 'AdditionalAmenities::detailAdditionalAmenitiesMobile/$1/$2', ['namespace' => 'App\Controllers\Web\AdditionalAmenities']);
+    $routes->get('list_homestay_mobile', 'Homestay::maps', ['namespace' => 'App\Controllers\Web\Homestay']);
+
+
 });
 
 // Dashboard
@@ -366,6 +373,8 @@ $routes->group('api', ['namespace' => 'App\Controllers\Api'], function ($routes)
     $routes->post('culinaryPlace/findAll', 'CulinaryPlace::findAll');
     $routes->post('souvenirPlace/findAll', 'SouvenirPlace::findAll');
     $routes->post('worshipPlace/findAll', 'WorshipPlace::findAll');
+
+    $routes->get('attraction_mobile', 'Attraction::attractionMobile');
 });
 
 /*

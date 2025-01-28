@@ -853,7 +853,6 @@ if (strtotime(date("d F Y, H:i")) < strtotime($cancelDeadline)) {
 }
 
 ?>
-<span><?= esc(strtotime(date("d F Y, H:i"))) ?><br><?= esc(strtotime($cancelDeadline)) ?></span>
 <?php if (isset($snapToken)) : ?>
     <script type="text/javascript">
         var payButton = document.getElementById('pay-button');

@@ -82,7 +82,7 @@
                 </li>
                 <li class="form-check">
                     <input class="form-check-input" type="checkbox" id="checkAttraction" value="Attraction" onchange="checkObject()">
-                    <label class="form-check-label" for="checkAttraction">Attraction</label>
+                    <label class="form-check-label" for="checkAttraction">Ordinary Attraction</label>
                 </li>
                 <li class="form-check">
                     <input class="form-check-input" type="checkbox" id="checkHomestay" value="Homestay" onchange="checkObject()">

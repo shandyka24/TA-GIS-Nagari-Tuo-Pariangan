@@ -565,4 +565,29 @@ class Attraction extends ResourceController
         ];
         return $this->respond($response);
     }
+
+    public function attractionMobile(){
+        $contents = $this->attractionModel->get_list_at_api_mobile()->getResult();
+        foreach ($contents as $content) {
+            $list_gallery = $this->attractionGalleryModel->get_gallery_api($content->id)->getResultArray();
+            $galleries = array();
+            foreach ($list_gallery as $gallery) {
+                $galleries[] = $gallery['url'];
+            }
+            if (empty($galleries)) {
+                $content->gallery = null;
+            } else {
+                $content->gallery = $galleries[0];
+            }
+            $attraction[] = $content;
+        }
+        $response = [
+            'data' => $contents,
+            'status' => 200,
+            'message' => [
+                "Success get list of Owner"
+            ]
+        ];
+        return $this->respond($response);
+    }
 }
