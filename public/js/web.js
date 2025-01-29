@@ -714,6 +714,18 @@ function objectInfoWindow(id, attcat = null) {
           ticket_price +
           "</p>" +
           "</div>";
+
+          let nearbyButton = '';
+        if (!window.location.href.includes('web/aroundYou')) {
+          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+            rgid +
+            "`," +
+            lat +
+            "," +
+            lng +
+            ')"><i class="fa-solid fa-compass"></i></a>';
+        }
+
         contentButton =
           '<br><div class="text-center">' +
           '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
@@ -726,13 +738,7 @@ function objectInfoWindow(id, attcat = null) {
           "/web/rumahGadang/" +
           rgid +
           '><i class="fa-solid fa-info"></i></a>' +
-          '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
-          rgid +
-          "`," +
-          lat +
-          "," +
-          lng +
-          ')"><i class="fa-solid fa-compass"></i></a>' +
+          nearbyButton +
           "</div>";
         contentMobile =
           '<br><div class="text-center">' +
@@ -768,7 +774,7 @@ function objectInfoWindow(id, attcat = null) {
         let ticket_price = data.price;
         let open = data.open.substring(0, data.open.length - 3);
         let close = data.close.substring(0, data.close.length - 3);
-
+    
         content =
           '<div class="text-center">' +
           '<p class="fw-bold fs-6">' +
@@ -783,6 +789,18 @@ function objectInfoWindow(id, attcat = null) {
           ticket_price +
           "</p>" +
           "</div>";
+    
+        let nearbyButton = '';
+        if (!window.location.href.includes('web/aroundYou')) {
+          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+            rgid +
+            "`," +
+            lat +
+            "," +
+            lng +
+            ')"><i class="fa-solid fa-compass"></i></a>';
+        }
+    
         contentButton =
           '<br><div class="text-center">' +
           '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
@@ -795,13 +813,7 @@ function objectInfoWindow(id, attcat = null) {
           "/web/attraction/" +
           rgid +
           '><i class="fa-solid fa-info"></i></a>' +
-          '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
-          rgid +
-          "`," +
-          lat +
-          "," +
-          lng +
-          ')"><i class="fa-solid fa-compass"></i></a>' +
+          nearbyButton +
           "</div>";
         contentMobile =
           '<br><div class="text-center">' +
@@ -811,7 +823,7 @@ function objectInfoWindow(id, attcat = null) {
           lng +
           ')"><i class="fa-solid fa-road"></i></a>' +
           "</div>";
-
+    
         if (currentUrl.includes(id)) {
           if (currentUrl.includes("mobile")) {
             infoWindow.setContent(content + contentMobile);
@@ -848,6 +860,16 @@ function objectInfoWindow(id, attcat = null) {
           close +
           " WIB</p>" +
           "</div>";
+          let nearbyButton = '';
+        if (!window.location.href.includes('web/aroundYou')) {
+          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+            rgid +
+            "`," +
+            lat +
+            "," +
+            lng +
+            ')"><i class="fa-solid fa-compass"></i></a>';
+        }
         contentButton =
           '<br><div class="text-center">' +
           '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
@@ -860,13 +882,7 @@ function objectInfoWindow(id, attcat = null) {
           "/web/homestay/" +
           rgid +
           '><i class="fa-solid fa-info"></i></a>' +
-          '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
-          rgid +
-          "`," +
-          lat +
-          "," +
-          lng +
-          ')"><i class="fa-solid fa-compass"></i></a>' +
+          nearbyButton +
           "</div>";
         contentMobile =
           '<br><div class="text-center">' +
@@ -938,6 +954,18 @@ function objectInfoWindow(id, attcat = null) {
           date +
           "</p>" +
           "</div>";
+
+          let nearbyButton = '';
+        if (!window.location.href.includes('web/aroundYou')) {
+          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+            rgid +
+            "`," +
+            lat +
+            "," +
+            lng +
+            ')"><i class="fa-solid fa-compass"></i></a>';
+        }
+
         contentButton =
           '<br><div class="text-center">' +
           '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
@@ -950,13 +978,7 @@ function objectInfoWindow(id, attcat = null) {
           "/web/event/" +
           evid +
           '><i class="fa-solid fa-info"></i></a>' +
-          '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
-          evid +
-          "`," +
-          lat +
-          "," +
-          lng +
-          ')"><i class="fa-solid fa-compass"></i></a>' +
+          nearbyButton +
           "</div>";
         contentMobile =
           '<br><div class="text-center">' +
@@ -1003,6 +1025,18 @@ function objectInfoWindow(id, attcat = null) {
           close +
           " WIB</p>" +
           "</div>";
+
+          let nearbyButton = '';
+        if (!window.location.href.includes('web/aroundYou')) {
+          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+            rgid +
+            "`," +
+            lat +
+            "," +
+            lng +
+            ')"><i class="fa-solid fa-compass"></i></a>';
+        }
+
         contentButton =
           '<br><div class="text-center">' +
           '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
@@ -1015,13 +1049,7 @@ function objectInfoWindow(id, attcat = null) {
           "/web/culinaryPlace/" +
           rgid +
           '><i class="fa-solid fa-info"></i></a>' +
-          '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
-          rgid +
-          "`," +
-          lat +
-          "," +
-          lng +
-          ')"><i class="fa-solid fa-compass"></i></a>' +
+          nearbyButton +
           "</div>";
 
         infoWindow.setContent(content + contentButton);
@@ -1044,6 +1072,18 @@ function objectInfoWindow(id, attcat = null) {
           name +
           "</p>" +
           "</div>";
+
+          let nearbyButton = '';
+        if (!window.location.href.includes('web/aroundYou')) {
+          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+            rgid +
+            "`," +
+            lat +
+            "," +
+            lng +
+            ')"><i class="fa-solid fa-compass"></i></a>';
+        }
+
         contentButton =
           '<br><div class="text-center">' +
           '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
@@ -1056,13 +1096,7 @@ function objectInfoWindow(id, attcat = null) {
           "/web/worshipPlace/" +
           rgid +
           '><i class="fa-solid fa-info"></i></a>' +
-          '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
-          rgid +
-          "`," +
-          lat +
-          "," +
-          lng +
-          ')"><i class="fa-solid fa-compass"></i></a>' +
+          nearbyButton +
           "</div>";
         content =
           '<div class="text-center">' +
@@ -1098,6 +1132,18 @@ function objectInfoWindow(id, attcat = null) {
           close +
           " WIB</p>" +
           "</div>";
+
+          let nearbyButton = '';
+        if (!window.location.href.includes('web/aroundYou')) {
+          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+            rgid +
+            "`," +
+            lat +
+            "," +
+            lng +
+            ')"><i class="fa-solid fa-compass"></i></a>';
+        }
+
         contentButton =
           '<br><div class="text-center">' +
           '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
@@ -1110,13 +1156,7 @@ function objectInfoWindow(id, attcat = null) {
           "/web/souvenirPlace/" +
           rgid +
           '><i class="fa-solid fa-info"></i></a>' +
-          '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
-          rgid +
-          "`," +
-          lat +
-          "," +
-          lng +
-          ')"><i class="fa-solid fa-compass"></i></a>' +
+          nearbyButton +
           "</div>";
 
         infoWindow.setContent(content + contentButton);

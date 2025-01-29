@@ -279,6 +279,9 @@ $edit = in_array('edit', $uri);
         }
     });
 
+    <?php if ($edit && $data['video_url'] != null) : ?>
+        vidPond.addFile(`<?= base_url('media/videos/' . $data['video_url']); ?>`)
+    <?php endif; ?>
     vidPond.setOptions({
         server: {
             timeout: 86400000,

@@ -327,6 +327,7 @@ class Homestay extends ResourcePresenter
     {
         $facilities = $this->homestayFacilityModel->get_list_fc_api()->getResultArray();
         $homestay = $this->homestayModel->get_hs_by_id_api($id)->getRowArray();
+        
         if (empty($homestay)) {
             return redirect()->to('dashboard/homestay');
         }

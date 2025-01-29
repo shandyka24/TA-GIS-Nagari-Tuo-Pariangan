@@ -28,7 +28,7 @@ $users = in_array('users', $uri);
                     <h3 class="card-title">Reservation List</h3>
                 </div>
                 <div class="col">
-                    <a class="btn btn-primary float-end" href="reservation/new"><i class="fa-solid fa-add me-3"></i> Add Reservation </a>
+                    <a class="btn btn-primary float-end" href="reservation/new"><i class="fa-solid fa-add me-3"></i> Add Manual Reservation </a>
                 </div>
             </div>
         </div>
@@ -90,7 +90,7 @@ $users = in_array('users', $uri);
                                             <i class="fa-solid fa-circle-info"></i>
                                         </a>
                                         <?php if ((($item['status'] == null) && ($item['canceled_at'] == null)) || (($item['status'] == '1') && ($item['canceled_at'] == null) && ($item['is_rejected'] == '1'))) : ?>
-                                            <a title="Delete Reservation" class="btn icon btn-outline-danger btn-sm" href="#" onclick="deleteObject('<?= $item['id']?>', '<?= $item['id']?>')">
+                                            <a title="Delete Reservation" class="btn icon btn-outline-danger btn-sm" href="#" onclick="deleteObject('<?= $item['id'] ?>', '<?= $item['id'] ?>')">
                                                 <i class="fa-solid fa-trash"></i>
                                             </a>
                                         <?php endif; ?>

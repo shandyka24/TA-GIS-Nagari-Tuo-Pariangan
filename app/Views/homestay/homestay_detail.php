@@ -110,12 +110,14 @@
                                 <p class="text-mute mb-1"><?= esc($certification['certificate_num']); ?></p>
                                 <p class="mb-1"><?= esc($certification['description']); ?></p>
                                 <p class="mb-1"><strong>Certifying Agency:</strong> <?= esc($certification['certifying_agency']); ?> | <strong>Certification Date:</strong> <?= esc(date('d-m-Y', strtotime($certification['date']))); ?> </p>
-                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete" class="btn icon btn-outline-danger btn-sm float-end ms-1" onclick="deleteCertification('<?= esc($certification['homestay_id']); ?>','<?= esc($certification['certification_id']); ?>','<?= esc($certification['certificate_name']); ?>')">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                                <a title="Edit" class="btn icon btn-outline-warning btn-sm float-end ms-1" data-bs-toggle="modal" data-bs-target="#editCertificate<?= esc($certification['certification_id']); ?>">
-                                    <i class="fa-solid fa-edit"></i>
-                                </a>
+                                <?php if (in_groups('owner')) : ?>
+                                    <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete" class="btn icon btn-outline-danger btn-sm float-end ms-1" onclick="deleteCertification('<?= esc($certification['homestay_id']); ?>','<?= esc($certification['certification_id']); ?>','<?= esc($certification['certificate_name']); ?>')">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                    <a title="Edit" class="btn icon btn-outline-warning btn-sm float-end ms-1" data-bs-toggle="modal" data-bs-target="#editCertificate<?= esc($certification['certification_id']); ?>">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </a>
+                                <?php endif; ?>
                                 <a title="Info" class="btn icon btn-outline-primary btn-sm float-end ms-1" data-bs-toggle="modal" data-bs-target="#infoCertificate<?= esc($certification['certification_id']); ?>">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
@@ -123,9 +125,11 @@
                         <?php endforeach; ?>
                     </ul>
                 </div>
-                <div class="card-footer text-center">
-                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertNewAdditionalAmenities"><i class="fa-solid fa-add me-3"></i>Add Certificaion</a>
-                </div>
+                <?php if (in_groups('owner')) : ?>
+                    <div class="card-footer text-center">
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertNewAdditionalAmenities"><i class="fa-solid fa-add me-3"></i>Add Certificaion</a>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
 
