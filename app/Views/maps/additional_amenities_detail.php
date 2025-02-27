@@ -5,7 +5,7 @@
 <section class="section">
     <div class="row">
         <div class="col">
-            <a href="/web/homestay/detail/<?= esc($data['homestay_id']); ?>" class="btn btn-primary ms-3 mt-3 mb-3"><i class="fa-solid fa-arrow-left"></i> Back</a>
+            <a href="/web/homestay_detail_mobile/detail/<?= esc($data['homestay_id']); ?>" class="btn btn-primary ms-3 mt-3 mb-3"><i class="fa-solid fa-arrow-left"></i> Back</a>
         </div>
     </div>
     <div class="row">
