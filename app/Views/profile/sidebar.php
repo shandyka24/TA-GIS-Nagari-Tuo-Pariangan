@@ -23,7 +23,7 @@ $uri3 = $uri[3] ?? '';
                                 Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-muted mb-0">@<?= user()->username; ?></span><br>
                             <?php else : ?>
                                 Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-muted mb-0">@<?= user()->username; ?></span><br>
-                                <span class="fw-bold">Your Coin : <?= number_format(user()->total_coin); ?></span>
+                                <span class="fw-bold">Your Coin : <?= (user()->total_coin !== null) ? number_format(user()->total_coin) : number_format(0); ?></span>
                             <?php endif; ?>
 
                         <?php else: ?>
@@ -31,7 +31,7 @@ $uri3 = $uri[3] ?? '';
                                 Hello, <span class="fw-bold">@<?= user()->username; ?></span><br>
                             <?php else : ?>
                                 Hello, <span class="fw-bold">@<?= user()->username; ?></span><br>
-                                <span class="fw-bold">Your Coin : <?= number_format(user()->total_coin); ?></span>
+                                <span class="fw-bold">Your Coin : <?= (user()->total_coin !== null) ? number_format(user()->total_coin) : number_format(0); ?></span>
                             <?php endif; ?>
                         <?php endif; ?>
                     </div>

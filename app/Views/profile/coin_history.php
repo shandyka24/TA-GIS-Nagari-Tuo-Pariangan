@@ -27,7 +27,7 @@ $users = in_array('users', $uri);
             <div class="row align-items-center">
                 <div class="col">
                     <h3 class="card-title">Coin History</h3>
-                    <span class="fw-bold">Your Coin : <?= number_format(user()->total_coin); ?></span>
+                    <span class="fw-bold">Your Coin : <?= (user()->total_coin !== null) ? number_format(user()->total_coin) : number_format(0); ?></span>
                 </div>
                 <div class="col">
 
