@@ -214,4 +214,20 @@ class Dashboard extends BaseController
         ];
         return view('dashboard/recommendation', $data);
     }
+
+    public function announcement()
+    {
+        // $contents2 = $this->villageModel->get_desa_wisata_info()->getResultArray();
+        $contents3 = $this->villageModel->get_announcement_all()->getResultArray();
+
+
+        $data = [
+            'title' => 'Manage Announcement',
+            'manage' => 'Announcement',
+            'announcementdata' => $contents3,
+            // 'data2' => $contents2,
+
+        ];
+        return view('dashboard/manage-announcement', $data);
+    }
 }

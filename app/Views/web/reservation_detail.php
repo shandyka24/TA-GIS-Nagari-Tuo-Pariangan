@@ -215,7 +215,7 @@
                                     <input hidden readonly type="number" id="coin" name="coin" class="form-control" value="<?= esc($coin['total_coin']); ?>">
                                     <div class="mb-1 d-flex align-items-center">
                                         <label class="form-check-label me-auto" for="useCoinsSwitch">
-                                            Use Coins? <span class="text-muted"><i>*(Min. 25.000, Max. 15% of Total Price)</i></span>
+                                            Use Coins? <span class="text-muted"><i>*(Min. 50.000, Max. 15% of Total Price)</i></span>
                                         </label>
                                         <input
                                             onchange="getTpac()"
@@ -302,7 +302,7 @@
                                         <td class="fw-bold">Deposit</td>
                                         <td>: <?= esc("Rp " . number_format($deposit, 0, ',', '.')) ?> <i>*(20% of total price)</i></td>
                                     </tr>
-                                <?php elseif (($reservation['reservation_type'] == 2 && $tpac_save != null && $tpac_save > 0)) : ?>
+                                <?php elseif (($reservation['reservation_type'] == 2)) : ?>
                                     <tr>
                                         <td class="fw-bold">Total Price</td>
                                         <td>: <?= esc("Rp " . number_format($homestay_unit_total_price * 90 / 100, 0, ',', '.')) ?></td>
@@ -320,10 +320,10 @@
                                         <div id="used_coin_1" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0')) ? 'style="display: none;"' : '' ?>>Coin Used</div>
                                     </td>
                                     <td>
-                                        <div id="used_coin_2" <?= (($reservation['status'] == Null) || ($reservation['coin_use'] == '0')) ? 'style="display: none;"' : '' ?>>:
-                                            <?php if ($reservation['status'] != null) : ?>
+                                        <div id="used_coin_2" <?= (($reservation['status'] == null) || ($reservation['coin_use'] == '0')) ? 'style="display: none;"' : '' ?>>
+                                            <?php if ($reservation['status'] != null && isset($reservation['coin_use']) && $reservation['coin_use'] != '0') : ?>
                                                 <?= esc("-Rp " . number_format($reservation['coin_use'], 0, ',', '.')) ?>
-                                            <?php else : ?>
+                                            <?php elseif (isset($coin) && $coin != null && $coin != '0') : ?>
                                                 <?= esc("-Rp " . number_format($coin, 0, ',', '.')) ?>
                                             <?php endif; ?>
                                         </div>
@@ -355,9 +355,9 @@
                                     </td>
                                 </tr>
 
-                                <script>
+                                <!-- <script>
                                     usedCoinText();
-                                </script>
+                                </script> -->
 
                                 <?php if ((($reservation['status'] == 'Deposit Successful') || ($reservation['status'] == 'Full Pay Pending') || ($reservation['status'] == 'Full Pay Successful')) && ($reservation['canceled_at'] == null)) : ?>
                                     <?php if (($reservation['reservation_type'] == 1 && $reservation['coin_use'] == 0)) : ?>
@@ -781,7 +781,11 @@
                 confirmButtonText: "Yes",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "/web/reservation/finish/" + reservation_id + "/" + deposit + "/" + total_price + "/" + coin;
+                    Swal.fire("You have finish the reservation", "Please wait for the Homestay Owner to confirm the reservation. To view the reservation details, you can check the Reservation Menu.").then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/web/reservation/finish/" + reservation_id + "/" + deposit + "/" + total_price + "/" + coin;
+                        }
+                    });
                 }
             });
         } else {
@@ -793,7 +797,11 @@
                 confirmButtonText: "Yes",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = "/web/reservation/finish/" + reservation_id + "/" + deposit + "/" + total_price + "/" + zerocoin;
+                    Swal.fire("You have finish the reservation", "Please wait for the Homestay Owner to confirm the reservation. To view the reservation details, you can check the Reservation Menu.").then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "/web/reservation/finish/" + reservation_id + "/" + deposit + "/" + total_price + "/" + zerocoin;
+                        }
+                    });
                 }
             });
         }

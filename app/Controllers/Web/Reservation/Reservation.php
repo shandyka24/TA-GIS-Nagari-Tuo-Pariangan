@@ -1268,7 +1268,7 @@ class Reservation extends ResourcePresenter
         if ($finishPackage) {
             $coinUser = $this->accountModel->calculate_coin(user()->id, $coin);
             if ($coinUser) {
-                return redirect()->to(base_url('web/reservation/detail/' . $reservation_id));
+                return redirect()->to(base_url('web'));
             }
         } else {
             return redirect()->back()->withInput();
@@ -1745,7 +1745,7 @@ class Reservation extends ResourcePresenter
             $messageUser = 'Your reservation with ID ' . $reservation_id . ' at ' . $homestay['name'] . ' is rejected by Homestay Owner.';
             $messageOwner = 'You have rejected a reservation with ID ' . $reservation_id . ' from @' . $user['username'] . '.';
         } else {
-            $messageUser = 'Your reservation with ID ' . $reservation_id . ' at ' . $homestay['name'] . ' is confirmed by Homestay Owner. Please pay the deposit.';
+            $messageUser = 'Your reservation with ID ' . $reservation_id . ' at ' . $homestay['name'] . ' is confirmed by Homestay Owner. Please pay the deposit on reservation detail page.';
             $messageOwner = 'You have accepted a reservation with ID ' . $reservation_id . ' from @' . $user['username'] . '. Please wait for the customer to pay the deposit.';
         }
 

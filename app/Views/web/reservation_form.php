@@ -98,7 +98,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="seven-days-weather">
-                        <p>Prediksi Cuaca hingga 14 Hari ke Depan</p>
+                        <p>Weather Forecast up to 14 Days Ahead</p>
                         <div class="overflow-auto">
                             <ul class="list-unstyled d-flex">
                                 <?php foreach ($weather_dates as $index => $date): ?>

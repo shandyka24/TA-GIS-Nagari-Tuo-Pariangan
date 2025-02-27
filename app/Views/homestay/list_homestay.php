@@ -49,7 +49,7 @@
                                             <?php foreach ($data as $item) : ?>
                                                 <tr>
                                                     <script>
-                                                        objectMarker("<?= esc($item['id']); ?>", <?= esc($item['lat']); ?>, <?= esc($item['lng']); ?>);
+                                                        objectMarker("<?= esc($item['id']); ?>", <?= esc($item['lat']); ?>, <?= esc($item['lng']); ?>, true, null, <?= (in_groups('user')) ? 'true' : 'false' ?>);
                                                     </script>
                                                     <td><?= esc($i); ?></td>
                                                     <td class="fw-bold"><?= esc($item['name']); ?></td>

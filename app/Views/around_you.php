@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <?= $this->include('web/layouts/map-body'); ?>
-            </div>
+            </div>  
         </div>
 
         <div class="col-md-4 col-12">

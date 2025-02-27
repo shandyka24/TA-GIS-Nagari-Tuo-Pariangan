@@ -286,6 +286,12 @@ $routes->group('dashboard', ['namespace' => 'App\Controllers\Web', 'filter' => '
 
     $routes->presenter('villages',  ['namespace' => 'App\Controllers\Web\Villages', 'filter' => 'role:admin']);
     $routes->presenter('homestayCertification',  ['namespace' => 'App\Controllers\Web', 'filter' => 'role:owner']);
+
+    $routes->get('announcement', 'Dashboard::announcement', ['namespace' => 'App\Controllers\Web\Dashboard', 'filter' => 'role:admin']);
+    $routes->post('announcement/add', 'Villages::createannouncement', ['namespace' => 'App\Controllers\Web\Villages', 'filter' => 'role:admin']);
+    $routes->post('announcement/update/(:segment)', 'Villages::updateannouncement/$1', ['namespace' => 'App\Controllers\Web\Villages', 'filter' => 'role:admin']);
+    // $routes->post('announcement/delete/(:segment)', 'Villages::deleteobject/$1', ['namespace' => 'App\Controllers\Web\Villages', 'filter' => 'role:admin']);
+    $routes->delete('announcement/delete/(:segment)', 'Villages::deleteobject/$1', ['namespace' => 'App\Controllers\Web\Villages', 'filter' => 'role:admin']);
 });
 
 // API

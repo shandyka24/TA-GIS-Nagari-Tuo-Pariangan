@@ -3,6 +3,27 @@
 <?= $this->section('content') ?>
 
 <section class="section">
+    <?php if ($data3 != null) : ?>
+        <div class="row">
+            <!-- announcement -->
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title text-left" style="color: #dc3545;"><i class="fa-solid fa-bullhorn"></i> Announcement</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul>
+                            <?php foreach ($data3 as $item3) : ?>
+                                <li class="text-left"><strong><?= esc($item3['announcement']); ?></strong></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    <?php endif; ?>
+
     <div class="row">
         <!--map-->
         <div class="col-md-8 col-12">
@@ -120,8 +141,60 @@
                 </div>
             </div>
 
-            <!-- Search result all -->
-            <!-- <div class="col-12" id="result-exploreall-col">
+
+            <!-- Object Around Panel -->
+            <div class="card text-dark" id="check-nearbyyou-col">
+                <div class="card-header">
+                    <h5 class="card-title text-center">Object Around</h5>
+                </div>
+                <div class="card-body">
+                    <div class="sidebar-items">
+                        <div class="form-check sidebar-item">
+                            <input type="checkbox" id="check-uatt" class="form-check-input">
+                            <label for="check-uatt" class="sidebar-link">
+                                <i></i><span class="text-dark fw-bold">Unique Attraction</span>
+                            </label>
+                        </div>
+                        <div class="form-check sidebar-item">
+                            <input type="checkbox" id="check-att" class="form-check-input">
+                            <label for="check-att" class="sidebar-link">
+                                <i></i><span class="text-dark fw-bold">Ordinary Attraction</span>
+                            </label>
+                        </div>
+                        <div class="form-check sidebar-item">
+                            <input type="checkbox" id="check-hs" class="form-check-input">
+                            <label for="check-hs" class="sidebar-link">
+                                <i></i><span class="text-dark fw-bold">Homestay</span>
+                            </label>
+                        </div>
+                        <div class="form-check sidebar-item">
+                            <input type="checkbox" id="check-cp" class="form-check-input">
+                            <label for="check-cp" class="sidebar-link">
+                                <i></i><span class="text-dark fw-bold">Culinary Place</span>
+                            </label>
+                        </div>
+                        <div class="form-check sidebar-item">
+                            <input type="checkbox" id="check-sp" class="form-check-input">
+                            <label for="check-sp" class="sidebar-link">
+                                <i></i><span class="text-dark fw-bold">Souvenir Place</span>
+                            </label>
+                        </div>
+                        <div class="form-check sidebar-item">
+                            <input type="checkbox" id="check-wp" class="form-check-input">
+                            <label for="check-wp" class="sidebar-link">
+                                <i></i><span class="text-dark fw-bold">Worship Place</span>
+                            </label>
+                        </div>
+                        <div class="mt-2 mb-3" id="radiusNearby">
+                            <label for="inputRadiusNearby" class="form-label">Radius: </label>
+                            <label id="radiusValueNearby" class="form-label">0 m</label>
+                            <input type="range" class="form-range" min="0" max="20" value="0" id="inputRadiusNearby" name="inputRadius" onchange="updateRadius('Nearby'); checkAround('Nearby');">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search result all -->
+                <!-- <div class="col-12" id="result-exploreall-col">
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title text-center">Search Result All Object</h5>
@@ -141,39 +214,58 @@
                 </div>
             </div> -->
 
-            <!-- Search result nearby -->
+                <!-- Search result nearby -->
 
 
-            <!-- Nearby section -->
-            <?= $this->include('web/layouts/nearby'); ?>
+                <!-- Nearby section -->
+                <?= $this->include('web/layouts/nearby'); ?>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-12" id="result-explore-col">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title text-center">Result Object</h5>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive overflow-auto" id="table-result-nearby">
-                        <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-uAttraction">
-                        </table>
-                        <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Attraction">
-                        </table>
-                        <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Homestay">
-                        </table>
-                        <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Culinary">
-                        </table>
-                        <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Souvenir">
-                        </table>
-                        <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Worship">
-                        </table>
+        <div class="row">
+            <div class="col-12" id="result-explore-col">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title text-center">Result Object</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive overflow-auto" id="table-result-nearby">
+                            <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-uAttraction">
+                            </table>
+                            <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Attraction">
+                            </table>
+                            <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Homestay">
+                            </table>
+                            <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Culinary">
+                            </table>
+                            <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Souvenir">
+                            </table>
+                            <table class="table table-hover mb-md-5 mb-3 table-lg" id="table-Worship">
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Search Results Panel -->
+        <div class="card" id="result-nearbyyou-col">
+            <div class="card-header">
+                <h5 class="card-title text-center">Search Result Object Around</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive overflow-auto" id="table-result-nearby">
+                    <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-uatt"></table>
+                    <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-att"></table>
+                    <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-hs"></table>
+                    <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-cp"></table>
+                    <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-sp"></table>
+                    <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-wp"></table>
+                </div>
+            </div>
+        </div>
     </div>
+
     <!-- Direction section -->
     <?= $this->include('web/layouts/direction'); ?>
 </section>
@@ -186,6 +278,23 @@
     $('#check-nearby-col').hide();
     $('#result-nearby-col').hide();
     $("#result-explore-col").hide();
+    $('#check-nearbyyou-col').hide();
+    $("#result-nearbyyou-col").hide();
+
+    $("#table-uatt").empty();
+    $("#table-att").empty();
+    $("#table-hs").empty();
+    $("#table-cp").empty();
+    $("#table-wp").empty();
+    $("#table-sp").empty();
+
+    $("#table-uatt").hide();
+    $("#table-att").hide();
+    $("#table-hs").hide();
+    $("#table-cp").hide();
+    $("#table-wp").hide();
+    $("#table-sp").hide();
+
     map.setZoom(6);
 </script>
 <?= $this->endSection() ?>

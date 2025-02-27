@@ -17,7 +17,7 @@
 
     <?php
     $currentURL = $_SERVER['REQUEST_URI'];
-    if ($currentURL === '/web' ) {
+    if ($currentURL === '/web') {
         // Jika URL adalah '/web', tampilkan tombol
         // echo '<a data-bs-toggle="tooltip" data-bs-placement="bottom" title="How to Reach Pariangan" class="btn icon btn-primary mx-1" id="go-to" onclick="howToReachPariangan()">
         // <i style="height:1.72rem;width:1.5rem" class="fa-solid fa-person-walking-luggage"></i>
@@ -84,10 +84,10 @@
                     <input class="form-check-input" type="checkbox" id="checkAttraction" value="Attraction" onchange="checkObject()">
                     <label class="form-check-label" for="checkAttraction">Ordinary Attraction</label>
                 </li>
-                <li class="form-check">
+                <!-- <li class="form-check">
                     <input class="form-check-input" type="checkbox" id="checkHomestay" value="Homestay" onchange="checkObject()">
                     <label class="form-check-label" for="checkHomestay">Homestay</label>
-                </li>
+                </li> -->
                 <li class="form-check">
                     <input class="form-check-input" type="checkbox" id="checkCulinary" value="Culinary" onchange="checkObject()">
                     <label class="form-check-label" for="checkCulinary">Culinary</label>
@@ -155,4 +155,26 @@
         </ul>
     </div>
 
+    <?php
+    $currentURL = $_SERVER['REQUEST_URI'];
+    if (($currentURL === '/web')): ?>
+    <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Homestay" class="btn icon btn-primary mx-1" id="legend-map" onclick="allHomestay(<?= (in_groups('user')) ? 'true' : 'false' ?>);">
+        <span class="material-symbols-outlined">night_shelter</span>
+    </a>
+    <?php endif; ?>
+
+</div>
+<div class="row">
+    <?php
+    $currentURL = $_SERVER['REQUEST_URI'];
+    if ($currentURL === '/web') {
+        echo ' <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    console.log("DOM sudah siap!");
+    weatherNow();
+});
+</script>
+<div  class="col-md-auto" id="weather-info"></div>';
+    }
+    ?>
 </div>

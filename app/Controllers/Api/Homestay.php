@@ -102,6 +102,19 @@ class Homestay extends ResourceController
     public function show($id = null)
     {
         $homestay = $this->homestayModel->get_hs_by_id_api($id)->getRowArray();
+        $unit_homestay = $this->homestayUnitModel->get_list_hu_api($id)->getResultArray();
+        $prices = array_column($unit_homestay, 'price');
+
+        // Cek apakah semua harga sama
+        if (count(array_unique($prices)) === 1) {
+            $unit_price = 'Rp' .number_format(esc($prices[0]), 0, ',', '.');
+            // echo "Semua harga sama: " . $prices[0];
+        } else {
+            $minPrice = min($prices);
+            $maxPrice = max($prices);
+            $unit_price = 'Rp ' .number_format(esc($minPrice), 0, ',', '.') .' - ' .'Rp ' .number_format(esc($maxPrice), 0, ',', '.');
+            // echo "Harga bervariasi dari: " . $minPrice . " - " . $maxPrice;
+        }
 
         $list_gallery = $this->homestayGalleryModel->get_gallery_api($id)->getResultArray();
         $galleries = array();
@@ -120,6 +133,7 @@ class Homestay extends ResourceController
 
         $homestay['facilities'] = $facilities;
         $homestay['gallery'] = $galleries;
+        $homestay['price'] = $unit_price;
         // $rumahGadang['avg_rating'] = $avg_rating;
         // $rumahGadang['reviews'] = $list_review;
 

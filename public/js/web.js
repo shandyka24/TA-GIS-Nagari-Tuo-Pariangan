@@ -158,7 +158,7 @@ function digitCountries() {
           fillOpacity: 0.1,
           clickable: true,
           title: item.name,
-          index : 1,
+          index: 1,
         });
         village.addListener("click", function (event) {
           villageInfoWindow.close();
@@ -193,7 +193,7 @@ function digitProvinces() {
           fillOpacity: 0,
           clickable: true,
           title: item.name,
-          index : 2,
+          index: 2,
         });
         village.addListener("click", function (event) {
           villageInfoWindow.close();
@@ -227,7 +227,7 @@ function digitCities() {
           fillOpacity: 0,
           clickable: true,
           title: item.name,
-          index : 3,
+          index: 3,
         });
         village.addListener("click", function (event) {
           villageInfoWindow.close();
@@ -261,7 +261,7 @@ function digitSubdistricts() {
           fillOpacity: 0.2,
           clickable: true,
           title: item.name,
-          index : 4,
+          index: 4,
         });
         village.addListener("click", function (event) {
           villageInfoWindow.close();
@@ -295,7 +295,7 @@ function digitVillages() {
           fillOpacity: 0.2,
           clickable: true,
           title: item.name,
-          index : 5,
+          index: 5,
         });
         village.addListener("click", function (event) {
           infoWindow.close();
@@ -512,12 +512,19 @@ function currentPosition() {
           animation: google.maps.Animation.DROP,
           map: map,
         };
+        let nearbyButton = "";
+        if (!window.location.href.includes("web/aroundYou")) {
+          nearbyButton =
+            '<a title="Around You" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openAround()"><i class="fa-solid fa-compass"></i></a>';
+        }
         userMarker.setOptions(markerOption);
         userInfoWindow.setContent(
           "<p class='text-center'><span class='fw-bold'>You are here.</span> <br> lat: " +
             pos.lat +
             "<br>long: " +
             pos.lng +
+            "<br>" + 
+            nearbyButton +
             "</p>"
         );
         userInfoWindow.open(map, userMarker);
@@ -574,12 +581,21 @@ function manualPosition() {
       animation: google.maps.Animation.DROP,
       map: map,
     };
+
+    let nearbyButton = "";
+    if (!window.location.href.includes("web/aroundYou")) {
+      nearbyButton =
+        '<a title="Around You" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openAround()"><i class="fa-solid fa-compass"></i></a>';
+    }
     userMarker.setOptions(markerOption);
     userInfoWindow.setContent(
       "<p class='text-center'><span class='fw-bold'>You are here.</span> <br> lat: " +
         pos.lat().toFixed(8) +
         "<br>long: " +
         pos.lng().toFixed(8) +
+        "<br>" +
+        "<br>" +
+        nearbyButton +
         "</p>"
     );
     userInfoWindow.open(map, userMarker);
@@ -625,7 +641,7 @@ function routeTo(lat, lng, routeFromUser = true) {
 }
 
 // Display marker for loaded object
-function objectMarker(id, lat, lng, anim = true, attcat = null) {
+function objectMarker(id, lat, lng, anim = true, attcat = null, login = false) {
   const currentUrl = window.location.href;
   google.maps.event.clearListeners(map, "click");
   let pos = new google.maps.LatLng(lat, lng);
@@ -672,7 +688,7 @@ function objectMarker(id, lat, lng, anim = true, attcat = null) {
   marker.addListener("click", () => {
     infoWindow.close();
     villageInfoWindow.close();
-    objectInfoWindow(id, attcat);
+    objectInfoWindow(id, attcat, login);
     infoWindow.open(map, marker);
   });
 
@@ -680,7 +696,7 @@ function objectMarker(id, lat, lng, anim = true, attcat = null) {
 }
 
 // Display info window for loaded object
-function objectInfoWindow(id, attcat = null) {
+function objectInfoWindow(id, attcat = null, login = false) {
   let content = "";
   let contentButton = "";
   let contentMobile = "";
@@ -715,9 +731,10 @@ function objectInfoWindow(id, attcat = null) {
           "</p>" +
           "</div>";
 
-          let nearbyButton = '';
-        if (!window.location.href.includes('web/aroundYou')) {
-          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+        let nearbyButton = "";
+        if (!window.location.href.includes("web/aroundYou")) {
+          nearbyButton =
+            '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
             rgid +
             "`," +
             lat +
@@ -774,7 +791,7 @@ function objectInfoWindow(id, attcat = null) {
         let ticket_price = data.price;
         let open = data.open.substring(0, data.open.length - 3);
         let close = data.close.substring(0, data.close.length - 3);
-    
+
         content =
           '<div class="text-center">' +
           '<p class="fw-bold fs-6">' +
@@ -789,10 +806,11 @@ function objectInfoWindow(id, attcat = null) {
           ticket_price +
           "</p>" +
           "</div>";
-    
-        let nearbyButton = '';
-        if (!window.location.href.includes('web/aroundYou')) {
-          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+
+        let nearbyButton = "";
+        if (!window.location.href.includes("web/aroundYou")) {
+          nearbyButton =
+            '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
             rgid +
             "`," +
             lat +
@@ -800,7 +818,7 @@ function objectInfoWindow(id, attcat = null) {
             lng +
             ')"><i class="fa-solid fa-compass"></i></a>';
         }
-    
+
         contentButton =
           '<br><div class="text-center">' +
           '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
@@ -823,7 +841,7 @@ function objectInfoWindow(id, attcat = null) {
           lng +
           ')"><i class="fa-solid fa-road"></i></a>' +
           "</div>";
-    
+
         if (currentUrl.includes(id)) {
           if (currentUrl.includes("mobile")) {
             infoWindow.setContent(content + contentMobile);
@@ -844,6 +862,7 @@ function objectInfoWindow(id, attcat = null) {
         let data = response.data;
         let rgid = data.id;
         let name = data.name;
+        let price = data.price;
         let lat = data.lat;
         let lng = data.lng;
         let open = data.open.substring(0, data.open.length - 3);
@@ -854,15 +873,20 @@ function objectInfoWindow(id, attcat = null) {
           '<p class="fw-bold fs-6">' +
           name +
           "</p>" +
+          '<p><i class="fa-solid fa-money-bills me-2"></i> ' +
+          price +
+          "</p>" +
           '<p><i class="fa-solid fa-clock me-2"></i> ' +
           open +
           " - " +
           close +
           " WIB</p>" +
           "</div>";
-          let nearbyButton = '';
-        if (!window.location.href.includes('web/aroundYou')) {
-          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+
+        let nearbyButton = "";
+        if (!window.location.href.includes("web/aroundYou")) {
+          nearbyButton =
+            '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
             rgid +
             "`," +
             lat +
@@ -870,6 +894,18 @@ function objectInfoWindow(id, attcat = null) {
             lng +
             ')"><i class="fa-solid fa-compass"></i></a>';
         }
+
+        let bookingButton = "";
+        if (login) {
+          bookingButton =
+            '<a id="btn-booking" class="btn btn-primary mt-1" onclick="iwOpsiBook(`' +
+            rgid +
+            '`)"><i class="fa-solid fa-bookmark me-3"></i>Booking</a>';
+        } else {
+          bookingButton =
+            '<a id="btn-booking1" class="btn btn-primary mt-1" onclick="iwRedirectToLogin()"><i class="fa-solid fa-bookmark me-3"></i>Booking</a>';
+        }
+
         contentButton =
           '<br><div class="text-center">' +
           '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
@@ -883,6 +919,8 @@ function objectInfoWindow(id, attcat = null) {
           rgid +
           '><i class="fa-solid fa-info"></i></a>' +
           nearbyButton +
+          "<br>" +
+          bookingButton +
           "</div>";
         contentMobile =
           '<br><div class="text-center">' +
@@ -955,9 +993,10 @@ function objectInfoWindow(id, attcat = null) {
           "</p>" +
           "</div>";
 
-          let nearbyButton = '';
-        if (!window.location.href.includes('web/aroundYou')) {
-          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+        let nearbyButton = "";
+        if (!window.location.href.includes("web/aroundYou")) {
+          nearbyButton =
+            '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
             rgid +
             "`," +
             lat +
@@ -1026,9 +1065,10 @@ function objectInfoWindow(id, attcat = null) {
           " WIB</p>" +
           "</div>";
 
-          let nearbyButton = '';
-        if (!window.location.href.includes('web/aroundYou')) {
-          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+        let nearbyButton = "";
+        if (!window.location.href.includes("web/aroundYou")) {
+          nearbyButton =
+            '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
             rgid +
             "`," +
             lat +
@@ -1073,9 +1113,10 @@ function objectInfoWindow(id, attcat = null) {
           "</p>" +
           "</div>";
 
-          let nearbyButton = '';
-        if (!window.location.href.includes('web/aroundYou')) {
-          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+        let nearbyButton = "";
+        if (!window.location.href.includes("web/aroundYou")) {
+          nearbyButton =
+            '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
             rgid +
             "`," +
             lat +
@@ -1133,9 +1174,10 @@ function objectInfoWindow(id, attcat = null) {
           " WIB</p>" +
           "</div>";
 
-          let nearbyButton = '';
-        if (!window.location.href.includes('web/aroundYou')) {
-          nearbyButton = '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
+        let nearbyButton = "";
+        if (!window.location.href.includes("web/aroundYou")) {
+          nearbyButton =
+            '<a title="Nearby" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openNearby(`' +
             rgid +
             "`," +
             lat +
@@ -1555,7 +1597,7 @@ function checkNearby(id) {
   $("#result-nearby-col").show();
 }
 
-function checkAround(id) {
+function checkAround() {
   if (userLat == 0 && userLng == 0) {
     document.getElementById("radiusValueNearby").innerHTML = "0 m";
     document.getElementById("inputRadiusNearby").value = 0;
@@ -1567,7 +1609,6 @@ function checkAround(id) {
   // clearUser();
   destinationMarker.setMap(null);
   google.maps.event.clearListeners(map, "click");
-
 
   $("#table-uatt").empty();
   $("#table-att").empty();
@@ -2377,7 +2418,7 @@ function getLegendTraffic() {
       icon: baseUrl + "/media/icon/traffic_green.png",
     },
     yellow: {
-      name: "Light Traffic Jam", 
+      name: "Light Traffic Jam",
       icon: baseUrl + "/media/icon/traffic_yellow.png",
     },
     medred: {
@@ -3699,6 +3740,10 @@ function deleteObject(id = null, name = null, user = false) {
   } else if (user === true) {
     content = "User";
     apiUri = "user/";
+  } else if (id.substring(0, 1) === "L") {
+    id = id.substring(0, 5);
+    content = "Announcement";
+    apiUri = "announcement/";
   } else {
     content = "Facility";
     apiUri = "facility/";
@@ -3766,6 +3811,9 @@ function deleteObject(id = null, name = null, user = false) {
       "/product/" +
       souvenirProductId +
       "/delete";
+  }
+  if (content === "Announcement") {
+    urlok = baseUrl + "/dashboard/announcement/delete/" + id;
   }
 
   Swal.fire({
@@ -4706,7 +4754,7 @@ function allObject() {
   objectMarker("L", -0.4556825246682917, 100.49283664396526);
   $("#table-uAttraction").show();
   $("#table-Attraction").show();
-  $("#table-Homestay").show();
+  // $("#table-Homestay").show();
   $("#table-Culinary").show();
   $("#table-Souvenir").show();
   $("#table-Worship").show();
@@ -4717,8 +4765,8 @@ function allObject() {
   checkuAttraction.checked = true;
   const checkAttraction = document.getElementById("checkAttraction");
   checkAttraction.checked = true;
-  const checkHomestay = document.getElementById("checkHomestay");
-  checkHomestay.checked = true;
+  // const checkHomestay = document.getElementById("checkHomestay");
+  // checkHomestay.checked = true;
   const checkCulinary = document.getElementById("checkCulinary");
   checkCulinary.checked = true;
   const checkSouvenir = document.getElementById("checkSouvenir");
@@ -4743,6 +4791,26 @@ function allObject() {
   //     checkWorship.checked = true;
   //   },
   // });
+}
+
+function allHomestay(login = false) {
+  clearRadius();
+  clearRoute();
+  clearMarker();
+  clearAirplaneMarkers();
+  clearCarMarkers();
+  clearOverlay();
+  objectMarker("L", -0.4556825246682917, 100.49283664396526);
+  $("#table-uAttraction").empty().hide();
+  $("#table-Attraction").empty().hide();
+  $("#table-Homestay").empty().hide();
+  $("#table-Culinary").empty().hide();
+  $("#table-Souvenir").empty().hide();
+  $("#table-Worship").empty().hide();
+  // checkObject();
+  findAll("Homestay", login);
+  $("#result-explore-col").show();
+  $("#table-Homestay").show();
 }
 
 function checkObject() {
@@ -4779,10 +4847,10 @@ function checkObject() {
     findAll("Attraction");
     $("#table-Attraction").show();
   }
-  if (document.getElementById("checkHomestay").checked) {
-    findAll("Homestay");
-    $("#table-Homestay").show();
-  }
+  // if (document.getElementById("checkHomestay").checked) {
+  //   findAll("Homestay");
+  //   $("#table-Homestay").show();
+  // }
   if (document.getElementById("checkCulinary").checked) {
     findAll("Culinary");
     $("#table-Culinary").show();
@@ -4803,7 +4871,7 @@ function checkObject() {
   if (
     document.getElementById("checkuAttraction").checked ||
     document.getElementById("checkAttraction").checked ||
-    document.getElementById("checkHomestay").checked ||
+    // document.getElementById("checkHomestay").checked ||
     document.getElementById("checkCulinary").checked ||
     document.getElementById("checkSouvenir").checked ||
     document.getElementById("checkWorship").checked
@@ -4814,7 +4882,7 @@ function checkObject() {
   }
 }
 
-function findAll(category) {
+function findAll(category, login = false) {
   // let pos = new google.maps.LatLng(currentLat, currentLng);
   if (category === "uAttraction") {
     $.ajax({
@@ -4860,7 +4928,7 @@ function findAll(category) {
       data: {},
       dataType: "json",
       success: function (response) {
-        displayExploreResult(category, response);
+        displayExploreResult(category, response, login);
         boundToObject();
       },
     });
@@ -4888,7 +4956,7 @@ function findAll(category) {
     });
   }
 
-  function displayExploreResult(category, response) {
+  function displayExploreResult(category, response, login = false) {
     let data = response.data;
     let headerName;
     if (category === "Attraction") {
@@ -4941,7 +5009,7 @@ function findAll(category) {
           item.attraction_category
         );
       } else {
-        objectMarker(item.id, item.lat, item.lng);
+        objectMarker(item.id, item.lat, item.lng, true, null, login);
       }
     }
   }
@@ -5508,4 +5576,84 @@ function clearHtro() {
   clearAirplaneMarkers();
   clearCarMarkers();
   clearOverlay();
+}
+
+function weatherNow() {
+  const apiKey = "8253305683d95339ac1253f3c16aa325";
+  const cityName = "Pariangan";
+
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+
+  async function fetchWeather() {
+    try {
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+
+      // Ambil data cuaca dari API
+      const weatherDescription = data.weather[0].description;
+      const temperature = data.main.temp;
+      const humidity = data.main.humidity;
+      const weatherIcon = data.weather[0].icon;
+      const windSpeed = data.wind.speed;
+
+      const capitalizeWords = (str) => {
+        return str.replace(/\b\w/g, (char) => char.toUpperCase());
+      };
+      const capitalizedWeatherDescription = capitalizeWords(weatherDescription);
+
+      document.getElementById("weather-info").innerHTML = `
+    <span style="margin-right: 10px;">${cityName}, ID</span>
+    <img src="http://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon" style="margin-right: 10px; filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));" />
+    <span style="margin-right: 10px;">${temperature}°C</span>
+    <span style="margin-right: 10px;">${capitalizedWeatherDescription}</span>
+    <span style="margin-right: 10px;">Humidity: ${humidity}%</span>
+    <span style="margin-right: 10px;">Wind: ${windSpeed} m/s</span>
+`;
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+      document.getElementById("weather-info").innerHTML =
+        "Failed to fetch weather data.";
+    }
+  }
+
+  window.onload = fetchWeather;
+}
+
+function iwOpsiBook(id) {
+  Swal.fire({
+    title: "Select Booking Options",
+    text: "Please choose one of the booking options below:",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonText: "Personal",
+    confirmButtonColor: "#3085d6",
+    cancelButtonText: "Event",
+    cancelButtonColor: "#039e00",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.open(baseUrl + "/web/reservation/" + id);
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      window.open(baseUrl + "/web/reservationEvent/" + id);
+    }
+  });
+}
+
+function iwRedirectToLogin() {
+  Swal.fire({
+    icon: "warning",
+    title: "You are not logged in as User",
+    text: "Please log in to proceed.",
+    confirmButtonText: "OK",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = baseUrl + "/login";
+    } else {
+    }
+  });
+}
+function openAround() {
+  $("#list-rg-col").hide();
+  $("#list-ev-col").hide();
+  $("#list-rec-col").hide();
+  $("#check-nearbyyou-col").show();
 }

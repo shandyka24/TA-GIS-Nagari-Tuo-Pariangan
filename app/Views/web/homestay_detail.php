@@ -23,7 +23,7 @@
                                     function redirectToLogin() {
                                         Swal.fire({
                                             icon: 'warning',
-                                            title: 'You are not logged in',
+                                            title: 'You are not logged in as User',
                                             text: 'Please log in to proceed.',
                                             confirmButtonText: 'OK',
                                         }).then((result) => {

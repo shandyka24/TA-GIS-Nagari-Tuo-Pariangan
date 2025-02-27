@@ -41,13 +41,33 @@ $uri3 = $uri[3] ?? '';
                     </li>
 
                     <!-- Manage Village -->
-                    <?php if (in_groups(['admin'])) : ?>
+                    <!-- <?php if (in_groups(['admin'])) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'villages') ? 'active' : '' ?>">
                             <a href="<?= base_url('dashboard/villages'); ?>" class="sidebar-link">
                                 <i class="fa-solid fa-map-location-dot"></i><span class="text-dark fw-bold"> Village</span>
                             </a>
                         </li>
-                    <?php endif; ?>
+                    <?php endif; ?> -->
+
+                    <?php if (in_groups(['admin'])) :
+                    ?>
+                         <li class="sidebar-item has-sub">
+                            <a href="" class="sidebar-link">
+                                <i class="fa-solid fa-map-location-dot"></i><span>Village</span>
+                            </a>
+                            <ul class="submenu <?= ($uri1 == 'villages' || $uri1 == 'announcement') ? 'active' : '' ?>">
+                                <!-- List Package -->
+                                <li class="submenu-item <?= ($uri1 == 'villages') ? 'active' : '' ?>" id="pa-list">
+                                    <a href="<?= base_url('dashboard/villages'); ?>"><i class="fa-solid fa-map-location-dot"></i> Data Village</a>
+                                </li>
+                                <!-- List Package type-->
+                                <li class="submenu-item <?= ($uri1 == 'announcement') ? 'active' : '' ?>" id="pa-list">
+                                    <a href="<?= base_url('dashboard/announcement'); ?>"><i class="fa-solid fa-scroll"></i> Announcement</a>
+                                </li>                              
+                            </ul>
+                        </li>
+                    <?php endif;
+                    ?>
 
                     <!-- Manage Users -->
                     <?php if (in_groups(['admin'])) : ?>

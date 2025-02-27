@@ -49,6 +49,8 @@ class TouristArea extends ResourcePresenter
         $village = $this->villageModel->check_village()->getRowArray();
         $user_phone = $this->userModel->get_admin_phone()->getRowArray();
         $village['phone'] = $user_phone['phone'];
+        $contents3 = $this->villageModel->get_announcement_info()->getResultArray();
+
 
         $list_gallery = $this->villageGalleryModel->get_gallery_api($village['id'])->getResultArray();
         $galleries = array();
@@ -62,6 +64,7 @@ class TouristArea extends ResourcePresenter
         $data = [
             'title' => 'Home',
             'data' => $village,
+            'data3' => $contents3,
         ];
 
         return view('home/home', $data);
