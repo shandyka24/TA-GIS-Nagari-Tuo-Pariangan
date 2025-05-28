@@ -13,6 +13,64 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+<style>
+/* Global font size override to 20px */
+body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
+    font-size: 20px;
+}
+
+/* Specific overrides for smaller elements */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table th, .table td {
+    font-size: 20px;
+    padding: 12px;
+}
+
+.btn {
+    font-size: 20px;
+    padding: 10px 16px;
+}
+
+.btn-sm {
+    font-size: 18px;
+    padding: 8px 12px;
+}
+
+.form-control, .form-select {
+    font-size: 20px;
+    padding: 10px;
+    /* font-weight: bold; */
+}
+
+.modal-title {
+    font-size: 22px;
+}
+
+.input-group-text {
+    font-size: 20px;
+}
+
+.form-check-label {
+    font-size: 20px;
+}
+
+.text-secondary, .text-muted {
+    font-size: 18px;
+}
+
+/* DataTable specific styles */
+.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
+    font-size: 20px;
+}
+
+.dataTables_info, .dataTables_paginate {
+    font-size: 20px;
+}
+</style>
 
 <section class="section">
     <div class="row">
@@ -26,7 +84,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title">Edit Village Information</h4>
+                            <h4 class="card-title fs-4 fw-bolder">Edit Village Information</h4>
                         </div>
                     </div>
                 </div>
@@ -37,21 +95,21 @@
                                 <input type="hidden" name="id" value="<?= $data['id_vi']; ?>" required>
                                 <div class="form-group mb-4">
                                     <label for="address" class="form-label">Village</label>
-                                    <input type="text" class="form-control" name="name" aria-label="Name" aria-describedby="name" value="<?= $data['name']; ?>" required disabled>
+                                    <input type="text" class="form-control text-dark" name="name" aria-label="Name" aria-describedby="name" value="<?= $data['name']; ?>" required disabled>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="address" class="form-label">Address</label>
-                                    <textarea class="form-control" id="address" name="address" rows="2" required><?= $data['address']; ?></textarea>
+                                    <textarea class="form-control text-dark" id="address" name="address" rows="2" required><?= $data['address']; ?></textarea>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" id="description" name="description" rows="4" required><?= $data['description']; ?></textarea>
+                                    <textarea class="form-control text-dark" id="description" name="description" rows="4" required><?= $data['description']; ?></textarea>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4 col-12 mb-4">
                                         <label for="capacity" class="mb-2">Open</label>
                                         <div class="input-group">
-                                            <input type="time" id="capacity" class="form-control" name="open" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['open']; ?>" required>
+                                            <input type="time" id="capacity" class="form-control text-dark" name="open" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['open']; ?>" required>
                                             <span class="input-group-text">WIB</span>
                                         </div>
                                     </div>
@@ -61,7 +119,7 @@
                                         <label for="capacity" class="mb-2">Ticket Price</label>
                                         <div class="input-group">
                                             <span class="input-group-text">Rp.</span>
-                                            <input type="number" id="capacity" class="form-control" name="ticket_price" placeholder="Ticket Price" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['ticket_price']; ?>">
+                                            <input type="number" id="capacity" class="form-control text-dark" name="ticket_price" placeholder="Ticket Price" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['ticket_price']; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +127,7 @@
                                     <div class="form-group col-md-4 col-12 mb-4">
                                         <label for="capacity" class="mb-2">Close</label>
                                         <div class="input-group">
-                                            <input type="time" id="capacity" class="form-control" name="close" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['close']; ?>" required>
+                                            <input type="time" id="capacity" class="form-control text-dark" name="close" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['close']; ?>" required>
                                             <span class="input-group-text">WIB</span>
                                         </div>
                                     </div>
@@ -77,7 +135,7 @@
                                 <div class="row mt-3">
                                     <div class="form-group col-md-6 col-12 mb-4">
                                         <label for="email" class="mb-2">Email</label>
-                                        <input type="email" id="email" class="form-control" name="email" placeholder="Email" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['email']; ?>">
+                                        <input type="email" id="email" class="form-control text-dark" name="email" placeholder="Email" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['email']; ?>">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -85,39 +143,39 @@
                                         <label for="capacity" class="mb-2">Facebook</label>
                                         <div class="input-group">
                                             <span class="input-group-text">@</span>
-                                            <input type="text" id="capacity" class="form-control" name="facebook" placeholder="Facebook" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['facebook']; ?>">
+                                            <input type="text" id="capacity" class="form-control text-dark" name="facebook" placeholder="Facebook" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['facebook']; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-3 col-12 mb-4">
                                         <label for="capacity" class="mb-2">Instagram</label>
                                         <div class="input-group">
                                             <span class="input-group-text">@</span>
-                                            <input type="text" id="capacity" class="form-control" name="instagram" placeholder="Instagram" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['instagram']; ?>">
+                                            <input type="text" id="capacity" class="form-control text-dark" name="instagram" placeholder="Instagram" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['instagram']; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-3 col-12 mb-4">
                                         <label for="capacity" class="mb-2">Youtube</label>
                                         <div class="input-group">
                                             <span class="input-group-text">@</span>
-                                            <input type="text" id="capacity" class="form-control" name="youtube" placeholder="Youtube" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['youtube']; ?>">
+                                            <input type="text" id="capacity" class="form-control text-dark" name="youtube" placeholder="Youtube" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['youtube']; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group col-md-3 col-12 mb-4">
                                         <label for="capacity" class="mb-2">TikTok</label>
                                         <div class="input-group">
                                             <span class="input-group-text">@</span>
-                                            <input type="text" id="capacity" class="form-control" name="tiktok" placeholder="TikTok" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['tiktok']; ?>">
+                                            <input type="text" id="capacity" class="form-control text-dark" name="tiktok" placeholder="TikTok" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['tiktok']; ?>">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row mt-3 mb-4">
                                     <div class="form-group col-md-6 col-12 mb-4">
                                         <label for="gallery" class="form-label">Photos</label>
-                                        <input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
+                                        <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
                                     </div>
                                     <div class="form-group col-md-6 col-12 mb-4">
                                         <label for="video" class="form-label">Video</label>
-                                        <input class="form-control" accept="video/*, .mkv" type="file" name="video" id="video">
+                                        <input class="form-control text-dark" accept="video/*, .mkv" type="file" name="video" id="video">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>

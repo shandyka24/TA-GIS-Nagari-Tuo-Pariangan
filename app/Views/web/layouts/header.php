@@ -4,12 +4,21 @@
     </a>
 </header>
 
+<!-- <style>
+    h2 {
+        font-size: 28px !important;
+    }
+    a {
+        font-size: 20px;
+    }
+</style> -->
+
 <div class="page-heading">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Tourism Village</h3>
-                <p class="text-subtitle text-muted" id="villageName">Nagari Tuo Pariangan</p>
+                <h2 style="font-size: 28px;">Tourism Village</h2>
+                <p class="text-subtitle text-muted" style="font-size: 22px;" id="villageName">Nagari Tuo Pariangan</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first mb-md-0 mb-3">
                 <div class="float-end">
@@ -28,13 +37,13 @@
                                     </div>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="<?= base_url('web/profile'); ?>">My Profile</a>
-                                    <a class="dropdown-item" href="<?= base_url('logout'); ?>">Log Out</a>
+                                    <a class="dropdown-item fw-bold" style="font-size: 20px;" href="<?= base_url('web/profile'); ?>">My Profile</a>
+                                    <a class="dropdown-item fw-bold" style="font-size: 20px;" href="<?= base_url('logout'); ?>">Log Out</a>
                                 </div>
                             </div>
                         </div>
                     <?php else : ?>
-                        <a href="<?= base_url('login'); ?>" class="btn btn-primary">Login</a>
+                        <a href="<?= base_url('login'); ?>" class="btn btn-primary" style="font-size: 20px;">Login</a>
                     <?php endif; ?>
                 </div>
             </div>

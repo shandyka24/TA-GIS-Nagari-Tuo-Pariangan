@@ -378,6 +378,7 @@ class Homestay extends ResourcePresenter
             'open' => $request['open'],
             'close' => $request['close'],
             'owner' => $request['owner'],
+            'max_people_for_event' => $request['max_people_for_event'],
             'description' => $request['description'],
             'lat' => $request['lat'],
             'lng' => $request['lng'],

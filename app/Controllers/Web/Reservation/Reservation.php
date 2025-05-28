@@ -240,8 +240,8 @@ class Reservation extends ResourcePresenter
     {
         $api_url = "https://api.open-meteo.com/v1/forecast";
         $params = [
-            'latitude' => $latitude,
-            'longitude' => $longitude,
+            'latitude' => '-0.4505930495362753',
+            'longitude' => '100.4887328808639',
             'daily' => 'temperature_2m_min,temperature_2m_max,weathercode',
             'timezone' => 'auto',
             'forecast_days' => 14
@@ -259,10 +259,23 @@ class Reservation extends ResourcePresenter
                 $weatherData = $result['daily'];
                 if (isset($weatherData['weathercode'])) {
                     foreach ($weatherData['weathercode'] as $index => $code) {
+                        // dd($weatherData);
                         $weatherData['weather_icons'][$index] = $this->mapWeatherCodeToIcon($code);
                         $weatherData['weather_descriptions'][$index] = $this->mapWeatherCodeToDescription($code);
+                        if (isset($weatherData['time'][$index])) {
+                            $date = new \DateTime($weatherData['time'][$index]);
+                            $weatherData['day_names'][$index] = $date->format('l'); // 'l' returns full day name
+                        }
                     }
                 }
+                array_shift($weatherData['time']);
+                array_shift($weatherData['temperature_2m_min']);
+                array_shift($weatherData['temperature_2m_max']);
+                array_shift($weatherData['weathercode']);
+                array_shift($weatherData['weather_icons']);
+                array_shift($weatherData['weather_descriptions']);
+                array_shift($weatherData['day_names']);
+                // dd($weatherData);
                 return $weatherData;
             }
         }
@@ -308,7 +321,10 @@ class Reservation extends ResourcePresenter
         // bagian sini
         $weather_dates = [];
         $current_date = new \DateTime();
-        for ($i = 0; $i < 14; $i++) {
+        for ($i = 0; $i < 13; $i++) {
+            if ($i == 0) {
+                $current_date->modify('+1 day'); // Tambahkan 1 hari
+            }
             $weather_dates[] = $current_date->format('Y-m-d'); // Simpan dalam format Y-m-d
             $current_date->modify('+1 day'); // Tambahkan 1 hari
         }
@@ -415,7 +431,10 @@ class Reservation extends ResourcePresenter
 
         $weather_dates = [];
         $current_date = new \DateTime();
-        for ($i = 0; $i < 14; $i++) {
+        for ($i = 0; $i < 13; $i++) {
+            if ($i == 0) {
+                $current_date->modify('+1 day'); // Tambahkan 1 hari
+            }
             $weather_dates[] = $current_date->format('Y-m-d'); // Simpan dalam format Y-m-d
             $current_date->modify('+1 day'); // Tambahkan 1 hari
         }
@@ -441,7 +460,7 @@ class Reservation extends ResourcePresenter
                 $weather_descriptions[] = $description;
             }
         }
-        
+
         $data = [
             'title' =>  $homestay['name'] . ' Reservation',
             'homestay_id' => $homestay_id,

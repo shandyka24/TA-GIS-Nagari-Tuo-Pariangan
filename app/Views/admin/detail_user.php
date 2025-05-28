@@ -2,7 +2,15 @@
 
 <?= $this->section('content') ?>
 <section class="section">
-
+<style>
+    h3 {
+        font-size: 22px !important;
+        font-weight: bolder;
+    }
+    a, p {
+        font-size: 22px;
+    }
+</style>
     <div class="card">
         <div class="card-header">
             <div class="row align-items-center">
@@ -19,31 +27,31 @@
                 <div class="col-md-6 col-12 order-md-first order-last">
                     <div class="mb-5">
                         <p class="mb-2">First Name</p>
-                        <p class="fw-bold fs-5"><?= (esc($data['first_name']) == '') ? '-' : esc($data['first_name']); ?></p>
+                        <p class="fw-bold"><?= (esc($data['first_name']) == '') ? '-' : esc($data['first_name']); ?></p>
                     </div>
                     <div class="mb-5">
                         <p class="mb-2">Last Name</p>
-                        <p class="fw-bold fs-5"><?= (esc($data['last_name']) == '') ? '-' : esc($data['last_name']); ?></p>
+                        <p class="fw-bold"><?= (esc($data['last_name']) == '') ? '-' : esc($data['last_name']); ?></p>
                     </div>
                     <div class="mb-5">
                         <p class="mb-2">Email</p>
-                        <p class="fw-bold fs-5"><?= (esc($data['email']) == '') ? '-' : esc($data['email']); ?></p>
+                        <p class="fw-bold"><?= (esc($data['email']) == '') ? '-' : esc($data['email']); ?></p>
                     </div>
                     <div class="mb-5">
                         <p class="mb-2">Username</p>
-                        <p class="fw-bold fs-5"><?= (esc($data['username']) == '') ? '-' : esc($data['username']); ?></p>
+                        <p class="fw-bold"><?= (esc($data['username']) == '') ? '-' : esc($data['username']); ?></p>
                     </div>
                     <div class="mb-5">
                         <p class="mb-2">Role</p>
-                        <p class="fw-bold fs-5"><?= ucfirst(esc($data['role'])); ?></p>
+                        <p class="fw-bold"><?= ucfirst(esc($data['role'])); ?></p>
                     </div>
                     <div class="mb-5">
                         <p class="mb-2">Address</p>
-                        <p class="fw-bold fs-5"><?= (esc($data['address']) == '') ? '-' : esc($data['address']); ?></p>
+                        <p class="fw-bold"><?= (esc($data['address']) == '') ? '-' : esc($data['address']); ?></p>
                     </div>
                     <div class="">
                         <p class="mb-2">Phone</p>
-                        <p class="fw-bold fs-5"><?= (esc($data['phone']) == '') ? '-' : esc($data['phone']); ?></p>
+                        <p class="fw-bold"><?= (esc($data['phone']) == '') ? '-' : esc($data['phone']); ?></p>
                     </div>
                 </div>
                 <div class="col-md-6 col-12 order-md-last order-first mb-5">

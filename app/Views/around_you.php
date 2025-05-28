@@ -11,15 +11,15 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <h4 class="card-title">Google Maps</h4>
+                            <h4 class="card-title fw-bolder" style="font-size: 22px;">Google Maps</h4>
                             <div class="col-12 d-flex align-items-center gap-1">
                                 <div class="form-check" style="font-size: 14px;">
-                                    <input class="form-check-input" type="checkbox" id="check-label" value="check-label" onchange="checkLabel()">
-                                    <label class="form-check-label" for="check-label">Labels</label>
+                                    <input class="form-check-input" type="checkbox" id="check-label" value="check-label" style="font-size: 18px;" onchange="checkLabel()">
+                                    <label class="form-check-label" for="check-label" style="font-size: 18px;">Labels</label>
                                 </div>&nbsp;
                                 <div class="form-check" style="font-size: 14px;">
-                                    <input class="form-check-input" type="checkbox" id="check-terrain" value="check-terrain" onchange="checkTerrain()">
-                                    <label class="form-check-label" for="check-terrain">Terrain</label>
+                                    <input class="form-check-input" type="checkbox" id="check-terrain" value="check-terrain" style="font-size: 18px;" onchange="checkTerrain()">
+                                    <label class="form-check-label" for="check-terrain" style="font-size: 18px;">Terrain</label>
                                 </div>
                             </div>
                         </div>
@@ -34,50 +34,50 @@
             <!-- Object Around Panel -->
             <div class="card text-dark" id="check-nearbyyou-col">
                 <div class="card-header">
-                    <h5 class="card-title text-center">Object Around</h5>
+                    <h5 class="card-title text-center fs-4 fw-bolder">Object Around</h5>
                 </div>
                 <div class="card-body">
                     <div class="sidebar-items">
                         <div class="form-check sidebar-item">
-                            <input type="checkbox" id="check-uatt" class="form-check-input">
-                            <label for="check-uatt" class="sidebar-link">
+                            <input type="checkbox" id="check-uatt1" class="form-check-input" style="font-size: 18px;">
+                            <label for="check-uatt" class="sidebar-link" style="font-size: 20px;">
                                 <i></i><span class="text-dark fw-bold">Unique Attraction</span>
                             </label>
                         </div>
                         <div class="form-check sidebar-item">
-                            <input type="checkbox" id="check-att" class="form-check-input">
-                            <label for="check-att" class="sidebar-link">
+                            <input type="checkbox" id="check-att1" class="form-check-input" style="font-size: 18px;">
+                            <label for="check-att" class="sidebar-link" style="font-size: 20px;">
                                 <i></i><span class="text-dark fw-bold">Ordinary Attraction</span>
                             </label>
                         </div>
                         <div class="form-check sidebar-item">
-                            <input type="checkbox" id="check-hs" class="form-check-input">
-                            <label for="check-hs" class="sidebar-link">
+                            <input type="checkbox" id="check-hs1" class="form-check-input" style="font-size: 18px;">
+                            <label for="check-hs" class="sidebar-link" style="font-size: 20px;" >
                                 <i></i><span class="text-dark fw-bold">Homestay</span>
                             </label>
                         </div>
                         <div class="form-check sidebar-item">
-                            <input type="checkbox" id="check-cp" class="form-check-input">
-                            <label for="check-cp" class="sidebar-link">
+                            <input type="checkbox" id="check-cp1" class="form-check-input" style="font-size: 18px;">
+                            <label for="check-cp" class="sidebar-link" style="font-size: 20px;">
                                 <i></i><span class="text-dark fw-bold">Culinary Place</span>
                             </label>
                         </div>
                         <div class="form-check sidebar-item">
-                            <input type="checkbox" id="check-sp" class="form-check-input">
-                            <label for="check-sp" class="sidebar-link">
+                            <input type="checkbox" id="check-sp1" class="form-check-input" style="font-size: 18px;">
+                            <label for="check-sp" class="sidebar-link" style="font-size: 20px;">
                                 <i></i><span class="text-dark fw-bold">Souvenir Place</span>
                             </label>
                         </div>
                         <div class="form-check sidebar-item">
-                            <input type="checkbox" id="check-wp" class="form-check-input">
-                            <label for="check-wp" class="sidebar-link">
+                            <input type="checkbox" id="check-wp1" class="form-check-input" style="font-size: 18px;">
+                            <label for="check-wp" class="sidebar-link" style="font-size: 20px;">
                                 <i></i><span class="text-dark fw-bold">Worship Place</span>
                             </label>
                         </div>
-                        <div class="mt-2 mb-3" id="radiusNearby">
-                            <label for="inputRadiusNearby" class="form-label">Radius: </label>
-                            <label id="radiusValueNearby" class="form-label">0 m</label>
-                            <input type="range" class="form-range" min="0" max="20" value="0" id="inputRadiusNearby" name="inputRadius" onchange="updateRadius('Nearby'); checkAround('Nearby');">
+                        <div class="mt-2 mb-3" id="radiusNearbyyou" style="font-size: 20px;">
+                            <label for="inputRadiusNearbyyou" class="form-label">Radius: </label>
+                            <label id="radiusValueNearbyyou" class="form-label">0 m</label>
+                            <input type="range" class="form-range" min="0" max="20" value="0" id="inputRadiusNearbyyou" name="inputRadius" onchange="updateRadius('Nearbyyou'); checkAround('Nearbyyou');">
                         </div>
                     </div>
                 </div>
@@ -86,16 +86,16 @@
             <!-- Search Results Panel -->
             <div class="card" id="result-nearby-col">
                 <div class="card-header">
-                    <h5 class="card-title text-center">Search Result Object Around</h5>
+                    <h5 class="card-title text-center fs-4 fw-bolder">Search Result Object Around</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive overflow-auto" id="table-result-nearby">
-                        <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-uatt"></table>
-                        <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-att"></table>
-                        <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-hs"></table>
-                        <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-cp"></table>
-                        <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-sp"></table>
-                        <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" id="table-wp"></table>
+                        <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" style="font-size: 20px;" id="table-uatt"></table>
+                        <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" style="font-size: 20px;" id="table-att"></table>
+                        <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" style="font-size: 20px;" id="table-hs"></table>
+                        <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" style="font-size: 20px;" id="table-cp"></table>
+                        <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" style="font-size: 20px;" id="table-sp"></table>
+                        <table class="table table-hover mb-md-5 mb-3 table-lg text-dark" style="font-size: 20px;" id="table-wp"></table>
                     </div>
                 </div>
             </div>

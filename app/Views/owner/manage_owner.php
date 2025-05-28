@@ -16,7 +16,64 @@ $users = in_array('users', $uri);
     }
 </style>
 <?= $this->endSection() ?>
+<style>
+/* Global font size override to 20px */
+body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
+    font-size: 20px;
+}
 
+/* Specific overrides for smaller elements */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table th, .table td {
+    font-size: 20px;
+    padding: 12px;
+}
+
+.btn {
+    font-size: 20px;
+    padding: 10px 16px;
+}
+
+.btn-sm {
+    font-size: 18px;
+    padding: 8px 12px;
+}
+
+.form-control, .form-select {
+    font-size: 20px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.modal-title {
+    font-size: 22px;
+}
+
+.input-group-text {
+    font-size: 20px;
+}
+
+.form-check-label {
+    font-size: 20px;
+}
+
+.text-secondary, .text-muted {
+    font-size: 18px;
+}
+
+/* DataTable specific styles */
+.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
+    font-size: 20px;
+}
+
+.dataTables_info, .dataTables_paginate {
+    font-size: 20px;
+}
+</style>
 <?= $this->section('content') ?>
 <section class="section">
     <div class="card">
@@ -184,25 +241,25 @@ $users = in_array('users', $uri);
                             <div class="modal-body">
                                 <div class="card-body">
                                     <?php if ($category == 'Souvenir Product') : ?>
-                                        <form class="form form-vertical" action="product/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                                        <form class="form form-vertical text-dark" action="product/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
                                         <?php endif; ?>
                                         <?php if ($category == 'Culinary Product') : ?>
-                                            <form class="form form-vertical" action="product/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                                            <form class="form form-vertical text-dark" action="product/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
                                             <?php endif; ?>
                                             <?php if ($category == 'Attraction Facility') : ?>
                                                 <form class="form form-vertical" action="facility/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
                                                 <?php endif; ?>
                                                 <?php if ($category == 'Homestay Facility') : ?>
-                                                    <form class="form form-vertical" action="/dashboard/facilityHomestay/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                                                    <form class="form form-vertical text-dark" action="/dashboard/facilityHomestay/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
                                                     <?php endif; ?>
                                                     <?php if ($category == 'Homestay Unit Facility') : ?>
-                                                        <form class="form form-vertical" action="/dashboard/facilityUnit/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                                                        <form class="form form-vertical text-dark" action="/dashboard/facilityUnit/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
                                                         <?php endif; ?>
-                                                        <form class="form form-vertical" action="<?= ($category == 'Attraction Facility') ? 'facility' : 'product'; ?>/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
+                                                        <form class="form form-vertical text-dark" action="<?= ($category == 'Attraction Facility') ? 'facility' : 'product'; ?>/edit/<?= esc($product['id']); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
                                                             <div class="form-body">
                                                                 <div class="form-group">
                                                                     <label for="name" class="mb-2"><?= esc($category); ?> Name</label>
-                                                                    <input type="text" id="name" class="form-control" name="name" placeholder="<?= esc($category); ?> Name" value="<?= esc($product['name']); ?>" required>
+                                                                    <input type="text" id="name" class="form-control text-dark" name="name" placeholder="<?= esc($category); ?> Name" value="<?= esc($product['name']); ?>" required>
                                                                 </div>
                                                                 <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                                                 <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>
@@ -273,7 +330,7 @@ $users = in_array('users', $uri);
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                                    <textarea class="form-control text-dark" id="description" name="description" rows="4" required></textarea>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="gallery" class="form-label">Image</label>

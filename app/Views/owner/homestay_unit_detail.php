@@ -3,6 +3,64 @@
 <?= $this->section('content') ?>
 
 <section class="section">
+    <style>
+/* Global font size override to 20px */
+body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
+    font-size: 20px;
+}
+
+/* Specific overrides for smaller elements */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table th, .table td {
+    font-size: 20px;
+    padding: 12px;
+}
+
+.btn {
+    font-size: 20px;
+    padding: 10px 16px;
+}
+
+.btn-sm {
+    font-size: 18px;
+    padding: 8px 12px;
+}
+
+.form-control, .form-select {
+    font-size: 20px;
+    padding: 10px;
+    /* font-weight: bold; */
+}
+
+.modal-title {
+    font-size: 22px;
+}
+
+.input-group-text {
+    font-size: 20px;
+}
+
+.form-check-label {
+    font-size: 20px;
+}
+
+.text-secondary, .text-muted {
+    font-size: 18px;
+}
+
+/* DataTable specific styles */
+.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
+    font-size: 20px;
+}
+
+.dataTables_info, .dataTables_paginate {
+    font-size: 20px;
+}
+</style>
     <div class="row">
         <script>
             currentUrl = '<?= current_url(); ?>';
@@ -14,7 +72,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title">Homestay Unit Information</h4>
+                            <h4 class="card-title fs-4 fw-bolder">Homestay Unit Information</h4>
                             <!-- <div class="text-center">
                                 <?php
                                 // for ($i = 0; $i < (int)esc($data['avg_rating']); $i++) { 
@@ -134,7 +192,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Add New Facility</h5>
+                        <h5 class="modal-title fs-4 fw-bolder" id="exampleModalLabel">Add New Facility</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -151,12 +209,12 @@
                                             getListFHU('<?= esc($data['homestay_id']); ?>', '<?= esc($data['unit_type']); ?>', '<?= esc($data['unit_number']); ?>');
                                         </script>
                                         <label for="catSelect" class="mb-2">Facility</label>
-                                        <select class="form-select" id="proSelect" name="facility_id" required>
+                                        <select class="form-select text-dark" id="proSelect" name="facility_id" required>
                                         </select>
                                     </fieldset>
                                     <div class="form-group mb-4">
                                         <label for="description" class="form-label">Description</label>
-                                        <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+                                        <textarea class="form-control text-dark" style="color: #000000;" id="description" name="description" rows="4"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                     <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>
@@ -174,7 +232,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit Service</h5>
+                                <h5 class="modal-title fs-4 fw-bolder" id="exampleModalLabel">Edit Facility</h5>
                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -189,13 +247,13 @@
                                             <input type="hidden" name="facility_id" value="<?= esc($facility['id']); ?>">
                                             <fieldset class="form-group mb-4">
                                                 <label for="catSelect" class="mb-2">Facility</label>
-                                                <select class="form-select" id="proSelect" name="facility_id" required disabled>
-                                                    <option value="" selected disabled><?= esc($facility['name']); ?></option>
+                                                <select class="form-select text-dark" id="proSelect" name="facility_id" required disabled>
+                                                    <option class="text-dark" style="color:#000000" value="" selected disabled><?= esc($facility['name']); ?></option>
                                                 </select>
                                             </fieldset>
                                             <div class="form-group mb-4">
                                                 <label for="description" class="form-label">Description</label>
-                                                <textarea class="form-control" id="description" name="description" rows="4"><?= esc($facility['description']); ?></textarea>
+                                                <textarea class="form-control text-dark" style="color:#000000" id="description" name="description" rows="4"><?= esc($facility['description']); ?></textarea>
                                             </div>
                                             <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>

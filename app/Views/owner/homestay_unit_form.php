@@ -20,6 +20,64 @@ $edit = in_array('edit', $uri);
 <?= $this->section('content') ?>
 
 <section class="section">
+    <style>
+/* Global font size override to 20px */
+body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
+    font-size: 20px;
+}
+
+/* Specific overrides for smaller elements */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table th, .table td {
+    font-size: 20px;
+    padding: 12px;
+}
+
+.btn {
+    font-size: 20px;
+    padding: 10px 16px;
+}
+
+.btn-sm {
+    font-size: 18px;
+    padding: 8px 12px;
+}
+
+.form-control, .form-select {
+    font-size: 20px;
+    padding: 10px;
+    /* font-weight: bold; */
+}
+
+.modal-title {
+    font-size: 22px;
+}
+
+.input-group-text {
+    font-size: 20px;
+}
+
+.form-check-label {
+    font-size: 20px;
+}
+
+.text-secondary, .text-muted {
+    font-size: 18px;
+}
+
+/* DataTable specific styles */
+.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
+    font-size: 20px;
+}
+
+.dataTables_info, .dataTables_paginate {
+    font-size: 20px;
+}
+</style>
     <div class="row">
         <script>
             currentUrl = '<?= current_url(); ?>';
@@ -37,12 +95,12 @@ $edit = in_array('edit', $uri);
                             <fieldset class="form-group mb-4">
                                 <label for="catSelect" class="mb-2">Unit Type</label>
                                 <?php if (!$edit) : ?>
-                                    <select class="form-select" id="catSelect" name="unit_type" required>
+                                    <select class="form-select text-dark" id="catSelect" name="unit_type" required>
                                         <?php foreach ($unit_type as $unit) : ?>
                                             <?php if ($edit && in_array(esc($unit['id']), $data['type'])) : ?>
-                                                <option value="<?= esc($unit['id']); ?>" selected><?= esc($unit['name']); ?></option>
+                                                <option class="text-dark" value="<?= esc($unit['id']); ?>" selected><?= esc($unit['name']); ?></option>
                                             <?php else : ?>
-                                                <option value="<?= esc($unit['id']); ?>"><?= esc($unit['name']); ?></option>
+                                                <option class="text-dark" value="<?= esc($unit['id']); ?>"><?= esc($unit['name']); ?></option>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
@@ -54,30 +112,30 @@ $edit = in_array('edit', $uri);
                             </fieldset>
                             <div class="form-group mb-4">
                                 <label for="name" class="mb-2">Homestay Unit Name</label>
-                                <input type="text" id="name" class="form-control" name="name" placeholder="Homestay Unit Name" value="<?= ($edit) ? $data['name'] : old('name'); ?>" required>
+                                <input type="text" id="name" class="form-control text-dark" name="name" placeholder="Homestay Unit Name" value="<?= ($edit) ? $data['name'] : old('name'); ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="price" class="mb-2">Price</label>
                                 <div class="input-group">
                                     <span class="input-group-text">Rp.</span>
-                                    <input type="number" id="price" class="form-control" name="price" placeholder="Price" aria-label="Price" aria-describedby="price" value="<?= ($edit) ? $data['price'] : old('price'); ?>" required>
+                                    <input type="number" id="price" class="form-control text-dark" name="price" placeholder="Price" aria-label="Price" aria-describedby="price" value="<?= ($edit) ? $data['price'] : old('price'); ?>" required>
                                     <span class="input-group-text">/ day</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="price" class="mb-2">Capacity</label>
                                 <div class="input-group">
-                                    <input type="number" id="price" class="form-control" name="capacity" placeholder="Capacity" aria-label="Price" aria-describedby="price" value="<?= ($edit) ? $data['capacity'] : old('capacity'); ?>" required>
+                                    <input type="number" id="price" class="form-control text-dark" name="capacity" placeholder="Capacity" aria-label="Price" aria-describedby="price" value="<?= ($edit) ? $data['capacity'] : old('capacity'); ?>" required>
                                     <span class="input-group-text">people</span>
                                 </div>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" id="description" name="description" rows="4"><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
+                                <textarea class="form-control text-dark" id="description" name="description" rows="4"><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="gallery" class="form-label">Gallery</label>
-                                <input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
+                                <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
                             </div>
                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>

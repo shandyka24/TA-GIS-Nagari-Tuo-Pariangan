@@ -18,7 +18,11 @@ $edit = in_array('edit', $uri);
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
-
+<style>
+    .form-control, .form-select, .form-group, .btn, button, a {
+        font-size: 20px;
+    }
+</style>
 <section class="section">
     <div class="row">
         <script>
@@ -29,7 +33,7 @@ $edit = in_array('edit', $uri);
         <div class="col-md-6 col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title text-center"><?= $title; ?></h4>
+                    <h4 class="card-title text-center fs-5 fw-bolder"><?= $title; ?></h4>
                 </div>
                 <div class="card-body">
                     <?php if (in_groups('owner')) : ?>
@@ -40,46 +44,46 @@ $edit = in_array('edit', $uri);
                             <div class="form-body">
                                 <div class="form-group mb-4">
                                     <label for="geo-json" class="mb-2">GeoJSON</label>
-                                    <input type="text" id="geo-json" class="form-control" name="geo-json" placeholder="GeoJSON" readonly="readonly" required value='<?= ($edit) ? $data['geoJson'] : ''; ?>'>
+                                    <input type="text" id="geo-json" class="form-control text-dark" name="geo-json" placeholder="GeoJSON" readonly="readonly" required value='<?= ($edit) ? $data['geoJson'] : ''; ?>'>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="name" class="mb-2">Homestay Name</label>
-                                    <input type="text" id="name" class="form-control" name="name" placeholder="Homestay Name" value="<?= ($edit) ? $data['name'] : old('name'); ?>" required>
+                                    <input type="text" id="name" class="form-control text-dark" name="name" placeholder="Homestay Name" value="<?= ($edit) ? $data['name'] : old('name'); ?>" required>
                                 </div>
                                 <fieldset class="form-group mb-4">
                                     <label for="category" class="mb-2">Category</label>
-                                    <select class="form-select" id="category" name="category" required>
+                                    <select class="form-select text-dark" id="category" name="category" required>
                                         <?php if ($edit) : ?>
-                                            <option value="1" <?= ($data['category'] == '1') ? 'selected' : '' ?>>Non Syariah</option>
-                                            <option value="2" <?= ($data['category'] == '2') ? 'selected' : '' ?>>Syariah</option>
+                                            <option class="text-dark" value="1" <?= ($data['category'] == '1') ? 'selected' : '' ?>>Non Syariah</option>
+                                            <option class="text-dark" value="2" <?= ($data['category'] == '2') ? 'selected' : '' ?>>Syariah</option>
                                         <?php else : ?>
-                                            <option value="1">Non Syariah</option>
-                                            <option value="2">Syariah</option>
+                                            <option class="text-dark" value="1">Non Syariah</option>
+                                            <option class="text-dark" value="2">Syariah</option>
                                         <?php endif; ?>
                                     </select>
                                 </fieldset>
                                 <div class="form-group mb-4">
                                     <label for="address" class="mb-2">Address</label>
-                                    <input type="text" id="address" class="form-control" name="address" placeholder="Address" value="<?= ($edit) ? $data['address'] : old('address'); ?>">
+                                    <input type="text" id="address" class="form-control text-dark" name="address" placeholder="Address" value="<?= ($edit) ? $data['address'] : old('address'); ?>">
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="open" class="mb-2">Opening Hours</label>
                                     <div class="input-group">
-                                        <input type="time" id="open" class="form-control" name="open" placeholder="Opening Hours" aria-label="Opening Hours" aria-describedby="open" value="<?= ($edit) ? $data['open'] : old('open'); ?>" required>
+                                        <input type="time" id="open" class="form-control text-dark" name="open" placeholder="Opening Hours" aria-label="Opening Hours" aria-describedby="open" value="<?= ($edit) ? $data['open'] : old('open'); ?>" required>
                                         <span class="input-group-text">WIB</span>
                                     </div>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="close" class="mb-2">Closing Hours</label>
                                     <div class="input-group">
-                                        <input type="time" id="close" class="form-control" name="close" placeholder="Closing Hours" aria-label="Closing Hours" aria-describedby="close" value="<?= ($edit) ? $data['close'] : old('close'); ?>" required>
+                                        <input type="time" id="close" class="form-control text-dark" name="close" placeholder="Closing Hours" aria-label="Closing Hours" aria-describedby="close" value="<?= ($edit) ? $data['close'] : old('close'); ?>" required>
                                         <span class="input-group-text">WIB</span>
                                     </div>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="max_people_for_event" class="mb-2">Maximum Capacity for Event</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" id="max_people_for_event" class="form-control" name="max_people_for_event" placeholder="Capacity" value="<?= ($edit) ? $data['max_people_for_event'] : old('max_people_for_event'); ?>" required>
+                                        <input type="number" min="0" id="max_people_for_event" class="form-control text-dark" name="max_people_for_event" placeholder="Capacity" value="<?= ($edit) ? $data['max_people_for_event'] : old('max_people_for_event'); ?>" required>
                                         <span class="input-group-text">People</span>
                                     </div>
                                 </div>
@@ -90,7 +94,7 @@ $edit = in_array('edit', $uri);
                                         <input type="hidden" name="owner" value="<?= esc($data['owner']); ?>" required>
                                         <fieldset class="form-group mb-4">
                                             <label for="ownerSelect" class="mb-2">Owner</label>
-                                            <select class="form-select" id="ownerSelect" name="owner" required disabled>
+                                            <select class="form-select text-dark" id="ownerSelect" name="owner" required disabled>
                                                 <option value="<?= esc($data['owner']) ?>" selected><?= ($data['owner_first_name']) ? esc($data['owner_first_name']) : ''; ?> <?= ($data['owner_last_name']) ? esc($data['owner_last_name']) : ''; ?>(@<?= esc($data['owner_username']); ?>)</option>
                                             </select>
                                         </fieldset>
@@ -100,18 +104,18 @@ $edit = in_array('edit', $uri);
                                                 getListUsers('<?= ($edit) ? esc($data['owner']) : ''; ?>');
                                             </script>
                                             <label for="ownerSelect" class="mb-2">Owner</label>
-                                            <select class="form-select" id="ownerSelect" name="owner" required>
+                                            <select class="form-select text-dark" id="ownerSelect" name="owner" required>
                                             </select>
                                         </fieldset>
                                     <?php endif; ?>
                                 <?php endif; ?>
                                 <div class="form-group mb-4">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" id="description" name="description" rows="4"><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
+                                    <textarea class="form-control text-dark" id="description" name="description" rows="4"><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="facilities" class="mb-2">Facilities</label>
-                                    <select class="choices form-select multiple-remove" multiple="multiple" id="facilities" name="facilities[]">
+                                    <select class="choices form-select multiple-remove text-dark" multiple="multiple" id="facilities" name="facilities[]">
                                         <?php foreach ($facilities as $facility) : ?>
                                             <?php if ($edit && in_array(esc($facility['name']), $data['facilities'])) : ?>
                                                 <option value="<?= esc($facility['id']); ?>" selected><?= esc($facility['name']); ?></option>
@@ -123,11 +127,11 @@ $edit = in_array('edit', $uri);
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="gallery" class="form-label">Gallery</label>
-                                    <input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
+                                    <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="video" class="form-label">Video</label>
-                                    <input class="form-control" accept="video/*, .mkv" type="file" name="video" id="video">
+                                    <input class="form-control text-dark" accept="video/*, .mkv" type="file" name="video" id="video">
                                 </div>
 
                                 <input type="hidden" name="lat" id="lat" value="<?= ($edit) ? $data['lat'] : old('lat'); ?>">

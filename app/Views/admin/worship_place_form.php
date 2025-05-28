@@ -18,7 +18,64 @@ $edit = in_array('edit', $uri);
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+<style>
+/* Global font size override to 20px */
+body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
+    font-size: 20px;
+}
 
+/* Specific overrides for smaller elements */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table th, .table td {
+    font-size: 20px;
+    padding: 12px;
+}
+
+.btn {
+    font-size: 20px;
+    padding: 10px 16px;
+}
+
+.btn-sm {
+    font-size: 18px;
+    padding: 8px 12px;
+}
+
+.form-control, .form-select {
+    font-size: 20px;
+    padding: 10px;
+    /* font-weight: bold; */
+}
+
+.modal-title {
+    font-size: 22px;
+}
+
+.input-group-text {
+    font-size: 20px;
+}
+
+.form-check-label {
+    font-size: 20px;
+}
+
+.text-secondary, .text-muted {
+    font-size: 18px;
+}
+
+/* DataTable specific styles */
+.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
+    font-size: 20px;
+}
+
+.dataTables_info, .dataTables_paginate {
+    font-size: 20px;
+}
+</style>
 <section class="section">
     <div class="row">
         <script>
@@ -29,18 +86,18 @@ $edit = in_array('edit', $uri);
         <div class="col-md-6 col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title text-center"><?= $title; ?></h4>
+                    <h4 class="card-title text-center fs-4 fw-bolder"><?= $title; ?></h4>
                 </div>
                 <div class="card-body">
                     <form class="form form-vertical" action="<?= ($edit) ? base_url('dashboard/worshipPlace/update') . '/' . $data['id'] : base_url('dashboard/worshipPlace'); ?>" method="post" onsubmit="checkRequired(event)" enctype="multipart/form-data">
                         <div class="form-body">
                             <div class="form-group mb-4">
                                 <label for="geo-json" class="mb-2">GeoJSON</label>
-                                <input type="text" id="geo-json" class="form-control" name="geo-json" placeholder="GeoJSON" readonly="readonly" required value='<?= ($edit) ? $data['geoJson'] : ''; ?>'>
+                                <input type="text" id="geo-json" class="form-control text-dark" name="geo-json" placeholder="GeoJSON" readonly="readonly" required value='<?= ($edit) ? $data['geoJson'] : ''; ?>'>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="name" class="mb-2">Worship Place Name</label>
-                                <input type="text" id="name" class="form-control" name="name" placeholder="Worship Place Name" value="<?= ($edit) ? $data['name'] : old('name'); ?>" required>
+                                <input type="text" id="name" class="form-control text-dark" name="name" placeholder="Worship Place Name" value="<?= ($edit) ? $data['name'] : old('name'); ?>" required>
                                 </select>
                             </div>
                             <fieldset class="form-group mb-4">
@@ -53,18 +110,18 @@ $edit = in_array('edit', $uri);
                             </fieldset>
                             <div class="form-group mb-4">
                                 <label for="address" class="mb-2">Address</label>
-                                <input type="text" id="address" class="form-control" name="address" placeholder="Address" value="<?= ($edit) ? $data['address'] : old('address'); ?>">
+                                <input type="text" id="address" class="form-control text-dark" name="address" placeholder="Address" value="<?= ($edit) ? $data['address'] : old('address'); ?>">
                             </div>
                             <div class="form-group mb-4">
                                 <label for="capacity" class="mb-2">Capacity</label>
                                 <div class="input-group">
-                                    <input type="number" id="capacity" class="form-control" name="capacity" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= ($edit) ? $data['capacity'] : old('capacity'); ?>">
+                                    <input type="number" id="capacity" class="form-control text-dark" name="capacity" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= ($edit) ? $data['capacity'] : old('capacity'); ?>">
                                     <span class="input-group-text">People</span>
                                 </div>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control" id="description" name="description" rows="4"><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
+                                <textarea class="form-control text-dark" id="description" name="description" rows="4"><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="facilities" class="mb-2">Facilities</label>
@@ -80,7 +137,7 @@ $edit = in_array('edit', $uri);
                             </div>
                             <div class="form-group mb-4">
                                 <label for="gallery" class="form-label">Gallery</label>
-                                <input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
+                                <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
                             </div>
                             <input type="hidden" name="lat" id="lat" value="<?= ($edit) ? $data['lat'] : old('lat'); ?>">
                             <input type="hidden" name="lng" id="lng" value="<?= ($edit) ? $data['lng'] : old('lng'); ?>">
@@ -98,18 +155,18 @@ $edit = in_array('edit', $uri);
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-12 mb-3">
-                            <h5 class="card-title">Google Maps</h5>
+                            <h5 class="card-title fs-4 fw-bolder">Google Maps</h5>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="latitude">Latitude</label>
-                                <input type="text" class="form-control" id="latitude" name="latitude" placeholder="eg. -0.52435750" value="<?= ($edit) ? $data['lat'] : ''; ?>">
+                                <input type="text" class="form-control text-dark" id="latitude" name="latitude" placeholder="eg. -0.52435750" value="<?= ($edit) ? $data['lat'] : ''; ?>">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="latitude">Longitude</label>
-                                <input type="text" class="form-control" id="longitude" name="longitude" placeholder="eg. 100.49234850" value="<?= ($edit) ? $data['lng'] : ''; ?>">
+                                <input type="text" class="form-control text-dark" id="longitude" name="longitude" placeholder="eg. 100.49234850" value="<?= ($edit) ? $data['lng'] : ''; ?>">
                             </div>
                         </div>
                         <div class="col-auto mx-1">

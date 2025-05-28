@@ -49,9 +49,9 @@
         <div class="collapse navbar-collapse py-4 py-lg-0" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
                 <?php if ($village != null) : ?>
-                    <a href="<?= base_url('web'); ?>" class="nav-item nav-link">Explore</a>
+                    <a href="<?= base_url('web'); ?>" class="nav-item nav-link fw-bold text-dark" style="font-size: 20px;">Explore</a>
                 <?php endif; ?>
-                <a href="<?= base_url(); ?>" class="nav-item nav-link">About</a>
+                <a href="<?= base_url(); ?>" class="nav-item nav-link fw-bold text-dark" style="font-size: 20px;">About</a>
             </div>
         </div>
     </nav>
@@ -65,7 +65,7 @@
 
     <div class="row justify-content-center align-items-center m-0" style="background-color: #2d499d">
         <div class="col">
-            <p class="text-center text-white"><?= date('Y'); ?> &copy; Shandyka Tribuana Putra</p>
+            <p class="text-center text-white" style="font-size: 20px;"><?= date('Y'); ?> &copy; Shandyka Tribuana Putra</p>
         </div>
     </div>
     <script>

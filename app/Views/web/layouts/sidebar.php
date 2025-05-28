@@ -4,14 +4,22 @@ $uri1 = $uri[1] ?? 'index';
 $uri2 = $uri[2] ?? '';
 $uri3 = $uri[3] ?? '';
 ?>
+<style>
+    div {
+        font-size: 20px;
+    }
 
+    span {
+        font-size: 20px;
+    }
+</style>
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active">
         <!-- Sidebar Header -->
         <?= $this->include('web/layouts/sidebar_header'); ?>
 
         <!-- Sidebar -->
-        <div class="sidebar-menu">
+        <div class="sidebar-menu fw-bold" style="font-size: 22px;">
             <div class="d-flex flex-column">
                 <div class="d-flex justify-content-center avatar avatar-xl me-3" id="avatar-sidebar">
                     <img src="<?= base_url('images/logo.png'); ?>" alt="" srcset="" style="object-fit: cover; max-height: 90px; max-width: 90px;">
@@ -20,67 +28,67 @@ $uri3 = $uri[3] ?? '';
                     <div class="p-2 text-center">
                         <?php if (!empty(user()->first_name)): ?>
                             <?php if (in_groups(['owner', 'admin'])) : ?>
-                                Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-muted mb-0">@<?= user()->username; ?></span><br>
+                                Hello, <span class="fw-bold" style="font-size: 22px;"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-dark mb-0">@<?= user()->username; ?></span><br>
                             <?php else : ?>
                                 Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br>
-                                <span class="text-muted mb-0">@<?= user()->username; ?></span><br>
-                                <span class="fw-bold">Your Coin : <?= (user()->total_coin !== null) ? number_format(user()->total_coin) : number_format(0); ?></span>
+                                <span class="text-dark mb-0" style="font-size: 22px;">@<?= user()->username; ?></span><br>
+                                <span class="fw-bold" style="font-size: 22px;">Your Coin : <?= (user()->total_coin !== null) ? number_format(user()->total_coin) : number_format(0); ?></span>
                             <?php endif; ?>
 
                         <?php else: ?>
                             <?php if (in_groups(['owner', 'admin'])) : ?>
-                                Hello, <span class="fw-bold">@<?= user()->username; ?></span><br>
+                                Hello, <span class="fw-bold text-dark" style="font-size: 22px;">@<?= user()->username; ?></span><br>
                             <?php else : ?>
-                                Hello, <span class="fw-bold">@<?= user()->username; ?></span><br>
-                                <span class="fw-bold">Your Coin : <?= (user()->total_coin !== null) ? number_format(user()->total_coin) : number_format(0); ?></span>
+                                Hello, <span class="fw-bold text-dark" style="font-size: 22px;">@<?= user()->username; ?></span><br>
+                                <span class="fw-bold" style="font-size: 22px;">Your Coin : <?= (user()->total_coin !== null) ? number_format(user()->total_coin) : number_format(0); ?></span>
                             <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 <?php else : ?>
-                    <div class="p-2 d-flex justify-content-center">Hello, Visitor</div>
+                    <div class="p-2 d-flex justify-content-center" style="font-size: 22px;">Hello, Visitor</div>
                 <?php endif; ?>
                 <ul class="menu">
                     <!-- Home -->
                     <li class="sidebar-item <?= ($uri1 == 'index') ? 'active' : '' ?>">
                         <a href="/web" class="sidebar-link">
-                            <i class="fa-solid fa-house"></i><span class="text-dark fw-bold">Home</span>
+                            <i class="fa-solid fa-house"></i><span class="text-dark fw-bold" style="font-size: 22px;">Home</span>
                         </a>
                     </li>
 
                     <!-- Attraction -->
                     <li class="sidebar-item <?= ($uri1 == 'uniqueAttraction') ? 'active' : '' ?>">
                         <a href="/web/uniqueAttraction" class="sidebar-link">
-                            <i class="fa-solid fa-star"></i><span class="text-dark fw-bold">Unique Attraction</span>
+                            <i class="fa-solid fa-star"></i><span class="text-dark fw-bold" style="font-size: 20px;">Unique Attraction</span>
                         </a>
                     </li>
 
                     <!-- Attraction -->
                     <li class="sidebar-item <?= ($uri1 == 'attraction') ? 'active' : '' ?>">
                         <a href="/web/attraction" class="sidebar-link">
-                            <i class="fa-solid fa-signs-post"></i><span class="text-dark fw-bold">Ordinary Attraction</span>
+                            <i class="fa-solid fa-signs-post"></i><span class="text-dark fw-bold" style="font-size: 20px;">Ordinary Attraction</span>
                         </a>
                     </li>
 
                     <!-- Arround You -->
                     <li class="sidebar-item <?= ($uri1 == 'aroundYou') ? 'active' : '' ?>">
                         <a href="/web/aroundYou" class="sidebar-link">
-                            <i class="fa-solid fa-compass"></i><span class="text-dark fw-bold">Around You</span>
+                            <i class="fa-solid fa-compass"></i><span class="text-dark fw-bold" style="font-size: 20px;">Around You</span>
                         </a>
                     </li>
 
                     <!-- Homestay -->
                     <li class="sidebar-item <?= ($uri1 == 'homestay') ? 'active' : '' ?> has-sub">
                         <a href="" class="sidebar-link">
-                            <i class="fa-solid fa-bed"></i></i><span class="text-dark fw-bold">Homestay</span>
+                            <i class="fa-solid fa-bed"></i></i><span class="text-dark fw-bold" style="font-size: 20px;">Homestay</span>
                         </a>
                         <ul class="submenu <?= ($uri1 == 'homestay') ? 'active' : '' ?>">
                             <!-- List Homestay -->
                             <li class="submenu-item" id="rg-list">
-                                <a href="<?= base_url('/web/homestay'); ?>"><i class="fa-solid fa-list me-3"></i>List</a>
+                                <a href="<?= base_url('/web/homestay'); ?>"><i class="fa-solid fa-list me-3"></i><span class="text-dark fw-bold" style="font-size: 18px;">List</span></a>
                             </li>
                             <!-- Homestay Around You -->
                             <li class="submenu-item" id="rg-around-you">
-                                <a data-bs-toggle="collapse" href="#searchRadiusRG" role="button" aria-expanded="false" aria-controls="searchRadiusRG"><i class="fa-solid fa-compass me-3"></i>Homestay Around You</a>
+                                <a data-bs-toggle="collapse" href="#searchRadiusRG" role="button" aria-expanded="false" aria-controls="searchRadiusRG"><i class="fa-solid fa-compass me-3"></i><span class="text-dark fw-bold" style="font-size: 18px;">Homestay Around You</span></a>
                                 <div class="collapse mb-3" id="searchRadiusRG">
                                     <label for="inputRadiusRG" class="form-label">Radius: </label>
                                     <label id="radiusValueHS" class="form-label">0 m</label>
@@ -88,11 +96,11 @@ $uri3 = $uri[3] ?? '';
                                 </div>
                             </li>
                             <li class="submenu-item has-sub" id="rg-search">
-                                <a data-bs-toggle="collapse" href="#subsubmenu-rg" role="button" aria-expanded="false" aria-controls="subsubmenu-rg" class="collapse"><i class="fa-solid fa-magnifying-glass me-3"></i>Search</a>
+                                <a data-bs-toggle="collapse" href="#subsubmenu-rg" role="button" aria-expanded="false" aria-controls="subsubmenu-rg" class="collapse"><i class="fa-solid fa-magnifying-glass me-3"></i><span class="text-dark fw-bold" style="font-size: 18px;">Search</span></a>
                                 <ul class="subsubmenu collapse" id="subsubmenu-rg">
                                     <!-- Homestay by Name -->
                                     <li class="submenu-item submenu-marker" id="rg-by-name">
-                                        <a data-bs-toggle="collapse" href="#searchNameRG" role="button" aria-expanded="false" aria-controls="searchNameRG"><i class="fa-solid fa-arrow-down-a-z me-3"></i>By Name</a>
+                                        <a data-bs-toggle="collapse" href="#searchNameRG" role="button" aria-expanded="false" aria-controls="searchNameRG"><i class="fa-solid fa-arrow-down-a-z me-3"></i><span class="text-dark fw-bold" style="font-size: 18px;">By Name</span></a>
                                         <div class="collapse mb-3" id="searchNameRG">
                                             <div class="d-grid gap-2">
                                                 <input type="text" name="nameRG" id="nameHS" class="form-control" placeholder="Name" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -104,7 +112,7 @@ $uri3 = $uri[3] ?? '';
                                     </li>
                                     <!-- Homestay by Rating -->
                                     <li class="submenu-item submenu-marker" id="rg-by-rating">
-                                        <a data-bs-toggle="collapse" href="#searchRatingRG" role="button" aria-expanded="false" aria-controls="searchRatingRG"><i class="fa-regular fa-star me-3"></i>By Rating</a>
+                                        <a data-bs-toggle="collapse" href="#searchRatingRG" role="button" aria-expanded="false" aria-controls="searchRatingRG"><i class="fa-regular fa-star me-3"></i><span class="text-dark fw-bold" style="font-size: 18px;">By Rating</span></a>
                                         <div class="collapse mb-3" id="searchRatingRG">
                                             <div class="d-grid gap-2">
                                                 <div class="star-containter">
@@ -123,14 +131,14 @@ $uri3 = $uri[3] ?? '';
                                     </li>
                                     <!-- Homestay by Facility -->
                                     <li class="submenu-item submenu-marker" id="rg-by-facility">
-                                        <a data-bs-toggle="collapse" href="#searchFacilityRG" role="button" aria-expanded="false" aria-controls="searchFacilityRG"><i class="fa-solid fa-house-circle-check me-3"></i>By Facility</a>
+                                        <a data-bs-toggle="collapse" href="#searchFacilityRG" role="button" aria-expanded="false" aria-controls="searchFacilityRG"><i class="fa-solid fa-house-circle-check me-3"></i><span class="text-dark fw-bold" style="font-size: 18px;">By Facility</span></a>
                                         <div class="collapse mb-3" id="searchFacilityRG">
                                             <div class="d-grid">
                                                 <script>
                                                     getHSFacility();
                                                 </script>
-                                                <fieldset class="form-group">
-                                                    <select class="form-select" id="hsfacilitySelect">
+                                                <fieldset class="form-group text-dark">
+                                                    <select class="form-select text-dark" id="hsfacilitySelect">
                                                     </select>
                                                 </fieldset>
                                                 <button class="btn btn-outline-primary" type="submit" id="button-addon2" onclick="findByFacilityHS()">
@@ -141,11 +149,11 @@ $uri3 = $uri[3] ?? '';
                                     </li>
                                     <!-- Homestay by Type -->
                                     <li class="submenu-item submenu-marker" id="rg-by-unit">
-                                        <a data-bs-toggle="collapse" href="#searchUnitRG" role="button" aria-expanded="false" aria-controls="searchUnitRG"><i class="fa-solid fa-bed me-3"></i>By Unit Available</a>
+                                        <a data-bs-toggle="collapse" href="#searchUnitRG" role="button" aria-expanded="false" aria-controls="searchUnitRG"><i class="fa-solid fa-bed me-3"></i><span class="text-dark fw-bold" style="font-size: 18px;">By Unit Available</span></a>
                                         <div class="collapse mb-3" id="searchUnitRG">
                                             <div class="d-grid">
-                                                <fieldset class="form-group">
-                                                    <select class="form-select" id="unitHSSelect">
+                                                <fieldset class="form-group text-dark">
+                                                    <select class="form-select text-dark" id="unitHSSelect">
                                                         <option value="1">Room</option>
                                                         <option value="2">Vila</option>
                                                         <option value="3">Hall</option>
@@ -159,11 +167,11 @@ $uri3 = $uri[3] ?? '';
                                     </li>
                                     <!-- Homestay by Category -->
                                     <li class="submenu-item submenu-marker" id="rg-by-category">
-                                        <a data-bs-toggle="collapse" href="#searchCategoryRG" role="button" aria-expanded="false" aria-controls="searchCategoryRG"><i class="fa-solid fa-bed me-3"></i>By Category</a>
+                                        <a data-bs-toggle="collapse" href="#searchCategoryRG" role="button" aria-expanded="false" aria-controls="searchCategoryRG"><i class="fa-solid fa-bed me-3"></i><span class="text-dark fw-bold" style="font-size: 18px;">By Category</span></a>
                                         <div class="collapse mb-3" id="searchCategoryRG">
                                             <div class="d-grid">
-                                                <fieldset class="form-group">
-                                                    <select class="form-select" id="categoryHSSelect">
+                                                <fieldset class="form-group text-dark">
+                                                    <select class="form-select text-dark" id="categoryHSSelect">
                                                         <option value="1">Non Syariah</option>
                                                         <option value="2">Syariah</option>
                                                     </select>
@@ -181,7 +189,7 @@ $uri3 = $uri[3] ?? '';
                     <?php if (in_groups('user')) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'reservation') ? 'active' : '' ?>">
                             <a href="<?= base_url('web/reservation'); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-book"></i><span class="text-dark fw-bold">Reservation</span>
+                                <i class="fa-solid fa-book"></i><span class="text-dark fw-bold" style="font-size: 20px;">Reservation</span>
                             </a>
                         </li>
                     <?php endif; ?>
@@ -192,7 +200,7 @@ $uri3 = $uri[3] ?? '';
                                 <?php elseif (in_groups(['admin'])) : ?>
                                     <a href="<?= base_url('dashboard/villages'); ?>" class="sidebar-link">
                                     <?php endif; ?>
-                                    <i class="bi bi-grid-fill"></i><span class="text-dark fw-bold">Dashboard</span>
+                                    <i class="bi bi-grid-fill"></i><span class="text-dark fw-bold" style="font-size: 20px;">Dashboard</span>
                                     </a>
                         </li>
                     <?php endif; ?>
@@ -220,16 +228,16 @@ $uri3 = $uri[3] ?? '';
                                 success: function(response) {
                                     const data = response.data;
                                     if (data.instagram) {
-                                        socs = socs + '<a href="https://www.instagram.com/' + data.instagram + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-instagram" title="Intagram"></i></a>'
+                                        socs = socs + '<a href="https://www.instagram.com/' + data.instagram + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-instagram" style="font-size: 25px;" title="Intagram"></i></a>'
                                     }
                                     if (data.facebook) {
-                                        socs = socs + '<a href="https://www.facebook.com/' + data.facebook + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-facebook" title="Facebook"></i></a>'
+                                        socs = socs + '<a href="https://www.facebook.com/' + data.facebook + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-facebook" style="font-size: 25px;" title="Facebook"></i></a>'
                                     }
                                     if (data.youtube) {
-                                        socs = socs + '<a href="https://www.youtube.com/' + data.youtube + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-youtube" title="Youtube"></i></a>'
+                                        socs = socs + '<a href="https://www.youtube.com/' + data.youtube + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-youtube" style="font-size: 25px;" title="Youtube"></i></a>'
                                     }
                                     if (data.tiktok) {
-                                        socs = socs + '<a href="https://www.tiktok.com/' + data.tiktok + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-tiktok" title="Tiktok"></i></a>'
+                                        socs = socs + '<a href="https://www.tiktok.com/' + data.tiktok + '" class="sidebar-link" target="_blank"> <i class = "fa-brands fa-tiktok" style="font-size: 25px;" title="Tiktok"></i></a>'
                                     }
                                     // console.log(data);
                                     $("#socials").append(socs);

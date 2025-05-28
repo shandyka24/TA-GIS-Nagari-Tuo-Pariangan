@@ -6,12 +6,99 @@ $users = in_array('users', $uri);
 <?= $this->extend('dashboard/layouts/main'); ?>
 
 <?= $this->section('content') ?>
+<style>
+    /* Global font size override to 20px */
+    body,
+    .card,
+    .table,
+    .btn,
+    .form-control,
+    .form-select,
+    .modal,
+    .form-label,
+    label,
+    input,
+    textarea,
+    select,
+    option,
+    th,
+    td,
+    p,
+    span,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 20px;
+    }
+
+    /* Specific overrides for smaller elements */
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .table th,
+    .table td {
+        font-size: 20px;
+        padding: 12px;
+    }
+
+    .btn {
+        font-size: 20px;
+        padding: 10px 16px;
+    }
+
+    .btn-sm {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
+
+    .form-control,
+    .form-select {
+        font-size: 20px;
+        padding: 10px;
+        /* font-weight: bold; */
+    }
+
+    .modal-title {
+        font-size: 22px;
+    }
+
+    .input-group-text {
+        font-size: 20px;
+    }
+
+    .form-check-label {
+        font-size: 20px;
+    }
+
+    .text-secondary,
+    .text-muted {
+        font-size: 18px;
+    }
+
+    /* DataTable specific styles */
+    .dataTables_wrapper,
+    .dataTables_filter input,
+    .dataTables_length select {
+        font-size: 20px;
+    }
+
+    .dataTables_info,
+    .dataTables_paginate {
+        font-size: 20px;
+    }
+</style>
 <section class="section">
     <div class="card">
         <div class="card-header mb-2">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="card-title">Manage <?= $manage; ?></h3>
+                    <h3 class="card-title fs-4 fw-bolder">Manage <?= $manage; ?></h3>
                 </div>
             </div>
         </div>
@@ -26,14 +113,14 @@ $users = in_array('users', $uri);
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="newAnnouncementModalLabel">New Announcement</h5>
+                                        <h5 class="modal-title fs-4 fw-bolder" id="newAnnouncementModalLabel">New Announcement</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <form action="<?= base_url('dashboard/announcement/add'); ?>" method="post">
                                             <div class="mb-3">
                                                 <label for="announcement" class="form-label">Announcement:</label>
-                                                <textarea class="form-control" id="announcement" name="announcement" cols="30" rows="3"></textarea>
+                                                <textarea class="form-control text-dark" id="announcement" name="announcement" cols="30" rows="3"></textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="status" class="form-label">Status:</label>
@@ -60,7 +147,7 @@ $users = in_array('users', $uri);
                     <br>
                     <?php if (isset($announcementdata) && !empty($announcementdata)) : ?>
                         <div class="table-responsive">
-                            <table class="table table-hover dt-head-center" id="table-manage">
+                            <table class="table table-hover dt-head-center text-dark" id="table-manage">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -94,7 +181,7 @@ $users = in_array('users', $uri);
                                                     <div class="modal-dialog modal-dialog-centered modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="announcementDetailModalLabel">Announcement Detail</h5>
+                                                                <h5 class="modal-title fs-4 fw-bolder" id="announcementDetailModalLabel">Announcement Detail</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body" id="announcementDetailContent<?= esc($item['id']) ?>">
@@ -102,7 +189,7 @@ $users = in_array('users', $uri);
                                                                     <div class="mb-4">
                                                                         <div class="row">
                                                                             <div class="col-12">
-                                                                                <table class="table text-left">
+                                                                                <table class="table text-left text-dark">
                                                                                     <tbody style="text-align: left;">
                                                                                         <tr>
                                                                                             <td>ID:</td>
@@ -147,14 +234,14 @@ $users = in_array('users', $uri);
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="announcementEditModalLabel">Edit Announcement</h5>
+                                                                <h5 class="modal-title fs-4 fw-bolder" id="announcementEditModalLabel">Edit Announcement</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body" style="text-align: left;" id="announcementEditContent<?= esc($item['id']) ?>">
                                                                 <form action="<?= base_url('dashboard/announcement/update') . '/' . $item['id']; ?>" method="post">
                                                                     <div class="mb-3">
                                                                         <label for="announcement" class="form-label">Announcement:</label>
-                                                                        <textarea class="form-control" id="announcement" name="announcement" cols="30" rows="3"><?= esc($item['announcement']); ?></textarea>
+                                                                        <textarea class="form-control text-dark" id="announcement" name="announcement" cols="30" rows="3"><?= esc($item['announcement']); ?></textarea>
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label for="status" class="form-label">Status:</label>
@@ -177,7 +264,7 @@ $users = in_array('users', $uri);
                                                         </div>
                                                     </div>
                                                 </div>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete" class="btn icon btn-outline-danger mx-1" onclick="deleteObject('<?= esc($item['id']); ?>', '<?= esc($item['announcement']); ?>', <?= ($users) ? 'true' : 'false'; ?>)">
+                                                <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete" class="btn btn-outline-danger mx-1" onclick="deleteObject('<?= esc($item['id']); ?>', '<?= esc($item['announcement']); ?>', <?= ($users) ? 'true' : 'false'; ?>)">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </a>
                                             </td>

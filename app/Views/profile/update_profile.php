@@ -1,10 +1,68 @@
 <?= $this->extend('profile/index'); ?>
 
 <?= $this->section('content') ?>
+<style>
+/* Global font size override to 20px */
+body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
+    font-size: 20px;
+}
+
+/* Specific overrides for smaller elements */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table th, .table td {
+    font-size: 20px;
+    padding: 12px;
+}
+
+.btn {
+    font-size: 20px;
+    padding: 10px 16px;
+}
+
+.btn-sm {
+    font-size: 18px;
+    padding: 8px 12px;
+}
+
+.form-control, .form-select {
+    font-size: 20px;
+    padding: 10px;
+    /* font-weight: bold; */
+}
+
+.modal-title {
+    font-size: 22px;
+}
+
+.input-group-text {
+    font-size: 20px;
+}
+
+.form-check-label {
+    font-size: 20px;
+}
+
+.text-secondary, .text-muted {
+    font-size: 18px;
+}
+
+/* DataTable specific styles */
+.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
+    font-size: 20px;
+}
+
+.dataTables_info, .dataTables_paginate {
+    font-size: 20px;
+}
+</style>
 <section class="section">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Update Profile</h3>
+            <h3 class="card-title fs-4 fw-bolder">Update Profile</h3>
             <?php foreach ($errors as $error) : ?>
                 <div class="alert alert-warning alert-dismissible show fade">
                     <?= esc($error) ?>
@@ -21,37 +79,37 @@
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="first-name" class="mb-2">First Name</label>
-                                        <input type="text" id="first-name" class="form-control" name="first_name" placeholder="First Name" value="<?= (user()->first_name == '') ? '' : user()->first_name; ?>">
+                                        <input type="text" id="first-name" class="form-control text-dark" name="first_name" placeholder="First Name" value="<?= (user()->first_name == '') ? '' : user()->first_name; ?>">
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="last-name" class="mb-2">Last Name</label>
-                                        <input type="text" id="last-name" class="form-control" name="last_name" placeholder="Last Name" value="<?= (user()->last_name == '') ? '' : user()->last_name; ?>">
+                                        <input type="text" id="last-name" class="form-control text-dark" name="last_name" placeholder="Last Name" value="<?= (user()->last_name == '') ? '' : user()->last_name; ?>">
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="email" class="mb-2">Email</label>
-                                        <input type="email" id="email" class="form-control" name="email" placeholder="Email" value="<?= user()->email; ?>">
+                                        <input type="email" id="email" class="form-control text-dark" name="email" placeholder="Email" value="<?= user()->email; ?>">
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="username" class="mb-2">Username</label>
-                                        <input type="text" id="username" class="form-control" name="username" placeholder="Username" value="<?= user()->username; ?>">
+                                        <input type="text" id="username" class="form-control text-dark" name="username" placeholder="Username" value="<?= user()->username; ?>">
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="address" class="mb-2">Address</label>
-                                        <input type="text" id="address" class="form-control" name="address" placeholder="Address" value="<?= (user()->address == '') ? '' : user()->address; ?>">
+                                        <input type="text" id="address" class="form-control text-dark" name="address" placeholder="Address" value="<?= (user()->address == '') ? '' : user()->address; ?>">
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="phone" class="mb-2">Phone</label>
-                                        <input type="tel" id="phone" class="form-control" name="phone" placeholder="Phone" value="<?= (user()->phone == '') ? '' : user()->phone; ?>">
+                                        <input type="tel" id="phone" class="form-control text-dark" name="phone" placeholder="Phone" value="<?= (user()->phone == '') ? '' : user()->phone; ?>">
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end mb-3">

@@ -14,7 +14,64 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+<style>
+/* Global font size override to 20px */
+body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
+    font-size: 20px;
+}
 
+/* Specific overrides for smaller elements */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table th, .table td {
+    font-size: 20px;
+    padding: 12px;
+}
+
+.btn {
+    font-size: 20px;
+    padding: 10px 16px;
+}
+
+.btn-sm {
+    font-size: 18px;
+    padding: 8px 12px;
+}
+
+.form-control, .form-select {
+    font-size: 20px;
+    padding: 10px;
+    /* font-weight: bold; */
+}
+
+.modal-title {
+    font-size: 22px;
+}
+
+.input-group-text {
+    font-size: 20px;
+}
+
+.form-check-label {
+    font-size: 20px;
+}
+
+.text-secondary, .text-muted {
+    font-size: 18px;
+}
+
+/* DataTable specific styles */
+.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
+    font-size: 20px;
+}
+
+.dataTables_info, .dataTables_paginate {
+    font-size: 20px;
+}
+</style>
 <section class="section text-dark">
     <div class="row">
         <script>
@@ -37,7 +94,7 @@
                 <div class="card-header text-center">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title">Homestay Reservation</h4>
+                            <h4 class="card-title fs-4 fw-bolder">Homestay Reservation</h4>
                         </div>
                     </div>
                 </div>
@@ -107,7 +164,7 @@
                         <div class="accordion" id="accordionPanelsStayOpenExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                    <button class="accordion-button fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                                         Homestay Units
                                     </button>
                                 </h2>
@@ -148,7 +205,7 @@
                             <?php if ($homestay_unit[0]['unit_type'] != "3") : ?>
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="panelsStayOpen-headingFour">
-                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="true" aria-controls="panelsStayOpen-collapseFour">
+                                        <button class="accordion-button fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="true" aria-controls="panelsStayOpen-collapseFour">
                                             Additional Amenities
                                         </button>
                                     </h2>
@@ -283,7 +340,7 @@
                 <div class="card-header text-center">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title">Transaction History</h4>
+                            <h4 class="card-title fs-4 fw-bolder">Transaction History</h4>
                         </div>
                     </div>
                 </div>
@@ -576,7 +633,7 @@
                                                         <input type="hidden" name="reservation_id" value="<?= esc($reservation['id']); ?>">
                                                         <div class="form-group">
                                                             <label for="name" class="mb-2">Account Refund (Ex: Name XX - Bank XX - AccNumber)</label>
-                                                            <textarea class="form-control" name="account_refund" placeholder="Budi Setiawan - Bank ABC - 12345678" required><?= $reservation['account_refund'] ? $reservation['account_refund'] : '' ?></textarea>
+                                                            <textarea class="form-control text-dark" name="account_refund" style="color: #000;" placeholder="Budi Setiawan - Bank ABC - 12345678" required><?= $reservation['account_refund'] ? $reservation['account_refund'] : '' ?></textarea>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                                     </div>
@@ -625,7 +682,7 @@
                                                                     </div>
                                                                     <div class="col-12 mb-3">
                                                                         <div class="form-floating">
-                                                                            <textarea class="form-control" placeholder="Leave review here" id="floatingTextarea" style="height: 150px;" name="review"></textarea>
+                                                                            <textarea class="form-control" placeholder="Leave review here" id="floatingTextarea" style="height: 150px; color: #000000;" name="review"></textarea>
                                                                             <label for="floatingTextarea">Review</label>
                                                                         </div>
                                                                     </div>
@@ -657,7 +714,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Additional Amenities</h5>
+                    <h5 class="modal-title fs-4 fw-bolder" id="exampleModalLabel">Additional Amenities</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -672,7 +729,7 @@
                                         getListAdditionalAmenities('<?= esc($reservation['id']); ?>', '<?= esc($homestay['id']) ?>');
                                     </script>
                                     <label for="serviceSelect" class="mb-2">Additional Amenities</label>
-                                    <select class="form-select" id="serviceSelect" name="additional_amenities_id" onchange="getOrderField(this.value, '<?= esc($homestay['id']) ?>','<?= esc($reservation['day_of_stay']) ?>','<?= esc($reservation['total_people']) ?>','<?= esc(count($homestay_unit)) ?>')" required>
+                                    <select class="form-select text-dark" id="serviceSelect" name="additional_amenities_id" onchange="getOrderField(this.value, '<?= esc($homestay['id']) ?>','<?= esc($reservation['day_of_stay']) ?>','<?= esc($reservation['total_people']) ?>','<?= esc(count($homestay_unit)) ?>')" required>
                                     </select>
                                 </fieldset>
                                 <div id="additionalAmenitiesOrderFields">
@@ -732,7 +789,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Refund Confirmation</h5>
+                        <h5 class="modal-title fs-4 fw-bolder" id="exampleModalLabel">Refund Confirmation</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

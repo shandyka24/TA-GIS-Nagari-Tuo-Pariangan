@@ -18,12 +18,70 @@ $users = in_array('users', $uri);
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+<style>
+/* Global font size override to 20px */
+body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
+    font-size: 20px;
+}
+
+/* Specific overrides for smaller elements */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table th, .table td {
+    font-size: 20px;
+    padding: 12px;
+}
+
+.btn {
+    font-size: 20px;
+    padding: 10px 16px;
+}
+
+.btn-sm {
+    font-size: 18px;
+    padding: 8px 12px;
+}
+
+.form-control, .form-select {
+    font-size: 20px;
+    padding: 10px;
+    /* font-weight: bold; */
+}
+
+.modal-title {
+    font-size: 22px;
+}
+
+.input-group-text {
+    font-size: 20px;
+}
+
+.form-check-label {
+    font-size: 20px;
+}
+
+.text-secondary, .text-muted {
+    font-size: 18px;
+}
+
+/* DataTable specific styles */
+.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
+    font-size: 20px;
+}
+
+.dataTables_info, .dataTables_paginate {
+    font-size: 20px;
+}
+</style>
 <section class="section">
     <div class="card">
         <div class="card-header mb-4">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="card-title">Manage <?= $category; ?></h3>
+                    <h3 class="card-title fs-4 fw-bolder">Manage <?= $category; ?></h3>
                 </div>
                 <div class="col">
                     <?php if ($category != 'Users') : ?>
@@ -132,7 +190,7 @@ $users = in_array('users', $uri);
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add New <?= esc($category); ?></h5>
+                    <h5 class="modal-title fs-4 fw-bolder" id="exampleModalLabel">Add New <?= esc($category); ?></h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -166,7 +224,7 @@ $users = in_array('users', $uri);
                                                         <div class="form-body">
                                                             <div class="form-group">
                                                                 <label for="name" class="mb-2"><?= esc($category); ?> Name</label>
-                                                                <input type="text" id="name" class="form-control" name="name" placeholder="<?= esc($category); ?> Name" required>
+                                                                <input type="text" id="name" class="form-control text-dark" name="name" placeholder="<?= esc($category); ?> Name" required>
                                                             </div>
                                                             <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                                             <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>
@@ -185,7 +243,7 @@ $users = in_array('users', $uri);
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Edit <?= esc($category); ?></h5>
+                                <h5 class="modal-title fs-4 fw-bolder" id="exampleModalLabel">Edit <?= esc($category); ?></h5>
                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -220,7 +278,7 @@ $users = in_array('users', $uri);
                                                                         <div class="form-body">
                                                                             <div class="form-group">
                                                                                 <label for="name" class="mb-2"><?= esc($category); ?> Name</label>
-                                                                                <input type="text" id="name" class="form-control" name="name" placeholder="<?= esc($category); ?> Name" value="<?= esc($product['name']); ?>" required>
+                                                                                <input type="text" id="name" class="form-control text-dark" name="name" placeholder="<?= esc($category); ?> Name" value="<?= esc($product['name']); ?>" required>
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                                                             <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>
@@ -250,7 +308,7 @@ $users = in_array('users', $uri);
                             <div class="form-body">
                                 <div class="form-group">
                                     <label for="name" class="mb-2">Name</label>
-                                    <input type="text" id="name" class="form-control" name="name" placeholder="<?= esc($category); ?> Name" required>
+                                    <input type="text" id="name" class="form-control text-dark" name="name" placeholder="<?= esc($category); ?> Name" required>
                                 </div>
                                 <fieldset class="form-group mb-4">
                                     <label for="catSelect" class="mb-2">Category</label>
@@ -263,7 +321,7 @@ $users = in_array('users', $uri);
                                     <label for="name" class="mb-2">Price</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp.</span>
-                                        <input type="number" id="name" class="form-control" name="price" placeholder="Price" required>
+                                        <input type="number" id="name" class="form-control text-dark" name="price" placeholder="Price" required>
                                     </div>
                                 </div>
                                 <div class="form-check">
@@ -286,16 +344,16 @@ $users = in_array('users', $uri);
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="name" class="mb-2">Stock</label>
-                                    <input type="number" id="name" class="form-control" name="stock" placeholder="Stock" min="0" required>
+                                    <input type="number" id="name" class="form-control text-dark" name="stock" placeholder="Stock" min="0" required>
                                     <span class="text-secondary"><i>*make it '0' if it is not based on stock</i></span>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                                    <textarea class="form-control text-dark" id="description" name="description" rows="4" required></textarea>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="gallery" class="form-label">Image</label>
-                                    <input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery1" required>
+                                    <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery1" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                 <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>
@@ -360,7 +418,7 @@ $users = in_array('users', $uri);
                                         <div class="form-body">
                                             <div class="form-group">
                                                 <label for="name" class="mb-2">Name</label>
-                                                <input type="text" id="name" class="form-control" name="name" placeholder="<?= esc($category); ?> Name" value="<?= esc($activity['name']) ?>" required>
+                                                <input type="text" id="name" class="form-control text-dark" name="name" placeholder="<?= esc($category); ?> Name" value="<?= esc($activity['name']) ?>" required>
                                             </div>
                                             <fieldset class="form-group mb-4">
                                                 <label for="catSelect" class="mb-2">Category</label>
@@ -373,7 +431,7 @@ $users = in_array('users', $uri);
                                                 <label for="name" class="mb-2">Price</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text">Rp.</span>
-                                                    <input type="number" id="name" class="form-control" name="price" placeholder="Price" value="<?= esc($activity['price']) ?>" min="0" required>
+                                                    <input type="number" id="name" class="form-control text-dark" name="price" placeholder="Price" value="<?= esc($activity['price']) ?>" min="0" required>
                                                 </div>
                                             </div>
                                             <div class="form-check">
@@ -396,16 +454,16 @@ $users = in_array('users', $uri);
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label for="name" class="mb-2">Stock</label>
-                                                <input type="number" id="name" class="form-control" name="stock" min="0" value="<?= esc($activity['stock']) ?>" required>
+                                                <input type="number" id="name" class="form-control text-dark" name="stock" min="0" value="<?= esc($activity['stock']) ?>" required>
                                                 <span class="text-secondary"><i>*make it '0' if it is not based on stock</i></span>
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label for="description" class="form-label">Description</label>
-                                                <textarea class="form-control" id="description" name="description" rows="4" required><?= esc($activity['description']) ?></textarea>
+                                                <textarea class="form-control text-dark" id="description" name="description" rows="4" required><?= esc($activity['description']) ?></textarea>
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label for="gallery" class="form-label">Image</label>
-                                                <input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery<?= esc($activity['id']); ?>" required>
+                                                <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery<?= esc($activity['id']); ?>" required>
                                             </div>
                                             <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>
@@ -435,7 +493,7 @@ $users = in_array('users', $uri);
                             <div class="form-body">
                                 <div class="form-group">
                                     <label for="name" class="mb-2">Activity Name</label>
-                                    <input type="text" id="name" class="form-control" name="name" placeholder="<?= esc($category); ?> Name" required>
+                                    <input type="text" id="name" class="form-control text-dark" name="name" placeholder="<?= esc($category); ?> Name" required>
                                 </div>
                                 <div class="form-check mb-4">
                                     <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="is_daily">
@@ -448,17 +506,17 @@ $users = in_array('users', $uri);
                                     <label for="name" class="mb-2">Price</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp.</span>
-                                        <input type="number" id="name" class="form-control" name="price" placeholder="Price" required>
+                                        <input type="number" id="name" class="form-control text-dark" name="price" placeholder="Price" required>
                                         <span class="input-group-text">/person</span>
                                     </div>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+                                    <textarea class="form-control text-dark" id="description" name="description" rows="4" required></textarea>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="gallery" class="form-label">Image</label>
-                                    <input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery1" required>
+                                    <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery1" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                 <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>
@@ -525,7 +583,7 @@ $users = in_array('users', $uri);
                                             <input type="hidden" name="id" value="<?= esc($activity['id']); ?>">
                                             <div class="form-group">
                                                 <label for="name" class="mb-2">Activity Name</label>
-                                                <input type="text" id="name" class="form-control" name="name" placeholder="<?= esc($category); ?> Name" value="<?= esc($activity['name']); ?>" required>
+                                                <input type="text" id="name" class="form-control text-dark" name="name" placeholder="<?= esc($category); ?> Name" value="<?= esc($activity['name']); ?>" required>
                                             </div>
                                             <div class="form-check mb-4">
                                                 <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="is_daily" <?= ($activity['is_daily'] == "1") ? "checked" : "" ?>>
@@ -537,17 +595,17 @@ $users = in_array('users', $uri);
                                                 <label for="name" class="mb-2">Price</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text">Rp.</span>
-                                                    <input type="number" id="name" class="form-control" name="price" placeholder="Price" value="<?= esc($activity['price']); ?>" required>
+                                                    <input type="number" id="name" class="form-control text-dark" name="price" placeholder="Price" value="<?= esc($activity['price']); ?>" required>
                                                     <span class="input-group-text">/person</span>
                                                 </div>
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label for="description" class="form-label">Description</label>
-                                                <textarea class="form-control" id="description" name="description" rows="4" required><?= esc($activity['description']); ?></textarea>
+                                                <textarea class="form-control text-dark" id="description" name="description" rows="4" required><?= esc($activity['description']); ?></textarea>
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label for="gallery" class="form-label">Image</label>
-                                                <input class="form-control" accept="image/*" type="file" name="gallery[]" id="gallery<?= esc($activity['id']); ?>" required>
+                                                <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery<?= esc($activity['id']); ?>" required>
                                             </div>
                                             <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                             <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>

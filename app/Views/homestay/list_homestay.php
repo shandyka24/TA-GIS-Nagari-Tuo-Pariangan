@@ -10,7 +10,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <h5 class="card-title">Google Maps with Location</h5>
+                            <h5 class="card-title fs-4 fw-bolder">Google Maps with Location</h5>
                         </div>
                         <?= $this->include('web/layouts/map-head'); ?>
                     </div>
@@ -25,7 +25,7 @@
                 <div class="col-12" id="list-rg-col">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title text-center">List Homestay</h5>
+                            <h5 class="card-title text-center fs-4 fw-bolder">List Homestay</h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive overflow-auto" id="table-user">
@@ -35,15 +35,15 @@
                                     clearRoute();
                                     digitTourismVillage();
                                 </script>
-                                <table class="table table-hover mb-0 table-lg text-dark">
+                                <table class="table table-hover mb-0 table-lg text-dark" style="font-size: 20px;">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>Action</th>
+                                            <th class="fw-bold" style="font-size: 20px;">#</th>
+                                            <th class="fw-bold" style="font-size: 20px;">Name</th>
+                                            <th class="fw-bold" style="font-size: 20px;">Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="table-data">
+                                    <tbody id="table-data" style="font-size: 20px;">
                                         <?php if (isset($data)) : ?>
                                             <?php $i = 1; ?>
                                             <?php foreach ($data as $item) : ?>

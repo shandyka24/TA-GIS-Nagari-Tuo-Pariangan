@@ -100,15 +100,15 @@
         <div class="collapse navbar-collapse py-4 py-lg-0" id="navbarCollapse">
             <div class="navbar-nav ms-auto">
 
-                <a href="#home" class="nav-item nav-link active">Home</a>
+                <a href="#home" class="nav-item nav-link active fw-bold" style="font-size: 20px;">Home</a>
                 <?php if ($village != null) : ?>
-                    <a href="/web" class="nav-item nav-link">Explore</a>
-                    <a href="#about" class="nav-item nav-link">About</a>
-                    <a href="#award" class="nav-item nav-link">Award</a>
+                    <a href="/web" class="nav-item nav-link fw-bold text-dark" style="font-size: 20px;">Explore</a>
+                    <a href="#about" class="nav-item nav-link fw-bold text-dark" style="font-size: 20px;">About</a>
+                    <a href="#award" class="nav-item nav-link fw-bold text-dark" style="font-size: 20px;">Award</a>
                 <?php endif; ?>
             </div>
             <?php if (!logged_in()) : ?>
-                <a href="<?= base_url('login'); ?>" class="btn btn-primary">Login</a>
+                <a href="<?= base_url('login'); ?>" class="btn btn-primary" style="font-size: 20px;">Login</a>
             <?php endif; ?>
         </div>
     </nav>
@@ -127,11 +127,11 @@
                             <?= $village['name']; ?>
                         </h1>
                         <div class="d-flex align-items-center pt-4 animated slideInDown">
-                            <a href="/web" class="btn btn-primary py-sm-3 px-3 px-sm-5 me-5">Explore</a>
+                            <a href="/web" class="btn btn-primary py-sm-3 px-3 px-sm-5 me-5" style="font-size: 20px;">Explore</a>
                             <button type="button" class="btn-play" data-bs-toggle="modal" data-src="<?= base_url('media/videos/' . $village['video_url']); ?>" data-bs-target="#videoModal">
                                 <span></span>
                             </button>
-                            <h6 class="text-white m-0 ms-4 d-none d-sm-block">Watch Video</h6>
+                            <h6 class="text-white m-0 ms-4 d-none d-sm-block" style="font-size: 20px;">Watch Video</h6>
                         </div>
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                                 <?= $village['name']; ?>
                             </span>
                         </h1>
-                        <p class="mb-4">
+                        <p class="mb-4" style="font-size: 18px;">
                             <?= $village['description']; ?>
                         </p>
                         <h5 class="mb-3">

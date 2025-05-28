@@ -77,28 +77,28 @@
             </button>
             <ul class="dropdown-menu p-2">
                 <li class="form-check">
-                    <input class="form-check-input" type="checkbox" id="checkuAttraction" value="Attraction" onchange="checkObject()">
-                    <label class="form-check-label" for="checkuAttraction">Unique Attraction</label>
+                    <input class="form-check-input" style="font-size: 18px;" type="checkbox" id="checkuAttraction" value="Attraction" onchange="checkObject()">
+                    <label class="form-check-label" style="font-size: 20px;" for="checkuAttraction">Unique Attraction</label>
                 </li>
                 <li class="form-check">
-                    <input class="form-check-input" type="checkbox" id="checkAttraction" value="Attraction" onchange="checkObject()">
-                    <label class="form-check-label" for="checkAttraction">Ordinary Attraction</label>
+                    <input class="form-check-input" style="font-size: 18px;" type="checkbox" id="checkAttraction" value="Attraction" onchange="checkObject()">
+                    <label class="form-check-label" style="font-size: 20px;" for="checkAttraction">Ordinary Attraction</label>
                 </li>
                 <!-- <li class="form-check">
                     <input class="form-check-input" type="checkbox" id="checkHomestay" value="Homestay" onchange="checkObject()">
                     <label class="form-check-label" for="checkHomestay">Homestay</label>
                 </li> -->
                 <li class="form-check">
-                    <input class="form-check-input" type="checkbox" id="checkCulinary" value="Culinary" onchange="checkObject()">
-                    <label class="form-check-label" for="checkCulinary">Culinary</label>
+                    <input class="form-check-input" style="font-size: 18px;" type="checkbox" id="checkCulinary" value="Culinary" onchange="checkObject()">
+                    <label class="form-check-label" style="font-size: 20px;" for="checkCulinary">Culinary</label>
                 </li>
                 <li class="form-check">
-                    <input class="form-check-input" type="checkbox" id="checkSouvenir" value="Souvenir" onchange="checkObject()">
-                    <label class="form-check-label" for="checkSouvenir">Souvenir</label>
+                    <input class="form-check-input" style="font-size: 18px;" type="checkbox" id="checkSouvenir" value="Souvenir" onchange="checkObject()">
+                    <label class="form-check-label" style="font-size: 20px;" for="checkSouvenir">Souvenir</label>
                 </li>
                 <li class="form-check">
-                    <input class="form-check-input" type="checkbox" id="checkWorship" value="Worship" onchange="checkObject()">
-                    <label class="form-check-label" for="checkWorship">Worship</label>
+                    <input class="form-check-input" style="font-size: 18px;" type="checkbox" id="checkWorship" value="Worship" onchange="checkObject()">
+                    <label class="form-check-label" style="font-size: 20px;" for="checkWorship">Worship</label>
                 </li>
             </ul>
         </div>
@@ -137,20 +137,20 @@
         </button>
         <ul class="dropdown-menu p-2">
             <li class="form-check">
-                <input class="form-check-input" type="checkbox" id="checkCountry" value="Country" onchange="checkLayer()">
-                <label class="form-check-label" for="checkCountry">Country</label>
+                <input class="form-check-input" style="font-size: 18px;" type="checkbox" id="checkCountry" value="Country" onchange="checkLayer()">
+                <label class="form-check-label" style="font-size: 20px;" for="checkCountry">Country</label>
             </li>
             <li class="form-check">
-                <input class="form-check-input" type="checkbox" id="checkProvince" value="Province" onchange="checkLayer()">
-                <label class="form-check-label" for="checkProvince">Province</label>
+                <input class="form-check-input" style="font-size: 18px;" type="checkbox" id="checkProvince" value="Province" onchange="checkLayer()">
+                <label class="form-check-label" style="font-size: 20px;" for="checkProvince">Province</label>
             </li>
             <li class="form-check">
-                <input class="form-check-input" type="checkbox" id="checkCity" value="City" onchange="checkLayer()">
-                <label class="form-check-label" for="checkCity">City</label>
+                <input class="form-check-input" style="font-size: 18px;" type="checkbox" id="checkCity" value="City" onchange="checkLayer()">
+                <label class="form-check-label" style="font-size: 20px;" for="checkCity">City</label>
             </li>
             <li class="form-check">
-                <input class="form-check-input" type="checkbox" id="checkVillage" value="Village" onchange="checkLayer()">
-                <label class="form-check-label" for="checkVillage">Village</label>
+                <input class="form-check-input" style="font-size: 18px;" type="checkbox" id="checkVillage" value="Village" onchange="checkLayer()">
+                <label class="form-check-label" style="font-size: 20px;" for="checkVillage">Village</label>
             </li>
         </ul>
     </div>

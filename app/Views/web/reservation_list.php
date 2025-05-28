@@ -20,12 +20,100 @@ $users = in_array('users', $uri);
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+<style>
+    /* Global font size override to 20px */
+    body,
+    .card,
+    .table,
+    .btn,
+    .form-control,
+    .form-select,
+    .modal,
+    .form-label,
+    label,
+    input,
+    textarea,
+    select,
+    option,
+    th,
+    td,
+    p,
+    span,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 20px;
+    }
+
+    /* Specific overrides for smaller elements */
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .table th,
+    .table td {
+        font-size: 20px;
+        padding: 12px;
+    }
+
+    .btn {
+        font-size: 20px;
+        padding: 10px 16px;
+    }
+
+    .btn-sm {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
+
+    .form-control,
+    .form-select {
+        font-size: 20px;
+        padding: 10px;
+        color: black;
+        /* font-weight: bold; */
+    }
+
+    .modal-title {
+        font-size: 22px;
+    }
+
+    .input-group-text {
+        font-size: 20px;
+    }
+
+    .form-check-label {
+        font-size: 20px;
+    }
+
+    .text-secondary,
+    .text-muted {
+        font-size: 18px;
+    }
+
+    /* DataTable specific styles */
+    .dataTables_wrapper,
+    .dataTables_filter input,
+    .dataTables_length select {
+        font-size: 20px;
+    }
+
+    .dataTables_info,
+    .dataTables_paginate {
+        font-size: 20px;
+    }
+</style>
 <section class="section">
     <div class="card">
         <div class="card-header mb-4">
             <div class="row align-items-center">
                 <div class="col">
-                    <h3 class="card-title">Reservation List</h3>
+                    <h3 class="card-title fs-4 fw-bolder">Reservation List</h3>
                 </div>
                 <div class="col">
 

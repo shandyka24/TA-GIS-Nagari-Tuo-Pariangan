@@ -21,7 +21,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col table-responsive">
-                            <table class="table table-borderless">
+                            <table class="table table-borderless text-dark">
                                 <tbody>
                                     <tr>
                                         <td class="fw-bold">Name</td>

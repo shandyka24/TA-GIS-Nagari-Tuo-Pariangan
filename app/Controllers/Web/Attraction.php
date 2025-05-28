@@ -423,7 +423,7 @@ class Attraction extends ResourcePresenter
             'category' => 'Attraction Facility',
             'data' => $contents,
         ];
-        return view('dashboard/manage', $data);
+        return view('admin/manage_admin', $data);
     }
     public function addNewFacility()
     {

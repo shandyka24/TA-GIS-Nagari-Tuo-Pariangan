@@ -3,6 +3,16 @@
 <?= $this->section('content') ?>
 
 <section class="section">
+<style>
+    div {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 20px;
+    }
+
+</style>
     <div class="row">
         <script>
             currentUrl = '<?= current_url(); ?>';
@@ -14,10 +24,10 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title">Homestay Information</h4>
+                            <h4 class="card-title fw-bolder">Homestay Information</h4>
                         </div>
                         <?php if (!logged_in()) : ?>
-                            <div class="col">
+                            <div class="col" style="font-size: 20px;">
                                 <a id="btn-booking1" class="btn btn-success float-end" onclick="redirectToLogin()"><i class="fa-solid fa-bookmark me-3"></i>Booking</a>
                                 <script>
                                     function redirectToLogin() {

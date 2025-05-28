@@ -163,7 +163,9 @@ function digitCountries() {
         village.addListener("click", function (event) {
           villageInfoWindow.close();
           infoWindow.close();
-          villageInfoWindow.setContent(item.name + " Country");
+          villageInfoWindow.setContent(
+            '<span class="fw-bold text-dark">' + item.name + " Country</span>"
+          );
           villageInfoWindow.setPosition(event.latLng);
           villageInfoWindow.open(map);
         });
@@ -198,7 +200,9 @@ function digitProvinces() {
         village.addListener("click", function (event) {
           villageInfoWindow.close();
           infoWindow.close();
-          villageInfoWindow.setContent(item.name + " Province");
+          villageInfoWindow.setContent(
+            '<span class="fw-bold text-dark">' + item.name + " Province</span>"
+          );
           villageInfoWindow.setPosition(event.latLng);
           villageInfoWindow.open(map);
         });
@@ -232,7 +236,9 @@ function digitCities() {
         village.addListener("click", function (event) {
           villageInfoWindow.close();
           infoWindow.close();
-          villageInfoWindow.setContent(item.name);
+          villageInfoWindow.setContent(
+            '<span class="fw-bold text-dark">' + item.name + "</span>"
+          );
           villageInfoWindow.setPosition(event.latLng);
           villageInfoWindow.open(map);
         });
@@ -266,7 +272,11 @@ function digitSubdistricts() {
         village.addListener("click", function (event) {
           villageInfoWindow.close();
           infoWindow.close();
-          villageInfoWindow.setContent(item.name + " Subdistrict");
+          villageInfoWindow.setContent(
+            '<span class="fw-bold text-dark">' +
+              item.name +
+              " Subdistrict</span>"
+          );
           villageInfoWindow.setPosition(event.latLng);
           villageInfoWindow.open(map);
         });
@@ -299,7 +309,9 @@ function digitVillages() {
         });
         village.addListener("click", function (event) {
           infoWindow.close();
-          villageInfoWindow.setContent(item.name + " Village");
+          villageInfoWindow.setContent(
+            '<span class="fw-bold text-dark">' + item.name + " Village</span>"
+          );
           villageInfoWindow.setPosition(event.latLng);
           villageInfoWindow.open(map);
         });
@@ -388,7 +400,9 @@ function digitTourismVillage(goToVillage = false) {
           });
 
           // Tampilkan info window di tengah village
-          villageInfoWindow.setContent(data.name);
+          villageInfoWindow.setContent(
+            '<span class="fw-bold text-dark">' + data.name + "</span>"
+          );
           villageInfoWindow.setPosition(center);
           objectMarker("L", -0.4556825246682917, 100.49283664396526);
         }
@@ -396,7 +410,9 @@ function digitTourismVillage(goToVillage = false) {
       //Tambahkan listener untuk klik pada village
       currentVillage.addListener("click", function (event) {
         villageInfoWindow.close();
-        villageInfoWindow.setContent(data.name);
+        villageInfoWindow.setContent(
+          '<span class="fw-bold text-dark">' + data.name + "</span>"
+        );
         villageInfoWindow.setPosition(event.latLng);
         villageInfoWindow.open(map);
       });
@@ -519,11 +535,16 @@ function currentPosition() {
         }
         userMarker.setOptions(markerOption);
         userInfoWindow.setContent(
-          "<p class='text-center'><span class='fw-bold'>You are here.</span> <br> lat: " +
+          "<p class='text-center fw-bolder text-dark'><span class='fw-bold text-dark' style='font-size: 18px;'>You are here.</span> <br>" +
+            "<span class='fw-normal text-dark' style='font-size: 15px;'>lat: </span>" +
+            "<span class='fw-normal text-dark' style='font-size: 15px;'>" +
             pos.lat +
-            "<br>long: " +
+            "</span>" +
+            "<br><span class='fw-normal text-dark' style='font-size: 15px;'>long: </span>" +
+            "<span class='fw-normal text-dark' style='font-size: 15px;'>" +
             pos.lng +
-            "<br>" + 
+            "</span>" +
+            "<br>" +
             nearbyButton +
             "</p>"
         );
@@ -549,9 +570,9 @@ function currentPosition() {
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(
-    browserHasGeolocation
+    '<span class="fw-bold text-dark">' + browserHasGeolocation
       ? "Error: The Geolocation service failed."
-      : "Error: Your browser doesn't support geolocation."
+      : "Error: Your browser doesn't support geolocation." + "</span>"
   );
   infoWindow.open(map);
 }
@@ -589,7 +610,7 @@ function manualPosition() {
     }
     userMarker.setOptions(markerOption);
     userInfoWindow.setContent(
-      "<p class='text-center'><span class='fw-bold'>You are here.</span> <br> lat: " +
+      "<p class='text-center fw-bolder text-dark'><span class='fw-bold text-dark' style='font-size: 18px;'>You are here.</span> <br> lat: " +
         pos.lat().toFixed(8) +
         "<br>long: " +
         pos.lng().toFixed(8) +
@@ -717,16 +738,16 @@ function objectInfoWindow(id, attcat = null, login = false) {
         let close = data.close.substring(0, data.close.length - 3);
 
         content =
-          '<div class="text-center">' +
-          '<p class="fw-bold fs-6">' +
+          '<div class="text-center text-dark">' +
+          '<p class="fw-bold fs-6 text-dark">' +
           name +
           "</p> <br>" +
-          '<p><i class="fa-solid fa-clock me-2"></i> ' +
+          '<p class="fw-bold text-dark"><i class="fa-solid fa-clock me-2"></i> ' +
           open +
           " - " +
           close +
           " WIB</p>" +
-          '<p><i class="fa-solid fa-money-bill me-2"></i> ' +
+          '<p class="fw-bold text-dark><i class="fa-solid fa-money-bill me-2"></i> ' +
           ticket_price +
           "</p>" +
           "</div>";
@@ -793,16 +814,16 @@ function objectInfoWindow(id, attcat = null, login = false) {
         let close = data.close.substring(0, data.close.length - 3);
 
         content =
-          '<div class="text-center">' +
-          '<p class="fw-bold fs-6">' +
+          '<div class="text-center text-dark">' +
+          '<p class="fw-bold fs-6 text-dark">' +
           name +
           "</p> <br>" +
-          '<p><i class="fa-solid fa-clock me-2"></i> ' +
+          '<p class="fw-bolder text-dark fs-6"><i class="fa-solid fa-clock me-2"></i> ' +
           open +
           " - " +
           close +
           " WIB</p>" +
-          '<p><i class="fa-solid fa-money-bill me-2"></i> ' +
+          '<p class="fw-bolder text-dark fs-6" ><i class="fa-solid fa-money-bill me-2"></i> ' +
           ticket_price +
           "</p>" +
           "</div>";
@@ -869,14 +890,14 @@ function objectInfoWindow(id, attcat = null, login = false) {
         let close = data.close.substring(0, data.close.length - 3);
 
         content =
-          '<div class="text-center">' +
-          '<p class="fw-bold fs-6">' +
+          '<div class="text-center fw-bold text-dark">' +
+          '<p class="fw-bold fs-6 fw-bold text-dark">' +
           name +
           "</p>" +
-          '<p><i class="fa-solid fa-money-bills me-2"></i> ' +
+          '<p class="fw-normal text-dark fs-6"><i class="fa-solid fa-money-bills me-2"></i> ' +
           price +
           "</p>" +
-          '<p><i class="fa-solid fa-clock me-2"></i> ' +
+          '<p class="fw-normal text-dark fs-6"><i class="fa-solid fa-clock me-2"></i> ' +
           open +
           " - " +
           close +
@@ -981,14 +1002,14 @@ function objectInfoWindow(id, attcat = null, login = false) {
           date_next.getFullYear();
 
         content =
-          '<div class="text-center">' +
-          '<p class="fw-bold fs-6">' +
+          '<div class="text-center fw-bold text-dark">' +
+          '<p class="fw-bold fs-6 text-dark">' +
           name +
           "</p> <br>" +
-          '<p><i class="fa-solid fa-money-bill me-2"></i> ' +
+          '<p class="fw-bolder text-dark fs-6"><i class="fa-solid fa-money-bill me-2"></i> ' +
           ticket_price +
           "</p>" +
-          '<p><i class="fa-solid fa-calendar-days me-2"></i> ' +
+          '<p class="fw-bolder text-dark fs-6"><i class="fa-solid fa-calendar-days me-2"></i> ' +
           date +
           "</p>" +
           "</div>";
@@ -1054,11 +1075,11 @@ function objectInfoWindow(id, attcat = null, login = false) {
         let lng = data.lng;
 
         content =
-          '<div class="text-center">' +
-          '<p class="fw-bold fs-6">' +
+          '<div class="text-center fw-bold text-dark">' +
+          '<p class="fw-bold fs-6 text-dark">' +
           name +
           "</p>" +
-          '<p><i class="fa-solid fa-clock me-2"></i> ' +
+          '<p class="fw-normal text-dark fs-6"><i class="fa-solid fa-clock me-2"></i> ' +
           open +
           " - " +
           close +
@@ -1107,8 +1128,8 @@ function objectInfoWindow(id, attcat = null, login = false) {
         let lng = data.lng;
 
         content =
-          '<div class="text-center">' +
-          '<p class="fw-bold fs-6">' +
+          '<div class="text-center fw-bold text-dark">' +
+          '<p class="fw-bold fs-6 text-dark">' +
           name +
           "</p>" +
           "</div>";
@@ -1140,7 +1161,7 @@ function objectInfoWindow(id, attcat = null, login = false) {
           nearbyButton +
           "</div>";
         content =
-          '<div class="text-center">' +
+          '<div class="text-center fw-bold text-dark">' +
           '<p class="fw-bold fs-6">' +
           name +
           "</p>" +
@@ -1163,11 +1184,11 @@ function objectInfoWindow(id, attcat = null, login = false) {
         let lng = data.lng;
 
         content =
-          '<div class="text-center">' +
-          '<p class="fw-bold fs-6">' +
+          '<div class="text-center fw-bold text-dark">' +
+          '<p class="fw-bold fs-6 text-dark">' +
           name +
           "</p>" +
-          '<p><i class="fa-solid fa-clock me-2"></i> ' +
+          '<p class="fw-normal text-dark fs-6"><i class="fa-solid fa-clock me-2"></i> ' +
           open +
           " - " +
           close +
@@ -1213,8 +1234,8 @@ function objectInfoWindow(id, attcat = null, login = false) {
         let name = data.name;
 
         content =
-          '<div class="text-center">' +
-          '<p class="fw-bold fs-6">' +
+          '<div class="text-center fw-bold text-dark">' +
+          '<p class="fw-bold fs-6 text-dark">' +
           name +
           "</p>" +
           "</div>";
@@ -1235,7 +1256,7 @@ function objectInfoWindow(id, attcat = null, login = false) {
           '<p class="fw-bold fs-6">' +
           name +
           "</p>" +
-          '<p><i class="fa-solid fa-spa"></i> Tourism Village</p>' +
+          '<p><i class="fa-solid fa-spa"></i> <span class="fw-bolder fs-6">Tourism Village</span></p>' +
           "</div>";
 
         infoWindow.setContent(content);
@@ -1299,6 +1320,15 @@ function drawRadius(position, radius) {
 
 // Update radiusValue on search by radius
 function updateRadius(postfix) {
+  // userInfoWindow.close();
+  document.getElementById("radiusValue" + postfix).innerHTML =
+    document.getElementById("inputRadius" + postfix).value * 100 + " m";
+  console.log(
+    document.getElementById("inputRadius" + postfix).value * 100 + " m"
+  );
+}
+
+function updateRadiusN(postfix) {
   // userInfoWindow.close();
   document.getElementById("radiusValue" + postfix).innerHTML =
     document.getElementById("inputRadius" + postfix).value * 100 + " m";
@@ -1512,6 +1542,8 @@ function closeNearby() {
 
 // open nearby search section
 function openNearby(id, lat, lng) {
+  $("#result-nearby-col").hide();
+  $("#check-nearbyyou-col").hide();
   $("#list-rg-col").hide();
   $("#list-ev-col").hide();
   $("#list-rec-col").hide();
@@ -1541,6 +1573,7 @@ function checkNearby(id) {
 
   objectMarker(id, currentLat, currentLng, false);
 
+  $("#check-nearbyyou-col").hide();
   $("#table-uatt").empty();
   $("#table-att").empty();
   $("#table-hs").empty();
@@ -1553,6 +1586,7 @@ function checkNearby(id) {
   $("#table-cp").hide();
   $("#table-wp").hide();
   $("#table-sp").hide();
+  $("#result-explore-col").hide();
 
   let radiusValue =
     parseFloat(document.getElementById("inputRadiusNearby").value) * 100;
@@ -1598,9 +1632,10 @@ function checkNearby(id) {
 }
 
 function checkAround() {
+  userInfoWindow.close();
   if (userLat == 0 && userLng == 0) {
-    document.getElementById("radiusValueNearby").innerHTML = "0 m";
-    document.getElementById("inputRadiusNearby").value = 0;
+    document.getElementById("radiusValueNearbyyou").innerHTML = "0 m";
+    document.getElementById("inputRadiusNearbyyou").value = 0;
     return Swal.fire("Determine your position first!");
   }
   clearRadius();
@@ -1625,21 +1660,21 @@ function checkAround() {
   $("#table-sp").hide();
 
   let radiusValue =
-    parseFloat(document.getElementById("inputRadiusNearby").value) * 100;
-  const checkuATT = document.getElementById("check-uatt").checked;
-  const checkATT = document.getElementById("check-att").checked;
-  const checkHS = document.getElementById("check-hs").checked;
-  const checkCP = document.getElementById("check-cp").checked;
-  const checkWP = document.getElementById("check-wp").checked;
-  const checkSP = document.getElementById("check-sp").checked;
+    parseFloat(document.getElementById("inputRadiusNearbyyou").value) * 100;
+  const checkUATT = document.getElementById("check-uatt1").checked;
+  const checkATT = document.getElementById("check-att1").checked;
+  const checkHS = document.getElementById("check-hs1").checked;
+  const checkCP = document.getElementById("check-cp1").checked;
+  const checkWP = document.getElementById("check-wp1").checked;
+  const checkSP = document.getElementById("check-sp1").checked;
 
-  if (!checkuATT && !checkATT && !checkHS && !checkCP && !checkWP && !checkSP) {
-    document.getElementById("radiusValueNearby").innerHTML = "0 m";
-    document.getElementById("inputRadiusNearby").value = 0;
+  if (!checkUATT && !checkATT && !checkHS && !checkCP && !checkWP && !checkSP) {
+    document.getElementById("radiusValueNearbyyou").innerHTML = "0 m";
+    document.getElementById("inputRadiusNearbyyou").value = 0;
     return Swal.fire("Please choose one object");
   }
 
-  if (checkuATT) {
+  if (checkUATT) {
     findNearby("uatt", radiusValue);
     $("#table-uatt").show();
   }
@@ -1868,10 +1903,10 @@ function displayNearbyResult(category, response) {
 
   let table =
     "<thead><tr>" +
-    '<th style="width: 50%;">' +
+    '<th style="width: 52%; font-size: 20px;">' +
     headerName +
     " Name</th>" +
-    '<th style="width: 50%;">Action</th>' +
+    '<th style="width: 48%; font-size: 20px;">Action</th>' +
     "</tr></thead>" +
     '<tbody id="data-' +
     category +
@@ -2388,14 +2423,19 @@ function getLegend() {
     },
   };
 
-  const title = '<p class="fw-bold fs-6">Legend</p>';
+  const title = '<p class="fw-bold fs-4">Legend</p>';
   $("#legend").append(title);
 
   for (key in icons) {
     const type = icons[key];
     const name = type.name;
     const icon = type.icon;
-    const div = '<div><img src="' + icon + '"> ' + name + "</div>";
+    const div =
+      '<div class="fw-normal text-dark fs-5"><img src="' +
+      icon +
+      '"> ' +
+      name +
+      "</div>";
 
     $("#legend").append(div);
   }
@@ -2431,14 +2471,19 @@ function getLegendTraffic() {
     },
   };
 
-  const title = '<p class="fw-bold fs-6">Traffic Legend</p>';
+  const title = '<p class="fw-bold fs-5">Traffic Legend</p>';
   $("#legend_t").append(title);
 
   for (key in icons) {
     const type = icons[key];
     const name = type.name;
     const icon = type.icon;
-    const div = '<div><img src="' + icon + '"> ' + name + "</div>";
+    const div =
+      '<div class="fw-normal text-dark fs-6"><img src="' +
+      icon +
+      '"> ' +
+      name +
+      "</div><br>";
 
     $("#legend_t").append(div);
   }
@@ -4354,7 +4399,7 @@ function getOrderField(
         objs +
         ' <div class="form-group mb-4">' +
         '<label for="address" class="mb-2">Day Order</label>' +
-        '<input type="number" class="form-control" id="dayOrder" name="day_order" min="1" onchange="getTotalOrder(' +
+        '<input type="number" class="form-control text-dark" id="dayOrder" name="day_order" min="1" onchange="getTotalOrder(' +
         price +
         ')" required>' +
         "</div>";
@@ -4364,7 +4409,7 @@ function getOrderField(
         objs +
         ' <div class="form-group mb-4">' +
         '<label for="address" class="mb-2">Person Order</label>' +
-        '<input type="number" class="form-control" id="personOrder" name="person_order" min="1" onchange="getTotalOrder(' +
+        '<input type="number" class="form-control text-dark" id="personOrder" name="person_order" min="1" onchange="getTotalOrder(' +
         price +
         ')" required>' +
         "</div>";
@@ -4374,7 +4419,7 @@ function getOrderField(
         objs +
         ' <div class="form-group mb-4">' +
         '<label for="address" class="mb-2">Room Order</label>' +
-        '<input type="number" class="form-control" id="roomOrder" name="room_order" min="1" onchange="getTotalOrder(' +
+        '<input type="number" class="form-control text-dark" id="roomOrder" name="room_order" min="1" onchange="getTotalOrder(' +
         price +
         ')" required>' +
         "</div>";
@@ -4383,14 +4428,14 @@ function getOrderField(
       objs +
       ' <div class="form-group mb-4">' +
       '<label for="address" class="mb-2">Total Order</label>' +
-      '<input type="number" class="form-control" id="totalOrder" name="total_order" readonly required>' +
+      '<input type="number" class="form-control text-dark" id="totalOrder" name="total_order" readonly required>' +
       "</div>";
   } else {
     objs =
       objs +
       ' <div class="form-group mb-4">' +
       '<label for="address" class="mb-2">Total Order</label>' +
-      '<input type="number" class="form-control" id="totalOrder" name="total_order" min="1" onchange="getTotalPrice(' +
+      '<input type="number" class="form-control text-dark" id="totalOrder" name="total_order" min="1" onchange="getTotalPrice(' +
       price +
       ')" required>' +
       "</div>";
@@ -4400,8 +4445,8 @@ function getOrderField(
     '<div class="form-group mb-4">' +
     '<label for="address" class="mb-2">Total Price</label>' +
     '<div class="input-group">' +
-    '<span class="input-group-text">Rp</span>' +
-    '<input type="number" class="form-control" id="totalPrice" name="total_price" readonly required>' +
+    '<span class="input-group-text text-dark">Rp</span>' +
+    '<input type="number" class="form-control text-dark" id="totalPrice" name="total_price" readonly required>' +
     "</div>" +
     "</div>";
   $("#additionalAmenitiesOrderFields").append(objs);
@@ -4705,12 +4750,11 @@ function deleteAdditionalAmenities(
   additional_amenities_id = null,
   reservation_id = null
 ) {
-  console.log(homestay_id + additional_amenities_id + reservation_id);
+  // console.log(homestay_id + additional_amenities_id + reservation_id);
   Swal.fire({
     title: "Delete Additional Amenities?",
     icon: "warning",
     showCancelButton: true,
-    denyButtonText: "Delete",
     confirmButtonColor: "#dc3545",
     cancelButtonColor: "#343a40",
   }).then((result) => {
@@ -4975,10 +5019,10 @@ function findAll(category, login = false) {
 
     let table =
       "<thead><tr>" +
-      '<th style="width: 70%;">' +
+      '<th style="width: 70%; font-size: 20px;">' +
       headerName +
       " Name</th>" +
-      '<th style="width: 30%;">Action</th>' +
+      '<th style="width: 30%; font-size: 20px;">Action</th>' +
       "</tr></thead>" +
       '<tbody id="data-' +
       category +
@@ -5328,7 +5372,7 @@ function howToReachPariangan() {
     `
     <div style="display: flex; align-items: center;">
       
-      <div>
+      <div style="font-size: 15px">
         <b>From Singapore <img src="${baseUrl}/media/icon/sg.svg" alt="Singapore Flag" style="width: 24px; height: 16px; margin-right: 4px;">(SIN):</b><br>
         1. Take a flight from Singapore (SIN) to Padang (PDG), Indonesia.<br>
         2. Rent a car to Nagari Tuo Pariangan.
@@ -5343,7 +5387,7 @@ function howToReachPariangan() {
     `
     <div style="display: flex; align-items: center;">
       
-      <div>
+      <div style="font-size: 15px">
         <b>From Kuala Lumpur <img src="${baseUrl}/media/icon/my.svg" alt="Malaysia Flag" style="width: 24px; height: 16px; margin-right: 4px;">(KUL):</b><br>
         1. Take a flight from Kuala Lumpur (KUL) to Padang (PDG), Indonesia.<br>
         2. Rent a car to Nagari Tuo Pariangan.
@@ -5358,7 +5402,7 @@ function howToReachPariangan() {
     `
     <div style="display: flex; align-items: center;">
       
-      <div>
+      <div style="font-size: 15px">
         <b>From Jakarta <img src="${baseUrl}/media/icon/id.svg" alt="Indonesia Flag" style="width: 24px; height: 16px; margin-right: 4px;">:</b><br>
         1. Take a domestic flight to Padang (PDG), Indonesia.<br>
         2. Rent a car to Nagari Tuo Pariangan.
@@ -5372,7 +5416,7 @@ function howToReachPariangan() {
     bandaAceh,
     `
     <div style="display: flex; align-items: center;">      
-      <div>
+      <div style="font-size: 15px">
         <b>From anywhere in Sumatra <img src="${baseUrl}/media/icon/id.svg" alt="Indonesia Flag" style="width: 24px; height: 16px; margin-right: 4px;">:</b><br>
         1. Travel by land directly to Nagari Tuo Pariangan.<br>
         2. Alternatively, fly to Padang (PDG) and rent a car to Nagari Tuo Pariangan.
@@ -5602,12 +5646,12 @@ function weatherNow() {
       const capitalizedWeatherDescription = capitalizeWords(weatherDescription);
 
       document.getElementById("weather-info").innerHTML = `
-    <span style="margin-right: 10px;">${cityName}, ID</span>
+    <span style="margin-right: 10px; font-size: 20px;" class="fw-bold">${cityName}, ID</span>
     <img src="http://openweathermap.org/img/wn/${weatherIcon}.png" alt="Weather Icon" style="margin-right: 10px; filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));" />
-    <span style="margin-right: 10px;">${temperature}°C</span>
-    <span style="margin-right: 10px;">${capitalizedWeatherDescription}</span>
-    <span style="margin-right: 10px;">Humidity: ${humidity}%</span>
-    <span style="margin-right: 10px;">Wind: ${windSpeed} m/s</span>
+    <span style="margin-right: 10px; font-size: 20px;" class="fw-bold">${temperature}°C</span>
+    <span style="margin-right: 10px; font-size: 20px;" class="fw-bold">${capitalizedWeatherDescription}</span>
+    <span style="margin-right: 10px; font-size: 20px;" class="fw-bold">Humidity: ${humidity}%</span>
+    <span style="margin-right: 10px; font-size: 20px;" class="fw-bold">Wind: ${windSpeed} m/s</span>
 `;
     } catch (error) {
       console.error("Error fetching weather data:", error);
@@ -5644,6 +5688,11 @@ function iwRedirectToLogin() {
     title: "You are not logged in as User",
     text: "Please log in to proceed.",
     confirmButtonText: "OK",
+    customClass: {
+      title: "swal-title",
+      htmlContainer: "swal-text",
+      confirmButton: "swal-button",
+    },
   }).then((result) => {
     if (result.isConfirmed) {
       window.location.href = baseUrl + "/login";

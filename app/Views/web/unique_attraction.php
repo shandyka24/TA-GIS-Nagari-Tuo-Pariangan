@@ -10,7 +10,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col-md-auto">
-                            <h5 class="card-title">Google Maps with Location</h5>
+                            <h5 class="card-title fs-4 fw-bolder">Google Maps with Location</h5>
                         </div>
                         <?= $this->include('web/layouts/map-head'); ?>
                     </div>
@@ -26,9 +26,9 @@
                 <div class="col-12" id="list-rec-col">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title text-center"><?= esc($data['name']); ?></h5>
+                            <h5 class="card-title text-center fs-4 fw-bolder"><?= esc($data['name']); ?></h5>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" style="font-size: 20px;">
                             <?php $i = 0; ?>
                             <script>
                                 clearMarker();

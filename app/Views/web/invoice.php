@@ -1,19 +1,101 @@
 <style>
+    /* Increase font sizes overall */
     p,
     span,
     table {
-        font-size: 10px
+        font-size: 14px; /* increased from 11px */
+        line-height: 1.4;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h5 {
+        font-size: 20pt; /* larger heading */
+        text-align: right;
+        margin-bottom: 15px;
+        font-weight: 700;
     }
 
     table {
         width: 100%;
+        border-collapse: collapse;
         border: 1px solid #dee2e6;
+        margin-bottom: 25px;
     }
 
     table#tb-item tr th,
     table#tb-item tr td {
-        border: 1px solid #000
+        border: 1px solid #000;
     }
+
+    /* Add padding for table cells */
+    table th,
+    table td {
+        padding: 8px 10px;
+        vertical-align: middle;
+    }
+
+    /* Add some spacing under spans and paragraphs for better reading flow */
+    span,
+    p {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    /* Style for status colors with some padding and rounded corners */
+    table[celpadding] th[width="20%"] {
+        padding: 6px 10px;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: 600;
+    }
+    /* Keep the existing background colors but add white bold text for clarity */
+    .status-pay-deposit {
+        background-color: #34ebd5;
+        color: #000;
+        padding: 6px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .status-deposit-pending,
+    .status-fullpay-pending {
+        background-color: #e1eb34;
+        color: #000;
+        padding: 6px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .status-deposit-successful,
+    .status-fullpay-successful {
+        background-color: #30ab3a;
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .status-done {
+        background-color: #6772ab;
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .status-canceled {
+        background-color: #F78CA2;
+        color: #000;
+        padding: 6px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-align: left;
+    }
+
 </style>
 <?php
 $dateTime = new DateTime('now'); // Waktu sekarang
@@ -85,8 +167,8 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
 <br><br>
 <table id="tb-item" cellpadding="4">
     <tr style="background-color:#a9a9a9">
-        <th width="38%" style="height: 20px"><strong>Unit Name</strong></th>
-        <th width="10%" style="height: 20px"><strong>Capacity</strong></th>
+        <th width="36%" style="height: 20px"><strong>Unit Name</strong></th>
+        <th width="12%" style="height: 20px"><strong>Capacity</strong></th>
         <th width="30%" style="height: 20px"><strong>Unit Price</strong></th>
         <th width="18%" style="height: 20px"><strong>Total Price</strong></th>
     </tr>
@@ -191,7 +273,6 @@ $datenow = $dateTime->format('Y-m-d H:i:s');
         </tr>
     <?php endif; ?>
 </table>
-<br>
 <br>
 <br>
 

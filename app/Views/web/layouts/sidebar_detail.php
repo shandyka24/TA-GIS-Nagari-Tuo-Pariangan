@@ -4,15 +4,23 @@ $uri1 = $uri[1] ?? 'index';
 $uri2 = $uri[2] ?? '';
 $uri3 = $uri[3] ?? '';
 ?>
+<style>
+    /* div {
+        font-size: 20px;
+    } */
 
+    span {
+        font-size: 20px;
+    }
+</style>
 <div id="sidebar" class="active">
     <div class="sidebar-wrapper active">
         <?= $this->include('web/layouts/sidebar_header'); ?>
         <div class="sidebar-menu">
             <div class="d-flex flex-column">
                 <?php if (url_is('*homestay*')) : ?>
-                    <div class="d-flex justify-content-center">Welcome to</div>
-                    <div class="d-flex justify-content-center fw-bold"><?= esc($title); ?></div>
+                    <div class="d-flex justify-content-center fw-bold" style="font-size: 22px;">Welcome to</div>
+                    <div class="d-flex justify-content-center fw-bold" style="font-size: 22px;"><?= esc($title); ?></div>
                     <hr class="hr" />
                 <?php else : ?>
                     <div class="d-flex justify-content-center avatar avatar-xl" id="avatar-sidebar">
@@ -20,26 +28,26 @@ $uri3 = $uri[3] ?? '';
                     </div>
                 <?php endif; ?>
                 <?php if (logged_in()) : ?>
-                    <div class="p-2 text-center">
+                    <div class="p-2 text-center fw-bold" style="font-size: 22px;">
                         <?php if (!empty(user()->first_name)): ?>
                             <?php if (in_groups(['owner', 'admin'])) : ?>
-                                Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-muted mb-0">@<?= user()->username; ?></span><br>
+                                Hello, <span class="fw-bold" style="font-size: 22px;"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-dark mb-0" style="font-size: 22px;">@<?= user()->username; ?></span><br>
                             <?php else : ?>
-                                Hello, <span class="fw-bold"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-muted mb-0">@<?= user()->username; ?></span><br>
-                                <span class="fw-bold">Your Coin : <?= number_format(user()->total_coin); ?></span>
+                                Hello, <span class="fw-bold" style="font-size: 22px;"><?= user()->first_name; ?><?= (!empty(user()->last_name)) ? ' ' . user()->last_name : ''; ?></span> <br> <span class="text-mudarkted mb-0" style="font-size: 22px;">@<?= user()->username; ?></span><br>
+                                <span class="fw-bold" style="font-size: 22px;">Your Coin : <?= number_format(user()->total_coin); ?></span>
                             <?php endif; ?>
 
                         <?php else: ?>
                             <?php if (in_groups(['owner', 'admin'])) : ?>
-                                Hello, <span class="fw-bold">@<?= user()->username; ?></span><br>
+                                Hello, <span class="fw-bold text-dark" style="font-size: 22px;">@<?= user()->username; ?></span><br>
                             <?php else : ?>
-                                Hello, <span class="fw-bold">@<?= user()->username; ?></span><br>
-                                <span class="fw-bold">Your Coin : <?= number_format(user()->total_coin); ?></span>
+                                Hello, <span class="fw-bold text-dark" style="font-size: 22px;">@<?= user()->username; ?></span><br>
+                                <span class="fw-bold" style="font-size: 22px;">Your Coin : <?= number_format(user()->total_coin); ?></span>
                             <?php endif; ?>
                         <?php endif; ?>
                     </div>
                 <?php else : ?>
-                    <div class="p-2 d-flex justify-content-center">Hello, Visitor</div>
+                    <div class="p-2 d-flex justify-content-center" style="font-size: 22px;">Hello, Visitor</div>
                 <?php endif; ?>
                 <ul class="menu">
                     <li class="sidebar-item">

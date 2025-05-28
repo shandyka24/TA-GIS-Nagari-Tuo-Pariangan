@@ -3,6 +3,64 @@
 <?= $this->section('content') ?>
 
 <section class="section text-dark">
+    <style>
+/* Global font size override to 20px */
+body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
+    font-size: 20px;
+}
+
+/* Specific overrides for smaller elements */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table th, .table td {
+    font-size: 20px;
+    padding: 12px;
+}
+
+.btn {
+    font-size: 20px;
+    padding: 10px 16px;
+}
+
+.btn-sm {
+    font-size: 18px;
+    padding: 8px 12px;
+}
+
+.form-control, .form-select {
+    font-size: 20px;
+    padding: 10px;
+    /* font-weight: bold; */
+}
+
+.modal-title {
+    font-size: 22px;
+}
+
+.input-group-text {
+    font-size: 20px;
+}
+
+.form-check-label {
+    font-size: 20px;
+}
+
+.text-secondary, .text-muted {
+    font-size: 18px;
+}
+
+/* DataTable specific styles */
+.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
+    font-size: 20px;
+}
+
+.dataTables_info, .dataTables_paginate {
+    font-size: 20px;
+}
+</style>
     <div class="row">
         <script>
             currentUrl = '<?= current_url(); ?>';
@@ -23,7 +81,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title"><?= esc($title); ?></h4>
+                            <h4 class="card-title fs-4 fw-bolder"><?= esc($title); ?></h4>
                         </div>
                         <div class="col">
                             <button form="reservation-form" type="submit" class="float-end btn btn-primary">Make Reservation</button>
@@ -40,8 +98,8 @@
                                             <div class="form-group mb-4">
                                                 <label for="check_in" class="mb-2">Check In</label>
                                                 <div class="input-group">
-                                                    <input type="date" id="check_in" class="form-control" name="check_in" onchange="getCheckOut2()" value="" required>
-                                                    <input type="time" class="form-control" id="check_in_time" value="14:00" required disabled>
+                                                    <input type="date" id="check_in" class="form-control text-dark" name="check_in" onchange="getCheckOut2()" value="" required>
+                                                    <input type="time" class="form-control text-dark" id="check_in_time" value="14:00" required disabled>
                                                     <script>
                                                         function getCheckOut2() {
                                                             const dayOfStay = document.getElementById("day_of_stay");
@@ -94,14 +152,14 @@
                                             <div class="form-group mb-4">
                                                 <label for="check_out" class="mb-2">Check Out</label>
                                                 <div class="input-group">
-                                                    <input type="datetime-local" id="check_out" class="form-control" name="check_out" value="" disabled required>
+                                                    <input type="datetime-local" id="check_out" class="form-control text-dark" name="check_out" value="" disabled required>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group mb-4 col-md-4 col-12">
                                         <label for="name" class="mb-2">Day of Stay</label>
-                                        <input type="number" id="day_of_stay" class="form-control" name="day_of_stay" onchange="getCheckOut(this.value)" min="1" value="" required>
+                                        <input type="number" id="day_of_stay" class="form-control text-dark" name="day_of_stay" onchange="getCheckOut(this.value)" min="1" value="" required>
                                         <script>
                                             function getCheckOut(val) {
                                                 const dayOfStay = document.getElementById("day_of_stay");
@@ -141,7 +199,7 @@
                                     </fieldset>
                                     <div class="form-group mb-4 col-md-4 col-12">
                                         <label for="name" class="mb-2">Total People</label>
-                                        <input type="number" id="total_people" class="form-control" name="total_people" min="1" value="" required>
+                                        <input type="number" id="total_people" class="form-control text-dark" name="total_people" min="1" value="" required>
                                     </div>
                                 </div>
                                 <div class="col-md-7 col-12" id="unit-available">

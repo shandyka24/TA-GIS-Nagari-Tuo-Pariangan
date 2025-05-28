@@ -13,7 +13,15 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+<style>
+    div {
+        font-size: 20px;
+    }
 
+    a, button, .btn {
+        font-size: 20px;
+    }
+</style>
 <section class="section">
     <div class="row">
         <script>
@@ -26,7 +34,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title">Homestay Information</h4>
+                            <h4 class="card-title fs-4 fw-bolder">Homestay Information</h4>
                         </div>
                         <?php if (in_groups('owner')) : ?>
                             <div class="col-auto">
@@ -137,7 +145,7 @@
             <!-- Object Location on Map -->
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">Google Maps</h5>
+                    <h5 class="card-title fs-4 fw-bolder">Google Maps</h5>
                 </div>
 
                 <?= $this->include('web/layouts/map-body'); ?>

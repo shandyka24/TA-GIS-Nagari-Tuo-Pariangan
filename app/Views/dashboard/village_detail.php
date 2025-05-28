@@ -1,7 +1,64 @@
 <?= $this->extend('dashboard/layouts/main'); ?>
 
 <?= $this->section('content') ?>
+<style>
+/* Global font size override to 20px */
+body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
+    font-size: 20px;
+}
 
+/* Specific overrides for smaller elements */
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table th, .table td {
+    font-size: 20px;
+    padding: 12px;
+}
+
+.btn {
+    font-size: 20px;
+    padding: 10px 16px;
+}
+
+.btn-sm {
+    font-size: 18px;
+    padding: 8px 12px;
+}
+
+.form-control, .form-select {
+    font-size: 20px;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.modal-title {
+    font-size: 22px;
+}
+
+.input-group-text {
+    font-size: 20px;
+}
+
+.form-check-label {
+    font-size: 20px;
+}
+
+.text-secondary, .text-muted {
+    font-size: 18px;
+}
+
+/* DataTable specific styles */
+.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
+    font-size: 20px;
+}
+
+.dataTables_info, .dataTables_paginate {
+    font-size: 20px;
+}
+</style>
 <section class="section">
     <div class="row">
         <script>
@@ -14,7 +71,7 @@
                 <div class="card-header">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title">Village Information</h4>
+                            <h4 class="card-title fs-4 fw-bolder">Village Information</h4>
                         </div>
                         <div class="col-auto">
                             <a href="<?= base_url('dashboard/villages/edit'); ?>/<?= esc($data['id_vi']); ?>" class="btn btn-primary float-end"><i class="fa-solid fa-pencil me-3"></i>Edit</a>
@@ -27,31 +84,31 @@
                             <table class="table table-borderless text-dark">
                                 <tbody>
                                     <tr>
-                                        <td class="fw-bold">Name</td>
-                                        <td><?= esc($data['name']); ?></td>
+                                        <td class="fw-bold"><span>Name</span></td>
+                                        <td><span><?= esc($data['name']); ?></td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold">Address</td>
-                                        <td><?= esc($data['address']); ?></td>
+                                        <td class="fw-bold"><span>Address</span></td>
+                                        <td><span><?= esc($data['address']); ?></span></td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold">Open</td>
-                                        <td><?= date('H:i', strtotime(esc($data['open']))) . ' WIB'; ?></td>
+                                        <td class="fw-bold"><span>Open</span></td>
+                                        <td><span><?= date('H:i', strtotime(esc($data['open']))) . ' WIB'; ?></span></td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold">Close</td>
-                                        <td><?= date('H:i', strtotime(esc($data['close']))) . ' WIB'; ?></td>
+                                        <td class="fw-bold"><span>Close</span></td>
+                                        <td><span><?= date('H:i', strtotime(esc($data['close']))) . ' WIB'; ?></span></td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold">Ticket Price</td>
-                                        <td><?=
+                                        <td class="fw-bold"><span>Ticket Price</span></td>
+                                        <td><span><?=
                                             'Rp ' . number_format(esc($data['ticket_price']), 0, ',', '.'); 
-                                            ?></td>
+                                            ?></span></td>
                                     </tr>
                                     <tr>
-                                        <td class="fw-bold">Contact Person</td>
-                                        <td><?= esc($data['phone']);
-                                            ?></td>
+                                        <td class="fw-bold"><span>Contact Person</span></td>
+                                        <td><span><?= esc($data['phone']);
+                                            ?></span></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -71,7 +128,7 @@
             <!-- Object Location on Map -->
             <div class="card text-dark">
                 <div class="card-header">
-                    <h5 class="card-title">Google Maps</h5>
+                    <h5 class="card-title fs-4 fw-bolder">Google Maps</h5>
                 </div>
 
                 <?= $this->include('web/layouts/map-body'); ?>
