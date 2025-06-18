@@ -1,7 +1,12 @@
 <?= $this->extend('web/layouts/main'); ?>
 
 <?= $this->section('content') ?>
-
+<?php
+$uri = service('uri')->getSegments();
+$uri1 = $uri[1] ?? 'index';
+$uri2 = $uri[2] ?? '';
+$uri3 = $uri[3] ?? '';
+?>
 <section class="section">
     <div class="row">
         <!--map-->
@@ -90,4 +95,18 @@
     $('#check-nearby-col').hide();
     $('#result-nearby-col').hide();
 </script>
+<?php if ($uri1 == 'uniqueAttraction') : ?>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(() => { map.panTo({lat: -0.45853462312870247, lng: 100.49299378728645}); map.setZoom(19); }, 1000);
+    });
+</script>
+<?php endif ;?>
+<?php if ($uri1 == 'attraction') : ?>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(() => { map.panTo({lat: -0.45847879, lng: 100.49211505}); map.setZoom(19); }, 1000);
+    });
+</script>
+<?php endif ;?>
 <?= $this->endSection() ?>

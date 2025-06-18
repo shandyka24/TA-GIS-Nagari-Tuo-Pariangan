@@ -863,11 +863,19 @@ function objectInfoWindow(id, attcat = null, login = false) {
           ')"><i class="fa-solid fa-road"></i></a>' +
           "</div>";
 
+        contentButtonLp =
+          '<br><div class="text-center">' +
+          '<a title="Info" class="btn icon btn-outline-primary mx-1" target="_blank" id="infoInfoWindow" href=' +
+          baseUrl +
+          "/web/attraction/" +
+          rgid +
+          '><i class="fa-solid fa-info"></i></a></div>';
+
         if (currentUrl.includes(id)) {
           if (currentUrl.includes("mobile")) {
             infoWindow.setContent(content + contentMobile);
           } else {
-            infoWindow.setContent(content);
+            infoWindow.setContent(content + contentButtonLp);
           }
           infoWindow.open(map, markerArray[rgid]);
         } else {
@@ -952,11 +960,19 @@ function objectInfoWindow(id, attcat = null, login = false) {
           ')"><i class="fa-solid fa-road"></i></a>' +
           "</div>";
 
+        contentButtonLp =
+          '<br><div class="text-center">' +
+          '<a title="Info" class="btn icon btn-outline-primary mx-1" target="_blank" id="infoInfoWindow" href=' +
+          baseUrl +
+          "/web/homestay/" +
+          rgid +
+          '><i class="fa-solid fa-info"></i></a></div>';
+
         if (currentUrl.includes(id)) {
           if (currentUrl.includes("mobile")) {
             infoWindow.setContent(content + contentMobile);
           } else {
-            infoWindow.setContent(content);
+            infoWindow.setContent(content + contentButtonLp);
           }
           infoWindow.open(map, markerArray[rgid]);
         } else {
@@ -1113,7 +1129,24 @@ function objectInfoWindow(id, attcat = null, login = false) {
           nearbyButton +
           "</div>";
 
-        infoWindow.setContent(content + contentButton);
+        contentButtonLp =
+          '<br><div class="text-center">' +
+          '<a title="Info" class="btn icon btn-outline-primary mx-1" target="_blank" id="infoInfoWindow" href=' +
+          baseUrl +
+          "/web/culinaryPlace/" +
+          rgid +
+          '><i class="fa-solid fa-info"></i></a></div>';
+
+        if (currentUrl.includes(id)) {
+          if (currentUrl.includes("mobile")) {
+            infoWindow.setContent(content + contentMobile);
+          } else {
+            infoWindow.setContent(content + contentButtonLp);
+          }
+          infoWindow.open(map, markerArray[rgid]);
+        } else {
+          infoWindow.setContent(content + contentButton);
+        }
       },
     });
   } else if (id.substring(0, 1) === "W") {
@@ -1167,7 +1200,24 @@ function objectInfoWindow(id, attcat = null, login = false) {
           "</p>" +
           "</div>";
 
-        infoWindow.setContent(content + contentButton);
+        contentButtonLp =
+          '<br><div class="text-center">' +
+          '<a title="Info" class="btn icon btn-outline-primary mx-1" target="_blank" id="infoInfoWindow" href=' +
+          baseUrl +
+          "/web/worshipPlace/" +
+          rgid +
+          '><i class="fa-solid fa-info"></i></a></div>';
+
+        if (currentUrl.includes(id)) {
+          if (currentUrl.includes("mobile")) {
+            infoWindow.setContent(content + contentMobile);
+          } else {
+            infoWindow.setContent(content + contentButtonLp);
+          }
+          infoWindow.open(map, markerArray[rgid]);
+        } else {
+          infoWindow.setContent(content + contentButton);
+        }
       },
     });
   } else if (id.substring(0, 1) === "S") {
@@ -1222,7 +1272,24 @@ function objectInfoWindow(id, attcat = null, login = false) {
           nearbyButton +
           "</div>";
 
-        infoWindow.setContent(content + contentButton);
+        contentButtonLp =
+          '<br><div class="text-center">' +
+          '<a title="Info" class="btn icon btn-outline-primary mx-1" target="_blank" id="infoInfoWindow" href=' +
+          baseUrl +
+          "/web/souvenirPlace/" +
+          rgid +
+          '><i class="fa-solid fa-info"></i></a></div>';
+
+        if (currentUrl.includes(id)) {
+          if (currentUrl.includes("mobile")) {
+            infoWindow.setContent(content + contentMobile);
+          } else {
+            infoWindow.setContent(content + contentButtonLp);
+          }
+          infoWindow.open(map, markerArray[rgid]);
+        } else {
+          infoWindow.setContent(content + contentButton);
+        }
       },
     });
   } else if (id.substring(0, 1) === "V") {

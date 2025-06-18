@@ -185,12 +185,12 @@
                             <?= $village['description']; ?>
                         </p>
                         <h5 class="mb-3">
-                            <a href="#map" class="text-reset" onclick="showMap('uat');">
+                            <a href="#map" class="text-reset" onclick="showMap('uat'); setTimeout(() => map.setZoom(19), 1000);">
                                 <i class="far fa-check-circle text-primary me-3"></i>Unique Attraction
                             </a>
                         </h5>
                         <h5 class="mb-3">
-                            <a href="#map" class="text-reset" onclick="showMap('at');">
+                            <a href="#map" class="text-reset" onclick="showMap('at'); setTimeout(() => { map.panTo({lat: -0.45847879, lng: 100.49211505}); map.setZoom(19); }, 1000);">
                                 <i class="far fa-check-circle text-primary me-3"></i>Ordinary Attraction
                             </a>
                         </h5>
@@ -200,12 +200,12 @@
                             </a>
                         </h5>
                         <h5 class="mb-3">
-                            <a href="#map" class="text-reset" onclick="showMap('cp');">
+                            <a href="#map" class="text-reset" onclick="showMap('cp'); setTimeout(() => map.setZoom(18), 1000);">
                                 <i class="far fa-check-circle text-primary me-3"></i>Culinary Place
                             </a>
                         </h5>
                         <h5 class="mb-3">
-                            <a href="#map" class="text-reset" onclick="showMap('wp');">
+                            <a href="#map" class="text-reset" onclick="showMap('wp'); setTimeout(() => { map.panTo({lat: -0.45841019, lng: 100.49237328}); map.setZoom(18); }, 1000);">
                                 <i class="far fa-check-circle text-primary me-3"></i>Worship Place
                             </a>
                         </h5>
@@ -218,7 +218,7 @@
                     </div>
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="img-border  ">
-                            <img class="img-fluid" src="media/photos/<?= $gallery[array_rand($gallery)]; ?>" alt="" />
+                            <img class="img-fluid" src="media/photos/448373dacf4bc269fc38066f53fd4b6e.jpg" alt="" />
                         </div>
                     </div>
                 </div>
@@ -457,7 +457,7 @@
                     for (i in data) {
                         let item = data[i];
                         currentUrl = currentUrl + item.id;
-                        if (item.id.substring(0, 1) === "A"){
+                        if (item.id.substring(0, 1) === "A") {
                             objectMarker(item.id, item.lat, item.lng, true, item.attraction_category);
                         } else {
                             objectMarker(item.id, item.lat, item.lng);

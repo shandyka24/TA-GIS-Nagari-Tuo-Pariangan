@@ -90,4 +90,9 @@
     $('#check-nearby-col').hide();
     $('#result-nearby-col').hide();
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(() => { map.panTo({lat: -0.4466521323747273, lng: 100.4836235079706}); map.setZoom(17); }, 1000);
+    });
+</script>
 <?= $this->endSection() ?>
