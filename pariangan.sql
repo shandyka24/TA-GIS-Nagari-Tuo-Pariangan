@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 29, 2025 at 06:44 AM
+-- Generation Time: Jun 30, 2025 at 11:36 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.2.4
 
@@ -75,12 +75,12 @@ INSERT INTO `attraction` (`id`, `attraction_category`, `name`, `address`, `open`
 ('A10', '2', 'Surau Suri Maharajo', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45823353, 100.49225133, 0xe610000001030000000100000005000000e53b0ccb801f594019adf667b852ddbfe43b8cef811f59408791e7c63953ddbfe33bec62811f5940ea66dd03ad54ddbfe43bec27801f5940579deca42b54ddbfe53b0ccb801f594019adf667b852ddbf, '2025-01-11 03:02:46', '2025-01-11 03:02:46'),
 ('A11', '2', 'Surau Melayu', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45847879, 100.49211505, 0xe610000001030000000100000005000000bf13a15f7e1f5940207691f2ec56ddbfbf1381ab7f1f5940900d82516e57ddbfbf1381247f1f59408fb43fef8158ddbfbf13c1f47d1f594028c92b701158ddbfbf13a15f7e1f5940207691f2ec56ddbf, '2025-01-11 03:04:21', '2025-01-11 03:04:21'),
 ('A12', '2', 'Surau Inyiak Janna', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45875639, 100.49186641, 0xe610000001030000000100000005000000602acbd3791f594030ad58096e5bddbf602aabd37b1f5940487e6469685bddbf602a8bb77b1f594008ceca251f5dddbf602acba6791f59404b5b2926f25cddbf602acbd3791f594030ad58096e5bddbf, '2025-01-11 03:06:04', '2025-01-11 03:06:04'),
-('A2', '1', 'Batu Agam', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Pokdarwis Pariangan', '082284978004', 'Agam stone is one of the relics in Pariangan which is included in the 3 sajarangan stones, where the agam stone is directed towards the agam area', '', -0.45815154, 100.49220609, 0xe610000001030000000100000008000000aa48e4c6801f59404d422f59ea51ddbfab48a407801f5940e5be81f9c251ddbfab48a4ad7f1f5940e510f1378252ddbfaa48443a801f5940d05505b7f252ddbfab4844ee801f5940d18f9e97a952ddbfab4844ee801f594019fe2b186652ddbfac4804e3801f5940d88de8180c52ddbfaa48e4c6801f59404d422f59ea51ddbf, '2025-01-09 02:41:54', '2025-01-11 03:29:13'),
-('A3', '1', 'Batu 50 Kota', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Pokdarwis Pariangan', '082284978004', 'The 50 Kota Stone is one of the relics in Pariangan which is included in the 3 Saurangan Stones, where the 50 Kota stones point towards the 50 Kota area.', '', -0.45884599, 100.49264716, 0xe6100000010300000001000000060000001a9ce479871f5940de5f5dc3315dddbf1a9c041d881f5940d65adba26f5dddbf1b9ca4f5871f594077231a61455eddbf199ca414871f59405af625c13f5eddbf1a9ce4f2861f5940032665e2a75dddbf1a9ce479871f5940de5f5dc3315dddbf, '2025-01-09 02:49:05', '2025-01-11 03:29:46'),
-('A4', '1', 'Batu Tanah Datar', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Pokdarwis Pariangan', '082284978004', 'The Tanah Datar Stone is one of the relics in Pariangan which is included in the 3 Sajarangan Stones, where the Tanah Datar stones point towards the Tanah Datar area.', '', -0.45891036, 100.49210310, 0xe610000001030000000100000006000000864b3c227e1f594081194fcc4d5eddbf854b3c307f1f59400b09960c2c5eddbf874b5c4c7f1f5940972c2f8a505fddbf864b1c607e1f59405adeff09675fddbf854b9cef7d1f5940bd07044beb5eddbf864b3c227e1f594081194fcc4d5eddbf, '2025-01-09 04:56:23', '2025-01-11 02:07:50'),
+('A2', '1', 'Batu Agam', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Pokdarwis Pariangan', '082284978004', 'Batu Agam lies approximately 50–70 meters from Batu Tanah Datar, on a lower slope of the hill. Medium in size and once hidden among the bushes, it has now been restored for easier access. This stone represents Luhak Agam, which is known as the center of scholars and religious leaders in Minangkabau society. Symbolically, it reflects the role of alim ulama (Islamic scholars) in maintaining balance between religious values and customary laws within the community.', '', -0.45815154, 100.49220609, 0xe610000001030000000100000008000000aa48e4c6801f59404d422f59ea51ddbfab48a407801f5940e5be81f9c251ddbfab48a4ad7f1f5940e510f1378252ddbfaa48443a801f5940d05505b7f252ddbfab4844ee801f5940d18f9e97a952ddbfab4844ee801f594019fe2b186652ddbfac4804e3801f5940d88de8180c52ddbfaa48e4c6801f59404d422f59ea51ddbf, '2025-01-09 02:41:54', '2025-06-26 13:05:43'),
+('A3', '1', 'Batu 50 Kota', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Pokdarwis Pariangan', '082284978004', 'This stone is positioned at the highest elevation among the three, about 70 meters from Batu Tanah Datar, and is the smallest in size. It represents Luhak Lima Puluh Kota, a region traditionally regarded as the guardian and protector of customs, also referred to as the panglima (military leader). Its elevated position is seen as a symbol of vigilance and strength in defending traditional values. Though partially embedded in the ground, the stone remains intact and is now preserved as part of Minangkabau’s historical legacy.', '', -0.45884599, 100.49264716, 0xe6100000010300000001000000060000001a9ce479871f5940de5f5dc3315dddbf1a9c041d881f5940d65adba26f5dddbf1b9ca4f5871f594077231a61455eddbf199ca414871f59405af625c13f5eddbf1a9ce4f2861f5940032665e2a75dddbf1a9ce479871f5940de5f5dc3315dddbf, '2025-01-09 02:49:05', '2025-06-26 13:05:29'),
+('A4', '1', 'Batu Tanah Datar', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Pokdarwis Pariangan', '082284978004', 'This stone is located closest to the Ishlah Grand Mosque in Nagari Pariangan and is the largest among the three. It symbolizes Luhak Tanah Datar, the birthplace of Minangkabau customs and the core of Minangkabau civilization. It is often used as the starting point for cultural heritage tours due to its strategic location and strong historical significance. According to oral tradition, this stone once served as a place for traditional leaders (ninik mamak) to deliberate, reflecting Tanah Datar’s role as the center of customary governance.', '', -0.45891036, 100.49210310, 0xe610000001030000000100000006000000864b3c227e1f594081194fcc4d5eddbf854b3c307f1f59400b09960c2c5eddbf874b5c4c7f1f5940972c2f8a505fddbf864b1c607e1f59405adeff09675fddbf854b9cef7d1f5940bd07044beb5eddbf864b3c227e1f594081194fcc4d5eddbf, '2025-01-09 04:56:23', '2025-06-26 13:05:09'),
 ('A5', '1', 'Masjid Ishlah', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', 'Masjid Islah Nagari Tuo Pariangan is a historic mosque located in Nagari Pariangan, Tanah Datar Regency, West Sumatra. This mosque is known as one of the oldest religious buildings in Minangkabau, with traditional architecture that reflects strong cultural and religious values. Built with a dominant Minangkabau architectural style, this mosque has a gonjong-shaped roof, similar to the Minangkabau traditional house (rumah gadang), which gives a magnificent and distinctive impression. This building uses natural materials such as wood and stone, which makes it in line with the surrounding natural environment which is beautiful and beautiful.', '', -0.45851320, 100.49233294, 0xe610000001030000000100000008000000a4aac794801f59402ba5d79a7354ddbfa4aa272f861f59403ae582568456ddbfa3aae742851f594016d864b1f458ddbfa3aa474e831f5940f3f4c5da1b5cddbfa4aa2735801f59400153a84dbc5addbfa5aae7947e1f5940afb72f010e59ddbfa5aac7b37f1f594035b7a235ef56ddbfa4aac794801f59402ba5d79a7354ddbf, '2025-01-09 04:59:58', '2025-01-09 04:59:58'),
 ('A6', '2', 'Tabuah Larangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '12:00:00', '23:59:00', 0, 'Nagari Tuo Pariangan', '', 'Tabuah Larangan Nagari Tuo Pariangan is a traditional cultural heritage from Nagari Tuo Pariangan, located in Tanah Datar, West Sumatra. It holds profound cultural and spiritual significance. This \"tabuah\" refers to a traditional communication tool, often a drum or gong, used by the local community to convey important messages. The beating of the tabuah follows specific rhythms to announce significant events such as adat (customary) meetings, warnings of danger, or religious ceremonies.\r\n\r\nIn Minangkabau tradition, the tabuah larangan holds sacred meaning and is governed by strict customary norms. Only specific individuals, such as adat leaders or elders (ninik mamak), are authorized to beat the tabuah, and it cannot be sounded carelessly. Its sound is believed to serve as a call for the community to gather and engage in discussions, ensuring harmony and the continuity of customary values in the village.\r\n\r\nThe existence of the tabuah larangan also reflects the local wisdom of the Minangkabau people in preserving tradition and fostering collective communication. To this day, the tabuah larangan of Nagari Tuo Pariangan remains a symbol of cultural identity, passed down through generations.', '', -0.45865213, 100.49220402, 0xe61000000103000000010000000700000014805cad801f59405a7f00b6125addbf15803ceb801f594034d4ad153a5addbf15803c91801f59409ecef8330a5bddbf13803cb07f1f5940543e1c54f95addbf13805c9f7f1f5940e46ccdf4a45addbf1480fc2b801f594096359655455addbf14805cad801f59405a7f00b6125addbf, '2025-01-09 05:05:28', '2025-01-11 02:11:32'),
-('A7', '2', 'Panorama Pariangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '06:00:00', '22:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.44612581, 100.48522601, 0xe610000001030000000100000005000000e65a6114fa1e59404ead4d51c485dcbfe65ae1bb0e1f594096aae066de7adcbfe65a61ce211f59404077b82e2b97dcbfe65ae13d051f594027f78a1dc89fdcbfe65a6114fa1e59404ead4d51c485dcbf, '2025-01-11 02:30:24', '2025-01-11 02:30:36'),
+('A7', '2', 'Panorama Pariangan', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '06:00:00', '22:00:00', 0, 'Nagari Tuo Pariangan', '', 'Nagari Tuo Pariangan offers breathtaking natural beauty, with lush green hills on the slopes of Mount Marapi, terraced rice fields that stretch gracefully across the landscape, and clear rivers flowing through the traditional village. The cool, fresh air creates a serene atmosphere that perfectly complements the preserved architecture of traditional rumah gadang and village suraus. In the early morning, a light mist blankets the valleys and fields, creating a magical scene reminiscent of a living painting. This natural charm blends harmoniously with the area’s rich history and cultural heritage, making Nagari Tuo Pariangan not only visually stunning but also spiritually meaningful and deeply rooted in local wisdom.', '', -0.44612581, 100.48522601, 0xe610000001030000000100000005000000e65a6114fa1e59404ead4d51c485dcbfe65ae1bb0e1f594096aae066de7adcbfe65a61ce211f59404077b82e2b97dcbfe65ae13d051f594027f78a1dc89fdcbfe65a6114fa1e59404ead4d51c485dcbf, '2025-01-11 02:30:24', '2025-06-26 13:09:48'),
 ('A8', '2', 'Surau Bandaro Kayo', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45832160, 100.49214289, 0xe610000001030000000100000005000000e5c7e2bd7e1f5940d09c2e2eca53ddbfe5c742047e1f5940badae549d555ddbfe5c742c67f1f594033f083087e56ddbfe4c78285801f5940f20dfc6c5c54ddbfe5c7e2bd7e1f5940d09c2e2eca53ddbf, '2025-01-11 02:39:47', '2025-01-11 02:58:45'),
 ('A9', '2', 'Surau Sampono Kayo', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '03:00:00', '21:00:00', 0, 'Nagari Tuo Pariangan', '', '', '', -0.45810202, 100.49207359, 0xe610000001030000000100000005000000c4065fb77d1f5940542c52419950ddbfc306bf467f1f594066ff4e001551ddbfc2061f607e1f594074d95cfd7c52ddbfc306bffd7c1f5940bdaf77fef551ddbfc4065fb77d1f5940542c52419950ddbf, '2025-01-11 02:47:22', '2025-01-11 02:47:22');
 
@@ -146,14 +146,14 @@ INSERT INTO `attraction_facility_detail` (`attraction_id`, `attraction_facility_
 ('A10', '01', '2025-01-11 03:02:46', '2025-01-11 03:02:46'),
 ('A11', '01', '2025-01-11 03:04:21', '2025-01-11 03:04:21'),
 ('A12', '01', '2025-01-11 03:06:04', '2025-01-11 03:06:04'),
-('A2', '01', '2025-01-11 03:29:13', '2025-01-11 03:29:13'),
-('A3', '01', '2025-01-11 03:29:46', '2025-01-11 03:29:46'),
-('A4', '01', '2025-01-11 02:07:50', '2025-01-11 02:07:50'),
+('A2', '01', '2025-06-26 13:05:43', '2025-06-26 13:05:43'),
+('A3', '01', '2025-06-26 13:05:29', '2025-06-26 13:05:29'),
+('A4', '01', '2025-06-26 13:05:10', '2025-06-26 13:05:10'),
 ('A5', '01', '2025-01-09 04:59:58', '2025-01-09 04:59:58'),
 ('A6', '01', '2025-01-11 02:11:32', '2025-01-11 02:11:32'),
 ('A6', '02', '2025-01-11 02:11:32', '2025-01-11 02:11:32'),
-('A7', '01', '2025-01-11 02:30:36', '2025-01-11 02:30:36'),
-('A7', '02', '2025-01-11 02:30:36', '2025-01-11 02:30:36'),
+('A7', '01', '2025-06-26 13:09:48', '2025-06-26 13:09:48'),
+('A7', '02', '2025-06-26 13:09:48', '2025-06-26 13:09:48'),
 ('A8', '01', '2025-01-11 02:58:45', '2025-01-11 02:58:45'),
 ('A9', '01', '2025-01-11 02:47:22', '2025-01-11 02:47:22');
 
@@ -178,11 +178,7 @@ CREATE TABLE `attraction_gallery` (
 INSERT INTO `attraction_gallery` (`id`, `attraction_id`, `url`, `created_at`, `updated_at`) VALUES
 ('008', 'A5', '1736445552_7c3b409524517b78303a.webp', '2025-01-09 04:59:58', '2025-01-09 04:59:58'),
 ('009', 'A5', '1736445552_02f44c589d2a5c22cdfd.jpg', '2025-01-09 04:59:58', '2025-01-09 04:59:58'),
-('015', 'A4', '1736608067_95024e2035d0dc61390b.jpg', '2025-01-11 02:07:50', '2025-01-11 02:07:50'),
-('016', 'A4', '1736608067_9987847ba3804f1f8c12.jpg', '2025-01-11 02:07:50', '2025-01-11 02:07:50'),
 ('017', 'A6', '1736608128_33d475ad3f68c5f14b71.jpg', '2025-01-11 02:11:32', '2025-01-11 02:11:32'),
-('018', 'A7', '1736609433_a8bd732068fccd31a7a0.jpeg', '2025-01-11 02:30:36', '2025-01-11 02:30:36'),
-('019', 'A7', '1736609433_1503750170aa64a89878.jpeg', '2025-01-11 02:30:36', '2025-01-11 02:30:36'),
 ('026', 'A9', '1736610392_3cd5df0efc6257a2f0c7.jpg', '2025-01-11 02:47:22', '2025-01-11 02:47:22'),
 ('030', 'A8', '1736611122_1a063a2b8664a3d00524.jpg', '2025-01-11 02:58:45', '2025-01-11 02:58:45'),
 ('031', 'A8', '1736611122_0ed75d985d8bd8faf331.jpg', '2025-01-11 02:58:45', '2025-01-11 02:58:45'),
@@ -191,11 +187,15 @@ INSERT INTO `attraction_gallery` (`id`, `attraction_id`, `url`, `created_at`, `u
 ('034', 'A11', '1736611435_fc54ba576b470445cc1f.jpg', '2025-01-11 03:04:21', '2025-01-11 03:04:21'),
 ('035', 'A12', '1736611523_1822c249ec28f27fb0c8.jpg', '2025-01-11 03:06:04', '2025-01-11 03:06:04'),
 ('036', 'A12', '1736611533_6305eec4d15fb41c4eee.jpg', '2025-01-11 03:06:04', '2025-01-11 03:06:04'),
-('037', 'A2', '1736612951_1943c6fbc97eac919929.jpg', '2025-01-11 03:29:13', '2025-01-11 03:29:13'),
-('038', 'A2', '1736612951_bcce4b8835dc666d568d.jpg', '2025-01-11 03:29:13', '2025-01-11 03:29:13'),
-('039', 'A3', '1736612983_ac49b19da9fc839f9386.jpg', '2025-01-11 03:29:46', '2025-01-11 03:29:46'),
-('040', 'A3', '1736612983_af9cd5837eee73881127.jpg', '2025-01-11 03:29:46', '2025-01-11 03:29:46'),
-('041', 'A1', '1738350178_a9b4f1d71ec1f60e24e4.jpg', '2025-01-31 06:03:14', '2025-01-31 06:03:14');
+('041', 'A1', '1738350178_a9b4f1d71ec1f60e24e4.jpg', '2025-01-31 06:03:14', '2025-01-31 06:03:14'),
+('042', 'A4', '1750986302_31c018110b6fbb330de2.jpg', '2025-06-26 13:05:10', '2025-06-26 13:05:10'),
+('043', 'A4', '1750986302_b05b6816e31f2159f790.jpg', '2025-06-26 13:05:10', '2025-06-26 13:05:10'),
+('044', 'A3', '1750986326_8cdef4c5232d08a2544e.jpg', '2025-06-26 13:05:29', '2025-06-26 13:05:29'),
+('045', 'A3', '1750986327_8821a2287cb639964154.jpg', '2025-06-26 13:05:29', '2025-06-26 13:05:29'),
+('046', 'A2', '1750986341_1819afb134dd67fb3968.jpg', '2025-06-26 13:05:43', '2025-06-26 13:05:43'),
+('047', 'A2', '1750986341_0c6e876645ed5ebce50e.jpg', '2025-06-26 13:05:43', '2025-06-26 13:05:43'),
+('048', 'A7', '1750986585_9cf31d26e1f2c8ce866a.jpeg', '2025-06-26 13:09:48', '2025-06-26 13:09:48'),
+('049', 'A7', '1750986585_ce0547454806a3b5733a.jpeg', '2025-06-26 13:09:48', '2025-06-26 13:09:48');
 
 -- --------------------------------------------------------
 
@@ -1114,7 +1114,20 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (824, '::1', 'shandyka2403@gmail.com', 11, '2025-05-28 06:47:15', 1),
 (825, '::1', 'pokdarwis.pariangan', NULL, '2025-05-28 08:34:59', 0),
 (826, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-05-28 08:35:03', 1),
-(827, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-05-28 12:24:26', 1);
+(827, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-05-28 12:24:26', 1),
+(828, '::1', 'shandyka2403@gmail.com', 11, '2025-06-03 04:54:48', 1),
+(829, '::1', 'pokdarwis.pariangan', NULL, '2025-06-18 10:17:28', 0),
+(830, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-06-18 10:17:33', 1),
+(831, '::1', 'shandyka2403@gmail.com', 11, '2025-06-18 10:41:14', 1),
+(832, '::1', 'shandyka2403@gmail.com', 11, '2025-06-24 13:38:34', 1),
+(833, '::1', 'umegahomestay@gmail.com', 23, '2025-06-24 13:43:56', 1),
+(834, '::1', 'shandyka2403@gmail.com', 11, '2025-06-24 13:44:12', 1),
+(835, '::1', 'umegahomestay@gmail.com', 23, '2025-06-24 13:50:19', 1),
+(836, '::1', 'shandyka2403@gmail.com', 11, '2025-06-25 01:54:21', 1),
+(837, '::1', 'umegahomestay@gmail.com', 23, '2025-06-25 01:55:54', 1),
+(838, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-06-25 08:56:17', 1),
+(839, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-06-26 19:38:06', 1),
+(840, '::1', 'pokdarwispariangan1@gmail.com', 7, '2025-06-28 11:16:51', 1);
 
 -- --------------------------------------------------------
 
@@ -2024,14 +2037,17 @@ INSERT INTO `reservation` (`id`, `customer_id`, `reservation_type`, `request_dat
 ('R139', 11, '1', '2025-05-27 18:12:06', '2025-05-30 14:00:00', 1, NULL, NULL, NULL, 52500, 350000, 70000, 'Deposit Successful', 'b33a7e17-12cf-42f8-a6d8-2b15682ae107', NULL, '2025-05-27 11:41:13', '0', '2025-05-27 13:34:56', '', '2025-05-27 13:35:00', '1', '1', '2025-05-27 13:50:15', 'Dyka - Bank BCA - 1234567890', '1748353811_55a903efa344bdb53bb9.png', '1', '2025-05-27 13:55:41'),
 ('R140', 11, '1', '2025-05-27 20:45:01', '2025-05-30 14:00:00', 1, NULL, NULL, NULL, 0, 350000, 70000, 'Deposit Successful', 'bc325a2e-8a28-4952-b5a7-bf62357f0df0', '72c2b879-3684-4756-a472-b320c343d55a', '2025-05-27 13:45:06', '0', '2025-05-27 13:46:09', '', '2025-05-27 13:48:00', '1', '1', NULL, NULL, NULL, NULL, NULL),
 ('R141', 11, '1', '2025-05-28 00:28:49', '2025-05-31 14:00:00', 4, NULL, NULL, NULL, 0, 450000, 90000, 'Deposit Successful', '9c5a4db0-49b7-49a7-b9b3-196ef0bc1a27', 'b9787f33-3391-4519-9e12-b77ca645482a', '2025-05-27 17:34:16', '0', '2025-05-27 17:40:19', 'ACC', '2025-05-27 17:54:00', '1', '1', '2025-05-27 18:01:09', 'Dyka - Bank BCA - 1234567890', '1748368753_d6ef827bf2ebc3333e21.png', '1', '2025-05-27 18:02:59'),
-('R142', 11, '1', '2025-05-28 01:14:48', '2025-05-31 14:00:00', 4, NULL, NULL, NULL, 0, 700000, 140000, 'Deposit Successful', '6ec7fce6-eb4c-4d52-bd1a-e16939083387', 'ac9eb8e2-ba99-4c97-a16e-139c75c93d6f', '2025-05-27 18:14:53', '0', '2025-05-27 18:15:11', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R143', 11, '1', '2025-05-28 01:16:26', '2025-06-01 14:00:00', 2, NULL, NULL, NULL, 0, 1400000, 280000, 'Deposit Successful', 'eb1ec77c-dc41-42ec-89e9-6e0b5d16b49e', NULL, '2025-05-27 18:16:31', '0', '2025-05-27 18:16:42', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R142', 11, '1', '2025-05-28 01:14:48', '2025-05-31 14:00:00', 4, NULL, NULL, NULL, 0, 700000, 140000, 'Deposit Successful', '6ec7fce6-eb4c-4d52-bd1a-e16939083387', 'ac9eb8e2-ba99-4c97-a16e-139c75c93d6f', '2025-05-27 18:14:53', '0', '2025-05-27 18:15:11', '', '2025-06-24 18:39:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
+('R143', 11, '1', '2025-05-28 01:16:26', '2025-06-01 14:00:00', 2, NULL, NULL, NULL, 0, 1400000, 280000, 'Deposit Successful', 'eb1ec77c-dc41-42ec-89e9-6e0b5d16b49e', NULL, '2025-05-27 18:16:31', '0', '2025-05-27 18:16:42', '', '2025-06-24 18:39:00', '3', '0', NULL, NULL, NULL, NULL, NULL),
 ('R144', 11, '2', '2025-05-28 01:20:21', '2025-06-03 14:00:00', 20, NULL, NULL, NULL, 0, 3150000, 630000, 'Deposit Successful', 'd0d3329e-9b90-4b52-ace8-03695a9c964a', '3a28d2af-04d8-43b5-bb42-f2a80fd8af6c', '2025-05-27 18:22:33', '0', '2025-05-27 18:28:21', '', '2025-05-27 18:40:00', '1', '1', '2025-05-27 18:45:22', 'Dyka - Bank BCA - 123456789', '1748371511_d14929a5884f003ee42a.jpg', '1', '2025-05-27 18:53:33'),
 ('R145', 11, '1', '2025-05-28 02:10:08', '2025-05-25 14:00:00', 2, 'GOOD', 5, 35000, 62500, 700000, 140000, 'Done', '47d03e52-09b4-4034-94e9-5227ea42077f', '97e1f45a-cc62-4ae3-a34a-fde4ec765396', '2025-05-27 19:12:57', '0', '2025-05-27 19:16:19', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('R146', 11, '1', '2025-05-28 02:36:04', '2025-05-31 14:00:00', 1, NULL, NULL, NULL, 0, 350000, 70000, 'Deposit Successful', '90496ddc-c38d-4d52-b7f0-dcc84578a891', 'bc4ebff6-0b90-46b3-943f-cda0306b40b8', '2025-05-28 11:38:06', '0', '2025-05-28 11:42:25', '', '2025-05-28 12:53:00', '1', '1', '2025-05-28 12:55:17', 'Dyka - Bank BCA - 1234567890', '1748436911_d8c1a080698e9200a530.png', NULL, NULL),
-('R147', 11, '1', '2025-05-28 18:43:56', '2025-05-31 14:00:00', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R148', 11, '1', '2025-05-28 18:56:51', '2025-06-03 14:00:00', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('R149', 11, '2', '2025-05-28 19:04:47', '2025-06-04 14:00:00', 20, NULL, NULL, NULL, 0, 1575000, 315000, '1', NULL, NULL, '2025-05-28 12:23:13', '1', '2025-05-28 12:23:29', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+('R147', 11, '1', '2025-05-28 18:43:56', '2025-05-31 14:00:00', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-06-24 18:39:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R148', 11, '1', '2025-05-28 18:56:51', '2025-06-03 14:00:00', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-06-24 18:39:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R149', 11, '2', '2025-05-28 19:04:47', '2025-06-04 14:00:00', 20, NULL, NULL, NULL, 0, 1575000, 315000, '1', NULL, NULL, '2025-05-28 12:23:13', '1', '2025-05-28 12:23:29', '', '2025-06-24 18:39:00', '2', '0', NULL, NULL, NULL, NULL, NULL),
+('R150', 11, '1', '2025-06-25 01:43:40', '2025-06-28 14:00:00', 2, NULL, NULL, NULL, 0, 700000, 140000, 'Full Pay Successful', NULL, '61aaceb9-42a8-43f2-a54d-160cbba07d64', '2025-06-24 18:43:48', '0', '2025-06-24 18:44:05', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R151', 11, '1', '2025-06-25 01:50:41', '2025-06-28 14:00:00', 1, NULL, NULL, NULL, 0, 350000, 70000, '1', '24172df0-1a2c-4055-937f-e50f32710a51', NULL, '2025-06-24 18:50:49', '0', '2025-06-24 18:51:04', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+('R800', 11, '1', '2025-06-25 01:53:01', '2025-06-30 14:00:00', 1, NULL, NULL, NULL, 0, 350000, 70000, 'Deposit Successful', '543185d6-fc43-4560-9fbe-ce675fabff8b', '7b753f17-d74e-4900-b2cd-6546580e7721', '2025-06-24 18:53:10', '0', '2025-06-24 18:53:23', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2162,16 +2178,12 @@ INSERT INTO `reservation_homestay_unit_detail` (`homestay_id`, `unit_type`, `uni
 ('H12', '1', '2', '2025-03-03', 'R122'),
 ('H12', '1', '3', '2025-05-15', 'R133'),
 ('H12', '1', '3', '2025-05-16', 'R133'),
-('H12', '1', '1', '2025-05-31', 'R142'),
-('H12', '1', '3', '2025-05-31', 'R142'),
-('H12', '1', '2', '2025-06-01', 'R143'),
-('H12', '1', '2', '2025-06-02', 'R143'),
-('H12', '1', '4', '2025-06-01', 'R143'),
-('H12', '1', '4', '2025-06-02', 'R143'),
 ('H12', '1', '1', '2025-06-01', 'R145'),
 ('H12', '1', '1', '2025-06-02', 'R145'),
-('H12', '1', '4', '2025-05-31', 'R147'),
-('H12', '1', '1', '2025-06-03', 'R148');
+('H12', '1', '1', '2025-06-28', 'R150'),
+('H12', '1', '1', '2025-06-29', 'R150'),
+('H12', '1', '2', '2025-06-28', 'R151'),
+('H12', '1', '1', '2025-06-30', 'R800');
 
 -- --------------------------------------------------------
 
@@ -2431,6 +2443,12 @@ INSERT INTO `reservation_homestay_unit_detail_backup` (`homestay_id`, `unit_type
 ('H12', '1', '2', 'R139', '2025-05-30'),
 ('H12', '1', '2', 'R140', '2025-05-30'),
 ('H12', '1', '2', 'R141', '2025-05-31'),
+('H12', '1', '1', 'R142', '2025-05-31'),
+('H12', '1', '3', 'R142', '2025-05-31'),
+('H12', '1', '2', 'R143', '2025-06-01'),
+('H12', '1', '2', 'R143', '2025-06-02'),
+('H12', '1', '4', 'R143', '2025-06-01'),
+('H12', '1', '4', 'R143', '2025-06-02'),
 ('H12', '1', '1', 'R144', '2025-06-03'),
 ('H12', '1', '1', 'R144', '2025-06-04'),
 ('H12', '1', '2', 'R144', '2025-06-03'),
@@ -2442,6 +2460,8 @@ INSERT INTO `reservation_homestay_unit_detail_backup` (`homestay_id`, `unit_type
 ('H12', '1', '5', 'R144', '2025-06-03'),
 ('H12', '1', '5', 'R144', '2025-06-04'),
 ('H12', '1', '2', 'R146', '2025-05-31'),
+('H12', '1', '4', 'R147', '2025-05-31'),
+('H12', '1', '1', 'R148', '2025-06-03'),
 ('H12', '1', '1', 'R149', '2025-06-04'),
 ('H12', '1', '2', 'R149', '2025-06-04'),
 ('H12', '1', '3', 'R149', '2025-06-04'),
@@ -2670,7 +2690,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `email`, `username`, `first_name`, `last_name`, `address`, `phone`, `avatar`, `total_coin`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (7, 'pokdarwispariangan1@gmail.com', 'pokdarwis.pariangan', 'Fakhrudoni Putra', 'Account', 'Desa Wisata Nagari Tuo Pariangan', '082218141289', 'default.jpg', NULL, '$2y$10$KKs/QMWOtQgv6eN0wOiCQO5SDa14h2o387oiOCPyn9nGDKFs0usAu', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-10-28 22:51:29', '2023-10-28 22:51:29', NULL),
-(11, 'shandyka2403@gmail.com', 'dykdyk', 'Dyka', 'Dyka', 'Padang', '085171597007', 'default.jpg', 55000, '$2y$10$8hisvq21dFUH0hs3DBJLZ.2Kzs9dHc2HLQBi6Y1WM6xUOXh1mWH.a', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-14 20:28:36', '2023-12-14 20:28:36', NULL),
+(11, 'shandyka2403@gmail.com', 'dykdyk', 'Dyka', 'Dyka', 'Padang', '085171597007', 'default.jpg', 35000, '$2y$10$8hisvq21dFUH0hs3DBJLZ.2Kzs9dHc2HLQBi6Y1WM6xUOXh1mWH.a', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2023-12-14 20:28:36', '2023-12-14 20:28:36', NULL),
 (23, 'umegahomestay@gmail.com', 'umegahomestay', 'Owner Umega', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '0895329272378', 'default.jpg', NULL, '$2y$10$t/tLnMQiHV.4x9rez4BozenBzYWYsax3IZy5apnWa729tS1p944xq', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-26 11:40:48', '2024-09-26 11:40:48', NULL),
 (24, 'gudesterhomestay@gmail.com', 'gudesterhomestay', 'Owner Gudester', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '0895329272378', 'default.jpg', NULL, '$2y$10$e4cqmQwqIh8drtCvobmCuOodW.zIHGRwqIn9RKfG6u6MapDSJ2dva', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-09-28 05:04:12', '2024-09-28 05:04:12', NULL),
 (25, 'nabilahomestay@gmail.com', 'nabilahomestay', 'Owner Nabila', 'Homestay', 'Pariangan, Kec. Pariangan, Kabupaten Tanah Datar, Sumatera Barat ', '082249063128', 'default.jpg', NULL, '$2y$10$hb.4auiFDNFb8uPEePqiauI2jyTKKm47b.4WXfMdB5hxSc6iWmTgq', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-10-10 03:16:39', '2024-10-10 03:16:39', NULL),
@@ -2708,7 +2728,7 @@ CREATE TABLE `village` (
 --
 
 INSERT INTO `village` (`id`, `name`, `geom_file`, `selected`, `description`, `ticket_price`, `open`, `close`, `address`, `email`, `facebook`, `instagram`, `youtube`, `tiktok`, `video_url`, `created_at`, `updated_at`) VALUES
-('1', 'Nagari Tuo Pariangan', 'Pariangan.geojson', '1', 'Nagari Tuo Pariangan is a traditional village situated in the Tanah Datar Regency of West Sumatra province, Indonesia. It is renowned for being one of the oldest and most well-preserved Minangkabau traditional villages, often considered the original homeland of the Minangkabau people.\r\nLocated in the Pariangan sub-district, this village is nestled at the foot of Mount Merapi, offering a picturesque setting that combines natural beauty with rich cultural heritage. The village is particularly famous for its authentic traditional architecture, traditional customs, and historical significance in Minangkabau culture.', 0, '06:00:00', '23:59:00', 'Pariangan, Kecamatan Pariangan, Kabupaten Tanah Datar, Sumatera Barat', 'pokdarwispariangan1@gmail.com', 'pokdarwis.pariangan', 'pokdarwis.pariangan', NULL, 'pokdarwis.pariangan', '1736615066_2a9ebea46881527624fa.mp4', NULL, NULL),
+('1', 'Nagari Tuo Pariangan', 'Pariangan.geojson', '1', 'Nagari Tuo Pariangan, located on the slopes of Mount Marapi in Tanah Datar Regency, West Sumatra, is considered the oldest village in Minangkabau culture and is believed to be the birthplace of Minangkabau civilization. It holds great historical significance, as it is mentioned in traditional Tambo as the first settlement of the Minangkabau ancestors. Culturally, Pariangan preserves the unique Minangkabau social structure, including the matrilineal system and communal decision-making in traditional council halls (balai adat). Ancient rumah gadang (traditional houses), old surau (prayer houses), and functioning traditional irrigation systems serve as evidence of a long-standing and advanced civilization. Traditional customs and religious practices are still observed, reflecting the philosophy of adat basandi syarak, syarak basandi Kitabullah—customs based on Islamic teachings. As a cultural heritage site, Nagari Tuo Pariangan not only holds the history of the Minangkabau people but also represents a living example of indigenous tradition that continues to thrive today.', 0, '06:00:00', '23:59:00', 'Pariangan, Kecamatan Pariangan, Kabupaten Tanah Datar, Sumatera Barat', 'pokdarwispariangan1@gmail.com', 'pokdarwis.pariangan', 'pokdarwis.pariangan', NULL, 'pokdarwis.pariangan', '1750985178_deb0afba4f6f5ad7edd2.mp4', NULL, NULL),
 ('10', 'Danau Ateh Alahan Panjang', 'Alahan_Panjang.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('11', 'Kumanis', 'Kumanis.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 ('12', 'Sisawah', 'Sisawah.geojson', '0', NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -2748,8 +2768,10 @@ INSERT INTO `village` (`id`, `name`, `geom_file`, `selected`, `description`, `ti
 --
 
 CREATE TABLE `village_gallery` (
-  `id` varchar(3) NOT NULL,
+  `id` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `village_id` varchar(3) NOT NULL,
+  `tittle` varchar(100) DEFAULT NULL,
+  `description` text,
   `url` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -2757,11 +2779,18 @@ CREATE TABLE `village_gallery` (
 -- Dumping data for table `village_gallery`
 --
 
-INSERT INTO `village_gallery` (`id`, `village_id`, `url`) VALUES
-('001', '1', '1736615063_fa112af7c7c2a00cd75c.webp'),
-('002', '1', '1736615063_96524ac2c98bdeb2fb1b.jpg'),
-('003', '1', '1736615065_234ff7adf9a0213d1eab.jpg'),
-('004', '1', '1736615065_5b2f0e34e3d33a1fdb11.jpg');
+INSERT INTO `village_gallery` (`id`, `village_id`, `tittle`, `description`, `url`) VALUES
+('001', '1', 'Nagari Tuo Pariangan', 'Nagari Tuo Pariangan, located on the slopes of Mount Marapi in Tanah Datar Regency, West Sumatra, is considered the oldest village in Minangkabau culture and is believed to be the birthplace of Minangkabau civilization. It holds great historical significance, as it is mentioned in traditional Tambo as the first settlement of the Minangkabau ancestors. Culturally, Pariangan preserves the unique Minangkabau social structure, including the matrilineal system and communal decision-making in traditional council halls (balai adat). Ancient rumah gadang (traditional houses), old surau (prayer houses), and functioning traditional irrigation systems serve as evidence of a long-standing and advanced civilization. Traditional customs and religious practices are still observed, reflecting the philosophy of adat basandi syarak, syarak basandi Kitabullah—customs based on Islamic teachings. As a cultural heritage site, Nagari Tuo Pariangan not only holds the history of the Minangkabau people but also represents a living example of indigenous tradition that continues to thrive today.', '1750985081_0e68b9d63725b625ecd8.jpg'),
+('002', '1', 'Kuburan Panjang DT Tantejo', 'The length of this grave is around 24-25 m, based on the experience of the community and visitors who have measured the length of this grave, the results always change, sometimes it is 24, sometimes 25 m. The body that rests in this grave is Tantejo Gurhano, he was the one who first came up with the idea of ​​building a bagonjoang house inspired by a boat that had sharp corners at both ends. Tantejo Gurhano is thought to have lived during the Hindu-Buddhist era, when she died her body was burned according to Hindu-Buddhist religious rituals and her ashes were scattered throughout this cemetery area.', '1750985081_492ac442d4bc67f3e42a.jpg'),
+('003', '1', 'Batu Lantak Tigo (Batu 50 Kota)', 'This stone is positioned at the highest elevation among the three, about 70 meters from Batu Tanah Datar, and is the smallest in size. It represents Luhak Lima Puluh Kota, a region traditionally regarded as the guardian and protector of customs, also referred to as the panglima (military leader). Its elevated position is seen as a symbol of vigilance and strength in defending traditional values. Though partially embedded in the ground, the stone remains intact and is now preserved as part of Minangkabau’s historical legacy.', '1750985083_b9b74aea79791007e707.jpg'),
+('004', '1', 'Batu Lantak Tigo (Batu Agam)', 'Batu Agam lies approximately 50–70 meters from Batu Tanah Datar, on a lower slope of the hill. Medium in size and once hidden among the bushes, it has now been restored for easier access. This stone represents Luhak Agam, which is known as the center of scholars and religious leaders in Minangkabau society. Symbolically, it reflects the role of alim ulama (Islamic scholars) in maintaining balance between religious values and customary laws within the community.', '1750985221_64c283920268de09b0e6.jpg'),
+('005', '1', 'Batu Lantak Tigo (Batu Tanah Datar)', 'This stone is located closest to the Ishlah Grand Mosque in Nagari Pariangan and is the largest among the three. It symbolizes Luhak Tanah Datar, the birthplace of Minangkabau customs and the core of Minangkabau civilization. It is often used as the starting point for cultural heritage tours due to its strategic location and strong historical significance. According to oral tradition, this stone once served as a place for traditional leaders (ninik mamak) to deliberate, reflecting Tanah Datar’s role as the center of customary governance.', '1750985221_c95bcbf6e7ccc3e0c900.jpg'),
+('006', '1', 'Tabuah Larangan', 'Tabuah Larangan Nagari Tuo Pariangan is a traditional cultural heritage from Nagari Tuo Pariangan, located in Tanah Datar, West Sumatra. It holds profound cultural and spiritual significance. This \"tabuah\" refers to a traditional communication tool, often a drum or gong, used by the local community to convey important messages. The beating of the tabuah follows specific rhythms to announce significant events such as adat (customary) meetings, warnings of danger, or religious ceremonies. In Minangkabau tradition, the tabuah larangan holds sacred meaning and is governed by strict customary norms. Only specific individuals, such as adat leaders or elders (ninik mamak), are authorized to beat the tabuah, and it cannot be sounded carelessly. Its sound is believed to serve as a call for the community to gather and engage in discussions, ensuring harmony and the continuity of customary values in the village. The existence of the tabuah larangan also reflects the local wisdom of the Minangkabau people in preserving tradition and fostering collective communication. To this day, the tabuah larangan of Nagari Tuo Pariangan remains a symbol of cultural identity, passed down through generations.', '1750985083_716916b538729f1ef005.jpg'),
+('007', '1', 'Panorama Pariangan', 'Nagari Tuo Pariangan offers breathtaking natural beauty, with lush green hills on the slopes of Mount Marapi, terraced rice fields that stretch gracefully across the landscape, and clear rivers flowing through the traditional village. The cool, fresh air creates a serene atmosphere that perfectly complements the preserved architecture of traditional rumah gadang and village suraus. In the early morning, a light mist blankets the valleys and fields, creating a magical scene reminiscent of a living painting. This natural charm blends harmoniously with the area’s rich history and cultural heritage, making Nagari Tuo Pariangan not only visually stunning but also spiritually meaningful and deeply rooted in local wisdom.', '1750985253_8fe44e1d8989fbfff3b5.jpeg'),
+('008', '1', 'Homestay', 'Experience authentic Minangkabau hospitality by staying in one of the charming homestays in Nagari Tuo Pariangan, all run by friendly local residents. Choose from three delightful options — Homestay Umega, Homestay Gudester, and Homestay Nabila — each offering a cozy and comfortable stay. With prices ranging from only IDR 300,000 to 400,000 per night, these homestays come fully equipped with essential amenities to ensure a pleasant and memorable visit.', '1750985223_5cbf972494128a16aecf.jpg'),
+('009', '1', 'Culinary Place', 'Discover the rich flavors of Nagari Tuo Pariangan through its vibrant culinary scene. The village is home to six culinary spots, each serving a wide variety of traditional foods and beverages unique to the region. One of the highlights is Kawa Daun, a signature local drink made from roasted coffee leaves — a must-try for any visitor. Not only do these culinary places offer delicious dishes, but they are also equipped with comfortable facilities and set against the backdrop of breathtaking natural scenery. Whether you\'re enjoying a warm cup of Kawa Daun or sampling local delicacies, you’ll be surrounded by the charm and beauty of the Minangkabau highlands.', '1750985223_c883e36ea1ee407b1253.jpg'),
+('010', '1', 'Souvenir Place', 'Take a piece of Nagari Tuo Pariangan home with you by visiting its charming souvenir spots. There are two souvenir centers in the village, each offering a wide range of authentic local crafts and keepsakes. One of the most popular items is the beautiful Batik Pariangan, a unique batik design that reflects the rich cultural heritage of the region. In addition to batik, these shops feature a variety of handmade crafts carefully created by local artisans, showcasing the creativity and skill of the people of Nagari Tuo Pariangan. Whether you\'re looking for gifts or personal mementos, these souvenir places are perfect for finding something truly meaningful and culturally rich.', '1750985225_16feb416bed0e953a7f5.jpg'),
+('011', '1', 'Worship Place', 'Embrace the spiritual and cultural essence of Nagari Tuo Pariangan by visiting its historic worship places. The village is home to two places of worship, each playing a vital role in the community\'s religious life.\n\nOne of the most iconic is the Islah Mosque, a symbol of unity and tradition that has become an architectural and cultural landmark of the village. With its distinctive Minangkabau design and serene atmosphere, the Islah Mosque not only serves as a place for prayer but also as a reflection of the deep-rooted Islamic values and heritage of Nagari Tuo Pariangan.\n\nThese sacred spaces offer visitors a glimpse into the spiritual life of the local people, while also providing peaceful surroundings perfect for reflection and cultural appreciation.', '1729791763_1c689838e1155efc6d2c.webp');
 
 -- --------------------------------------------------------
 
@@ -3281,7 +3310,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=828;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=841;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`

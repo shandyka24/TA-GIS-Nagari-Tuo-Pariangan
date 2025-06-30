@@ -32,8 +32,62 @@
     <link href="css/landing-page/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url('css/web.css'); ?>">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
     <!-- Third Party CSS and JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggles = document.querySelectorAll('.toggle-caption-btn');
+
+            toggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const caption = this.closest('.carousel-caption');
+                    caption.classList.toggle('expanded');
+
+                    if (caption.classList.contains('expanded')) {
+                        this.classList.remove('fa-chevron-up');
+                        this.classList.add('fa-chevron-down');
+                    } else {
+                        this.classList.remove('fa-chevron-down');
+                        this.classList.add('fa-chevron-up');
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            var owl = $('.header-carousel');
+
+            owl.owlCarousel({
+                items: 1,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 10000, // 10 detik
+                smartSpeed: 1000,
+                dots: false,
+                nav: false,
+                autoplayHoverPause: true
+            });
+
+            // 🔥 Paksa set interval ulang jika konflik dari luar
+            owl.trigger('play.owl.autoplay', [10000]);
+
+            $('.carousel-control.prev').click(function() {
+                owl.trigger('prev.owl.carousel');
+            });
+
+            $('.carousel-control.next').click(function() {
+                owl.trigger('next.owl.carousel');
+            });
+        });
+    </script>
+
+
+
+
     <script src="https://kit.fontawesome.com/de7d18ea4d.js" crossorigin="anonymous"></script>
 
     <!-- Google Maps API and Custom JS -->
@@ -48,7 +102,7 @@
         }
 
         #home {
-            height: 65vh;
+            height: 92%;
             /* Mengatur tinggi elemen agar sesuai dengan tinggi viewport */
         }
 
@@ -75,6 +129,158 @@
             object-fit: cover;
             /* This ensures the image covers the entire div without distortion */
         }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 20%;
+            left: 2%;
+            right: 2%;
+            bottom: 12%;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: 0.5s ease;
+            max-height: 100px;
+            /* saat collapse */
+        }
+
+        /* Saat expanded: diperbesar dan bisa discroll */
+        .carousel-caption.expanded {
+            max-height: 350px;
+            /* lebih tinggi dari sebelumnya */
+            overflow-y: auto;
+            /* aktifkan scroll isi */
+        }
+
+        /* Tambahan: scroll bar agar terlihat halus */
+        .carousel-caption.expanded::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .carousel-caption.expanded::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 4px;
+        }
+
+        /* Judul */
+        .carousel-caption h5 {
+            font-size: 24px;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        /* Deskripsi */
+        .carousel-caption .caption-text {
+            font-size: 20px;
+            color: white;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            transition: all 0.3s ease;
+        }
+
+        /* Saat expanded: tampilkan semua */
+        .carousel-caption.expanded .caption-text {
+            -webkit-line-clamp: unset;
+            display: block;
+            overflow: visible;
+        }
+
+        .header-carousel {
+            height: 100% !important;
+        }
+
+        .header-carousel .owl-stage-outer,
+        .header-carousel .owl-stage {
+            height: 100% !important;
+        }
+
+        .header-carousel .owl-item {
+            height: 100% !important;
+        }
+
+        /* Sesuaikan tinggi owl-carousel-item dengan container parent */
+        .header-carousel .owl-carousel-item {
+            height: 100% !important;
+            min-height: 65vh;
+        }
+
+        /* Pastikan gambar mengisi penuh container */
+        .header-carousel .owl-carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 92vh;
+            border: 5px solid rgb(0, 0, 0);
+            /* warna bingkai (putih) */
+            padding: 3px;
+            /* ruang antara gambar dan bingkai */
+            background-color: rgb(255, 255, 255);
+            /* warna latar belakang bingkai */
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 991.98px) {
+
+            .header-carousel .owl-carousel-item,
+            .header-carousel .owl-carousel-item img {
+                min-height: 50vh;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+
+            .header-carousel .owl-carousel-item,
+            .header-carousel .owl-carousel-item img {
+                min-height: 40vh;
+            }
+        }
+
+        .carousel-wrapper {
+            position: relative;
+        }
+
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-control:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .carousel-control.prev {
+            left: 10px;
+        }
+
+        .carousel-control.next {
+            right: 10px;
+        }
+
+        .owl-nav {
+            display: none !important;
+        }
+    </style>
+
     </style>
 </head>
 
@@ -117,31 +323,54 @@
     <?php if ($village != null) : ?>
         <!-- Header Start -->
         <div class="container-fluid bg-dark p-0 mb-5" id="home">
-            <div class="row g-0 flex-column-reverse flex-lg-row">
+            <div class="row g-0 flex-column-reverse flex-lg-row" style="height: 100%;">
                 <div class="col-lg-6 p-0 wow fadeIn" data-wow-delay="0.1s">
-                    <div class="header-bg h-100 d-flex flex-column justify-content-center p-5" style="background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url(media/photos/<?= $gallery[array_rand($gallery)]; ?>) center center no-repeat; background-size: cover;">
-                        <h2 class="display-6 text-light mb-2">
-                            Welcome to
-                        </h2>
-                        <h1 class="display-4 text-light mb-5">
-                            <?= $village['name']; ?>
-                        </h1>
-                        <div class="d-flex align-items-center pt-4 animated slideInDown">
-                            <a href="/web" class="btn btn-primary py-sm-3 px-3 px-sm-5 me-5" style="font-size: 20px;">Explore</a>
-                            <button type="button" class="btn-play" data-bs-toggle="modal" data-src="<?= base_url('media/videos/' . $village['video_url']); ?>" data-bs-target="#videoModal">
-                                <span></span>
-                            </button>
-                            <h6 class="text-white m-0 ms-4 d-none d-sm-block" style="font-size: 20px;">Watch Video</h6>
+                    <div class="card">
+                        <div class="header-bg h-100 d-flex flex-column justify-content-center p-5" style="background: linear-gradient(rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url(media/photos/1750260443_ee5465b04d4f6fa53e03.jpg) center center no-repeat; background-size: cover;">
+                            <h2 class="display-6 text-light mb-2">
+                                Welcome to
+                            </h2>
+                            <h1 class="display-4 text-light mb-5">
+                                <?= $village['name']; ?>
+                            </h1>
+                            <div class="d-flex align-items-center pt-4 animated slideInDown">
+                                <a href="/web" class="btn btn-primary py-sm-3 px-3 px-sm-5 me-5" style="font-size: 20px;">Explore</a>
+                                <button type="button" class="btn-play" data-bs-toggle="modal" data-src="<?= base_url('media/videos/' . $village['video_url']); ?>" data-bs-target="#videoModal">
+                                    <span></span>
+                                </button>
+                                <h6 class="text-white m-0 ms-4 d-none d-sm-block" style="font-size: 20px;">Watch Video</h6>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                    <div class="owl-carousel header-carousel">
-                        <?php foreach ($gallery as $item) : ?>
-                            <div class="owl-carousel-item">
-                                <img class="img-fluid" src="media/photos/<?= $item; ?>" alt="" />
-                            </div>
-                        <?php endforeach; ?>
+                <div class="col-lg-6 p-0 wow fadeIn" data-wow-delay="0.5s">
+                    <div class="carousel-wrapper position-relative">
+                        <!-- Tombol Previous -->
+                        <button class="carousel-control prev">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+
+                        <!-- Tombol Next -->
+                        <button class="carousel-control next">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+
+                        <div class="owl-carousel header-carousel h-100" id="header-carousel">
+                            <?php foreach ($gallery as $item) : ?>
+                                <div class="owl-carousel-item">
+                                    <img src="media/photos/<?= $item['url']; ?>" alt="<?= $item['tittle']; ?>" class="w-100 h-100 object-fit-cover" />
+                                    <div class="carousel-caption collapsed">
+                                        <div class="toggle-arrow text-end">
+                                            <i class="fas fa-chevron-up toggle-caption-btn" style="cursor: pointer;"></i>
+                                        </div>
+                                        <h5><?= $item['tittle']; ?></h5>
+                                        <p class="caption-text">
+                                            <?= $item['description']; ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -166,81 +395,6 @@
             </div>
         </div>
         <!-- Video Modal End -->
-
-        <!-- About Start -->
-        <div class="container-xxl py-5 my-5" id="about">
-            <div class="container">
-                <div class="row p-5">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <p><span class="text-primary me-2">#</span>Welcome To <span>
-                                <?= $village['name']; ?>
-                            </span></p>
-                        <h1 class="display-5 mb-4">
-                            Why You Should Visit
-                            <span class="text-primary">
-                                <?= $village['name']; ?>
-                            </span>
-                        </h1>
-                        <p class="mb-4" style="font-size: 18px;">
-                            <?= $village['description']; ?>
-                        </p>
-                        <h5 class="mb-3">
-                            <a href="#map" class="text-reset" onclick="showMap('uat'); setTimeout(() => map.setZoom(19), 1000);">
-                                <i class="far fa-check-circle text-primary me-3"></i>Unique Attraction
-                            </a>
-                        </h5>
-                        <h5 class="mb-3">
-                            <a href="#map" class="text-reset" onclick="showMap('at'); setTimeout(() => { map.panTo({lat: -0.45847879, lng: 100.49211505}); map.setZoom(19); }, 1000);">
-                                <i class="far fa-check-circle text-primary me-3"></i>Ordinary Attraction
-                            </a>
-                        </h5>
-                        <h5 class="mb-3">
-                            <a href="#map" class="text-reset" onclick="showMap('hs');">
-                                <i class="far fa-check-circle text-primary me-3"></i>Homestay
-                            </a>
-                        </h5>
-                        <h5 class="mb-3">
-                            <a href="#map" class="text-reset" onclick="showMap('cp'); setTimeout(() => map.setZoom(18), 1000);">
-                                <i class="far fa-check-circle text-primary me-3"></i>Culinary Place
-                            </a>
-                        </h5>
-                        <h5 class="mb-3">
-                            <a href="#map" class="text-reset" onclick="showMap('wp'); setTimeout(() => { map.panTo({lat: -0.45841019, lng: 100.49237328}); map.setZoom(18); }, 1000);">
-                                <i class="far fa-check-circle text-primary me-3"></i>Worship Place
-                            </a>
-                        </h5>
-                        <h5 class="mb-3">
-                            <a href="#map" class="text-reset" onclick="showMap('sp');">
-                                <i class="far fa-check-circle text-primary me-3"></i>Souvenir Place
-                            </a>
-                        </h5>
-                        <a class="btn btn-primary py-3 px-5 mt-3" href="/web">Explore</a>
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="img-border  ">
-                            <img class="img-fluid" src="media/photos/448373dacf4bc269fc38066f53fd4b6e.jpg" alt="" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row p-5" id="map">
-                    <div class="mb-3">
-                        <a class="btn btn-outline-danger float-end" onclick="closeMap();"><i class="fa-solid fa-xmark"></i></a>
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp googlemaps" data-wow-delay="0.5s" id="googlemaps">
-                        <script>
-                            initMap();
-                            digitTourismVillage();
-                        </script>
-                        <div id="legend"></div>
-                        <script>
-                            $('#legend').hide();
-                            getLegend();
-                        </script>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- About End -->
 
         <!-- Award Start -->
         <div class="container-xxl bg-primary facts my-5 py-5 wow fadeInUp" data-wow-delay="0.1s" id="award">
@@ -464,10 +618,10 @@
                         }
                     }
                     boundToObject();
-
                 }
             })
         }
+        $('#header-carousel').trigger('play.owl.autoplay', [10000]);
     </script>
 </body>
 

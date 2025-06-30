@@ -41,7 +41,7 @@ class VillageGalleryModel extends Model
     public function get_gallery_api($village_id = null)
     {
         $query = $this->db->table($this->table)
-            ->select('url')
+            ->select('*')
             ->orderBy('id', 'ASC')
             ->where('village_id', $village_id)
             ->get();
