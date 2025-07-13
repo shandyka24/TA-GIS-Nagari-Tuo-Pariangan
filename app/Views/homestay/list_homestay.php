@@ -3,6 +3,104 @@
 <?= $this->section('content') ?>
 
 <section class="section">
+    <style>
+        /* .swal-title {
+            font-size: 24px !important;
+        }
+
+        .swal-text {
+            font-size: 20px !important;
+        }
+
+        .swal-button {
+            font-size: 20px !important;
+        } */
+
+        body,
+        .card,
+        .table,
+        .btn,
+        .form-control,
+        .form-select,
+        .modal,
+        .form-label,
+        label,
+        input,
+        textarea,
+        select,
+        option,
+        th,
+        td,
+        p,
+        span,
+        div,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: 20px;
+        }
+
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        */
+        /* .table th, .table td {
+    font-size: 20px;
+    padding: 12px;
+} */
+
+        /* .btn {
+    font-size: 20px;
+    padding: 10px 16px;
+}
+
+/* .btn-sm {
+    font-size: 18px;
+    padding: 8px 12px;
+} */
+
+        .form-control,
+        .form-select {
+            font-size: 20px;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .modal-title {
+            font-size: 22px;
+        }
+
+        .input-group-text {
+            font-size: 20px;
+        }
+
+        .form-check-label {
+            font-size: 20px;
+        }
+
+        .text-secondary,
+        .text-muted {
+            font-size: 18px;
+        }
+
+        /* DataTable specific styles */
+        .dataTables_wrapper,
+        .dataTables_filter input,
+        .dataTables_length select {
+            font-size: 20px;
+        }
+
+        .dataTables_info,
+        .dataTables_paginate {
+            font-size: 20px;
+        }
+    </style>
     <div class=" row">
         <!--map-->
         <div class="col-md-8 col-12">
@@ -92,7 +190,13 @@
 </script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        setTimeout(() => { map.panTo({lat: -0.4466521323747273, lng: 100.4836235079706}); map.setZoom(17); }, 1000);
+        setTimeout(() => {
+            map.panTo({
+                lat: -0.4466521323747273,
+                lng: 100.4836235079706
+            });
+            map.setZoom(17);
+        }, 1000);
     });
 </script>
 <?= $this->endSection() ?>

@@ -158,7 +158,7 @@
     <?php
     $currentURL = $_SERVER['REQUEST_URI'];
     if (($currentURL === '/web')): ?>
-        <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Homestay" class="btn icon btn-primary mx-1" id="legend-map" onclick="allHomestay(<?= (in_groups('user')) ? 'true' : 'false' ?>); setTimeout(() => { map.panTo({lat: -0.4466521323747273, lng: 100.4836235079706}); map.setZoom(17); }, 1000);">
+        <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Homestay" class="btn icon btn-primary mx-1" id="legend-map" onclick="allHomestay(<?= (in_groups('user')) ? 'true' : 'false' ?>, <?= in_groups('owner') ? 'false' : (in_groups('admin') ? 'false' : 'true') ?>); setTimeout(() => { map.panTo({lat: -0.4466521323747273, lng: 100.4836235079706}); map.setZoom(17); }, 1000);">
             <span class="material-symbols-outlined">night_shelter</span>
         </a>
     <?php endif; ?>

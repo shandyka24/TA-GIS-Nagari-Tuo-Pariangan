@@ -28,6 +28,14 @@ let customLabelsCountry = [];
 let latVillage = 0;
 let lngVillage = 0;
 
+let activity = [];
+let recActTriggered = false;
+let backToHomeTriggered = false;
+let addActivityTriggered = false;
+let singleRouteShown = false;
+
+
+
 let selectedShape,
   drawingManager = new google.maps.drawing.DrawingManager();
 let customStyled = [
@@ -404,6 +412,7 @@ function digitTourismVillage(goToVillage = false) {
             '<span class="fw-bold text-dark">' + data.name + "</span>"
           );
           villageInfoWindow.setPosition(center);
+          objectMarker("P", -0.461603238092608, 100.49665288491838);
           objectMarker("L", -0.4556825246682917, 100.49283664396526);
         }
       );
@@ -662,7 +671,15 @@ function routeTo(lat, lng, routeFromUser = true) {
 }
 
 // Display marker for loaded object
-function objectMarker(id, lat, lng, anim = true, attcat = null, login = false) {
+function objectMarker(
+  id,
+  lat,
+  lng,
+  anim = true,
+  attcat = null,
+  login = false,
+  act = true
+) {
   const currentUrl = window.location.href;
   google.maps.event.clearListeners(map, "click");
   let pos = new google.maps.LatLng(lat, lng);
@@ -681,6 +698,8 @@ function objectMarker(id, lat, lng, anim = true, attcat = null, login = false) {
     icon = baseUrl + "/media/icon/marker_ev.png";
   } else if (id.substring(0, 1) === "L") {
     icon = baseUrl + "/media/icon/marker_pr.png";
+  } else if (id.substring(0, 1) === "P") {
+    icon = baseUrl + "/media/icon/entrance.png";
   } else if (id.substring(0, 1) === "A") {
     if (attcat === "1") {
       icon = baseUrl + "/media/icon/marker_uat.png";
@@ -709,7 +728,7 @@ function objectMarker(id, lat, lng, anim = true, attcat = null, login = false) {
   marker.addListener("click", () => {
     infoWindow.close();
     villageInfoWindow.close();
-    objectInfoWindow(id, attcat, login);
+    objectInfoWindow(id, attcat, login, act);
     infoWindow.open(map, marker);
   });
 
@@ -717,7 +736,7 @@ function objectMarker(id, lat, lng, anim = true, attcat = null, login = false) {
 }
 
 // Display info window for loaded object
-function objectInfoWindow(id, attcat = null, login = false) {
+function objectInfoWindow(id, attcat = null, login = false, act = true) {
   let content = "";
   let contentButton = "";
   let contentMobile = "";
@@ -800,6 +819,7 @@ function objectInfoWindow(id, attcat = null, login = false) {
       },
     });
   } else if (id.substring(0, 1) === "A") {
+    // console.log(attcat);
     $.ajax({
       url: baseUrl + "/api/attraction/" + id,
       dataType: "json",
@@ -837,8 +857,27 @@ function objectInfoWindow(id, attcat = null, login = false) {
             lat +
             "," +
             lng +
-            ')"><i class="fa-solid fa-compass"></i></a>';
+            ",`" +
+            attcat +
+            '`)"><i class="fa-solid fa-compass"></i></a>';
         }
+
+        let actButton = "";
+        const alreadyAdded = activity.some((item) => item.id === rgid);
+        if (act && recActTriggered && !alreadyAdded) {
+    actButton =
+        '<a id="btn-act" class="btn btn-primary mt-1" onclick="addActivity(`' +
+        rgid +
+        "`,`" +
+        name +
+        "`," +
+        lat +
+        "," +
+        lng +
+        ",`" +
+        attcat +
+        '`)"><i class="fa-solid fa-plus me-2"></i>Add Activity</a>';
+}
 
         contentButton =
           '<br><div class="text-center">' +
@@ -853,6 +892,8 @@ function objectInfoWindow(id, attcat = null, login = false) {
           rgid +
           '><i class="fa-solid fa-info"></i></a>' +
           nearbyButton +
+          "<br>" +
+          actButton +
           "</div>";
         contentMobile =
           '<br><div class="text-center">' +
@@ -924,6 +965,25 @@ function objectInfoWindow(id, attcat = null, login = false) {
             ')"><i class="fa-solid fa-compass"></i></a>';
         }
 
+        let actButton = "";
+        if (
+          act &&
+          !window.location.href.includes("web/homestay") &&
+          !window.location.href.includes("web/aroundYou") &&
+          !addActivityTriggered
+        ) {
+          actButton =
+            '<a id="btn-act" class="btn btn-primary mt-1" onclick="recActivity(`' +
+            rgid +
+            "`,`" +
+            name +
+            "`," +
+            lat +
+            "," +
+            lng +
+            ')"><i class="fa-solid fa-person-running me-2"></i>Activity Plan</a>';
+        }
+
         let bookingButton = "";
         if (login) {
           bookingButton =
@@ -948,6 +1008,8 @@ function objectInfoWindow(id, attcat = null, login = false) {
           rgid +
           '><i class="fa-solid fa-info"></i></a>' +
           nearbyButton +
+          "<br>" +
+          actButton +
           "<br>" +
           bookingButton +
           "</div>";
@@ -1114,6 +1176,23 @@ function objectInfoWindow(id, attcat = null, login = false) {
             ')"><i class="fa-solid fa-compass"></i></a>';
         }
 
+        let actButton = "";
+        const alreadyAdded = activity.some((item) => item.id === rgid);
+        if (act && recActTriggered && !alreadyAdded) {
+    actButton =
+        '<a id="btn-act" class="btn btn-primary mt-1" onclick="addActivity(`' +
+        rgid +
+        "`,`" +
+        name +
+        "`," +
+        lat +
+        "," +
+        lng +
+        ",`" +
+        attcat +
+        '`)"><i class="fa-solid fa-plus me-2"></i>Add Activity</a>';
+}
+
         contentButton =
           '<br><div class="text-center">' +
           '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
@@ -1127,6 +1206,8 @@ function objectInfoWindow(id, attcat = null, login = false) {
           rgid +
           '><i class="fa-solid fa-info"></i></a>' +
           nearbyButton +
+          "<br>" +
+          actButton +
           "</div>";
 
         contentButtonLp =
@@ -1179,6 +1260,23 @@ function objectInfoWindow(id, attcat = null, login = false) {
             ')"><i class="fa-solid fa-compass"></i></a>';
         }
 
+        let actButton = "";
+        const alreadyAdded = activity.some((item) => item.id === rgid);
+        if (act && recActTriggered && !alreadyAdded) {
+    actButton =
+        '<a id="btn-act" class="btn btn-primary mt-1" onclick="addActivity(`' +
+        rgid +
+        "`,`" +
+        name +
+        "`," +
+        lat +
+        "," +
+        lng +
+        ",`" +
+        attcat +
+        '`)"><i class="fa-solid fa-plus me-2"></i>Add Activity</a>';
+}
+
         contentButton =
           '<br><div class="text-center">' +
           '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
@@ -1192,6 +1290,8 @@ function objectInfoWindow(id, attcat = null, login = false) {
           rgid +
           '><i class="fa-solid fa-info"></i></a>' +
           nearbyButton +
+          "<br>" +
+          actButton +
           "</div>";
         content =
           '<div class="text-center fw-bold text-dark">' +
@@ -1257,6 +1357,23 @@ function objectInfoWindow(id, attcat = null, login = false) {
             ')"><i class="fa-solid fa-compass"></i></a>';
         }
 
+        let actButton = "";
+        const alreadyAdded = activity.some((item) => item.id === rgid);
+        if (act && recActTriggered && !alreadyAdded) {
+    actButton =
+        '<a id="btn-act" class="btn btn-primary mt-1" onclick="addActivity(`' +
+        rgid +
+        "`,`" +
+        name +
+        "`," +
+        lat +
+        "," +
+        lng +
+        ",`" +
+        attcat +
+        '`)"><i class="fa-solid fa-plus me-2"></i>Add Activity</a>';
+}
+
         contentButton =
           '<br><div class="text-center">' +
           '<a title="Route" class="btn icon btn-outline-primary mx-1" id="routeInfoWindow" onclick="routeTo(' +
@@ -1270,6 +1387,8 @@ function objectInfoWindow(id, attcat = null, login = false) {
           rgid +
           '><i class="fa-solid fa-info"></i></a>' +
           nearbyButton +
+          "<br>" +
+          actButton +
           "</div>";
 
         contentButtonLp =
@@ -1329,6 +1448,14 @@ function objectInfoWindow(id, attcat = null, login = false) {
         infoWindow.setContent(content);
       },
     });
+  } else if (id.substring(0, 1) === "P") {
+    content =
+      '<div style="max-width:200px;max-height:300px;" class="text-center">' +
+      '<p class="fw-bold fs-6">Pariangan Entrance</p>' +
+      '<p><i class="fa-solid fa-spa"></i> <span class="fw-bolder fs-6">Tourism Village</span></p>' +
+      "</div>";
+
+    infoWindow.setContent(content);
   }
 }
 
@@ -1402,6 +1529,12 @@ function updateRadiusN(postfix) {
   console.log(
     document.getElementById("inputRadius" + postfix).value * 100 + " m"
   );
+}
+function updateRadiusAct(postfix) {
+  // userInfoWindow.close();
+  document.getElementById("radiusValueAct").innerHTML =
+    document.getElementById("inputRadiusAct").value * 100 + " m";
+  console.log(document.getElementById("inputRadiusAct").value * 100 + " m");
 }
 
 // function updateRadius(postfix) {
@@ -1608,13 +1741,16 @@ function closeNearby() {
 }
 
 // open nearby search section
-function openNearby(id, lat, lng) {
+function openNearby(id, lat, lng, attcat = null) {
   $("#result-nearby-col").hide();
   $("#check-nearbyyou-col").hide();
   $("#list-rg-col").hide();
   $("#list-ev-col").hide();
   $("#list-rec-col").hide();
   $("#check-nearby-col").show();
+
+  $("#check-activity").hide();
+  $("#your-activity").hide();
 
   currentLat = lat;
   currentLng = lng;
@@ -1625,20 +1761,22 @@ function openNearby(id, lat, lng) {
     .getElementById("inputRadiusNearby")
     .setAttribute(
       "onchange",
-      'updateRadius("Nearby"); checkNearby("' + id + '")'
+      'updateRadius("Nearby"); checkNearby("' + id + '","' + attcat + '")'
     );
 }
 
 // Search Result Object Around
-function checkNearby(id) {
+function checkNearby(id, attcat = null) {
   clearRadius();
   clearRoute();
   clearMarker();
   clearUser();
   destinationMarker.setMap(null);
   google.maps.event.clearListeners(map, "click");
+  objectMarker("P", -0.461603238092608, 100.49665288491838);
+  objectMarker("L", -0.4556825246682917, 100.49283664396526);
 
-  objectMarker(id, currentLat, currentLng, false);
+  objectMarker(id, currentLat, currentLng, false, attcat);
 
   $("#check-nearbyyou-col").hide();
   $("#table-uatt").empty();
@@ -1696,6 +1834,87 @@ function checkNearby(id) {
   }
   drawRadius(new google.maps.LatLng(currentLat, currentLng), radiusValue);
   $("#result-nearby-col").show();
+}
+
+function checkAct(id, attcat = null) {
+  clearRadius();
+  // clearRoute();
+  clearMarker();
+  for (let i = 0; i < activity.length; i++) {
+    objectMarker(
+      activity[i].id,
+      activity[i].lat,
+      activity[i].lng,
+      false,
+      activity[i].attcat
+    );
+    // objectMarker("P", -0.461603238092608, 100.49665288491838);
+    // objectMarker("L", -0.4556825246682917, 100.49283664396526);
+  }
+  clearUser();
+  destinationMarker.setMap(null);
+  google.maps.event.clearListeners(map, "click");
+  objectMarker("P", -0.461603238092608, 100.49665288491838);
+  objectMarker("L", -0.4556825246682917, 100.49283664396526);
+  objectMarker(id, currentLat, currentLng, false, attcat, null, true);
+  console.log(attcat);
+
+  $("#check-nearbyyou-col").hide();
+  $("#table-uatt").empty();
+  $("#table-att").empty();
+  $("#table-hs").empty();
+  $("#table-cp").empty();
+  $("#table-wp").empty();
+  $("#table-sp").empty();
+  $("#table-uatt").hide();
+  $("#table-att").hide();
+  $("#table-hs").hide();
+  $("#table-cp").hide();
+  $("#table-wp").hide();
+  $("#table-sp").hide();
+  $("#result-explore-col").hide();
+
+  let radiusValue =
+    parseFloat(document.getElementById("inputRadiusAct").value) * 100;
+  const checkUATT = document.getElementById("check-uatt-act").checked;
+  const checkATT = document.getElementById("check-att-act").checked;
+  const checkHS = document.getElementById("check-hs-act").checked;
+  const checkCP = document.getElementById("check-cp-act").checked;
+  const checkWP = document.getElementById("check-wp-act").checked;
+  const checkSP = document.getElementById("check-sp-act").checked;
+
+  if (!checkUATT && !checkATT && !checkHS && !checkCP && !checkWP && !checkSP) {
+    document.getElementById("radiusValueAct").innerHTML = "0 m";
+    document.getElementById("inputRadiusAct").value = 0;
+    return Swal.fire("Please choose one object");
+  }
+
+  if (checkUATT) {
+    findNearbyAct("uatt", radiusValue);
+    // $("#table-uatt").show();
+  }
+  if (checkATT) {
+    findNearbyAct("att", radiusValue);
+    // $("#table-att").show();
+  }
+  if (checkHS) {
+    findNearbyAct("hs", radiusValue);
+    // $("#table-hs").show();
+  }
+  if (checkCP) {
+    findNearbyAct("cp", radiusValue);
+    // $("#table-cp").show();
+  }
+  if (checkWP) {
+    findNearbyAct("wp", radiusValue);
+    // $("#table-wp").show();
+  }
+  if (checkSP) {
+    findNearbyAct("sp", radiusValue);
+    // $("#table-sp").show();
+  }
+
+  drawRadius(new google.maps.LatLng(currentLat, currentLng), radiusValue);
 }
 
 function checkAround() {
@@ -2008,6 +2227,175 @@ function displayNearbyResult(category, response) {
     } else {
       objectMarker(item.id, item.lat, item.lng);
     }
+  }
+}
+
+function findNearbyAct(category, radius) {
+  let pos = new google.maps.LatLng(currentLat, currentLng);
+  if (category === "uatt") {
+    $.ajax({
+      url: baseUrl + "/api/attraction/findByRadius",
+      type: "POST",
+      data: {
+        category: "1",
+        lat: currentLat,
+        long: currentLng,
+        radius: radius,
+      },
+      dataType: "json",
+      success: function (response) {
+        displayActResult(category, response, "1");
+      },
+    });
+  } else if (category === "att") {
+    $.ajax({
+      url: baseUrl + "/api/attraction/findByRadius",
+      type: "POST",
+      data: {
+        category: "2",
+        lat: currentLat,
+        long: currentLng,
+        radius: radius,
+      },
+      dataType: "json",
+      success: function (response) {
+        displayActResult(category, response, "2");
+      },
+    });
+  } else if (category === "hs") {
+    $.ajax({
+      url: baseUrl + "/api/homestay/findByRadius",
+      type: "POST",
+      data: {
+        lat: currentLat,
+        long: currentLng,
+        radius: radius,
+      },
+      dataType: "json",
+      success: function (response) {
+        displayActResult(category, response);
+      },
+    });
+  } else if (category === "cp") {
+    $.ajax({
+      url: baseUrl + "/api/culinaryPlace/findByRadius",
+      type: "POST",
+      data: {
+        lat: currentLat,
+        long: currentLng,
+        radius: radius,
+      },
+      dataType: "json",
+      success: function (response) {
+        displayActResult(category, response);
+      },
+    });
+  } else if (category === "wp") {
+    $.ajax({
+      url: baseUrl + "/api/worshipPlace/findByRadius",
+      type: "POST",
+      data: {
+        lat: currentLat,
+        long: currentLng,
+        radius: radius,
+      },
+      dataType: "json",
+      success: function (response) {
+        displayActResult(category, response);
+      },
+    });
+  } else if (category === "sp") {
+    $.ajax({
+      url: baseUrl + "/api/souvenirPlace/findByRadius",
+      type: "POST",
+      data: {
+        lat: currentLat,
+        long: currentLng,
+        radius: radius,
+      },
+      dataType: "json",
+      success: function (response) {
+        displayActResult(category, response);
+      },
+    });
+  } else if (category === "sv") {
+    $.ajax({
+      url: baseUrl + "/api/serviceProvider/findByRadius",
+      type: "POST",
+      data: {
+        lat: currentLat,
+        long: currentLng,
+        radius: radius,
+      },
+      dataType: "json",
+      success: function (response) {
+        displayActResult(category, response);
+      },
+    });
+  }
+}
+
+// Add Act object to corresponding table
+function displayActResult(category, response, attcat = null) {
+  let data = response.data;
+  let headerName;
+  if (category === "uatt") {
+    headerName = "Unique Attraction";
+  } else if (category === "att") {
+    headerName = "Ordinary Attraction";
+  } else if (category === "hs") {
+    headerName = "Homestay";
+  } else if (category === "cp") {
+    headerName = "Culinary";
+  } else if (category === "wp") {
+    headerName = "Worship";
+  } else if (category === "sp") {
+    headerName = "Souvenir";
+  } else if (category === "sv") {
+    headerName = "Service";
+  }
+
+  let table =
+    "<thead><tr>" +
+    '<th style="width: 52%; font-size: 20px;">' +
+    headerName +
+    " Name</th>" +
+    '<th style="width: 48%; font-size: 20px;">Action</th>' +
+    "</tr></thead>" +
+    '<tbody id="data-' +
+    category +
+    '">' +
+    "</tbody>";
+  $("#table-" + category).append(table);
+
+  for (i in data) {
+    let item = data[i];
+    let row =
+      "<tr>" +
+      '<td class="fw-bold">' +
+      item.name +
+      "</td>" +
+      "<td>" +
+      '<a title="Route" class="btn icon btn-primary mx-1" onclick="routeTo(' +
+      item.lat +
+      ", " +
+      item.lng +
+      ', false)"><i class="fa-solid fa-road"></i></a>' +
+      '<a title="Info" class="btn icon btn-primary mx-1" onclick="infoModal(`' +
+      item.id +
+      '`)"><i class="fa-solid fa-info"></i></a>' +
+      '<a title="Location" class="btn icon btn-primary mx-1" onclick="focusObject(`' +
+      item.id +
+      '`);"><i class="fa-solid fa-location-dot"></i></a>' +
+      "</td>" +
+      "</tr>";
+    $("#data-" + category).append(row);
+    if (category === "uatt" || category === "att") {
+      objectMarker(item.id, item.lat, item.lng, true, item.attraction_category);
+    } else {
+      objectMarker(item.id, item.lat, item.lng);
+    }
+    // console.log(item);
   }
 }
 
@@ -3844,7 +4232,7 @@ function deleteObject(id = null, name = null, user = false) {
   } else if (id.substring(0, 1) === "E") {
     content = "Event";
     apiUri = "event/";
-  } else if (id.substring(0, 1) === "P") {
+  } else if (id.substring(0, 1) === "") {
     homestay_id = id.substring(4, 7);
     id = id.substring(0, 4);
     content = "Package";
@@ -4812,6 +5200,32 @@ function routeBetweenObjects(startLat, startLng, endLat, endLng) {
   boundToRoute(start, end);
 }
 
+function routeBetweenObjectsAct(startLat, startLng, endLat, endLng) {
+  // initMap();
+  google.maps.event.clearListeners(map, "click");
+
+  // Create LatLng objects for the start and end coordinates
+  const start = new google.maps.LatLng(startLat, startLng);
+  const end = new google.maps.LatLng(endLat, endLng);
+
+  let request = {
+    origin: start,
+    destination: end,
+    travelMode: "DRIVING",
+  };
+
+  directionsService.route(request, function (result, status) {
+    if (status == "OK") {
+      directionsRenderer.setDirections(result);
+      // showSteps(result);
+      directionsRenderer.setMap(map);
+      routeArray.push(directionsRenderer);
+    }
+  });
+
+  boundToRoute(start, end);
+}
+
 function deleteAdditionalAmenities(
   homestay_id = null,
   additional_amenities_id = null,
@@ -4856,13 +5270,19 @@ function deleteAdditionalAmenities(
 }
 
 function allObject() {
+  initMap();
+  digitTourismVillage();
   clearRadius();
   clearRoute();
   clearMarker();
   clearAirplaneMarkers();
   clearCarMarkers();
   clearOverlay();
+  objectMarker("P", -0.461603238092608, 100.49665288491838);
   objectMarker("L", -0.4556825246682917, 100.49283664396526);
+  $("#check-activity").hide();
+  $("#your-activity").hide();
+  $("#list-rec-col").show();
   $("#table-uAttraction").show();
   $("#table-Attraction").show();
   // $("#table-Homestay").show();
@@ -4904,13 +5324,100 @@ function allObject() {
   // });
 }
 
-function allHomestay(login = false) {
+function recActivity(id, name, lat, lng) {
+  $("#check-nearby-col").hide();
+  $("#check-nearbyyou-col").hide();
+  $("#list-rg-col").hide();
+  $("#list-ev-col").hide();
+  $("#list-rec-col").hide();
+  $("#check-activity").show();
+  $("#result-explore-col").hide();
+
+  recActTriggered = true;
+  activity = [];
+  activity.push({
+    index: activity.length,
+    id: "P",
+    name: "Entrance",
+    lat: -0.461603238092608,
+    lng: 100.49665288491838,
+    distance: "0",
+    duration: "0",
+  });
+
+  currentLat = lat;
+  currentLng = lng;
+  let pos = new google.maps.LatLng(currentLat, currentLng);
+  map.panTo(pos);
+
+  document
+    .getElementById("inputRadiusAct")
+    .setAttribute(
+      "onchange",
+      'updateRadiusAct("Activity"); checkAct("' + id + '")'
+    );
+
+  // Ambil jarak & waktu tempuh Google
+  getDistanceAndDuration(
+    -0.461603238092608,
+    100.49665288491838,
+    lat,
+    lng,
+    (distance, duration) => {
+      activity.push({
+        index: activity.length,
+        id: id,
+        name: name,
+        lat: lat,
+        lng: lng,
+        distance: distance,
+        duration: duration,
+      });
+      $("#table-act").empty();
+$("#your-activity").show();
+let table =
+  "<thead><tr>" +
+  '<th style="width: 80%; font-size: 20px;">Activity</th>' +
+  '<th style="width: 20%; font-size: 20px;">Action</th>' +
+  "</tr></thead>" +
+  '<tbody id="data-act">' +
+  "<tr><td>Activity 1 (" +
+  distance +
+  ") (" +
+  duration +
+  ")<br>" +
+  activity[0].name +
+  " - " +
+  activity[1].name +
+  "</td><td>" +
+  '<button class="btn btn-success btn-sm" onclick="showSingleRoute(0)">' +
+  '<i class="fa-solid fa-route"></i>' +
+  "</button>" +
+  "</td></tr></tbody>";
+$("#table-act").append(table);
+      routeBetweenObjectsAct(
+        activity[0].lat,
+        activity[0].lng,
+        activity[1].lat,
+        activity[1].lng
+      );
+      document.getElementById("btn-back-homestay").disabled = true;
+    }
+  );
+}
+
+function allHomestay(login = false, act = true) {
+  addActivityTriggered = false;
+  recActTriggered = false;
+  initMap();
+  digitTourismVillage();
   clearRadius();
   clearRoute();
   clearMarker();
   clearAirplaneMarkers();
   clearCarMarkers();
   clearOverlay();
+  objectMarker("P", -0.461603238092608, 100.49665288491838);
   objectMarker("L", -0.4556825246682917, 100.49283664396526);
   $("#table-uAttraction").empty().hide();
   $("#table-Attraction").empty().hide();
@@ -4919,9 +5426,14 @@ function allHomestay(login = false) {
   $("#table-Souvenir").empty().hide();
   $("#table-Worship").empty().hide();
   // checkObject();
-  findAll("Homestay", login);
+  findAll("Homestay", login, act);
   $("#result-explore-col").show();
   $("#table-Homestay").show();
+
+  $("#check-activity").hide();
+  $("#your-activity").hide();
+
+  $("#list-rec-col").show();
 }
 
 function checkObject() {
@@ -4933,6 +5445,7 @@ function checkObject() {
   clearCarMarkers();
   clearOverlay();
   // initMap5();
+  objectMarker("P", -0.461603238092608, 100.49665288491838);
   objectMarker("L", -0.4556825246682917, 100.49283664396526);
   destinationMarker.setMap(null);
   google.maps.event.clearListeners(map, "click");
@@ -4993,7 +5506,7 @@ function checkObject() {
   }
 }
 
-function findAll(category, login = false) {
+function findAll(category, login = false, act = true) {
   // let pos = new google.maps.LatLng(currentLat, currentLng);
   if (category === "uAttraction") {
     $.ajax({
@@ -5039,7 +5552,7 @@ function findAll(category, login = false) {
       data: {},
       dataType: "json",
       success: function (response) {
-        displayExploreResult(category, response, login);
+        displayExploreResult(category, response, login, act);
         boundToObject();
       },
     });
@@ -5067,7 +5580,7 @@ function findAll(category, login = false) {
     });
   }
 
-  function displayExploreResult(category, response, login = false) {
+  function displayExploreResult(category, response, login = false, act = true) {
     let data = response.data;
     let headerName;
     if (category === "Attraction") {
@@ -5120,7 +5633,7 @@ function findAll(category, login = false) {
           item.attraction_category
         );
       } else {
-        objectMarker(item.id, item.lat, item.lng, true, null, login);
+        objectMarker(item.id, item.lat, item.lng, true, null, login, act);
       }
     }
   }
@@ -5136,6 +5649,7 @@ function checkLayer() {
   clearOverlay();
 
   // initMap();
+  objectMarker("P", -0.461603238092608, 100.49665288491838);
   objectMarker("L", -0.4556825246682917, 100.49283664396526);
 
   destinationMarker.setMap(null);
@@ -5268,6 +5782,7 @@ function clickLayer() {
   }
   digitProvinces();
   digitCities();
+  objectMarker("P", -0.461603238092608, 100.49665288491838);
   objectMarker("L", -0.4556825246682917, 100.49283664396526);
 
   const checkCountry = document.getElementById("checkCountry");
@@ -5292,7 +5807,7 @@ function howToReachPariangan() {
   clearMarker();
   clearRoute();
   clearRadius();
-
+  objectMarker("P", -0.461603238092608, 100.49665288491838);
   objectMarker("L", -0.4556825246682917, 100.49283664396526);
 
   const clearHtro = document.getElementById("clearHtro");
@@ -5767,9 +6282,458 @@ function iwRedirectToLogin() {
     }
   });
 }
+
 function openAround() {
   $("#list-rg-col").hide();
   $("#list-ev-col").hide();
   $("#list-rec-col").hide();
   $("#check-nearbyyou-col").show();
+}
+
+function addActivity(id, name, lat, lng, attcat = null) {
+    addActivityTriggered = true;
+    clearRadius();
+
+    const checkboxIds = [
+        "check-uatt-act", "check-att-act", "check-hs-act",
+        "check-cp-act", "check-sp-act", "check-wp-act"
+    ];
+    checkboxIds.forEach((id) => {
+        const checkbox = document.getElementById(id);
+        if (checkbox) checkbox.checked = false;
+    });
+
+    const radiusSlider = document.getElementById("inputRadiusAct");
+    const radiusLabel = document.getElementById("radiusValueAct");
+    if (radiusSlider) radiusSlider.value = 0;
+    if (radiusLabel) radiusLabel.textContent = "0 m";
+
+    const lastIndex = activity.length - 1;
+    const lastLat = activity[lastIndex].lat;
+    const lastLng = activity[lastIndex].lng;
+
+    getDistanceAndDuration(lastLat, lastLng, lat, lng, (distance, duration) => {
+        activity.push({
+            index: activity.length,
+            id: id,
+            name: name,
+            lat: lat,
+            lng: lng,
+            attcat: attcat !== null ? attcat : null,
+            distance: distance,
+            duration: duration,
+        });
+
+        $("#table-act").empty();
+        $("#your-activity").show();
+
+        let table =
+            "<thead><tr>" +
+            '<th style="width: 80%; font-size: 20px;">Activity</th>' +
+            '<th style="width: 20%; font-size: 20px;">Action</th>' +
+            "</tr></thead><tbody id='data-act'>";
+
+        for (let i = 0; i < activity.length - 1; i++) {
+            let isLast = i === activity.length - 2;
+            let actionBtn = isLast
+                ? '<button class="btn btn-danger btn-sm" onclick="removeLastActivity()"><i class="fa-solid fa-trash"></i></button>'
+                : "";
+
+            const dis = activity[i + 1].distance || "-";
+            const dur = activity[i + 1].duration || "-";
+
+            table +=
+                "<tr><td>Activity " +
+                (i + 1) +
+                " (" +
+                dis +
+                ") (" +
+                dur +
+                ")<br>" +
+                activity[i].name +
+                " - " +
+                activity[i + 1].name +
+                "</td><td>" +
+                '<button class="btn btn-success btn-sm" onclick="showSingleRoute(' + i + ')"><i class="fa-solid fa-route"></i></button> ' +
+                actionBtn +
+                "</td></tr>";
+        }
+
+        table += "</tbody>";
+        $("#table-act").append(table);
+
+        const tableContainer = document.getElementById("table-activity");
+        tableContainer.scrollTop = tableContainer.scrollHeight;
+
+        redrawRoute();
+        const last = activity[activity.length - 1];
+        actRadius(last.id, last.lat, last.lng, last.attcat);
+
+        document.getElementById("btn-back-homestay").disabled = false;
+    });
+}
+
+
+function redrawRoute() {
+  clearRoute();
+  clearMarker();
+  for (let i = 0; i < activity.length; i++) {
+    objectMarker(
+      activity[i].id,
+      activity[i].lat,
+      activity[i].lng,
+      false,
+      activity[i].attcat
+    );
+  }
+  objectMarker("P", -0.461603238092608, 100.49665288491838);
+  objectMarker("L", -0.4556825246682917, 100.49283664396526);
+  // Rute hanya bisa digambar jika ada minimal 2 titik (misal: A -> B)
+  // if (itineraryPoints.length < 2) {
+  //   return;
+  // }
+
+  // Titik awal (origin) SELALU adalah item pertama di dalam daftar
+  const originPoint = activity[0];
+  const origin = new google.maps.LatLng(originPoint.lat, originPoint.lng);
+
+  // Titik terakhir (destination) SELALU adalah item terakhir di dalam daftar
+  const destinationPoint = activity[activity.length - 1];
+  const destination = new google.maps.LatLng(
+    destinationPoint.lat,
+    destinationPoint.lng
+  );
+
+  let waypoints = [];
+  // Semua titik di antaranya (jika ada) menjadi waypoints
+  for (let i = 1; i < activity.length - 1; i++) {
+    waypoints.push({
+      location: new google.maps.LatLng(activity[i].lat, activity[i].lng),
+      stopover: true,
+    });
+  }
+
+  let request = {
+    origin: origin,
+    destination: destination,
+    waypoints: waypoints,
+    travelMode: "DRIVING",
+  };
+
+  directionsService.route(request, function (result, status) {
+    if (status == "OK") {
+      directionsRenderer.setDirections(result);
+      // showSteps(result); // Opsional, jika Anda ingin menampilkan detail langkah
+      directionsRenderer.setMap(map);
+      routeArray.push(directionsRenderer);
+    }
+  });
+  // boundToRoute(start, end);
+}
+
+function actRadius(id, lat, lng, attcat = null) {
+  currentLat = lat;
+  currentLng = lng;
+  let pos = new google.maps.LatLng(currentLat, currentLng);
+  map.panTo(pos);
+
+  document
+    .getElementById("inputRadiusAct")
+    .setAttribute(
+      "onchange",
+      'updateRadiusAct("Activity"); checkAct("' + id + '","' + attcat + '")'
+    );
+}
+
+function removeLastActivity() {
+  if (activity.length > 0) {
+    Swal.fire({
+      title: "Delete Last Activity?",
+      text: "You're about to delete last activity!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#FF0000",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        activity.pop(); // Hapus item terakhir
+        backToHomeTriggered = false; // <--- ✅ reset flag tombol
+
+        $("#table-act").empty();
+        addActivityRenderOnly();
+        redrawRoute();
+
+        Swal.fire("Deleted!", "Last activity has been deleted.", "success");
+
+        console.log(activity);
+
+        clearMarker();
+        initMap();
+        digitTourismVillage();
+
+        for (let i = 0; i < activity.length; i++) {
+          objectMarker(
+            activity[i].id,
+            activity[i].lat,
+            activity[i].lng,
+            false,
+            activity[i].attcat
+          );
+        }
+
+        objectMarker("P", -0.461603238092608, 100.49665288491838);
+        objectMarker("L", -0.4556825246682917, 100.49283664396526);
+
+        // Uncheck semua kategori
+        const checkboxIds = [
+          "check-uatt-act",
+          "check-att-act",
+          "check-hs-act",
+          "check-cp-act",
+          "check-sp-act",
+          "check-wp-act",
+        ];
+        checkboxIds.forEach((id) => {
+          const checkbox = document.getElementById(id);
+          if (checkbox) checkbox.checked = false;
+        });
+
+        // Reset radius slider
+        const radiusSlider = document.getElementById("inputRadiusAct");
+        const radiusLabel = document.getElementById("radiusValueAct");
+        if (radiusSlider) radiusSlider.value = 0;
+        if (radiusLabel) radiusLabel.textContent = "0 m";
+      }
+    });
+  }
+}
+
+function addActivityRenderOnly() {
+    $("#table-act").empty();
+
+    let table =
+        "<thead><tr>" +
+        '<th style="width: 80%; font-size: 20px;">Activity</th>' +
+        '<th style="width: 20%; font-size: 20px;">Action</th>' +
+        "</tr></thead><tbody id='data-act'>";
+
+    let promises = [];
+
+    for (let i = 0; i < activity.length - 1; i++) {
+        const current = activity[i];
+        const next = activity[i + 1];
+
+        if (!next.distance || !next.duration) {
+            const promise = new Promise((resolve) => {
+                getDistanceAndDuration(
+                    current.lat,
+                    current.lng,
+                    next.lat,
+                    next.lng,
+                    (distance, duration) => {
+                        next.distance = distance;
+                        next.duration = duration;
+                        resolve();
+                    }
+                );
+            });
+            promises.push(promise);
+        }
+    }
+
+    Promise.all(promises).then(() => {
+        for (let i = 0; i < activity.length - 1; i++) {
+            const current = activity[i];
+            const next = activity[i + 1];
+            let isLast = i === activity.length - 2 && activity.length > 2;
+            let actionBtn = isLast
+                ? '<button class="btn btn-danger btn-sm" onclick="removeLastActivity()"><i class="fa-solid fa-trash"></i></button>'
+                : "";
+
+            table +=
+                "<tr><td>Activity " +
+                (i + 1) +
+                " (" +
+                (next.distance || "-") +
+                ") (" +
+                (next.duration || "-") +
+                ")<br>" +
+                current.name +
+                " - " +
+                next.name +
+                "</td><td>" +
+                '<button class="btn btn-success btn-sm" onclick="showSingleRoute(' + i + ')"><i class="fa-solid fa-route"></i></button> ' +
+                actionBtn +
+                "</td></tr>";
+        }
+
+        const btnBack = document.getElementById("btn-back-homestay");
+        btnBack.disabled = activity.length <= 2;
+
+        table += "</tbody>";
+        $("#table-act").append(table);
+
+        clearMarker();
+        for (let i = 0; i < activity.length; i++) {
+            objectMarker(
+                activity[i].id,
+                activity[i].lat,
+                activity[i].lng,
+                false,
+                activity[i].attcat
+            );
+        }
+        objectMarker("P", -0.461603238092608, 100.49665288491838);
+        objectMarker("L", -0.4556825246682917, 100.49283664396526);
+
+        actRadius(
+            activity[activity.length - 1].id,
+            activity[activity.length - 1].lat,
+            activity[activity.length - 1].lng,
+            activity[activity.length - 1].attcat
+        );
+    });
+
+    const tableContainer = document.getElementById("table-activity");
+    if (tableContainer) {
+        setTimeout(() => {
+            tableContainer.scrollTop = tableContainer.scrollHeight;
+        }, 300);
+    }
+}
+
+
+function backToHomestay() {
+  if (activity.length < 2) {
+    Swal.fire({
+      icon: "warning",
+      title: "Not Enough Activity",
+      text: "You must add at least 2 activities before returning to homestay.",
+      confirmButtonText: "OK",
+    });
+    return;
+  }
+
+  if (backToHomeTriggered) {
+    Swal.fire({
+      icon: "info",
+      title: "Already Back",
+      text: "You've already back to homestay.",
+      confirmButtonText: "OK",
+    });
+    return;
+  }
+
+  backToHomeTriggered = true;
+
+  activity.push({
+    index: activity.length,
+    id: activity[1].id,
+    name: activity[1].name,
+    lat: activity[1].lat,
+    lng: activity[1].lng,
+    attcat: activity[1].attcat !== null ? activity[1].attcat : null,
+  });
+  addActivityRenderOnly();
+  redrawRoute();
+  // drawReverseRoute();
+  const tableContainer = document.getElementById("table-activity");
+  if (tableContainer) {
+    setTimeout(() => {
+      tableContainer.scrollTop = tableContainer.scrollHeight;
+    }, 300); // jeda kecil agar rendering selesai
+  }
+}
+
+function drawReverseRoute() {
+  if (activity.length < 2) return;
+
+  const origin = new google.maps.LatLng(
+    activity[activity.length - 1].lat,
+    activity[activity.length - 1].lng
+  );
+
+  const destination = new google.maps.LatLng(activity[0].lat, activity[0].lng);
+
+  let waypoints = [];
+  for (let i = activity.length - 2; i > 0; i--) {
+    waypoints.push({
+      location: new google.maps.LatLng(activity[i].lat, activity[i].lng),
+      stopover: true,
+    });
+  }
+
+  const reverseRenderer = new google.maps.DirectionsRenderer({
+    suppressMarkers: true,
+    polylineOptions: {
+      strokeColor: "#FF00FF", // ungu untuk rute balik
+      strokeWeight: 4,
+      strokeOpacity: 0.7,
+    },
+  });
+
+  directionsService.route(
+    {
+      origin: origin,
+      destination: destination,
+      waypoints: waypoints,
+      travelMode: "DRIVING",
+    },
+    function (result, status) {
+      if (status === "OK") {
+        reverseRenderer.setDirections(result);
+        reverseRenderer.setMap(map);
+        routeArray.push(reverseRenderer);
+      }
+    }
+  );
+}
+
+function getDistanceAndDuration(
+  originLat,
+  originLng,
+  destLat,
+  destLng,
+  callback
+) {
+  const service = new google.maps.DistanceMatrixService();
+  service.getDistanceMatrix(
+    {
+      origins: [new google.maps.LatLng(originLat, originLng)],
+      destinations: [new google.maps.LatLng(destLat, destLng)],
+      travelMode: "DRIVING",
+      unitSystem: google.maps.UnitSystem.METRIC,
+    },
+    (response, status) => {
+      if (status === "OK") {
+        const element = response.rows[0].elements[0];
+        const distance = element.distance.text; // "1.3 km"
+        const duration = element.duration.text; // "4 mins"
+        callback(distance, duration);
+      } else {
+        callback("-", "-");
+      }
+    }
+  );
+}
+
+function showSingleRoute(fromIndex) {
+    clearRoute();
+    routeBetweenObjectsAct(
+        activity[fromIndex].lat,
+        activity[fromIndex].lng,
+        activity[fromIndex + 1].lat,
+        activity[fromIndex + 1].lng
+    );
+
+    singleRouteShown = true;
+    document.getElementById("btn-show-all-route").disabled = false;
+}
+
+function showAllRoutes() {
+    redrawRoute();
+    singleRouteShown = false;
+    document.getElementById("btn-show-all-route").disabled = true;
 }

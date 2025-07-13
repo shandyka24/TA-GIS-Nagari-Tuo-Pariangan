@@ -157,7 +157,7 @@
             <div class="row">
                 <!--popular-->
                 <div class="col-12" id="list-rec-col">
-                    <div class="card">
+                    <div class="card" id="recAct">
                         <div class="card-header">
                             <h5 class="card-title text-center fs-4  fw-bolder"><?= esc($data['name']); ?></h5>
                         </div>
@@ -289,6 +289,7 @@
                 </div>
                 <!-- Nearby section -->
                 <?= $this->include('web/layouts/nearby'); ?>
+                <?= $this->include('web/layouts/activity'); ?>
             </div>
         </div>
     </div>
@@ -352,6 +353,9 @@
     $('#check-nearbyyou-col').hide();
     $("#result-nearbyyou-col").hide();
 
+    $('#check-activity').hide();
+    $('#your-activity').hide();
+
     $("#table-uatt").empty();
     $("#table-att").empty();
     $("#table-hs").empty();
@@ -367,5 +371,27 @@
     $("#table-sp").hide();
 
     map.setZoom(6);
+
+    // const locations = [{
+    //     lat: -0.461603238092608,
+    //     lng: 100.49665288491838,
+    //     title: "Entrance",
+    //     icon: "/media/icon/entrance.png"
+    // }, ];
+
+    // locations.forEach(loc => {
+    //     new google.maps.Marker({
+    //         position: {
+    //             lat: loc.lat,
+    //             lng: loc.lng
+    //         },
+    //         map: map,
+    //         title: loc.title,
+    //         icon: {
+    //             url: loc.icon,
+    //             scaledSize: new google.maps.Size(32, 48),
+    //         },
+    //     });
+    // });
 </script>
 <?= $this->endSection() ?>
