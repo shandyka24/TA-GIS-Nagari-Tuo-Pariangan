@@ -6257,9 +6257,9 @@ function iwOpsiBook(id) {
     cancelButtonColor: "#039e00",
   }).then((result) => {
     if (result.isConfirmed) {
-      window.open(baseUrl + "/web/reservation/" + id);
+      window.open(baseUrl + "/web/reservation/" + id + "/1");
     } else if (result.dismiss === Swal.DismissReason.cancel) {
-      window.open(baseUrl + "/web/reservationEvent/" + id);
+      window.open(baseUrl + "/web/reservationEvent/" + id + "/1");
     }
   });
 }

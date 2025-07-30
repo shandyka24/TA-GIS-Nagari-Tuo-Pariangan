@@ -127,6 +127,7 @@ class Reservation extends ResourcePresenter
             'data' => $reservations,
         ];
 
+        session()->set('isHome', 0);
         return view('web/reservation_list', $data);
     }
 
@@ -313,7 +314,7 @@ class Reservation extends ResourcePresenter
     // }
 
 
-    public function newReservation($homestay_id = null)
+    public function newReservation($homestay_id = null, $isHome = 0)
     {
         // $homestays = $this->homestayModel->get_all_homestays();
         // $booked_dates = $this->reservationHomestayUnitDetailModel->get_date_by_hid($homestay_id);
@@ -391,6 +392,7 @@ class Reservation extends ResourcePresenter
             ];
         }
         // dd($data, $homestay);
+        session()->set('isHome', $isHome);
         return view('web/reservation_form', $data);
     }
 
@@ -416,7 +418,7 @@ class Reservation extends ResourcePresenter
     //     return view('web/reservation_form', $data);
     // }
 
-    public function newReservationEvent($homestay_id = null)
+    public function newReservationEvent($homestay_id = null, $isHome = 0)
     {
         $homestay = $this->homestayModel->get_hs_by_id_api($homestay_id)->getRowArray();
 
@@ -471,6 +473,7 @@ class Reservation extends ResourcePresenter
             'weather_icons' => $weather_icons
         ];
 
+        session()->set('isHome', $isHome);
         return view('web/reservation_event_form', $data);
     }
 
@@ -527,7 +530,7 @@ class Reservation extends ResourcePresenter
         return $this->respond($response);
     }
 
-    public function createReservation($homestay_id = null)
+    public function createReservation($homestay_id = null, $isHome = 0)
     {
         $request = $this->request->getPost();
 
@@ -585,7 +588,7 @@ class Reservation extends ResourcePresenter
         }
     }
 
-    public function createReservationEvent($homestay_id = null)
+    public function createReservationEvent($homestay_id = null, $isHome = 0)
     {
 
         $request = $this->request->getPost();
@@ -1263,7 +1266,7 @@ class Reservation extends ResourcePresenter
         }
     }
 
-    public function finishReservation($reservation_id = null, $deposit = null, $total_price = null, $coin = null)
+    public function finishReservation($reservation_id = null, $deposit = null, $total_price = null, $coin = null, $isHome = 0)
     {
         // $finishPackage = $this->reservationModel->finish_reservation($reservation_id, $deposit, $total_price);
         $finishPackage = $this->reservationModel->finish_reservation($reservation_id, $deposit, $total_price, $coin);
@@ -1287,7 +1290,11 @@ class Reservation extends ResourcePresenter
         if ($finishPackage) {
             $coinUser = $this->accountModel->calculate_coin(user()->id, $coin);
             if ($coinUser) {
-                return redirect()->to(base_url('web'));
+                if ($isHome == 1) {
+                    return redirect()->to(base_url('web'));
+                } else {
+                    return redirect()->to(base_url('web/reservation/detail/' . $reservation_id));
+                }
             }
         } else {
             return redirect()->back()->withInput();

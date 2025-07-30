@@ -323,11 +323,11 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
             <div class="row">
                 <div class="col">
                     <?php if (($reservation['reservation_type'] == 1)) : ?>
-                        <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($deposit); ?>','<?= esc($total_price); ?>','<?= esc($coin); ?>')">
+                        <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($deposit); ?>','<?= esc($total_price); ?>','<?= esc($coin); ?>', '<?= $isHome = session()->get('isHome');?>')">
                             <i class="fa-solid fa-check"></i> Done
                         </a>
                     <?php elseif (($reservation['reservation_type'] == 2)) : ?>
-                        <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($reservation['deposit']); ?>','<?= esc($reservation['total_price']); ?>','<?= esc($coin); ?>')">
+                        <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($reservation['deposit']); ?>','<?= esc($reservation['total_price']); ?>','<?= esc($coin); ?>', '<?= $isHome = session()->get('isHome');?>')">
                             <i class="fa-solid fa-check"></i> Done
                         </a>
                     <?php endif; ?>
@@ -829,7 +829,7 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
 <?= $this->section('javascript') ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    function confirmDone(reservation_id, deposit, total_price, coin) {
+    function confirmDone(reservation_id, deposit, total_price, coin, isHome) {
         if ($('#useCoinsSwitch').is(':checked')) {
             Swal.fire({
                 title: "Do you want to finish reservation?",
@@ -837,12 +837,14 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                 showCancelButton: true,
                 confirmButtonText: "Yes",
             }).then((result) => {
-                if (result.isConfirmed) {
+                if (result.isConfirmed && isHome == 1) {
                     Swal.fire("You have finish the reservation", "Please wait for the Homestay Owner to confirm the reservation. To view the reservation details, you can check the Reservation Menu.").then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = "/web/reservation/finish/" + reservation_id + "/" + deposit + "/" + total_price + "/" + coin;
+                            window.location.href = "/web/reservation/finish/" + reservation_id + "/" + deposit + "/" + total_price + "/" + coin + "/" + isHome;
                         }
                     });
+                } else {
+                    window.location.href = "/web/reservation/finish/" + reservation_id + "/" + deposit + "/" + total_price + "/" + coin + "/" + isHome;
                 }
             });
         } else {
@@ -853,12 +855,14 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                 showCancelButton: true,
                 confirmButtonText: "Yes",
             }).then((result) => {
-                if (result.isConfirmed) {
+                if (result.isConfirmed && isHome == 1) {
                     Swal.fire("You have finish the reservation", "Please wait for the Homestay Owner to confirm the reservation. To view the reservation details, you can check the Reservation Menu.").then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = "/web/reservation/finish/" + reservation_id + "/" + deposit + "/" + total_price + "/" + zerocoin;
+                            window.location.href = "/web/reservation/finish/" + reservation_id + "/" + deposit + "/" + total_price + "/" + zerocoin + "/" + isHome;
                         }
                     });
+                } else {
+                    window.location.href = "/web/reservation/finish/" + reservation_id + "/" + deposit + "/" + total_price + "/" + zerocoin + "/" + isHome;
                 }
             });
         }
