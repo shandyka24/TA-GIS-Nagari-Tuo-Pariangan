@@ -14,62 +14,91 @@
 
 <?= $this->section('content') ?>
 <style>
-/* Global font size override to 20px */
-body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
-    font-size: 20px;
-}
+    /* Global font size override to 20px */
+    body,
+    .card,
+    .table,
+    .btn,
+    .form-control,
+    .form-select,
+    .modal,
+    .form-label,
+    label,
+    input,
+    textarea,
+    select,
+    option,
+    th,
+    td,
+    p,
+    span,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 20px;
+    }
 
-/* Specific overrides for smaller elements */
-.card-title {
-    font-size: 20px;
-    font-weight: bold;
-}
+    /* Specific overrides for smaller elements */
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
 
-.table th, .table td {
-    font-size: 20px;
-    padding: 12px;
-}
+    .table th,
+    .table td {
+        font-size: 20px;
+        padding: 12px;
+    }
 
-.btn {
-    font-size: 20px;
-    padding: 10px 16px;
-}
+    .btn {
+        font-size: 20px;
+        padding: 10px 16px;
+    }
 
-.btn-sm {
-    font-size: 18px;
-    padding: 8px 12px;
-}
+    .btn-sm {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
 
-.form-control, .form-select {
-    font-size: 20px;
-    padding: 10px;
-    font-weight: bold;
-}
+    .form-control,
+    .form-select {
+        font-size: 20px;
+        padding: 10px;
+        font-weight: bold;
+    }
 
-.modal-title {
-    font-size: 22px;
-}
+    .modal-title {
+        font-size: 22px;
+    }
 
-.input-group-text {
-    font-size: 20px;
-}
+    .input-group-text {
+        font-size: 20px;
+    }
 
-.form-check-label {
-    font-size: 20px;
-}
+    .form-check-label {
+        font-size: 20px;
+    }
 
-.text-secondary, .text-muted {
-    font-size: 18px;
-}
+    .text-secondary,
+    .text-muted {
+        font-size: 18px;
+    }
 
-/* DataTable specific styles */
-.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
-    font-size: 20px;
-}
+    /* DataTable specific styles */
+    .dataTables_wrapper,
+    .dataTables_filter input,
+    .dataTables_length select {
+        font-size: 20px;
+    }
 
-.dataTables_info, .dataTables_paginate {
-    font-size: 20px;
-}
+    .dataTables_info,
+    .dataTables_paginate {
+        font-size: 20px;
+    }
 </style>
 <section class="section text-dark">
     <div class="row">
@@ -83,7 +112,7 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                 <div class="card-header text-center">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title">Homestay Reservation</h4>
+                            <h4 class="card-title fs-4 fw-bolder">Homestay Reservation</h4>
                         </div>
                     </div>
                 </div>
@@ -226,10 +255,10 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
         $total_price = $homestay_unit_total_price + $homestay_activity_total_price;
         $deposit = $total_price * 20 / 100;
         $fullPay = $total_price * 80 / 100;
-        if($reservation['customer_id'] == null){
+        if ($reservation['customer_id'] == null) {
             $coin['total_coin'] = 0;
             $total_price_after_coin = 0;
-        } else{
+        } else {
             $total_price_after_coin = $total_price - $coin['total_coin'];
         }
         $coin = $coin['total_coin'];
@@ -243,7 +272,7 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                 $coin = 0.15 * $homestay_unit_total_price * 0.9;
             }
         }
-        
+
         if ($reservation['is_refund'] == '1') {
             $refund = $deposit * 50 / 100;
         } elseif ($reservation['is_refund'] == '0') {
@@ -255,7 +284,7 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                 <div class="card-header text-center">
                     <div class="row align-items-center">
                         <div class="col">
-                            <h4 class="card-title">Transaction History</h4>
+                            <h4 class="card-title fs-4 fw-bolder">Transaction History</h4>
                         </div>
                     </div>
                 </div>
@@ -263,7 +292,7 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                     <div class="col table-responsive">
                         <table class="table table-borderless text-dark">
                             <tbody>
-                            <?php if (($reservation['reservation_type'] == 1)) : ?>
+                                <?php if (($reservation['reservation_type'] == 1)) : ?>
                                     <tr>
                                         <td class="fw-bold">Total Price</td>
                                         <td>: <?= esc("Rp " . number_format($total_price, 0, ',', '.')) ?></td>

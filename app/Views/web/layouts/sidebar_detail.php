@@ -5,9 +5,9 @@ $uri2 = $uri[2] ?? '';
 $uri3 = $uri[3] ?? '';
 ?>
 <style>
-    /* div {
+    div {
         font-size: 20px;
-    } */
+    }
 
     span {
         font-size: 20px;
@@ -52,23 +52,23 @@ $uri3 = $uri[3] ?? '';
                 <ul class="menu">
                     <li class="sidebar-item">
                         <a href="" onclick="self.close()" class="sidebar-link">
-                            <span class="material-icons" style="font-size: 1.5rem; vertical-align: bottom">arrow_back</span> <span>Back to Home</span>
+                            <span class="material-icons" style="font-size: 1.5rem; vertical-align: bottom">arrow_back</span> <span class="text-dark fw-bold" style="font-size: 20px;">Back to Home</span>
                         </a>
                     </li>
                     <?php if (url_is('*homestay*')) : ?>
                         <li class="sidebar-item <?= ($uri1 == 'homestay') ? 'active' : '' ?>">
                             <a href="<?= base_url('web/homestay'); ?><?= esc('/' . $homestay_id); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-bed"></i><span> Homestay</span>
+                                <i class="fa-solid fa-bed"></i><span class="text-dark fw-bold" style="font-size: 20px;"> Homestay</span>
                             </a>
                         </li>
                         <li class="sidebar-item <?= ($uri1 == 'homestayUnit') ? 'active' : '' ?>">
                             <a href="<?= base_url('web/homestayUnit/'); ?><?= esc('/' . $homestay_id); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-door-open"></i><span> Unit</span>
+                                <i class="fa-solid fa-door-open"></i><span class="text-dark fw-bold" style="font-size: 20px;"> Unit</span>
                             </a>
                         </li>
                         <li class="sidebar-item <?= ($uri1 == 'homestayAdditionalAmenities') ? 'active' : '' ?>">
                             <a href="<?= base_url('web/homestayAdditionalAmenities'); ?><?= esc('/' . $homestay_id); ?>" class="sidebar-link">
-                                <i class="fa-solid fa-list-ol"></i><span> Additional Amenities</span>
+                                <i class="fa-solid fa-list-ol"></i><span class="text-dark fw-bold" style="font-size: 20px;"> Additional Amenities</span>
                             </a>
                         </li>
                     <?php endif; ?>
