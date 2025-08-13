@@ -19,62 +19,91 @@ $edit = in_array('edit', $uri);
 
 <?= $this->section('content') ?>
 <style>
-/* Global font size override to 20px */
-body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
-    font-size: 20px;
-}
+    /* Global font size override to 20px */
+    body,
+    .card,
+    .table,
+    .btn,
+    .form-control,
+    .form-select,
+    .modal,
+    .form-label,
+    label,
+    input,
+    textarea,
+    select,
+    option,
+    th,
+    td,
+    p,
+    span,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 20px;
+    }
 
-/* Specific overrides for smaller elements */
-.card-title {
-    font-size: 20px;
-    font-weight: bold;
-}
+    /* Specific overrides for smaller elements */
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
 
-.table th, .table td {
-    font-size: 20px;
-    padding: 12px;
-}
+    .table th,
+    .table td {
+        font-size: 20px;
+        padding: 12px;
+    }
 
-.btn {
-    font-size: 20px;
-    padding: 10px 16px;
-}
+    .btn {
+        font-size: 20px;
+        padding: 10px 16px;
+    }
 
-.btn-sm {
-    font-size: 18px;
-    padding: 8px 12px;
-}
+    .btn-sm {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
 
-.form-control, .form-select {
-    font-size: 20px;
-    padding: 10px;
-    /* font-weight: bold; */
-}
+    .form-control,
+    .form-select {
+        font-size: 20px;
+        padding: 10px;
+        /* font-weight: bold; */
+    }
 
-.modal-title {
-    font-size: 22px;
-}
+    .modal-title {
+        font-size: 22px;
+    }
 
-.input-group-text {
-    font-size: 20px;
-}
+    .input-group-text {
+        font-size: 20px;
+    }
 
-.form-check-label {
-    font-size: 20px;
-}
+    .form-check-label {
+        font-size: 20px;
+    }
 
-.text-secondary, .text-muted {
-    font-size: 18px;
-}
+    .text-secondary,
+    .text-muted {
+        font-size: 18px;
+    }
 
-/* DataTable specific styles */
-.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
-    font-size: 20px;
-}
+    /* DataTable specific styles */
+    .dataTables_wrapper,
+    .dataTables_filter input,
+    .dataTables_length select {
+        font-size: 20px;
+    }
 
-.dataTables_info, .dataTables_paginate {
-    font-size: 20px;
-}
+    .dataTables_info,
+    .dataTables_paginate {
+        font-size: 20px;
+    }
 </style>
 <section class="section">
     <div class="row">
@@ -97,31 +126,65 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                             </div>
                             <div class="form-group mb-4">
                                 <label for="name" class="mb-2">Worship Place Name</label>
-                                <input type="text" id="name" class="form-control text-dark" name="name" placeholder="Worship Place Name" value="<?= ($edit) ? $data['name'] : old('name'); ?>" required>
+                                <input type="text"
+                                    id="name"
+                                    class="form-control text-dark"
+                                    name="name"
+                                    placeholder="Worship Place Name"
+                                    value="<?= ($edit) ? $data['name'] : old('name'); ?>"
+                                    required
+                                    pattern="[A-Za-z0-9'() \s]+"
+                                    title="Only letters, numbers, apostrophes ('), parentheses ( ), and spaces are allowed"
+                                    oninput="this.value = this.value.replace(/[^A-Za-z0-9'() ]/g, '')">
                                 </select>
                             </div>
                             <fieldset class="form-group mb-4">
                                 <script>
                                     getListWPCat('<?= ($edit) ? esc($data['worship_place_category']) : ''; ?>');
                                 </script>
-                                <label for="catSelect" class="mb-2">Worship Place Category</label>
-                                <select class="form-select" id="catSelect" name="worship_place_category" required>
+                                <label for="catSelect" class="mb-2 text-dark">Worship Place Category</label>
+                                <select class="form-select text-dark" id="catSelect" name="worship_place_category" required>
                                 </select>
                             </fieldset>
                             <div class="form-group mb-4">
                                 <label for="address" class="mb-2">Address</label>
-                                <input type="text" id="address" class="form-control text-dark" name="address" placeholder="Address" value="<?= ($edit) ? $data['address'] : old('address'); ?>">
+                                <input type="text"
+                                    id="address"
+                                    class="form-control text-dark"
+                                    name="address"
+                                    placeholder="Address"
+                                    value="<?= ($edit) ? $data['address'] : old('address'); ?>"
+                                    pattern="[A-Za-z0-9'() \s.,-]+"
+                                    title="Only letters, numbers, apostrophes ('), parentheses (), dots (.), commas (,), dashes (-), and spaces are allowed"
+                                    oninput="this.value = this.value.replace(/[^A-Za-z0-9'() .,\\-]/g, '')">
                             </div>
                             <div class="form-group mb-4">
                                 <label for="capacity" class="mb-2">Capacity</label>
                                 <div class="input-group">
-                                    <input type="number" id="capacity" class="form-control text-dark" name="capacity" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= ($edit) ? $data['capacity'] : old('capacity'); ?>">
+                                    <input type="number"
+                                        id="capacity"
+                                        class="form-control text-dark"
+                                        name="capacity"
+                                        placeholder="Capacity"
+                                        aria-label="Capacity"
+                                        aria-describedby="capacity"
+                                        value="<?= ($edit) ? $data['capacity'] : old('capacity'); ?>">
                                     <span class="input-group-text">People</span>
                                 </div>
+                                <script>
+                                    const capacityInput = document.getElementById('capacity');
+                                    capacityInput.addEventListener('input', function() {
+                                        // Menghapus tanda minus jika diketik
+                                        this.value = this.value.replace(/[^0-9]/g, '');
+                                    });
+                                </script>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control text-dark" id="description" name="description" rows="4"><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
+                                <textarea class="form-control text-dark" id="description" name="description" rows="4"
+                                    oninput="this.value = this.value.replace(/[^A-Za-z0-9\s.,'\/()\-\–]/g, '')"
+                                    pattern="[A-Za-z0-9\s.,'\/()\-\–]+"
+                                    title="Only letters, numbers, spaces, and characters: . , ' / ( ) - – allowed"><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="facilities" class="mb-2">Facilities</label>
@@ -137,8 +200,24 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                             </div>
                             <div class="form-group mb-4">
                                 <label for="gallery" class="form-label">Gallery</label>
-                                <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
+                                <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery" multiple required>
+                                <small id="gallery-warning" class="text-danger d-none">Please select at least 1 image.</small>
                             </div>
+
+                            <script>
+                                const galleryInput = document.getElementById('gallery');
+                                const warning = document.getElementById('gallery-warning');
+
+                                galleryInput.addEventListener('change', function() {
+                                    if (this.files.length < 1) {
+                                        warning.classList.remove('d-none');
+                                        this.setCustomValidity("Please select at least one image.");
+                                    } else {
+                                        warning.classList.add('d-none');
+                                        this.setCustomValidity("");
+                                    }
+                                });
+                            </script>
                             <input type="hidden" name="lat" id="lat" value="<?= ($edit) ? $data['lat'] : old('lat'); ?>">
                             <input type="hidden" name="lng" id="lng" value="<?= ($edit) ? $data['lng'] : old('lng'); ?>">
                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>

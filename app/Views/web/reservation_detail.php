@@ -15,62 +15,91 @@
 
 <?= $this->section('content') ?>
 <style>
-/* Global font size override to 20px */
-body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
-    font-size: 20px;
-}
+    /* Global font size override to 20px */
+    body,
+    .card,
+    .table,
+    .btn,
+    .form-control,
+    .form-select,
+    .modal,
+    .form-label,
+    label,
+    input,
+    textarea,
+    select,
+    option,
+    th,
+    td,
+    p,
+    span,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 20px;
+    }
 
-/* Specific overrides for smaller elements */
-.card-title {
-    font-size: 20px;
-    font-weight: bold;
-}
+    /* Specific overrides for smaller elements */
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
 
-.table th, .table td {
-    font-size: 20px;
-    padding: 12px;
-}
+    .table th,
+    .table td {
+        font-size: 20px;
+        padding: 12px;
+    }
 
-.btn {
-    font-size: 20px;
-    padding: 10px 16px;
-}
+    .btn {
+        font-size: 20px;
+        padding: 10px 16px;
+    }
 
-.btn-sm {
-    font-size: 18px;
-    padding: 8px 12px;
-}
+    .btn-sm {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
 
-.form-control, .form-select {
-    font-size: 20px;
-    padding: 10px;
-    /* font-weight: bold; */
-}
+    .form-control,
+    .form-select {
+        font-size: 20px;
+        padding: 10px;
+        /* font-weight: bold; */
+    }
 
-.modal-title {
-    font-size: 22px;
-}
+    .modal-title {
+        font-size: 22px;
+    }
 
-.input-group-text {
-    font-size: 20px;
-}
+    .input-group-text {
+        font-size: 20px;
+    }
 
-.form-check-label {
-    font-size: 20px;
-}
+    .form-check-label {
+        font-size: 20px;
+    }
 
-.text-secondary, .text-muted {
-    font-size: 18px;
-}
+    .text-secondary,
+    .text-muted {
+        font-size: 18px;
+    }
 
-/* DataTable specific styles */
-.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
-    font-size: 20px;
-}
+    /* DataTable specific styles */
+    .dataTables_wrapper,
+    .dataTables_filter input,
+    .dataTables_length select {
+        font-size: 20px;
+    }
 
-.dataTables_info, .dataTables_paginate {
-    font-size: 20px;
-}
+    .dataTables_info,
+    .dataTables_paginate {
+        font-size: 20px;
+    }
 </style>
 <section class="section text-dark">
     <div class="row">
@@ -323,11 +352,11 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
             <div class="row">
                 <div class="col">
                     <?php if (($reservation['reservation_type'] == 1)) : ?>
-                        <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($deposit); ?>','<?= esc($total_price); ?>','<?= esc($coin); ?>', '<?= $isHome = session()->get('isHome');?>')">
+                        <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($deposit); ?>','<?= esc($total_price); ?>','<?= esc($coin); ?>', '<?= $isHome = session()->get('isHome'); ?>')">
                             <i class="fa-solid fa-check"></i> Done
                         </a>
                     <?php elseif (($reservation['reservation_type'] == 2)) : ?>
-                        <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($reservation['deposit']); ?>','<?= esc($reservation['total_price']); ?>','<?= esc($coin); ?>', '<?= $isHome = session()->get('isHome');?>')">
+                        <a title="Finish Reservation" class="btn icon btn-success btn-sm mb-3 float-end" onclick="confirmDone('<?= esc($reservation['id']); ?>','<?= esc($reservation['deposit']); ?>','<?= esc($reservation['total_price']); ?>','<?= esc($coin); ?>', '<?= $isHome = session()->get('isHome'); ?>')">
                             <i class="fa-solid fa-check"></i> Done
                         </a>
                     <?php endif; ?>
@@ -633,7 +662,7 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                                                         <input type="hidden" name="reservation_id" value="<?= esc($reservation['id']); ?>">
                                                         <div class="form-group">
                                                             <label for="name" class="mb-2">Account Refund (Ex: Name XX - Bank XX - AccNumber)</label>
-                                                            <textarea class="form-control text-dark" name="account_refund" style="color: #000;" placeholder="Budi Setiawan - Bank ABC - 12345678" required><?= $reservation['account_refund'] ? $reservation['account_refund'] : '' ?></textarea>
+                                                            <textarea class="form-control text-dark" name="account_refund" style="color: #000;" placeholder="Budi Setiawan - Bank ABC - 12345678" oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s\-']/g, '')" required><?= $reservation['account_refund'] ? $reservation['account_refund'] : '' ?></textarea>
                                                         </div>
                                                         <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                                     </div>

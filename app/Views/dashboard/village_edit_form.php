@@ -14,62 +14,91 @@
 
 <?= $this->section('content') ?>
 <style>
-/* Global font size override to 20px */
-body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
-    font-size: 20px;
-}
+    /* Global font size override to 20px */
+    body,
+    .card,
+    .table,
+    .btn,
+    .form-control,
+    .form-select,
+    .modal,
+    .form-label,
+    label,
+    input,
+    textarea,
+    select,
+    option,
+    th,
+    td,
+    p,
+    span,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 20px;
+    }
 
-/* Specific overrides for smaller elements */
-.card-title {
-    font-size: 20px;
-    font-weight: bold;
-}
+    /* Specific overrides for smaller elements */
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
 
-.table th, .table td {
-    font-size: 20px;
-    padding: 12px;
-}
+    .table th,
+    .table td {
+        font-size: 20px;
+        padding: 12px;
+    }
 
-.btn {
-    font-size: 20px;
-    padding: 10px 16px;
-}
+    .btn {
+        font-size: 20px;
+        padding: 10px 16px;
+    }
 
-.btn-sm {
-    font-size: 18px;
-    padding: 8px 12px;
-}
+    .btn-sm {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
 
-.form-control, .form-select {
-    font-size: 20px;
-    padding: 10px;
-    /* font-weight: bold; */
-}
+    .form-control,
+    .form-select {
+        font-size: 20px;
+        padding: 10px;
+        /* font-weight: bold; */
+    }
 
-.modal-title {
-    font-size: 22px;
-}
+    .modal-title {
+        font-size: 22px;
+    }
 
-.input-group-text {
-    font-size: 20px;
-}
+    .input-group-text {
+        font-size: 20px;
+    }
 
-.form-check-label {
-    font-size: 20px;
-}
+    .form-check-label {
+        font-size: 20px;
+    }
 
-.text-secondary, .text-muted {
-    font-size: 18px;
-}
+    .text-secondary,
+    .text-muted {
+        font-size: 18px;
+    }
 
-/* DataTable specific styles */
-.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
-    font-size: 20px;
-}
+    /* DataTable specific styles */
+    .dataTables_wrapper,
+    .dataTables_filter input,
+    .dataTables_length select {
+        font-size: 20px;
+    }
 
-.dataTables_info, .dataTables_paginate {
-    font-size: 20px;
-}
+    .dataTables_info,
+    .dataTables_paginate {
+        font-size: 20px;
+    }
 </style>
 
 <section class="section">
@@ -99,39 +128,78 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="address" class="form-label">Address</label>
-                                    <textarea class="form-control text-dark" id="address" name="address" rows="2" required><?= $data['address']; ?></textarea>
+                                    <textarea class="form-control text-dark" id="address" name="address" rows="2"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z0-9\s.,'\/()\-\–]/g, '')"
+                                        pattern="[A-Za-z0-9\s.,'\/()\-\–]+"
+                                        title="Only letters, numbers, spaces, and characters: . , ' / ( ) - allowed"
+                                        required><?= $data['address']; ?></textarea>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control text-dark" id="description" name="description" rows="4" required><?= $data['description']; ?></textarea>
+                                    <textarea class="form-control text-dark" id="description" name="description" rows="4"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z0-9\s.,'\/()\-\–]/g, '')"
+                                        pattern="[A-Za-z0-9\s.,'\/()\-\–]+"
+                                        title="Only letters, numbers, spaces, and characters: . , ' / ( ) - allowed"
+                                        required><?= $data['description']; ?></textarea>
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-4 col-12 mb-4">
-                                        <label for="capacity" class="mb-2">Open</label>
+                                        <label for="open" class="mb-2">Open</label>
                                         <div class="input-group">
-                                            <input type="time" id="capacity" class="form-control text-dark" name="open" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['open']; ?>" required>
+                                            <input type="time" id="open" class="form-control text-dark" name="open"
+                                                placeholder="Opening Hours" aria-label="Opening Hours" aria-describedby="open"
+                                                value="<?= $data['open']; ?>" required>
                                             <span class="input-group-text">WIB</span>
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-2 col-12 mb-4">
-                                    </div>
+
+                                    <div class="form-group col-md-2 col-12 mb-4"></div>
+
                                     <div class="form-group col-md-4 col-12 mb-4">
-                                        <label for="capacity" class="mb-2">Ticket Price</label>
+                                        <label for="ticket_price" class="mb-2">Ticket Price</label>
                                         <div class="input-group">
                                             <span class="input-group-text">Rp.</span>
-                                            <input type="number" id="capacity" class="form-control text-dark" name="ticket_price" placeholder="Ticket Price" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['ticket_price']; ?>">
+                                            <input type="number" id="ticket_price" class="form-control text-dark" name="ticket_price"
+                                                placeholder="Ticket Price" aria-label="Ticket Price" aria-describedby="ticket-price"
+                                                value="<?= $data['ticket_price']; ?>">
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="form-group col-md-4 col-12 mb-4">
-                                        <label for="capacity" class="mb-2">Close</label>
+                                        <label for="close" class="mb-2">Close</label>
                                         <div class="input-group">
-                                            <input type="time" id="capacity" class="form-control text-dark" name="close" placeholder="Capacity" aria-label="Ticket Price" aria-describedby="ticket-price" value="<?= $data['close']; ?>" required>
+                                            <input type="time" id="close" class="form-control text-dark" name="close"
+                                                placeholder="Closing Hours" aria-label="Closing Hours" aria-describedby="close"
+                                                value="<?= $data['close']; ?>" required>
                                             <span class="input-group-text">WIB</span>
                                         </div>
+                                        <small id="time-warning" class="text-danger d-none">Closing time must be after opening time.</small>
                                     </div>
                                 </div>
+
+                                <script>
+                                    const openInput = document.getElementById('open');
+                                    const closeInput = document.getElementById('close');
+                                    const warning = document.getElementById('time-warning');
+
+                                    function validateTime() {
+                                        const openTime = openInput.value;
+                                        const closeTime = closeInput.value;
+
+                                        if (openTime && closeTime && closeTime <= openTime) {
+                                            warning.classList.remove('d-none');
+                                            closeInput.setCustomValidity("Closing time must be after opening time.");
+                                        } else {
+                                            warning.classList.add('d-none');
+                                            closeInput.setCustomValidity("");
+                                        }
+                                    }
+
+                                    openInput.addEventListener('change', validateTime);
+                                    closeInput.addEventListener('change', validateTime);
+                                </script>
                                 <div class="row mt-3">
                                     <div class="form-group col-md-6 col-12 mb-4">
                                         <label for="email" class="mb-2">Email</label>

@@ -59,7 +59,7 @@
 <div class="table-responsive overflow-auto col-12" id="your-activity">
     <div class="card">
         <div class="card-header">
-            <h5 class="card-title text-center fs-4 fw-bolder">Your Activity Plan</h5>
+            <h5 class="card-title text-center fs-4 fw-bolder" id="yap">Your Activity Plan</h5>
         </div>
         <div class="card-body">
             <div id="table-activity" style="max-height: 300px; overflow-y: auto;">
@@ -69,7 +69,7 @@
             </div>
             <div class="d-flex justify-content-center gap-3">
                 <button class="btn btn-primary" id="btn-back-homestay" onclick="backToHomestay();">
-                    <i class="fa-solid fa-circle-left me-2"></i> Back to Homestay
+                    <i class="fa-solid fa-circle-left me-2"></i><span id="back-back">Back to Homestay</span>
                 </button>
                 <button class="btn btn-success" id="btn-show-all-route" onclick="showAllRoutes();" disabled>
                     <i class="fa-solid fa-route me-2"></i> Show All Routes

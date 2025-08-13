@@ -19,7 +19,12 @@ $edit = in_array('edit', $uri);
 
 <?= $this->section('content') ?>
 <style>
-    .form-control, .form-select, .form-group, .btn, button, a {
+    .form-control,
+    .form-select,
+    .form-group,
+    .btn,
+    button,
+    a {
         font-size: 20px;
     }
 </style>
@@ -48,7 +53,13 @@ $edit = in_array('edit', $uri);
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="name" class="mb-2">Homestay Name</label>
-                                    <input type="text" id="name" class="form-control text-dark" name="name" placeholder="Homestay Name" value="<?= ($edit) ? $data['name'] : old('name'); ?>" required>
+                                    <input type="text" id="name" class="form-control text-dark" name="name"
+                                        placeholder="Homestay Name"
+                                        value="<?= ($edit) ? $data['name'] : old('name'); ?>"
+                                        required
+                                        pattern="[A-Za-z0-9\s()']+"
+                                        title="Only letters, numbers, and spaces allowed"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z0-9\s()']/g, '')">
                                 </div>
                                 <fieldset class="form-group mb-4">
                                     <label for="category" class="mb-2">Category</label>
@@ -64,26 +75,90 @@ $edit = in_array('edit', $uri);
                                 </fieldset>
                                 <div class="form-group mb-4">
                                     <label for="address" class="mb-2">Address</label>
-                                    <input type="text" id="address" class="form-control text-dark" name="address" placeholder="Address" value="<?= ($edit) ? $data['address'] : old('address'); ?>">
+                                    <input type="text" id="address" class="form-control text-dark" name="address"
+                                        placeholder="Address"
+                                        value="<?= ($edit) ? $data['address'] : old('address'); ?>"
+                                        required
+                                        pattern="[A-Za-z0-9\s.,'\/()\-]+"
+                                        title="Only letters, numbers, spaces, and characters: . , ' / ( ) - allowed"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z0-9\s.,'\/()\-\–]/g, '')">
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="open" class="mb-2">Opening Hours</label>
                                     <div class="input-group">
-                                        <input type="time" id="open" class="form-control text-dark" name="open" placeholder="Opening Hours" aria-label="Opening Hours" aria-describedby="open" value="<?= ($edit) ? $data['open'] : old('open'); ?>" required>
+                                        <input type="time" id="open" class="form-control text-dark" name="open"
+                                            placeholder="Opening Hours" aria-label="Opening Hours" aria-describedby="open"
+                                            value="<?= ($edit) ? $data['open'] : old('open'); ?>" required>
                                         <span class="input-group-text">WIB</span>
                                     </div>
                                 </div>
+
                                 <div class="form-group mb-4">
                                     <label for="close" class="mb-2">Closing Hours</label>
                                     <div class="input-group">
-                                        <input type="time" id="close" class="form-control text-dark" name="close" placeholder="Closing Hours" aria-label="Closing Hours" aria-describedby="close" value="<?= ($edit) ? $data['close'] : old('close'); ?>" required>
+                                        <input type="time" id="close" class="form-control text-dark" name="close"
+                                            placeholder="Closing Hours" aria-label="Closing Hours" aria-describedby="close"
+                                            value="<?= ($edit) ? $data['close'] : old('close'); ?>" required>
                                         <span class="input-group-text">WIB</span>
                                     </div>
+                                    <small id="time-warning" class="text-danger d-none">Closing time must be after opening time.</small>
                                 </div>
+
+                                <script>
+                                    const openInput = document.getElementById('open');
+                                    const closeInput = document.getElementById('close');
+                                    const warning = document.getElementById('time-warning');
+
+                                    function validateTime() {
+                                        const openTime = openInput.value;
+                                        const closeTime = closeInput.value;
+
+                                        if (openTime && closeTime) {
+                                            const [openHour, openMin] = openTime.split(':').map(Number);
+                                            const [closeHour, closeMin] = closeTime.split(':').map(Number);
+
+                                            const openMinutes = openHour * 60 + openMin;
+                                            const closeMinutes = closeHour * 60 + closeMin;
+
+                                            // Hitung awal zona terlarang: 6 jam sebelum jam buka
+                                            let forbiddenStart = openMinutes - (6 * 60);
+                                            if (forbiddenStart < 0) {
+                                                forbiddenStart += 24 * 60; // kalau negatif berarti mundur ke hari sebelumnya
+                                            }
+
+                                            let valid = true;
+
+                                            if (forbiddenStart < openMinutes) {
+                                                // Zona larangan tidak melintasi tengah malam
+                                                if (closeMinutes > forbiddenStart && closeMinutes < openMinutes) {
+                                                    valid = false;
+                                                }
+                                            } else {
+                                                // Zona larangan melintasi tengah malam
+                                                if (closeMinutes > forbiddenStart || closeMinutes < openMinutes) {
+                                                    valid = false;
+                                                }
+                                            }
+
+                                            if (!valid) {
+                                                warning.textContent = "Closing time cannot be within 6 hours before opening time.";
+                                                warning.classList.remove('d-none');
+                                                closeInput.setCustomValidity("Closing time invalid.");
+                                            } else {
+                                                warning.classList.add('d-none');
+                                                closeInput.setCustomValidity("");
+                                            }
+                                        }
+                                    }
+
+                                    openInput.addEventListener('change', validateTime);
+                                    closeInput.addEventListener('change', validateTime);
+                                </script>
+
                                 <div class="form-group mb-4">
                                     <label for="max_people_for_event" class="mb-2">Maximum Capacity for Event</label>
                                     <div class="input-group">
-                                        <input type="number" min="0" id="max_people_for_event" class="form-control text-dark" name="max_people_for_event" placeholder="Capacity" value="<?= ($edit) ? $data['max_people_for_event'] : old('max_people_for_event'); ?>" required>
+                                        <input type="number" min="0" id="max_people_for_event" class="form-control text-dark" name="max_people_for_event" placeholder="Capacity" pattern="[0-9]+" oninput="this.value = this.value.replace(/[^0-9]/g, '')" value="<?= ($edit) ? $data['max_people_for_event'] : old('max_people_for_event'); ?>" required>
                                         <span class="input-group-text">People</span>
                                     </div>
                                 </div>
@@ -101,7 +176,7 @@ $edit = in_array('edit', $uri);
                                     <?php else : ?>
                                         <fieldset class="form-group mb-4">
                                             <script>
-                                                getListUsers('<?= ($edit) ? esc($data['owner']) : ''; ?>');
+                                                getListUsers(' <?= ($edit) ? esc($data['owner']) : ''; ?>');
                                             </script>
                                             <label for="ownerSelect" class="mb-2">Owner</label>
                                             <select class="form-select text-dark" id="ownerSelect" name="owner" required>
@@ -111,7 +186,11 @@ $edit = in_array('edit', $uri);
                                 <?php endif; ?>
                                 <div class="form-group mb-4">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control text-dark" id="description" name="description" rows="4"><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
+                                    <textarea class="form-control text-dark" id="description" name="description" rows="4"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z0-9\s.,'\/()\-\–]/g, '')"
+                                        pattern="[A-Za-z0-9\s.,'\/()\-\–]+"
+                                        title="Only letters, numbers, spaces, and characters: . , ' / ( ) - allowed"
+                                        required><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="facilities" class="mb-2">Facilities</label>
@@ -127,8 +206,26 @@ $edit = in_array('edit', $uri);
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="gallery" class="form-label">Gallery</label>
-                                    <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
+                                    <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery" multiple required>
+                                    <small id="gallery-warning" class="text-danger d-none">Please upload at least one image.</small>
                                 </div>
+
+                                <script>
+                                    const galleryInput = document.getElementById('gallery');
+                                    const galleryWarning = document.getElementById('gallery-warning');
+
+                                    function validateGallery() {
+                                        if (galleryInput.files.length < 1) {
+                                            galleryWarning.classList.remove('d-none');
+                                            galleryInput.setCustomValidity("Please upload at least one image.");
+                                        } else {
+                                            galleryWarning.classList.add('d-none');
+                                            galleryInput.setCustomValidity("");
+                                        }
+                                    }
+
+                                    galleryInput.addEventListener('change', validateGallery);
+                                </script>
                                 <div class="form-group mb-4">
                                     <label for="video" class="form-label">Video</label>
                                     <input class="form-control text-dark" accept="video/*, .mkv" type="file" name="video" id="video">

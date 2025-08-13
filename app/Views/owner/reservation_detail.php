@@ -670,7 +670,9 @@
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="description" class="form-label">Feedback</label>
-                                        <textarea class="form-control text-dark" id="description" name="feedback" rows="4"></textarea>
+                                        <textarea class="form-control text-dark" id="description" name="feedback" rows="4"
+                                            oninput="this.value = this.value.replace(/[^A-Za-z0-9 .,!?':;()_\-\/]/g, '')"
+                                            pattern="[A-Za-z0-9 .,!?':;()_\-\/]*"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                 </div>

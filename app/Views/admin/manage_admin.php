@@ -19,62 +19,91 @@ $users = in_array('users', $uri);
 
 <?= $this->section('content') ?>
 <style>
-/* Global font size override to 20px */
-body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
-    font-size: 20px;
-}
+    /* Global font size override to 20px */
+    body,
+    .card,
+    .table,
+    .btn,
+    .form-control,
+    .form-select,
+    .modal,
+    .form-label,
+    label,
+    input,
+    textarea,
+    select,
+    option,
+    th,
+    td,
+    p,
+    span,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 20px;
+    }
 
-/* Specific overrides for smaller elements */
-.card-title {
-    font-size: 20px;
-    font-weight: bold;
-}
+    /* Specific overrides for smaller elements */
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
 
-.table th, .table td {
-    font-size: 20px;
-    padding: 12px;
-}
+    .table th,
+    .table td {
+        font-size: 20px;
+        padding: 12px;
+    }
 
-.btn {
-    font-size: 20px;
-    padding: 10px 16px;
-}
+    .btn {
+        font-size: 20px;
+        padding: 10px 16px;
+    }
 
-.btn-sm {
-    font-size: 18px;
-    padding: 8px 12px;
-}
+    .btn-sm {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
 
-.form-control, .form-select {
-    font-size: 20px;
-    padding: 10px;
-    /* font-weight: bold; */
-}
+    .form-control,
+    .form-select {
+        font-size: 20px;
+        padding: 10px;
+        /* font-weight: bold; */
+    }
 
-.modal-title {
-    font-size: 22px;
-}
+    .modal-title {
+        font-size: 22px;
+    }
 
-.input-group-text {
-    font-size: 20px;
-}
+    .input-group-text {
+        font-size: 20px;
+    }
 
-.form-check-label {
-    font-size: 20px;
-}
+    .form-check-label {
+        font-size: 20px;
+    }
 
-.text-secondary, .text-muted {
-    font-size: 18px;
-}
+    .text-secondary,
+    .text-muted {
+        font-size: 18px;
+    }
 
-/* DataTable specific styles */
-.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
-    font-size: 20px;
-}
+    /* DataTable specific styles */
+    .dataTables_wrapper,
+    .dataTables_filter input,
+    .dataTables_length select {
+        font-size: 20px;
+    }
 
-.dataTables_info, .dataTables_paginate {
-    font-size: 20px;
-}
+    .dataTables_info,
+    .dataTables_paginate {
+        font-size: 20px;
+    }
 </style>
 <section class="section">
     <div class="card">
@@ -224,7 +253,15 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                                                         <div class="form-body">
                                                             <div class="form-group">
                                                                 <label for="name" class="mb-2"><?= esc($category); ?> Name</label>
-                                                                <input type="text" id="name" class="form-control text-dark" name="name" placeholder="<?= esc($category); ?> Name" required>
+                                                                <input type="text"
+                                                                    id="name"
+                                                                    class="form-control text-dark"
+                                                                    name="name"
+                                                                    placeholder="<?= esc($category); ?> Name"
+                                                                    required
+                                                                    pattern="[A-Za-z\s]+"
+                                                                    title="Only letters and spaces allowed"
+                                                                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                                             </div>
                                                             <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                                             <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>
@@ -278,7 +315,16 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                                                                         <div class="form-body">
                                                                             <div class="form-group">
                                                                                 <label for="name" class="mb-2"><?= esc($category); ?> Name</label>
-                                                                                <input type="text" id="name" class="form-control text-dark" name="name" placeholder="<?= esc($category); ?> Name" value="<?= esc($product['name']); ?>" required>
+                                                                                <input type="text"
+                                                                                    id="name"
+                                                                                    class="form-control text-dark"
+                                                                                    name="name"
+                                                                                    placeholder="<?= esc($category); ?> Name"
+                                                                                    value="<?= esc($product['name']); ?>"
+                                                                                    required
+                                                                                    pattern="[A-Za-z\s]+"
+                                                                                    title="Only letters and spaces allowed"
+                                                                                    oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
                                                                             </div>
                                                                             <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                                                             <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>

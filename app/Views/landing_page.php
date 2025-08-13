@@ -315,6 +315,26 @@
             </div>
             <?php if (!logged_in()) : ?>
                 <a href="<?= base_url('login'); ?>" class="btn btn-primary" style="font-size: 20px;">Login</a>
+            <?php else : ?>
+                <div class="btn-group mb-1">
+                    <div class="dropdown">
+                        <a class="" role="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="card mb-0">
+                                <div class="card-body py-3 px-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-lg me-0">
+                                            <img width="40px" height="40px" class="rounded-circle" src="<?= base_url('media/photos'); ?>/<?= user()->avatar; ?>" alt="Face 1" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu" style="border-radius: .5rem;" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item fw-bold" style="font-size: 20px;" href="<?= base_url('web/profile'); ?>">My Profile</a>
+                            <a class="dropdown-item fw-bold" style="font-size: 20px;" href="<?= base_url('logout'); ?>">Log Out</a>
+                        </div>
+                    </div>
+                </div>
             <?php endif; ?>
         </div>
     </nav>
@@ -510,7 +530,11 @@
                         <a class="btn btn-link" href="/web">Explore</a>
                         <a class="btn btn-link" href="#about">About</a>
                         <a class="btn btn-link" href="#award">Award</a>
-                        <a class="btn btn-link" href="<?= base_url('login'); ?>">Login</a>
+                        <?php if (!logged_in()) : ?>
+                            <a class="btn btn-link" href="<?= base_url('login'); ?>">Login</a>
+                        <?php else : ?>
+                            <a class="btn btn-link" href="<?= base_url('logout'); ?>">Log Out</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 <?= $this->extend('web/layouts/main'); ?>
 
 <?= $this->section('content') ?>
- <style>
+<style>
     /* Global font size override to 20px */
     body,
     .card,
@@ -221,7 +221,16 @@
                                     <div class="form-group mb-4 col-md-4 col-12">
                                         <label for="name" class="mb-2">Day of Stay</label>
                                         <div class="input-group">
-                                            <input type="number" id="day_of_stay" class="form-control text-dark" name="day_of_stay" onchange="getCheckOut(this.value)" min="1" value="" required>
+                                            <input type="number"
+                                                id="day_of_stay"
+                                                class="form-control text-dark"
+                                                name="day_of_stay"
+                                                onchange="getCheckOut(this.value)"
+                                                min="1"
+                                                pattern="^[1-9][0-9]*$"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                                                value=""
+                                                required>
                                             <span class="input-group-text">Days</span>
                                         </div>
                                         <script>
@@ -248,7 +257,7 @@
                                                     let checkOutVal = coyear + '-' + comonth + '-' + codaydate + 'T12:00';
                                                     checkOutInput.value = checkOutVal;
                                                 }
-                                                
+
                                                 if (checkInVal) {
                                                     // console.log(checkInVal);
                                                     // for (let i = 0; i < parseInt(dayOfStay.value); i++) {
@@ -390,10 +399,19 @@
                                             <p id="weather-result">Please select check in date and day of stay to check the weather.</p>
                                         </div>
                                     </div>
-                                    <div class="form-group mb-4 col-md-4 col-12">
-                                        <label for="name" class="mb-2">Total People</label>
+                                    <div class="form-group mb-4 col-md-5 col-12">
+                                        <label for="name" class="mb-2">Total People <span class="text-muted"><i>*(Min <?=esc(floor($max_people_for_event/2))?>)*(Max <?= esc($max_people_for_event)?>)</i></span></label>
                                         <div class="input-group">
-                                            <input type="number" min="1" max="<?= esc($max_people_for_event) ?>" id="total_people" class="form-control text-dark" name="total_people" min="1" value="" required>
+                                            <input type="number"
+                                                id="total_people"
+                                                class="form-control text-dark"
+                                                name="total_people"
+                                                min="<?=esc(floor($max_people_for_event/2))?>"
+                                                max="<?= esc($max_people_for_event) ?>"
+                                                pattern="^[1-9][0-9]*$"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                                                value=""
+                                                required>
                                             <span class="input-group-text">People</span>
                                         </div>
                                     </div>
@@ -495,7 +513,7 @@
                         month: '2-digit',
                         day: '2-digit',
                         year: 'numeric'
-                    }) .replace(/\//g, '-') + '</strong></div>' +
+                    }).replace(/\//g, '-') + '</strong></div>' +
                     // '<strong>' + element.time + '</strong><br>' +
                     '<span>Weather Prediction is Unavailable</span>' +
                     '</li>';
@@ -508,7 +526,7 @@
                         month: '2-digit',
                         day: '2-digit',
                         year: 'numeric'
-                    }) .replace(/\//g, '-') + '</strong></div>' +
+                    }).replace(/\//g, '-') + '</strong></div>' +
                     // '<strong>' + element.time + '</strong><br>' +
                     '<img src="https://openweathermap.org/img/wn/' + icons[element.weathercode] + '@2x.png" alt="Weather Icon">' +
                     '<div class="weather-desc">' +

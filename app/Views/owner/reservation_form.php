@@ -4,63 +4,92 @@
 
 <section class="section text-dark">
     <style>
-/* Global font size override to 20px */
-body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
-    font-size: 20px;
-}
+        /* Global font size override to 20px */
+        body,
+        .card,
+        .table,
+        .btn,
+        .form-control,
+        .form-select,
+        .modal,
+        .form-label,
+        label,
+        input,
+        textarea,
+        select,
+        option,
+        th,
+        td,
+        p,
+        span,
+        div,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: 20px;
+        }
 
-/* Specific overrides for smaller elements */
-.card-title {
-    font-size: 20px;
-    font-weight: bold;
-}
+        /* Specific overrides for smaller elements */
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-.table th, .table td {
-    font-size: 20px;
-    padding: 12px;
-}
+        .table th,
+        .table td {
+            font-size: 20px;
+            padding: 12px;
+        }
 
-.btn {
-    font-size: 20px;
-    padding: 10px 16px;
-}
+        .btn {
+            font-size: 20px;
+            padding: 10px 16px;
+        }
 
-.btn-sm {
-    font-size: 18px;
-    padding: 8px 12px;
-}
+        .btn-sm {
+            font-size: 18px;
+            padding: 8px 12px;
+        }
 
-.form-control, .form-select {
-    font-size: 20px;
-    padding: 10px;
-    /* font-weight: bold; */
-}
+        .form-control,
+        .form-select {
+            font-size: 20px;
+            padding: 10px;
+            /* font-weight: bold; */
+        }
 
-.modal-title {
-    font-size: 22px;
-}
+        .modal-title {
+            font-size: 22px;
+        }
 
-.input-group-text {
-    font-size: 20px;
-}
+        .input-group-text {
+            font-size: 20px;
+        }
 
-.form-check-label {
-    font-size: 20px;
-}
+        .form-check-label {
+            font-size: 20px;
+        }
 
-.text-secondary, .text-muted {
-    font-size: 18px;
-}
+        .text-secondary,
+        .text-muted {
+            font-size: 18px;
+        }
 
-/* DataTable specific styles */
-.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
-    font-size: 20px;
-}
+        /* DataTable specific styles */
+        .dataTables_wrapper,
+        .dataTables_filter input,
+        .dataTables_length select {
+            font-size: 20px;
+        }
 
-.dataTables_info, .dataTables_paginate {
-    font-size: 20px;
-}
-</style>
+        .dataTables_info,
+        .dataTables_paginate {
+            font-size: 20px;
+        }
+    </style>
     <div class="row">
         <script>
             currentUrl = '<?= current_url(); ?>';
@@ -159,7 +188,16 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                                     </div>
                                     <div class="form-group mb-4 col-md-4 col-12">
                                         <label for="name" class="mb-2">Day of Stay</label>
-                                        <input type="number" id="day_of_stay" class="form-control text-dark" name="day_of_stay" onchange="getCheckOut(this.value)" min="1" value="" required>
+                                        <input
+                                            type="number"
+                                            id="day_of_stay"
+                                            class="form-control text-dark"
+                                            name="day_of_stay"
+                                            onchange="getCheckOut(this.value)"
+                                            min="1"
+                                            value=""
+                                            required
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                         <script>
                                             function getCheckOut(val) {
                                                 const dayOfStay = document.getElementById("day_of_stay");
@@ -199,7 +237,15 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                                     </fieldset>
                                     <div class="form-group mb-4 col-md-4 col-12">
                                         <label for="name" class="mb-2">Total People</label>
-                                        <input type="number" id="total_people" class="form-control text-dark" name="total_people" min="1" value="" required>
+                                        <input
+                                            type="number"
+                                            id="total_people"
+                                            class="form-control text-dark"
+                                            name="total_people"
+                                            min="1"
+                                            value=""
+                                            required
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                     </div>
                                 </div>
                                 <div class="col-md-7 col-12" id="unit-available">

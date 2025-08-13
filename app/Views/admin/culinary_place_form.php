@@ -19,62 +19,91 @@ $edit = in_array('edit', $uri);
 
 <?= $this->section('content') ?>
 <style>
-/* Global font size override to 20px */
-body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
-    font-size: 20px;
-}
+    /* Global font size override to 20px */
+    body,
+    .card,
+    .table,
+    .btn,
+    .form-control,
+    .form-select,
+    .modal,
+    .form-label,
+    label,
+    input,
+    textarea,
+    select,
+    option,
+    th,
+    td,
+    p,
+    span,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: 20px;
+    }
 
-/* Specific overrides for smaller elements */
-.card-title {
-    font-size: 20px;
-    font-weight: bold;
-}
+    /* Specific overrides for smaller elements */
+    .card-title {
+        font-size: 20px;
+        font-weight: bold;
+    }
 
-.table th, .table td {
-    font-size: 20px;
-    padding: 12px;
-}
+    .table th,
+    .table td {
+        font-size: 20px;
+        padding: 12px;
+    }
 
-.btn {
-    font-size: 20px;
-    padding: 10px 16px;
-}
+    .btn {
+        font-size: 20px;
+        padding: 10px 16px;
+    }
 
-.btn-sm {
-    font-size: 18px;
-    padding: 8px 12px;
-}
+    .btn-sm {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
 
-.form-control, .form-select {
-    font-size: 20px;
-    padding: 10px;
-    /* font-weight: bold; */
-}
+    .form-control,
+    .form-select {
+        font-size: 20px;
+        padding: 10px;
+        /* font-weight: bold; */
+    }
 
-.modal-title {
-    font-size: 22px;
-}
+    .modal-title {
+        font-size: 22px;
+    }
 
-.input-group-text {
-    font-size: 20px;
-}
+    .input-group-text {
+        font-size: 20px;
+    }
 
-.form-check-label {
-    font-size: 20px;
-}
+    .form-check-label {
+        font-size: 20px;
+    }
 
-.text-secondary, .text-muted {
-    font-size: 18px;
-}
+    .text-secondary,
+    .text-muted {
+        font-size: 18px;
+    }
 
-/* DataTable specific styles */
-.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
-    font-size: 20px;
-}
+    /* DataTable specific styles */
+    .dataTables_wrapper,
+    .dataTables_filter input,
+    .dataTables_length select {
+        font-size: 20px;
+    }
 
-.dataTables_info, .dataTables_paginate {
-    font-size: 20px;
-}
+    .dataTables_info,
+    .dataTables_paginate {
+        font-size: 20px;
+    }
 </style>
 <section class="section">
     <div class="row">
@@ -97,37 +126,98 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                             </div>
                             <div class="form-group mb-4">
                                 <label for="name" class="mb-2">Culinary Place Name</label>
-                                <input type="text" id="name" class="form-control text-dark" name="name" placeholder="Culinary Place Name" value="<?= ($edit) ? $data['name'] : old('name'); ?>" required>
+                                <input type="text"
+                                    id="name"
+                                    class="form-control text-dark"
+                                    name="name"
+                                    placeholder="Culinary Place Name"
+                                    value="<?= ($edit) ? $data['name'] : old('name'); ?>"
+                                    required
+                                    pattern="[A-Za-z0-9\s()']+"
+                                    title="Only letters, numbers, spaces, parentheses (), and apostrophes (') allowed"
+                                    oninput="this.value = this.value.replace(/[^A-Za-z0-9\s()']/g, '')">
                             </div>
                             <div class="form-group mb-4">
                                 <label for="address" class="mb-2">Address</label>
-                                <input type="text" id="address" class="form-control text-dark" name="address" placeholder="Address" value="<?= ($edit) ? $data['address'] : old('address'); ?>">
+                                <input type="text"
+                                    id="address"
+                                    class="form-control text-dark"
+                                    name="address"
+                                    placeholder="Address"
+                                    value="<?= ($edit) ? $data['address'] : old('address'); ?>"
+                                    required
+                                    pattern="[A-Za-z0-9\s.,'\/()-]+"
+                                    title="Only letters, numbers, spaces, and symbols . , ' / ( ) - allowed"
+                                    oninput="this.value = this.value.replace(/[^A-Za-z0-9\s.,'\/()\-\–]/g, '')">
                             </div>
                             <div class="form-group mb-4">
                                 <label for="open" class="mb-2">Opening Hours</label>
                                 <div class="input-group">
-                                    <input type="time" id="open" class="form-control text-dark" name="open" placeholder="Opening Hours" aria-label="Opening Hours" aria-describedby="open" value="<?= ($edit) ? $data['open'] : old('open'); ?>" required>
+                                    <input type="time" id="open" class="form-control text-dark" name="open"
+                                        placeholder="Opening Hours" aria-label="Opening Hours" aria-describedby="open"
+                                        value="<?= ($edit) ? $data['open'] : old('open'); ?>" required>
                                     <span class="input-group-text">WIB</span>
                                 </div>
                             </div>
+
                             <div class="form-group mb-4">
                                 <label for="close" class="mb-2">Closing Hours</label>
                                 <div class="input-group">
-                                    <input type="time" id="close" class="form-control text-dark" name="close" placeholder="Closing Hours" aria-label="Closing Hours" aria-describedby="close" value="<?= ($edit) ? $data['close'] : old('close'); ?>" required>
+                                    <input type="time" id="close" class="form-control text-dark" name="close"
+                                        placeholder="Closing Hours" aria-label="Closing Hours" aria-describedby="close"
+                                        value="<?= ($edit) ? $data['close'] : old('close'); ?>" required>
                                     <span class="input-group-text">WIB</span>
                                 </div>
+                                <small id="time-warning" class="text-danger d-none">Closing time must be after opening time.</small>
                             </div>
+
+                            <script>
+                                const openInput = document.getElementById('open');
+                                const closeInput = document.getElementById('close');
+                                const warning = document.getElementById('time-warning');
+
+                                function validateTime() {
+                                    const openTime = openInput.value;
+                                    const closeTime = closeInput.value;
+
+                                    if (openTime && closeTime && closeTime <= openTime) {
+                                        warning.classList.remove('d-none');
+                                        closeInput.setCustomValidity("Closing time must be after opening time.");
+                                    } else {
+                                        warning.classList.add('d-none');
+                                        closeInput.setCustomValidity("");
+                                    }
+                                }
+
+                                openInput.addEventListener('change', validateTime);
+                                closeInput.addEventListener('change', validateTime);
+                            </script>
                             <div class="form-group mb-4">
                                 <label for="employee_name" class="mb-2">Employee Name</label>
-                                <input type="text" maxlength="25" id="employee_name" class="form-control text-dark" name="employee_name" placeholder="Employee Name" value="<?= ($edit) ? $data['employee_name'] : old('employee_name'); ?>">
+                                <input type="text" maxlength="25" id="employee_name" class="form-control text-dark" name="employee_name"
+                                    placeholder="Employee Name"
+                                    value="<?= ($edit) ? $data['employee_name'] : old('employee_name'); ?>"
+                                    oninput="this.value = this.value.replace(/[^A-Za-z\s']/g, '')"
+                                    pattern="[A-Za-z\s']+"
+                                    title="Only letters, spaces, and apostrophe (') allowed"
+                                    required>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="phone" class="mb-2">Phone</label>
-                                <input type="text" maxlength="13" id="phone" class="form-control text-dark" name="phone" placeholder="Phone" value="<?= ($edit) ? $data['phone'] : old('phone'); ?>">
+                                <input type="text" minlength="10" maxlength="13" id="phone" class="form-control text-dark" name="phone"
+                                    placeholder="Phone"
+                                    value="<?= ($edit) ? $data['phone'] : old('phone'); ?>"
+                                    oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                    pattern="\d{10,13}"
+                                    title="Phone number must be 10 to 13 digits"
+                                    required>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control text-dark" id="description" name="description" rows="4"><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
+                                <textarea class="form-control text-dark" id="description" name="description" rows="4"
+                                    oninput="this.value = this.value.replace(/[^A-Za-z0-9\s.,'\/()\-\–]/g, '')"
+                                    pattern="[A-Za-z0-9\s.,'\/()\-\–]+"
+                                    title="Only letters, numbers, spaces, and characters: . , ' / ( ) - – allowed"><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="facilities" class="mb-2">Facilities</label>
@@ -143,9 +233,24 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                             </div>
                             <div class="form-group mb-4">
                                 <label for="gallery" class="form-label">Gallery</label>
-                                <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
+                                <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery" multiple required>
+                                <small id="gallery-warning" class="text-danger d-none">Please select at least 1 image.</small>
                             </div>
 
+                            <script>
+                                const galleryInput = document.getElementById('gallery');
+                                const warning = document.getElementById('gallery-warning');
+
+                                galleryInput.addEventListener('change', function() {
+                                    if (this.files.length < 1) {
+                                        warning.classList.remove('d-none');
+                                        this.setCustomValidity("Please select at least one image.");
+                                    } else {
+                                        warning.classList.add('d-none');
+                                        this.setCustomValidity("");
+                                    }
+                                });
+                            </script>
                             <input type="hidden" name="lat" id="lat" value="<?= ($edit) ? $data['lat'] : old('lat'); ?>">
                             <input type="hidden" name="lng" id="lng" value="<?= ($edit) ? $data['lng'] : old('lng'); ?>">
                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>

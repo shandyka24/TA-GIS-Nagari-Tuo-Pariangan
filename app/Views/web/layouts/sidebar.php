@@ -103,7 +103,10 @@ $uri3 = $uri[3] ?? '';
                                         <a data-bs-toggle="collapse" href="#searchNameRG" role="button" aria-expanded="false" aria-controls="searchNameRG"><i class="fa-solid fa-arrow-down-a-z me-3"></i><span class="text-dark fw-bold" style="font-size: 18px;">By Name</span></a>
                                         <div class="collapse mb-3" id="searchNameRG">
                                             <div class="d-grid gap-2">
-                                                <input type="text" name="nameRG" id="nameHS" class="form-control" placeholder="Name" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                                <input type="text" name="nameRG" id="nameHS" class="form-control"
+                                                    placeholder="Name" aria-label="Recipient's username" aria-describedby="button-addon2"
+                                                    pattern="[A-Za-z0-9' ]+"
+                                                    oninput="this.value = this.value.replace(/[^A-Za-z0-9' ]/g, '')">
                                                 <button class="btn btn-outline-primary" type="submit" id="button-addon2" onclick="findByName('HS')">
                                                     <span class="material-icons" style="font-size: 1.5rem; vertical-align: bottom">search</span>
                                                 </button>

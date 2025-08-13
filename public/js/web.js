@@ -34,8 +34,6 @@ let backToHomeTriggered = false;
 let addActivityTriggered = false;
 let singleRouteShown = false;
 
-
-
 let selectedShape,
   drawingManager = new google.maps.drawing.DrawingManager();
 let customStyled = [
@@ -537,10 +535,22 @@ function currentPosition() {
           animation: google.maps.Animation.DROP,
           map: map,
         };
+
+        let actButton = "";
         let nearbyButton = "";
-        if (!window.location.href.includes("web/aroundYou")) {
+        if (
+          !window.location.href.includes("web/aroundYou") &&
+          !addActivityTriggered
+        ) {
           nearbyButton =
             '<a title="Around You" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openAround()"><i class="fa-solid fa-compass"></i></a>';
+          actButton =
+            '<a id="btn-act" class="btn btn-primary mt-1" onclick="exploreAct(`' +
+            "`,`Your Location`," +
+            pos.lat +
+            "," +
+            pos.lng +
+            ')"><i class="fa-solid fa-person-running me-2"></i>Explore Activity</a>';
         }
         userMarker.setOptions(markerOption);
         userInfoWindow.setContent(
@@ -555,6 +565,8 @@ function currentPosition() {
             "</span>" +
             "<br>" +
             nearbyButton +
+            "<br>" +
+            actButton +
             "</p>"
         );
         userInfoWindow.open(map, userMarker);
@@ -612,10 +624,22 @@ function manualPosition() {
       map: map,
     };
 
+    let actButton = "";
     let nearbyButton = "";
-    if (!window.location.href.includes("web/aroundYou")) {
+    if (
+      !window.location.href.includes("web/aroundYou") &&
+      !addActivityTriggered
+    ) {
       nearbyButton =
         '<a title="Around You" class="btn icon btn-outline-primary mx-1" id="nearbyInfoWindow" onclick="openAround()"><i class="fa-solid fa-compass"></i></a>';
+
+      actButton =
+        '<a id="btn-act" class="btn btn-primary mt-1" onclick="exploreAct(`' +
+        "`,`Your Location`," +
+        pos.lat().toFixed(8) +
+        "," +
+        pos.lng().toFixed(8) +
+        ')"><i class="fa-solid fa-person-running me-2"></i>Explore Activity</a>';
     }
     userMarker.setOptions(markerOption);
     userInfoWindow.setContent(
@@ -626,6 +650,8 @@ function manualPosition() {
         "<br>" +
         "<br>" +
         nearbyButton +
+        "<br>" +
+        actButton +
         "</p>"
     );
     userInfoWindow.open(map, userMarker);
@@ -865,19 +891,19 @@ function objectInfoWindow(id, attcat = null, login = false, act = true) {
         let actButton = "";
         const alreadyAdded = activity.some((item) => item.id === rgid);
         if (act && recActTriggered && !alreadyAdded) {
-    actButton =
-        '<a id="btn-act" class="btn btn-primary mt-1" onclick="addActivity(`' +
-        rgid +
-        "`,`" +
-        name +
-        "`," +
-        lat +
-        "," +
-        lng +
-        ",`" +
-        attcat +
-        '`)"><i class="fa-solid fa-plus me-2"></i>Add Activity</a>';
-}
+          actButton =
+            '<a id="btn-act" class="btn btn-primary mt-1" onclick="addActivity(`' +
+            rgid +
+            "`,`" +
+            name +
+            "`," +
+            lat +
+            "," +
+            lng +
+            ",`" +
+            attcat +
+            '`)"><i class="fa-solid fa-plus me-2"></i>Add Activity</a>';
+        }
 
         contentButton =
           '<br><div class="text-center">' +
@@ -989,10 +1015,10 @@ function objectInfoWindow(id, attcat = null, login = false, act = true) {
           bookingButton =
             '<a id="btn-booking" class="btn btn-primary mt-1" onclick="iwOpsiBook(`' +
             rgid +
-            '`)"><i class="fa-solid fa-bookmark me-3"></i>Booking</a>';
+            '`)"><i class="fa-solid fa-bookmark me-3"></i>Reserve Now</a>';
         } else {
           bookingButton =
-            '<a id="btn-booking1" class="btn btn-primary mt-1" onclick="iwRedirectToLogin()"><i class="fa-solid fa-bookmark me-3"></i>Booking</a>';
+            '<a id="btn-booking1" class="btn btn-primary mt-1" onclick="iwRedirectToLogin()"><i class="fa-solid fa-bookmark me-3"></i>Reserve Now</a>';
         }
 
         contentButton =
@@ -1179,19 +1205,19 @@ function objectInfoWindow(id, attcat = null, login = false, act = true) {
         let actButton = "";
         const alreadyAdded = activity.some((item) => item.id === rgid);
         if (act && recActTriggered && !alreadyAdded) {
-    actButton =
-        '<a id="btn-act" class="btn btn-primary mt-1" onclick="addActivity(`' +
-        rgid +
-        "`,`" +
-        name +
-        "`," +
-        lat +
-        "," +
-        lng +
-        ",`" +
-        attcat +
-        '`)"><i class="fa-solid fa-plus me-2"></i>Add Activity</a>';
-}
+          actButton =
+            '<a id="btn-act" class="btn btn-primary mt-1" onclick="addActivity(`' +
+            rgid +
+            "`,`" +
+            name +
+            "`," +
+            lat +
+            "," +
+            lng +
+            ",`" +
+            attcat +
+            '`)"><i class="fa-solid fa-plus me-2"></i>Add Activity</a>';
+        }
 
         contentButton =
           '<br><div class="text-center">' +
@@ -1263,19 +1289,19 @@ function objectInfoWindow(id, attcat = null, login = false, act = true) {
         let actButton = "";
         const alreadyAdded = activity.some((item) => item.id === rgid);
         if (act && recActTriggered && !alreadyAdded) {
-    actButton =
-        '<a id="btn-act" class="btn btn-primary mt-1" onclick="addActivity(`' +
-        rgid +
-        "`,`" +
-        name +
-        "`," +
-        lat +
-        "," +
-        lng +
-        ",`" +
-        attcat +
-        '`)"><i class="fa-solid fa-plus me-2"></i>Add Activity</a>';
-}
+          actButton =
+            '<a id="btn-act" class="btn btn-primary mt-1" onclick="addActivity(`' +
+            rgid +
+            "`,`" +
+            name +
+            "`," +
+            lat +
+            "," +
+            lng +
+            ",`" +
+            attcat +
+            '`)"><i class="fa-solid fa-plus me-2"></i>Add Activity</a>';
+        }
 
         contentButton =
           '<br><div class="text-center">' +
@@ -1360,19 +1386,19 @@ function objectInfoWindow(id, attcat = null, login = false, act = true) {
         let actButton = "";
         const alreadyAdded = activity.some((item) => item.id === rgid);
         if (act && recActTriggered && !alreadyAdded) {
-    actButton =
-        '<a id="btn-act" class="btn btn-primary mt-1" onclick="addActivity(`' +
-        rgid +
-        "`,`" +
-        name +
-        "`," +
-        lat +
-        "," +
-        lng +
-        ",`" +
-        attcat +
-        '`)"><i class="fa-solid fa-plus me-2"></i>Add Activity</a>';
-}
+          actButton =
+            '<a id="btn-act" class="btn btn-primary mt-1" onclick="addActivity(`' +
+            rgid +
+            "`,`" +
+            name +
+            "`," +
+            lat +
+            "," +
+            lng +
+            ",`" +
+            attcat +
+            '`)"><i class="fa-solid fa-plus me-2"></i>Add Activity</a>';
+        }
 
         contentButton =
           '<br><div class="text-center">' +
@@ -5065,7 +5091,9 @@ function getUnitType(homestay_id = null) {
                 '<div class="row">' +
                 '<div class="col-md-1 col-12 d-flex align-items-center justify-content-center">' +
                 '<div class="form-check ">' +
-                '<input class="form-check-input" type="checkbox" value="' +
+                '<input class="form-check-input" type="checkbox" data-capacity="' +
+                (parseInt(item.capacity) + 1) +
+                '" onchange="updateMaxPeople()" value="' +
                 item.unit_number +
                 '" name="unit_number[]" id="flexCheckDefault">' +
                 '<label class="form-check-label" for="flexCheckDefault">' +
@@ -5324,7 +5352,13 @@ function allObject() {
   // });
 }
 
-function recActivity(id, name, lat, lng) {
+function exploreAct(id, name, lat, lng) {
+  const heading = document.getElementById("yap");
+  heading.innerText = "Your Explore Activity";
+
+  const backback = document.getElementById("back-back");
+  backback.innerText = "Back To Your Location";
+
   $("#check-nearby-col").hide();
   $("#check-nearbyyou-col").hide();
   $("#list-rg-col").hide();
@@ -5374,27 +5408,114 @@ function recActivity(id, name, lat, lng) {
         duration: duration,
       });
       $("#table-act").empty();
-$("#your-activity").show();
-let table =
-  "<thead><tr>" +
-  '<th style="width: 80%; font-size: 20px;">Activity</th>' +
-  '<th style="width: 20%; font-size: 20px;">Action</th>' +
-  "</tr></thead>" +
-  '<tbody id="data-act">' +
-  "<tr><td>Activity 1 (" +
-  distance +
-  ") (" +
-  duration +
-  ")<br>" +
-  activity[0].name +
-  " - " +
-  activity[1].name +
-  "</td><td>" +
-  '<button class="btn btn-success btn-sm" onclick="showSingleRoute(0)">' +
-  '<i class="fa-solid fa-route"></i>' +
-  "</button>" +
-  "</td></tr></tbody>";
-$("#table-act").append(table);
+      $("#your-activity").show();
+      let table =
+        "<thead><tr>" +
+        '<th style="width: 80%; font-size: 20px;">Activity</th>' +
+        '<th style="width: 20%; font-size: 20px;">Action</th>' +
+        "</tr></thead>" +
+        '<tbody id="data-act">' +
+        "<tr><td>Activity 1 (" +
+        distance +
+        ") (" +
+        duration +
+        ")<br>" +
+        activity[0].name +
+        " - " +
+        activity[1].name +
+        "</td><td>" +
+        '<button class="btn btn-success btn-sm" onclick="showSingleRoute(0)">' +
+        '<i class="fa-solid fa-route"></i>' +
+        "</button>" +
+        "</td></tr></tbody>";
+      $("#table-act").append(table);
+      routeBetweenObjectsAct(
+        activity[0].lat,
+        activity[0].lng,
+        activity[1].lat,
+        activity[1].lng
+      );
+      document.getElementById("btn-back-homestay").disabled = true;
+    }
+  );
+}
+
+function recActivity(id, name, lat, lng) {
+  const heading = document.getElementById("yap");
+  heading.innerText = "Your Activity Plan";
+
+  const backback = document.getElementById("back-back");
+  backback.innerText = "Back To Homestay";
+  $("#check-nearby-col").hide();
+  $("#check-nearbyyou-col").hide();
+  $("#list-rg-col").hide();
+  $("#list-ev-col").hide();
+  $("#list-rec-col").hide();
+  $("#check-activity").show();
+  $("#result-explore-col").hide();
+
+  recActTriggered = true;
+  activity = [];
+  activity.push({
+    index: activity.length,
+    id: "P",
+    name: "Entrance",
+    lat: -0.461603238092608,
+    lng: 100.49665288491838,
+    distance: "0",
+    duration: "0",
+  });
+
+  currentLat = lat;
+  currentLng = lng;
+  let pos = new google.maps.LatLng(currentLat, currentLng);
+  map.panTo(pos);
+
+  document
+    .getElementById("inputRadiusAct")
+    .setAttribute(
+      "onchange",
+      'updateRadiusAct("Activity"); checkAct("' + id + '")'
+    );
+
+  // Ambil jarak & waktu tempuh Google
+  getDistanceAndDuration(
+    -0.461603238092608,
+    100.49665288491838,
+    lat,
+    lng,
+    (distance, duration) => {
+      activity.push({
+        index: activity.length,
+        id: id,
+        name: name,
+        lat: lat,
+        lng: lng,
+        distance: distance,
+        duration: duration,
+      });
+      $("#table-act").empty();
+      $("#your-activity").show();
+      let table =
+        "<thead><tr>" +
+        '<th style="width: 80%; font-size: 20px;">Activity</th>' +
+        '<th style="width: 20%; font-size: 20px;">Action</th>' +
+        "</tr></thead>" +
+        '<tbody id="data-act">' +
+        "<tr><td>Activity 1 (" +
+        distance +
+        ") (" +
+        duration +
+        ")<br>" +
+        activity[0].name +
+        " - " +
+        activity[1].name +
+        "</td><td>" +
+        '<button class="btn btn-success btn-sm" onclick="showSingleRoute(0)">' +
+        '<i class="fa-solid fa-route"></i>' +
+        "</button>" +
+        "</td></tr></tbody>";
+      $("#table-act").append(table);
       routeBetweenObjectsAct(
         activity[0].lat,
         activity[0].lng,
@@ -5419,6 +5540,9 @@ function allHomestay(login = false, act = true) {
   clearOverlay();
   objectMarker("P", -0.461603238092608, 100.49665288491838);
   objectMarker("L", -0.4556825246682917, 100.49283664396526);
+
+  $("#check-nearby-col").hide();
+  $("#result-nearby-col").hide();
   $("#table-uAttraction").empty().hide();
   $("#table-Attraction").empty().hide();
   $("#table-Homestay").empty().hide();
@@ -6247,8 +6371,8 @@ function weatherNow() {
 
 function iwOpsiBook(id) {
   Swal.fire({
-    title: "Select Booking Options",
-    text: "Please choose one of the booking options below:",
+    title: "Select Reservation Options",
+    text: "Please choose one of the reservation options below:",
     icon: "question",
     showCancelButton: true,
     confirmButtonText: "Personal",
@@ -6291,88 +6415,93 @@ function openAround() {
 }
 
 function addActivity(id, name, lat, lng, attcat = null) {
-    addActivityTriggered = true;
-    clearRadius();
+  addActivityTriggered = true;
+  clearRadius();
 
-    const checkboxIds = [
-        "check-uatt-act", "check-att-act", "check-hs-act",
-        "check-cp-act", "check-sp-act", "check-wp-act"
-    ];
-    checkboxIds.forEach((id) => {
-        const checkbox = document.getElementById(id);
-        if (checkbox) checkbox.checked = false;
+  const checkboxIds = [
+    "check-uatt-act",
+    "check-att-act",
+    "check-hs-act",
+    "check-cp-act",
+    "check-sp-act",
+    "check-wp-act",
+  ];
+  checkboxIds.forEach((id) => {
+    const checkbox = document.getElementById(id);
+    if (checkbox) checkbox.checked = false;
+  });
+
+  const radiusSlider = document.getElementById("inputRadiusAct");
+  const radiusLabel = document.getElementById("radiusValueAct");
+  if (radiusSlider) radiusSlider.value = 0;
+  if (radiusLabel) radiusLabel.textContent = "0 m";
+
+  const lastIndex = activity.length - 1;
+  const lastLat = activity[lastIndex].lat;
+  const lastLng = activity[lastIndex].lng;
+
+  getDistanceAndDuration(lastLat, lastLng, lat, lng, (distance, duration) => {
+    activity.push({
+      index: activity.length,
+      id: id,
+      name: name,
+      lat: lat,
+      lng: lng,
+      attcat: attcat !== null ? attcat : null,
+      distance: distance,
+      duration: duration,
     });
 
-    const radiusSlider = document.getElementById("inputRadiusAct");
-    const radiusLabel = document.getElementById("radiusValueAct");
-    if (radiusSlider) radiusSlider.value = 0;
-    if (radiusLabel) radiusLabel.textContent = "0 m";
+    $("#table-act").empty();
+    $("#your-activity").show();
 
-    const lastIndex = activity.length - 1;
-    const lastLat = activity[lastIndex].lat;
-    const lastLng = activity[lastIndex].lng;
+    let table =
+      "<thead><tr>" +
+      '<th style="width: 80%; font-size: 20px;">Activity</th>' +
+      '<th style="width: 20%; font-size: 20px;">Action</th>' +
+      "</tr></thead><tbody id='data-act'>";
 
-    getDistanceAndDuration(lastLat, lastLng, lat, lng, (distance, duration) => {
-        activity.push({
-            index: activity.length,
-            id: id,
-            name: name,
-            lat: lat,
-            lng: lng,
-            attcat: attcat !== null ? attcat : null,
-            distance: distance,
-            duration: duration,
-        });
+    for (let i = 0; i < activity.length - 1; i++) {
+      let isLast = i === activity.length - 2;
+      let actionBtn = isLast
+        ? '<button class="btn btn-danger btn-sm" onclick="removeLastActivity()"><i class="fa-solid fa-trash"></i></button>'
+        : "";
 
-        $("#table-act").empty();
-        $("#your-activity").show();
+      const dis = activity[i + 1].distance || "-";
+      const dur = activity[i + 1].duration || "-";
 
-        let table =
-            "<thead><tr>" +
-            '<th style="width: 80%; font-size: 20px;">Activity</th>' +
-            '<th style="width: 20%; font-size: 20px;">Action</th>' +
-            "</tr></thead><tbody id='data-act'>";
+      table +=
+        "<tr><td>Activity " +
+        (i + 1) +
+        " (" +
+        dis +
+        ") (" +
+        dur +
+        ")<br>" +
+        activity[i].name +
+        " - " +
+        activity[i + 1].name +
+        "</td><td>" +
+        '<button class="btn btn-success btn-sm" onclick="showSingleRoute(' +
+        i +
+        ')"><i class="fa-solid fa-route"></i></button> ' +
+        actionBtn +
+        "</td></tr>";
+    }
 
-        for (let i = 0; i < activity.length - 1; i++) {
-            let isLast = i === activity.length - 2;
-            let actionBtn = isLast
-                ? '<button class="btn btn-danger btn-sm" onclick="removeLastActivity()"><i class="fa-solid fa-trash"></i></button>'
-                : "";
+    table += "</tbody>";
+    $("#table-act").append(table);
 
-            const dis = activity[i + 1].distance || "-";
-            const dur = activity[i + 1].duration || "-";
+    const tableContainer = document.getElementById("table-activity");
+    tableContainer.scrollTop = tableContainer.scrollHeight;
 
-            table +=
-                "<tr><td>Activity " +
-                (i + 1) +
-                " (" +
-                dis +
-                ") (" +
-                dur +
-                ")<br>" +
-                activity[i].name +
-                " - " +
-                activity[i + 1].name +
-                "</td><td>" +
-                '<button class="btn btn-success btn-sm" onclick="showSingleRoute(' + i + ')"><i class="fa-solid fa-route"></i></button> ' +
-                actionBtn +
-                "</td></tr>";
-        }
+    redrawRoute();
+    const last = activity[activity.length - 1];
+    actRadius(last.id, last.lat, last.lng, last.attcat);
 
-        table += "</tbody>";
-        $("#table-act").append(table);
-
-        const tableContainer = document.getElementById("table-activity");
-        tableContainer.scrollTop = tableContainer.scrollHeight;
-
-        redrawRoute();
-        const last = activity[activity.length - 1];
-        actRadius(last.id, last.lat, last.lng, last.attcat);
-
-        document.getElementById("btn-back-homestay").disabled = false;
-    });
+    document.getElementById("btn-back-homestay").disabled = false;
+  });
 }
-
 
 function redrawRoute() {
   clearRoute();
@@ -6511,99 +6640,100 @@ function removeLastActivity() {
 }
 
 function addActivityRenderOnly() {
-    $("#table-act").empty();
+  $("#table-act").empty();
 
-    let table =
-        "<thead><tr>" +
-        '<th style="width: 80%; font-size: 20px;">Activity</th>' +
-        '<th style="width: 20%; font-size: 20px;">Action</th>' +
-        "</tr></thead><tbody id='data-act'>";
+  let table =
+    "<thead><tr>" +
+    '<th style="width: 80%; font-size: 20px;">Activity</th>' +
+    '<th style="width: 20%; font-size: 20px;">Action</th>' +
+    "</tr></thead><tbody id='data-act'>";
 
-    let promises = [];
+  let promises = [];
 
-    for (let i = 0; i < activity.length - 1; i++) {
-        const current = activity[i];
-        const next = activity[i + 1];
+  for (let i = 0; i < activity.length - 1; i++) {
+    const current = activity[i];
+    const next = activity[i + 1];
 
-        if (!next.distance || !next.duration) {
-            const promise = new Promise((resolve) => {
-                getDistanceAndDuration(
-                    current.lat,
-                    current.lng,
-                    next.lat,
-                    next.lng,
-                    (distance, duration) => {
-                        next.distance = distance;
-                        next.duration = duration;
-                        resolve();
-                    }
-                );
-            });
-            promises.push(promise);
-        }
-    }
-
-    Promise.all(promises).then(() => {
-        for (let i = 0; i < activity.length - 1; i++) {
-            const current = activity[i];
-            const next = activity[i + 1];
-            let isLast = i === activity.length - 2 && activity.length > 2;
-            let actionBtn = isLast
-                ? '<button class="btn btn-danger btn-sm" onclick="removeLastActivity()"><i class="fa-solid fa-trash"></i></button>'
-                : "";
-
-            table +=
-                "<tr><td>Activity " +
-                (i + 1) +
-                " (" +
-                (next.distance || "-") +
-                ") (" +
-                (next.duration || "-") +
-                ")<br>" +
-                current.name +
-                " - " +
-                next.name +
-                "</td><td>" +
-                '<button class="btn btn-success btn-sm" onclick="showSingleRoute(' + i + ')"><i class="fa-solid fa-route"></i></button> ' +
-                actionBtn +
-                "</td></tr>";
-        }
-
-        const btnBack = document.getElementById("btn-back-homestay");
-        btnBack.disabled = activity.length <= 2;
-
-        table += "</tbody>";
-        $("#table-act").append(table);
-
-        clearMarker();
-        for (let i = 0; i < activity.length; i++) {
-            objectMarker(
-                activity[i].id,
-                activity[i].lat,
-                activity[i].lng,
-                false,
-                activity[i].attcat
-            );
-        }
-        objectMarker("P", -0.461603238092608, 100.49665288491838);
-        objectMarker("L", -0.4556825246682917, 100.49283664396526);
-
-        actRadius(
-            activity[activity.length - 1].id,
-            activity[activity.length - 1].lat,
-            activity[activity.length - 1].lng,
-            activity[activity.length - 1].attcat
+    if (!next.distance || !next.duration) {
+      const promise = new Promise((resolve) => {
+        getDistanceAndDuration(
+          current.lat,
+          current.lng,
+          next.lat,
+          next.lng,
+          (distance, duration) => {
+            next.distance = distance;
+            next.duration = duration;
+            resolve();
+          }
         );
-    });
-
-    const tableContainer = document.getElementById("table-activity");
-    if (tableContainer) {
-        setTimeout(() => {
-            tableContainer.scrollTop = tableContainer.scrollHeight;
-        }, 300);
+      });
+      promises.push(promise);
     }
-}
+  }
 
+  Promise.all(promises).then(() => {
+    for (let i = 0; i < activity.length - 1; i++) {
+      const current = activity[i];
+      const next = activity[i + 1];
+      let isLast = i === activity.length - 2 && activity.length > 2;
+      let actionBtn = isLast
+        ? '<button class="btn btn-danger btn-sm" onclick="removeLastActivity()"><i class="fa-solid fa-trash"></i></button>'
+        : "";
+
+      table +=
+        "<tr><td>Activity " +
+        (i + 1) +
+        " (" +
+        (next.distance || "-") +
+        ") (" +
+        (next.duration || "-") +
+        ")<br>" +
+        current.name +
+        " - " +
+        next.name +
+        "</td><td>" +
+        '<button class="btn btn-success btn-sm" onclick="showSingleRoute(' +
+        i +
+        ')"><i class="fa-solid fa-route"></i></button> ' +
+        actionBtn +
+        "</td></tr>";
+    }
+
+    const btnBack = document.getElementById("btn-back-homestay");
+    btnBack.disabled = activity.length <= 2;
+
+    table += "</tbody>";
+    $("#table-act").append(table);
+
+    clearMarker();
+    for (let i = 0; i < activity.length; i++) {
+      objectMarker(
+        activity[i].id,
+        activity[i].lat,
+        activity[i].lng,
+        false,
+        activity[i].attcat
+      );
+    }
+    objectMarker("P", -0.461603238092608, 100.49665288491838);
+    objectMarker("L", -0.4556825246682917, 100.49283664396526);
+
+    actRadius(
+      activity[activity.length - 1].id,
+      activity[activity.length - 1].lat,
+      activity[activity.length - 1].lng,
+      activity[activity.length - 1].attcat
+    );
+  });
+
+  const tableContainer = document.getElementById("table-activity");
+  if (tableContainer) {
+    setTimeout(() => {
+      tableContainer.scrollTop = tableContainer.scrollHeight;
+    }, 300);
+  }
+}
 
 function backToHomestay() {
   if (activity.length < 2) {
@@ -6720,20 +6850,20 @@ function getDistanceAndDuration(
 }
 
 function showSingleRoute(fromIndex) {
-    clearRoute();
-    routeBetweenObjectsAct(
-        activity[fromIndex].lat,
-        activity[fromIndex].lng,
-        activity[fromIndex + 1].lat,
-        activity[fromIndex + 1].lng
-    );
+  clearRoute();
+  routeBetweenObjectsAct(
+    activity[fromIndex].lat,
+    activity[fromIndex].lng,
+    activity[fromIndex + 1].lat,
+    activity[fromIndex + 1].lng
+  );
 
-    singleRouteShown = true;
-    document.getElementById("btn-show-all-route").disabled = false;
+  singleRouteShown = true;
+  document.getElementById("btn-show-all-route").disabled = false;
 }
 
 function showAllRoutes() {
-    redrawRoute();
-    singleRouteShown = false;
-    document.getElementById("btn-show-all-route").disabled = true;
+  redrawRoute();
+  singleRouteShown = false;
+  document.getElementById("btn-show-all-route").disabled = true;
 }

@@ -106,7 +106,7 @@
                         </div>
                         <?php if (!logged_in()) : ?>
                             <div class="col" style="font-size: 20px;">
-                                <a id="btn-booking1" class="btn btn-success float-end" onclick="redirectToLogin()"><i class="fa-solid fa-bookmark me-3"></i>Booking</a>
+                                <a id="btn-booking1" class="btn btn-success float-end" onclick="redirectToLogin()"><i class="fa-solid fa-bookmark me-3"></i>Reserve Now</a>
                                 <script>
                                     function redirectToLogin() {
                                         Swal.fire({
@@ -127,7 +127,7 @@
                         <?php endif; ?>
                         <?php if (in_groups('user')) : ?>
                             <div class="col">
-                                <a id="btn-booking" class="btn btn-success float-end"><i class="fa-solid fa-bookmark me-3"></i>Booking</a>
+                                <a id="btn-booking" class="btn btn-success float-end"><i class="fa-solid fa-bookmark me-3"></i>Reserve Now</a>
                             </div>
                         <?php endif; ?>
                     </div>
@@ -323,8 +323,8 @@
     document.getElementById("btn-booking").addEventListener("click", function() {
         // Tampilkan SweetAlert
         Swal.fire({
-            title: 'Select Booking Options',
-            text: 'Please choose one of the booking options below:',
+            title: 'Select Reservation Options',
+            text: 'Please choose one of the reservation options below:',
             icon: 'question',
             showCancelButton: true,
             confirmButtonText: 'Personal',

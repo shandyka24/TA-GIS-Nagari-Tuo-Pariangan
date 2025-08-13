@@ -11,7 +11,7 @@
     <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Show Traffic" class="btn icon btn-primary mx-1" id="legend-map" onclick="showTraffic(); viewLegendTraffic();">
         <span class="material-symbols-outlined"> traffic </span>
     </a>
-    <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Zoom To Pariangan Village" class="btn icon btn-primary mx-1" id="legend-map" onclick="digitTourismVillage(true);">
+    <a data-bs-toggle="tooltip" data-bs-placement="bottom" title="Zoom To Pariangan Village" class="btn icon btn-primary mx-1" id="legend-map" onclick="digitTourismVillage(true); setTimeout(() => { map.panTo({lat: -0.4556825246682917, lng: 100.49283664396526}); map.setZoom(17); }, 1000);">
         <span class="material-symbols-outlined">landscape_2</span>
     </a>
 

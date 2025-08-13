@@ -21,63 +21,92 @@ $edit = in_array('edit', $uri);
 
 <section class="section">
     <style>
-/* Global font size override to 20px */
-body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, label, input, textarea, select, option, th, td, p, span, div, h1, h2, h3, h4, h5, h6{
-    font-size: 20px;
-}
+        /* Global font size override to 20px */
+        body,
+        .card,
+        .table,
+        .btn,
+        .form-control,
+        .form-select,
+        .modal,
+        .form-label,
+        label,
+        input,
+        textarea,
+        select,
+        option,
+        th,
+        td,
+        p,
+        span,
+        div,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: 20px;
+        }
 
-/* Specific overrides for smaller elements */
-.card-title {
-    font-size: 20px;
-    font-weight: bold;
-}
+        /* Specific overrides for smaller elements */
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
 
-.table th, .table td {
-    font-size: 20px;
-    padding: 12px;
-}
+        .table th,
+        .table td {
+            font-size: 20px;
+            padding: 12px;
+        }
 
-.btn {
-    font-size: 20px;
-    padding: 10px 16px;
-}
+        .btn {
+            font-size: 20px;
+            padding: 10px 16px;
+        }
 
-.btn-sm {
-    font-size: 18px;
-    padding: 8px 12px;
-}
+        .btn-sm {
+            font-size: 18px;
+            padding: 8px 12px;
+        }
 
-.form-control, .form-select {
-    font-size: 20px;
-    padding: 10px;
-    /* font-weight: bold; */
-}
+        .form-control,
+        .form-select {
+            font-size: 20px;
+            padding: 10px;
+            /* font-weight: bold; */
+        }
 
-.modal-title {
-    font-size: 22px;
-}
+        .modal-title {
+            font-size: 22px;
+        }
 
-.input-group-text {
-    font-size: 20px;
-}
+        .input-group-text {
+            font-size: 20px;
+        }
 
-.form-check-label {
-    font-size: 20px;
-}
+        .form-check-label {
+            font-size: 20px;
+        }
 
-.text-secondary, .text-muted {
-    font-size: 18px;
-}
+        .text-secondary,
+        .text-muted {
+            font-size: 18px;
+        }
 
-/* DataTable specific styles */
-.dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
-    font-size: 20px;
-}
+        /* DataTable specific styles */
+        .dataTables_wrapper,
+        .dataTables_filter input,
+        .dataTables_length select {
+            font-size: 20px;
+        }
 
-.dataTables_info, .dataTables_paginate {
-    font-size: 20px;
-}
-</style>
+        .dataTables_info,
+        .dataTables_paginate {
+            font-size: 20px;
+        }
+    </style>
     <div class="row">
         <script>
             currentUrl = '<?= current_url(); ?>';
@@ -87,7 +116,7 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
         <div class="col-md-9 col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title text-center"><?= $title; ?></h4>
+                    <h4 class="card-title text-center fs-4"><?= $title; ?></h4>
                 </div>
                 <div class="card-body">
                     <form class="form form-vertical" action="<?= ($edit) ? base_url('dashboard/homestayUnit/update') . '/' . $data['unit_type'] . $data['unit_number'] : base_url('dashboard/homestayUnit'); ?>" method="post" enctype="multipart/form-data">
@@ -112,31 +141,85 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
                             </fieldset>
                             <div class="form-group mb-4">
                                 <label for="name" class="mb-2">Homestay Unit Name</label>
-                                <input type="text" id="name" class="form-control text-dark" name="name" placeholder="Homestay Unit Name" value="<?= ($edit) ? $data['name'] : old('name'); ?>" required>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    class="form-control text-dark"
+                                    name="name"
+                                    placeholder="Homestay Unit Name"
+                                    value="<?= ($edit) ? $data['name'] : old('name'); ?>"
+                                    required
+                                    pattern="[A-Za-z0-9\s']+"
+                                    title="Only letters, numbers, spaces, and apostrophes (') are allowed"
+                                    oninput="this.value = this.value.replace(/[^A-Za-z0-9\s']/g, '')">
                             </div>
                             <div class="form-group">
                                 <label for="price" class="mb-2">Price</label>
                                 <div class="input-group">
                                     <span class="input-group-text">Rp.</span>
-                                    <input type="number" id="price" class="form-control text-dark" name="price" placeholder="Price" aria-label="Price" aria-describedby="price" value="<?= ($edit) ? $data['price'] : old('price'); ?>" required>
+                                    <input
+                                        type="number"
+                                        id="price"
+                                        class="form-control text-dark"
+                                        name="price"
+                                        placeholder="Price"
+                                        aria-label="Price"
+                                        aria-describedby="price"
+                                        value="<?= ($edit) ? $data['price'] : old('price'); ?>"
+                                        required
+                                        min="0"
+                                        oninput="this.value = this.value.replace(/-/g, '')">
                                     <span class="input-group-text">/ day</span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="price" class="mb-2">Capacity</label>
                                 <div class="input-group">
-                                    <input type="number" id="price" class="form-control text-dark" name="capacity" placeholder="Capacity" aria-label="Price" aria-describedby="price" value="<?= ($edit) ? $data['capacity'] : old('capacity'); ?>" required>
+                                    <input
+                                        type="number"
+                                        id="price"
+                                        class="form-control text-dark"
+                                        name="capacity"
+                                        placeholder="Capacity"
+                                        aria-label="Price"
+                                        aria-describedby="price"
+                                        value="<?= ($edit) ? $data['capacity'] : old('capacity'); ?>"
+                                        required
+                                        min="1"
+                                        oninput="this.value = this.value.replace(/-/g, '')">
                                     <span class="input-group-text">people</span>
                                 </div>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="description" class="form-label">Description</label>
-                                <textarea class="form-control text-dark" id="description" name="description" rows="4"><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
+                                <textarea
+                                    class="form-control text-dark"
+                                    id="description"
+                                    name="description"
+                                    rows="4"
+                                    oninput="this.value = this.value.replace(/[^A-Za-z0-9\s.,'()!?-]/g, '')"
+                                    required><?= ($edit) ? $data['description'] : old('description'); ?></textarea>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="gallery" class="form-label">Gallery</label>
-                                <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery" multiple>
+                                <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery" multiple required>
+                                <small id="gallery-warning" class="text-danger d-none">Please select at least 1 image.</small>
                             </div>
+
+                            <script>
+                                const galleryInput = document.getElementById('gallery');
+                                const warning = document.getElementById('gallery-warning');
+
+                                galleryInput.addEventListener('change', function() {
+                                    if (this.files.length < 1) {
+                                        warning.classList.remove('d-none');
+                                        this.setCustomValidity("Please select at least one image.");
+                                    } else {
+                                        warning.classList.add('d-none');
+                                        this.setCustomValidity("");
+                                    }
+                                });
+                            </script>
                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                             <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                         </div>

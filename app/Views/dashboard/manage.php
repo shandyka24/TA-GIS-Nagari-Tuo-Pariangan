@@ -320,7 +320,15 @@ $users = in_array('users', $uri);
                             <div class="form-body">
                                 <div class="form-group">
                                     <label for="name" class="mb-2">Name</label>
-                                    <input type="text" id="name" class="form-control text-dark" name="name" placeholder="<?= esc($category); ?> Name" required>
+                                    <input type="text"
+                                        id="name"
+                                        class="form-control text-dark"
+                                        name="name"
+                                        placeholder="<?= esc($category); ?> Name"
+                                        required
+                                        pattern="[A-Za-z'() ]+"
+                                        title="Only letters, spaces, apostrophes (') and parentheses () are allowed"
+                                        oninput="this.value = this.value.replace(/[^A-Za-z'() ]/g, '')">
                                 </div>
                                 <fieldset class="form-group mb-4">
                                     <label for="catSelect" class="mb-2">Category</label>
@@ -333,7 +341,14 @@ $users = in_array('users', $uri);
                                     <label for="name" class="mb-2">Price</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp.</span>
-                                        <input type="number" id="name" class="form-control text-dark" name="price" placeholder="Price" required>
+                                        <input type="number"
+                                            id="name"
+                                            class="form-control text-dark"
+                                            name="price"
+                                            placeholder="Price"
+                                            required
+                                            min="0"
+                                            oninput="this.value = this.value.replace(/-/g, '')">
                                     </div>
                                 </div>
                                 <div class="form-check">
@@ -362,16 +377,49 @@ $users = in_array('users', $uri);
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="name" class="mb-2">Stock</label>
-                                    <input type="number" id="name" class="form-control text-dark" name="stock" placeholder="Stock" min="0" required>
+                                    <input type="number"
+                                        id="name"
+                                        class="form-control text-dark"
+                                        name="stock"
+                                        placeholder="Stock"
+                                        min="0"
+                                        required
+                                        oninput="this.value = this.value.replace(/-/g, '')">
                                     <span class="text-secondary"><i>*make it '0' if it is not based on stock</i></span>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control text-dark" id="description" name="description" rows="4" required></textarea>
+                                    <textarea
+                                        class="form-control text-dark"
+                                        id="description"
+                                        name="description"
+                                        rows="4"
+                                        required
+                                        pattern="[a-zA-Z0-9\s'(),.\-]*"
+                                        oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s'(),.\-]/g, '')"></textarea>
                                 </div>
                                 <div class="form-group mb-4">
                                     <label for="gallery" class="form-label">Image</label>
-                                    <input class="form-control text-dark" accept="image/*" type="file" name="gallery[]" id="gallery1" required>
+                                    <input
+                                        class="form-control text-dark"
+                                        accept="image/*"
+                                        type="file"
+                                        name="gallery[]"
+                                        id="gallery1"
+                                        required
+                                        multiple
+                                        onchange="validateGallery()" />
+
+                                    <script>
+                                        function validateGallery() {
+                                            const input = document.getElementById('gallery1');
+                                            if (input.files.length === 0) {
+                                                input.setCustomValidity("Please upload at least one image.");
+                                            } else {
+                                                input.setCustomValidity("");
+                                            }
+                                        }
+                                    </script>
                                 </div>
                                 <button type="submit" class="btn btn-primary me-1 my-3">Save</button>
                                 <button type="reset" class="btn btn-light-secondary me-1 my-3">Reset</button>
@@ -439,7 +487,17 @@ $users = in_array('users', $uri);
                                         <div class="form-body">
                                             <div class="form-group">
                                                 <label for="name" class="mb-2">Name</label>
-                                                <input type="text" id="name" class="form-control text-dark" name="name" placeholder="<?= esc($category); ?> Name" value="<?= esc($activity['name']) ?>" required>
+                                                <input
+                                                    type="text"
+                                                    id="name"
+                                                    class="form-control text-dark"
+                                                    name="name"
+                                                    placeholder="<?= esc($category); ?> Name"
+                                                    value="<?= esc($activity['name']) ?>"
+                                                    required
+                                                    pattern="[A-Za-z\s()]+"
+                                                    title="Only letters, spaces, and parentheses () allowed"
+                                                    oninput="this.value = this.value.replace(/[^A-Za-z\s()]/g, '')">
                                             </div>
                                             <fieldset class="form-group mb-4">
                                                 <label for="catSelect" class="mb-2">Category</label>
@@ -452,7 +510,16 @@ $users = in_array('users', $uri);
                                                 <label for="name" class="mb-2">Price</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text">Rp.</span>
-                                                    <input type="number" id="name" class="form-control text-dark" name="price" placeholder="Price" value="<?= esc($activity['price']) ?>" min="0" required>
+                                                    <input
+                                                        type="number"
+                                                        id="name"
+                                                        class="form-control text-dark"
+                                                        name="price"
+                                                        placeholder="Price"
+                                                        value="<?= esc($activity['price']) ?>"
+                                                        min="0"
+                                                        required
+                                                        oninput="this.value = this.value.replace(/-/g, '')">
                                                 </div>
                                             </div>
                                             <div class="form-check">
@@ -481,12 +548,28 @@ $users = in_array('users', $uri);
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label for="name" class="mb-2">Stock</label>
-                                                <input type="number" id="name" class="form-control text-dark" name="stock" min="0" value="<?= esc($activity['stock']) ?>" required>
+                                                <input
+                                                    type="number"
+                                                    id="name"
+                                                    class="form-control text-dark"
+                                                    name="stock"
+                                                    placeholder="Stock"
+                                                    min="0"
+                                                    value="<?= esc($activity['stock']) ?>"
+                                                    required
+                                                    oninput="this.value = this.value.replace(/-/g, '')">
                                                 <span class="text-secondary"><i>*make it '0' if it is not based on stock</i></span>
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label for="description" class="form-label">Description</label>
-                                                <textarea class="form-control text-dark" id="description" name="description" rows="4" required><?= esc($activity['description']) ?></textarea>
+                                                <textarea
+                                                    class="form-control text-dark"
+                                                    id="description"
+                                                    name="description"
+                                                    rows="4"
+                                                    required
+                                                    pattern="[a-zA-Z0-9\s'.,!?()\-]*"
+                                                    oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s'.,!?()\-]/g, '')"><?= esc($activity['description']) ?></textarea>
                                             </div>
                                             <div class="form-group mb-4">
                                                 <label for="gallery" class="form-label">Image</label>

@@ -15,10 +15,19 @@ $edit = in_array('edit', $uri);
         font-size: 22px;
         font-weight: bolder;
     }
-    label, input,  fieldset, button, div, .form-control, option, .btn, .form-group, .form-select{
+
+    label,
+    input,
+    fieldset,
+    button,
+    div,
+    .form-control,
+    option,
+    .btn,
+    .form-group,
+    .form-select {
         font-size: 20px;
     }
-
 </style>
 <?= $this->endSection() ?>
 
@@ -45,39 +54,81 @@ $edit = in_array('edit', $uri);
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="first-name" class="mb-2">First Name</label>
-                                        <input type="text" id="first-name" class="form-control text-dark" name="first_name" placeholder="First Name" value="<?= ($edit) ? $data['first_name'] : old('first_name'); ?>">
+                                        <input type="text" id="first-name" class="form-control text-dark" name="first_name"
+                                            placeholder="First Name"
+                                            value="<?= ($edit) ? $data['first_name'] : old('first_name'); ?>"
+                                            oninput="this.value = this.value.replace(/[^a-zA-Z\s']/g, '')" required>
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="last-name" class="mb-2">Last Name</label>
-                                        <input type="text" id="last-name" class="form-control text-dark" name="last_name" placeholder="Last Name" value="<?= ($edit) ? $data['last_name'] : old('last_name'); ?>">
+                                        <input type="text" id="last-name" class="form-control text-dark" name="last_name"
+                                            placeholder="Last Name"
+                                            value="<?= ($edit) ? $data['last_name'] : old('last_name'); ?>"
+                                            oninput="this.value = this.value.replace(/[^a-zA-Z\s']/g, '')" required>
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="email" class="mb-2">Email</label>
-                                        <input type="email" id="email" class="form-control text-dark" name="email" placeholder="Email" value="<?= ($edit) ? $data['email'] : old('email'); ?>" required>
+                                        <input type="email"
+                                            id="email"
+                                            class="form-control text-dark"
+                                            name="email"
+                                            placeholder="Email"
+                                            value="<?= ($edit) ? $data['email'] : old('email'); ?>"
+                                            required>
+                                    </div>
+                                    <script>
+                                        // Hanya izinkan karakter valid pada email
+                                        document.getElementById('email').addEventListener('input', function(e) {
+                                            const allowed = /^[a-zA-Z0-9@._%+-]*$/;
+                                            let current = e.target.value;
+                                            if (!allowed.test(current)) {
+                                                e.target.value = current.replace(/[^a-zA-Z0-9@._%+-]/g, '');
+                                            }
+                                        });
+                                    </script>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div class="form-group">
+                                    <label for="username" class="mb-2">Username</label>
+                                    <input type="text" id="username" class="form-control text-dark" name="username"
+                                        placeholder="Username"
+                                        value="<?= ($edit) ? $data['username'] : old('username'); ?>"
+                                        oninput="this.value = this.value.replace(/[^a-zA-Z0-9._-]/g, '')" required>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div class="form-group">
+                                    <label for="password" class="mb-2">New Password</label>
+                                    <input type="password" id="password" class="form-control" name="password" placeholder="New Password">
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div class="form-group">
+                                    <label for="confirm-password" class="mb-2">Confirm New Password</label>
+                                    <input type="password" id="confirm-password" class="form-control" name="pass_confirm" placeholder="Confirm New Password">
+                                    <div id="password-error" class="text-danger small mt-1" style="display: none;">
                                     </div>
                                 </div>
-                                <div class="col-12 mb-3">
-                                    <div class="form-group">
-                                        <label for="username" class="mb-2">Username</label>
-                                        <input type="text" id="username" class="form-control text-dark" name="username" placeholder="Username" value="<?= ($edit) ? $data['username'] : old('username'); ?>" required>
-                                    </div>
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <div class="form-group">
-                                        <label for="password" class="mb-2">New Password</label>
-                                        <input type="password" id="password" class="form-control" name="password" placeholder="New Password">
-                                    </div>
-                                </div>
-                                <div class="col-12 mb-3">
-                                    <div class="form-group">
-                                        <label for="confirm-password" class="mb-2">Confirm New Password</label>
-                                        <input type="password" id="confirm-password" class="form-control" name="pass_confirm" placeholder="Confirm New Password">
-                                    </div>
-                                </div>
+                                <script>
+                                    // Karakter yang diizinkan (tidak termasuk ` dan \)
+                                    const allowedPasswordChars = /^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"|,.<>\/?~]*$/;
+
+                                    function restrictPasswordInput(id) {
+                                        document.getElementById(id).addEventListener('input', function(e) {
+                                            const value = e.target.value;
+                                            // Filter ` dan \ serta karakter lain yang tidak diizinkan
+                                            e.target.value = value.replace(/[`\\]/g, '').replace(/[^a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"|,.<>\/?~]/g, '');
+                                        });
+                                    }
+
+                                    restrictPasswordInput('password');
+                                    restrictPasswordInput('confirm-password');
+                                </script>
                                 <fieldset class="form-group mb-4">
                                     <label for="role" class="mb-2">Roles</label>
                                     <select class="form-select text-dark" id="role" name="role">
@@ -95,13 +146,20 @@ $edit = in_array('edit', $uri);
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="address" class="mb-2 ">Address</label>
-                                        <input type="text" id="address" class="form-control text-dark" name="address" placeholder="Address" value="<?= ($edit) ? $data['address'] : old('address'); ?>">
+                                        <input type="text" id="address" class="form-control text-dark" name="address"
+                                            placeholder="Address"
+                                            value="<?= ($edit) ? $data['address'] : old('address'); ?>"
+                                            oninput="this.value = this.value.replace(/[^a-zA-Z0-9.,'\/()\-\s]/g, '')" required>
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="phone" class="mb-2">Phone</label>
-                                        <input type="text" id="phone" class="form-control text-dark" name="phone" placeholder="Phone" value="<?= ($edit) ? $data['phone'] : old('phone'); ?>">
+                                        <input type="text" id="phone" class="form-control text-dark" name="phone" placeholder="Phone"
+                                            value="<?= ($edit) ? $data['phone'] : old('phone'); ?>"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                            maxlength="13" 
+                                            minlength="10" required>
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex justify-content-end mb-3">

@@ -119,8 +119,9 @@ $users = in_array('users', $uri);
                                     <div class="modal-body">
                                         <form action="<?= base_url('dashboard/announcement/add'); ?>" method="post">
                                             <div class="mb-3">
-                                                <label for="announcement" class="form-label">Announcement:</label>
-                                                <textarea class="form-control text-dark" id="announcement" name="announcement" cols="30" rows="3"></textarea>
+                                                <label for="announcement" class="form-label">Announcement :</label>
+                                                <textarea class="form-control text-dark" id="announcement" name="announcement" cols="30" rows="3" required
+                                                    oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s.,'()\/-]/g, '')"></textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="status" class="form-label">Status:</label>
@@ -241,7 +242,8 @@ $users = in_array('users', $uri);
                                                                 <form action="<?= base_url('dashboard/announcement/update') . '/' . $item['id']; ?>" method="post">
                                                                     <div class="mb-3">
                                                                         <label for="announcement" class="form-label">Announcement:</label>
-                                                                        <textarea class="form-control text-dark" id="announcement" name="announcement" cols="30" rows="3"><?= esc($item['announcement']); ?></textarea>
+                                                                        <textarea class="form-control text-dark" id="announcement" name="announcement" cols="30" rows="3" required
+                                                                            oninput="this.value = this.value.replace(/[^a-zA-Z0-9\s.,'()\/-]/g, '')"><?= esc($item['announcement']); ?></textarea>
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label for="status" class="form-label">Status:</label>

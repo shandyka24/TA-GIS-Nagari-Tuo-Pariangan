@@ -22,10 +22,15 @@
                             <div class="form-group position-relative has-icon-left mb-3">
                                 <input
                                     type="email"
-                                    class="form-control text-dark fs-5 <?php if (session('errors.login')) : ?>is-invalid<?php endif ?>"
+                                    class="form-control text-dark fs-10 <?php if (session('errors.login')) : ?>is-invalid<?php endif ?>"
                                     placeholder="<?= lang('Auth.email') ?>"
                                     name="login"
-                                    value="<?= old('login') ?>" />
+                                    value="<?= old('login') ?>"
+                                    pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                                    title="Masukkan email yang valid. Hanya karakter, angka, dan simbol @ . _ % + - yang diperbolehkan."
+                                    oninput="this.value = this.value.replace(/[^a-zA-Z0-9@._%+\-]/g, '')"
+                                    required />
+
                                 <div class="form-control-icon">
                                     <i class="bi bi-person"></i>
                                 </div>
@@ -40,7 +45,11 @@
                                     class="form-control text-dark fs-5 <?php if (session('errors.login')) : ?>is-invalid<?php endif ?>"
                                     placeholder="<?= lang('Auth.emailOrUsername') ?>"
                                     name="login"
-                                    value="<?= old('login') ?>" />
+                                    value="<?= old('login') ?>"
+                                    pattern="[a-zA-Z0-9@._\-]+"
+                                    title="Hanya huruf, angka, dan simbol @ . _ - yang diperbolehkan"
+                                    oninput="this.value = this.value.replace(/[^a-zA-Z0-9@._\-]/g, '')"
+                                    required />
                                 <div class="form-control-icon">
                                     <i class="bi bi-person"></i>
                                 </div>
