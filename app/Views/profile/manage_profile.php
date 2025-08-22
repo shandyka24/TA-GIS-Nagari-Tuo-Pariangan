@@ -50,8 +50,6 @@ body, .card, .table, .btn, .form-control, .form-select, .modal, .form-label, lab
     font-size: 18px;
 }
 
-/* tes */
-
 /* DataTable specific styles */
 .dataTables_wrapper, .dataTables_filter input, .dataTables_length select {
     font-size: 20px;
